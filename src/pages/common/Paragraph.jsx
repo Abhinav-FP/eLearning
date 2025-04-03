@@ -1,7 +1,9 @@
 import React from 'react'
 
-export default function Paragraph() {
+export default function Paragraph({title , classess}) {
   return (
-    <div>Paragraph</div>
+    <p className={`${classess} text-white`}>
+    {title}
+  </p>
   )
 }

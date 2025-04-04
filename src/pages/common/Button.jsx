@@ -1,7 +1,10 @@
 import React from 'react'
 
-export default function Button() {
+export default function Button({title , classess
+}) {
   return (
-    <div>Button</div>
+    <button className={`${classess} text-white`}>
+    {title}
+  </button>
   )
 }

@@ -1,10 +1,11 @@
 import Index from "./home/Index";
-import PayPalButton from "./Paypal/PayPalButton";
+// import PayPalButton from "./Paypal/PayPalButton";
 
 
 
-export default function Home() {
+export default function HomeMain() {
   return (
-   <PayPalButton />
+  //  <PayPalButton />
+  <Index />
   );
 }

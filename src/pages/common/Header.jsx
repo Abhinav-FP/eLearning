@@ -81,12 +81,12 @@ export default function Header() {
                         </div>
                         <div className="flex flex-wrap space-x-4 items-center">
                             <div className="group relative">
-                                <div onClick={ToggleDropdown} className="relative cursor-pointer border border-[#CC2828] text-base tracking-[-0.03em] rounded-[6px] text-[#CC2828] py-1.5 pl-4 pr-8">
+                                <div onClick={ToggleDropdown} className="relative cursor-pointer border border-[#CC2828] text-base tracking-[-0.03em] rounded-[6px] text-[#CC2828] py-1.5 pl-4 pr-8 min-w-[126px] text-center">
                                     {selectLang}  <IoIosArrowDown size="16" className="absolute right-2 top-1/2 -translate-y-1/2" />
                                 </div>
-                                <div className={`absolute top-full left-0 bg-white  ${DropDown ? 'block' : 'hidden'}`}>
-                                    <button onClick={() => (handleLanguageSelect('English'))} className="w-full cursor-pointer border-none bg-transparent py-.5 px-2">English</button>
-                                    <button onClick={() => (handleLanguageSelect('Dutch'))} className="w-full cursor-pointer border-none bg-transparent py-.5 px-2">Dutch</button>
+                                <div className={`absolute border-b border-l border-r border-[#ddd] bg-white top-full left-0 rounded-b ${DropDown ? 'block' : 'hidden'}`}>
+                                    <button onClick={() => (handleLanguageSelect('English'))} className="w-full cursor-pointer bg-transparent py-.5 px-2 [&:not(:last-child)]:border-b py-2 border-[#ddd] hover:text-[#CC2828]">English</button>
+                                    <button onClick={() => (handleLanguageSelect('Japanese'))} className="w-full cursor-pointer bg-transparent py-.5 px-2 py-2 [&:not(:last-child)]:border-b hover:text-[#CC2828]">Japanese</button>
                                 </div>
                             </div>
                             <Button classes={'bg-[#CC2828] hover:bg-[#ad0e0e] text-white text-base py-3.5 px-10'} title="Sign Up" />

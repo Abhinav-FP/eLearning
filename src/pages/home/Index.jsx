@@ -4,6 +4,8 @@ import Hero from './Hero';
 import HowItWork from '../common/HowItWork';
 import Lession from './Lession';
 import Ready from './Ready';
+import FindCource from './FindCource';
+import FAQ from '../common/FAQ';
 
 export default function Index() {
   return (
@@ -12,6 +14,8 @@ export default function Index() {
        <HowItWork />
        <Lession />
        <Ready />
+       <FindCource />
+       <FAQ />
      </Layout>
   )
 }

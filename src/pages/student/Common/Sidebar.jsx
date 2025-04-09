@@ -23,7 +23,7 @@ function SideBar() {
                 </button>}
             {!isOpen &&
                 <button
-                    className="lg:hidden p-2 fixed font-bold top-2.5 text-[#727272] z-[99]"
+                    className="lg:hidden p-2 fixed font-bold top-2.5 text-[#565F66] z-[99]"
                     onClick={() => setIsOpen(true)}
                 >
                     <IoIosMenu size={24} />
@@ -43,49 +43,49 @@ function SideBar() {
                         <ul className="mt-2 space-y-1 mb-10">
                             <Link
                                 href="/student/dashboard"
-                                className={`flex items-center py-2.5 px-2.5 gap-2 text-[#727272] text-base font-medium tracking-[-0.06em] ${pathname === "/student/dashboard" ? "text-blue-500 bg-blue-100" : "hover:bg-gray-100"} rounded-md`}
+                                className={`flex items-center py-2.5 px-2.5 gap-2 text-[#565F66] text-base font-medium tracking-[-0.06em] ${pathname === "/student/dashboard" ? "text-white bg-[#D6202C]" : "hover:bg-gray-100"} rounded-md`}
                             >
                                 <RxDashboard size={20} />
                                 Dashboard
                             </Link>
                             <Link
                                 href="/student/lessons"
-                                className={`flex items-center py-2.5 px-2.5 gap-2 text-[#727272] text-base font-medium tracking-[-0.06em] ${pathname === "/student/lessons" ? "text-blue-500 bg-blue-100" : "hover:bg-gray-100"} rounded-md`}
+                                className={`flex items-center py-2.5 px-2.5 gap-2 text-[#565F66] text-base font-medium tracking-[-0.06em] ${pathname === "/student/lessons" ? "text-white bg-[#D6202C]" : "hover:bg-gray-100"} rounded-md`}
                             >
                                 <RxDashboard size={20} />
                                 My Lessons
                             </Link>
                             <Link
                                 href="/student/teachers"
-                                className={`flex items-center py-2.5 px-2.5 gap-2 text-[#727272] text-base font-medium tracking-[-0.06em] ${pathname === "/student/teachers" ? "text-blue-500 bg-blue-100" : "hover:bg-gray-100"} rounded-md`}
+                                className={`flex items-center py-2.5 px-2.5 gap-2 text-[#565F66] text-base font-medium tracking-[-0.06em] ${pathname === "/student/teachers" ? "text-white bg-[#D6202C]" : "hover:bg-gray-100"} rounded-md`}
                             >
                                 <RxDashboard size={20} />
                                 Find a Teachers
                             </Link>
                             <Link
                                 href="/student/message"
-                                className={`flex items-center py-2.5 px-2.5 gap-2 text-[#727272] text-base font-medium tracking-[-0.06em] ${pathname === "/student/message" ? "text-blue-500 bg-blue-100" : "hover:bg-gray-100"} rounded-md`}
+                                className={`flex items-center py-2.5 px-2.5 gap-2 text-[#565F66] text-base font-medium tracking-[-0.06em] ${pathname === "/student/message" ? "text-white bg-[#D6202C]" : "hover:bg-gray-100"} rounded-md`}
                             >
                                 <RxDashboard size={20} />
                                 Messages
                             </Link>
                             <Link
                                 href="/student/payment-history"
-                                className={`flex items-center py-2.5 px-2.5 gap-2 text-[#727272] text-base font-medium tracking-[-0.06em] ${pathname === "/student/payment-history" ? "text-blue-500 bg-blue-100" : "hover:bg-gray-100"} rounded-md`}
+                                className={`flex items-center py-2.5 px-2.5 gap-2 text-[#565F66] text-base font-medium tracking-[-0.06em] ${pathname === "/student/payment-history" ? "text-white bg-[#D6202C]" : "hover:bg-gray-100"} rounded-md`}
                             >
                                 <RxDashboard size={20} />
                                 Payments
                             </Link>
                             <Link
                                 href="/student/review"
-                                className={`flex items-center py-2.5 px-2.5 gap-2 text-[#727272] text-base font-medium tracking-[-0.06em] ${pathname === "/student/review" ? "text-blue-500 bg-blue-100" : "hover:bg-gray-100"} rounded-md`}
+                                className={`flex items-center py-2.5 px-2.5 gap-2 text-[#565F66] text-base font-medium tracking-[-0.06em] ${pathname === "/student/review" ? "text-white bg-[#D6202C]" : "hover:bg-gray-100"} rounded-md`}
                             >
                                 <RxDashboard size={20} />
                                 Reviews
                             </Link>
                             <Link
                                 href="/student/setting"
-                                className={`flex items-center py-2.5 px-2.5 gap-2 text-[#727272] text-base font-medium tracking-[-0.06em] ${pathname === "/" ? "text-blue-500 bg-blue-100" : "hover:bg-gray-100"} rounded-md`}
+                                className={`flex items-center py-2.5 px-2.5 gap-2 text-[#565F66] text-base font-medium tracking-[-0.06em] ${pathname === "/student/setting" ? "text-white bg-[#D6202C]" : "hover:bg-gray-100"} rounded-md`}
                             >
                                 <RxDashboard size={20} />
                                 Settings

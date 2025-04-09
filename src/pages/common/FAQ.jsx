@@ -37,7 +37,7 @@ export default function FAQ() {
 
                 {
                     Faqs.map((items, index) => (
-                        <div id={index} className="border-b border-[#C6C7C8]">
+                        <div key={index} className="border-b border-[#C6C7C8]">
                             <button onClick={() => ToggleFaq(index)} className={`block w-full text-left bg-white border-none py-5 -tracking-[0.04em] font-semibold text-lg lg:text-xl cursor-pointer relative pr-20`} >
                                 {items.title}
                                 {

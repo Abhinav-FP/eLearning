@@ -34,7 +34,7 @@ export default function HowItWork() {
                     <div className="flex flex-wrap -mx-4 md:-mx-[28px] lg:-mx-[34px]">
                         {
                             Data.map((item, i) => (
-                                <div id={i} className=" w-full md:w-3/12 px-4 md:px-[28px] lg:px-[34px] relative 
+                                <div key={i} className=" w-full md:w-3/12 px-4 md:px-[28px] lg:px-[34px] relative 
                                 arrowimg
                                 [&:not(:last-child)]:after:absolute 
                                 [&:not(:last-child)]:after:top-1/2 

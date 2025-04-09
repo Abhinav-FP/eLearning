@@ -2,17 +2,17 @@ import React from 'react';
 import Layout from '../common/Layout';
 import Hero from './Hero';
 import HowItWork from '../common/HowItWork';
-import Lession from './Lession';
 import Ready from './Ready';
 import FindCource from './FindCource';
 import FAQ from '../common/FAQ';
+import Lesson from './Lesson';
 
-export default function Index() {
+export default function Main() {
   return (
      <Layout> 
        <Hero />
        <HowItWork />
-       <Lession />
+       <Lesson />
        <Ready />
        <FindCource />
        <FAQ />

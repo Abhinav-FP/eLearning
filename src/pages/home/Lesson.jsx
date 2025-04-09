@@ -6,8 +6,8 @@ import EmilyCarter from "../Assets/Images/emily-carter.png";
 import Button from "../common/Button";
 import { MdOutlinePlayCircle } from "react-icons/md";
 
-export default function Lession() {
-    const Lessions = [
+export default function Lesson() {
+    const lessons = [
         {
             ThumbnailImage: EmilyCarter,
             Title: 'Emily Carter',
@@ -26,8 +26,8 @@ export default function Lession() {
                     <Heading classess={'text-[#1E1E1E]  mb-[30px] lg:mb-[40px] max-w-[834px] mx-auto text-center '} title={'Learn from the Best: Expert English & Japanese Teachers'} />
                     <div className="flex flex-wrap -mx-2.5">
                         {
-                            Lessions.map((items, i) => (
-                                <div className="w-full md:w-6/12 px-2.5">
+                            lessons && lessons?.map((items, i) => (
+                                <div className="w-full md:w-6/12 px-2.5" key={i}>
                                     <div id={i} className="bg-[#EFD1D1] border border-[rgba(56,121,117,0.2)]  rounded-[10px] lg:rounded-[20px] p-[20px] lg:p-[30px]">
                                         <div className="relative h-[311px]">
                                             <Image className="w-full h-[311px] rounded-[10px]" src={items.ThumbnailImage} alt={items.Title} width={530} height={311} />

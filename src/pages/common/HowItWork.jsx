@@ -6,7 +6,7 @@ import ScheduleIcon from "../Assets/Images/schedule.png";
 import PaymentIcon from "../Assets/Images/payment.png";
 import LearningIcon from "../Assets/Images/learning.png";
 
-export default function HowItWork() {
+export default function HowItWork({classess}) {
     const Data = [
         {
             Icons: chooseIcon,
@@ -28,7 +28,7 @@ export default function HowItWork() {
     ]
     return (
         <>
-            <div className="bg-[rgba(204,40,40,0.6)] py-[40px] md:py-[60px] lg:py-[80px] mt-[30px] md:mt-[40px] lg:mt-[60px]">
+            <div className={`bg-[rgba(204,40,40,0.6)] py-[40px] md:py-[60px] lg:py-[80px] mt-[30px] md:mt-[40px] lg:mt-[60px] ${classess}`}>
                 <div className="mx-auto container sm:container md:container lg:max-w-[1230px] px-4">
                     <Heading classess={'text-center mb-[30px] lg:mb-[40px] text-white'} title={'How It Works'} />
                     <div className="flex flex-wrap -mx-4 md:-mx-[28px] lg:-mx-[34px]">

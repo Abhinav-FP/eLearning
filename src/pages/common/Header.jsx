@@ -2,7 +2,6 @@ import React, { useEffect, useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import Logo from "../Assets/Images/logo.png"; // Adjust the path as necessary
-import { useRouter } from "next/router";
 import { IoIosArrowDown } from "react-icons/io";
 import Button from "./Button";
 

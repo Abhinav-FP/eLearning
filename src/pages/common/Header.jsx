@@ -65,14 +65,14 @@ export default function Header() {
                                 </li>
                                 <li className="w-full lg:w-auto relative cursor-pointer [&:not(:last-child)]:border-b lg:border-none border-[#ddd] ">
                                     <Link
-                                        href="/"
+                                        href="/find-teacher"
                                         className="py-3 lg:py-0 inline-block px-4 lg:px-0 capitalize text-base xl:text-lg tracking-[-0.04em] font-medium text-[#CC2828] hover:text-[#ad0e0e]">
                                         Find a Teacher
                                     </Link>
                                 </li>
                                 <li className="w-full lg:w-auto relative cursor-pointer [&:not(:last-child)]:border-b lg:border-none border-[#ddd] ">
                                     <Link
-                                        href="/"
+                                        href="/become-teacher"
                                         className="py-3 lg:py-0 inline-block px-4 lg:px-0 capitalize text-base xl:text-lg tracking-[-0.04em] font-medium text-[#CC2828] hover:text-[#ad0e0e]">
                                         Become a Teacher
                                     </Link>

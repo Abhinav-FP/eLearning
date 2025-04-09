@@ -7,7 +7,7 @@ export default function FAQ() {
     const ToggleFaq = (index) => {
         setOpenIndex(openIndex === index ? null : index);
     }
-    const Faqs = [
+    const faqs = [
         {
             title: 'How do I choose the right teacher?',
             Decription: 'Use our filters to narrow down teachers by language, experience, and ratings. Read reviews and watch introduction videos to find the best fit.'
@@ -36,7 +36,7 @@ export default function FAQ() {
                 <Heading classess={'text-[#1E1E1E] mb-3 '} title={'Frequently Asked Questions'} />
 
                 {
-                    Faqs.map((items, index) => (
+                    faqs && faqs?.map((items, index) => (
                         <div key={index} className="border-b border-[#C6C7C8]">
                             <button onClick={() => ToggleFaq(index)} className={`block w-full text-left bg-white border-none py-5 -tracking-[0.04em] font-semibold text-lg lg:text-xl cursor-pointer relative pr-20`} >
                                 {items.title}

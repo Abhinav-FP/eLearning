@@ -41,7 +41,7 @@ export default function WhyTech() {
                             {
                                data && data.map((item, index) => (
                                 <li key={index} className={`rounded border-[#CC2828] ${index === 0 ? "max-w-[87%] !mr-0" : ""} ${index % 2 === 0 ? "pr-2.5 border-r-5 mr-[100px]" : "pl-2.5 border-l-5 ml-[100px]"}`}>
-                                    <div className="list_shadow mb-[30px]  bg-[rgba(204,40,40,0.2)] relative pl-[65px] pr-5 py-3 rounded-[10px] text-lg leading-snug font-medium -tracking-[0.03em] min-h-[74px] flex items-center">
+                                    <div className="list_shadow mb-[30px]  bg-[rgba(204,40,40,0.2)] relative pl-[65px] pr-5 py-3 rounded-[10px] text-base lg:text-lg leading-snug font-medium -tracking-[0.03em] min-h-[74px] flex items-center">
                                         <PiGlobe className="absolute left-5 text-[#CC2828] top-1/2 -translate-y-1/2" size={32} />
                                             {item.decription}
                                     </div>

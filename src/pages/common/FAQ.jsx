@@ -1,7 +1,7 @@
 import { useState } from "react";
 import Heading from "./Heading";
 
-export default function FAQ() {
+export default function FAQ({classess}) {
     const [openIndex, setOpenIndex] = useState(null);
 
     const ToggleFaq = (index) => {
@@ -31,7 +31,7 @@ export default function FAQ() {
 
     ]
     return (
-        <div className="pb-[40px] md:pb-[40px] lg:pb-[60px]">
+        <div className={`pb-[40px] md:pb-[40px] lg:pb-[60px] ${classess}`}>
             <div className="mx-auto container sm:container md:container lg:max-w-[1230px] px-4">
                 <Heading classess={'text-[#1E1E1E] mb-3 '} title={'Frequently Asked Questions'} />
 

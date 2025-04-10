@@ -7,6 +7,7 @@ import { MdLogout } from "react-icons/md";
 import { IoSettingsOutline } from "react-icons/io5";
 import SideBar from "./Sidebar";
 import Listing from "@/pages/api/Listing";
+import { FaRegUser } from "react-icons/fa6";
 
 export default function StudentLayout({ children, page }) {
   const [dropdownOpen, setDropdownOpen] = useState(false);
@@ -52,8 +53,8 @@ export default function StudentLayout({ children, page }) {
             <NotifcationPopup />
 
             <div className="relative">
-              <button className="border border-black border-opacity-10 rounded-md lg:rounded-xl w-[44px] lg:w-[48px] h-[34px] lg:h-[38px] flex items-center justify-center text-[#151547] hover:bg-[#1C5FE8] hover:text-white" onClick={() => setDropdownOpen(!dropdownOpen)}>
-                <svg className="w-[16px] lg:w-[18px] h-[20px] lg:h-[22px]"
+              <button className="border border-black border-opacity-10 rounded-md lg:rounded-xl w-[44px] lg:w-[48px] h-[34px] lg:h-[38px] flex items-center justify-center text-[#151547] hover:bg-[#1C5FE8] hover:text-white cursor-pointer" onClick={() => setDropdownOpen(!dropdownOpen)}>
+                {/* <svg className="w-[16px] lg:w-[18px] h-[20px] lg:h-[22px]"
                   width="18"
                   height="22"
                   viewBox="0 0 18 22"
@@ -70,12 +71,13 @@ export default function StudentLayout({ children, page }) {
                     stroke="currentColor"
                     stroke-width="1.5"
                   />
-                </svg>
+                </svg> */}
+                <FaRegUser size={24}/> 
               </button>
               {dropdownOpen && (
                 <div className="absolute right-0 mt-2 w-48 bg-white border border-gray-300 rounded-md shadow-lg z-50">
                   <ul className="py-1">
-                    <Link href="/settings" className="flex gap-2 px-4 py-2 hover:bg-gray-100 cursor-pointer">
+                    <Link href="/student/settings" className="flex gap-2 px-4 py-2 hover:bg-gray-100 cursor-pointer">
                       <IoSettingsOutline size={20} /> Settings
                     </Link>
                     <li className="flex gap-2 px-4 py-2 hover:bg-gray-100 cursor-pointer" onClick={handleLogout}>

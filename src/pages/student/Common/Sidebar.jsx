@@ -6,6 +6,12 @@ import { IoIosMenu } from "react-icons/io";
 import { IoMdArrowRoundBack } from "react-icons/io";
 import Logo from "../../Assets/Images/logo.png"
 import Image from "next/image";
+import { MdClass } from "react-icons/md";
+import { FaChalkboardTeacher } from "react-icons/fa";
+import { LuMessagesSquare } from "react-icons/lu";
+import { MdPayment } from "react-icons/md";
+import { IoSettingsOutline } from "react-icons/io5";
+import { MdOutlineRateReview } from "react-icons/md";
 
 function SideBar({ user }) {
     const pathname = usePathname();
@@ -52,12 +58,12 @@ function SideBar({ user }) {
                             <p className="text-xs  capitalize  text-gray-500">{user?.role}</p>
                         </div>
                     </div>
-                    <div className="mb-4 font-medium">
+                    <div className="mb-4 mt-8 font-medium">
                         <div className="uppercase text-[#808080] text-sm font-medium mb-4 lg:mb-5">MAIN MENU</div>
                         <ul className="mt-2 space-y-1 mb-10">
                             <Link
-                                href="/student/dashboard"
-                                className={`flex items-center py-2.5 px-2.5 gap-2 text-[#565F66] text-base font-medium tracking-[-0.06em] ${pathname === "/student/dashboard" ? "text-white bg-[#D6202C]" : "hover:bg-gray-100"} rounded-md`}
+                                href="/student"
+                                className={`flex items-center py-2.5 px-2.5 gap-2 text-[#565F66] text-base font-medium tracking-[-0.06em] ${pathname === "/student" ? "text-white bg-[#D6202C]" : "hover:bg-gray-100"} rounded-md`}
                             >
                                 <RxDashboard size={20} />
                                 Dashboard
@@ -66,42 +72,42 @@ function SideBar({ user }) {
                                 href="/student/lessons"
                                 className={`flex items-center py-2.5 px-2.5 gap-2 text-[#565F66] text-base font-medium tracking-[-0.06em] ${pathname === "/student/lessons" ? "text-white bg-[#D6202C]" : "hover:bg-gray-100"} rounded-md`}
                             >
-                                <RxDashboard size={20} />
+                                <MdClass size={20} />
                                 My Lessons
                             </Link>
                             <Link
                                 href="/student/teachers"
                                 className={`flex items-center py-2.5 px-2.5 gap-2 text-[#565F66] text-base font-medium tracking-[-0.06em] ${pathname === "/student/teachers" ? "text-white bg-[#D6202C]" : "hover:bg-gray-100"} rounded-md`}
                             >
-                                <RxDashboard size={20} />
+                                <FaChalkboardTeacher size={20} />
                                 Find a Teachers
                             </Link>
                             <Link
                                 href="/student/message"
                                 className={`flex items-center py-2.5 px-2.5 gap-2 text-[#565F66] text-base font-medium tracking-[-0.06em] ${pathname === "/student/message" ? "text-white bg-[#D6202C]" : "hover:bg-gray-100"} rounded-md`}
                             >
-                                <RxDashboard size={20} />
+                                <LuMessagesSquare size={20} />
                                 Messages
                             </Link>
                             <Link
                                 href="/student/payment-history"
                                 className={`flex items-center py-2.5 px-2.5 gap-2 text-[#565F66] text-base font-medium tracking-[-0.06em] ${pathname === "/student/payment-history" ? "text-white bg-[#D6202C]" : "hover:bg-gray-100"} rounded-md`}
                             >
-                                <RxDashboard size={20} />
+                                <MdPayment size={20} />
                                 Payments
                             </Link>
                             <Link
                                 href="/student/review"
                                 className={`flex items-center py-2.5 px-2.5 gap-2 text-[#565F66] text-base font-medium tracking-[-0.06em] ${pathname === "/student/review" ? "text-white bg-[#D6202C]" : "hover:bg-gray-100"} rounded-md`}
                             >
-                                <RxDashboard size={20} />
+                                <MdOutlineRateReview size={20} />
                                 Reviews
                             </Link>
                             <Link
                                 href="/student/setting"
                                 className={`flex items-center py-2.5 px-2.5 gap-2 text-[#565F66] text-base font-medium tracking-[-0.06em] ${pathname === "/student/setting" ? "text-white bg-[#D6202C]" : "hover:bg-gray-100"} rounded-md`}
                             >
-                                <RxDashboard size={20} />
+                                <IoSettingsOutline size={20} />
                                 Settings
                             </Link>
 

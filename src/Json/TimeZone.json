@@ -1,0 +1,82 @@
+[
+  {
+    "label": "Japan Standard Time (JST)",
+    "value": "JST"
+  },
+  {
+    "label": "Pacific Standard Time (PST)",
+    "value": "PST"
+  },
+  {
+    "label": "Mountain Standard Time (MST)",
+    "value": "MST"
+  },
+  {
+    "label": "Central Standard Time (CST)",
+    "value": "CST"
+  },
+  {
+    "label": "Eastern Standard Time (EST)",
+    "value": "EST"
+  },
+  {
+    "label": "Greenwich Mean Time (GMT)",
+    "value": "GMT"
+  },
+  {
+    "label": "Central European Time (CET)",
+    "value": "CET"
+  },
+  {
+    "label": "Eastern European Time (EET)",
+    "value": "EET"
+  },
+  {
+    "label": "Indian Standard Time (IST)",
+    "value": "IST"
+  },
+  {
+    "label": "China Standard Time (CST)",
+    "value": "CST_CN"
+  },
+  {
+    "label": "Korea Standard Time (KST)",
+    "value": "KST"
+  },
+  {
+    "label": "Australian Eastern Standard Time (AEST)",
+    "value": "AEST"
+  },
+  {
+    "label": "New Zealand Standard Time (NZST)",
+    "value": "NZST"
+  },
+  {
+    "label": "Singapore Standard Time (SGT)",
+    "value": "SGT"
+  },
+  {
+    "label": "Brasília Time (BRT)",
+    "value": "BRT"
+  },
+  {
+    "label": "Argentina Time (ART)",
+    "value": "ART"
+  },
+  {
+    "label": "Alaska Standard Time (AKST)",
+    "value": "AKST"
+  },
+  {
+    "label": "Hawaii-Aleutian Standard Time (HAST)",
+    "value": "HAST"
+  },
+  {
+    "label": "Moscow Standard Time (MSK)",
+    "value": "MSK"
+  },
+  {
+    "label": "Atlantic Standard Time (AST)",
+    "value": "AST"
+  }
+]

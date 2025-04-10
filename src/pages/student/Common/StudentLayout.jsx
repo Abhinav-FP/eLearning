@@ -6,20 +6,44 @@ import Link from "next/link";
 import { MdLogout } from "react-icons/md";
 import { IoSettingsOutline } from "react-icons/io5";
 import SideBar from "./Sidebar";
+import Listing from "@/pages/api/Listing";
 
 export default function StudentLayout({ children, page }) {
-  const router = useRouter();
   const [dropdownOpen, setDropdownOpen] = useState(false);
-
+  const [user, setUser] = useState("");
+  const router = useRouter();
   const handleLogout = () => {
     localStorage && localStorage.removeItem("token");
-    router.push("/login");
+    router.push("/student/login");
     toast.success("Logout Successfully");
   };
+  const fetchData = async (signal) => {
+    try {
+      const main = new Listing();
+      const response = await main.profileVerify(signal);
+      console.log(response)
+      if (response.data) {
+        setUser(response.data.data.user);
+      }
+    } catch (error) {
+      console.log("error", error);
+      localStorage?.removeItem("token");
+      router.push("/student/login");
+      toast.error("Please log in first.");
+    }
+  };
+
+  useEffect(() => {
+    const controller = new AbortController();
+    const { signal } = controller;
+    fetchData(signal);
+
+    return () => controller.abort();
+  }, []);
 
   return (
     <div className="md:flex flex-wrap bg-[#F5F6FB] items-start">
-      <SideBar  />
+      <SideBar user={user} />
       <div className="w-full lg:ml-[304px] lg:w-[calc(100%-304px)]">
         <div className="fixed z-10 px-4 md:px-5 lg:px-[30px] py-3 lg:py-4 top-0 bg-white flex items-center w-full lg:w-[calc(100%-304px)] flex-wrap">
           <div className="w-4/12 pl-6 lg:pl-0">
@@ -27,10 +51,10 @@ export default function StudentLayout({ children, page }) {
           </div>
           <div className="w-8/12 flex justify-end space-x-2.5 md:space-x-4">
             <NotifcationPopup />
-          
+
             <div className="relative">
               <button className="border border-black border-opacity-10 rounded-md lg:rounded-xl w-[44px] lg:w-[48px] h-[34px] lg:h-[38px] flex items-center justify-center text-[#151547] hover:bg-[#1C5FE8] hover:text-white" onClick={() => setDropdownOpen(!dropdownOpen)}>
-              <svg className="w-[16px] lg:w-[18px] h-[20px] lg:h-[22px]"
+                <svg className="w-[16px] lg:w-[18px] h-[20px] lg:h-[22px]"
                   width="18"
                   height="22"
                   viewBox="0 0 18 22"

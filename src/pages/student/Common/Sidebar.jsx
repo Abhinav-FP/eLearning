@@ -7,7 +7,8 @@ import { IoMdArrowRoundBack } from "react-icons/io";
 import Logo from "../../Assets/Images/logo.png"
 import Image from "next/image";
 
-function SideBar() {
+function SideBar({user}) {
+    console.log("user" ,user)
     console.log("Logo", Logo)
     const pathname = usePathname();
     const [isOpen, setIsOpen] = useState(false);
@@ -38,6 +39,21 @@ function SideBar() {
                 </div>
 
                 <div className="px-3 md:px-4 lg:px-6 py-4 lg:py-5">
+
+                <div className="w-[220px] p-4 bg-white shadow-md rounded-xl flex items-center gap-4">
+      <div className="w-12 h-12 rounded-full bg-green-400 flex items-center justify-center text-white text-xl font-bold">
+        {/* Replace with an actual image if needed */}
+        <img
+          src="https://www.svgrepo.com/show/384674/account-avatar-profile-user-11.svg"
+          alt="User Avatar"
+          className="w-12 h-12 rounded-full object-cover"
+        />
+      </div>
+      <div>
+        <p className="font-semibold text-sm text-gray-900">{user?.name}</p>
+        <p className="text-xs text-gray-500">{user?.role}</p>
+      </div>
+    </div>
                     <div className="mb-4 font-medium">
                         <div className="uppercase text-[#808080] text-sm font-medium mb-4 lg:mb-5">MAIN MENU</div>
                         <ul className="mt-2 space-y-1 mb-10">

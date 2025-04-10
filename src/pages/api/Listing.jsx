@@ -1,11 +1,10 @@
 import { Component } from "react";
-import { Api, ApiallowFile } from "./Api";
+import { Api } from "./Api";
 
 class Listing extends Component {
-  // async login(data) {
-  //   return Api.post("/user/login", data);
-  // }
-
+  async Register(data) {
+    return Api.post("/user/register", data);
+  }
  
 
   render() {

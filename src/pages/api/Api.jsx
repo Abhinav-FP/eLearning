@@ -1,8 +1,8 @@
 import axios from 'axios';
 
-const API_URL =  process.env.NEXT_PUBLIC_ADMIN_BASE_URL || "http://localhost:5000";
+const API_URL =  process.env.NEXT_PUBLIC_BASE_URL || "http://localhost:5000/api";
 
-
+console.log("API_URL" , API_URL)
 function getToken() {
   if (typeof window !== 'undefined') {
     const data = localStorage.getItem('token');

@@ -1,7 +1,12 @@
 import React from 'react'
+import StudentLayout from './Common/StudentLayout'
 
-export default function index() {
+export default function Index() {
   return (
-    <div>index</div>
+    <StudentLayout>
+      <div>
+        <h2>Dashboard</h2>
+      </div>
+    </StudentLayout>
   )
 }

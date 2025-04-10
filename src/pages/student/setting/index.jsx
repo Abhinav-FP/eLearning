@@ -34,10 +34,10 @@ export default function Index() {
                         {activeTab === 'password' &&
                             <Password />
                         }
-
                     </div>
                 </div>
             </div>
         </StudentLayout>
+
     )
 }

@@ -7,8 +7,10 @@ import Image from 'next/image';
 import Listing from '@/pages/api/Listing';
 import { IoEye, IoEyeOff } from 'react-icons/io5';
 import toast from 'react-hot-toast';
+import { useRouter } from 'next/router';
 
 export default function Index() {
+    const router = useRouter();
     const [loading, setLoading] = useState(false);
     const [showNewPassword, setShowNewPassword] = useState(false);
     const [showConfirPassword, setShowConfirPassword] = useState(false);
@@ -19,11 +21,8 @@ export default function Index() {
         nationalities: "",
         password: "",
         confirm_password: "",
-        role: "student",
         gender: "",
     });
-
-    console.log("data", data)
 
     const handleChange = (e) => {
         const { name, value } = e.target;
@@ -35,46 +34,50 @@ export default function Index() {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
+
         if (loading) return;
-        if (data?.password != data?.confirm_password) {
-            console.log("Please match password and confirm password");
+
+        if (data?.password !== data?.confirm_password) {
             toast.error("Please match password and confirm password");
-            setLoading(false);
             return;
         }
         setLoading(true);
-        const main = new Listing();
-        const response = await main.Register({
-            email: data?.email,
-            password: data?.password,
-            name: data?.name,
-            role: data?.role,
-            nationality: data?.nationalities,
-            time_zone: data?.timezone,
-            Gender : data?.gender
-        });
+        try {
+            const main = new Listing();
+            const response = await main.Register({
+                email: data?.email,
+                password: data?.password,
+                name: data?.name,
+                role: "student",
+                nationality: data?.nationalities,
+                time_zone: data?.timezone,
+                gender: data?.gender,
+            });
 
-        response
-            .then((res) => {
-                if (res?.data?.status) {
-                    toast.success(res.data.message);
-                } else {
-                    toast.error(res.data.message);
-                }
-
+            if (response?.data?.status) {
+                router.push("/student/login")
+                toast.success(response.data.message);
                 setData({
                     email: "",
                     password: "",
-                    confirm_password: "" // optional: clear this too
+                    confirm_password: "",
+                    name: "",
+                    role: "",
+                    nationalities: "",
+                    timezone: "",
+                    gender: ""
                 });
-                setLoading(false);
-            })
-            .catch((error) => {
-                toast.error(error?.response?.data?.message || "Something went wrong!");
-                console.error("error", error);
-                setLoading(false);
-            });
+            } else {
+                toast.error(response.data.message);
+            }
+        } catch (error) {
+            console.error("API error:", error);
+            toast.error(error?.response?.data?.message || "Something went wrong!");
+            setLoading(false);
+        }
+        setLoading(false);
     };
+
 
     return (
         <div className="min-h-screen flex items-center justify-center bg-gray-100">
@@ -121,14 +124,14 @@ export default function Index() {
                                     name="password"
                                     value={data.password}
                                     onChange={handleChange}
-                                    className="block w-full h-12 lg:h-[65px] px-3 py-3 bg-gray-100 text-[#727272] border border-transparent rounded-lg lg:rounded-[15px] sm:text-sm"
+                                    className="block w-full  px-3 py-3 bg-gray-100 text-[#727272] border border-transparent rounded-lg lg:rounded-[15px] sm:text-sm"
                                     required
                                 />
 
                                 <button
                                     type="button"
                                     onClick={() => setShowNewPassword(!showNewPassword)}
-                                    className="absolute top-6 right-5"
+                                    className="absolute top-3 right-5"
                                 >
                                     {showNewPassword ? (
                                         <IoEyeOff size={24} className="text-gray-600" />
@@ -145,14 +148,14 @@ export default function Index() {
                                     name="confirm_password"
                                     value={data.confirm_password}
                                     onChange={handleChange}
-                                    className="block w-full h-12 lg:h-[65px] px-3 py-3 bg-gray-100 text-[#727272] border border-transparent rounded-lg lg:rounded-[15px] sm:text-sm"
+                                    className="block w-full  px-3 py-3 bg-gray-100 text-[#727272] border border-transparent rounded-lg lg:rounded-[15px] sm:text-sm"
                                     required
                                 />
 
                                 <button
                                     type="button"
                                     onClick={() => setShowConfirPassword(!showConfirPassword)}
-                                    className="absolute top-6 right-5"
+                                    className="absolute top-3 right-5"
                                 >
                                     {showConfirPassword ? (
                                         <IoEyeOff size={24} className="text-gray-600" />
@@ -172,6 +175,9 @@ export default function Index() {
                                 required
 
                             >
+                                <option value="">Please select Time-Zone</option>
+
+
                                 {timeZones && timeZones?.map((zone, index) => (
                                     <option key={index} value={zone.value}>
                                         {zone.label}
@@ -179,17 +185,19 @@ export default function Index() {
                                 ))}
                             </select>
                             {/* Gender */}
-                            <select className="px-4 py-2 border border-gray-200 rounded-md bg-gray-100"
+                            <select
+                                className="px-4 py-2 border border-gray-200 rounded-md bg-gray-100 text-gray-700 focus:outline-none focus:ring-2 focus:ring-blue-500"
                                 onChange={handleChange}
-                                value={data?.gender}
-                                name='gender'
+                                value={data?.gender || ""}
+                                name="gender"
                                 required
-
                             >
-                                <option value="Male">Male</option>
-                                <option value="Female">Female</option>
-                                <option value="Other">Other</option>
+                                <option value="">Please select gender</option>
+                                <option value="M">Male</option>
+                                <option value="F">Female</option>
+                                <option value="O">Other</option>
                             </select>
+
                             {/* Nationality */}
                             <select className="px-4 py-2 border border-gray-200 rounded-md bg-gray-100"
                                 onChange={handleChange}
@@ -197,6 +205,8 @@ export default function Index() {
                                 name='nationalities'
                                 required
                             >
+                                <option value="">Please select nationality</option>
+
                                 {nationalities && nationalities?.map((nation, idx) => (
                                     <option key={idx} value={nation.value}>
                                         {nation.label}
@@ -212,7 +222,7 @@ export default function Index() {
                             <button
                                 type="submit"
                                 disabled={loading} //
-                               className="w-full mt-8 bg-red-600 hover:bg-red-700 text-white py-2 rounded-md font-semibold transition"
+                                className="w-full mt-8 bg-red-600 hover:bg-red-700 text-white py-2 rounded-md font-semibold transition"
                             >
                                 {loading ? "Loading.." : "Sign Up"} {/* Fixed typo */}
                             </button>

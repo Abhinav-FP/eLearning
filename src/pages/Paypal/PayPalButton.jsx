@@ -32,7 +32,6 @@ const PayPalButton = () => {
       body: JSON.stringify({ orderID: data.orderID }),
     });
     const details = await response.json();
-    console.log("details", details)
     if (response.ok && details.data.data.status === "COMPLETED") {
       router.push("/success"); // Success page pe redirect
     } else {

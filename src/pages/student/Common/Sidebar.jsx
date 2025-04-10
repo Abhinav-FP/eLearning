@@ -50,8 +50,8 @@ function SideBar({user}) {
         />
       </div>
       <div>
-        <p className="font-semibold text-sm text-gray-900">{user?.name}</p>
-        <p className="text-xs text-gray-500">{user?.role}</p>
+        <p className="font-semibold text-sm capitalize  text-gray-900">{user?.name}</p>
+        <p className="text-xs  capitalize  text-gray-500">{user?.role}</p>
       </div>
     </div>
                     <div className="mb-4 font-medium">

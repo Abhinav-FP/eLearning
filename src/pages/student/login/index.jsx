@@ -17,7 +17,6 @@ export default function index() {
     password: "",
   });
 
-  console.log("data", data)
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -41,7 +40,6 @@ export default function index() {
       });
 
       if (response?.data?.status) {
-        console.log(response?.data)
         router.push("/student/dashboard")
         toast.success(response.data.message);
         setData({

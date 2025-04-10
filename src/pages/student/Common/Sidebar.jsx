@@ -8,8 +8,6 @@ import Logo from "../../Assets/Images/logo.png"
 import Image from "next/image";
 
 function SideBar({ user }) {
-    console.log("user", user)
-    console.log("Logo", Logo)
     const pathname = usePathname();
     const [isOpen, setIsOpen] = useState(false);
 

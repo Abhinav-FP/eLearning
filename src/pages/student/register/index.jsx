@@ -24,8 +24,6 @@ export default function Index() {
         gender: "",
     });
 
-    console.log("data", data)
-
     const handleChange = (e) => {
         const { name, value } = e.target;
         setData((prevState) => ({

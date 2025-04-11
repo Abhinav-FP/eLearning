@@ -48,7 +48,7 @@ export default function HowItWork({classess}) {
                                     <div className="relative min-h-[124px] mb-[18px] ">
                                             <Image className="block mx-auto  h-auto max-h-[122px] w-auto" src={item.Icons} width={124} height={110} alt={item.Title} />
                                         </div>
-                                        <h3 className="max-w-[118px] mx-auto leading-[24px] Inter_font text-[#CC2828] -tracking-[0.04em] font-bold text-lg lg:text-xl">{item.Title}</h3>
+                                        <h3 className="max-w-[118px] mx-auto leading-[24px] font-inter text-[#CC2828] -tracking-[0.04em] font-bold text-lg lg:text-xl">{item.Title}</h3>
                                     </div>
                                 </div>
                             ))

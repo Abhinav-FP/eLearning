@@ -6,7 +6,7 @@ export default function Index() {
   return (
     <StudentLayout>
       <div className="min-h-screen bg-gray-50 font-sans">
-      <h1 className="text-2xl font-bold text-[#CC2828] mb-1">Welcome Back !</h1>
+      <h1 className="font-inter text-2xl font-bold text-[#CC2828] mb-1">Welcome Back !</h1>
       <p className="text-base text-[#565F66] mb-6">
         Next Lesson: Monday 10:00 AM with John Doe
       </p>
@@ -65,7 +65,7 @@ export default function Index() {
                   Learning Engaging. The Support From Teachers Is Excellent!"
                 </p>
                 <div className="flex items-center mt-2">
-                  <div className="text-yellow-500 text-sm">★★★★★</div>
+                  <div className="text-yellow-500 text-sm">★★★</div>
                 </div>
                 <p className="mt-1 font-bold text-gray-800">John Doe</p>
               </div>

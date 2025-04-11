@@ -37,7 +37,7 @@ export default function Header() {
 
     return (
         <>
-            <nav className={`fixed w-full top-0 z-50  transition-all duration-300 ease-in-out  ${Scrolled ? "bg-[#fff] py-1 lg:py-1" : "bg-transparent py-3 lg:py-3.5"}`}>
+            <nav className={`fixed w-full top-0 z-50  transition-all duration-300 ease-in-out  ${Scrolled ? "bg-[#fff] py-1 lg:py-1" : "bg-transparent py-3 lg:py-6"}`}>
                 <div className="mx-auto container sm:container md:container lg:max-w-[1230px] px-4">
                     <div className="relative flex items-center justify-between">
                         <div className="flex-shrink-0">

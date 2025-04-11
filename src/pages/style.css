@@ -9,6 +9,9 @@ body {
   .whytech_bg{background: linear-gradient(270deg, rgba(204, 40, 40, 0.2) 19.4%, rgba(255, 255, 255, 0) 112.89%);}
 
   .list_shadow{box-shadow: 0px 4px 54px 0px rgba(0, 0, 0, 0.18);}
+
+  .login_custom{ box-shadow: 0px 4px 34px 0px rgba(0, 0, 0, 0.15);}
+
    /* animations.css */
 
 @keyframes pulseCircle {

@@ -53,7 +53,7 @@ export default function Index(props) {
   };
 
   return (
-    <StudentLayout>
+    <StudentLayout page={"Messages"}>
       <>
         <div className="flex flex-wrap w-full">
           {/* Sidebar */}

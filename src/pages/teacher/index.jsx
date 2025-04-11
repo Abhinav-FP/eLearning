@@ -1,7 +1,10 @@
-import React from 'react'
+import React from 'react';
+import Detail from './Detail'
 
 export default function index() {
   return (
-    <div>index</div>
+    <div>
+      <Detail />
+    </div>
   )
 }

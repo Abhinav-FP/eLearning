@@ -81,7 +81,7 @@ export default function Index() {
 
     return (
         <div className="min-h-screen flex items-center justify-center bg-gray-100">
-            <div className="bg-white p-10 rounded-2xl shadow-lg w-full max-w-3xl">
+            <div className="bg-white px-4 lg:px-10 pt-5 pb-20  rounded-[40px] shadow-lg w-full max-w-[976px] login_custom">
                 {/* Logo */}
                 <div className="flex justify-center mb-6">
                     <Image src={Logo} alt="Japanse for me" />

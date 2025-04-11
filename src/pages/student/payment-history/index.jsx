@@ -14,7 +14,7 @@ export default function Index() {
 
   const toggleFilter = () => setShowFilter(!showFilter);
   return (
-    <StudentLayout>
+    <StudentLayout page={"Payments"}>
       <div className="p-4 ">
         <div className="bg-white rounded-lg shadow-md overflow-x-auto">
           <div className="flex justify-between items-center px-4 py-3 border-b ">

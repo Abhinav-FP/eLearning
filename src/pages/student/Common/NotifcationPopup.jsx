@@ -1,6 +1,8 @@
 import moment from 'moment';
 import Link from 'next/link';
 import React, { useState, useEffect } from 'react';
+import { MdOutlineNotifications } from "react-icons/md";
+
 export default function NotificationPopup() {
     const [Record, setRecord] = useState(0);
     const [notifications, setNotifications] = useState([]);
@@ -17,18 +19,7 @@ export default function NotificationPopup() {
                     onClick={() => setIsPopupOpen(!isPopupOpen)}
                     aria-label="Toggle Notifications"
                 >
-                    <svg className="w-[16px] lg:w-[18px] h-[18px] lg:h-[21px]"
-                        width="18"
-                        height="21"
-                        viewBox="0 0 18 21"
-                        fill="none"
-                        xmlns="http://www.w3.org/2000/svg"
-                    >
-                        <path
-                            d="M7 19H11C11 20.1 10.1 21 9 21C7.9 21 7 20.1 7 19ZM18 17V18H0V17L2 15V9C2 5.9 4 3.2 7 2.3V2C7 0.9 7.9 0 9 0C10.1 0 11 0.9 11 2V2.3C14 3.2 16 5.9 16 9V15L18 17ZM14 9C14 6.2 11.8 4 9 4C6.2 4 4 6.2 4 9V16H14V9Z"
-                            fill="currentColor"
-                        />
-                    </svg>
+                    <MdOutlineNotifications size={30}/>
                 </div>
                 {Record != "0" && (
                     <span className="absolute top-0 right-0 transform translate-x-2 -translate-y-2 bg-red-500 text-white text-xs font-bold w-5 h-5 flex items-center justify-center rounded-full">

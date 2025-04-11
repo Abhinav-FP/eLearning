@@ -81,7 +81,7 @@ export default function Index() {
 
     return (
         <div className="min-h-screen flex items-center justify-center bg-gray-100">
-            <div className="bg-white px-4 lg:px-10 pt-5 pb-20  rounded-[40px] shadow-lg w-full max-w-[976px] login_custom">
+            <div className="bg-white px-6 lg:px-16 pt-5 pb-20  rounded-[40px] shadow-lg w-full max-w-[976px] login_custom">
                 {/* Logo */}
                 <div className="flex justify-center mb-6">
                     <Image src={Logo} alt="Japanse for me" />
@@ -94,29 +94,34 @@ export default function Index() {
 
                 {/* Form Fields */}
                 <form onSubmit={handleSubmit}>
-                    <div className='row'>
-                        <div className="grid grid-cols-1 md:grid-cols-2 gap-4  mt-4">
+                    <div className='flex flex-wrap -mx-2.5 justify-center'>
+                        <div className='w-full md:w-6/12 px-2.5 mb-5'>
+                            <label className="block text-base font-medium text-[#727272] tracking-[-0.06em] mb-1">Name</label>
                             <input
                                 value={data?.name}
                                 onChange={handleChange}
                                 type="text"
                                 name='name'
                                 placeholder="Name"
-                                className="px-4 py-2 border border-gray-200 rounded-md bg-gray-100"
+                                className="w-full px-4 lg:px-5 py-2 border h-[48px] lg:h-[56px] border-[#F4F6F8] rounded-[6px] lg:rounded-[10px] bg-[#F4F6F8] focus:outline-none focus:ring-1 focus:ring-[#c9c9c9]"
                                 required
                             />
+                        </div>
+                        <div className='w-full md:w-6/12 px-2.5 mb-5'>
+                            <label className="block text-base font-medium text-[#727272] tracking-[-0.06em] mb-1">Email</label>
                             <input
                                 value={data?.email}
                                 onChange={handleChange}
                                 type="email"
                                 name='email'
                                 placeholder="Email"
-                                className="px-4 py-2 border border-gray-200 rounded-md bg-gray-100"
+                                className="w-full px-4 lg:px-5 py-2 border h-[48px] lg:h-[56px] border-[#F4F6F8] rounded-[6px] lg:rounded-[10px] bg-[#F4F6F8] focus:outline-none focus:ring-1 focus:ring-[#c9c9c9]"
                                 required
 
                             />
                         </div>
-                        <div className="grid grid-cols-1 md:grid-cols-2 gap-4  mt-4">
+                        <div className='w-full md:w-6/12 px-2.5 mb-5'>
+                            <label className="block text-base font-medium text-[#727272] tracking-[-0.06em] mb-1">Password</label>
                             <div className="relative">
                                 <input
                                     type={showNewPassword ? "text" : "password"}
@@ -124,14 +129,14 @@ export default function Index() {
                                     name="password"
                                     value={data.password}
                                     onChange={handleChange}
-                                    className="block w-full  px-3 py-3 bg-gray-100 text-[#727272] border border-transparent rounded-lg lg:rounded-[15px] sm:text-sm"
+                                    className="w-full px-4 lg:px-5 py-2 border h-[48px] lg:h-[56px] border-[#F4F6F8] rounded-[6px] lg:rounded-[10px] bg-[#F4F6F8] focus:outline-none focus:ring-1 focus:ring-[#c9c9c9]"
                                     required
                                 />
 
                                 <button
                                     type="button"
                                     onClick={() => setShowNewPassword(!showNewPassword)}
-                                    className="absolute top-3 right-5"
+                                    className="absolute top-1/2 cursor-pointer right-4 -translate-y-1/2"
                                 >
                                     {showNewPassword ? (
                                         <IoEyeOff size={24} className="text-gray-600" />
@@ -140,7 +145,9 @@ export default function Index() {
                                     )}
                                 </button>
                             </div>
-
+                        </div>
+                        <div className='w-full md:w-6/12 px-2.5 mb-5'>
+                            <label className="block text-base font-medium text-[#727272] tracking-[-0.06em] mb-1">Confirm Password</label>
                             <div className="relative">
                                 <input
                                     type={showConfirPassword ? "text" : "password"}
@@ -148,14 +155,14 @@ export default function Index() {
                                     name="confirm_password"
                                     value={data.confirm_password}
                                     onChange={handleChange}
-                                    className="block w-full  px-3 py-3 bg-gray-100 text-[#727272] border border-transparent rounded-lg lg:rounded-[15px] sm:text-sm"
+                                    className="w-full px-4 lg:px-5 py-2 border h-[48px] lg:h-[56px] border-[#F4F6F8] rounded-[6px] lg:rounded-[10px] bg-[#F4F6F8] focus:outline-none focus:ring-1 focus:ring-[#c9c9c9]"
                                     required
                                 />
 
                                 <button
                                     type="button"
                                     onClick={() => setShowConfirPassword(!showConfirPassword)}
-                                    className="absolute top-3 right-5"
+                                    className="absolute top-1/2 cursor-pointer right-4 -translate-y-1/2"
                                 >
                                     {showConfirPassword ? (
                                         <IoEyeOff size={24} className="text-gray-600" />
@@ -164,11 +171,11 @@ export default function Index() {
                                     )}
                                 </button>
                             </div>
-
                         </div>
-                        <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mt-4">
+                        <div className='w-full md:w-4/12 px-2.5 mb-5'>
+                            <label className="block text-base font-medium text-[#727272] tracking-[-0.06em] mb-1">Time-Zone</label>
                             {/* Time-Zone */}
-                            <select className="px-4 py-2 border border-gray-200 rounded-md bg-gray-100"
+                            <select className="w-full px-4 lg:px-5 py-2 border h-[48px] lg:h-[56px] border-[#F4F6F8] rounded-[6px] lg:rounded-[10px] bg-[#F4F6F8] focus:outline-none focus:ring-1 focus:ring-[#c9c9c9]"
                                 onChange={handleChange}
                                 value={data?.timezone}
                                 name='timezone'
@@ -184,9 +191,10 @@ export default function Index() {
                                     </option>
                                 ))}
                             </select>
-                            {/* Gender */}
-                            <select
-                                className="px-4 py-2 border border-gray-200 rounded-md bg-gray-100 text-gray-700 focus:outline-none focus:ring-2 focus:ring-blue-500"
+                        </div>
+                        {/* Gender */}
+                        {/* <select
+                                className="w-full px-4 lg:px-5 py-2 border h-[48px] lg:h-[56px] border-[#F4F6F8] rounded-[6px] lg:rounded-[10px] bg-[#F4F6F8] focus:outline-none focus:ring-1 focus:ring-[#c9c9c9]"
                                 onChange={handleChange}
                                 value={data?.gender || ""}
                                 name="gender"
@@ -196,10 +204,10 @@ export default function Index() {
                                 <option value="M">Male</option>
                                 <option value="F">Female</option>
                                 <option value="O">Other</option>
-                            </select>
+                            </select> */}
 
-                            {/* Nationality */}
-                            <select className="px-4 py-2 border border-gray-200 rounded-md bg-gray-100"
+                        {/* Nationality */}
+                        {/* <select className="w-full px-4 lg:px-5 py-2 border h-[48px] lg:h-[56px] border-[#F4F6F8] rounded-[6px] lg:rounded-[10px] bg-[#F4F6F8] focus:outline-none focus:ring-1 focus:ring-[#c9c9c9]"
                                 onChange={handleChange}
                                 value={data?.nationalities}
                                 name='nationalities'
@@ -212,30 +220,33 @@ export default function Index() {
                                         {nation.label}
                                     </option>
                                 ))}
-                            </select>
+                            </select> */}
 
-                        </div>
 
                         {/* Register Button */}
 
-                        <div className="text-center px-[20px]">
-                            <button
-                                type="submit"
-                                disabled={loading} //
-                                className="w-full mt-8 bg-red-600 hover:bg-red-700 text-white py-2 rounded-md font-semibold transition"
-                            >
-                                {loading ? "Loading.." : "Sign Up"} {/* Fixed typo */}
-                            </button>
+                        <div className="w-full md:w-12/12 px-2.5 mb-5 flex flex-wrap justify-center">
+                            <div className='w-full md:w-6/12'> 
+                                <button
+                                    type="submit"
+                                    disabled={loading} //
+                                    className="w-full py-[15px] bg-[#CC2828] hover:bg-[#ad0e0e] cursor-pointer text-white py-2 rounded-md font-semibold transition"
+                                >
+                                    {loading ? "Loading.." : "Sign Up"} {/* Fixed typo */}
+                                </button>
+                            </div>
                         </div>
+
+
                     </div>
 
                 </form>
 
 
                 {/* Login Redirect */}
-                <p className="text-center text-sm text-gray-500 mt-6">
+                <p className="text-center text-base text-[#727272] mt-6 lg:mt-12 tracking-[-0.03em] font-medium">
                     Already have an account?{" "}
-                    <Link href="/student/login" className="text-red-500 hover:underline">
+                    <Link href="/student/login" className="text-[#CC2828] hover:underline">
                         Log in.
                     </Link>
                 </p>

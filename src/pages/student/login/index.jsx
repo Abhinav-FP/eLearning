@@ -40,7 +40,7 @@ export default function index() {
       });
 
       if (response?.data?.status) {
-        router.push("/student/dashboard")
+        router.push("/student")
         toast.success(response.data.message);
         setData({
           email: "",

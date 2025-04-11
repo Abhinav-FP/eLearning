@@ -42,12 +42,12 @@ export default function StudentLayout({ children, page }) {
   }, []);
 
   return (
-    <div className="md:flex flex-wrap bg-[#F5F6FB] items-start">
+    <div className="md:flex flex-wrap bg-black items-start">
       <SideBar user={user} />
       <div className="w-full lg:ml-[304px] lg:w-[calc(100%-304px)]">
         <div className="fixed z-10 px-4 md:px-5 lg:px-[30px] py-3 lg:py-4 top-0 bg-white flex items-center w-full lg:w-[calc(100%-304px)] flex-wrap">
           <div className="w-4/12 pl-6 lg:pl-0">
-            <h1 className="text-[#151547] text-lg lg:text-2xl tracking-[-0.04em] font-medium">{page || "Dashboard"}</h1>
+            <h1 className="text-[#CC2828] text-lg lg:text-2xl tracking-[-0.04em] font-semibold">{page || "Dashboard"}</h1>
           </div>
           <div className="w-8/12 flex justify-end space-x-2.5 md:space-x-4">
             <NotifcationPopup />

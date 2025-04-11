@@ -19,13 +19,6 @@ function SideBar({ user }) {
 
     return (
         <>
-            {isOpen &&
-                <button
-                    className="lg:hidden p-2 absolute left-[213px] top-6 text-red-700 border border-red-700 z-[99] rounded"
-                    onClick={() => setIsOpen(false)}
-                >
-                    <IoMdArrowRoundBack size={18} />
-                </button>}
             {!isOpen &&
                 <button
                     className="lg:hidden p-2 fixed font-bold top-2.5 text-[#565F66] z-[99]"
@@ -38,6 +31,14 @@ function SideBar({ user }) {
                 className={`z-50 custom_scroll border border-r border-black border-opacity-10 w-[260px] md:w-[304px] fixed left-0 top-0 bottom-0 overflow-y-auto bg-white transition-transform transform ${isOpen ? "translate-x-0" : "-translate-x-full"
                     } lg:translate-x-0 lg:block`}
             >
+                 {isOpen &&
+                <button
+                    className="lg:hidden p-2 absolute left-[213px] top-6 text-red-700 border border-red-700 z-[99] rounded"
+                    onClick={() => setIsOpen(false)}
+                >
+                    <IoMdArrowRoundBack size={18} />
+                </button>}
+                
                 <div className="px-3 md:px-4 lg:px-6">
                     <Image src={Logo} alt="FriegtFlow Logo" className="h-[90px] w-[98px] mr-2" />
                 </div>

@@ -10,11 +10,11 @@ import Lesson from './Lesson';
 export default function Main() {
   return (
      <Layout> 
-       <Hero />
-       <HowItWork />
-       <Lesson />
-       <Ready />
-       <FindCource />
+       <Hero title={"Learn from Expert Teachers Anytime, Anywhere!"}/>
+       <HowItWork title={"How It Works"} />
+       <Lesson title={"Learn from the Best: Expert English & Japanese Teachers"}/>
+       <Ready  title={"Ready to Start Learning?"} />
+       <FindCource title={"Find Your Course"}  pargraph={"Our customers trust us for quality, reliability, and exceptional service. Experience the same"} />
        <FAQ />
      </Layout>
   )

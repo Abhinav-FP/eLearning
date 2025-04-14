@@ -8,94 +8,82 @@ const Event = ({ event }) => {
     const formattedStartTime = moment(event.start).format('hh:mm A');
     const formattedEndTime = moment(event.end).format('hh:mm A');
     const eventStyle = {
-        backgroundColor: event.color, // Apply color based on booking status
+        backgroundColor: event.color,
         borderRadius: '5px',
         color: 'white',
-        padding: '2px',
-        overflow: 'auto',
+        padding: '4px',
         maxHeight: '80px',
+        overflow: 'hidden',
+        fontSize: '12px',
     };
 
     return (
-        <div className="p-1" style={eventStyle}>
-            <p className="text-[12px] text-center">{`${formattedStartTime} - ${formattedEndTime}`}</p>
-            <p className="text-white text-[10px]  text-center">
-                {event.title} <span className='font-semibold ml-1 text-black'>
-                    ({event.UserName})
-                </span>
-            </p>
+        <div style={eventStyle}>
         </div>
     );
 };
-
 const Index = () => {
     const [events, setEvents] = useState([]);
     const [selectedSlot, setSelectedSlot] = useState(null);
     const [isPopupOpen, setIsPopupOpen] = useState(false);
 
-    const staffList = [
-        {
-            id: 3,
-            appointment_date: "2025-04-15", // Tuesday
-            appointment_time: "09:00 AM",
-            end_appointment_time: "09:30 AM",
-            serviceCategoryName: "Facial",
-            staffName: "John Doe",
-            userName: "Charlie Brown",
-            bookingStatus: 'booked', // 'booked', 'available', 'blocked'
-        },
-        {
-            id: 4,
-            appointment_date: "2025-04-15", // Tuesday
-            appointment_time: "09:30 AM",
-            end_appointment_time: "10:00 AM",
-            serviceCategoryName: "Massage",
-            staffName: "Jane Smith",
-            userName: "Lucy Van Pelt",
-            bookingStatus: 'available',
-        },
-        {
-            id: 5,
-            appointment_date: "2025-04-17", // Thursday
-            appointment_time: "11:00 AM",
-            end_appointment_time: "11:30 AM",
-            serviceCategoryName: "Haircut",
-            staffName: "John Doe",
-            userName: "Schroeder",
-            bookingStatus: 'blocked',
-        },
-        // Add more static appointments for the current week
-    ];
-
     useEffect(() => {
-        if (staffList && staffList?.length > 0) {
-            const transformedEvents = staffList.map((staff) => {
-                const startDate = moment(staff?.appointment_date).format('YYYY-MM-DD');
-                const startTime = staff?.appointment_time;
-                const endTime = staff?.end_appointment_time;
-                const startDateTime = moment(`${startDate} ${startTime}`, 'YYYY-MM-DD hh:mm A').toDate();
-                const endDateTime = moment(`${startDate} ${endTime}`, 'YYYY-MM-DD hh:mm A').toDate();
-                let color = 'green'; // Default to green (available)
-                if (staff.bookingStatus === 'booked') {
-                    color = 'red';
-                } else if (staff.bookingStatus === 'blocked') {
-                    color = 'yellow';
-                }
-                return {
-                    id: staff.id,
-                    title: "Ankit", // Static title as requested
-                    start: startDateTime,
-                    end: endDateTime,
-                    staffName: `${staff?.staff?.name}`,
-                    UserName: `${staff?.userName}`, // Corrected typo
-                    allDay: false,
-                    color: color, // Add color property
-                    bookingStatus: staff.bookingStatus, // Keep track of booking status
-                };
-            });
-            setEvents(transformedEvents);
-        }
-    }, [staffList]);
+        const data = [
+            {
+                id: 1,
+                name: 'Booked By You',
+                startTime: '2025-04-14T08:00:00',
+                endTime: '2025-04-14T08:30:00',
+                bookingStatus: 'bookedbyyou',
+            },
+            {
+                id: 2,
+                name: 'Blocked',
+                startTime: '2025-04-14T10:30:00',
+                endTime: '2025-04-14T11:00:00',
+                bookingStatus: 'blocked',
+            },
+            {
+                id: 3,
+                name: 'Booked',
+                startTime: '2025-04-14T12:00:00',
+                endTime: '2025-04-14T12:50:00',
+                bookingStatus: 'booked',
+            },
+            {
+                id: 4,
+                name: 'Booked by you',
+                startTime: '2025-04-14T14:00:00',
+                endTime: '2025-04-14T15:00:00',
+                bookingStatus: 'bookedByYou',
+            },
+        ];
+
+        const mappedEvents = data.map((event) => {
+            let color = '#90EE90'; // Default: Available
+
+            if (event.bookingStatus === 'booked') {
+                color = '#B0B0B0';
+            } else if (event.bookingStatus === 'blocked') {
+                color = '#EDEDED';
+            } else if (event.bookingStatus === 'bookedByYou') {
+                color = '#A4C639';
+            }
+
+            return {
+                ...event,
+                title: event.name,
+                start: new Date(event.startTime),
+                end: new Date(event.endTime),
+                color,
+            };
+        });
+
+        setEvents(mappedEvents);
+    }, []);
+
+
+
 
     const handleSelectSlot = (slotInfo) => {
         setSelectedSlot(slotInfo);
@@ -107,13 +95,45 @@ const Index = () => {
         setSelectedSlot(null);
     };
 
+    const eventStyleGetter = (event) => {
+        return {
+            style: {
+                backgroundColor: event.color,
+                borderRadius: '5px',
+                opacity: 0.9,
+                color: '#000',
+                border: '1px solid #ccc',
+            },
+        };
+    };
+
     return (
         <div className="md:flex flex-wrap  bg-[#F5F6FB] items-start">
+
+
             {/* right sidebar  */}
             <div className="w-full lg:w-[calc(100%-304px)]">
                 <div className="px-4 py-2 lg:px-10 lg:py-2.5">
                     <div className="bg-white rounded-[20px] mb-[30px]">
                         <div className="py-3 py-4 lg:py-[23px] px-4 md:px-6 lg:px-10 flex flex-wrap justify-between items-center border-b border-black border-opacity-10">
+                            <div className="flex flex-wrap items-center gap-4 mb-4">
+                                <div className="flex items-center gap-2">
+                                    <span className="w-3 h-3 rounded-full bg-green-400 inline-block"></span>
+                                    <span className="text-sm text-gray-700">Available</span>
+                                </div>
+                                <div className="flex items-center gap-2">
+                                    <span className="w-3 h-3 rounded-full bg-gray-200 inline-block"></span>
+                                    <span className="text-sm text-gray-700">Not Available</span>
+                                </div>
+                                <div className="flex items-center gap-2">
+                                    <span className="w-3 h-3 rounded-full bg-gray-400 inline-block"></span>
+                                    <span className="text-sm text-gray-700">Booked</span>
+                                </div>
+                                <div className="flex items-center gap-2">
+                                    <span className="w-3 h-3 rounded-full bg-[#A4C639] inline-block"></span>
+                                    <span className="text-sm text-gray-700">Booked by You</span>
+                                </div>
+                            </div>
                             <h3 className="text-base lg:text-lg font-semibold text-[#1E1E1E] m-0 tracking-[-0.03em]">Staff Calendar</h3>
                         </div>
                         <div className="p-4 relative">
@@ -131,6 +151,7 @@ const Index = () => {
                                     width: '100%',
                                 }}
                                 selectable
+                                eventPropGetter={eventStyleGetter}
                                 components={{ event: Event }}
                                 onSelectSlot={(slotInfo) => {
                                     if (!events.some(event =>

@@ -3,7 +3,7 @@ import Image from 'next/image';
 import Heading from '../common/Heading';
 import Button from '../common/Button';
 
-export default function FindCource() {
+export default function FindCource({pargraph ,title}) {
     return (
         <>
             <div className="pt-[40px] md:pt-[60px] lg:pt-[100px] pb-[40px] md:pb-[40px] lg:pb-[60px]">
@@ -12,9 +12,9 @@ export default function FindCource() {
                         <div className="flex flex-wrap -mx-4 items-center">
                             <div className="w-full md:w-5/12 px-4">
                                 <div className='max-w-[372px]'>
-                                    <Heading classess={'text-white mb-2'} title={'Find Your Course'} />
+                                    <Heading classess={'text-white mb-2'} title={title} />
                                     <p className='text-base font-normal text-[#F8F9FA] -tracking-[0.03em] mb-6 md:mb-8 lg:mb-10'>
-                                        Our customers trust us for quality, reliability, and exceptional service. Experience the same
+                                      {pargraph}
                                     </p>
                                     <Button classes={'text-[#CC2828] text-base bg-white w-full py-3.5'} title={'Search Courses'} />
                                 </div>

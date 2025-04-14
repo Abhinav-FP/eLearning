@@ -24,7 +24,7 @@ export default function Hero(title) {
                             </div> 
                         </div>
                         <div className="w-full lg:w-4/12 px-4">
-                            <h1 className="text-[#CC2828] Inter_font text-[55px] font-extrabold leading-[40px] lg:text-[50px] lg:leading-[60px]  mb-8 -tracking-[0.04em]">
+                            <h1 className="text-[#CC2828] font-inter text-[55px] font-extrabold leading-[40px] lg:text-[50px] lg:leading-[60px]  mb-8 -tracking-[0.04em]">
                                 Learn from Expert Teachers Anytime, Anywhere!
                             </h1>
                             <Button classes={'bg-[#CC2828] hover:bg-[#ad0e0e] text-base lg:text-xl py-3.5 px-4 text-white w-full max-w-[438px]'} title={'Book a lesson'} />

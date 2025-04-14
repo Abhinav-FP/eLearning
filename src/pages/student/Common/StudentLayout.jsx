@@ -18,28 +18,28 @@ export default function StudentLayout({ children, page }) {
     router.push("/student/login");
     toast.success("Logout Successfully");
   };
-  const fetchData = async (signal) => {
-    try {
-      const main = new Listing();
-      const response = await main.profileVerify(signal);
-      if (response.data) {
-        setUser(response.data.data.user);
-      }
-    } catch (error) {
-      console.log("error", error);
-      localStorage?.removeItem("token");
-      router.push("/student/login");
-      toast.error("Please log in first.");
-    }
-  };
+  // const fetchData = async (signal) => {
+  //   try {
+  //     const main = new Listing();
+  //     const response = await main.profileVerify(signal);
+  //     if (response.data) {
+  //       setUser(response.data.data.user);
+  //     }
+  //   } catch (error) {
+  //     console.log("error", error);
+  //     localStorage?.removeItem("token");
+  //     router.push("/student/login");
+  //     toast.error("Please log in first.");
+  //   }
+  // };
 
-  useEffect(() => {
-    const controller = new AbortController();
-    const { signal } = controller;
-    fetchData(signal);
+  // useEffect(() => {
+  //   const controller = new AbortController();
+  //   const { signal } = controller;
+  //   fetchData(signal);
 
-    return () => controller.abort();
-  }, []);
+  //   return () => controller.abort();
+  // }, []);
 
   return (
     <div className="md:flex flex-wrap bg-black items-start">
@@ -54,24 +54,6 @@ export default function StudentLayout({ children, page }) {
 
             <div className="relative">
               <button className="border border-black border-opacity-10 rounded-md lg:rounded-xl w-[44px] lg:w-[48px] h-[34px] lg:h-[38px] flex items-center justify-center text-[#151547] hover:bg-[#1C5FE8] hover:text-white cursor-pointer" onClick={() => setDropdownOpen(!dropdownOpen)}>
-                {/* <svg className="w-[16px] lg:w-[18px] h-[20px] lg:h-[22px]"
-                  width="18"
-                  height="22"
-                  viewBox="0 0 18 22"
-                  fill="none"
-                  xmlns="http://www.w3.org/2000/svg"
-                >
-                  <path
-                    d="M9 9C11.2091 9 13 7.20914 13 5C13 2.79086 11.2091 1 9 1C6.79086 1 5 2.79086 5 5C5 7.20914 6.79086 9 9 9Z"
-                    stroke="currentColor"
-                    stroke-width="1.5"
-                  />
-                  <path
-                    d="M17 16.5C17 18.985 17 21 9 21C1 21 1 18.985 1 16.5C1 14.015 4.582 12 9 12C13.418 12 17 14.015 17 16.5Z"
-                    stroke="currentColor"
-                    stroke-width="1.5"
-                  />
-                </svg> */}
                 <FaRegUser size={24}/> 
               </button>
               {dropdownOpen && (

@@ -46,7 +46,7 @@ export default function HowItWork({classess}) {
                                 [&:not(:last-child)]:after:bg-contain">
                                     <div className="bg-white rounded-[30px] py-5 px-6 text-center">
                                     <div className="relative min-h-[124px] mb-[18px] ">
-                                            <Image className="block mx-auto  h-auto max-h-[122px] w-auto" src={item.Icons} width={124} height={110} alt={item.Title} />
+                                            <Image className="block mx-auto  " src={item.Icons} alt={item.Title} />
                                         </div>
                                         <h3 className="max-w-[118px] mx-auto leading-[24px] font-inter text-[#CC2828] -tracking-[0.04em] font-bold text-lg lg:text-xl">{item.Title}</h3>
                                     </div>

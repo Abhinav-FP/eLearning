@@ -17,6 +17,13 @@ class Listing extends Component {
   async ProfileUpdate(data) {
     return Api.post("/user/update-profile", data);
   }
+  async ReviewUserGet(data) {
+    return Api.get("/student/review", data);
+  }
+
+  async PaymentUser(data) {
+    return Api.get("/student/payment", data);
+  }
  
   render() {
     return (

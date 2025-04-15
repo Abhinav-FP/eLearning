@@ -2,6 +2,19 @@ import React, { useState } from 'react'
 import StudentLayout from '../Common/StudentLayout'
 
 export default function Index() {
+
+   // const [payment, setPayment] = useState([]);
+  // console.log("reviews", payment)
+  // useEffect(() => {
+  //   const main = new Listing();
+  //   const response = main.PaymentUser();
+  //   response.then((res) => {
+  //     console.log("review", res);
+  //     setReviews(res?.data?.data?.reviews || [])
+  //   }).catch((error) => {
+  //     console.log("erorr", error)
+  //   })
+  // }, [])
   const payments = Array(9).fill({
     teacherName: "April 23,2024",
     lessonName: "Trial Lesson",

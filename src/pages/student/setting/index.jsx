@@ -11,7 +11,7 @@ export default function Index() {
 
     return (
         <StudentLayout page={"Settings"}>
-            <div className="bg-white rounded-[10px] lg:rounded-[10px]">
+            <div >
                 <div className="border-b border-[rgba(0,0,0,.1)] px-3 md:px-8 lg:px-12 pt-2">
                     <button
                         onClick={() => handleTabClick('Profile')}
@@ -21,7 +21,7 @@ export default function Index() {
                     </button>
                     <button
                         onClick={() => handleTabClick('password')}
-                        className={` cursor-pointer tracking-[-0.04em] font-medium px-2 md:px-4 lg:px-8 pt-6 lg:pt-10 pb-3 lg:pb-4 text-sm sm:text-base lg:text-xl outline-none focus:outline-none ease-linear transition-all border-b duration-150  ${activeTab === 'password' ? 'text-[#CC2828] border-[#CC2828]' : 'text-[#535353]  border-[rgba(0,0,0,.0)] '}`}
+                        className={` cursor-pointer tracking-[-0.04em] font-medium  px-2 md:px-4 lg:px-8 pt-3 lg:pt-4 pb-3 lg:pb-4 text-sm sm:text-base lg:text-xl outline-none focus:outline-none ease-linear transition-all border-b duration-150  ${activeTab === 'password' ? 'text-[#CC2828] border-[#CC2828]' : 'text-[#535353]  border-[rgba(0,0,0,.0)] '}`}
                     >
                         Password
                     </button>

@@ -70,24 +70,24 @@ export default function Password() {
     return (
         <form onSubmit={handleSubmit}>
             <>
-                <div className="border-b border-opacity-10 border-black py-6 lg:py-8 space-y-4 lg:space-y-6">
+                <div className="border-b border-[rgba(0,0,0,.1)]  py-6 lg:py-8 space-y-4 lg:space-y-6">
                     {/* Current Password Field */}
-                    <div className="flex flex-wrap">
-                        <div className="w-full lg:w-4/12 lg:pr-3 mb-2 lg:mb-0">
-                            <label className="block text-[#1E1E1E] font-semibold text-base mb-1">
+                    <div className="flex flex-wrap items-start">
+                        <div className="w-full lg:w-5/12 xl:w-4/12 lg:pr-3 mb-2 lg:mb-0">
+                            <label className="block text-[#CC2828] font-medium text-base lg:text-xl mb-1 tracking-[-0.04em]">
                                 Current Password
                             </label>
-                            <p className="block text-[#737373] text-[13px]">
+                            <p className="block text-[#535353] font-medium text-base tracking-[-0.04em] mb-0">
                                 Edit your Current Password here
                             </p>
                         </div>
-                        <div className="w-full lg:w-5/12 lg:pl-3 relative">
+                        <div className="w-full lg:w-6/12 xl:w-5/12 lg:pl-3 relative">
                             <input
                                 required
 
                                 type={showCurrentPassword ? "password" : "text"}
                                 name="current_password"
-                                className={`w-full h-11 lg:h-[54px] font-semibold appearance-none block bg-white text-[#46494D] text-base border border-gray-300 rounded-lg py-3 px-3 lg:px-5 leading-tight focus:outline-none 
+                                className={`w-full h-11 lg:h-[54px] font-medium appearance-none block bg-[#F4F6F8] text-[#46494D] text-base border border-[#F4F6F8] rounded-lg py-3 px-3 lg:px-6 leading-tight focus:outline-none 
                                `}
                                 value={data.current_password}
                                 onChange={handleChange}
@@ -107,22 +107,21 @@ export default function Password() {
                     </div>
 
                     {/* New Password Field */}
-                    <div className="flex flex-wrap">
-                        <div className="w-full lg:w-4/12 lg:pr-3 mb-2 lg:mb-0">
-                            <label className="block text-[#1E1E1E] font-semibold text-base mb-1">
+                    <div className="flex flex-wrap items-start">
+                        <div className="w-full lg:w-5/12 xl:w-4/12 lg:pr-3 mb-2 lg:mb-0">
+                            <label className="block text-[#CC2828] font-medium text-base lg:text-xl mb-1 tracking-[-0.04em]">
                                 New Password
                             </label>
-                            <p className="block text-[#737373] text-[13px]">
+                            <p className="block text-[#535353] font-medium text-base tracking-[-0.04em] mb-0">
                                 Edit your New Password here
                             </p>
                         </div>
-                        <div className="w-full lg:w-5/12 lg:pl-3 relative">
+                        <div className="w-full lg:w-6/12 xl:w-5/12 lg:pl-3 relative">
                             <input
                                 required
                                 type={showNewPassword ? "password" : "text"}
                                 name="new_password"
-                                className={`w-full h-11 lg:h-[54px] font-semibold appearance-none block bg-white text-[#46494D]
-                                 text-base border border-gray-300 rounded-lg py-3 px-3 lg:px-5 leading-tight focus:outline-none 
+                                className={`w-full h-11 lg:h-[54px] font-medium appearance-none block bg-[#F4F6F8] text-[#46494D] text-base border border-[#F4F6F8] rounded-lg py-3 px-3 lg:px-6 leading-tight focus:outline-none 
                                  `}
                                 value={data.new_password}
                                 onChange={handleChange
@@ -144,20 +143,20 @@ export default function Password() {
                     </div>
 
                     {/* Confirm Password Field */}
-                    <div className="flex flex-wrap">
-                        <div className="w-full lg:w-4/12 lg:pr-3 mb-2 lg:mb-0">
-                            <label className="block text-[#1E1E1E] font-semibold text-base mb-1">
+                    <div className="flex flex-wrap items-start">
+                        <div className="w-full lg:w-5/12 xl:w-4/12 lg:pr-3 mb-2 lg:mb-0">
+                            <label className="block text-[#CC2828] font-medium text-base lg:text-xl mb-1 tracking-[-0.04em]">
                                 Confirm Password
                             </label>
-                            <p className="block text-[#737373] text-[13px]">
+                            <p className="block text-[#535353] font-medium text-base tracking-[-0.04em] mb-0">
                                 Edit your Confirm Password here
                             </p>
                         </div>
-                        <div className="w-full lg:w-5/12 lg:pl-3 relative">
+                        <div className="w-full lg:w-6/12 xl:w-5/12 lg:pl-3 relative">
                             <input
                                 type={showConfirmPassword ? "password" : "text"}
                                 name="password_confirmation"
-                                className={`w-full h-11 lg:h-[54px] font-semibold appearance-none block bg-white text-[#46494D] text-base border border-gray-300 rounded-lg py-3 px-3 lg:px-5 leading-tight focus:outline-none 
+                                className={`w-full h-11 lg:h-[54px] font-medium appearance-none block bg-[#F4F6F8] text-[#46494D] text-base border border-[#F4F6F8] rounded-lg py-3 px-3 lg:px-6 leading-tight focus:outline-none
                                 `}
                                 required
                                 value={data.password_confirmation}
@@ -180,8 +179,8 @@ export default function Password() {
                         </div>
                     </div>
                 </div>
-                <div className="flex w-full lg:w-10/12 flex-wrap justify-center items-center pt-6 lg:pt-8 space-x-4 lg:space-x-6">
-                    <button className="w-full cursor-pointer border border-[rgba(0,0,0,0.1)] bg-[#CC2828] hover:bg-red-700 uppercase text-white py-3.5 cursor-pointer rounded-[10px] font-bold text-base transition"
+                <div className="flex w-full lg:w-12/12 xl:w-11/12 flex-wrap justify-center items-center pt-6 lg:pt-10 space-x-4 lg:space-x-6">
+                    <button className="w-full max-w-[183px] cursor-pointer border border-[#CC2828] bg-[#CC2828] hover:bg-red-700  text-white py-3.5 cursor-pointer rounded-[10px] font-normal text-base xl:text-xl transition  tracking-[-0.04em]"
                         type='submit'
                         disabled={processing}
                     >

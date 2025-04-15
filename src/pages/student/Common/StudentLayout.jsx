@@ -44,8 +44,9 @@ export default function StudentLayout({ children, page }) {
   return (
     <div className="md:flex flex-wrap bg-black items-start">
       <SideBar user={user} />
-      <div className="w-full lg:ml-[304px] lg:w-[calc(100%-304px)]">
-        <div className="fixed justify-between z-10 px-4 md:px-5 lg:px-[30px] py-3 lg:py-4 top-0 bg-white flex items-center w-full lg:w-[calc(100%-304px)] flex-wrap">
+      <div className="w-full lg:ml-[286px] lg:w-[calc(100%-286px)]">
+        <div className="fixed right-0  z-10 pl-0 md:pl-5 lg:pl-[30px] top-0 w-full lg:w-[calc(100%-286px)] ">
+        <div className="justify-between px-4 md:px-5 lg:px-[30px] py-3 lg:py-4 top-0 bg-white flex items-center w-full flex-wrap rounded-b-[10px]">
           <div className="w-6/12 sm:w-4/12 pl-6 lg:pl-0">
             <h1 className="text-[#CC2828] text-xl lg:text-2xl tracking-[-0.04em] font-semibold">{page || "Dashboard"}</h1>
           </div>
@@ -53,8 +54,8 @@ export default function StudentLayout({ children, page }) {
             <NotifcationPopup />
 
             <div className="relative">
-              <button className="border border-black border-opacity-10 rounded-md lg:rounded-xl w-[44px] lg:w-[48px] h-[34px] lg:h-[38px] flex items-center justify-center text-[#151547] hover:bg-[#1C5FE8] hover:text-white cursor-pointer" onClick={() => setDropdownOpen(!dropdownOpen)}>
-                <FaRegUser size={24}/> 
+              <button className="border border-[rgba(0,0,0,0.1)] rounded-md lg:rounded-xl w-[44px] lg:w-[48px] h-[34px] lg:h-[38px] flex items-center justify-center text-[#CC2828] bg-[rgba(204,40,40,0.1)] hover:bg-[#CC2828] hover:text-white cursor-pointer" onClick={() => setDropdownOpen(!dropdownOpen)}>
+                <FaRegUser size={18}/> 
               </button>
               {dropdownOpen && (
                 <div className="absolute right-0 mt-2 w-48 bg-white border border-gray-300 rounded-md shadow-lg z-50">
@@ -70,8 +71,9 @@ export default function StudentLayout({ children, page }) {
               )}
             </div>
           </div>
+          </div>
         </div>
-        <div className="px-4 md:px-5 lg:px-[30px] pt-20 lg:pt-24 pb-8 bg-[#F6F7FA]">{children}</div>
+        <div className="pl-0 md:pl-5 lg:pl-[30px] pt-20 lg:pt-24 pb-8 bg-[#F2F2F2]">{children}</div>
       </div>
     </div>
   );

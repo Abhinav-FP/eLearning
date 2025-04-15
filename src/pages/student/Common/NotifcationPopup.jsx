@@ -15,11 +15,11 @@ export default function NotificationPopup() {
         <div className="relative">
             <div>
                 <div
-                    className="border border-black border-opacity-10 rounded-md lg:rounded-xl w-[44px] lg:w-[48px] h-[34px] lg:h-[38px] flex items-center justify-center text-[#151547] hover:bg-[#1C5FE8] hover:text-white cursor-pointer"
+                    className="border border-[rgba(0,0,0,0.1)] rounded-md lg:rounded-xl w-[44px] lg:w-[48px] h-[34px] lg:h-[38px] flex items-center justify-center text-[#CC2828] bg-[rgba(204,40,40,0.1)] hover:bg-[#CC2828] hover:text-white cursor-pointer"
                     onClick={() => setIsPopupOpen(!isPopupOpen)}
                     aria-label="Toggle Notifications"
                 >
-                    <MdOutlineNotifications size={30}/>
+                    <MdOutlineNotifications size={24}/>
                 </div>
                 {Record != "0" && (
                     <span className="absolute top-0 right-0 transform translate-x-2 -translate-y-2 bg-red-500 text-white text-xs font-bold w-5 h-5 flex items-center justify-center rounded-full">

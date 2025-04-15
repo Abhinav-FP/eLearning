@@ -11,22 +11,22 @@ export default function Index() {
 
     return (
         <StudentLayout page={"Settings"}>
-            <div className="bg-white rounded-[10px] lg:rounded-[20px]">
-                <div className="border-b border-black border-opacity-10 px-3 md:px-8 lg:px-10 space-x-1  md:space-x-2 lg:space-x-5">
+            <div className="bg-white rounded-[10px] lg:rounded-[10px]">
+                <div className="border-b border-[rgba(0,0,0,.1)] px-3 md:px-8 lg:px-12 pt-2">
                     <button
                         onClick={() => handleTabClick('Profile')}
-                        className={`  tracking-[-0.03em] font-medium px-1.5 sm:px-2 md:px-3 lg:px-6 pt-4 pb-3 text-sm sm:text-base lg:text-lg outline-none focus:outline-none ease-linear transition-all border-b duration-150 ${activeTab === 'Profile' ? 'text-[#0367F7] border-[#0367F7]' : 'text-[#1E1E1E] border-opacity-0 border-black '}`}
+                        className={` cursor-pointer tracking-[-0.04em] font-medium  px-2 md:px-4 lg:px-8 pt-3 lg:pt-4 pb-3 lg:pb-4 text-sm sm:text-base lg:text-xl outline-none focus:outline-none ease-linear transition-all border-b duration-150 ${activeTab === 'Profile' ? 'text-[#CC2828] border-[#CC2828]' : 'text-[#535353]  border-[rgba(0,0,0,.0)] '}`}
                     >
                         Profile
                     </button>
                     <button
                         onClick={() => handleTabClick('password')}
-                        className={`tracking-[-0.03em] font-medium px-1.5 sm:px-2 md:px-3 lg:px-6 pt-4 pb-3 text-sm sm:text-base lg:text-lg outline-none focus:outline-none ease-linear transition-all border-b duration-150 ${activeTab === 'password' ? 'text-[#0367F7] border-[#0367F7]' : 'text-[#1E1E1E] border-opacity-0 border-black '}`}
+                        className={` cursor-pointer tracking-[-0.04em] font-medium px-2 md:px-4 lg:px-8 pt-6 lg:pt-10 pb-3 lg:pb-4 text-sm sm:text-base lg:text-xl outline-none focus:outline-none ease-linear transition-all border-b duration-150  ${activeTab === 'password' ? 'text-[#CC2828] border-[#CC2828]' : 'text-[#535353]  border-[rgba(0,0,0,.0)] '}`}
                     >
                         Password
                     </button>
                 </div>
-                <div className="px-6 sm:px-8 lg:px-10 pb-6 lg:pb-[30px]">
+                <div className="px-3 md:px-8 lg:px-12 pb-6 lg:pb-[30px] min-h-[75vh]">
                     <div className="mt-0">
                         {activeTab === 'Profile' &&
                             <Profile />

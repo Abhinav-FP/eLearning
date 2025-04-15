@@ -81,7 +81,7 @@ export default function Profile() {
     };
     return (
             <>
-                <div className="border-b border-opacity-10 border-black flex flex-wrap py-6 lg:py-8">
+                <div className="border-b border-gray-300 flex flex-wrap py-6 lg:py-8">
                     <div className="w-full sm:w-6/12 lg:w-4/12 sm:pr-3 mb-2 sm:mb-0">
                         <label className="block text-[#1E1E1E] font-semibold text-base mb-1">Your Photo</label>
                         <p className="block text-[#737373] text-[13px]">This will be displayed in your profile</p>

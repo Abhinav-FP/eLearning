@@ -70,7 +70,7 @@ export default function Password() {
     return (
         <form onSubmit={handleSubmit}>
             <>
-                <div className="border-b border-opacity-10 border-black py-6 lg:py-8 space-y-4 lg:space-y-6">
+                <div className="border-b border-gray-300 py-6 lg:py-8 space-y-4 lg:space-y-6">
                     {/* Current Password Field */}
                     <div className="flex flex-wrap">
                         <div className="w-full lg:w-4/12 lg:pr-3 mb-2 lg:mb-0">

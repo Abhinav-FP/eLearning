@@ -1,9 +1,8 @@
 import React, { useState } from 'react';
 import StudentLayout from '../Common/StudentLayout';
-import { CiSearch, CiLock } from 'react-icons/ci';
+import {  CiLock } from 'react-icons/ci';
 import { IoSend } from 'react-icons/io5';
 import moment from 'moment';
-import UserImage from "../../Assets/Images/hero_top_img.png"
 import Image from 'next/image';
 
 export default function Index(props) {

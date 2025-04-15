@@ -18,28 +18,28 @@ export default function StudentLayout({ children, page }) {
     router.push("/student/login");
     toast.success("Logout Successfully");
   };
-  // const fetchData = async (signal) => {
-  //   try {
-  //     const main = new Listing();
-  //     const response = await main.profileVerify(signal);
-  //     if (response.data) {
-  //       setUser(response.data.data.user);
-  //     }
-  //   } catch (error) {
-  //     console.log("error", error);
-  //     localStorage?.removeItem("token");
-  //     router.push("/student/login");
-  //     toast.error("Please log in first.");
-  //   }
-  // };
+  const fetchData = async (signal) => {
+    try {
+      const main = new Listing();
+      const response = await main.profileVerify(signal);
+      if (response.data) {
+        setUser(response.data.data.user);
+      }
+    } catch (error) {
+      console.log("error", error);
+      localStorage?.removeItem("token");
+      router.push("/student/login");
+      toast.error("Please log in first.");
+    }
+  };
 
-  // useEffect(() => {
-  //   const controller = new AbortController();
-  //   const { signal } = controller;
-  //   fetchData(signal);
+  useEffect(() => {
+    const controller = new AbortController();
+    const { signal } = controller;
+    fetchData(signal);
 
-  //   return () => controller.abort();
-  // }, []);
+    return () => controller.abort();
+  }, []);
 
   return (
     <div className="md:flex flex-wrap bg-black items-start">

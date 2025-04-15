@@ -95,61 +95,61 @@ export default function Index(props) {
           </div>
 
           {/* Chat Panel */}
-          <div className="w-full lg:w-3/4 flex flex-col ">
+          <div className="w-full lg:w-3/4 flex flex-col rounded-full p-4">
             {/* Chat Header */}
             {selectedUser && (
               <div className="flex items-center gap-3 bg-[#CC2828] px-5 lg:px-[30px] py-4">
-                <img
-                  src={selectedUser.profile_url}
-                  alt={selectedUser.name}
-                  className="w-[46px] h-[46px] lg:w-[56px] lg:h-[56px] rounded-lg mb-1"
-                />
-                <h2 className="font-medium text-base lg:text-[21px] text-[#1E1E1E]">{selectedUser.name}</h2>
+                <Image
+                    src={"/profile.png"}
+                    width={50}
+                    height={50}
+                    alt={"chat.nam"}
+                    className="w-[50px] h-[50px] rounded-lg  left-[22px] "
+                  />
+                <div>
+                <h2 className="font-medium text-base lg:text-[21px] text-[#FFFFFF]">{selectedUser.name}</h2>
+                <p className="font-medium text-sm lg:text-[18pxs] text-[#FFFFFF]">{"Teacher"}</p>
+                </div>
               </div>
             )}
 
             {/* Chat Body */}
-            <div className="px-5 lg:px-[30px] pt-5 lg:pt-[35px] pb-[10px] min-h-[500px] max-h-[500px] overflow-y-auto">
-              <div className="bg-[#FEECDC] rounded-[14px] relative pl-[50px] lg:pl-[70px] pr-[20px] lg:pr-[30px] py-[12px] mb-[30px] text-sm text-[#1E1E1E] max-w-[570px] mx-auto">
+            <div className="bg-[#ffffff] px-5 lg:px-[30px] pt-5 lg:pt-[35px] pb-[10px] min-h-[500px] max-h-[500px] overflow-y-auto">
+              <div className="bg-[#EAEAEA] rounded-[14px] relative pl-[50px] lg:pl-[70px] pr-[20px] lg:pr-[30px] py-[12px] mb-[30px] text-sm text-[#1E1E1E] max-w-[570px] mx-auto">
                 <div className="absolute top-1/2 left-[20px] lg:left-[30px] -translate-y-1/2">
                   <CiLock color="#312E40" size={20} />
                 </div>
                 <span>Messages are end-to-end encrypted. No one outside of this chat can read or listen to them.</span>
               </div>
 
-              {usermessage && (
                 <div className="mt-4 space-y-3">
                   {/* Incoming Message */}
-                  {usermessage?.sender_id === (props?.auth?.admin?.id || 1) ? (
                     <>
                       <div className="flex justify-end">
-                        <div className="bg-white px-[15px] lg:px-[30px] py-[12px] lg:py-[18px] rounded-[18px] max-w-[60%]">
-                          <p className="text-sm lg:text-base text-[#1E1E1E] opacity-90">{usermessage?.message}</p>
+                        <div className="bg-[#EAEAEA]  px-[15px] lg:px-[30px] py-[12px] lg:py-[18px] rounded-full max-w-[60%]">
+                          <p className="text-sm lg:text-base  opacity-90">{usermessage?.message}</p>
                         </div>
                       </div>
                       <span className="block text-[#0B3048] text-right text-sm opacity-70 mt-3">
                         {moment(usermessage?.created_at).format('DD MM YYYY hh:mmA')}
                       </span>
                     </>
-                  ) : (
                     <>
                       <div className="flex justify-start">
-                        <div className="bg-white px-[15px] lg:px-[30px] py-[12px] lg:py-[18px] rounded-[18px] max-w-[60%]">
-                          <p className="text-sm lg:text-base text-[#1E1E1E] opacity-90">{usermessage?.message}</p>
+                        <div className="bg-[#CC2828] px-[15px] lg:px-[30px] py-[12px] lg:py-[18px] rounded-full max-w-[60%]">
+                          <p className="text-sm lg:text-base text-[#ffffff] opacity-90">{"Hello"}</p>
                         </div>
                       </div>
                       <span className="block text-[#0B3048] text-left text-sm opacity-70 mt-3">
                         {moment(usermessage?.created_at).format('DD MM YYYY hh:mmA')}
                       </span>
                     </>
-                  )}
                 </div>
-              )}
             </div>
 
             {/* Chat Input */}
             <form onSubmit={handleSendMessage}>
-              <div className="p-4 border-t flex items-center gap-2">
+              <div className="p-4 border-t flex items-center gap-2 bg-[#ffffff]">
                 <input
                   type="text"
                   value={message}
@@ -161,11 +161,11 @@ export default function Index(props) {
                     }
                   }}
                   placeholder="Type a message..."
-                  className="w-full p-3 rounded-full border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-400"
+                  className="w-full p-3 rounded-full border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-400 bg-[#CC28281A]"
                 />
                 <button
                   type="submit"
-                  className="bg-[#0367F7] text-white px-4 py-2 rounded-full hover:bg-[#0256cc] transition duration-200"
+                  className="bg-[#CC2828] text-white px-4 py-2 rounded-full hover:bg-[#0256cc] transition duration-200"
                 >
                   <IoSend size={22} />
                 </button>

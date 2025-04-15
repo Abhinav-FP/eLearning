@@ -3,6 +3,8 @@ import StudentLayout from '../Common/StudentLayout';
 import { CiSearch, CiLock } from 'react-icons/ci';
 import { IoSend } from 'react-icons/io5';
 import moment from 'moment';
+import UserImage from "../../Assets/Images/hero_top_img.png"
+import Image from 'next/image';
 
 export default function Index(props) {
   const [userData, setUserData] = useState([
@@ -57,40 +59,33 @@ export default function Index(props) {
       <>
         <div className="flex flex-wrap w-full">
           {/* Sidebar */}
-          <div className="w-full lg:w-1/4 bg-[#0367F71A] rounded-bl-[20px] pb-5">
-            <div className="px-[22px] py-[22px] relative">
-              <div className="absolute top-1/2 left-9 text-[#8D929A] -translate-y-1/2">
-                <CiSearch size={22} />
-              </div>
-              <input
-                type="text"
-                name="search"
-                value={search}
-                onChange={(e) => setSearch(e.target.value)}
-                placeholder="Search or start a new chat"
-                className="w-full h-[38px] pl-11 text-sm bg-white border-0 max-w-[260px] rounded-full focus:outline-none focus:ring-1 focus:ring-blue-400"
-              />
-            </div>
-
+          <div className="w-full lg:w-1/4 bg-[#ffffff] rounded-lg pb-5">
             <div className="mt-0 space-y-4 h-[calc(100vh-300px)] overflow-y-auto customscroll">
               {userData.map((chat, index) => (
                 <div
                   key={index}
                   onClick={() => handleUserSelect(chat)}
-                  className="flex items-center min-h-[56px] pr-[66px] pl-[89px] rounded-lg hover:bg-gray-200 relative cursor-pointer"
+                  className="flex items-center bg-[#CC28281A] text-[#ffffff] min-h-[56px] pr-[66px] pl-[89px] pt-[15px] rounded-lg hover:bg-[#CC28281A] relative cursor-pointer "
                 >
-                  <img
-                    src={chat.profile_url}
+                  <Image
+                    src={"/profile.png"}
+                    width={50}
+                    height={50}
                     alt={chat.name}
-                    className="w-[56px] h-[56px] rounded-lg absolute left-[22px] top-1/2 -translate-y-1/2"
+                    className="w-[50px] h-[50px] rounded-lg absolute left-[22px] top-1/2 -translate-y-1/2"
                   />
                   <div className="flex-1">
-                    <h3 className="font-medium text-base mb-1 text-[#1E1E1E]">{chat.name}</h3>
-                    <p className="text-sm text-[#09132C]">{chat.message}</p>
+                    <h3 className="font-medium font-inter text-base mb-1 text-black ">{chat.name}</h3>
+                    {chat.unread ? (
+                    <p className="text-sm text-[#CC2828] "> {chat.unread > 5 ? '5+' : chat.unread} unread messages</p>
+
+                    ) : (
+                    <p className="text-sm text-[#09132C]"> Teacher</p>
+
+                    ) }
                   </div>
-                  <div className="text-xs text-[#829C99] absolute right-[22px] top-1.5">{chat.time}</div>
                   {chat.unread > 0 && (
-                    <div className="bg-[#D1E4FF] h-[24px] w-[24px] text-[#0367F7] text-xs font-bold flex items-center justify-center absolute right-[22px] bottom-1.5 rounded-full">
+                    <div className="bg-[#CC2828] h-[24px] w-[24px] text-[#fff] text-xs font-bold flex items-center justify-center absolute right-[22px] bottom-1.5 rounded-full">
                       {chat.unread > 5 ? '5+' : chat.unread}
                     </div>
                   )}
@@ -100,10 +95,10 @@ export default function Index(props) {
           </div>
 
           {/* Chat Panel */}
-          <div className="w-full lg:w-3/4 flex flex-col bg-[#FAFAFA]">
+          <div className="w-full lg:w-3/4 flex flex-col ">
             {/* Chat Header */}
             {selectedUser && (
-              <div className="flex items-center gap-3 bg-[#F7F7FC] px-5 lg:px-[30px] py-4">
+              <div className="flex items-center gap-3 bg-[#CC2828] px-5 lg:px-[30px] py-4">
                 <img
                   src={selectedUser.profile_url}
                   alt={selectedUser.name}

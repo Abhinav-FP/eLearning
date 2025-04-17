@@ -7,22 +7,43 @@ import Link from "next/link";
 
 export default function Index() {
     const [teachers, setTeachers] = useState([]);
+
+    const fetchfavouriteStudentTeachers = async () => {
+        try {
+            const main = new Listing();
+            const response = await main.StudentfavouriteTeacher();
+            console.log("res", response);
+            setTeachers(response?.data?.data || []);
+        } catch (error) {
+            console.log("error", error);
+        }
+    };
+
+
     useEffect(() => {
-        const main = new Listing();
-        const response = main.StudentfavouriteTeacher();
-        response.then((res) => {
-            setTeachers(res?.data?.data || [])
-        }).catch((error) => {
-            console.log("erorr", error)
-        })
-    }, [])
+        fetchfavouriteStudentTeachers();
+    }, []);
+
+
+    const handleRemoveSubmit = async (Id) => {
+        console.log(":aa")
+        try {
+            const main = new Listing();
+            const response = await main.RemoveWishlist({ teacherId: Id });
+            fetchfavouriteStudentTeachers();
+            console.log("res", response);
+        } catch (error) {
+            console.log("error", error);
+        }
+    };
+    console.log("teacher", teachers)
     return (
         <StudentLayout page={"Favourite teacher"}>
             <div className="min-h-screen bg-gray-50 p-4 sm:p-6">
                 {/* Lesson Cards */}
                 <Link href="/student/teachers" className="flex w-fit ml-auto mb-4 sm:mb-6 px-2 sm:px-8 py-3 text-[#CC2828] border border-[#CC2828] rounded-md text-xs sm:text-sm hover:bg-[#CC2828] hover:text-white cursor-pointer">
-          Back 
-        </Link>
+                    Back
+                </Link>
                 <div className="space-y-4">
                     {teachers &&
                         teachers?.map((teacher, idx) => (
@@ -39,7 +60,7 @@ export default function Index() {
                                         <div>
                                             <p className="flex gap-2 items-center text-md sm:text-xl text-[#CC2828] font-medium">
                                                 {teacher?.teacher?.name || ""}
-                                                <span className="cursor-pointer">
+                                                <span className="cursor-pointer" onClick={() => handleRemoveSubmit(teacher?.teacher?._id)}>
                                                     <FaHeart color={"#CC2828"} size={18} />
                                                 </span>
 

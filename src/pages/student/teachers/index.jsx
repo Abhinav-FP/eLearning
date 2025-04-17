@@ -8,26 +8,50 @@ import Link from "next/link";
 
 export default function Index() {
   const [teachers, setTeachers] = useState([]);
-  useEffect(() => {
-    const main = new Listing();
-    const response = main.StudentTeacher();
-    response.then((res) => {
-      console.log("res", res)
-      setTeachers(res?.data?.data || [])
-    }).catch((error) => {
-      console.log("erorr", error)
-    })
-  }, [])
+ 
+  
+  const fetchStudentTeachers = async () => {
+    try {
+      const main = new Listing();
+      const response = await main.StudentTeacher();
+      console.log("res", response);
+      setTeachers(response?.data?.data || []);
+    } catch (error) {
+      console.log("error", error);
+    }
+  };
+  
 
-const handlesubmit =  async()=>{
-  const main = new Listing();
-  const response = main.StudentTeacher();
-  response.then((res)=>{
-    console.log("res", res)
-  }).catch((error)=>{
-    console.log("error" ,error)
-  })
-}
+  useEffect(() => {
+    fetchStudentTeachers();
+  }, []);
+
+
+
+const handleAddSubmit = async (Id) => {
+  try {
+    const main = new Listing();
+    const response = await main.AddWishlist({ teacherId: Id });
+    console.log("res", response);
+    fetchStudentTeachers();
+  } catch (error) {
+    console.log("error", error);
+  }
+};
+
+const handleRemoveSubmit = async (Id) => {
+  console.log(":aa")
+  try {
+    const main = new Listing();
+    const response = await main.RemoveWishlist({ teacherId: Id });
+    fetchStudentTeachers();
+    console.log("res", response);
+  } catch (error) {
+    console.log("error", error);
+  }
+};
+
+console.log("teachers" , teachers)
 
   return (
     <StudentLayout page={"Find a teacher"}>
@@ -52,13 +76,19 @@ const handlesubmit =  async()=>{
                     <div>
                       <p className="flex gap-2 items-center text-md sm:text-xl text-[#CC2828] font-medium">
                         {teacher?.userId?.name || ""}
-                        {teacher?.isLiked ? (
-                          <span className="cursor-pointer" onClick={()=>{handlesubmit()}}>
-                            <FaHeart color={"#CC2828"} size={18} />
+                        {teacher?.isLiked  ? (
+                          //Liked teacher
+                          <span className="cursor-pointer" onClick={() => handleRemoveSubmit(teacher?.userId?._id)}>
+                            <FaHeart color="#CC2828" size={18} />
                           </span>
                         ) : (
-                          <span className="cursor-pointer">
-                            <FaRegHeart color={"#7A7A7A"} size={18} />
+                             //Disliked teacher
+                          <span 
+                            className="cursor-pointer" 
+                            onClick={() => handleAddSubmit(teacher?.userId?._id)}
+                          >
+                            <FaRegHeart color={"#000000"} size={18} />
+                           
                           </span>
                         )}
                       </p>

@@ -31,26 +31,26 @@ const handlesubmit =  async()=>{
 
   return (
     <StudentLayout page={"Find a teacher"}>
-      <div className="min-h-screen bg-gray-50 p-4 sm:p-6">
-        <Link href="/student/favourite-teacher" className="flex w-fit ml-auto mb-4 sm:mb-6 px-2 sm:px-8 py-3 text-[#CC2828] border border-[#CC2828] rounded-md text-xs sm:text-sm hover:bg-[#CC2828] hover:text-white cursor-pointer">
+      <div className="min-h-screen p-5 lg:p-[30px]">
+        <Link href="/student/favourite-teacher" className="flex w-fit ml-auto mb-4 lg:mb-5 px-2 sm:px-8 py-2.5 text-[#CC2828] border border-[#CC2828] rounded-[10px] tracking-[-0.06em] text-sm font-medium hover:bg-[#CC2828] hover:text-white cursor-pointer">
           View Favourite Teachers
         </Link>
         {/* Lesson Cards */}
-        <div className="space-y-4">
+        <div className="space-y-4 lg:space-y-5">
           {teachers &&
             teachers?.map((teacher, idx) => (
               <div key={idx}>
-                <div className="bg-white rounded-xl shadow-sm p-4 flex flex-col sm:flex-row items-center justify-between transition border-red-100 border-1">
+                <div className="bg-white rounded-[10px] lesson_list_shadow p-4 lg:p-5 flex flex-col lg:flex-row items-center justify-between transition border-[rgba(204,40,40,0.2)] border-1">
                   <div className="flex items-center space-x-3 mt-2">
                     <Image
                       src={teacher?.teacher?.profile_photo || "/profile.png"}
                       alt="Profile"
-                      className="w-20 h-20 rounded-full object-cover"
-                      height={80}
-                      width={80}
+                      className="w-20 h-20 lg:w-[104px] lg:h-[104px] rounded-full object-cover"
+                      height={104}
+                      width={104}
                     />
                     <div>
-                      <p className="flex gap-2 items-center text-md sm:text-xl text-[#CC2828] font-medium">
+                      <h3 className="flex font-inter gap-2 items-center text-md lg:text-xl text-[#CC2828] font-medium tracking-[-0.06em] mb-2">
                         {teacher?.userId?.name || ""}
                         {teacher?.isLiked ? (
                           <span className="cursor-pointer" onClick={()=>{handlesubmit()}}>
@@ -61,11 +61,11 @@ const handlesubmit =  async()=>{
                             <FaRegHeart color={"#7A7A7A"} size={18} />
                           </span>
                         )}
-                      </p>
-                      <p className="text-xs text-gray-500">
+                      </h3>
+                      <p className="text-xs text-[#7A7A7A] font-inter tracking-[-0.04em] mb-1">
                         {teacher?.description || ""}
                       </p>
-                      <p className="text-yellow-500 text-lg">
+                      <p className="text-[#E4B750] text-lg">
                         {teacher.average_price && (
                           ` $${teacher.average_price}/${teacher?.average_duration} min`
                         )}
@@ -73,10 +73,10 @@ const handlesubmit =  async()=>{
                     </div>
                   </div>
                   <div className="flex flex-row gap-2 justify-between">
-                    <button className="px-2 sm:px-10 py-2 text-[#CC2828] border border-[#CC2828] rounded-md text-xs sm:text-sm hover:bg-[#CC2828] hover:text-white cursor-pointer">
+                    <button className="tracking-[-0.06em] font-inter font-medium px-8 lg:px-12 py-2.5 text-[#CC2828] border border-[#CC2828] rounded-[10px] text-sm hover:bg-[#CC2828] hover:text-white cursor-pointer">
                       Book
                     </button>
-                    <Link href="/student/message" className="px-2 sm:px-10 py-2 bg-[#CC2828] text-white rounded-md text-xs sm:text-sm hover:bg-white hover:text-[#CC2828] border border-[#CC2828] cursor-pointer">
+                    <Link href="/student/message" className="tracking-[-0.06em] font-inter font-medium px-8 lg:px-12 py-2.5 bg-[#CC2828] text-white rounded-[10px]  text-sm hover:bg-white hover:text-[#CC2828] border border-[#CC2828] cursor-pointer">
                       Message
                     </Link>
                   </div>

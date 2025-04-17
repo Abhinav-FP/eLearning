@@ -24,7 +24,26 @@ class Listing extends Component {
   async PaymentUser(data) {
     return Api.get("/student/payment", data);
   }
- 
+
+  async homeTeacher(data) {
+    return Api.get("/home/teacher", data);
+  }
+
+  
+  async StudentTeacher(data) {
+    return Api.get("/student/teacherGet", data);
+  }
+  async StudentfavouriteTeacher(data) {
+    return Api.get("/student/favourite/get_all", data);
+  }
+
+  async AddWishlist(data) {
+    return Api.post("/favourite/add", data);
+  }
+
+  async RemoveWishlist(data) {
+    return Api.post("/favourite/delete", data);
+  }
   render() {
     return (
       <div>

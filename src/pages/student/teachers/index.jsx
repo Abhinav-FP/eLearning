@@ -106,7 +106,7 @@ console.log("teachers" , teachers)
                     <button className="tracking-[-0.06em] font-inter font-medium px-8 lg:px-12 py-2.5 text-[#CC2828] border border-[#CC2828] rounded-[10px] text-sm hover:bg-[#CC2828] hover:text-white cursor-pointer">
                       Book
                     </button>
-                    <Link href="/student/message" className="tracking-[-0.06em] font-inter font-medium px-8 lg:px-12 py-2.5 bg-[#CC2828] text-white rounded-[10px]  text-sm hover:bg-white hover:text-[#CC2828] border border-[#CC2828] cursor-pointer">
+                    <Link href={`/student/message?query=${teacher?.userId?._id}`} className="tracking-[-0.06em] font-inter font-medium px-8 lg:px-12 py-2.5 bg-[#CC2828] text-white rounded-[10px]  text-sm hover:bg-white hover:text-[#CC2828] border border-[#CC2828] cursor-pointer">
                       Message
                     </Link>
                   </div>

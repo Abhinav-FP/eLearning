@@ -33,6 +33,10 @@ class Listing extends Component {
   async StudentTeacher(data) {
     return Api.get("/student/teacherGet", data);
   }
+
+  async StudentDashboard() {
+    return Api.get("/student/dashboard");
+  }
   async StudentfavouriteTeacher(data) {
     return Api.get("/student/favourite/get_all", data);
   }
@@ -44,6 +48,18 @@ class Listing extends Component {
   async RemoveWishlist(data) {
     return Api.post("/favourite/delete", data);
   }
+
+  async getCountmessage(){
+    return Api.get("/message/getAll");
+  }
+  async MessageGetAll(id){
+    return Api.get(`/message/get/${id}`);
+  }
+  async SendMessage(data){
+    return Api.post(`/message/send` , data);
+  }
+
+  
   render() {
     return (
       <div>

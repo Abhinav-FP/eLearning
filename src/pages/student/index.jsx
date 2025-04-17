@@ -1,8 +1,24 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import StudentLayout from './Common/StudentLayout'
 import Link from 'next/link'
+import Listing from '../api/Listing';
+import { FaStar } from 'react-icons/fa';
 
 export default function Index() {
+
+   const [dahboard, setDashboard] = useState([]);
+    useEffect(() => {
+      const main = new Listing();
+      const response = main.StudentDashboard();
+      response.then((res) => {
+        console.log("response" ,res)
+        setDashboard(res?.data || [])
+      }).catch((error) => {
+        console.log("erorr", error)
+      })
+    }, [])
+
+    console.log("dahboard" ,dahboard)
   return (
     <StudentLayout>
       <div className="min-h-screen p-5 lg:p-[30px]">
@@ -31,7 +47,7 @@ export default function Index() {
             <div className="bg-white p-4 lg:p-5 border border-[rgba(204,40,40,0.2)] dashboard-box rounded-[20px]">
               <h2 className="font-inter text-lg lg:text-xl tracking-[-0.04em] font-bold text-[#CC2828] mb-4">Favorite Teachers</h2>
               <div className="space-y-4">
-                {[1, 2, 3].map((_, idx) => (
+                {dahboard?.wishlistResult?.map((wish, idx) => (
                   <div
                     key={idx}
                     className="flex items-center justify-between  border border-[rgba(204,40,40,0.3)] rounded-xl p-2.5"
@@ -40,11 +56,11 @@ export default function Index() {
                       <div className="w-11 h-11 rounded-full bg-[rgba(204,40,40,0.3)]">
                       </div>
                       <div>
-                        <p className="font-medium text-sm text-black tracking-[-0.06em] font-inter mb-1">John Doe</p>
-                        <p className="text-xs text-[#7A7A7A] tracking-[-0.04em] font-inter">Teacher</p>
+                        <p className="font-medium text-sm text-black tracking-[-0.06em] font-inter mb-1">{wish?.teacher?.name}</p>
+                        <p className="text-xs text-[#7A7A7A] tracking-[-0.04em] font-inter capitalize">{wish?.teacher?.role}</p>
                       </div>
                     </div>
-                    <Link href="/student/message" className="text-[#CC2828] font-inter text-sm font-medium tracking-[-0.06em]  hover:underline cursor-pointer">
+                    <Link href={`/student/message?query=${wish?.teacher?._id}`} className="text-[#CC2828] font-inter text-sm font-medium tracking-[-0.06em]  hover:underline cursor-pointer">
                       Message
                     </Link>
                   </div>
@@ -60,19 +76,21 @@ export default function Index() {
             <div className="bg-white p-4 lg:p-5 border border-[rgba(204,40,40,0.2)]  rounded-[20px]">
               <h2 className="font-inter text-lg lg:text-xl tracking-[-0.04em] font-bold text-[#CC2828] mb-4">Recent Reviews</h2>
               <div className="space-y-2">
-                {[1, 2, 3].map((_, idx) => (
+                {dahboard?.reviews?.map((item, idx) => (
                   <div
                     key={idx}
                     className="bg-[rgba(204,40,40,0.1)] p-2.5 rounded-xl text-sm font-medium"
                   >
                     <p className='text-sm font-medium font-inter tracking-[-0.04em] text-black'>
-                      "The Courses Are Well-Structured, And The Interactive Lessons Make
-                      Learning Engaging. The Support From Teachers Is Excellent!"
+                     {item.description}
                     </p>
                     <div className="flex items-center mt-2">
-                      <div className="text-[#E4B750] text-sm">★★★</div>
+                      <div className="flex text-[#E4B750] text-sm"> 
+                        {Array.from({ length: item?.rating }).map((_, i) => (
+                                          <FaStar key={i} size={16} fill="currentColor" />
+                                        ))}</div>
                     </div>
-                    <p className="mt-2 font-bold text-base font-inter tracking-[-0.04em]  text-black">John Doe</p>
+                    <p className="mt-2 font-bold text-base font-inter tracking-[-0.04em]  text-black">{item?.lessonId?.title}</p>
                   </div>
                 ))}
               </div>

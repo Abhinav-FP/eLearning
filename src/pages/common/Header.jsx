@@ -88,8 +88,12 @@ export default function Header() {
                                     <button onClick={() => (handleLanguageSelect('Japanese'))} className="w-full cursor-pointer bg-transparent py-.5 px-2 py-2 [&:not(:last-child)]:border-b hover:text-[#CC2828]">Japanese</button>
                                 </div>
                             </div>
-                            <Button classes={'bg-[#CC2828] hover:bg-[#ad0e0e] text-white text-base py-3.5 px-10'} title="Sign Up" />
-                            <Button classes={'bg-[#CC2828] hover:bg-[#ad0e0e] text-white text-base py-3.5 px-10'} title="Log In" />
+                            <Link href="/student/register" className="bg-[#CC2828] hover:bg-[#ad0e0e] text-white text-base py-3.5 px-10 font-medium cursor-pointer rounded-full" >
+                            Sign Up                            </Link>
+                            <Link href="/student/login" className="bg-[#CC2828] hover:bg-[#ad0e0e] text-white text-base py-3.5 px-10 font-medium cursor-pointer rounded-full" >
+                                Log In
+                            </Link>
+                       
                         </div>
                         <div className="flex lg:hidden">
                             {/* <!-- Mobile menu button --> */}

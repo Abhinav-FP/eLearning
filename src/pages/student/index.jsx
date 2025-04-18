@@ -11,14 +11,12 @@ export default function Index() {
       const main = new Listing();
       const response = main.StudentDashboard();
       response.then((res) => {
-        console.log("response" ,res)
         setDashboard(res?.data || [])
       }).catch((error) => {
         console.log("erorr", error)
       })
     }, [])
 
-    console.log("dahboard" ,dahboard)
   return (
     <StudentLayout>
       <div className="min-h-screen p-5 lg:p-[30px]">

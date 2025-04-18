@@ -13,7 +13,6 @@ export default function Teacher() {
         try {
           const main = new Listing();
           const response = await main.homeTeacher();
-          console.log("response" ,response)
           if (response.data) {
             setTeacher(response.data.data.record);
           }

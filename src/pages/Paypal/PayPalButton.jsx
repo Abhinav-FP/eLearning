@@ -8,7 +8,6 @@ const PayPalButton = () => {
   const router = useRouter();
 
   function calculateTotal({ items }) {
-    console.log("items:", items);
     const total = items.reduce((sum, item) => sum + item.price * item.quantity, 0);
     return total;
   }
@@ -23,7 +22,6 @@ const PayPalButton = () => {
   };
 
   const totalAmount = calculateTotal(cartData);
-  console.log("Total Amount:", totalAmount); // ➜
   const [isProcessing, setIsProcessing] = useState(false);
 
   const handleCreateOrder = async () => {

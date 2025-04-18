@@ -10,7 +10,6 @@ export default function Profile() {
         const main = new Listing();
         main.profileVerify()
           .then((r) => {
-            console.log("r" ,r)
             const profiledata = r?.data?.data?.user;
             setData({
               name: profiledata?.name,
@@ -29,7 +28,6 @@ export default function Profile() {
         email: "",
         phone: "",
     })
-    console.log("data", data)
     const handleChange = (e) => {
         const { name, value } = e.target;
         setData((prevState) => ({

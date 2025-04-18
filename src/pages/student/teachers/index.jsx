@@ -14,7 +14,6 @@ export default function Index() {
     try {
       const main = new Listing();
       const response = await main.StudentTeacher();
-      console.log("res", response);
       setTeachers(response?.data?.data || []);
     } catch (error) {
       console.log("error", error);
@@ -32,7 +31,6 @@ const handleAddSubmit = async (Id) => {
   try {
     const main = new Listing();
     const response = await main.AddWishlist({ teacherId: Id });
-    console.log("res", response);
     fetchStudentTeachers();
   } catch (error) {
     console.log("error", error);
@@ -40,18 +38,15 @@ const handleAddSubmit = async (Id) => {
 };
 
 const handleRemoveSubmit = async (Id) => {
-  console.log(":aa")
   try {
     const main = new Listing();
     const response = await main.RemoveWishlist({ teacherId: Id });
     fetchStudentTeachers();
-    console.log("res", response);
   } catch (error) {
     console.log("error", error);
   }
 };
 
-console.log("teachers" , teachers)
 
   return (
     <StudentLayout page={"Find a teacher"}>

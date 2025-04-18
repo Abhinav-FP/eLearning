@@ -14,7 +14,6 @@ export default function Password() {
         password_confirmation: "",
     })
 
-    console.log("data", data)
     const handleChange = (e) => {
         const { name, value } = e.target;
         setData((prevState) => ({
@@ -38,7 +37,6 @@ export default function Password() {
                 existingPassword: data?.current_password,
                 newPassword: data?.password_confirmation,
             });
-            console.log("response", response)
             if (response?.data) {
                 toast.success(response.data.message);
                 setData({

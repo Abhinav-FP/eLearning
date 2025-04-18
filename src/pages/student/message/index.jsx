@@ -10,21 +10,8 @@ import { useRouter } from 'next/router';
 
 export default function Index() {
   const chatContainerRef = useRef(null);
-
   const router = useRouter();
-  console.log("router", router)
-
   const Query = router.query.query;
-
-  console.log("Query", Query)
-
-  const [selectedUser, setSelectedUser] = useState();
-  const [message, setMessage] = useState('');
-  const [usermessage, setUserMessage] = useState();
-  const [Loading, setLoading] = useState();
-
-  const [messageCount, SetmessageCount] = useState([])
-
   useEffect(() => {
     if (Query) {
       MessageGetAlls(Query)
@@ -32,11 +19,18 @@ export default function Index() {
   }, [Query]);
 
 
+  const [selectedUser, setSelectedUser] = useState();
+  const [message, setMessage] = useState('');
+  const [usermessage, setUserMessage] = useState();
+  const [Loading, setLoading] = useState();
+  const [messageCount, SetmessageCount] = useState([])
+
+  
+
   const MessageCount = async () => {
     try {
       const main = new Listing();
       const response = await main.getCountmessage();
-      console.log("response", response)
       SetmessageCount(response.data.data);
     } catch (error) {
       console.log("error", error);
@@ -53,18 +47,15 @@ export default function Index() {
   };
 
   const MessageGetAlls = async (Id) => {
-    console.log("Id", Id)
     try {
       const main = new Listing();
       const response = await main.MessageGetAll(Id);
-      console.log("response", response)
       setUserMessage(response.data.data);
     } catch (error) {
       console.log("error", error);
     }
   };
 
-  console.log("usermessage", usermessage)
 
   const handleSendMessage = async (e) => {
     e.preventDefault();

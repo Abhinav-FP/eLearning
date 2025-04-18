@@ -104,63 +104,64 @@ export default function Index() {
       return moment(date).format("DD MMM YYYY ");
     }
   };
-
-
+  
   return (
     <StudentLayout page={"Messages"}>
       <>
         <div className="flex flex-wrap w-full">
           {/* Sidebar */}
-          <div className="w-full lg:w-1/4 bg-[#ffffff] rounded-lg pb-5">
-            <div className="mt-0 space-y-4 h-[calc(100vh-300px)] overflow-y-auto customscroll">
+          <div className="w-full lg:w-1/4  rounded-lg pb-5 pt-2">
+            <div className="mt-0 space-y-1 h-[calc(100vh-300px)] overflow-y-auto customscroll">
               {messageCount && messageCount.map((chat, index) => (
                 <div
                   key={index}
                   onClick={() => handleUserSelect(chat)}
-                  className="flex items-center bg-[#CC28281A] text-[#ffffff] min-h-[56px] pr-[66px] pl-[89px] pt-[15px] rounded-lg hover:bg-[#CC28281A] relative cursor-pointer "
+                  className={`flex items-center  text-[#ffffff] min-h-[56px] pr-[66px] pl-[89px] py-[8px]   hover:bg-[#CC28281A] relative cursor-pointer min-h-[72px] ${selectedUser === chat ? "bg-[#CC28281A]" : "bg-[#fff]"}`} 
                 >
                   <Image
                     src={"/profile.png"}
                     width={50}
                     height={50}
                     alt={chat?.teacher?.name}
-                    className="w-[50px] h-[50px] rounded-lg absolute left-[22px] top-1/2 -translate-y-1/2"
+                    className="w-[50px] h-[50px] lg:w-[56px] lg:h-[56px] rounded-lg absolute left-[22px] top-1/2 -translate-y-1/2"
                   />
                   <div className="flex-1">
-                    <h3 className="font-medium font-inter text-base mb-1 text-black ">{chat?.teacher?.name}</h3>
+                    <h3 className="font-medium font-inter text-base mb-0 text-black ">{chat?.teacher?.name}</h3>
                     {chat?.count ? (
-                      <p className="text-sm text-[#CC2828] "> {chat?.count > 5 ? '5+' : chat?.count} unread messages</p>
+                      <p className="text-sm text-[#CC2828] font-inter  tracking-[-0.04em] "> {chat?.count > 5 ? '5+' : chat?.count} unread messages</p>
 
                     ) : (
-                      <p className="text-sm text-[#09132C]"> Teacher</p>
+                      <p className="text-sm text-[#7A7A7A] font-inter  tracking-[-0.04em]"> Teacher</p>
 
                     )}
                   </div>
                   {chat?.count > 0 && (
-                    <div className="bg-[#CC2828] h-[24px] w-[24px] text-[#fff] text-xs font-bold flex items-center justify-center absolute right-[22px] bottom-1.5 rounded-full">
+                    <div className={` h-[28px] w-[28px] text-[#535353] text-xs font-bold flex items-center justify-center absolute right-[22px] rounded-full top-1/2 -translate-y-1/2 ${selectedUser === chat ? "bg-white" : "bg-[rgba(204,40,40,0.1)]"}`}>
                       {chat?.count > 5 ? '5+' : chat?.count}
                     </div>
                   )}
                 </div>
-              ))}
+                
+              ))} 
+
             </div>
           </div>
 
           {/* Chat Panel */}
-          <div className="w-full lg:w-3/4 flex flex-col rounded-full p-4">
+          <div className="w-full lg:w-3/4 flex flex-col  bg-[#F1F1F1]">
             {/* Chat Header */}
             {selectedUser && (
-              <div className="flex items-center gap-3 bg-[#CC2828] px-5 lg:px-[30px] py-4">
+              <div className="flex items-center gap-3 lg:gap-4 bg-[#FFFFFF] px-4 lg:px-5 py-3.5 lg:py-4">
                 <Image
                   src={"/profile.png"}
-                  width={50}
-                  height={50}
+                  width={45}
+                  height={45}
                   alt={"chat.nam"}
-                  className="w-[50px] h-[50px] rounded-lg  left-[22px] "
+                  className="w-[45px] h-[45px] rounded-full left-[22px] "
                 />
                 <div>
-                  <h2 className="font-medium text-base lg:text-[21px] text-[#FFFFFF]">{selectedUser.teacher.name}</h2>
-                  <p className="font-medium text-sm lg:text-[18pxs] text-[#FFFFFF] capitalize">{selectedUser.teacher.role}</p>
+                  <h2 className="font-medium text-base text-black mb-0 tracking-[-0.06em]">{selectedUser.teacher.name}</h2>
+                  <p className="font-normal text-sm font-inter text-[#1E1E1E] capitalize">{selectedUser.teacher.role}</p>
                 </div>
               </div>
             )}
@@ -168,10 +169,10 @@ export default function Index() {
             {/* Chat Body */}
             <div
               ref={chatContainerRef}
-              className="px-5 lg:px-[30px] pt-5 lg:pt-[35px] pb-[10px] min-h-[500px] max-h-[500px] overflow-y-auto"
+              className="px-4 lg:px-5 pt-5 lg:pt-[30px] pb-[10px] min-h-[500px] max-h-[500px] overflow-y-auto"
             >
-              <div className="bg-[#FEECDC] rounded-[14px] relative pl-[50px] lg:pl-[70px] pr-[20px] lg:pr-[30px] py-[12px] mb-[30px] text-sm text-[#1E1E1E] max-w-[570px] mx-auto">
-                <div className="absolute top-1/2 left-[20px] lg:left-[30px] -translate-y-1/2">
+              <div className="bg-[#FEECDC] rounded-[14px] relative pl-[50px] lg:pl-[60px] pr-[20px] lg:pr-[30px] py-[12px] mb-[30px] text-sm text-[#1E1E1E] max-w-[570px] mx-auto">
+                <div className="absolute top-1/2 left-[20px] lg:left-[20px] -translate-y-1/2">
                   <CiLock color="#312E40" size={20} />
                 </div>
                 <span>Messages are end-to-end encrypted. No one outside of this chat can read or listen to them.</span>
@@ -180,10 +181,10 @@ export default function Index() {
               {usermessage && usermessage?.map((item, index) => {
                 const isIncoming = item.sent_by !== selectedUser?.teacher?.role;
                 return (
-                  <div className="mt-4 space-y-3" key={index}>
+                  <div className="mt-4 space-y-1" key={index}>
                     {index === 0 || formatDate(item.created_at) !== formatDate(usermessage[index - 1]?.created_at) ? (
                       <div className="text-center my-3">
-                        <span className="bg-gray-200 px-3 py-1 rounded-full text-sm text-gray-600">
+                        <span className=" py-1 tracking-[-0.06em] font-inter text-base text-[#7A7A7A]">
                           {formatDate(item.created_at)}
                         </span>
                       </div>
@@ -191,13 +192,13 @@ export default function Index() {
                     {isIncoming ? (
                       <>
                         <div className="flex justify-end">
-                          <div className="bg-red-500 px-[15px] lg:px-[30px] py-[12px] lg:py-[18px] rounded-[18px] max-w-[60%]">
-                            <p className="text-sm lg:text-base text-[#1E1E1E] opacity-90 text-black text-left">{item?.content}</p>
+                          <div className="bg-[rgba(204,40,40,0.1)] px-4 lg:px-5 py-[12px] lg:py-[15px] rounded-bl-[10px] rounded-t-[10px] lg:rounded-t-[15px] lg:rounded-bl-[15px] max-w-[60%]">
+                            <p className="text-sm tracking-[-0.04em] font-inter text-[#535353] text-left">{item?.content}</p>
                           </div>
                         </div>
 
                         {item?.createdAt && (
-                          <span className="block text-[#0B3048] text-right text-sm opacity-70 mt-3">
+                          <span className="tracking-[-0.04em] font-inter block text-[#535353] text-right text-sm  mt-2">
                             {moment(item.createdAt).format(" hh:mm A")}
                           </span>
                         )}
@@ -205,13 +206,13 @@ export default function Index() {
                     ) : (
                       <>
                         <div className="flex justify-start">
-                          <div className="bg-red-500  px-[15px] lg:px-[30px] py-[12px] lg:py-[18px] rounded-[18px] max-w-[60%]">
-                            <p className="text-sm lg:text-base text-[#1E1E1E] opacity-90 text-left">{item?.content}</p>
+                          <div className="bg-white  px-4 lg:px-5 py-[12px] lg:py-[15px] rounded-br-[10px] rounded-t-[10px] lg:rounded-t-[15px] lg:rounded-br-[15px] max-w-[60%]">
+                            <p className="text-sm tracking-[-0.04em] font-inter  text-[#535353] text-left">{item?.content}</p>
                           </div>
                         </div>
 
                         {item?.createdAt && (
-                          <span className="block text-[#0B3048] text-left text-sm opacity-70 mt-3">
+                          <span className="tracking-[-0.04em] font-inter block text-[#535353] text-left text-sm mt-2">
                             {moment(item.createdAt).format("hh:mm A")}
                           </span>
                         )}
@@ -225,7 +226,7 @@ export default function Index() {
 
             {/* Chat Input */}
             <form onSubmit={handleSendMessage}>
-              <div className="p-4 border-t flex items-center gap-2 bg-[#ffffff]">
+              <div className="px-4 lg:px-5 py-3.5 lg:py-4 flex items-center gap-2 bg-[#e5e5e5]">
                 <input
                   type="text"
                   value={message}
@@ -237,11 +238,11 @@ export default function Index() {
                     }
                   }}
                   placeholder="Type a message..."
-                  className="w-full p-3 rounded-full border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-400 bg-[#CC28281A]"
+                  className="w-full px-5 py-3 h-[50px] rounded-full border border-gray-200 focus:outline-none focus:ring-1 focus:ring-gray-400 bg-white"
                 />
                 <button
                   type="submit"
-                  className="bg-[#CC2828] text-white px-4 py-2 rounded-full hover:bg-[#0256cc] transition duration-200"
+                  className="bg-[#CC2828] h-[50px] w-[50px] cursor-pointer text-white px-4 py-2 rounded-full hover:bg-[#ad0e0e] transition duration-200"
                 >
                   <IoSend size={22} />
                 </button>

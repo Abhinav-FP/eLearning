@@ -28,15 +28,15 @@ export default function Index() {
   const toggleFilter = () => setShowFilter(!showFilter);
   return (
     <StudentLayout page={"Payments"}>
-      <div className="p-4 ">
-        <div className="bg-white rounded-lg shadow-md overflow-x-auto">
-          <div className="flex justify-between items-center px-4 py-3 border-b ">
-            <h2 className="text-lg font-semibold text-red-600">Payments History</h2>
+      <div className="pr-5">
+        <div className="border border-[rgba(204,40,40,0.3)] rounded-[20px] shadow-md overflow-x-auto">
+          <div className="flex justify-between items-center  px-4 lg:px-6 py-4">
+            <h2 className="text-xl lg:text-2xl font-bold text-[#CC2828] tracking-[-0.04em] font-inter">Payments History</h2>
             <div className="flex items-center space-x-2">
               <select
-                className="border border-red-300 text-red-500 text-sm px-3 py-1 rounded hover:bg-red-100 focus:outline-none"
+                className="border h-[46px] border-[rgba(204,40,40,0.6)] text-[#CC2828] text-base font-medium tracking-[-0.04em] px-3 py-1 rounded-[10px]  bg-[rgba(204,40,40,0.1)] focus:outline-none font-inter"
               >
-                <option value="">   Filter</option>
+                <option value="">Filter</option>
                 <option value="paypal">Paypal</option>
                 <option value="credit_card">Credit Card</option>
                 <option value="bank_transfer">Bank Transfer</option>
@@ -44,25 +44,25 @@ export default function Index() {
             </div>
           </div>
           <table className="min-w-full text-sm text-left">
-            <thead className="bg-red-100 text-red-600">
+            <thead className="bg-[rgba(204,40,40,0.1)] text-[#535353] tracking-[-0.04em] font-inter">
               <tr>
-                <th className="px-4 py-2 font-medium">Teacher name</th>
-                <th className="px-4 py-2 font-medium">Lesson name</th>
-                <th className="px-4 py-2 font-medium">Lesson date and time</th>
-                <th className="px-4 py-2 font-medium">Lesson duration</th>
-                <th className="px-4 py-2 font-medium">Amount</th>
-                <th className="px-4 py-2 font-medium">Payment Method</th>
+                <th className="font-normal text-lg px-4 py-3 border-t border-[rgba(204,40,40,0.2)]">Teacher name</th>
+                <th className="font-normal text-lg px-4 py-3 border-t border-[rgba(204,40,40,0.2)]">Lesson name</th>
+                <th className="font-normal text-lg px-4 py-3 border-t border-[rgba(204,40,40,0.2)]">Lesson date and time</th>
+                <th className="font-normal text-lg px-4 py-3 border-t border-[rgba(204,40,40,0.2)]">Lesson duration</th>
+                <th className="font-normal text-lg px-4 py-3 border-t border-[rgba(204,40,40,0.2)]">Amount</th>
+                <th className="font-normal text-lg px-4 py-3 border-t border-[rgba(204,40,40,0.2)]">Payment Method</th>
               </tr>
             </thead>
             <tbody>
               {payments.map((item, index) => (
-                <tr key={index} className="border-t hover:bg-red-50">
-                  <td className="px-4 py-2">{item.teacherName}</td>
-                  <td className="px-4 py-2">{item.lessonName}</td>
-                  <td className="px-4 py-2">{item.dateTime}</td>
-                  <td className="px-4 py-2">{item.duration}</td>
-                  <td className="px-4 py-2">{item.amount}</td>
-                  <td className="px-4 py-2">{item.method}</td>
+                <tr key={index} className="border-t hover:bg-[rgba(204,40,40,0.1)] border-t border-[rgba(204,40,40,0.2)]">
+                  <td className="px-4 py-3 text-black text-lg font-medium font-inter ">{item.teacherName}</td>
+                  <td className="px-4 py-3 text-black text-lg font-medium font-inter ">{item.lessonName}</td>
+                  <td className="px-4 py-3 text-black text-lg font-medium font-inter ">{item.dateTime}</td>
+                  <td className="px-4 py-3 text-black text-lg font-medium font-inter ">{item.duration}</td>
+                  <td className="px-4 py-3 text-black text-lg font-medium font-inter ">{item.amount}</td>
+                  <td className="px-4 py-3 text-black text-lg font-medium font-inter ">{item.method}</td>
                 </tr>
               ))}
             </tbody>

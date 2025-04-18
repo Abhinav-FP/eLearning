@@ -3,6 +3,7 @@ import StudentLayout from './Common/StudentLayout'
 import Link from 'next/link'
 import Listing from '../api/Listing';
 import { FaStar } from 'react-icons/fa';
+import Image from 'next/image'
 
 export default function Index() {
 
@@ -51,7 +52,14 @@ export default function Index() {
                     className="flex items-center justify-between  border border-[rgba(204,40,40,0.3)] rounded-xl p-2.5"
                   >
                     <div className="flex items-center space-x-3">
-                      <div className="w-11 h-11 rounded-full bg-[rgba(204,40,40,0.3)]">
+                      <div>
+                        <Image
+                          src="/profile.png"
+                          alt="Profile"
+                          className="w-11 h-11 rounded-full object-cover"
+                          height={40}
+                          width={40}
+                        />
                       </div>
                       <div>
                         <p className="font-medium text-sm text-black tracking-[-0.06em] font-inter mb-1">{wish?.teacher?.name}</p>

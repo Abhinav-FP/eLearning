@@ -12,20 +12,22 @@ export default function Index() {
   const chatContainerRef = useRef(null);
   const router = useRouter();
   const Query = router.query.query;
+  const [teacherId, setTeacherId] = useState("")
   useEffect(() => {
     if (Query) {
+      setTeacherId(Query)
+
       MessageGetAlls(Query)
     }
   }, [Query]);
 
 
-  const [selectedUser, setSelectedUser] = useState();
+
+
   const [message, setMessage] = useState('');
   const [usermessage, setUserMessage] = useState();
   const [Loading, setLoading] = useState();
   const [messageCount, SetmessageCount] = useState([])
-
-  
 
   const MessageCount = async () => {
     try {
@@ -41,16 +43,19 @@ export default function Index() {
   }, []);
 
 
+
   const handleUserSelect = (user) => {
-    setSelectedUser(user);
+    setTeacherId(user?.teacher?._id)
     MessageGetAlls(user?.teacher?._id)
   };
 
+  const [selectedIdUser, setSelectedIdUser] = useState();
   const MessageGetAlls = async (Id) => {
     try {
       const main = new Listing();
       const response = await main.MessageGetAll(Id);
-      setUserMessage(response.data.data);
+      setUserMessage(response.data.messages);
+      setSelectedIdUser(response.data.ReciverUser);
     } catch (error) {
       console.log("error", error);
     }
@@ -67,10 +72,10 @@ export default function Index() {
       const main = new Listing();
       const response = await main.SendMessage({
         content: message,
-        receiver: selectedUser?.teacher?._id,
+        receiver: teacherId,
       });
       if (response?.data?.status) {
-        MessageGetAlls(selectedUser?.teacher?._id)
+        MessageGetAlls(teacherId)
         setMessage("")
         toast.success(response.data.message);
       } else {
@@ -104,7 +109,7 @@ export default function Index() {
       return moment(date).format("DD MMM YYYY ");
     }
   };
-  
+
   return (
     <StudentLayout page={"Messages"}>
       <>
@@ -116,7 +121,7 @@ export default function Index() {
                 <div
                   key={index}
                   onClick={() => handleUserSelect(chat)}
-                  className={`flex items-center  text-[#ffffff] min-h-[56px] pr-[66px] pl-[89px] py-[8px]   hover:bg-[#CC28281A] relative cursor-pointer min-h-[72px] ${selectedUser === chat ? "bg-[#CC28281A]" : "bg-[#fff]"}`} 
+                  className={`flex items-center  text-[#ffffff] min-h-[56px] pr-[66px] pl-[89px] py-[8px]   hover:bg-[#CC28281A] relative cursor-pointer min-h-[72px] ${teacherId === chat?.tecaher?._id ? "bg-[#CC28281A]" : "bg-[#fff]"}`}
                 >
                   <Image
                     src={"/profile.png"}
@@ -136,13 +141,13 @@ export default function Index() {
                     )}
                   </div>
                   {chat?.count > 0 && (
-                    <div className={` h-[28px] w-[28px] text-[#535353] text-xs font-bold flex items-center justify-center absolute right-[22px] rounded-full top-1/2 -translate-y-1/2 ${selectedUser === chat ? "bg-white" : "bg-[rgba(204,40,40,0.1)]"}`}>
+                    <div className={` h-[28px] w-[28px] text-[#535353] text-xs font-bold flex items-center justify-center absolute right-[22px] rounded-full top-1/2 -translate-y-1/2 ${teacherId === chat?.tecaher?._id ? "bg-white" : "bg-[rgba(204,40,40,0.1)]"}`}>
                       {chat?.count > 5 ? '5+' : chat?.count}
                     </div>
                   )}
                 </div>
-                
-              ))} 
+
+              ))}
 
             </div>
           </div>
@@ -150,7 +155,7 @@ export default function Index() {
           {/* Chat Panel */}
           <div className="w-full lg:w-3/4 flex flex-col  bg-[#F1F1F1]">
             {/* Chat Header */}
-            {selectedUser && (
+            {teacherId && (
               <div className="flex items-center gap-3 lg:gap-4 bg-[#FFFFFF] px-4 lg:px-5 py-3.5 lg:py-4">
                 <Image
                   src={"/profile.png"}
@@ -160,8 +165,8 @@ export default function Index() {
                   className="w-[45px] h-[45px] rounded-full left-[22px] "
                 />
                 <div>
-                  <h2 className="font-medium text-base text-black mb-0 tracking-[-0.06em]">{selectedUser.teacher.name}</h2>
-                  <p className="font-normal text-sm font-inter text-[#1E1E1E] capitalize">{selectedUser.teacher.role}</p>
+                  <h2 className="font-medium text-base text-black mb-0 tracking-[-0.06em]">{selectedIdUser?.name}</h2>
+                  <p className="font-normal text-sm font-inter text-[#1E1E1E] capitalize">{selectedIdUser?.role}</p>
                 </div>
               </div>
             )}
@@ -179,13 +184,13 @@ export default function Index() {
               </div>
 
               {usermessage && usermessage?.map((item, index) => {
-                const isIncoming = item.sent_by !== selectedUser?.teacher?.role;
+                const isIncoming = item.sent_by !== selectedIdUser?.role;
                 return (
                   <div className="mt-4 space-y-1" key={index}>
-                    {index === 0 || formatDate(item.created_at) !== formatDate(usermessage[index - 1]?.created_at) ? (
+                    {index === 0 || formatDate(item.createdAt) !== formatDate(usermessage[index - 1]?.createdAt) ? (
                       <div className="text-center my-3">
                         <span className=" py-1 tracking-[-0.06em] font-inter text-base text-[#7A7A7A]">
-                          {formatDate(item.created_at)}
+                          {formatDate(item.createdAt)}
                         </span>
                       </div>
                     ) : null}

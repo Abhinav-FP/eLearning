@@ -33,7 +33,7 @@ const Index = () => {
                 id: 1,
                 name: 'Booked By You',
                 startTime: '2025-04-14T08:00:00',
-                endTime: '2025-04-14T08:30:00',
+                endTime: '2025-04-14T08:50:00',
                 bookingStatus: 'bookedbyyou',
             },
             {
@@ -134,7 +134,7 @@ const Index = () => {
                                     <span className="text-sm text-gray-700">Booked by You</span>
                                 </div>
                             </div>
-                            <h3 className="text-base lg:text-lg font-semibold text-[#1E1E1E] m-0 tracking-[-0.03em]">Staff Calendar</h3>
+                            <h3 className="text-base lg:text-lg font-semibold text-[#1E1E1E] m-0 tracking-[-0.03em]">Teacher Calendar</h3>
                         </div>
                         <div className="p-4 relative">
                             <Calendar
@@ -154,13 +154,16 @@ const Index = () => {
                                 eventPropGetter={eventStyleGetter}
                                 components={{ event: Event }}
                                 onSelectSlot={(slotInfo) => {
-                                    if (!events.some(event =>
-                                        moment(event.start).isSame(slotInfo.start) &&
-                                        moment(event.end).isSame(slotInfo.end)
-                                    )) {
+                                    const overlap = events.some(event =>
+                                        moment(slotInfo.start).isBefore(event.end) &&
+                                        moment(slotInfo.end).isAfter(event.start)
+                                    );
+
+                                    if (!overlap) {
                                         handleSelectSlot(slotInfo);
                                     }
                                 }}
+
                             />
                             {isPopupOpen && selectedSlot && (
                                 <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 bg-white p-6 rounded-md shadow-lg z-10">

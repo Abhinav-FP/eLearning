@@ -15,6 +15,7 @@ export default function Index() {
             setTeachers(response?.data?.data || []);
         } catch (error) {
             console.log("error", error);
+            setTeachers([])
         }
     };
 
@@ -25,14 +26,20 @@ export default function Index() {
 
 
     const handleRemoveSubmit = async (Id) => {
+        console.log("Id", Id)
         try {
             const main = new Listing();
             const response = await main.RemoveWishlist({ teacherId: Id });
-            fetchfavouriteStudentTeachers();
+            console.log(response)
+            if (response?.data?.status) {
+                fetchfavouriteStudentTeachers();
+            }
         } catch (error) {
             console.log("error", error);
         }
     };
+
+    console.log("teacher", teachers)
     return (
         <StudentLayout page={"Favourite teacher"}>
             <div className="min-h-screen bg-gray-50 p-4 sm:p-6">
@@ -56,7 +63,7 @@ export default function Index() {
                                         <div>
                                             <p className="flex gap-2 items-center text-md sm:text-xl text-[#CC2828] font-medium">
                                                 {teacher?.teacher?.name || ""}
-                                                <span className="cursor-pointer" onClick={() => handleRemoveSubmit(teacher?.teacher?._id)}>
+                                                <span className="cursor-pointer" onClick={() => handleRemoveSubmit(teacher?.teacher?.userId)}>
                                                     <FaHeart color={"#CC2828"} size={18} />
                                                 </span>
 

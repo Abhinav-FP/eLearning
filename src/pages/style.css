@@ -69,9 +69,14 @@ body {
 
 .ready-bg{background: linear-gradient(90deg, #CC2828 4.38%, #661414 151.98%);}
 
+.swiper{padding-bottom: 50px !important;} 
+.swiper-button-prev:after, .swiper-button-next:after{ font-size: 28px !important;color: #cc2828;}
+.swiper  .swiper-button-prev{left:-4px}
+.swiper .swiper-button-next{right:-4px}
+.swiper-pagination-fraction, .swiper-pagination-custom, .swiper-horizontal > .swiper-pagination-bullets, .swiper-pagination-bullets.swiper-pagination-horizontal {bottom: 0;}
+  .swiper-horizontal > .swiper-pagination-bullets .swiper-pagination-bullet, .swiper-pagination-horizontal.swiper-pagination-bullets .swiper-pagination-bullet{background: #999999; height: 9px;width: 9px;border: 2px solid #fff; opacity: 1;margin: 0 2px !important;}
 
-
-
+  .swiper-pagination-horizontal.swiper-pagination-bullets .swiper-pagination-bullet.swiper-pagination-bullet-active{background: #fff; border: 2px solid #CC2828; opacity: 1;}
 /* Calendr css */
 
 .rbc-calendar .rbc-header{padding: 15px 0;border-left: none !important;border-right: none !important;}
@@ -94,3 +99,6 @@ body {
 
  .rbc-row-segment .rbc-event, .rbc-row-segment .rbc-day-slot .rbc-background-event{    background-color: #68C32F !important;}
 .rbc-event .font-bold{font-weight: 400;;}
+
+
+

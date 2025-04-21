@@ -6,7 +6,7 @@ export default function Footer() {
      return (
         <>
           <footer className="bg-[#EFD1D1] pt-[50px] md:pt-[60px] lg:pt-[90px] pb-[15px] md:pb-[20px]">
-              <div className="mx-auto container sm:container md:container lg:max-w-[1230px] px-4">
+              <div className="mx-auto container sm:container md:container lg:container xl:max-w-[1230px]  px-4">
                   <div className="flex flex-wrap -mx-4  justify-between">
                      <div className="w-full md:w-[180px] px-4 ">
                         <Link href="/" > 
@@ -46,7 +46,7 @@ export default function Footer() {
                   </div>
               </div>
               <div className="border-t border-[rgba(56,121,117,0.2)] pt-3.5 mt-10 md:mt-16 lg:mt-28 text-center">
-                 <div className="mx-auto container sm:container md:container lg:max-w-[1230px] px-4">
+                 <div className="mx-auto container sm:container md:container lg:container xl:max-w-[1230px]  px-4">
                     <p className="text-[#CC2828] -tracking-[0.03em] text-sm lg:text-base m-0">© 2025 Japanese for Me. All Rights Reserved.</p>
                  </div>
               </div>

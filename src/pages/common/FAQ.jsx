@@ -32,7 +32,7 @@ export default function FAQ({ classess }) {
     ]
     return (
         <div className={`pb-[40px] md:pb-[40px] lg:pb-[60px] ${classess}`}>
-            <div className="mx-auto container sm:container md:container lg:max-w-[1230px] px-4">
+            <div className="mx-auto container sm:container md:container lg:container xl:max-w-[1230px]  px-4">
                 <Heading classess={'text-[#1E1E1E] mb-3 '} title={'Frequently Asked Questions'} />
                 {faqs && faqs?.map((items, index) => (
                     <div key={index} className="border-b border-[#C6C7C8]">

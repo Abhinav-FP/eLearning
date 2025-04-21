@@ -13,7 +13,7 @@ export default function index() {
         <>
             <Layout>
                 <div className="py-[154px] pb-[100px]">
-                    <div className="container sm:container md:container lg:max-w-[1230px] px-4 mx-auto">
+                    <div className="container sm:container md:container lg:container xl:max-w-[1230px]  px-4 mx-auto">
                         <div className="bg-[rgba(204,40,40,0.8)] rounded-[20px] py-[30px] px-[45px]">
                             <div className="flex flex-wrap -mx-4">
                                 <div className="w-full lg:w-[308px] px-4">
@@ -38,7 +38,7 @@ export default function index() {
                 </div>
                 <LessonList />
                 <div className="pt-[60px] lg:pt-[100px] pb-[40px] lg:pb-[60px] bg-[#F8F9FA]">
-                    <div className="container sm:container md:container lg:max-w-[1230px] px-4 mx-auto">                      
+                    <div className="container sm:container md:container lg:container xl:max-w-[1230px]  px-4 mx-auto">                      
                        <Heading classess={'text-[#1E1E1E] mg-6 lg:mb-8'} title={'Availability'} />
                     </div>
                 </div> 

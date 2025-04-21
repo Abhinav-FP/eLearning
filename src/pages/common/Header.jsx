@@ -38,7 +38,7 @@ export default function Header() {
     return (
         <>
             <nav className={`fixed w-full top-0 z-50  transition-all duration-300 ease-in-out  ${Scrolled ? "bg-[#fff] py-1 lg:py-1" : "bg-transparent py-3 lg:py-6"}`}>
-                <div className="mx-auto container sm:container md:container lg:max-w-[1230px] px-4">
+                <div className="mx-auto container sm:container md:container lg:container xl:max-w-[1230px]  px-4">
                     <div className="relative flex items-center justify-between">
                         <div className="flex-shrink-0">
                             <Link href="/">
@@ -77,9 +77,17 @@ export default function Header() {
                                     </Link>
                                 </li>
                             </ul>
+                            <div className="flex flex-col lg:hidden">
+                                <Link href="/student/login" className="text-[#CC2828] hover:text-[#ad0e0e] border-t border-[#ddd] text-base py-3 px-4 font-medium cursor-pointer" >
+                                    Log In
+                                </Link>
+                                <Link href="/student/register" className="text-[#CC2828] hover:text-[#ad0e0e] border-t border-[#ddd] text-base py-3 px-4 font-medium cursor-pointer" >
+                                    Sign Up 
+                                </Link>
+                            </div>
                         </div>
-                        <div className="flex flex-wrap space-x-4 items-center">
-                            <div className="group relative">
+                        <div className="flex flex-wrap space-x-4 items-center ml-auto lg:ml-0 mr-2 lg:mr-0">
+                            <div className="group relative mr-0 lg:mr-4 xl:mr-5">
                                 <div onClick={ToggleDropdown} className="relative cursor-pointer border border-[#CC2828] text-base tracking-[-0.03em] rounded-[6px] text-[#CC2828] py-1.5 pl-4 pr-8 min-w-[126px] text-center">
                                     {selectLang}  <IoIosArrowDown size="16" className="absolute right-2 top-1/2 -translate-y-1/2" />
                                 </div>
@@ -88,18 +96,18 @@ export default function Header() {
                                     <button onClick={() => (handleLanguageSelect('Japanese'))} className="w-full cursor-pointer bg-transparent py-.5 px-2 py-2 [&:not(:last-child)]:border-b hover:text-[#CC2828]">Japanese</button>
                                 </div>
                             </div>
-                            <Link href="/student/register" className="bg-[#CC2828] hover:bg-[#ad0e0e] text-white text-base py-3.5 px-10 font-medium cursor-pointer rounded-full" >
-                            Sign Up                            </Link>
-                            <Link href="/student/login" className="bg-[#CC2828] hover:bg-[#ad0e0e] text-white text-base py-3.5 px-10 font-medium cursor-pointer rounded-full" >
+                            <Link href="/student/register" className="hidden lg:block bg-[#CC2828] hover:bg-[#ad0e0e] text-white text-base py-3.5 px-8 xl:px-10 font-medium cursor-pointer rounded-full" >
+                                Sign Up                            </Link>
+                            <Link href="/student/login" className="hidden lg:block bg-[#CC2828] hover:bg-[#ad0e0e] text-white text-base py-3.5 px-8 xl:px-10 font-medium cursor-pointer rounded-full" >
                                 Log In
                             </Link>
-                       
+
                         </div>
                         <div className="flex lg:hidden">
                             {/* <!-- Mobile menu button --> */}
                             <button
                                 type="button"
-                                className="relative inline-flex items-center justify-center rounded-md p-2 text-gray-400 hover:bg-gray-700 hover:text-white focus:outline-none focus:ring-2 focus:ring-inset focus:ring-white"
+                                className="relative inline-flex items-center justify-center rounded-md py-2 px-2.5 text-[#CC2828] hover:bg-gray-700 hover:text-[#ad0e0e] focus:outline-none focus:ring-2 focus:ring-inset focus:ring-[#CC2828]"
                                 aria-controls="mobile-menu"
                                 aria-expanded={menuOpen}
                                 onClick={toggleMenu}

@@ -28,7 +28,7 @@ export default function WhyTech() {
     ]
     return (
         <div className="whytech_bg pt-[120px] md:pt-[120px] lg:pt-[150px] pb-[40px] md:pb-[50px] lg:pb-[70px]">
-            <div className="mx-auto container sm:container md:container lg:max-w-[1230px] px-4">
+            <div className="mx-auto container sm:container md:container lg:container xl:max-w-[1230px]  px-4">
                 <Heading classess={'text-center mb-3'} title={'Why Teach with Japanese for Me?'} />
                 <p className="text-center text-[#535353] font-medium text-base -tracking-[0.03em] mb-5">At Japanese for Me, we empower educators to share their passion, connect with eager learners worldwide, and thrive in a flexible, supportive environment.</p>
                 <div className="text-center mb-8 lg:mb-16">

@@ -7,7 +7,7 @@ export default function FindCource({pargraph ,title}) {
     return (
         <>
             <div className="pt-[40px] md:pt-[60px] lg:pt-[100px] pb-[40px] md:pb-[40px] lg:pb-[60px]">
-                <div className="mx-auto container sm:container md:container lg:max-w-[1230px] px-4">
+                <div className="mx-auto container sm:container md:container lg:container xl:max-w-[1230px]  px-4">
                     <div className="bg-[#CC2828] rounded-[10px] lg:rounded-[20px] px-6 lg:px-10 py-8 lg:py-12">
                         <div className="flex flex-wrap -mx-4 items-center">
                             <div className="w-full md:w-5/12 px-4">

@@ -6,6 +6,7 @@ import { MdOutlinePlayCircle } from "react-icons/md";
 import LessonList from "./LessonList";
 import Testimonial from "./Testimonial";
 import Heading from "../common/Heading";
+import Calendar from "../calendar/index.jsx"
 
 export default function index() {
 
@@ -38,10 +39,13 @@ export default function index() {
                 </div>
                 <LessonList />
                 <div className="pt-[60px] lg:pt-[100px] pb-[40px] lg:pb-[60px] bg-[#F8F9FA]">
-                    <div className="container sm:container md:container lg:max-w-[1230px] px-4 mx-auto">                      
-                       <Heading classess={'text-[#1E1E1E] mg-6 lg:mb-8'} title={'Availability'} />
+                    <div className="container sm:container md:container lg:max-w-[1230px] px-4 mx-auto">
+                        <Heading classess={'text-[#1E1E1E] mg-6 lg:mb-8'} title={'Availability'} />
+                        <Calendar />
                     </div>
-                </div> 
+
+                </div>
+
                 <Testimonial />
 
             </Layout>

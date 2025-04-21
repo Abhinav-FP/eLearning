@@ -1,31 +1,30 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import StudentLayout from '../Common/StudentLayout'
+import Listing from '@/pages/api/Listing';
+import moment from 'moment';
 
 export default function Index() {
 
-   // const [payment, setPayment] = useState([]);
-  // console.log("reviews", payment)
-  // useEffect(() => {
-  //   const main = new Listing();
-  //   const response = main.PaymentUser();
-  //   response.then((res) => {
-  //     console.log("review", res);
-  //     setReviews(res?.data?.data?.reviews || [])
-  //   }).catch((error) => {
-  //     console.log("erorr", error)
-  //   })
-  // }, [])
-  const payments = Array(9).fill({
-    teacherName: "April 23,2024",
-    lessonName: "Trial Lesson",
-    dateTime: "25 April, 11:00 pm",
-    duration: "50 min",
-    amount: "$50.00",
-    method: "Paypal",
-  });
+   const [payment, setPayment] = useState([]);
+
+  const PaymentHistory = async () => {
+    try {
+      const main = new Listing();
+      const response = await main.PaymentUser();
+      console.log("response" ,response)
+      setPayment(response?.data?.data?.payment);
+    } catch (error) {
+      console.log("error", error);
+    }
+  };
+
+  useEffect(() => {
+    PaymentHistory();
+  }, []);
+
+  console.log("payment"  ,payment)
   const [showFilter, setShowFilter] = useState(false);
 
-  const toggleFilter = () => setShowFilter(!showFilter);
   return (
     <StudentLayout page={"Payments"}>
       <div className="pr-5">
@@ -46,23 +45,23 @@ export default function Index() {
           <table className="min-w-full text-sm text-left">
             <thead className="bg-[rgba(204,40,40,0.1)] text-[#535353] tracking-[-0.04em] font-inter">
               <tr>
-                <th className="font-normal text-lg px-4 py-3 border-t border-[rgba(204,40,40,0.2)]">Teacher name</th>
+                <th className="font-normal text-lg px-4 py-3 border-t border-[rgba(204,40,40,0.2)]">Order Id</th>
                 <th className="font-normal text-lg px-4 py-3 border-t border-[rgba(204,40,40,0.2)]">Lesson name</th>
                 <th className="font-normal text-lg px-4 py-3 border-t border-[rgba(204,40,40,0.2)]">Lesson date and time</th>
                 <th className="font-normal text-lg px-4 py-3 border-t border-[rgba(204,40,40,0.2)]">Lesson duration</th>
                 <th className="font-normal text-lg px-4 py-3 border-t border-[rgba(204,40,40,0.2)]">Amount</th>
-                <th className="font-normal text-lg px-4 py-3 border-t border-[rgba(204,40,40,0.2)]">Payment Method</th>
+                <th className="font-normal text-lg px-4 py-3 border-t border-[rgba(204,40,40,0.2)]">Payment Status</th>
               </tr>
             </thead>
             <tbody>
-              {payments.map((item, index) => (
+              {payment && payment.map((item, index) => (
                 <tr key={index} className="border-t hover:bg-[rgba(204,40,40,0.1)] border-t border-[rgba(204,40,40,0.2)]">
-                  <td className="px-4 py-3 text-black text-lg font-medium font-inter ">{item.teacherName}</td>
-                  <td className="px-4 py-3 text-black text-lg font-medium font-inter ">{item.lessonName}</td>
-                  <td className="px-4 py-3 text-black text-lg font-medium font-inter ">{item.dateTime}</td>
-                  <td className="px-4 py-3 text-black text-lg font-medium font-inter ">{item.duration}</td>
-                  <td className="px-4 py-3 text-black text-lg font-medium font-inter ">{item.amount}</td>
-                  <td className="px-4 py-3 text-black text-lg font-medium font-inter ">{item.method}</td>
+                  <td className="px-4 py-3 text-black text-lg font-medium font-inter ">{item.orderID}</td>
+                  <td className="px-4 py-3 text-black text-lg font-medium font-inter ">{item.LessonId?.title}</td>
+                  <td className="px-4 py-3 text-black text-lg font-medium font-inter ">{moment(item?.LessonId.createdAt).format("DD MM YYYY hh:mm A")}</td>
+                  <td className="px-4 py-3 text-black text-lg font-medium font-inter ">{item.LessonId.duration}</td>
+                  <td className="px-4 py-3 text-black text-lg font-medium font-inter ">${item.amount}</td>
+                  <td className="px-4 py-3 text-black text-lg font-medium font-inter ">{item.status}</td>
                 </tr>
               ))}
             </tbody>

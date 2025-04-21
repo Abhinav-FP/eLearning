@@ -21,8 +21,8 @@ class Listing extends Component {
     return Api.get("/student/review", data);
   }
 
-  async PaymentUser(data) {
-    return Api.get("/student/payment", data);
+  async PaymentUser() {
+    return Api.get("/student/payment", );
   }
 
   async homeTeacher(data) {
@@ -59,7 +59,19 @@ class Listing extends Component {
     return Api.post(`/message/send` , data);
   }
 
-  
+  async PaypalCreate(data){
+    return Api.post(`/paypal/create-order` , data);
+  }
+
+  async PaypalApprove(data){
+    return Api.post(`/paypal/capture-order` , data);
+  }
+
+  async PaypalCancel(data){
+    return Api.post(`/paypal/cancel-order` , data);
+  }
+
+
   render() {
     return (
       <div>

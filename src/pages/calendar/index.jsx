@@ -113,10 +113,10 @@ const Index = () => {
 
     return (
         <>
-            <div className=' bg-[#F8F9FA]'>
+            <div className=' bg-[#F8F9FA] '>
                 <div className="w-full ">
                     <div className=" py-2 lg:py-2.5">
-                        <div className="bg-white rounded-[20px] mb-[30px]">
+                        <div className="bg-white rounded-[20px] mb-[30px] border-[#CC282880] border-1">
                             <div className="py-1 py-2 lg:py-[15px] px-2 md:px-3 lg:px-6 flex flex-wrap justify-between items-center border-b border-black border-opacity-10">
                                 <div className="flex flex-wrap items-center gap-4 mb-4">
                                     <div className="flex items-center gap-2">

@@ -29,7 +29,7 @@ export default function index() {
                                         <h3 className="text-white text-2xl lg:text-[45px] font-inter font-extrabold tracking-[-0.04em] mb-2">
                                             Emily Carter
                                         </h3>
-                                        <p className="text-white tracking-[-0.03em] text-lg lg:text-xl font-medium">Hi! I'm Emily Carter, a passionate and certified English language teacher with over 8 years of experience. I specialize in helping students build confidence in speaking, improve their grammar, and prepare for exams like IELTS and TOEFL. My approach is friendly, interactive, and tailored to each student's unique learning style.</p>
+                                        <p className="text-white tracking-[-0.03em] text-lg lg:text-xl font-medium">{`Hi! I'm Emily Carter, a passionate and certified English language teacher with over 8 years of experience. I specialize in helping students build confidence in speaking, improve their grammar, and prepare for exams like IELTS and TOEFL. My approach is friendly, interactive, and tailored to each student's unique learning style.`}</p>
                                     </div>
                                 </div>
                             </div>

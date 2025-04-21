@@ -4,7 +4,7 @@ import Heading from "../common/Heading";
 export default function LessonList() {
     return (
         <div style={{ backgroundImage: "url('/leasson-bg.png')" }}  className="bg-[rgba(249,190,191,.5)] bg-cover bg-center rounded-[20px] py-[40px] lg:py-[60px]">           
-        <div className="container sm:container md:container lg:max-w-[1230px] bg-[rgba(249,190,191, .1)] px-4 mx-auto"> 
+        <div className="container sm:container md:container lg:container xl:max-w-[1230px]  bg-[rgba(249,190,191, .1)] px-4 mx-auto"> 
             <Heading classess={'text-[#CC2828] mg-6 lg:mb-8'} title={'Lessons'} />
             <ul className="space-y-5 lg:space-y-5">
                 <li className="bg-white rounded-[10px] lg:rounded-[20px] p-6 lg:p-10">

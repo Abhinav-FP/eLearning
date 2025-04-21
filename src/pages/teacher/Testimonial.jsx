@@ -34,7 +34,7 @@ export default function Testimonial() {
     return (
         <>
             <div className="py-[40px] lg:py-[60px] bg-[#F8F9FA]">
-                <div className="container sm:container md:container lg:max-w-[1230px] bg-[rgba(249,190,191, .1)] px-4 mx-auto">
+                <div className="container sm:container md:container lg:container xl:max-w-[1230px]  bg-[rgba(249,190,191, .1)] px-4 mx-auto">
                     <Heading classess={'text-[#1E1E1E] mg-3 lg:mb-4 text-center'} title={'Reviews'} />
                     <p className="text-[#4E4E4E] tracking-[-0.04em] text-base mb-6 text-center lg:mb-10">Hear from our educators about their journey and experiences with Japanese for Me</p>
                     <Swiper

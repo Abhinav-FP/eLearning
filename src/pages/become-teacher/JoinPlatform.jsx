@@ -19,7 +19,7 @@ export default function JoinPlatform() {
     ]
     return (
         <div className="bg-[#DE7C7C] py-[40px] md:py-[60px] lg:py-[80px]">
-            <div className="mx-auto container sm:container md:container lg:max-w-[1230px] px-4">
+            <div className="mx-auto container sm:container md:container lg:container xl:max-w-[1230px]  px-4">
                 <Heading classess={'text-[#F8F9FA] mb-8'} title={'Ways to join the platform - NO LICENSE REQUIRED'} />
                 <div className="flex flex-wrap -mx-4">
                     {

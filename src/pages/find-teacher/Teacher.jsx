@@ -27,7 +27,7 @@ export default function Teacher() {
 
     return (
         <div className="pt-[120px] md:pt-[120px] lg:pt-[150px] pb-[40px] md:pb-[60px] lg:pb-[80px]">
-            <div className="mx-auto container sm:container md:container lg:max-w-[1230px] px-4">
+            <div className="mx-auto container sm:container md:container lg:container xl:max-w-[1230px]  px-4">
                 <Heading classess={'text-center mb-3'} title={'Meet Our Top-Rated Teachers'} />
                 <p className="text-center text-[#535353] font-medium text-base -tracking-[0.03em] mb-5">Browse profiles of our most experienced and highest-rated educators.</p>
                 <div className="text-center mb-8 lg:mb-10">

@@ -29,8 +29,8 @@ export default function HowItWork({classess ,title}) {
     return (
         <>
             <div className={`bg-[rgba(204,40,40,0.6)] py-[40px] md:py-[60px] lg:py-[80px] mt-[30px] md:mt-[40px] lg:mt-[60px] ${classess}`}>
-                <div className="mx-auto container sm:container md:container lg:max-w-[1230px] px-4">
-                    <Heading classess={'text-center mb-[30px] lg:mb-[40px] text-white'} title={title || "How It Works"} />
+                <div className="mx-auto container sm:container md:container lg:container xl:max-w-[1230px] px-4">
+                    <Heading classess={'text-center mb-[20px] md:mb-[30] lg:mb-[40px] text-white'} title={title || "How It Works"} />
                     <div className="flex flex-wrap -mx-4 md:-mx-[28px] lg:-mx-[34px]">
                         {
                             Data.map((item, i) => (
@@ -44,8 +44,8 @@ export default function HowItWork({classess ,title}) {
                                 [&:not(:last-child)]:after:h-[30px] 
                                 [&:not(:last-child)]:after:bg-no-repeat 
                                 [&:not(:last-child)]:after:bg-contain">
-                                    <div className="bg-white rounded-[30px] py-5 px-6 text-center">
-                                    <div className="relative min-h-[124px] mb-[18px] ">
+                                <div className="bg-white rounded-[30px] py-5 px-6 text-center">
+                                    <   div className="relative min-h-[124px] mb-[18px] ">
                                             <Image className="block mx-auto  " src={item.Icons} alt={item.Title} />
                                         </div>
                                         <h3 className="max-w-[118px] mx-auto leading-[24px] font-inter text-[#CC2828] -tracking-[0.04em] font-bold text-lg lg:text-xl">{item.Title}</h3>

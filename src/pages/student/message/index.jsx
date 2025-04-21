@@ -9,25 +9,24 @@ import toast from 'react-hot-toast';
 import { useRouter } from 'next/router';
 
 export default function Index() {
-  const chatContainerRef = useRef(null);
-  const router = useRouter();
-  const Query = router.query.query;
   const [teacherId, setTeacherId] = useState("")
-  useEffect(() => {
-    if (Query) {
-      setTeacherId(Query)
-
-      MessageGetAlls(Query)
-    }
-  }, [Query]);
-
-
-
-
   const [message, setMessage] = useState('');
   const [usermessage, setUserMessage] = useState();
   const [Loading, setLoading] = useState();
   const [messageCount, SetmessageCount] = useState([])
+  const [selectedIdUser, setSelectedIdUser] = useState();
+
+  const chatContainerRef = useRef(null);
+  const router = useRouter();
+  const Query = router.query.query;
+
+  useEffect(() => {
+    if (Query) {
+      setTeacherId(Query)
+      MessageGetAlls(Query)
+    }
+  }, [Query]);
+ 
 
   const MessageCount = async () => {
     try {
@@ -49,7 +48,6 @@ export default function Index() {
     MessageGetAlls(user?.teacher?._id)
   };
 
-  const [selectedIdUser, setSelectedIdUser] = useState();
   const MessageGetAlls = async (Id) => {
     try {
       const main = new Listing();
@@ -121,7 +119,7 @@ export default function Index() {
                 <div
                   key={index}
                   onClick={() => handleUserSelect(chat)}
-                  className={`flex items-center  text-[#ffffff] min-h-[56px] pr-[66px] pl-[89px] py-[8px]   hover:bg-[#CC28281A] relative cursor-pointer min-h-[72px] ${teacherId === chat?.tecaher?._id ? "bg-[#CC28281A]" : "bg-[#fff]"}`}
+                  className={`flex items-center  text-[#ffffff] min-h-[56px] pr-[66px] pl-[89px] py-[8px] hover:bg-[#CC28281A] relative cursor-pointer min-h-[72px] ${teacherId === chat?.teacher?._id ? "bg-[#CC28281A]" : "bg-[#fff]"}`}
                 >
                   <Image
                     src={"/profile.png"}
@@ -133,10 +131,10 @@ export default function Index() {
                   <div className="flex-1">
                     <h3 className="font-medium font-inter text-base mb-0 text-black ">{chat?.teacher?.name}</h3>
                     {chat?.count ? (
-                      <p className="text-sm text-[#CC2828] font-inter  tracking-[-0.04em] "> {chat?.count > 5 ? '5+' : chat?.count} unread messages</p>
+                      <p className="text-sm text-[#CC2828] font-inter tracking-[-0.04em] "> {chat?.count > 5 ? '5+' : chat?.count} unread messages</p>
 
                     ) : (
-                      <p className="text-sm text-[#7A7A7A] font-inter  tracking-[-0.04em]"> Teacher</p>
+                      <p className="text-sm text-[#7A7A7A] font-inter tracking-[-0.04em]"> Teacher</p>
 
                     )}
                   </div>

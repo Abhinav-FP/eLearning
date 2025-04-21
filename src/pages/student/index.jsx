@@ -7,16 +7,23 @@ import Image from 'next/image'
 
 export default function Index() {
 
-   const [dahboard, setDashboard] = useState([]);
-    useEffect(() => {
+  const [dahboard, setDashboard] = useState([]);
+
+  const StudentDashboards = async () => {
+    try {
       const main = new Listing();
-      const response = main.StudentDashboard();
-      response.then((res) => {
-        setDashboard(res?.data || [])
-      }).catch((error) => {
-        console.log("erorr", error)
-      })
-    }, [])
+      const response = await main.StudentDashboard();
+      setDashboard(response?.data);
+    } catch (error) {
+      console.log("error", error);
+    }
+  };
+
+  useEffect(() => {
+    StudentDashboards();
+  }, []);
+
+
 
   return (
     <StudentLayout>
@@ -78,7 +85,7 @@ export default function Index() {
 
         {/* Row 2: Recent Reviews (left) */}
         <div className="flex flex-wrap -mx-4">
-          <div className='w-full lg:w-1/2 px-4'>
+          <div className='w-full px-4'>
             <div className="bg-white p-4 lg:p-5 border border-[rgba(204,40,40,0.2)]  rounded-[20px]">
               <h2 className="font-inter text-lg lg:text-xl tracking-[-0.04em] font-bold text-[#CC2828] mb-4">Recent Reviews</h2>
               <div className="space-y-2">
@@ -88,13 +95,13 @@ export default function Index() {
                     className="bg-[rgba(204,40,40,0.1)] p-2.5 rounded-xl text-sm font-medium"
                   >
                     <p className='text-sm font-medium font-inter tracking-[-0.04em] text-black'>
-                     {item.description}
+                      {item.description}
                     </p>
                     <div className="flex items-center mt-2">
-                      <div className="flex text-[#E4B750] text-sm"> 
+                      <div className="flex text-[#E4B750] text-sm">
                         {Array.from({ length: item?.rating }).map((_, i) => (
-                                          <FaStar key={i} size={16} fill="currentColor" />
-                                        ))}</div>
+                          <FaStar key={i} size={16} fill="currentColor" />
+                        ))}</div>
                     </div>
                     <p className="mt-2 font-bold text-base font-inter tracking-[-0.04em]  text-black">{item?.lessonId?.title}</p>
                   </div>

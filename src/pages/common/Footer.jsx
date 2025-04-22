@@ -7,14 +7,14 @@ export default function Footer() {
         <>
           <footer className="bg-[#EFD1D1] pt-[50px] md:pt-[60px] lg:pt-[90px] pb-[15px] md:pb-[20px]">
               <div className="mx-auto container sm:container md:container lg:container xl:max-w-[1230px]  px-4">
-                  <div className="flex flex-wrap -mx-4  justify-between">
-                     <div className="w-full md:w-[180px] px-4 ">
+                  <div className="flex flex-wrap -mx-4  justify-between ">
+                     <div className="w-full md:w-[180px] px-4 mb-5 md:mb-0 ">
                         <Link href="/" > 
                            <Image src={FooterLogo} alt="img" />
                         </Link>
                      </div>
                      <div className="w-full md:w-[180px] px-4 ">
-                        <h3 className="text-[#CC2828] text-lg lg:text-xl -tracking-[0.04em] font-bold mb-4">Quick Links</h3>
+                        <h3 className="text-[#CC2828] text-lg lg:text-xl -tracking-[0.04em] font-bold mb-3 md:mb-4">Quick Links</h3>
                         <ul className="space-y-1">
                            <li>
                               <Link href="/" className="-tracking-[0.03em] text-base text-[#CC2828] hover:underline " >Home</Link>

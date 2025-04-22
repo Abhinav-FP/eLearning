@@ -64,7 +64,7 @@ body {
 }
 
 .arrowimg:not(:last-child)::after{
-   background-image: url('../pages//Assets/Images/arrow-png.png');
+   background-image: url('../pages/Assets/Images/arrow-png.png');
 }
 
 .ready-bg{background: linear-gradient(90deg, #CC2828 4.38%, #661414 151.98%);}
@@ -79,7 +79,14 @@ body {
   .swiper-pagination-horizontal.swiper-pagination-bullets .swiper-pagination-bullet.swiper-pagination-bullet-active{background: #fff; border: 2px solid #CC2828; opacity: 1;}
 /* Calendr css */
 
+@media (max-width: 1023px) {
+  .arrowimg:not(:last-child):after{background-size: 20px;}
+}
 
-
-
+@media (max-width: 767px) {
+  .arrowimg:not(:last-child)::after{
+    background-image: url('../pages/Assets/Images/arrow-down.png');
+  }
+  
+}
 

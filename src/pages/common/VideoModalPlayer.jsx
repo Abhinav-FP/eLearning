@@ -6,7 +6,7 @@ import EmilyCarter from "../Assets/Images/emily-carter.png";
 
 function getYouTubeID(url) {
     const regExp = /(?:youtube\.com.*(?:\?|&)v=|youtu\.be\/)([^&\n?#]+)/;
-    const match = url.match(regExp);
+    const match = url && url?.match(regExp);
     return match && match[1] ? match[1] : null;
 }
 
@@ -20,7 +20,7 @@ export default function VideoModalPlayer({ items }) {
                 <Image
                     className="w-full h-[265px] sm:h-[295px]  md:h-[186px] lg:h-[311px] rounded-[6px] md:rounded-[10px]"
                     src={EmilyCarter}
-                    alt={items.Title}
+                    alt={items?.Title}
                     width={530}
                     height={311}
                 />

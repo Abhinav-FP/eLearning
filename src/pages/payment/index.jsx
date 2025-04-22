@@ -6,7 +6,7 @@ import { useState } from "react";
 import Listing from "../api/Listing";
 import toast from "react-hot-toast";
 
-const PayPalButton = () => {
+const Index = () => {
   const router = useRouter();
 
 
@@ -110,4 +110,4 @@ const PayPalButton = () => {
   );
 };
 
-export default PayPalButton;
+export default Index;

@@ -5,7 +5,7 @@ import 'react-big-calendar/lib/css/react-big-calendar.css';
 const localizer = momentLocalizer(moment);
 // import "../../styles/calendar.css"
 import Popup from '../common/Popup';
-import PayPalButton from '../paypal/PayPalButton';
+import PayPalButton from '../payment/index';
 
 const Event = ({ event }) => {
     const formattedStartTime = moment(event.start).format('hh:mm A');

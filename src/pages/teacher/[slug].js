@@ -2,12 +2,12 @@ import React from "react";
 import Layout from "../common/Layout";
 import Image from "next/image";
 import teacherImg from "../Assets/Images/teacherimg.jpg";
-import { MdOutlinePlayCircle } from "react-icons/md";
 import LessonList from "./LessonList";
 import Testimonial from "./Testimonial";
 import Heading from "../common/Heading";
 import Calendar from "../calendar/index.jsx"
 import VideoModalPlayer from "../common/VideoModalPlayer";
+import { MdOutlinePlayCircle } from "react-icons/md";
 
 export default function Index() {
 

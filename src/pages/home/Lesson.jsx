@@ -4,7 +4,8 @@ import EmilyCarter from "../Assets/Images/emily-carter.png";
 import Button from "../common/Button";
 import Listing from "../api/Listing";
 import VideoModalPlayer from "../common/VideoModalPlayer";
-
+import { MdOutlinePlayCircle } from 'react-icons/md';
+import Image from "next/image";
 export default function Lesson({ title }) {
 
 
@@ -51,7 +52,9 @@ export default function Lesson({ title }) {
                                     <div id={i} className="bg-[#EFD1D1] border border-[rgba(56,121,117,0.2)]  rounded-[10px] lg:rounded-[20px] p-4 md:p-[20px] lg:p-[30px]">
                                         <div className="relative lg:h-[311px]">
                                             <Image className="w-full h-[265px] sm:h-[295px]  md:h-[186px] lg:h-[311px] rounded-[6px] md:rounded-[10px]" src={items.ThumbnailImage} alt={items.Title} width={530} height={311} />
-                                            <button className="absolute top-1/2  cursor-pointer left-0 w-[85px] text-center text-white hover:text-[#CC2828] right-0 mx-auto -translate-y-1/2"><MdOutlinePlayCircle size={80} /></button>
+                                            <button className="absolute top-1/2  cursor-pointer left-0 w-[85px] text-center text-white hover:text-[#CC2828] right-0 mx-auto -translate-y-1/2">
+                                            <MdOutlinePlayCircle size={80} />
+                                            </button>
                                         </div>
                                         <div className="pt-[20px] lg:pt-[30px]">
                                             <h3 className="font-bold text-xl xl:text-[25px] -tracking-[0.03em] m-0 pb-[20px] xl:pb-[35px] border-b border-[rgba(204,40,40,.2)] border-opacity-20 ">{items.Title}</h3>

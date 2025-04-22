@@ -16,9 +16,9 @@ export default function VideoModalPlayer({ items }) {
 
     return (
         <>
-            <div className="relative w-full h-[311px] rounded-[10px] overflow-hidden">
+            <div className="relative lg:h-[311px]">
                 <Image
-                    className="w-full h-full object-cover rounded-[10px]"
+                    className="w-full h-[265px] sm:h-[295px]  md:h-[186px] lg:h-[311px] rounded-[6px] md:rounded-[10px]"
                     src={EmilyCarter}
                     alt={items.Title}
                     width={530}

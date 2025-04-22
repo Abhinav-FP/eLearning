@@ -40,9 +40,9 @@ export default function FAQ({ classess }) {
                             {items.title}
                             {
                                 openIndex === index ? (
-                                    <span className="text-[#008F70] bg-[#C6E4DE] h-[44px] w-[44px] flex items-center justify-center block rounded-full absolute right-0 top-1/2 -translate-y-1/2 ">-</span>
+                                    <span className="text-[#008F70] bg-[#C6E4DE] h-[38px] w-[38px]  lg:h-[44px] lg:w-[44px] flex items-center justify-center block rounded-full absolute right-0 top-1/2 -translate-y-1/2 ">-</span>
                                 ) : (
-                                    <span className="text-[#008F70] bg-[#C6E4DE] h-[44px] w-[44px] flex items-center justify-center block rounded-full absolute right-0 top-1/2 -translate-y-1/2">+</span>
+                                    <span className="text-[#008F70] bg-[#C6E4DE] h-[38px] w-[38px]  lg:h-[44px] lg:w-[44px] flex items-center justify-center block rounded-full absolute right-0 top-1/2 -translate-y-1/2">+</span>
                                 )}
                         </button>
                         <div

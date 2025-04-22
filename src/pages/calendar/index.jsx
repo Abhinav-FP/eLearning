@@ -3,7 +3,7 @@ import { Calendar, momentLocalizer, Views } from 'react-big-calendar';
 import moment from 'moment';
 import 'react-big-calendar/lib/css/react-big-calendar.css';
 const localizer = momentLocalizer(moment);
-import "../../styles/calendar.css"
+// import "../../styles/calendar.css"
 import Popup from '../common/Popup';
 import PayPalButton from '../paypal/PayPalButton';
 

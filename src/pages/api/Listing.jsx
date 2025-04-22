@@ -29,6 +29,9 @@ class Listing extends Component {
     return Api.get("/home/teacher", data);
   }
 
+  async HomeTeacherVideo(){
+    return Api.get("/home/teacher/video")
+  }
   
   async StudentTeacher(data) {
     return Api.get("/student/teacherGet", data);

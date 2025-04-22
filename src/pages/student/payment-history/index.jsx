@@ -42,26 +42,26 @@ export default function Index() {
               </select>
             </div>
           </div>
-          <table className="min-w-full text-sm text-left">
+          <table className="min-w-full text-sm text-center">
             <thead className="bg-[rgba(204,40,40,0.1)] text-[#535353] tracking-[-0.04em] font-inter">
               <tr>
-                <th className="font-normal text-lg px-4 py-3 border-t border-[rgba(204,40,40,0.2)]">Order Id</th>
-                <th className="font-normal text-lg px-4 py-3 border-t border-[rgba(204,40,40,0.2)]">Lesson name</th>
-                <th className="font-normal text-lg px-4 py-3 border-t border-[rgba(204,40,40,0.2)]">Lesson date and time</th>
-                <th className="font-normal text-lg px-4 py-3 border-t border-[rgba(204,40,40,0.2)]">Lesson duration</th>
-                <th className="font-normal text-lg px-4 py-3 border-t border-[rgba(204,40,40,0.2)]">Amount</th>
-                <th className="font-normal text-lg px-4 py-3 border-t border-[rgba(204,40,40,0.2)]">Payment Status</th>
+                <th className="font-normal text-base px-4 py-3 border-t border-[rgba(204,40,40,0.2)] capitalize">Order Id</th>
+                <th className="font-normal text-base px-4 py-3 border-t border-[rgba(204,40,40,0.2)] capitalize">Lesson name</th>
+                <th className="font-normal text-base px-4 py-3 border-t border-[rgba(204,40,40,0.2)] capitalize">Payment time</th>
+                {/* <th className="font-normal text-base px-4 py-3 border-t border-[rgba(204,40,40,0.2)] capitalize">duration</th> */}
+                <th className="font-normal text-base px-4 py-3 border-t border-[rgba(204,40,40,0.2)] capitalize">Amount</th>
+                <th className="font-normal text-base px-4 py-3 border-t border-[rgba(204,40,40,0.2)] capitalize">Payment Status</th>
               </tr>
             </thead>
             <tbody>
               {payment && payment.map((item, index) => (
                 <tr key={index} className="border-t hover:bg-[rgba(204,40,40,0.1)] border-t border-[rgba(204,40,40,0.2)]">
-                  <td className="px-4 py-3 text-black text-lg font-medium font-inter ">{item.orderID}</td>
-                  <td className="px-4 py-3 text-black text-lg font-medium font-inter ">{item.LessonId?.title}</td>
-                  <td className="px-4 py-3 text-black text-lg font-medium font-inter ">{moment(item?.LessonId.createdAt).format("DD MM YYYY hh:mm A")}</td>
-                  <td className="px-4 py-3 text-black text-lg font-medium font-inter ">{item.LessonId.duration}</td>
-                  <td className="px-4 py-3 text-black text-lg font-medium font-inter ">${item.amount}</td>
-                  <td className="px-4 py-3 text-black text-lg font-medium font-inter ">{item.status}</td>
+                  <td className="px-4 py-3 text-black text-base font-medium font-inter ">{item.orderID}</td>
+                  <td className="px-4 py-3 text-black text-base font-medium font-inter ">{item.LessonId?.title}</td>
+                  <td className="px-4 py-3 text-black text-base font-medium font-inter ">{moment(item?.LessonId.createdAt).format("DD MMMM YYYY hh:mm A")}</td>
+                  {/* <td className="px-4 py-3 text-black text-base font-medium font-inter ">{item.LessonId.duration}</td> */}
+                  <td className="px-4 py-3 text-black text-base font-medium font-inter ">${item.amount}</td>
+                  <td className="px-4 py-3 text-black text-base font-medium font-inter ">{item.status}</td>
                 </tr>
               ))}
             </tbody>

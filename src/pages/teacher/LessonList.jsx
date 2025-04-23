@@ -27,19 +27,19 @@ export default function LessonList() {
     return (
         <div style={{ backgroundImage: "url('/leasson-bg.png')" }} className="bg-[rgba(249,190,191,.5)] bg-cover bg-center rounded-[20px] py-[40px] lg:py-[60px]">
             <div className="container sm:container md:container lg:container xl:max-w-[1230px]  bg-[rgba(249,190,191, .1)] px-4 mx-auto">
-                <Heading classess={'text-[#CC2828] mg-6 lg:mb-8'} title={'Lessons'} />
+                <Heading classess={'text-[#CC2828] mb-6 lg:mb-8'} title={'Lessons'} />
                 <ul className="space-y-5 lg:space-y-5">
 
                     {
                         data && data?.map((item, index) => (
-                            <li key={index} className="bg-white rounded-[10px] lg:rounded-[20px] p-6 lg:p-10">
-                                <h3 className="text-[#CC2828] tracking-[-0.04em] text-xl lg:text-[30px] font-inter font-extrabold mb-5 lg:mb-6">{item?.title}  </h3>
+                            <li key={index} className="bg-white rounded-[10px] lg:rounded-[20px] p-5 lg:p-6 xl:p-10 ">
+                                <h3 className="text-[#CC2828] tracking-[-0.04em] text-xl lg:text-2xl xl:text-[30px] font-inter font-extrabold mb-3 md:mb-4 lg:mb-6">{item?.title}  </h3>
                                 <div className="flex flex-wrap ">
-                                    <div className="w-full md:w-[calc(100%-170px)]">
-                                        <span className="text-center bg-[rgba(204,40,40,0.1)] text-[#CC2828] text-lg font-semibold font-inter inline-block px-6 py-2.5 rounded-full tracking-[-0.04em]">{item?.decription}</span>
+                                    <div className="mb-3 md:mb-0 w-full md:w-[calc(100%-170px)] md:pr-5">
+                                        <span className="bg-[rgba(204,40,40,0.1)] text-[#CC2828] text-base xl:text-lg font-semibold font-inter inline-block px-4 lg:px-5 lg:px-6 py-2.5 rounded-[20px] lg:rounded-full tracking-[-0.04em]">{item?.decription}</span>
                                     </div>
                                     <div className="w-full md:w-[170px]">
-                                        <button className="text-center bg-[rgba(204,40,40,0.1)] tracking-[-0.04em] text-[#CC2828] text-lg font-semibold font-inter block px-6 py-2.5 rounded-full ">USD ${item?.price}</button>
+                                        <button className="text-center bg-[rgba(204,40,40,0.1)] tracking-[-0.04em] text-[#CC2828] text-base xl:text-lg font-semibold font-inter block px-4 lg:px-5 lg:px-6 py-2.5 rounded-full ">USD ${item?.price}</button>
                                     </div>
                                 </div>
                             </li>

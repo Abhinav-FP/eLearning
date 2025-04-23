@@ -7,10 +7,10 @@ export default function Footer() {
         <>
           <footer className="bg-[#EFD1D1] pt-[50px] md:pt-[60px] lg:pt-[90px] pb-[15px] md:pb-[20px]">
               <div className="mx-auto container sm:container md:container lg:container xl:max-w-[1230px]  px-4">
-                  <div className="flex flex-wrap -mx-4  justify-between ">
+                  <div className="flex flex-wrap -mx-4 justify-between text-center md:text-left">
                      <div className="w-full md:w-[180px] px-4 mb-5 md:mb-0 ">
                         <Link href="/" > 
-                           <Image src={FooterLogo} alt="img" />
+                           <Image className="block mx-auto md:mx-0" src={FooterLogo} alt="img" />
                         </Link>
                      </div>
                      <div className="w-full md:w-[180px] px-4 ">

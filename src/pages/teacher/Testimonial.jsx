@@ -33,9 +33,9 @@ export default function Testimonial() {
 
     return (
         <>
-            <div className="py-[40px] lg:py-[60px] bg-[#F8F9FA]">
+            <div className="pt-[20px] lg:pt-[40px] xl:pt-[60px] pb-[40px] lg:pb-[60px] bg-[#F8F9FA]">
                 <div className="container sm:container md:container lg:container xl:max-w-[1230px]  bg-[rgba(249,190,191, .1)] px-4 mx-auto">
-                    <Heading classess={'text-[#1E1E1E] mg-3 lg:mb-4 text-center'} title={'Reviews'} />
+                    <Heading classess={'text-[#1E1E1E] mb-3 lg:mb-4 text-center'} title={'Reviews'} />
                     <p className="text-[#4E4E4E] tracking-[-0.04em] text-base mb-6 text-center lg:mb-10">Hear from our educators about their journey and experiences with Japanese for Me</p>
                     <Swiper
                         modules={[Navigation, Pagination, Autoplay]}
@@ -72,9 +72,7 @@ export default function Testimonial() {
                                         <div className="flex text-[#E4B750] text-sm justify-center mb-4">
                                             <FaStar size={16} fill="currentColor" />
                                             <FaStar size={16} fill="currentColor" />
-                                            <FaStar size={16} fill="currentColor" />
-                                            <FaStar size={16} fill="currentColor" />
-                                            <FaStar size={16} fill="currentColor" />
+                                            <FaStar size={16} fill="currentColor" /> 
                                         </div>
                                         <p className="text-[#535353] font-medium italic text-base text-center">{item?.decription}</p>
                                     </div>

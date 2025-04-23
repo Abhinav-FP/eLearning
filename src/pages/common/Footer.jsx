@@ -20,13 +20,13 @@ export default function Footer() {
                               <Link href="/" className="-tracking-[0.03em] text-base text-[#CC2828] hover:underline " >Home</Link>
                            </li>
                            <li>
-                              <Link href="/" className="-tracking-[0.03em] text-base text-[#CC2828] hover:underline" >Find a Teacher</Link>
+                              <Link href="/find-teacher" className="-tracking-[0.03em] text-base text-[#CC2828] hover:underline" >Find a Teacher</Link>
                            </li>
                            <li>
-                              <Link href="/" className="-tracking-[0.03em] text-base text-[#CC2828] hover:underline" >How It Works</Link>
+                              <Link href="/#howitwork" className="-tracking-[0.03em] text-base text-[#CC2828] hover:underline" >How It Works</Link>
                            </li>
                            <li>
-                              <Link href="/" className="-tracking-[0.03em] text-base text-[#CC2828] hover:underline" >FAQ</Link>
+                              <Link href="/#faq" className="-tracking-[0.03em] text-base text-[#CC2828] hover:underline" >FAQ</Link>
                            </li>
                            <li>
                               <Link href="/" className="-tracking-[0.03em] text-base text-[#CC2828] hover:underline" >Contact</Link>

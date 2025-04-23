@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import Layout from "../common/Layout";
 import Image from "next/image";
 import teacherImg from "../Assets/Images/teacherimg.jpg";
@@ -8,8 +8,32 @@ import Heading from "../common/Heading";
 import Calendar from "../calendar/index.jsx"
 import VideoModalPlayer from "../common/VideoModalPlayer";
 import { MdOutlinePlayCircle } from "react-icons/md";
+import { useRouter } from "next/router";
+import Listing from "../api/Listing";
 
 export default function Index() {
+    const router = useRouter();
+    const { slug } = router.query;
+    const [data,setdata]=useState([]);
+
+    const fetchData = async (slug) => {
+        try {
+            const main = new Listing();
+            const response = await main.TeachergetbyId(slug);
+            if (response.data) {
+                setdata(response.data.data);
+            }
+        } catch (error) {
+            console.log("error", error);  
+        }
+    };
+
+    useEffect(() => {
+        if(slug){
+            fetchData(slug);
+        }
+    }, [slug]);
+    console.log("data",data);
 
     return (
         <>
@@ -20,7 +44,7 @@ export default function Index() {
                             <div className="flex flex-wrap -mx-4 space-y-4">
                                 <div className="mx-auto w-[280px] md:w-[280px] lg:w-[308px] px-4">
                                     <div className="relative">
-                                        <Image className="rounded-[10px]" src={teacherImg} alt="teacher" height={276} width={276} />
+                                        <Image className="rounded-[10px]" src={data?.profile_photo || teacherImg} alt={data?.userId?.name || "teacher"} height={276} width={276} />
                                         <button className="absolute top-1/2  cursor-pointer left-0 w-[81px] text-center text-white hover:text-[#CC2828] right-0 mx-auto -translate-y-1/2">
                                             <MdOutlinePlayCircle size={81} />
                                         </button>
@@ -29,9 +53,11 @@ export default function Index() {
                                 <div className="w-full md:w-[calc(100%-280px)] md:w-[calc(100%-308px)] px-4">
                                     <div className="relative after:right-0 after:top-2 after:bottom-2 after:width-[1px] after-bg-white">
                                         <h3 className="text-white text-2xl lg:text-[45px] font-inter font-extrabold tracking-[-0.04em] mb-2">
-                                            Emily Carter
+                                            {data?.userId?.name || ""}
                                         </h3>
-                                        <p className="text-white tracking-[-0.03em] text-base lg:text-lg lg:text-xl font-medium">{`Hi! I'm Emily Carter, a passionate and certified English language teacher with over 8 years of experience. I specialize in helping students build confidence in speaking, improve their grammar, and prepare for exams like IELTS and TOEFL. My approach is friendly, interactive, and tailored to each student's unique learning style.`}</p>
+                                        <p className="text-white tracking-[-0.03em] text-base lg:text-lg lg:text-xl font-medium">
+                                            {data?.description || ""}
+                                        </p>
                                     </div>
                                 </div>
                             </div>
@@ -46,9 +72,7 @@ export default function Index() {
                     </div>
 
                 </div>
-
                 <Testimonial />
-
             </Layout>
         </>
     )

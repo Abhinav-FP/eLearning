@@ -40,6 +40,8 @@ export default function Lesson({ title }) {
         TeacherVideos();
     }, []);
 
+    console.log("video",video);
+
 
     return (
         <>
@@ -59,7 +61,9 @@ export default function Lesson({ title }) {
                                             <MdOutlinePlayCircle size={80} />
                                             </button>
                                         </div> */}
-                                        <VideoModalPlayer items={items} />
+                                        <VideoModalPlayer video={items?.intro_video} 
+                                        image={items?.profile_photo} 
+                                        name={items?.userId?.name} />
                                         <div className="pt-[20px] lg:pt-[30px]">
                                             <h3 className="font-bold text-xl xl:text-[25px] -tracking-[0.03em] m-0 pb-[20px] xl:pb-[35px] border-b border-[rgba(204,40,40,.2)] border-opacity-20 ">{items.userId.name}</h3>
                                         </div>

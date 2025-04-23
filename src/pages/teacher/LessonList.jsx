@@ -36,7 +36,7 @@ export default function LessonList() {
                                 <h3 className="text-[#CC2828] tracking-[-0.04em] text-xl lg:text-[30px] font-inter font-extrabold mb-5 lg:mb-6">{item?.title}  </h3>
                                 <div className="flex flex-wrap ">
                                     <div className="w-full md:w-[calc(100%-170px)]">
-                                        <span className="text-center bg-[rgba(204,40,40,0.1)] text-[#CC2828] text-lg font-semibold font-inter inline-block px-6 py-2.5 rounded-full tracking-[-0.04em]">{item?.decription}</span>
+                                        <span className="text-left bg-[rgba(204,40,40,0.1)] text-[#CC2828] text-lg font-semibold font-inter inline-block px-6 py-2.5 rounded-full tracking-[-0.04em]">{item?.decription}</span>
                                     </div>
                                     <div className="w-full md:w-[170px]">
                                         <button className="text-center bg-[rgba(204,40,40,0.1)] tracking-[-0.04em] text-[#CC2828] text-lg font-semibold font-inter block px-6 py-2.5 rounded-full ">USD ${item?.price}</button>

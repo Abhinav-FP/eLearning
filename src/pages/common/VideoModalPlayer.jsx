@@ -10,23 +10,23 @@ function getYouTubeID(url) {
     return match && match[1] ? match[1] : null;
 }
 
-export default function VideoModalPlayer({ items }) {
+export default function VideoModalPlayer({ video, image, name }) {
     const [isOpen, setIsOpen] = useState(false);
-    const videoId = getYouTubeID(items?.intro_video);
+    const videoId = getYouTubeID(video);
 
     return (
         <>
             <div className="relative lg:h-[311px]">
                 <Image
                     className="w-full h-[265px] sm:h-[295px]  md:h-[186px] lg:h-[311px] rounded-[6px] md:rounded-[10px]"
-                    src={EmilyCarter}
-                    alt={items?.Title}
+                    src={image || EmilyCarter}
+                    alt={name || "video"}
                     width={530}
                     height={311}
                 />
                 <button
                     onClick={() => setIsOpen(true)}
-                    className="absolute top-1/2 left-0 right-0 mx-auto -translate-y-1/2 text-white hover:text-[#CC2828] w-[85px] text-center"
+                    className="absolute top-1/2 left-0 right-0 mx-auto -translate-y-1/2 text-white hover:text-[#CC2828] w-[85px] text-center cursor-pointer"
                 >
                     <MdOutlinePlayCircle size={80} />
                 </button>

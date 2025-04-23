@@ -37,6 +37,10 @@ class Listing extends Component {
     return Api.get("/student/teacherGet", data);
   }
 
+  async TeachergetbyId(data) {
+    return Api.get(`/student/teacher/${data}`);
+  }
+
   async StudentDashboard() {
     return Api.get("/student/dashboard");
   }

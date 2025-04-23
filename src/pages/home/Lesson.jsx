@@ -30,6 +30,7 @@ export default function Lesson({ title }) {
             const response = await main.HomeTeacherVideo();
             console.log("response", response)
             setvideo(response?.data?.data?.record);
+            console.log( video);
         } catch (error) {
             console.log("error", error);
         }
@@ -48,19 +49,22 @@ export default function Lesson({ title }) {
                     <div className="flex flex-wrap -mx-2.5 space-y-3">
                         {
                             video && video?.map((items, i) => (
+                               
                                 <div className="w-full md:w-6/12 px-2.5" key={i}>
+                                    
                                     <div id={i} className="bg-[#EFD1D1] border border-[rgba(56,121,117,0.2)]  rounded-[10px] lg:rounded-[20px] p-4 md:p-[20px] lg:p-[30px]">
-                                        <div className="relative lg:h-[311px]">
+                                        {/* <div className="relative lg:h-[311px]">
                                             <Image className="w-full h-[265px] sm:h-[295px]  md:h-[186px] lg:h-[311px] rounded-[6px] md:rounded-[10px]" src={items.ThumbnailImage} alt={items.Title} width={530} height={311} />
                                             <button className="absolute top-1/2  cursor-pointer left-0 w-[85px] text-center text-white hover:text-[#CC2828] right-0 mx-auto -translate-y-1/2">
                                             <MdOutlinePlayCircle size={80} />
                                             </button>
-                                        </div>
+                                        </div> */}
+                                        <VideoModalPlayer items={items} />
                                         <div className="pt-[20px] lg:pt-[30px]">
-                                            <h3 className="font-bold text-xl xl:text-[25px] -tracking-[0.03em] m-0 pb-[20px] xl:pb-[35px] border-b border-[rgba(204,40,40,.2)] border-opacity-20 ">{items.Title}</h3>
+                                            <h3 className="font-bold text-xl xl:text-[25px] -tracking-[0.03em] m-0 pb-[20px] xl:pb-[35px] border-b border-[rgba(204,40,40,.2)] border-opacity-20 ">{items.userId.name}</h3>
                                         </div>
                                         <div className="flex justify-between items-center pt-4 lg:pt-5">
-                                            <div className="text-black font-bold text-lg lg:text-xl -tracking-[0.03em]">{items.Price}</div>
+                                            <div className="text-black font-bold text-lg lg:text-xl -tracking-[0.03em]">{items.average_price && `$${items.average_price}`}</div>
                                             <Button classes='bg-[#CC2828] hover:bg-[#ad0e0e] text-white text-base xl:text-xl py-2.5 px-8 lg:px-9' title="Book a Lesson" />
                                         </div>
                                     </div>

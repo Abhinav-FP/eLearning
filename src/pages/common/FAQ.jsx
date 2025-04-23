@@ -36,13 +36,13 @@ export default function FAQ({ classess }) {
                 <Heading classess={'text-[#1E1E1E] mb-3 '} title={'Frequently Asked Questions'} />
                 {faqs && faqs?.map((items, index) => (
                     <div key={index} className="border-b border-[#C6C7C8]">
-                        <button onClick={() => ToggleFaq(index)} className={`block w-full text-left bg-white border-none py-5 -tracking-[0.04em] font-semibold text-lg lg:text-xl cursor-pointer relative pr-20`} >
+                        <button onClick={() => ToggleFaq(index)} className={`block w-full text-left bg-white border-none py-3 md:py-5 -tracking-[0.04em] font-semibold text-base md:text-lg lg:text-xl cursor-pointer relative pr-20`} >
                             {items.title}
                             {
                                 openIndex === index ? (
-                                    <span className="text-[#008F70] bg-[#C6E4DE] h-[38px] w-[38px]  lg:h-[44px] lg:w-[44px] flex items-center justify-center block rounded-full absolute right-0 top-1/2 -translate-y-1/2 ">-</span>
+                                    <span className="text-[#008F70] bg-[#C6E4DE] h-[32px] w-[32px] md:h-[38px] md:w-[38px]  lg:h-[44px] lg:w-[44px] flex items-center justify-center block rounded-full absolute right-0 top-1/2 -translate-y-1/2 ">-</span>
                                 ) : (
-                                    <span className="text-[#008F70] bg-[#C6E4DE] h-[38px] w-[38px]  lg:h-[44px] lg:w-[44px] flex items-center justify-center block rounded-full absolute right-0 top-1/2 -translate-y-1/2">+</span>
+                                    <span className="text-[#008F70] bg-[#C6E4DE] h-[32px] w-[32px] md:h-[38px] md:w-[38px]  lg:h-[44px] lg:w-[44px] flex items-center justify-center block rounded-full absolute right-0 top-1/2 -translate-y-1/2">+</span>
                                 )}
                         </button>
                         <div

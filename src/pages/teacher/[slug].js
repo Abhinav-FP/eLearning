@@ -70,7 +70,7 @@ export default function Index() {
                     </div>
                 </div>
                 <LessonList />
-                <div className="pt-[60px] lg:pt-[100px] pb-[40px] lg:pb-[60px] bg-[#F8F9FA]">
+                <div className="pt-[40px md:pt-[60px] md:pt-[80px] xl:pt-[100px] pb-[40px] lg:pb-[60px] bg-[#F8F9FA]">
                     <div className="container sm:container md:container lg:container xl:max-w-[1230px]  px-4 mx-auto">
                         <Heading classess={'text-[#1E1E1E] mg-6 lg:mb-8'} title={'Availability'} />
                         <Calendar />

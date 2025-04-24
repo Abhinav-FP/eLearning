@@ -1,5 +1,4 @@
 import React, { useEffect, useRef, useState } from 'react';
-import StudentLayout from '../Common/StudentLayout';
 import { CiLock } from 'react-icons/ci';
 import { IoSend } from 'react-icons/io5';
 import moment from 'moment';
@@ -7,8 +6,9 @@ import Image from 'next/image';
 import Listing from '@/pages/api/Listing';
 import toast from 'react-hot-toast';
 import { useRouter } from 'next/router';
+import TeacherLayout from './Common/TeacherLayout';
 
-export default function Index() {
+export default function Message() {
   const [teacherId, setTeacherId] = useState("")
   const [message, setMessage] = useState('');
   const [usermessage, setUserMessage] = useState();
@@ -44,14 +44,15 @@ export default function Index() {
 
 
   const handleUserSelect = (user) => {
-    setTeacherId(user?.teacher?._id)
-    MessageGetAlls(user?.teacher?._id)
+    setTeacherId(user?.student?._id)
+    MessageGetAlls(user?.student?._id)
   };
 
   const MessageGetAlls = async (Id) => {
     try {
       const main = new Listing();
       const response = await main.MessageGetAll(Id);
+      console.log("response.data.messages",response.data.messages);
       setUserMessage(response.data.messages);
       setSelectedIdUser(response.data.ReciverUser);
     } catch (error) {
@@ -109,7 +110,7 @@ export default function Index() {
   };
 
   return (
-    <StudentLayout page={"Messages"}>
+    <TeacherLayout page={"Messages"}>
       <>
         <div className="flex flex-wrap w-full">
           {/* Sidebar */}
@@ -125,17 +126,16 @@ export default function Index() {
                     src={"/profile.png"}
                     width={50}
                     height={50}
-                    alt={chat?.teacher?.name}
+                    alt={chat?.student?.name}
                     className="w-[50px] h-[50px] lg:w-[56px] lg:h-[56px] rounded-lg absolute left-[22px] top-1/2 -translate-y-1/2"
                   />
                   <div className="flex-1">
-                    <h3 className="font-medium font-inter text-base mb-0 text-black capitalize">{chat?.teacher?.name}</h3>
+                    <h3 className="font-medium font-inter text-base mb-0 text-black capitalize">{chat?.student?.name}</h3>
                     {chat?.count ? (
                       <p className="text-sm text-[#CC2828] font-inter tracking-[-0.04em] "> {chat?.count > 5 ? '5+' : chat?.count} unread messages</p>
 
                     ) : (
-                      <p className="text-sm text-[#7A7A7A] font-inter tracking-[-0.04em]"> Teacher</p>
-
+                      <p className="text-sm text-[#7A7A7A] font-inter tracking-[-0.04em]">Student</p>
                     )}
                   </div>
                   {chat?.count > 0 && (
@@ -163,7 +163,7 @@ export default function Index() {
                   className="w-[45px] h-[45px] rounded-full left-[22px] "
                 />
                 <div>
-                  <h2 className="font-medium text-base text-black mb-0 tracking-[-0.06em]">{selectedIdUser?.name}</h2>
+                  <h2 className="font-medium text-base text-black mb-0 tracking-[-0.06em] capitalize">{selectedIdUser?.name}</h2>
                   <p className="font-normal text-sm font-inter text-[#1E1E1E] capitalize">{selectedIdUser?.role}</p>
                 </div>
               </div>
@@ -254,6 +254,6 @@ export default function Index() {
           </div>
         </div>
       </>
-    </StudentLayout>
+    </TeacherLayout>
   );
 }

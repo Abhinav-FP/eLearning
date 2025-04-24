@@ -39,7 +39,8 @@ export default function Login () {
       });
 
       if (response?.data?.status) {
-        router.push("/student")
+        if(response?.data?.role === "student"){router.push("/student");}
+        else if(response?.data?.role === "teacher"){router.push("/teacher-dashboard");}
         toast.success(response.data.message);
         setData({
           email: "",

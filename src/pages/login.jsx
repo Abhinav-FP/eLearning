@@ -1,13 +1,13 @@
 import Image from 'next/image'
 import React, { useState } from 'react'
-import Logo from "../../Assets/Images/logo.png"
+import Logo from "./Assets/Images/logo.png"
 import Link from 'next/link'
 import { IoEye, IoEyeOff } from 'react-icons/io5';
 import { useRouter } from 'next/router';
 import toast from 'react-hot-toast';
 import Listing from '@/pages/api/Listing';
 
-export default function index () {
+export default function Login () {
   const router = useRouter();
   const [showConfirPassword, setShowConfirPassword] = useState(false);
   const [loading, setLoading] = useState(false);

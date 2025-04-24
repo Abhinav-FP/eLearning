@@ -16,6 +16,8 @@ export default function Index() {
   const [messageCount, SetmessageCount] = useState([])
   const [selectedIdUser, setSelectedIdUser] = useState();
 
+  const [MobileOpen, setMobileOpen] = useState(false);
+
   const chatContainerRef = useRef(null);
   const router = useRouter();
   const Query = router.query.query;
@@ -45,7 +47,8 @@ export default function Index() {
 
   const handleUserSelect = (user) => {
     setTeacherId(user?.teacher?._id)
-    MessageGetAlls(user?.teacher?._id)
+    MessageGetAlls(user?.teacher?._id);
+    setMobileOpen(true)
   };
 
   const MessageGetAlls = async (Id) => {
@@ -108,13 +111,15 @@ export default function Index() {
     }
   };
 
+
+  
   return (
     <StudentLayout page={"Messages"}>
       <>
         <div className="flex flex-wrap w-full">
           {/* Sidebar */}
-          <div className="w-full lg:w-1/4  rounded-lg pb-5 pt-2">
-            <div className="mt-0 space-y-1 h-[calc(100vh-300px)] overflow-y-auto customscroll">
+          <div className={`w-full lg:w-4/12 xl:w-3/12 rounded-lg pb-5 pt-2 ${MobileOpen ? "hidden lg:block" : "block lg:block"} `}>
+            <div className="mt-0 space-y-1 lg:h-[calc(100vh-300px)] overflow-y-auto customscroll">
               {messageCount && messageCount.map((chat, index) => (
                 <div
                   key={index}
@@ -151,7 +156,7 @@ export default function Index() {
           </div>
 
           {/* Chat Panel */}
-          <div className="w-full lg:w-3/4 flex flex-col  bg-[#F1F1F1]">
+          <div className={`w-full lg:w-8/12  xl:w-9/12 flex flex-col  bg-[#F1F1F1] ${MobileOpen ? "block lg:block" : "hidden lg:block"}`}>
             {/* Chat Header */}
             {teacherId && (
               <div className="flex items-center gap-3 lg:gap-4 bg-[#FFFFFF] px-4 lg:px-5 py-3.5 lg:py-4">
@@ -160,12 +165,16 @@ export default function Index() {
                   width={45}
                   height={45}
                   alt={"chat.nam"}
-                  className="w-[45px] h-[45px] rounded-full left-[22px] "
+                  className="w-[32px] xl:w-[45px] h-[32px] xl:h-[45px] rounded-full left-[22px] "
                 />
                 <div>
                   <h2 className="font-medium text-base text-black mb-0 tracking-[-0.06em]">{selectedIdUser?.name}</h2>
                   <p className="font-normal text-sm font-inter text-[#1E1E1E] capitalize">{selectedIdUser?.role}</p>
                 </div>
+                {MobileOpen && (
+                  <button onClick={ () => setMobileOpen(false) } className='flex w-fit ml-auto px-6 md:px-8 lg:px-10 py-2 text-[#CC2828] border border-[#CC2828] rounded-md text-xs sm:text-sm hover:bg-[#CC2828] hover:text-white cursor-pointer'>Back</button>
+                )}
+                
               </div>
             )}
 

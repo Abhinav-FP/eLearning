@@ -15,13 +15,13 @@ export default function Index() {
     <StudentLayout page={"My Lessons"}>
       <div className="min-h-screen  py-5 lg:py-[30px]">
         <div className="px-5 lg:px-[30px]">
-          <h1 className="font-inter text-lg md:text-xl lg:text-3xl font-bold text-[#CC2828] tracking-[-0.04em] mb-4 lg:mb-5">
+          <h1 className="font-inter text-lg lg:text-xl xl:text-3xl font-bold text-[#CC2828] tracking-[-0.04em] mb-1 lg:mb-3 xl:mb-5">
             Stay on Track with Your Lessons
           </h1>
         </div>
 
         {/* Tabs */}
-        <div className="flex px-5 lg:px-[30px] flex-wrap gap-6 sm:gap-12 md:gap-28 border-b border-[rgba(0,0,0,0.2)] mb-6">
+        <div className="flex px-5 lg:px-[30px] flex-wrap gap-6 sm:gap-16 lg:gap-12 xl:gap-28 border-b border-[rgba(0,0,0,0.2)] mb-6">
           {["Upcoming", "Past", "Cancelled"].map((item) => (
             <button
               key={item}
@@ -41,15 +41,15 @@ export default function Index() {
           {lessons &&
             lessons?.map((lesson, idx) => (
               <div key={idx}>
-                <div className="flex items-center gap-3 lg:gap-4 flex-wrap mb-3 lg:mb-5">
-                  <p className="text-[#CC2828] font-bold text-lg lg:text-xl font-inter">
+                <div className="flex items-center gap-3 xl:gap-4 flex-wrap mb-3 lg:mb-4 xl:mb-5">
+                  <p className="text-[#CC2828] font-bold text-lg xl:text-xl font-inter">
                     {lesson.date}
                   </p>
                   <p className="text-sm lg:text-base font-medium text-[#535353] font-inter ">{lesson?.time || ""}</p>
                   <p className="text-sm lg:text-base font-medium text-[#535353] font-inter ">{lesson?.duration || ""}</p>
                 </div>
                 <div
-                  className="bg-white rounded-[10px] lesson_list_shadow p-4 lg:p-5 flex items-center justify-between transition border-[rgba(204,40,40,0.2)] border-1"
+                  className="bg-white rounded-[10px] lesson_list_shadow p-3 md:p-4 lg:p-5 flex items-center justify-between transition border-[rgba(204,40,40,0.2)] border-1"
                 >
                   <div className="flex items-center space-x-2.5 lg:space-x-3">
                     <Image
@@ -66,11 +66,11 @@ export default function Index() {
                       <p className="text-xs font-inter text-[#7A7A7A] tracking-[-0.04em]">Teacher</p>
                     </div>
                   </div>
-                  <div className="flex flex-col sm:flex-row gap-3 lg:gap-5">
-                    <button className="tracking-[-0.06em] font-inter px-8 md:px-16 py-2.5 text-[#CC2828] border border-[#CC2828] rounded-[10px]  text-sm hover:bg-[#CC2828] hover:text-white cursor-pointer">
+                  <div className="flex flex-col sm:flex-row gap-2 md:gap-3 xl:gap-5">
+                    <button className="tracking-[-0.06em] font-inter px-6 md:px-10 lg:px-12 xl:px-16 py-2 lg:py-2.5 text-[#CC2828] border border-[#CC2828] rounded-[10px]  text-sm hover:bg-[#CC2828] hover:text-white cursor-pointer">
                       Reschedule
                     </button>
-                    <button className="tracking-[-0.06em] font-inter px-8 md:px-16 py-2.5 text-white border border-[#CC2828] rounded-[10px]  text-sm bg-[#CC2828] hover:bg-white hover:text-[#CC2828] cursor-pointer">
+                    <button className="tracking-[-0.06em] font-inter px-6 md:px-10 lg:px-12 xl:px-16 py-2 lg:py-2.5 text-white border border-[#CC2828] rounded-[10px]  text-sm bg-[#CC2828] hover:bg-white hover:text-[#CC2828] cursor-pointer">
                       Message
                     </button>
                   </div>

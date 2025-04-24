@@ -34,7 +34,7 @@ function SideBar({ user }) {
             >
                 {isOpen &&
                     <button
-                        className="lg:hidden p-2 absolute left-[213px] top-6 text-red-700 border border-red-700 z-[99] rounded"
+                        className="lg:hidden p-1.5 absolute left-[213px] top-3 text-red-700 border border-red-700 z-[99] rounded"
                         onClick={() => setIsOpen(false)}
                     >
                         <IoMdArrowRoundBack size={18} />
@@ -62,53 +62,53 @@ function SideBar({ user }) {
                 </div>
                 <div className="p py-4 lg:py-5">
                     <div className="mb-4 mt-8 font-medium">
-                        <div className="x-3 md:px-4 lg:px-6 uppercase text-[#727272] text-sm font-medium mb-4 lg:mb-5">MAIN MENU</div>
+                        <div className="px-3 md:px-4 lg:px-6 uppercase text-[#727272] text-sm font-medium mb-4 lg:mb-5">MAIN MENU</div>
                         <ul className="mt-2 space-y-1 mb-10">
                             <Link
                                 href="/student"
-                                className={`flex items-center py-2.5 x-3 md:px-4 lg:px-6 gap-2 text-[#565F66] text-base font-medium tracking-[-0.06em] ${pathname === "/student" ? "text-white bg-[#D6202C]" : "hover:bg-gray-100"} `}
+                                className={`flex items-center py-2.5 px-3 md:px-4 lg:px-6 gap-2 text-[#565F66] text-base font-medium tracking-[-0.06em] ${pathname === "/student" ? "text-white bg-[#D6202C]" : "hover:bg-gray-100"} `}
                             >
                                 <MdSpaceDashboard  size={20} />
                                 Dashboard
                             </Link>
                             <Link
                                 href="/student/lessons"
-                                className={`flex items-center py-2.5 x-3 md:px-4 lg:px-6  gap-2 text-[#565F66] text-base font-medium tracking-[-0.06em] ${pathname === "/student/lessons" ? "text-white bg-[#D6202C]" : "hover:bg-gray-100"} `}
+                                className={`flex items-center py-2.5 px-3 md:px-4 lg:px-6  gap-2 text-[#565F66] text-base font-medium tracking-[-0.06em] ${pathname === "/student/lessons" ? "text-white bg-[#D6202C]" : "hover:bg-gray-100"} `}
                             >
                                 <MdClass size={20} />
                                 My Lessons
                             </Link>
                             <Link
                                 href="/student/teachers"
-                                className={`flex items-center py-2.5 x-3 md:px-4 lg:px-6 gap-2 text-[#565F66] text-base font-medium tracking-[-0.06em] ${pathname === "/student/teachers" ? "text-white bg-[#D6202C]" : "hover:bg-gray-100"} `}
+                                className={`flex items-center py-2.5 px-3 md:px-4 lg:px-6 gap-2 text-[#565F66] text-base font-medium tracking-[-0.06em] ${pathname === "/student/teachers" ? "text-white bg-[#D6202C]" : "hover:bg-gray-100"} `}
                             >
                                 <FaChalkboardTeacher size={20} />
                                 Find a Teachers
                             </Link>
                             <Link
                                 href="/student/message"
-                                className={`flex items-center py-2.5 x-3 md:px-4 lg:px-6 gap-2 text-[#565F66] text-base font-medium tracking-[-0.06em] ${pathname === "/student/message" ? "text-white bg-[#D6202C]" : "hover:bg-gray-100"}`}
+                                className={`flex items-center py-2.5 px-3 md:px-4 lg:px-6 gap-2 text-[#565F66] text-base font-medium tracking-[-0.06em] ${pathname === "/student/message" ? "text-white bg-[#D6202C]" : "hover:bg-gray-100"}`}
                             >
                                 <LuMessagesSquare size={20} />
                                 Messages
                             </Link>
                             <Link
                                 href="/student/payment-history"
-                                className={`flex items-center py-2.5 x-3 md:px-4 lg:px-6 gap-2 text-[#565F66] text-base font-medium tracking-[-0.06em] ${pathname === "/student/payment-history" ? "text-white bg-[#D6202C]" : "hover:bg-gray-100"}`}
+                                className={`flex items-center py-2.5 px-3 md:px-4 lg:px-6 gap-2 text-[#565F66] text-base font-medium tracking-[-0.06em] ${pathname === "/student/payment-history" ? "text-white bg-[#D6202C]" : "hover:bg-gray-100"}`}
                             >
                                 <MdPayment size={20} />
                                 Payments
                             </Link>
                             <Link
                                 href="/student/review"
-                                className={`flex items-center py-2.5 x-3 md:px-4 lg:px-6 gap-2 text-[#565F66] text-base font-medium tracking-[-0.06em] ${pathname === "/student/review" ? "text-white bg-[#D6202C]" : "hover:bg-gray-100"}`}
+                                className={`flex items-center py-2.5 px-3 md:px-4 lg:px-6 gap-2 text-[#565F66] text-base font-medium tracking-[-0.06em] ${pathname === "/student/review" ? "text-white bg-[#D6202C]" : "hover:bg-gray-100"}`}
                             >
                                 <MdOutlineRateReview size={20} />
                                 Reviews
                             </Link>
                             <Link
                                 href="/student/setting"
-                                className={`flex items-center py-2.5 x-3 md:px-4 lg:px-6 gap-2 text-[#565F66] text-base font-medium tracking-[-0.06em] ${pathname === "/student/setting" ? "text-white bg-[#D6202C]" : "hover:bg-gray-100"}`}
+                                className={`flex items-center py-2.5 px-3 md:px-4 lg:px-6 gap-2 text-[#565F66] text-base font-medium tracking-[-0.06em] ${pathname === "/student/setting" ? "text-white bg-[#D6202C]" : "hover:bg-gray-100"}`}
                             >
                                 <IoSettingsOutline size={20} />
                                 Settings

@@ -36,7 +36,7 @@ export default function Header() {
         window.addEventListener('scroll', handleScroll);
         return () => window.removeEventListener('scroll', handleScroll);
     }, [])
-    console.log("user",user);
+    // console.log("user",user);
 
     return (
         <>
@@ -83,7 +83,7 @@ export default function Header() {
                             { user && user?.role ?
                                 <div className="flex flex-col lg:hidden">
                                     <Link 
-                                        href={`${user?.role === "student" ? "/student" : "teacher-dashboard"}`}
+                                        href={`${user?.role === "student" ? "/student" : "/teacher-dashboard"}`}
                                         className="text-[#CC2828] hover:text-[#ad0e0e] border-t border-[#ddd] text-base py-3 px-4 font-medium cursor-pointer" >
                                         View dashboard
                                     </Link>
@@ -111,7 +111,7 @@ export default function Header() {
                             </div>
                             { user && user?.role ? 
                                 <Link 
-                                href={`${user?.role === "student" ? "/student" : "teacher-dashboard"}`} 
+                                href={`${user?.role === "student" ? "/student" : "/teacher-dashboard"}`} 
                                 className="hidden lg:block bg-[#CC2828] hover:bg-[#ad0e0e] text-white text-base py-3.5 px-8 xl:px-10 font-medium cursor-pointer rounded-full" >
                                     View Dashboard                            
                                 </Link>

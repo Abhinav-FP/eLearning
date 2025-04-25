@@ -11,8 +11,7 @@ import { useRole } from "@/context/RoleContext";
 
 export default function AuthLayout({ children, page , sidebar }) {
     const [dropdownOpen, setDropdownOpen] = useState(false);
-    // const [user, setUser] = useState("");
-    const { setUser } = useRole();
+    const { user, setUser } = useRole();
     const router = useRouter();
     const handleLogout = () => {
       localStorage && localStorage.removeItem("token");
@@ -62,7 +61,9 @@ export default function AuthLayout({ children, page , sidebar }) {
                   {dropdownOpen && (
                     <div className="absolute right-0 mt-2 w-48 bg-white border border-gray-300 rounded-md shadow-lg z-50">
                       <ul className="py-1">
-                        <Link href="/student/settings" className="flex gap-2 px-4 py-2 hover:bg-gray-100 cursor-pointer">
+                        <Link 
+                        href={`${user && user?.role === "student" ? "/student/setting" : "/teacher-dashboard/setting"}`} 
+                        className="flex gap-2 px-4 py-2 hover:bg-gray-100 cursor-pointer">
                           <IoSettingsOutline size={20} /> Settings
                         </Link>
                         <li className="flex gap-2 px-4 py-2 hover:bg-gray-100 cursor-pointer" onClick={handleLogout}>

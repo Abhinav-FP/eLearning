@@ -49,7 +49,7 @@ function SideBar() {
                 </div>
 
                 <div className="px-3 lg:px-4">
-                    <div className="user_row p-2.5 bg-white shadow-md rounded-lg lg:rounded-xl flex items-center gap-3">
+                    <Link href = "/student/setting" className="user_row p-2.5 bg-white shadow-md rounded-lg lg:rounded-xl flex items-center gap-3">
                         <div className="w-11 h-11 rounded-full bg-green-400 flex items-center justify-center text-white text-xl font-bold">
                             {/* Replace with an actual image if needed */}
                             <img
@@ -62,7 +62,7 @@ function SideBar() {
                             <p className="font-medium text-sm capitalize  text-black -tracking-[0.04em]">{user?.name}</p>
                             <p className="text-xs capitalize #7A7A7A text-[#7A7A7A]">{user?.role}</p>
                         </div>
-                    </div>
+                    </Link>
                 </div>
                 <div className="p py-4 lg:py-5">
                     <div className="mb-4 mt-8 font-medium">

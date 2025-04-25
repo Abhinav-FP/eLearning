@@ -38,7 +38,7 @@ export default function Stripe() {
     <div className="w-full flex justify-between items-center text-lg font-bold mt-4 px-4 py-2 bg-gray-200 rounded-lg">
       <span>Total:</span>
       <span>
-      ¥ {100}</span>
+      ¥ {10000}</span>
     </div>
     <button
     onClick={() => {

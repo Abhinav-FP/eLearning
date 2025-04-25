@@ -67,17 +67,30 @@ class Listing extends Component {
   }
 
   async PaypalCreate(data){
-    return Api.post(`/paypal/create-order` , data);
+    return Api.post(`/payment/create-order` , data);
   }
 
   async PaypalApprove(data){
-    return Api.post(`/paypal/capture-order` , data);
+    return Api.post(`/payment/capture-order` , data);
   }
 
   async PaypalCancel(data){
-    return Api.post(`/paypal/cancel-order` , data);
+    return Api.post(`/payment/cancel-order` , data);
   }
 
+
+  async Stripe_payment(data) {
+    return Api.post("/payment/create-checkout-session", data);
+  }
+
+  
+  async StripeSuccess(data) {
+    return Api.get(`/payment/payment-success/${data}`);
+  }
+
+  async StripeCancel(data) {
+    return Api.get(`/payment/payment-cancel/${data}`);
+  }
 
   render() {
     return (

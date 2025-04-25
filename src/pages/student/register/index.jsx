@@ -115,7 +115,7 @@ export default function Index() {
                                 type="email"
                                 name='email'
                                 placeholder="Email"
-                                className="w-full px-4 lg:px-5 py-2 border h-[48px] lg:h-[56px] border-[#F4F6F8] rounded-[6px] lg:rounded-[10px] bg-[#F4F6F8] focus:outline-none focus:ring-1 focus:ring-[#c9c9c9]"
+                                className="w-full px-4 lg:px-5 py-2 border h-[48px] lg:h-[5 6px] border-[#F4F6F8] rounded-[6px] lg:rounded-[10px] bg-[#F4F6F8] focus:outline-none focus:ring-1 focus:ring-[#c9c9c9]"
                                 required
 
                             />

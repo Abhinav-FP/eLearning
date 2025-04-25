@@ -59,12 +59,12 @@ const handleRemoveSubmit = async (Id) => {
           {teachers &&
             teachers?.map((teacher, idx) => (
               <div key={idx}>
-                <div className="bg-white rounded-[10px] lesson_list_shadow p-4 lg:p-5 flex flex-col lg:flex-row items-center justify-between transition border-[rgba(204,40,40,0.2)] border-1">
-                  <div className="flex items-center space-x-3 mt-2">
+                <div className="bg-white rounded-[10px] lesson_list_shadow  p-3 md:p-4 lg:p-5 flex flex-col lg:flex-row lg:items-center justify-between transition border-[rgba(204,40,40,0.2)] border-1 gap-5">
+                  <div className="flex flex-col sm:flex-row sm:items-center space-y-2 sm:space-x-3  mt-2">
                     <Image
                       src={teacher?.teacher?.profile_photo || "/profile.png"}
                       alt="Profile"
-                      className="w-20 h-20 lg:w-[104px] lg:h-[104px] rounded-full object-cover"
+                      className="w-16 h-16 md:w-20 md:h-20 lg:w-[104px] lg:h-[104px] rounded-full object-cover"
                       height={104}
                       width={104}
                     />
@@ -90,7 +90,7 @@ const handleRemoveSubmit = async (Id) => {
                       <p className="text-xs text-[#7A7A7A] font-inter tracking-[-0.04em] mb-1">
                         {teacher?.description || ""}
                       </p>
-                      <p className="text-[#E4B750] text-lg">
+                      <p className="text-[#E4B750] text-base lg:text-lg font-inter">
                         {teacher.average_price && (
                           ` $${teacher.average_price}/${teacher?.average_duration} min`
                         )}
@@ -98,10 +98,10 @@ const handleRemoveSubmit = async (Id) => {
                     </div>
                   </div>
                   <div className="flex flex-row gap-2 justify-between">
-                    <button className="tracking-[-0.06em] font-inter font-medium px-8 lg:px-12 py-2.5 text-[#CC2828] border border-[#CC2828] rounded-[10px] text-sm hover:bg-[#CC2828] hover:text-white cursor-pointer">
+                    <button className="tracking-[-0.06em] font-inter font-medium px-6 md:px-10 lg:px-12 py-2 lg:py-2.5 text-[#CC2828] border border-[#CC2828] rounded-[10px] text-sm hover:bg-[#CC2828] hover:text-white cursor-pointer">                    
                       Book
                     </button>
-                    <Link href={`/student/message?query=${teacher?.userId?._id}`} className="tracking-[-0.06em] font-inter font-medium px-8 lg:px-12 py-2.5 bg-[#CC2828] text-white rounded-[10px]  text-sm hover:bg-white hover:text-[#CC2828] border border-[#CC2828] cursor-pointer">
+                    <Link href={`/student/message?query=${teacher?.userId?._id}`} className="tracking-[-0.06em] font-inter font-medium px-6 md:px-10 lg:px-12 py-2 lg:py-2.5 bg-[#CC2828] text-white rounded-[10px]  text-sm hover:bg-white hover:text-[#CC2828] border border-[#CC2828] cursor-pointer">
                       Message
                     </Link>
                   </div>

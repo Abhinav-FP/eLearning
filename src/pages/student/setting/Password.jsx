@@ -96,9 +96,9 @@ export default function Password() {
                                 className="absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-500"
                             >
                                 {showCurrentPassword ? (
-                                    <FaEyeSlash size={24} />
+                                    <FaEyeSlash className='h-5 w-5 lg:h-6 lg:w-6' size={24} />
                                 ) : (
-                                    <FaEye size={24} />
+                                    <FaEye className='h-5 w-5 lg:h-6 lg:w-6' size={24} />
                                 )}
                             </button>
                         </div>
@@ -131,9 +131,9 @@ export default function Password() {
                                 className="absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-500"
                             >
                                 {showNewPassword ? (
-                                    <FaEyeSlash size={24} />
+                                    <FaEyeSlash className='h-5 w-5 lg:h-6 lg:w-6' size={24} />
                                 ) : (
-                                    <FaEye size={24} />
+                                    <FaEye className='h-5 w-5 lg:h-6 lg:w-6' size={24} />
                                 )}
                             </button>
 
@@ -169,16 +169,16 @@ export default function Password() {
                                 className="absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-500"
                             >
                                 {showConfirmPassword ? (
-                                    <FaEyeSlash size={24} />
+                                    <FaEyeSlash className='h-5 w-5 lg:h-6 lg:w-6' size={24} />
                                 ) : (
-                                    <FaEye size={24} />
+                                    <FaEye className='h-5 w-5 lg:h-6 lg:w-6' size={24} />
                                 )}
                             </button>
                         </div>
                     </div>
                 </div>
                 <div className="flex w-full lg:w-12/12 xl:w-11/12 flex-wrap justify-center items-center pt-6 lg:pt-10 space-x-4 lg:space-x-6">
-                    <button className="w-full max-w-[183px] cursor-pointer border border-[#CC2828] bg-[#CC2828] hover:bg-red-700  text-white py-3.5 cursor-pointer rounded-[10px] font-normal text-base xl:text-xl transition  tracking-[-0.04em]"
+                    <button className="w-full max-w-[183px] cursor-pointer border border-[#CC2828] bg-[#CC2828] hover:bg-red-700  text-white py-2.5 lg:py-3.5 cursor-pointer rounded-[10px] font-normal text-base xl:text-xl transition  tracking-[-0.04em]"
                         type='submit'
                         disabled={processing}
                     >

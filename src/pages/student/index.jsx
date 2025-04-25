@@ -54,7 +54,8 @@ export default function Index() {
               <h2 className="font-inter text-lg lg:text-xl tracking-[-0.04em] font-bold text-[#CC2828] mb-4">Favorite Teachers</h2>
               <div className="space-y-4">
                 {dahboard?.wishlistResult?.map((wish, idx) => (
-                  <div
+                  <Link
+                    href={`/teacher/${wish?._id}`}
                     key={idx}
                     className="flex items-center justify-between  border border-[rgba(204,40,40,0.3)] rounded-xl p-2.5"
                   >
@@ -76,14 +77,13 @@ export default function Index() {
                     <Link href={`/student/message?query=${wish?.teacher?._id}`} className="text-[#CC2828] font-inter text-sm font-medium tracking-[-0.06em]  hover:underline cursor-pointer">
                       Message
                     </Link>
-                  </div>
+                  </Link>
                 ))}
               </div>
             </div>
           </div>
         </div>
 
-        {/* Row 2: Recent Reviews (left) */}
         <div className="flex flex-wrap -mx-4">
           <div className='w-full px-4'>
             <div className="bg-white p-4 lg:p-5 border border-[rgba(204,40,40,0.2)]  rounded-[20px]">

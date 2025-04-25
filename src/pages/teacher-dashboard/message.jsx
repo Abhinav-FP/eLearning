@@ -26,7 +26,7 @@ export default function Message() {
       MessageGetAlls(Query)
     }
   }, [Query]);
- 
+
 
   const MessageCount = async () => {
     try {
@@ -52,7 +52,7 @@ export default function Message() {
     try {
       const main = new Listing();
       const response = await main.MessageGetAll(Id);
-      console.log("response.data.messages",response.data.messages);
+      console.log("response.data.messages", response.data.messages);
       setUserMessage(response.data.messages);
       setSelectedIdUser(response.data.ReciverUser);
     } catch (error) {
@@ -150,10 +150,9 @@ export default function Message() {
             </div>
           </div>
 
-          {/* Chat Panel */}
-          <div className="w-full lg:w-3/4 flex flex-col  bg-[#F1F1F1]">
-            {/* Chat Header */}
-            {teacherId && (
+          {teacherId && (
+            <div className="w-full lg:w-3/4 flex flex-col  bg-[#F1F1F1]">
+              {/* Chat Header */}
               <div className="flex items-center gap-3 lg:gap-4 bg-[#FFFFFF] px-4 lg:px-5 py-3.5 lg:py-4">
                 <Image
                   src={"/profile.png"}
@@ -167,91 +166,92 @@ export default function Message() {
                   <p className="font-normal text-sm font-inter text-[#1E1E1E] capitalize">{selectedIdUser?.role}</p>
                 </div>
               </div>
-            )}
-
-            {/* Chat Body */}
-            <div
-              ref={chatContainerRef}
-              className="px-4 lg:px-5 pt-5 lg:pt-[30px] pb-[10px] min-h-[500px] max-h-[500px] overflow-y-auto"
-            >
-              <div className="bg-[#FEECDC] rounded-[14px] relative pl-[50px] lg:pl-[60px] pr-[20px] lg:pr-[30px] py-[12px] mb-[30px] text-sm text-[#1E1E1E] max-w-[570px] mx-auto">
-                <div className="absolute top-1/2 left-[20px] lg:left-[20px] -translate-y-1/2">
-                  <CiLock color="#312E40" size={20} />
-                </div>
-                <span>Messages are end-to-end encrypted. No one outside of this chat can read or listen to them.</span>
-              </div>
-
-              {usermessage && usermessage?.map((item, index) => {
-                const isIncoming = item.sent_by !== selectedIdUser?.role;
-                return (
-                  <div className="mt-4 space-y-1" key={index}>
-                    {index === 0 || formatDate(item.createdAt) !== formatDate(usermessage[index - 1]?.createdAt) ? (
-                      <div className="text-center my-3">
-                        <span className=" py-1 tracking-[-0.06em] font-inter text-base text-[#7A7A7A]">
-                          {formatDate(item.createdAt)}
-                        </span>
-                      </div>
-                    ) : null}
-                    {isIncoming ? (
-                      <>
-                        <div className="flex justify-end">
-                          <div className="bg-[rgba(204,40,40,0.1)] px-4 lg:px-5 py-[12px] lg:py-[15px] rounded-bl-[10px] rounded-t-[10px] lg:rounded-t-[15px] lg:rounded-bl-[15px] max-w-[60%]">
-                            <p className="text-sm tracking-[-0.04em] font-inter text-[#535353] text-left">{item?.content}</p>
-                          </div>
-                        </div>
-
-                        {item?.createdAt && (
-                          <span className="tracking-[-0.04em] font-inter block text-[#535353] text-right text-sm  mt-2">
-                            {moment(item.createdAt).format(" hh:mm A")}
-                          </span>
-                        )}
-                      </>
-                    ) : (
-                      <>
-                        <div className="flex justify-start">
-                          <div className="bg-white  px-4 lg:px-5 py-[12px] lg:py-[15px] rounded-br-[10px] rounded-t-[10px] lg:rounded-t-[15px] lg:rounded-br-[15px] max-w-[60%]">
-                            <p className="text-sm tracking-[-0.04em] font-inter  text-[#535353] text-left">{item?.content}</p>
-                          </div>
-                        </div>
-
-                        {item?.createdAt && (
-                          <span className="tracking-[-0.04em] font-inter block text-[#535353] text-left text-sm mt-2">
-                            {moment(item.createdAt).format("hh:mm A")}
-                          </span>
-                        )}
-                      </>
-                    )}
+              {/* Chat Body */}
+              <div
+                ref={chatContainerRef}
+                className="px-4 lg:px-5 pt-5 lg:pt-[30px] pb-[10px] min-h-[500px] max-h-[500px] overflow-y-auto"
+              >
+                <div className="bg-[#FEECDC] rounded-[14px] relative pl-[50px] lg:pl-[60px] pr-[20px] lg:pr-[30px] py-[12px] mb-[30px] text-sm text-[#1E1E1E] max-w-[570px] mx-auto">
+                  <div className="absolute top-1/2 left-[20px] lg:left-[20px] -translate-y-1/2">
+                    <CiLock color="#312E40" size={20} />
                   </div>
-                );
-              })}
-            </div>
+                  <span>Messages are end-to-end encrypted. No one outside of this chat can read or listen to them.</span>
+                </div>
 
+                {usermessage && usermessage?.map((item, index) => {
+                  const isIncoming = item.sent_by !== selectedIdUser?.role;
+                  return (
+                    <div className="mt-4 space-y-1" key={index}>
+                      {index === 0 || formatDate(item.createdAt) !== formatDate(usermessage[index - 1]?.createdAt) ? (
+                        <div className="text-center my-3">
+                          <span className=" py-1 tracking-[-0.06em] font-inter text-base text-[#7A7A7A]">
+                            {formatDate(item.createdAt)}
+                          </span>
+                        </div>
+                      ) : null}
+                      {isIncoming ? (
+                        <>
+                          <div className="flex justify-end">
+                            <div className="bg-[rgba(204,40,40,0.1)] px-4 lg:px-5 py-[12px] lg:py-[15px] rounded-bl-[10px] rounded-t-[10px] lg:rounded-t-[15px] lg:rounded-bl-[15px] max-w-[60%]">
+                              <p className="text-sm tracking-[-0.04em] font-inter text-[#535353] text-left">{item?.content}</p>
+                            </div>
+                          </div>
 
-            {/* Chat Input */}
-            <form onSubmit={handleSendMessage}>
-              <div className="px-4 lg:px-5 py-3.5 lg:py-4 flex items-center gap-2 bg-[#e5e5e5]">
-                <input
-                  type="text"
-                  value={message}
-                  onChange={(e) => setMessage(e.target.value)}
-                  onKeyDown={(e) => {
-                    if (e.key === 'Enter' && !e.shiftKey) {
-                      e.preventDefault();
-                      handleSendMessage(e);
-                    }
-                  }}
-                  placeholder="Type a message..."
-                  className="w-full px-5 py-3 h-[50px] rounded-full border border-gray-200 focus:outline-none focus:ring-1 focus:ring-gray-400 bg-white"
-                />
-                <button
-                  type="submit"
-                  className="bg-[#CC2828] h-[50px] w-[50px] cursor-pointer text-white px-4 py-2 rounded-full hover:bg-[#ad0e0e] transition duration-200"
-                >
-                  <IoSend size={22} />
-                </button>
+                          {item?.createdAt && (
+                            <span className="tracking-[-0.04em] font-inter block text-[#535353] text-right text-sm  mt-2">
+                              {moment(item.createdAt).format(" hh:mm A")}
+                            </span>
+                          )}
+                        </>
+                      ) : (
+                        <>
+                          <div className="flex justify-start">
+                            <div className="bg-white  px-4 lg:px-5 py-[12px] lg:py-[15px] rounded-br-[10px] rounded-t-[10px] lg:rounded-t-[15px] lg:rounded-br-[15px] max-w-[60%]">
+                              <p className="text-sm tracking-[-0.04em] font-inter  text-[#535353] text-left">{item?.content}</p>
+                            </div>
+                          </div>
+
+                          {item?.createdAt && (
+                            <span className="tracking-[-0.04em] font-inter block text-[#535353] text-left text-sm mt-2">
+                              {moment(item.createdAt).format("hh:mm A")}
+                            </span>
+                          )}
+                        </>
+                      )}
+                    </div>
+                  );
+                })}
               </div>
-            </form>
-          </div>
+
+
+              {/* Chat Input */}
+              <form onSubmit={handleSendMessage}>
+                <div className="px-4 lg:px-5 py-3.5 lg:py-4 flex items-center gap-2 bg-[#e5e5e5]">
+                  <input
+                    type="text"
+                    value={message}
+                    onChange={(e) => setMessage(e.target.value)}
+                    onKeyDown={(e) => {
+                      if (e.key === 'Enter' && !e.shiftKey) {
+                        e.preventDefault();
+                        handleSendMessage(e);
+                      }
+                    }}
+                    placeholder="Type a message..."
+                    className="w-full px-5 py-3 h-[50px] rounded-full border border-gray-200 focus:outline-none focus:ring-1 focus:ring-gray-400 bg-white"
+                  />
+                  <button
+                    type="submit"
+                    className="bg-[#CC2828] h-[50px] w-[50px] cursor-pointer text-white px-4 py-2 rounded-full hover:bg-[#ad0e0e] transition duration-200"
+                  >
+                    <IoSend size={22} />
+                  </button>
+                </div>
+              </form>
+            </div>
+          )}
+          {/* Chat Panel */}
+
         </div>
       </>
     </TeacherLayout>

@@ -133,7 +133,7 @@ export default function Index() {
                                     required
                                 />
 
-                                <button
+                                {/* <button
                                     type="button"
                                     onClick={() => setShowNewPassword(!showNewPassword)}
                                     className="absolute top-1/2 cursor-pointer right-4 -translate-y-1/2"
@@ -143,7 +143,7 @@ export default function Index() {
                                     ) : (
                                         <IoEye size={24} className="text-gray-600" />
                                     )}
-                                </button>
+                                </button> */}
                             </div>
                         </div>
                         <div className='w-full md:w-6/12 px-2.5 mb-5'>
@@ -159,7 +159,7 @@ export default function Index() {
                                     required
                                 />
 
-                                <button
+                                {/* <button
                                     type="button"
                                     onClick={() => setShowConfirPassword(!showConfirPassword)}
                                     className="absolute top-1/2 cursor-pointer right-4 -translate-y-1/2"
@@ -169,7 +169,7 @@ export default function Index() {
                                     ) : (
                                         <IoEye size={24} className="text-gray-600" />
                                     )}
-                                </button>
+                                </button> */}
                             </div>
                         </div>
                         <div className='w-full md:w-4/12 px-2.5 mb-5'>

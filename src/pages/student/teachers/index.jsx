@@ -98,9 +98,9 @@ const handleRemoveSubmit = async (Id) => {
                     </div>
                   </div>
                   <div className="flex flex-row gap-2 justify-between">
-                    <button className="tracking-[-0.06em] font-inter font-medium px-6 md:px-10 lg:px-12 py-2 lg:py-2.5 text-[#CC2828] border border-[#CC2828] rounded-[10px] text-sm hover:bg-[#CC2828] hover:text-white cursor-pointer">                    
+                    <Link href={`/teacher/${teacher?._id}`} className="tracking-[-0.06em] font-inter font-medium px-6 md:px-10 lg:px-12 py-2 lg:py-2.5 text-[#CC2828] border border-[#CC2828] rounded-[10px] text-sm hover:bg-[#CC2828] hover:text-white cursor-pointer">                    
                       Book
-                    </button>
+                    </Link>
                     <Link href={`/student/message?query=${teacher?.userId?._id}`} className="tracking-[-0.06em] font-inter font-medium px-6 md:px-10 lg:px-12 py-2 lg:py-2.5 bg-[#CC2828] text-white rounded-[10px]  text-sm hover:bg-white hover:text-[#CC2828] border border-[#CC2828] cursor-pointer">
                       Message
                     </Link>

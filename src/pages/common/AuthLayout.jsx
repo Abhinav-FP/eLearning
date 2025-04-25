@@ -7,10 +7,12 @@ import { MdLogout } from "react-icons/md";
 import { IoSettingsOutline } from "react-icons/io5";
 import Listing from "@/pages/api/Listing";
 import { FaRegUser } from "react-icons/fa6";
+import { useRole } from "@/context/RoleContext";
 
 export default function AuthLayout({ children, page , sidebar }) {
     const [dropdownOpen, setDropdownOpen] = useState(false);
-    const [user, setUser] = useState("");
+    // const [user, setUser] = useState("");
+    const { setUser } = useRole();
     const router = useRouter();
     const handleLogout = () => {
       localStorage && localStorage.removeItem("token");
@@ -27,6 +29,7 @@ export default function AuthLayout({ children, page , sidebar }) {
       } catch (error) {
         console.log("error", error);
         localStorage?.removeItem("token");
+        setUser(null);
         router.push("/login");
         toast.error("Please log in first.");
       }
@@ -42,7 +45,7 @@ export default function AuthLayout({ children, page , sidebar }) {
   
     return (
       <div className="md:flex flex-wrap bg-black items-start">
-         {sidebar && sidebar(user)}
+         {sidebar}
         <div className="w-full lg:ml-[286px] lg:w-[calc(100%-286px)]">
           <div className="fixed right-0  z-10 pl-0 md:pl-5 lg:pl-[30px] top-0 w-full lg:w-[calc(100%-286px)] ">
             <div className="justify-between px-4 md:px-5 lg:px-[30px] py-3 lg:py-4 top-0 bg-white flex items-center w-full flex-wrap rounded-b-[10px]">

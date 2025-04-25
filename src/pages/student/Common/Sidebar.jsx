@@ -13,10 +13,12 @@ import { LuMessagesSquare } from "react-icons/lu";
 import { MdPayment } from "react-icons/md";
 import { IoSettingsOutline } from "react-icons/io5";
 import { MdOutlineRateReview } from "react-icons/md";
+import { useRole } from "@/context/RoleContext";
 
-function SideBar({ user }) {
+function SideBar() {
     const pathname = usePathname();
     const [isOpen, setIsOpen] = useState(false);
+    const { user } = useRole();
 
     return (
         <>
@@ -41,7 +43,9 @@ function SideBar({ user }) {
                     </button>}
 
                 <div className="px-3 md:px-4 lg:px-6 text-center py-6 lg:py-8">
-                    <Image src={Logo} alt="FriegtFlow Logo" className="h-[85px] w-[105px] mx-2 inline-block" />
+                    <Link href="/">
+                        <Image src={Logo} alt="FriegtFlow Logo" className="h-[85px] w-[105px] mx-2 inline-block" />
+                    </Link>
                 </div>
 
                 <div className="px-3 lg:px-4">

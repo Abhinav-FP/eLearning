@@ -2,6 +2,7 @@ import "@/styles/globals.css";
 import "./style.css";
 import "../styles/calendar.css";
 import { Toaster } from "react-hot-toast";
+import { RoleProvider } from "@/context/RoleContext";
 
 export default function App({ Component, pageProps }) {
   return <>
@@ -14,6 +15,8 @@ export default function App({ Component, pageProps }) {
         },
       }}
     />
-    <Component {...pageProps} />
+    <RoleProvider>
+     <Component {...pageProps} />
+    </RoleProvider>
   </>;
 }

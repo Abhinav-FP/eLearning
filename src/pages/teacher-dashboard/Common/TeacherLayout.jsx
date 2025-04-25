@@ -4,7 +4,7 @@ import SideBar from './Sidebar';
 
 export default function TeacherLayout({ children, page }) {
     return (
-        <AuthLayout sidebar={(user) => <SideBar user={user} />} page={page}>
+        <AuthLayout sidebar={<SideBar/>} page={page}>
           {children}
         </AuthLayout>
       );

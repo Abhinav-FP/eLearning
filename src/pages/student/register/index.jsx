@@ -55,7 +55,7 @@ export default function Index() {
             });
 
             if (response?.data?.status) {
-                router.push("/student/login")
+                router.push("/login")
                 toast.success(response.data.message);
                 setData({
                     email: "",
@@ -246,7 +246,7 @@ export default function Index() {
                 {/* Login Redirect */}
                 <p className="text-center text-base text-[#727272] mt-6 lg:mt-12 tracking-[-0.03em] font-medium">
                     Already have an account?{" "}
-                    <Link href="/student/login" className="text-[#CC2828] hover:underline">
+                    <Link href="/login" className="text-[#CC2828] hover:underline">
                         Log in.
                     </Link>
                 </p>

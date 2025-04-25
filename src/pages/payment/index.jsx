@@ -88,9 +88,6 @@ const Index = () => {
     <PayPalScriptProvider options={{ "client-id": "Acq8BOAgNmN-iAGdJDmqJj9t-5VN6pA5KCsqGqvxdkrLis0-CRIjDwqtsYZwNRZ4F5uYEQfkxm_zMOXk" }}>
       <div className="flex flex-col items-center">
         <h2 className="text-2xl font-semibold text-gray-800 mb-4">    Trial Lessons</h2>
-        <p>
-    
-        </p>
         <div className="w-full flex justify-between items-center text-lg font-bold mt-4 px-4 py-2 bg-gray-200 rounded-lg">
           <span>Total:</span>
           <span>${100}</span>

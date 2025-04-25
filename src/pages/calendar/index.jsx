@@ -6,6 +6,7 @@ const localizer = momentLocalizer(moment);
 // import "../../styles/calendar.css"
 import Popup from '../common/Popup';
 import PayPalButton from '../payment/index';
+import Stripe from '../stripe/Stripe';
 
 const Event = ({ event }) => {
     const formattedStartTime = moment(event.start).format('hh:mm A');
@@ -177,7 +178,9 @@ const Index = () => {
                     onClose={handleClosePopup}
                     size={'max-w-[510px]'}
                 >
+                 
                     <PayPalButton />
+                    <Stripe />
                 </Popup>
             )}
         </>

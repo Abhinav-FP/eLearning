@@ -97,7 +97,7 @@ export default function Login () {
                   required
                 />
 
-                <button
+                {/* <button
                   type="button"
                   onClick={() => setShowConfirPassword(!showConfirPassword)}
                   className="absolute top-1/2 cursor-pointer right-4 -translate-y-1/2"
@@ -107,7 +107,7 @@ export default function Login () {
                   ) : (
                     <IoEye size={24} className="text-gray-400" />
                   )}
-                </button>
+                </button> */}
               </div>
             </div>
 

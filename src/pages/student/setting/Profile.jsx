@@ -40,7 +40,10 @@ export default function Profile() {
     const handleSubmit = async (e) => {
         e.preventDefault();
         if (processing) return;
-
+        if(data?.phone?.length <10){
+            toast.error("Phone Number must be 10 digits long");
+            return;
+        }
         setProcessing(true);
         try {
             const main = new Listing();
@@ -51,11 +54,6 @@ export default function Profile() {
             });
             if (response?.data) {
                 toast.success(response.data.message);
-                setData({
-                    phone: "",
-                    name: "",
-                    email: "",
-                });
             } else {
                 toast.error(response.data.message);
             }
@@ -144,10 +142,17 @@ export default function Profile() {
                                 value={data?.phone}
                                 required
                                 name='phone'
-                                onChange={handleChange}
+                                onChange={(e) => {
+                                    if (
+                                      e.target.value.length <= 10 &&
+                                      /^[0-9]*$/.test(e.target.value)
+                                    ) {
+                                      handleChange(e);
+                                    }
+                                  }}
+                                  maxLength="10"
                                 className="w-full h-11 lg:h-[54px] font-medium appearance-none block bg-[#F4F6F8] text-[#46494D] text-base border border-[#F4F6F8] rounded-lg py-3 px-3 lg:px-6 leading-tight focus:outline-none  tracking-[-0.04em]"
                             />
-
                         </div>
                     </div>
                 </div>

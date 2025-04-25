@@ -5,9 +5,6 @@ import { FaEye, FaEyeSlash } from "react-icons/fa";
 
 export default function Password() {
     const [processing, setProcessing] = useState(false);
-    const [showCurrentPassword, setShowCurrentPassword] = useState(true);
-    const [showNewPassword, setShowNewPassword] = useState(true);
-    const [showConfirmPassword, setShowConfirmPassword] = useState(true);
     const [data, setData] = useState({
         current_password: "",
         new_password: "",
@@ -82,25 +79,13 @@ export default function Password() {
                         <div className="w-full lg:w-6/12 xl:w-5/12 lg:pl-3 relative">
                             <input
                                 required
-
-                                type={showCurrentPassword ? "password" : "text"}
+                                type="password"
                                 name="current_password"
                                 className={`w-full h-11 lg:h-[54px] font-medium appearance-none block bg-[#F4F6F8] text-[#46494D] text-base border border-[#F4F6F8] rounded-lg py-3 px-3 lg:px-6 leading-tight focus:outline-none 
                                `}
                                 value={data.current_password}
                                 onChange={handleChange}
                             />
-                            <button
-                                type="button"
-                                onClick={() => setShowCurrentPassword(!showCurrentPassword)}
-                                className="absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-500"
-                            >
-                                {showCurrentPassword ? (
-                                    <FaEyeSlash className='h-5 w-5 lg:h-6 lg:w-6' size={24} />
-                                ) : (
-                                    <FaEye className='h-5 w-5 lg:h-6 lg:w-6' size={24} />
-                                )}
-                            </button>
                         </div>
                     </div>
 
@@ -117,7 +102,7 @@ export default function Password() {
                         <div className="w-full lg:w-6/12 xl:w-5/12 lg:pl-3 relative">
                             <input
                                 required
-                                type={showNewPassword ? "password" : "text"}
+                                type="password"
                                 name="new_password"
                                 className={`w-full h-11 lg:h-[54px] font-medium appearance-none block bg-[#F4F6F8] text-[#46494D] text-base border border-[#F4F6F8] rounded-lg py-3 px-3 lg:px-6 leading-tight focus:outline-none 
                                  `}
@@ -125,18 +110,6 @@ export default function Password() {
                                 onChange={handleChange
                                 }
                             />
-                            <button
-                                type="button"
-                                onClick={() => setShowNewPassword(!showNewPassword)}
-                                className="absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-500"
-                            >
-                                {showNewPassword ? (
-                                    <FaEyeSlash className='h-5 w-5 lg:h-6 lg:w-6' size={24} />
-                                ) : (
-                                    <FaEye className='h-5 w-5 lg:h-6 lg:w-6' size={24} />
-                                )}
-                            </button>
-
                         </div>
                     </div>
 
@@ -152,28 +125,14 @@ export default function Password() {
                         </div>
                         <div className="w-full lg:w-6/12 xl:w-5/12 lg:pl-3 relative">
                             <input
-                                type={showConfirmPassword ? "password" : "text"}
+                                type="password"
                                 name="password_confirmation"
                                 className={`w-full h-11 lg:h-[54px] font-medium appearance-none block bg-[#F4F6F8] text-[#46494D] text-base border border-[#F4F6F8] rounded-lg py-3 px-3 lg:px-6 leading-tight focus:outline-none
                                 `}
                                 required
                                 value={data.password_confirmation}
-                                onChange={handleChange
-                                }
+                                onChange={handleChange}
                             />
-                            <button
-                                type="button"
-                                onClick={() =>
-                                    setShowConfirmPassword(!showConfirmPassword)
-                                }
-                                className="absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-500"
-                            >
-                                {showConfirmPassword ? (
-                                    <FaEyeSlash className='h-5 w-5 lg:h-6 lg:w-6' size={24} />
-                                ) : (
-                                    <FaEye className='h-5 w-5 lg:h-6 lg:w-6' size={24} />
-                                )}
-                            </button>
                         </div>
                     </div>
                 </div>
@@ -182,7 +141,7 @@ export default function Password() {
                         type='submit'
                         disabled={processing}
                     >
-                        {processing ? "Loading" : "Submit"}
+                        {processing ? "Submitting..." : "Submit"}
                     </button>
                 </div>
             </>

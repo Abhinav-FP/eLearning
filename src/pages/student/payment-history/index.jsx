@@ -6,6 +6,43 @@ import moment from 'moment';
 export default function Index() {
 
   const [payment, setPayment] = useState([]);
+  const payments=[
+    {
+      "orderId": "ORD123456",
+      "lessonName": "Intro to JavaScript",
+      "paymentTime": "2025-04-24T10:30:00Z",
+      "amount": 49.99,
+      "paymentStatus": "Success"
+    },
+    {
+      "orderId": "ORD123457",
+      "lessonName": "Advanced CSS Grid",
+      "paymentTime": "2025-04-23T14:15:00Z",
+      "amount": 29.99,
+      "paymentStatus": "Success"
+    },
+    {
+      "orderId": "ORD123458",
+      "lessonName": "React Fundamentals",
+      "paymentTime": "2025-04-22T09:45:00Z",
+      "amount": 59.99,
+      "paymentStatus": "Failed"
+    },
+    {
+      "orderId": "ORD123459",
+      "lessonName": "Node.js Crash Course",
+      "paymentTime": "2025-04-21T16:00:00Z",
+      "amount": 39.99,
+      "paymentStatus": "Success"
+    },
+    {
+      "orderId": "ORD123460",
+      "lessonName": "Full Stack Web Dev",
+      "paymentTime": "2025-04-20T18:20:00Z",
+      "amount": 99.99,
+      "paymentStatus": "Failed"
+    }
+  ];  
 
   const PaymentHistory = async () => {
     try {
@@ -55,14 +92,23 @@ export default function Index() {
               </tr>
             </thead>
             <tbody>
-              {payment && payment.map((item, index) => (
+              {/* {payment && payment.map((item, index) => (
                 <tr key={index} className="border-t hover:bg-[rgba(204,40,40,0.1)] border-t border-[rgba(204,40,40,0.2)]">
                   <td className="px-3 lg:px-4 py-2 lg:py-3 text-black text-sm lg:text-base font-medium font-inter ">{item.orderID}</td>
                   <td className="px-3 lg:px-4 py-2 lg:py-3 text-black text-sm lg:text-base font-medium font-inter ">{item.LessonId?.title}</td>
                   <td className="px-3 lg:px-4 py-2 lg:py-3 text-black text-sm lg:text-base font-medium font-inter ">{moment(item?.LessonId.createdAt).format("DD MMMM YYYY hh:mm A")}</td>
-                  {/* <td className="px-3 lg:px-4 py-2 lg:py-3 text-black text-sm lg:text-base font-medium font-inter ">{item.LessonId.duration}</td> */}
                   <td className="px-3 lg:px-4 py-2 lg:py-3 text-black text-sm lg:text-base font-medium font-inter ">${item.amount}</td>
                   <td className="px-3 lg:px-4 py-2 lg:py-3 text-black text-sm lg:text-base font-medium font-inter ">{item.status}</td>
+                </tr>
+              ))} */}
+              {/* Mapping random data for client update */}
+              {payments && payments.map((item, index) => (
+                <tr key={index} className="hover:bg-[rgba(204,40,40,0.1)] border-t border-[rgba(204,40,40,0.2)]">
+                  <td className="px-3 lg:px-4 py-2 lg:py-3 text-black text-sm lg:text-base font-medium font-inter ">{item.orderId}</td>
+                  <td className="px-3 lg:px-4 py-2 lg:py-3 text-black text-sm lg:text-base font-medium font-inter ">{item.lessonName}</td>
+                  <td className="px-3 lg:px-4 py-2 lg:py-3 text-black text-sm lg:text-base font-medium font-inter ">{moment(item?.paymentTime).format("DD MMMM YYYY hh:mm A")}</td>
+                  <td className="px-3 lg:px-4 py-2 lg:py-3 text-black text-sm lg:text-base font-medium font-inter ">${item.amount}</td>
+                  <td className="px-3 lg:px-4 py-2 lg:py-3 text-black text-sm lg:text-base font-medium font-inter ">{item.paymentStatus}</td>
                 </tr>
               ))}
             </tbody>

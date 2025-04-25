@@ -12,8 +12,8 @@ export default function FindCource({pargraph ,title}) {
                         <div className="flex flex-wrap -mx-4 items-center space-y-5">
                             <div className="w-full md:w-5/12 px-4 ">
                                 <div className='max-w-[372px]'>
-                                    <Heading classess={'text-white mb-2'} title={title} />
-                                    <p className='text-base font-normal text-[#F8F9FA] -tracking-[0.03em] mb-6 md:mb-8 lg:mb-10'>
+                                    <Heading classess={'text-center sm:text-left text-white mb-2'} title={title} />
+                                    <p className='text-center sm:text-left text-base font-normal text-[#F8F9FA] -tracking-[0.03em] mb-6 md:mb-8 lg:mb-10'>
                                       {pargraph}
                                     </p>
                                     <Button classes={'text-[#CC2828] text-base bg-white w-full py-3 md:py-3.5'} title={'Search Courses'} />

@@ -46,9 +46,9 @@ export default function Header() {
                         <div className="flex-shrink-0">
                             <Link href="/">
                                 <Image
-                                    className="max-w-[81px] h-[69px]"
-                                    height={1000}
-                                    width={1000}
+                                    className="max-w-fit h-[69px]"
+                                    height={75}
+                                    width={94}
                                     layout="fixed"
                                     src={Logo}
                                     alt="Japanese Logo"

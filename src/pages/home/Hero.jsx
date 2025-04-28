@@ -13,12 +13,12 @@ export default function Hero({ title }) {
                             <div className="flex flex-col gap-[44px] lg:pr-[50px] ">
                                 <div className="w-fulk flex justify-start relative">
                                     <Image src={HeroImg1} width={500} height={256} alt="hero banner" />
-                                    <div className="animate-pulse-circle border-[10px] border-[#16C7F8] w-[76px] h-[76px] absolute right-56 bottom-1 rounded-full animate-pulse-slow"></div>
+                                    <div className="border-[10px] border-[#16C7F8] w-[76px] h-[76px] absolute right-56 bottom-1 rounded-full"></div>
                                 </div>
                                 <div className="w-fulk flex justify-end relative">
                                     <Image src={HeroImg2} width={480} height={264} alt="hero banner" />
-                                    <div className="animate-float-circle border-[10px] border-[#CC2828] w-[66px] h-[66px] absolute left-5 -top-5 rounded-full animate-float"></div>
-                                    <div className="animate-pulse-circle border-[10px] border-[#FF5816] w-[48px] h-[48px] absolute left-56 -bottom-6  lg:-bottom-15 rounded-full animate-rotate-slow"></div>
+                                    <div className="border-[10px] border-[#CC2828] w-[66px] h-[66px] absolute left-5 -top-5 rounded-full"></div>
+                                    <div className="border-[10px] border-[#FF5816] w-[48px] h-[48px] absolute left-56 -bottom-6  lg:-bottom-15 rounded-full"></div>
                                 </div>
 
                             </div>

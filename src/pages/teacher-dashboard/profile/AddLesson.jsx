@@ -20,7 +20,7 @@ export default function AddLesson({ isOpen, onClose, data, getLessons }) {
     }));
   };
 
-  const handleAdd = async(e) => {
+  const handleAdd = async (e) => {
     e.preventDefault();
     if (loading) return;
     setLoading(true);
@@ -54,13 +54,13 @@ export default function AddLesson({ isOpen, onClose, data, getLessons }) {
     setLoading(false);
   };
 
-  const handleUpdate = async(e) => {
+  const handleUpdate = async (e) => {
     e.preventDefault();
     if (loading) return;
     setLoading(true);
     try {
       const main = new Listing();
-      const response = await main.LessonUpdate(data?._id,{
+      const response = await main.LessonUpdate(data?._id, {
         title: formData?.title,
         description: formData?.description,
         duration: formData?.duration,
@@ -87,14 +87,15 @@ export default function AddLesson({ isOpen, onClose, data, getLessons }) {
     setLoading(false);
   };
 
-  useEffect(()=>{
-      setFormData({
-        title: data?.title || "",
-        description: data?.description || "",
-        price: data?.price || "",
-        duration: data?.duration || "",
-      });
-  },[data])
+  useEffect(() => {
+    setFormData({
+      title: data?.title || "",
+      description: data?.description || "",
+      price: data?.price || "",
+      duration: data?.duration || "",
+    });
+  }, [data]);
+  console.log("data",data);
 
   return (
     <Popup isOpen={isOpen} onClose={onClose} size={"max-w-[510px]"}>
@@ -103,7 +104,7 @@ export default function AddLesson({ isOpen, onClose, data, getLessons }) {
         className="max-w-md mx-auto mt-10 px-3 sm:px-6 pb-3 sm:pb-6 bg-white space-y-2 sm:space-y-4"
       >
         <h2 className="text-2xl font-bold text-center text-[#CC2828]">
-          Add lesson
+          {data ? "Edit Lesson" : "Add lesson"}
         </h2>
         {/* Title Field */}
         <div>
@@ -133,7 +134,9 @@ export default function AddLesson({ isOpen, onClose, data, getLessons }) {
         </div>
         {/* Price Field */}
         <div>
-          <label className="block text-[#CC2828] font-medium mb-1">Price (In USD)</label>
+          <label className="block text-[#CC2828] font-medium mb-1">
+            Price (In USD)
+          </label>
           <input
             type="text"
             name="price"
@@ -148,38 +151,83 @@ export default function AddLesson({ isOpen, onClose, data, getLessons }) {
           <label className="block text-[#CC2828] font-medium mb-1">
             Duration
           </label>
-          <input
-            type="text"
-            name="duration"
-            value={formData.duration}
-            onChange={handleChange}
-            placeholder="Enter duration"
-            className="w-full p-3 rounded-md bg-gray-100 text-gray-700 focus:outline-none focus:ring-2 focus:ring-[#CC2828]"
-          />
+
+          <div className="flex flex-col space-y-2">
+            <label className="flex items-center space-x-2">
+              <input
+                type="radio"
+                name="duration"
+                value="30"
+                checked={formData.duration == "30"}
+                onChange={handleChange}
+              />
+              <span>30 minutes</span>
+            </label>
+
+            <label className="flex items-center space-x-2">
+              <input
+                type="radio"
+                name="duration"
+                value="50"
+                checked={formData.duration == "50"}
+                onChange={handleChange}
+              />
+              <span>50 minutes</span>
+            </label>
+
+            <label className="flex items-center space-x-2">
+              <input
+                type="radio"
+                name="duration"
+                value="custom"
+                checked={
+                  formData.duration != "30" && formData.duration != "50"
+                }
+                onChange={() =>
+                  handleChange({ target: { name: "duration", value: "" } })
+                }
+              />
+              <span>Custom:</span>
+              <input
+                type="text"
+                name="duration"
+                value={
+                  formData.duration != "30" && formData.duration != "50"
+                    ? formData.duration
+                    : ""
+                }
+                onChange={handleChange}
+                placeholder="Enter duration"
+                className="ml-2 p-2 rounded-md bg-gray-100 text-gray-700 focus:outline-none focus:ring-2 focus:ring-[#CC2828]"
+              />
+            </label>
+          </div>
         </div>
+
         {/* Action Buttons */}
         <div className="flex justify-between gap-4 mt-6">
-          {data ?
+          {data ? (
             <button
-            type="submit"
-            className="cursor-pointer flex-1 bg-red-600 text-white py-2 rounded-md hover:bg-red-700"
-          >
-            {loading ? "Updating..." : "Update"}
-          </button>
-           :
+              type="submit"
+              className="cursor-pointer flex-1 bg-red-600 text-white py-2 rounded-md hover:bg-red-700"
+            >
+              {loading ? "Updating..." : "Update"}
+            </button>
+          ) : (
             <button
               type="submit"
               className="cursor-pointer flex-1 bg-red-600 text-white py-2 rounded-md hover:bg-red-700"
             >
               {loading ? "Adding..." : "Add"}
-            </button>}
-            <button
-              type="button"
-              onClick={onClose}
-              className="cursor-pointer flex-1 border border-red-600 text-red-600 py-2 rounded-md hover:bg-red-50"
-            >
-              Cancel
             </button>
+          )}
+          <button
+            type="button"
+            onClick={onClose}
+            className="cursor-pointer flex-1 border border-red-600 text-red-600 py-2 rounded-md hover:bg-red-50"
+          >
+            Cancel
+          </button>
         </div>
       </form>
     </Popup>

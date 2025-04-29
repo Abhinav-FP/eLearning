@@ -96,6 +96,10 @@ class Listing extends Component {
     return Api.post(`/lesson/add`, data);
   }
 
+  async deleteLesson(id){
+    return Api.delete(`/lesson/delete/${id}`);
+  }
+
   async LessonUpdate(id,data){
     return Api.put(`/lesson/update/${id}`, data);
   }

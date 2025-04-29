@@ -3,12 +3,17 @@ import TeacherLayout from "../Common/TeacherLayout";
 import { MdEditSquare } from "react-icons/md";
 import AddLesson from "./AddLesson";
 import Listing from "@/pages/api/Listing";
+import { RiDeleteBin6Line } from "react-icons/ri";
+import Delete from "./Delete";
 
 export default function Index() {
   const [data, setData]=useState([]);
   const [editData, setEditData]=useState(null);
+  const [id, setId]=useState(null);
   const [isLessonOpen, setIsLessonOpen] = useState(false);
   const closeLesson = () => setIsLessonOpen(false);
+  const [isDeleteOpen, setIsDeleteOpen] = useState(false);
+  const closeDelete = () => setIsDeleteOpen(false);
 
   const getLessons=()=>{
     const main = new Listing();
@@ -38,6 +43,12 @@ export default function Index() {
           <div className="flex items-center gap-2">
             <h3 className="text-lg font-bold text-[#CC2828]">{item?.title || ""}</h3>
             <MdEditSquare size={16} className="text-[#CC2828] cursor-pointer" onClick={()=>{handleEdit(item)}}/>
+             <RiDeleteBin6Line size={18} className="text-red-600 hover:text-red-700 cursor-pointer" 
+              onClick={()=>{
+                setId(item?._id);
+                setIsDeleteOpen(true);
+              }}
+             />
           </div>
           <div className="flex items-center text-yellow-400 text-sm mt-1">
             ★★★★☆ (29)
@@ -124,6 +135,12 @@ export default function Index() {
         onClose={closeLesson}
         data={editData}
         getLessons={getLessons}
+      />
+      <Delete
+        isOpen={isDeleteOpen}
+        onClose={closeDelete}
+        getLessons={getLessons}
+        Id={id}
       />
     </TeacherLayout>
   );

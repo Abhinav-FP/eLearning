@@ -96,12 +96,12 @@ export default function Index() {
             <div className="bg-white px-6 lg:px-16 pt-5 pb-10 lg:pb-20  rounded-[20px] md:rounded-[20px] lg:rounded-[40px] shadow lg:shadow-lg w-full max-w-[976px] login_custom">
                 {/* Logo */}
                 <div className="flex justify-center mb-6">
-                   <Link href="/"><Image src={Logo} alt="Japanse for me" /></Link>
+                   <Link href="/"><Image src={Logo} alt="Japanese for me" /></Link>
                 </div>
 
                 {/* Heading */}
-                <h2 className="text-center text-red-600 text-2xl font-semibold mb-8">
-                    REGISTER
+                <h2 className="text-center uppercase text-red-600 text-2xl font-semibold mb-8">
+                   Register as a Teacher
                 </h2>
 
                 {/* Form Fields */}

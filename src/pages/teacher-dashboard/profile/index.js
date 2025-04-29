@@ -1,14 +1,15 @@
-import React from "react";
+import React, { useState } from "react";
 import TeacherLayout from "../Common/TeacherLayout";
 import { MdEditSquare } from "react-icons/md";
+import AddLesson from "./AddLesson";
 
 const LessonCard = () => {
   return (
     <div className="bg-white shadow-md rounded-2xl flex justify-between items-center p-4 mb-4">
       <div>
         <div className="flex items-center gap-2">
-          <h3 className="text-lg font-bold text-red-700">Trial Lesson</h3>
-          <MdEditSquare size={16} className="text-red-500 cursor-pointer" />
+          <h3 className="text-lg font-bold text-[#CC2828]">Trial Lesson</h3>
+          <MdEditSquare size={16} className="text-[#CC2828] cursor-pointer" />
         </div>
         <div className="flex items-center text-yellow-400 text-sm mt-1">
           ★★★★☆ (29)
@@ -18,8 +19,8 @@ const LessonCard = () => {
           Feedback & Next Steps
         </p>
       </div>
-      <div className="text-right">
-        <div className="bg-red-100 text-red-600 font-bold p-2 rounded-full">
+      <div className="text-center sm:text-right">
+        <div className="bg-red-100 text-[#CC2828] font-bold p-2 rounded-full">
           USD $20.00
         </div>
       </div>
@@ -28,6 +29,8 @@ const LessonCard = () => {
 };
 
 export default function Index() {
+  const [isLessonOpen, setIsLessonOpen] = useState(false);
+  const closeLesson = () => setIsLessonOpen(false);
   return (
     <TeacherLayout page={"Profile"}>
       <div className="min-h-screen p-5 lg:p-[30px]">
@@ -82,12 +85,19 @@ export default function Index() {
           </div>
 
           {/* <div className=" mt-6"> */}
-            <button className="bg-[#CC2828] hover:bg-red-600 mt-6 text-white px-6 py-2 rounded font-bold">
+            <button className="bg-[#CC2828] hover:bg-red-600 mt-6 text-white px-8 py-3 rounded font-bold cursor-pointer"
+            onClick={()=>{
+              setIsLessonOpen(true);
+            }}>
               Add Lesson
             </button>
           {/* </div> */}
         </section>
       </div>
+      <AddLesson
+        isOpen={isLessonOpen}
+        onClose={closeLesson}
+      />
     </TeacherLayout>
   );
 }

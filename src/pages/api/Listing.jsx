@@ -92,6 +92,18 @@ class Listing extends Component {
     return Api.get(`/payment/payment-cancel/${data}`);
   }
 
+  async LessonAdd(data){
+    return Api.post(`/lesson/add`, data);
+  }
+
+  async LessonUpdate(id,data){
+    return Api.put(`/lesson/update/${id}`, data);
+  }
+
+  async TeacherLessonGet(){
+    return Api.get(`/teacher/lesson/get`);
+  }
+
   render() {
     return (
       <div>

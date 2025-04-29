@@ -1,36 +1,60 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import TeacherLayout from "../Common/TeacherLayout";
 import { MdEditSquare } from "react-icons/md";
 import AddLesson from "./AddLesson";
-
-const LessonCard = () => {
-  return (
-    <div className="bg-white shadow-md rounded-2xl flex justify-between items-center p-4 mb-4">
-      <div>
-        <div className="flex items-center gap-2">
-          <h3 className="text-lg font-bold text-[#CC2828]">Trial Lesson</h3>
-          <MdEditSquare size={16} className="text-[#CC2828] cursor-pointer" />
-        </div>
-        <div className="flex items-center text-yellow-400 text-sm mt-1">
-          ★★★★☆ (29)
-        </div>
-        <p className="text-xs text-gray-600 mt-2">
-          Introduction & Goal Setting, Brief Language Assessment, Personalized
-          Feedback & Next Steps
-        </p>
-      </div>
-      <div className="text-center sm:text-right">
-        <div className="bg-red-100 text-[#CC2828] font-bold p-2 rounded-full">
-          USD $20.00
-        </div>
-      </div>
-    </div>
-  );
-};
+import Listing from "@/pages/api/Listing";
 
 export default function Index() {
+  const [data, setData]=useState([]);
+  const [editData, setEditData]=useState(null);
   const [isLessonOpen, setIsLessonOpen] = useState(false);
   const closeLesson = () => setIsLessonOpen(false);
+
+  const getLessons=()=>{
+    const main = new Listing();
+    main.TeacherLessonGet()
+      .then((r) => {
+        console.log("r",r?.data);
+        setData(r?.data?.data);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  }
+
+  useEffect(() => {
+    getLessons();
+  }, []);
+
+  const handleEdit=(item)=>{
+    setEditData(item);
+    setIsLessonOpen(true);    
+  }
+
+  const LessonCard = ({item}) => {
+    return (
+      <div className="bg-white shadow-md rounded-2xl flex justify-between items-center p-4 mb-4">
+        <div>
+          <div className="flex items-center gap-2">
+            <h3 className="text-lg font-bold text-[#CC2828]">{item?.title || ""}</h3>
+            <MdEditSquare size={16} className="text-[#CC2828] cursor-pointer" onClick={()=>{handleEdit(item)}}/>
+          </div>
+          <div className="flex items-center text-yellow-400 text-sm mt-1">
+            ★★★★☆ (29)
+          </div>
+          <p className="text-xs text-gray-600 mt-2">
+            {item?.description || ""}
+          </p>
+        </div>
+        <div className="text-center sm:text-right">
+          <div className="bg-red-100 text-[#CC2828] font-bold p-2 rounded-full">
+            {item?.price ? `USD $${item?.price}` : ""}
+          </div>
+        </div>
+      </div>
+    );
+  };
+
   return (
     <TeacherLayout page={"Profile"}>
       <div className="min-h-screen p-5 lg:p-[30px]">
@@ -79,14 +103,15 @@ export default function Index() {
         <section className="mt-10">
           <h2 className="text-xl font-bold text-red-700 mb-4">Lessons</h2>
           <div className="space-y-4">
-            <LessonCard />
-            <LessonCard />
-            <LessonCard />
+            {data && data?.map((item,index)=>(
+              <LessonCard key={index} item={item} />
+            ))}
           </div>
 
           {/* <div className=" mt-6"> */}
             <button className="bg-[#CC2828] hover:bg-red-600 mt-6 text-white px-8 py-3 rounded font-bold cursor-pointer"
             onClick={()=>{
+              setEditData(null);
               setIsLessonOpen(true);
             }}>
               Add Lesson
@@ -97,6 +122,8 @@ export default function Index() {
       <AddLesson
         isOpen={isLessonOpen}
         onClose={closeLesson}
+        data={editData}
+        getLessons={getLessons}
       />
     </TeacherLayout>
   );

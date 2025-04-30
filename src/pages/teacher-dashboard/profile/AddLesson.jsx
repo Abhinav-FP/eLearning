@@ -116,6 +116,7 @@ export default function AddLesson({ isOpen, onClose, data, getLessons }) {
             onChange={handleChange}
             placeholder="Enter title"
             className="w-full p-3 rounded-md bg-gray-100 text-gray-700 focus:outline-none focus:ring-2 focus:ring-[#CC2828]"
+            required
           />
         </div>
         {/* Description Field */}
@@ -130,6 +131,7 @@ export default function AddLesson({ isOpen, onClose, data, getLessons }) {
             onChange={handleChange}
             placeholder="Enter description"
             className="w-full p-3 rounded-md bg-gray-100 text-gray-700 focus:outline-none focus:ring-2 focus:ring-[#CC2828]"
+            required
           />
         </div>
         {/* Price Field */}
@@ -160,6 +162,7 @@ export default function AddLesson({ isOpen, onClose, data, getLessons }) {
                 value="30"
                 checked={formData.duration == "30"}
                 onChange={handleChange}
+                required
               />
               <span>30 minutes</span>
             </label>

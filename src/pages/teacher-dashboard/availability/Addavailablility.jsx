@@ -1,99 +1,90 @@
 import Listing from '@/pages/api/Listing';
-import React, { useState } from 'react'
+import Popup from '@/pages/common/Popup';
+import React, { useEffect, useState } from 'react'
 
-export default function Addavailablility({isOpen, onClose, data, getLessons }) {
-    const [loading, setLoading] = useState(false);
-      const [formData, setFormData] = useState({
-        title: "",
-        description: "",
-        price: "",
-        duration: "",
+export default function Addavailablility({ isOpen, onClose, data, getLessons }) {
+  const [loading, setLoading] = useState(false);
+  const [formData, setFormData] = useState({
+    startDateTime: "",
+    endDateTime: "",
+  });
+
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setFormData((prev) => ({
+      ...prev,
+      [name]: value,
+    }));
+  };
+
+  const handleAdd = async (e) => {
+    e.preventDefault();
+    if (loading) return;
+    setLoading(true);
+    try {
+      const main = new Listing();
+      const response = await main.AddAvailablility({
+        startDateTime: formData?.startDateTime,
+        endDateTime: formData?.endDateTime,
       });
-    
-      const handleChange = (e) => {
-        const { name, value } = e.target;
-        setFormData((prev) => ({
-          ...prev,
-          [name]: value,
-        }));
-      };
-    
-      const handleAdd = async (e) => {
-        e.preventDefault();
-        if (loading) return;
-        setLoading(true);
-        try {
-          const main = new Listing();
-          const response = await main.AddAvailablility({
-            title: formData?.title,
-            description: formData?.description,
-            duration: formData?.duration,
-            price: formData?.price,
-          });
-    
-          if (response?.data?.status) {
-            toast.success(response.data.message);
-            setFormData({
-              title: "",
-              description: "",
-              price: "",
-              duration: "",
-            });
-            getLessons();
-            onClose();
-          } else {
-            toast.error(response.data.message);
-          }
-        } catch (error) {
-          console.error("API error:", error);
-          toast.error(error?.response?.data?.message || "Something went wrong!");
-          setLoading(false);
-        }
-        setLoading(false);
-      };
-    
-      const handleUpdate = async (e) => {
-        e.preventDefault();
-        if (loading) return;
-        setLoading(true);
-        try {
-          const main = new Listing();
-          const response = await main.LessonUpdate(data?._id, {
-            title: formData?.title,
-            description: formData?.description,
-            duration: formData?.duration,
-            price: formData?.price,
-          });
-          if (response?.data?.status) {
-            toast.success(response.data.message);
-            setFormData({
-              title: "",
-              description: "",
-              price: "",
-              duration: "",
-            });
-            getLessons();
-            onClose();
-          } else {
-            toast.error(response.data.message);
-          }
-        } catch (error) {
-          console.error("API error:", error);
-          toast.error(error?.response?.data?.message || "Something went wrong!");
-          setLoading(false);
-        }
-        setLoading(false);
-      };
-    
-      useEffect(() => {
+
+      if (response?.data?.status) {
+        toast.success(response.data.message);
         setFormData({
-          title: data?.title || "",
-          description: data?.description || "",
-          price: data?.price || "",
-          duration: data?.duration || "",
+          startDateTime: "",
+          endDateTime: "",
         });
-      }, [data]);
-      console.log("data",data);
+        getLessons();
+        onClose();
+      } else {
+        toast.error(response.data.message);
+      }
+    } catch (error) {
+      console.error("API error:", error);
+      toast.error(error?.response?.data?.message || "Something went wrong!");
+      setLoading(false);
+    }
+    setLoading(false);
+  };
+
+  const handleUpdate = async (e) => {
+    e.preventDefault();
+    if (loading) return;
+    setLoading(true);
+    try {
+      const main = new Listing();
+      const response = await main.LessonUpdate(data?._id, {
+        endDateTime: formData?.endDateTime,
+        startDateTime: formData?.startDateTime,
+      });
+      if (response?.data?.status) {
+        toast.success(response.data.message);
+        setFormData({
+          endDateTime: "",
+          startDateTime: "",
+        });
+        getLessons();
+        onClose();
+      } else {
+        toast.error(response.data.message);
+      }
+    } catch (error) {
+      console.error("API error:", error);
+      toast.error(error?.response?.data?.message || "Something went wrong!");
+      setLoading(false);
+    }
+    setLoading(false);
+  };
+
+  useEffect(() => {
+    setFormData({
+      title: data?.title || "",
+      description: data?.description || "",
+      price: data?.price || "",
+      duration: data?.duration || "",
+    });
+  }, [data]);
+  console.log("data", data);
   return (
     <Popup isOpen={isOpen} onClose={onClose} size={"max-w-[510px]"}>
       <form
@@ -101,17 +92,17 @@ export default function Addavailablility({isOpen, onClose, data, getLessons }) {
         className="max-w-md mx-auto mt-10 px-3 sm:px-6 pb-3 sm:pb-6 bg-white space-y-2 sm:space-y-4"
       >
         <h2 className="text-2xl font-bold text-center text-[#CC2828]">
-          {data ? "Edit Lesson" : "Add lesson"}
+          {data ? "Edit Availability" : "Add Availability"}
         </h2>
         {/* Title Field */}
         <div>
-          <label className="block text-[#CC2828] font-medium mb-1">Title</label>
+          <label className="block text-[#CC2828] font-medium mb-1">Start Date and time</label>
           <input
-            type="text"
-            name="title"
-            value={formData.title}
+            type="datetime-local"
+            name="startDateTime"
+            value={formData.startDateTime}
             onChange={handleChange}
-            placeholder="Enter title"
+            placeholder="Enter start date and time"
             className="w-full p-3 rounded-md bg-gray-100 text-gray-700 focus:outline-none focus:ring-2 focus:ring-[#CC2828]"
             required
           />
@@ -119,91 +110,18 @@ export default function Addavailablility({isOpen, onClose, data, getLessons }) {
         {/* Description Field */}
         <div>
           <label className="block text-[#CC2828] font-medium mb-1">
-            Description
+          End Date and time
           </label>
           <input
-            type="text"
-            name="description"
-            value={formData.description}
+            type="datetime-local"
+            name="endDateTime"
+            value={formData.endDateTime}
             onChange={handleChange}
             placeholder="Enter description"
             className="w-full p-3 rounded-md bg-gray-100 text-gray-700 focus:outline-none focus:ring-2 focus:ring-[#CC2828]"
             required
           />
         </div>
-        {/* Price Field */}
-        <div>
-          <label className="block text-[#CC2828] font-medium mb-1">
-            Price (In USD)
-          </label>
-          <input
-            type="text"
-            name="price"
-            value={formData.price}
-            onChange={handleChange}
-            placeholder="Enter price"
-            className="w-full p-3 rounded-md bg-gray-100 text-gray-700 focus:outline-none focus:ring-2 focus:ring-[#CC2828]"
-          />
-        </div>
-        {/* Duration Field */}
-        <div>
-          <label className="block text-[#CC2828] font-medium mb-1">
-            Duration
-          </label>
-
-          <div className="flex flex-col space-y-2">
-            <label className="flex items-center space-x-2">
-              <input
-                type="radio"
-                name="duration"
-                value="30"
-                checked={formData.duration == "30"}
-                onChange={handleChange}
-                required
-              />
-              <span>30 minutes</span>
-            </label>
-
-            <label className="flex items-center space-x-2">
-              <input
-                type="radio"
-                name="duration"
-                value="50"
-                checked={formData.duration == "50"}
-                onChange={handleChange}
-              />
-              <span>50 minutes</span>
-            </label>
-
-            <label className="flex items-center space-x-2">
-              <input
-                type="radio"
-                name="duration"
-                value="custom"
-                checked={
-                  formData.duration != "30" && formData.duration != "50"
-                }
-                onChange={() =>
-                  handleChange({ target: { name: "duration", value: "" } })
-                }
-              />
-              <span>Custom:</span>
-              <input
-                type="text"
-                name="duration"
-                value={
-                  formData.duration != "30" && formData.duration != "50"
-                    ? formData.duration
-                    : ""
-                }
-                onChange={handleChange}
-                placeholder="Enter duration"
-                className="ml-2 p-2 rounded-md bg-gray-100 text-gray-700 focus:outline-none focus:ring-2 focus:ring-[#CC2828]"
-              />
-            </label>
-          </div>
-        </div>
-
         {/* Action Buttons */}
         <div className="flex justify-between gap-4 mt-6">
           {data ? (

@@ -108,6 +108,19 @@ class Listing extends Component {
     return Api.get(`/teacher/lesson/get`);
   }
 
+
+  async AvailabilityAdd(data){
+    return Api.post(`/teacher/availability/add`, data);
+  }
+
+  async deleteAvailability(id){
+    return Api.delete(`/teacher/availability/delete/${id}`);
+  }
+
+  async LessonAvailability(id,data){
+    return Api.put(`/teacher/availability/update/${id}`, data);
+  }
+
   render() {
     return (
       <div>

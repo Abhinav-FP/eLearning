@@ -14,7 +14,7 @@ import Listing from "../api/Listing";
 export default function Index() {
     const router = useRouter();
     const { slug } = router.query;
-    const [data,setdata]=useState([]);
+    const [data, setdata] = useState([]);
 
     const fetchData = async (slug) => {
         try {
@@ -24,16 +24,35 @@ export default function Index() {
                 setdata(response.data.data);
             }
         } catch (error) {
-            console.log("error", error);  
+            console.log("error", error);
+        }
+    };
+
+    const [content, setContent] = useState("")
+    const Id = data?.userId?._id
+    const fetchAvailabilitys = async (Id) => {
+        try {
+            const main = new Listing();
+            const response = await main.studentteacherAvaliability(Id);
+            console.log("response", response)
+            if (response.data) {
+                setContent(response.data.data);
+            }
+        } catch (error) {
+            console.log("error", error);
         }
     };
 
     useEffect(() => {
-        if(slug){
+        if (slug) {
             fetchData(slug);
         }
-    }, [slug]);
-    console.log("data",data);
+        if (Id) {
+            fetchAvailabilitys(Id)
+        }
+    }, [slug, Id]);
+    console.log("data", data);
+    console.log("content" ,content)
 
     return (
         <>
@@ -43,19 +62,13 @@ export default function Index() {
                         <div className="bg-[rgba(204,40,40,0.8)] rounded-[20px] py-6 lg:py-[30px] px-6 md:px-[30px] lg:px-[30px] xl:px-[45px]">
                             <div className="flex flex-wrap -mx-4 space-y-4">
                                 <div className="mx-auto md:mx-0 w-[280px] md:w-[280px] lg:w-[308px] px-4">
-                                    {/* <div className="relative">
-                                        <Image className="rounded-[10px]" src={data?.profile_photo || teacherImg} alt={data?.userId?.name || "teacher"} height={276} width={276} />
-                                         <button className="absolute top-1/2  cursor-pointer left-0 w-[81px] text-center text-white hover:text-[#CC2828] right-0 mx-auto -translate-y-1/2">
-                                            <MdOutlinePlayCircle size={81} />
-                                        </button>
-                                    </div> */}
-                                    <VideoModalPlayer video={data?.intro_video} 
-                                        image={data?.profile_photo || teacherImg} 
-                                        name={data?.userId?.name} 
+                                    <VideoModalPlayer video={data?.intro_video}
+                                        image={data?.profile_photo || teacherImg}
+                                        name={data?.userId?.name}
                                         divClass="relative"
                                         imgClass="rounded-[10px] h-[276px] w-[276px]"
                                         btnClass="absolute top-1/2  cursor-pointer left-0 w-[81px] text-center text-white hover:text-[#CC2828] right-0 mx-auto -translate-y-1/2"
-                                        />
+                                    />
                                 </div>
                                 <div className="w-full md:w-[calc(100%-280px)] lg:w-[calc(100%-308px)] px-4">
                                     <div className="relative after:right-0 after:top-2 after:bottom-2 after:width-[1px] after-bg-white">
@@ -72,8 +85,8 @@ export default function Index() {
                 <LessonList />
                 <div className="pt-[40px md:pt-[60px] md:pt-[80px] xl:pt-[100px] pb-[40px] lg:pb-[60px] bg-[#F8F9FA]">
                     <div className="container sm:container md:container lg:container xl:max-w-[1230px]  px-4 mx-auto">
-                        <Heading classess={'text-[#1E1E1E] mg-6 lg:mb-8'} title={'Availability'} />
-                        <Calendar />
+                        <Heading classess={'text-[#1E1E1E] mg-6 lg:mb-8'} title={'Availabilitys'} />
+                        <Calendar Availability={content} />
                     </div>
 
                 </div>

@@ -26,66 +26,28 @@ const Event = ({ event }) => {
         </div>
     );
 };
-const Index = () => {
+const Index = ({Availability}) => {
     const [events, setEvents] = useState([]);
     const [selectedSlot, setSelectedSlot] = useState(null);
     const [isPopupOpen, setIsPopupOpen] = useState(false);
 
-    useEffect(() => {
-        const data = [
-            {
-                id: 1,
-                name: 'Booked By You',
-                startTime: '2025-04-14T08:00:00',
-                endTime: '2025-04-14T08:50:00',
-                bookingStatus: 'bookedbyyou',
-            },
-            {
-                id: 2,
-                name: 'Blocked',
-                startTime: '2025-04-14T10:30:00',
-                endTime: '2025-04-14T11:00:00',
-                bookingStatus: 'blocked',
-            },
-            {
-                id: 3,
-                name: 'Booked',
-                startTime: '2025-04-14T12:00:00',
-                endTime: '2025-04-14T12:50:00',
-                bookingStatus: 'booked',
-            },
-            {
-                id: 4,
-                name: 'Booked by you',
-                startTime: '2025-04-14T14:00:00',
-                endTime: '2025-04-14T15:00:00',
-                bookingStatus: 'bookedByYou',
-            },
-        ];
-
-        const mappedEvents = data.map((event) => {
-            let color = '#90EE90'; // Default: Available
-
-            if (event.bookingStatus === 'booked') {
-                color = '#B0B0B0';
-            } else if (event.bookingStatus === 'blocked') {
-                color = '#EDEDED';
-            } else if (event.bookingStatus === 'bookedByYou') {
-                color = '#A4C639';
-            }
-
-            return {
-                ...event,
-                title: event.name,
-                start: new Date(event.startTime),
-                end: new Date(event.endTime),
-                color,
-            };
-        });
-
-        setEvents(mappedEvents);
-    }, []);
-
+  useEffect(() => {
+        if (Availability?.availabilityBlocks?.length) {
+            const parsedEvents = Availability.availabilityBlocks
+                .map(block => {
+                    const start = new Date(block.startDateTime);
+                    const end = new Date(block.endDateTime);
+                    return {
+                        id: block._id,
+                        title: 'Available',
+                        start: start,
+                        end: end,
+                        color: '#6ABB52', // Green
+                    };
+                });
+            setEvents(parsedEvents);
+        }
+    }, [Availability]);
 
 
 

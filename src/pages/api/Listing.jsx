@@ -41,6 +41,10 @@ class Listing extends Component {
     return Api.get(`/student/teacher/${data}`);
   }
 
+  async studentteacherAvaliability(id){
+    return Api.get(`/student/teacher/availability/${id}`);
+  }
+
   async StudentDashboard() {
     return Api.get("/student/dashboard");
   }
@@ -108,8 +112,12 @@ class Listing extends Component {
     return Api.get(`/teacher/lesson/get`);
   }
 
+  async TeacherAvailabilityGet(){
+    return Api.get(`/teacher/availability/get`);
+  }
 
-  async AvailabilityAdd(data){
+  
+  async AddAvailablility(data){
     return Api.post(`/teacher/availability/add`, data);
   }
 
@@ -117,7 +125,7 @@ class Listing extends Component {
     return Api.delete(`/teacher/availability/delete/${id}`);
   }
 
-  async LessonAvailability(id,data){
+  async EditAvailability(id,data){
     return Api.put(`/teacher/availability/update/${id}`, data);
   }
 

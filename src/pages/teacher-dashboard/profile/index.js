@@ -5,6 +5,7 @@ import AddLesson from "./AddLesson";
 import Listing from "@/pages/api/Listing";
 import { RiDeleteBin6Line } from "react-icons/ri";
 import Delete from "./Delete";
+import Link from "next/link";
 
 export default function Index() {
   const [data, setData]=useState([]);
@@ -85,9 +86,9 @@ export default function Index() {
           </div>
 
           {/* Edit Button */}
-          <button className="absolute top-[67px] sm:top-10 right-1 sm:right-4 bg-[#CC2828] hover:bg-[#941111fd] text-white text-sm px-4 py-1.5 rounded cursor-pointer">
+          <Link href="/teacher-dashboard/setting" className="absolute top-[67px] sm:top-10 right-1 sm:right-4 bg-[#CC2828] hover:bg-[#941111fd] text-white text-sm px-4 py-1.5 rounded cursor-pointer">
             Edit Profile
-          </button>
+          </Link>
 
           {/* Info Grid */}
           <div className="w-full mt-10 mb-2 flex flex-wrap gap-x-10 gap-y-2 md:justify-center text-sm">

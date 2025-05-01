@@ -45,20 +45,8 @@ export default function Password() {
                 toast.error(response.data.message);
             }
         } catch (error) {
-            console.error("API error:", error);
-            const status = error?.response?.status;
-            if (status === 401) {
-                toast.error("Unauthorized: Invalid email or password.");
-            } else if (status === 403) {
-                toast.error("Access denied.");
-            } else if (status === 500) {
-                toast.error("Server error. Please try again later.");
-            } else if (status === 404) {
-                toast.error(error?.response?.data?.message);
-            } else {
-                toast.error("Something went wrong. Please try again.");
-            }
-            // toast.error(error?.response?.data?.message || "Something went wrong!");
+            console.error("API error:", error);           
+            toast.error(error?.response?.data?.message || "Something went wrong!");
         }
         setProcessing(false);
     };

@@ -7,6 +7,7 @@ import Listing from '@/pages/api/Listing';
 import toast from 'react-hot-toast';
 import { useRouter } from 'next/router';
 import TeacherLayout from './Common/TeacherLayout';
+import DefaultMessage from '../common/DefaultMessage';
 
 export default function Message() {
   const [teacherId, setTeacherId] = useState("")
@@ -150,7 +151,7 @@ export default function Message() {
             </div>
           </div>
 
-          {teacherId && (
+          {teacherId ? (
             <div className="w-full lg:w-3/4 flex flex-col  bg-[#F1F1F1]">
               {/* Chat Header */}
               <div className="flex items-center gap-3 lg:gap-4 bg-[#FFFFFF] px-4 lg:px-5 py-3.5 lg:py-4">
@@ -249,9 +250,10 @@ export default function Message() {
                 </div>
               </form>
             </div>
+          ) : (
+            <DefaultMessage />
           )}
           {/* Chat Panel */}
-
         </div>
       </>
     </TeacherLayout>

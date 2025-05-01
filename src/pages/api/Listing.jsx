@@ -112,10 +112,13 @@ class Listing extends Component {
     return Api.get(`/teacher/lesson/get`);
   }
 
+  async TeacherLessonGetForStudent(id){
+    return Api.get(`/student/lesson/get/${id}`);
+  }
+
   async TeacherAvailabilityGet(){
     return Api.get(`/teacher/availability/get`);
   }
-
   
   async AddAvailablility(data){
     return Api.post(`/teacher/availability/add`, data);

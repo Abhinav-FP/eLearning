@@ -7,7 +7,7 @@ import Listing from "../api/Listing";
 import toast from "react-hot-toast";
 
 
-const Index = () => {
+const Index = ({isPopupOpen}) => {
   const router = useRouter();
 
 

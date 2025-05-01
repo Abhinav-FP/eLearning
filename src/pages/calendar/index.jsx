@@ -26,10 +26,9 @@ const Event = ({ event }) => {
         </div>
     );
 };
-const Index = ({Availability}) => {
+const Index = ({Availability, setIsPopupOpen}) => {
     const [events, setEvents] = useState([]);
     const [selectedSlot, setSelectedSlot] = useState(null);
-    const [isPopupOpen, setIsPopupOpen] = useState(false);
 
   useEffect(() => {
         if (Availability?.availabilityBlocks?.length) {
@@ -49,11 +48,12 @@ const Index = ({Availability}) => {
         }
     }, [Availability]);
 
-
+    // console.log("events",events);
 
     const handleSelectSlot = (slotInfo) => {
+        console.log("selected slot", slotInfo);
         setSelectedSlot(slotInfo);
-        setIsPopupOpen(true);
+        // setIsPopupOpen(true);
     };
     const handleClosePopup = () => {
         setIsPopupOpen(false);
@@ -99,7 +99,7 @@ const Index = ({Availability}) => {
                             </div>
                             <h3 className="text-base lg:text-lg font-semibold text-[#1E1E1E] m-0 tracking-[-0.03em]">
 
-                                <button onClick={() => { setIsPopupOpen(true) }} className={'font-medium cursor-pointer rounded-full py-2 px-5 text-[#ffffff] bg-[#CC2828] hover:bg-[#ad0e0e] text-base w-full py-3.5'} >
+                                <button onClick={()=>{setIsPopupOpen(true);}} className={'font-medium cursor-pointer rounded-full py-2 px-5 text-[#ffffff] bg-[#CC2828] hover:bg-[#ad0e0e] text-base w-full py-3.5'} >
                                     Book Slot
                                 </button>
 
@@ -120,6 +120,7 @@ const Index = ({Availability}) => {
                                 style={{ height: '1000px', width: '100%' }}
                                 selectable
                                 eventPropGetter={eventStyleGetter}
+                                // onSelectEvent={(event) => handleSelectSlot(event)}
                                 components={{ event: Event }}
                                 onSelectSlot={(slotInfo) => {
                                     const overlap = events.some(event =>
@@ -134,17 +135,17 @@ const Index = ({Availability}) => {
                         </div>
                     </div>
                 </div>
-            {isPopupOpen && (
+            {/* {isPopupOpen && (
                 <Popup
+                isPopupOpen={isPopupOpen}
                     isOpen={true}
                     onClose={handleClosePopup}
                     size={'max-w-[510px]'}
-                >
-                 
-                    <PayPalButton />
+                >         
+                    <PayPalButton isPopupOpen={isPopupOpen}/>
                     <Stripe />
                 </Popup>
-            )}
+            )} */}
         </>
 
     );

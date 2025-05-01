@@ -91,7 +91,7 @@ export default function EditAvailablity({ isOpen, onClose, TeacherAvailabilitys,
         <Popup isOpen={isOpen} onClose={onClose} size={"max-w-[510px]"}>
             <form
                 onSubmit={handleUpdate}
-                className="max-w-md mx-auto mt-10 px-3 sm:px-6 pb-3 sm:pb-6 bg-white space-y-2 sm:space-y-4"
+                className="max-w-md mx-auto mt-10  pb-3 sm:pb-6 bg-white space-y-2 sm:space-y-4"
             >
                 <h2 className="text-2xl font-bold text-center text-[#CC2828]">
                     {"Edit Availablity"}
@@ -134,10 +134,9 @@ export default function EditAvailablity({ isOpen, onClose, TeacherAvailabilitys,
                         type="submit"
                         className="cursor-pointer flex-1 bg-red-600 text-white py-2 rounded-md hover:bg-red-700"
                     >
-                        {loading ? "Processing..." : "Edit"}
+                        {loading ? "Updating..." : "Update"}
                     </button>
                 </div>
-            </form>
             <div className="flex justify-between gap-4 mt-6">
                 <button
                     type="submit"
@@ -145,9 +144,10 @@ export default function EditAvailablity({ isOpen, onClose, TeacherAvailabilitys,
                     disabled={processing}
                     className="cursor-pointer flex-1 bg-red-600 text-white py-2 rounded-md hover:bg-red-700"
                 >
-                    {processing ? "Processing..." : "Delete"}
+                    {processing ? "Deleting..." : "Delete"}
                 </button>
             </div>
+            </form>
         </Popup>
     );
 }

@@ -1,6 +1,6 @@
 .rbc-calendar .rbc-header{padding: 15px 0;border-left: none !important;border-right: none !important;}
 .rbc-header span { font-family: Poppins; font-size: 14px; font-weight: 500; line-height: 21px; letter-spacing: -0.03em; text-align: left; color: #8D929A;}
-.rbc-today { background-color: white;}
+.rbc-today { background-color: white !important;}
 .rbc-date-cell .rbc-button-link{font-family: Poppins; font-size: 14px; font-weight: 500; line-height: 21px; letter-spacing: -0.03em; text-align: right;color: #8D929A;}
 .rbc-row-bg .rbc-off-range-bg {
   background: transparent;
@@ -39,4 +39,13 @@ margin-left: 10px;
 .rbc-btn-group > button:last-child:not(:first-child) {
   border-top-left-radius: 20;
   border-bottom-left-radius: 20;
+}
+
+.rbc-day-slot .rbc-events-container {
+  bottom: 0;
+  left: 0;
+  position: absolute;
+  right: 0 ;
+  margin-right: 0px !important;
+  top: 0;
 }

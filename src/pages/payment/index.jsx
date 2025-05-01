@@ -1,10 +1,11 @@
 'use client';
 
-import { PayPalScriptProvider, PayPalButtons } from "@paypal/react-paypal-js";
+import { PayPalScriptProvider, PayPalButtons ,FUNDING } from "@paypal/react-paypal-js";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
 import Listing from "../api/Listing";
 import toast from "react-hot-toast";
+
 
 const Index = () => {
   const router = useRouter();
@@ -100,6 +101,7 @@ const Index = () => {
             onCancel={handleCancel}
             style={{ layout: 'vertical' }}
             disabled={isProcessing}
+            fundingSource={FUNDING.PAYPAL}
           />
         </div>
       </div>

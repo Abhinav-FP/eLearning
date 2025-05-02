@@ -1,141 +1,195 @@
-import React, { useState, useEffect } from 'react';
-import { Calendar, momentLocalizer, Views } from 'react-big-calendar';
-import moment from 'moment';
-import 'react-big-calendar/lib/css/react-big-calendar.css';
+import React, { useState, useEffect } from "react";
+import { Calendar, momentLocalizer, Views } from "react-big-calendar";
+import moment from "moment";
+import "react-big-calendar/lib/css/react-big-calendar.css";
 const localizer = momentLocalizer(moment);
 // import "../../styles/calendar.css"
-import Popup from '../common/Popup';
-import PayPalButton from '../payment/index';
-import Stripe from '../stripe/Stripe';
+import Popup from "../common/Popup";
+import PayPalButton from "../payment/index";
+import Stripe from "../stripe/Stripe";
 
 const Event = ({ event }) => {
-    const formattedStartTime = moment(event.start).format('hh:mm A');
-    const formattedEndTime = moment(event.end).format('hh:mm A');
-    const eventStyle = {
-        backgroundColor: event.color,
-        borderRadius: '5px',
-        color: 'white',
-        padding: '4px',
-        maxHeight: '80px',
-        overflow: 'hidden',
-        fontSize: '12px',
-    };
+  const formattedStartTime = moment(event.start).format("hh:mm A");
+  const formattedEndTime = moment(event.end).format("hh:mm A");
+  const eventStyle = {
+    backgroundColor: event.color,
+    borderRadius: "5px",
+    color: "white",
+    padding: "4px",
+    maxHeight: "80px",
+    overflow: "hidden",
+    fontSize: "12px",
+  };
 
-    return (
-        <div style={eventStyle}>
-        </div>
-    );
+  return <div style={eventStyle}></div>;
 };
-const Index = ({Availability, setIsPopupOpen}) => {
-    const [events, setEvents] = useState([]);
-    const [selectedSlot, setSelectedSlot] = useState(null);
+const Index = ({ Availability, setIsPopupOpen, usedInPopup, setSelectedSlot }) => {
+  const [events, setEvents] = useState([]);
+//   console.log("Availability",Availability);
 
   useEffect(() => {
-        if (Availability?.availabilityBlocks?.length) {
-            const parsedEvents = Availability.availabilityBlocks
-                .map(block => {
-                    const start = new Date(block.startDateTime);
-                    const end = new Date(block.endDateTime);
-                    return {
-                        id: block._id,
-                        title: 'Available',
-                        start: start,
-                        end: end,
-                        color: '#6ABB52', // Green
-                    };
-                });
-            setEvents(parsedEvents);
+    if (Availability?.availabilityBlocks?.length) {
+      const getNextQuarter = (date) => {
+        const next = new Date(date);
+        const minutes = next.getMinutes();
+        const add =
+          minutes < 15
+            ? 15 - minutes
+            : minutes < 30
+            ? 30 - minutes
+            : minutes < 45
+            ? 45 - minutes
+            : 60 - minutes;
+        next.setMinutes(minutes + add, 0, 0);
+        return next;
+      };
+  
+      const parsedEvents = [];
+  
+      Availability.availabilityBlocks.forEach((block) => {
+        let current = new Date(block.startDateTime);
+        const end = new Date(block.endDateTime);
+  
+        let isFirst = true;
+        let firstSlotEnd = null;
+  
+        while (current < end) {
+          const nextChunk = getNextQuarter(current);
+          const chunkEnd = nextChunk < end ? nextChunk : end;
+  
+          if (isFirst) {
+            const duration = (chunkEnd - current) / (1000 * 60); // in minutes
+            if (duration < 15) {
+              firstSlotEnd = chunkEnd; // mark for merge
+              current = chunkEnd;
+              isFirst = false;
+              continue;
+            }
+          }
+  
+          // If first slot was too short, merge it with this one
+          if (firstSlotEnd) {
+            parsedEvents.push({
+              id: `${block._id}_${block.startDateTime}`, 
+              title: "Available",
+              start: new Date(block.startDateTime),
+              end: new Date(chunkEnd),
+              color: "#6ABB52",
+            });
+            firstSlotEnd = null; // reset
+          } else {
+            parsedEvents.push({
+              id: `${block._id}_${current.toISOString()}`,
+              title: "Available",
+              start: new Date(current),
+              end: new Date(chunkEnd),
+              color: "#6ABB52",
+            });
+          }
+  
+          current = new Date(chunkEnd);
+          isFirst = false;
         }
-    }, [Availability]);
+      });
+  
+      setEvents(parsedEvents);
+    }
+  }, [Availability]);  
 
-    // console.log("events",events);
+  // console.log("events",events);
 
-    const handleSelectSlot = (slotInfo) => {
-        console.log("selected slot", slotInfo);
-        setSelectedSlot(slotInfo);
-        // setIsPopupOpen(true);
+  const eventStyleGetter = (event) => {
+    return {
+      style: {
+        backgroundColor: event.color,
+        borderRadius: "5px",
+        opacity: 0.9,
+        color: "#000",
+        border: "1px solid #ccc",
+      },
     };
-    const handleClosePopup = () => {
-        setIsPopupOpen(false);
-    };
+  };
 
+  const [currentDate, setCurrentDate] = useState(new Date());
 
-    const eventStyleGetter = (event) => {
-        return {
-            style: {
-                backgroundColor: event.color,
-                borderRadius: '5px',
-                opacity: 0.9,
-                color: '#000',
-                border: '1px solid #ccc',
-            },
-        };
-    };
+  const handleClick = (event) => {
+    if (!usedInPopup) {
+      setIsPopupOpen(true);
+    }
+    else{
+        setSelectedSlot(event);
+    }
+  };
 
-    const [currentDate, setCurrentDate] = useState(new Date());
-
-    return (
-        <>
-            <div className="w-full ">
-                    <div className="bg-white rounded-[20px]  border-[#CC282880] border-1">
-                        <div className="py-1 py-2 lg:py-[15px] px-2 md:px-3 lg:px-6 flex flex-wrap justify-between items-center border-b border-black border-opacity-10">
-                            <div className="flex flex-wrap items-center gap-4 mb-4">
-                                <div className="flex items-center gap-2">
-                                    <span className="w-3 h-3 rounded-full bg-[#6ABB52] inline-block"></span>
-                                    <span className="text-sm text-gray-700">Available</span>
-                                </div>
-                                <div className="flex items-center gap-2">
-                                    <span className="w-3 h-3 rounded-full bg-[#D9D9D9] inline-block"></span>
-                                    <span className="text-sm text-gray-700">Not Available</span>
-                                </div>
-                                <div className="flex items-center gap-2">
-                                    <span className="w-3 h-3 rounded-full bg-[#D9D9D9] inline-block"></span>
-                                    <span className="text-sm text-gray-700">Booked</span>
-                                </div>
-                                <div className="flex items-center gap-2">
-                                    <span className="w-3 h-3 rounded-full bg-[#CC2828] inline-block"></span>
-                                    <span className="text-sm text-gray-700">Booked by You</span>
-                                </div>
-                            </div>
-                            <h3 className="text-base lg:text-lg font-semibold text-[#1E1E1E] m-0 tracking-[-0.03em]">
-
-                                <button onClick={()=>{setIsPopupOpen(true);}} className={'font-medium cursor-pointer rounded-full py-2 px-5 text-[#ffffff] bg-[#CC2828] hover:bg-[#ad0e0e] text-base w-full py-3.5'} >
-                                    Book Slot
-                                </button>
-
-                            </h3>
-                        </div>
-                        <div className="p-4 relative">
-                            <Calendar
-                                localizer={localizer}
-                                events={events}
-                                startAccessor="start"
-                                endAccessor="end"
-                                defaultView={Views.WEEK}
-                                views={[Views.WEEK]}
-                                date={currentDate}
-                                onNavigate={date => setCurrentDate(date)}
-                                step={30}
-                                timeslots={1}
-                                style={{ height: '1000px', width: '100%' }}
-                                selectable
-                                eventPropGetter={eventStyleGetter}
-                                // onSelectEvent={(event) => handleSelectSlot(event)}
-                                components={{ event: Event }}
-                                onSelectSlot={(slotInfo) => {
-                                    const overlap = events.some(event =>
-                                        moment(slotInfo.start).isBefore(event.end) &&
-                                        moment(slotInfo.end).isAfter(event.start)
-                                    );
-                                    if (!overlap) {
-                                        handleSelectSlot(slotInfo);
-                                    }
-                                }}
-                            />
-                        </div>
-                    </div>
-                </div>
-            {/* {isPopupOpen && (
+  return (
+    <>
+      <div className="w-full ">
+        <div className="bg-white rounded-[20px]  border-[#CC282880] border-1">
+          <div className="py-1 py-2 lg:py-[15px] px-2 md:px-3 lg:px-6 flex flex-wrap justify-between items-center border-b border-black border-opacity-10">
+            <div className="flex flex-wrap items-center gap-4 mb-4">
+              <div className="flex items-center gap-2">
+                <span className="w-3 h-3 rounded-full bg-[#6ABB52] inline-block"></span>
+                <span className="text-sm text-gray-700">Available</span>
+              </div>
+              <div className="flex items-center gap-2">
+                <span className="w-3 h-3 rounded-full bg-[#D9D9D9] inline-block"></span>
+                <span className="text-sm text-gray-700">Not Available</span>
+              </div>
+              <div className="flex items-center gap-2">
+                <span className="w-3 h-3 rounded-full bg-[#D9D9D9] inline-block"></span>
+                <span className="text-sm text-gray-700">Booked</span>
+              </div>
+              <div className="flex items-center gap-2">
+                <span className="w-3 h-3 rounded-full bg-[#CC2828] inline-block"></span>
+                <span className="text-sm text-gray-700">Booked by You</span>
+              </div>
+            </div>
+            {!usedInPopup &&
+            <h3 className="text-base lg:text-lg font-semibold text-[#1E1E1E] m-0 tracking-[-0.03em]">
+              <button
+                onClick={() => {
+                  handleClick();
+                }}
+                className={
+                  "font-medium cursor-pointer rounded-full py-2 px-5 text-[#ffffff] bg-[#CC2828] hover:bg-[#ad0e0e] text-base w-full py-3.5"
+                }
+              >
+                Book Slot
+              </button>
+            </h3>}
+          </div>
+          <div className="p-4 relative">
+            <Calendar
+              localizer={localizer}
+              events={events}
+              startAccessor="start"
+              endAccessor="end"
+              defaultView={Views.WEEK}
+              views={[Views.WEEK]}
+              date={currentDate}
+              onNavigate={(date) => setCurrentDate(date)}
+              step={30}
+              timeslots={1}
+              style={{ height: "1000px", width: "100%" }}
+              selectable
+              eventPropGetter={eventStyleGetter}
+              onSelectEvent={(event) => handleClick(event)}
+              components={{ event: Event }}
+              onSelectSlot={(slotInfo) => {
+                const overlap = events.some(
+                  (event) =>
+                    moment(slotInfo.start).isBefore(event.end) &&
+                    moment(slotInfo.end).isAfter(event.start)
+                );
+                if (!overlap && !usedInPopup) {
+                    handleClick(slotInfo);
+                }
+              }}
+            />
+          </div>
+        </div>
+      </div>
+      {/* {isPopupOpen && (
                 <Popup
                 isPopupOpen={isPopupOpen}
                     isOpen={true}
@@ -146,9 +200,8 @@ const Index = ({Availability, setIsPopupOpen}) => {
                     <Stripe />
                 </Popup>
             )} */}
-        </>
-
-    );
+    </>
+  );
 };
 
 export default Index;

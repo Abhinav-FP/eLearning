@@ -122,7 +122,7 @@ export default function Index() {
               classess={"text-[#1E1E1E] mg-6 lg:mb-8"}
               title={"Availabilities"}
             />
-            <Calendar Availability={content} setIsPopupOpen={setIsPopupOpen}/>
+            <Calendar Availability={content} setIsPopupOpen={setIsPopupOpen} usedInPopup={false}/>
           </div>
         </div>
         <Testimonial />

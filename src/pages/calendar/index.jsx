@@ -1,8 +1,10 @@
 import React, { useState, useEffect } from "react";
 import { Calendar, momentLocalizer, Views } from "react-big-calendar";
+import "react-big-calendar/lib/css/react-big-calendar.css";
 import moment from "moment";
 import "react-big-calendar/lib/css/react-big-calendar.css";
 const localizer = momentLocalizer(moment);
+// moment.tz.setDefault("UTC");
 // import "../../styles/calendar.css"
 import Popup from "../common/Popup";
 import PayPalButton from "../payment/index";
@@ -25,7 +27,7 @@ const Event = ({ event }) => {
 };
 const Index = ({ Availability, setIsPopupOpen, usedInPopup, setSelectedSlot }) => {
   const [events, setEvents] = useState([]);
-//   console.log("Availability",Availability);
+  console.log("Availability",Availability);
 
   useEffect(() => {
     if (Availability?.availabilityBlocks?.length) {
@@ -47,8 +49,8 @@ const Index = ({ Availability, setIsPopupOpen, usedInPopup, setSelectedSlot }) =
       const parsedEvents = [];
   
       Availability.availabilityBlocks.forEach((block) => {
-        let current = new Date(block.startDateTime);
-        const end = new Date(block.endDateTime);
+        let current = moment.utc(block.startDateTime).toDate();
+        const end = moment.utc(block.endDateTime).toDate();
   
         let isFirst = true;
         let firstSlotEnd = null;
@@ -60,29 +62,28 @@ const Index = ({ Availability, setIsPopupOpen, usedInPopup, setSelectedSlot }) =
           if (isFirst) {
             const duration = (chunkEnd - current) / (1000 * 60); // in minutes
             if (duration < 15) {
-              firstSlotEnd = chunkEnd; // mark for merge
+              firstSlotEnd = chunkEnd;
               current = chunkEnd;
               isFirst = false;
               continue;
             }
           }
   
-          // If first slot was too short, merge it with this one
           if (firstSlotEnd) {
             parsedEvents.push({
-              id: `${block._id}_${block.startDateTime}`, 
+              id: `${block._id}_${block.startDateTime}`,
               title: "Available",
-              start: new Date(block.startDateTime),
-              end: new Date(chunkEnd),
+              start: moment.utc(block.startDateTime).toDate(),
+              end: moment.utc(chunkEnd).toDate(),
               color: "#6ABB52",
             });
-            firstSlotEnd = null; // reset
+            firstSlotEnd = null;
           } else {
             parsedEvents.push({
-              id: `${block._id}_${current.toISOString()}`,
+              id: `${block._id}_${moment.utc(current).toISOString()}`,
               title: "Available",
-              start: new Date(current),
-              end: new Date(chunkEnd),
+              start: moment.utc(current).toDate(),
+              end: moment.utc(chunkEnd).toDate(),
               color: "#6ABB52",
             });
           }
@@ -94,9 +95,9 @@ const Index = ({ Availability, setIsPopupOpen, usedInPopup, setSelectedSlot }) =
   
       setEvents(parsedEvents);
     }
-  }, [Availability]);  
+  }, [Availability]);
 
-  // console.log("events",events);
+  console.log("events",events);
 
   const eventStyleGetter = (event) => {
     return {

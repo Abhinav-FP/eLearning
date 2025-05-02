@@ -13,6 +13,7 @@
     "@paypal/react-paypal-js": "^8.8.2",
     "axios": "^1.8.4",
     "moment": "^2.30.1",
+    "moment-timezone": "^0.5.48",
     "next": "15.2.4",
     "react": "^19.0.0",
     "react-big-calendar": "^1.18.0",

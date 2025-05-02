@@ -3,6 +3,7 @@ import Popup from "../common/Popup";
 import LessonList from "./LessonList";
 import Heading from "../common/Heading";
 import Calendar from "../calendar/index.jsx";
+import PaymentCheckout from "./PaymentCheckout";
 
 export default function BookingPopup({
   isOpen,
@@ -14,27 +15,27 @@ export default function BookingPopup({
   const [selectedLesson, SetSelectedLesson] = useState(null);
   const [selectedSlot, setSelectedSlot] = useState(null);
 
-  useEffect(()=>{
+  useEffect(() => {
     setStep(1);
     // SetSelectedLesson(null);
     // setSelectedSlot(null);
-  },[isOpen]);
-
+  }, [isOpen]);
+  
   console.log("selectedSlot",selectedSlot);
   console.log("selectedLesson",selectedLesson);
 
   function getFormattedEndTime(time, durationInMinutes) {
     const start = new Date(time);
     const end = new Date(start.getTime() + durationInMinutes * 60000);
-  
+
     const options = {
-      month: "short",  // e.g. "May"
-      day: "numeric",  // e.g. "2"
+      month: "short", // e.g. "May"
+      day: "numeric", // e.g. "2"
       hour: "numeric",
       minute: "2-digit",
       hour12: true,
     };
-  
+
     return end.toLocaleString("en-US", options); // → "May 2, 7:40 PM"
   }
 
@@ -89,9 +90,13 @@ export default function BookingPopup({
               classess="text-[#CC2828] mb-6 lg:mb-8 text-center"
               title="Select your Lesson Start Time"
             />
-            <Calendar Availability={Availability} usedInPopup={true} setSelectedSlot={setSelectedSlot}/>
+            <Calendar
+              Availability={Availability}
+              usedInPopup={true}
+              setSelectedSlot={setSelectedSlot}
+            />
             <div className="flex justify-between items-center mt-5">
-            <button
+              <button
                 onClick={() => {
                   setStep(step - 1);
                 }}
@@ -102,8 +107,19 @@ export default function BookingPopup({
               <div>
                 {selectedSlot && (
                   <p className="text-[#CC2828] capitalize text-base xl:text-lg font-semibold font-inter inline-block tracking-[-0.04em]">
-                    Selected Time Slot - {new Date(selectedSlot.start).toLocaleString("en-US", {month: "short",day: "numeric",hour: "numeric",minute: "2-digit",hour12: true,})} - 
-                    {getFormattedEndTime(selectedSlot?.start, selectedLesson?.duration)}{" "}
+                    Selected Time Slot -{" "}
+                    {new Date(selectedSlot.start).toLocaleString("en-US", {
+                      month: "short",
+                      day: "numeric",
+                      hour: "numeric",
+                      minute: "2-digit",
+                      hour12: true,
+                    })}{" "}
+                    -
+                    {getFormattedEndTime(
+                      selectedSlot?.start,
+                      selectedLesson?.duration
+                    )}{" "}
                   </p>
                 )}
               </div>
@@ -120,6 +136,12 @@ export default function BookingPopup({
             </div>
           </div>
         </div>
+      )}
+      {step === 3 && (
+        <PaymentCheckout
+          selectedLesson={selectedLesson}
+          selectedSlot={selectedSlot}
+        />
       )}
     </Popup>
   );

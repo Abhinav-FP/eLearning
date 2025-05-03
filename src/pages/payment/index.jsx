@@ -100,11 +100,9 @@ const Index = ({ isPopupOpen, PricePayment, selectedLesson, selectedSlot }) => {
           onApprove={handleApprove}
           onCancel={handleCancel}
           disabled={isProcessing}
-          style={{
-            layout: 'vertical',
-          }}
+          style={{ layout: 'vertical'}}
+          fundingSource={FUNDING.PAYPAL}
         />
-
       </div>
     </PayPalScriptProvider>
   );

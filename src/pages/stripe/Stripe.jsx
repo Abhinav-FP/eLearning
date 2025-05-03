@@ -2,9 +2,11 @@ import React, { useState } from 'react'
 import toast from 'react-hot-toast';
 import Listing from '../api/Listing';
 
-export default function Stripe({PricePayment}) {
+export default function Stripe({PricePayment ,selectedLesson , selectedSlot}) {
+  console.log("selectedSlot" ,selectedSlot)
   const [processing, setprocessing] = useState(false);
 
+ 
   const handlePayment = async () => {
     try {
       setprocessing(true);
@@ -12,9 +14,12 @@ export default function Stripe({PricePayment}) {
       const resp = payment.Stripe_payment({
         amount: PricePayment,
         currency: "USD",
+        LessonId : selectedLesson?._id,
+        teacherId :  selectedLesson?.teacher?._id,
+        startDateTime : selectedSlot?.start ,
+        endDateTime : selectedSlot?.end
       });
-      resp
-        .then((res) => {
+      resp.then((res) => {
           if (res.data.url) {
             window.location.href = res.data.url;
           }

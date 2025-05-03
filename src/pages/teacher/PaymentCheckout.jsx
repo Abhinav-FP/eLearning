@@ -109,14 +109,14 @@ const PaymentCheckout = ({ selectedLesson, selectedSlot }) => {
             <p className="font-medium">Total</p>
             <p className="font-medium">${selectedLesson?.price} USD</p>
           </div>
-          <p className="text-sm text-gray-500">+ Processing fee $10 USD</p>
-          <p className="text-sm text-gray-500">Estimated ${selectedLesson?.price + 10} USD</p>
+          <p className="text-sm text-gray-500">{`+ Processing fee $${0.1*selectedLesson?.price} USD`}</p>
+          <p className="text-sm text-gray-500">Estimated ${selectedLesson?.price + 0.1*selectedLesson?.price} USD</p>
         </div>
 
         {PaymentStatus === false ? (
-          <Payment PricePayment={selectedLesson?.price + 10} />
+          <Payment PricePayment={selectedLesson?.price + 0.1*selectedLesson?.price} selectedLesson={selectedLesson}  selectedSlot={selectedSlot}  />
         ) : (
-          <Stripe PricePayment={selectedLesson?.price + 10} />
+          <Stripe PricePayment={selectedLesson?.price + 0.1*selectedLesson?.price} selectedLesson={selectedLesson}  selectedSlot= {selectedSlot}/>
         )}
 
       </div>

@@ -9,6 +9,9 @@ const localizer = momentLocalizer(moment);
 import Popup from "../common/Popup";
 import PayPalButton from "../payment/index";
 import Stripe from "../stripe/Stripe";
+import { useRole } from "@/context/RoleContext";
+import { useRouter } from "next/router";
+import toast from "react-hot-toast";
 
 const Event = ({ event }) => {
   const formattedStartTime = moment(event.start).format("hh:mm A");
@@ -27,7 +30,8 @@ const Event = ({ event }) => {
 };
 const Index = ({ Availability, setIsPopupOpen, usedInPopup, setSelectedSlot }) => {
   const [events, setEvents] = useState([]);
-  console.log("Availability",Availability);
+  const { user } = useRole();
+  const router = useRouter();
 
   useEffect(() => {
     if (Availability?.availabilityBlocks?.length) {
@@ -97,8 +101,6 @@ const Index = ({ Availability, setIsPopupOpen, usedInPopup, setSelectedSlot }) =
     }
   }, [Availability]);
 
-  console.log("events",events);
-
   const eventStyleGetter = (event) => {
     return {
       style: {
@@ -115,6 +117,10 @@ const Index = ({ Availability, setIsPopupOpen, usedInPopup, setSelectedSlot }) =
 
   const handleClick = (event) => {
     if (!usedInPopup) {
+      if(!user){
+        toast.error("Please login first");
+        router.push(`/login?redirect=${router.asPath}`);
+      }
       setIsPopupOpen(true);
     }
     else{

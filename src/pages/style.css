@@ -114,3 +114,15 @@ html{
 .customscroll::-webkit-scrollbar-thumb:hover {
   background: #d37f7f;
 }
+
+.paypal-button.paypal-button-shape-rect {
+  border-radius: 100px !important;
+}
+
+.paypal-button.paypal-button-color-gold {
+  background: #ef2c0c !important;
+}
+
+.paypal-button.paypal-button-color-gold, .paypal-button-row.paypal-button-color-gold .menu-button {
+  background: #ef2c0c !important;
+}

@@ -7,7 +7,7 @@ import Listing from "../api/Listing";
 import toast from "react-hot-toast";
 
 
-const Index = ({isPopupOpen}) => {
+const Index = ({isPopupOpen , PricePayment}) => {
   const router = useRouter();
 
 
@@ -21,7 +21,7 @@ const Index = ({isPopupOpen}) => {
     try {
       const main = new Listing();
       const response = await main.PaypalCreate({
-        amount: 100,
+        amount: PricePayment,
         currency: "USD",
       });
 
@@ -87,24 +87,23 @@ const Index = ({isPopupOpen}) => {
 
   return (
     <PayPalScriptProvider options={{ "client-id": "Acq8BOAgNmN-iAGdJDmqJj9t-5VN6pA5KCsqGqvxdkrLis0-CRIjDwqtsYZwNRZ4F5uYEQfkxm_zMOXk" }}>
-      <div className="flex flex-col items-center">
-        <h2 className="text-2xl font-semibold text-gray-800 mb-4">    Trial Lessons</h2>
-        <div className="w-full flex justify-between items-center text-lg font-bold mt-4 px-4 py-2 bg-gray-200 rounded-lg">
-          <span>Total:</span>
-          <span>${100}</span>
-        </div>
-
         <div className="mt-6 w-full">
-          <PayPalButtons
-            createOrder={handleCreateOrder}
-            onApprove={handleApprove}
-            onCancel={handleCancel}
-            style={{ layout: 'vertical' }}
-            disabled={isProcessing}
-            fundingSource={FUNDING.PAYPAL}
-          />
+        <PayPalButtons
+  createOrder={handleCreateOrder}
+  onApprove={handleApprove}
+  onCancel={handleCancel}
+  disabled={isProcessing}
+  fundingSource={FUNDING.PAYPAL}
+  style={{
+    layout: 'vertical',
+    color: 'gold',     // try 'black' or 'blue' if needed
+    shape: 'pill',
+    label: 'pay',      // only shows 'PayPal' text
+    height: 45         // optional
+  }}
+/>
+
         </div>
-      </div>
     </PayPalScriptProvider>
   );
 };

@@ -1,9 +1,8 @@
 import React, { useState } from 'react'
 import toast from 'react-hot-toast';
 import Listing from '../api/Listing';
-import { FaYenSign } from 'react-icons/fa';
 
-export default function Stripe() {
+export default function Stripe({PricePayment}) {
   const [processing, setprocessing] = useState(false);
 
   const handlePayment = async () => {
@@ -11,8 +10,8 @@ export default function Stripe() {
       setprocessing(true);
       const payment = new Listing();
       const resp = payment.Stripe_payment({
-        amount: 100,
-        currency: "JPY",
+        amount: PricePayment,
+        currency: "USD",
       });
       resp
         .then((res) => {
@@ -34,21 +33,13 @@ export default function Stripe() {
   };
   return (
     <>
-      <div className="flex flex-col items-center">
-        <div className="w-full flex justify-between items-center text-lg font-bold mt-4 px-4 py-2 bg-gray-200 rounded-lg">
-          <span>Total:</span>
-          <span>
-            ¥ {10000}</span>
-        </div>
-        <button
-          onClick={() => {
-            handlePayment();
-          }}
-          className="font-medium cursor-pointer rounded-full mt-5 py-2 px-5 text-[#ffffff] bg-[#CC2828] hover:bg-[#ad0e0e] text-base w-full py-3.5"
+        <button className="w-full bg-red-600 hover:bg-red-700 text-white font-medium py-2 rounded-full" 
+         onClick={() => {
+          handlePayment();
+        }}
         >
-          {processing ? "Processing.." : "Stripe Payment"}
-        </button>
-      </div>
+          Pay ${PricePayment} USD
+        </button> 
     </>
   )
 }

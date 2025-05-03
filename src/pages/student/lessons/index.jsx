@@ -18,24 +18,53 @@ export default function Index() {
   //   teacher: "John Doe",
   // });
 
-  const [lessons, setLessons] = useState([]);
+  const [categorizedLessons, setCategorizedLessons] = useState({
+    upcoming: [],
+    past: [],
+    cancelled: [],
+  });  
 
   const fetchLessons = async () => {
-      try {
-          const main = new Listing();
-          const response = await main.GetBooking();
-          console.log("response",response?.data);
-          setLessons(response?.data?.data || []);
-      } catch (error) {
-          console.log("error", error);
-          setLessons([])
-      }
+    try {
+      const main = new Listing();
+      const response = await main.GetBooking();
+      const allLessons = response?.data?.data || [];
+  
+      const now = new Date();
+  
+      const categorized = {
+        upcoming: [],
+        past: [],
+        cancelled: [],
+      };
+  
+      allLessons.forEach(lesson => {
+        const start = new Date(lesson.startDateTime);
+  
+        if (lesson.status?.toLowerCase() === "cancelled") {
+          categorized.cancelled.push(lesson);
+        } else if (start > now) {
+          categorized.upcoming.push(lesson);
+        } else {
+          categorized.past.push(lesson);
+        }
+      });
+  
+      setCategorizedLessons(categorized);
+    } catch (error) {
+      console.log("error", error);
+      setCategorizedLessons({
+        upcoming: [],
+        past: [],
+        cancelled: [],
+      });
+    }
   };
-
 
   useEffect(() => {
       fetchLessons();
   }, []);
+  console.log("lessons",categorizedLessons);
 
   return (
     <StudentLayout page={"My Lessons"}>
@@ -64,8 +93,8 @@ export default function Index() {
 
         {/* Lesson Cards */}
         <div className="space-y-4 lg:space-y-5  px-5 lg:px-[30px]">
-          {lessons &&
-            lessons?.map((lesson, idx) => (
+        {categorizedLessons[tab]?.length ? (
+  categorizedLessons[tab].map((lesson, idx) => (
               <div key={idx}>
                 <div className="flex items-center gap-3 xl:gap-4 flex-wrap mb-3 lg:mb-4 xl:mb-5">
                   <p className="text-[#CC2828] font-bold text-lg xl:text-xl font-inter">
@@ -104,7 +133,9 @@ export default function Index() {
                   </div>
                 </div>
               </div>
-            ))}
+           ))) : (
+            <p className="text-gray-500">No {tab} lessons found.</p>
+          )}
         </div>
       </div>
     </StudentLayout>

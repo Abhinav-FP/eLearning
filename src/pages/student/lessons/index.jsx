@@ -11,12 +11,12 @@ export default function Index() {
   // Extract the time (formatted as "2:00 PM")
   const timeOptions = { hour: 'numeric', minute: 'numeric', hour12: true };
 
-  const lessonss = Array(6).fill({
-    date: "April 15, 2025",
-    time: "2:00 PM",
-    duration: "1 Hour",
-    teacher: "John Doe",
-  });
+  // const lessonss = Array(6).fill({
+  //   date: "April 15, 2025",
+  //   time: "2:00 PM",
+  //   duration: "1 Hour",
+  //   teacher: "John Doe",
+  // });
 
   const [lessons, setLessons] = useState([]);
 
@@ -36,8 +36,6 @@ export default function Index() {
   useEffect(() => {
       fetchLessons();
   }, []);
-
-  console.log("lessons",lessons);
 
   return (
     <StudentLayout page={"My Lessons"}>

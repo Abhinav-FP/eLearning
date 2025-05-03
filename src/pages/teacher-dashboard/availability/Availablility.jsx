@@ -4,6 +4,11 @@ import moment from 'moment';
 import 'react-big-calendar/lib/css/react-big-calendar.css';
 import Addavailablility from './Addavailablility';
 import EditAvailablity from './EditAvailablity';
+// import { DateTime } from "luxon";
+
+// // Convert UTC to local time zone
+// const studentTimeZone = Intl.DateTimeFormat().resolvedOptions().timeZone;
+// console.log("studentTimeZone",studentTimeZone);
 
 const localizer = momentLocalizer(moment);
 

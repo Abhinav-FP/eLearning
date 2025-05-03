@@ -132,6 +132,10 @@ class Listing extends Component {
     return Api.put(`/teacher/availability/update/${id}`, data);
   }
 
+  async GetBooking(){
+    return Api.get(`/booking/getAll`);
+  }
+
   render() {
     return (
       <div>

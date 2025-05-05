@@ -10,6 +10,7 @@ export default function BookingPopup({
   onClose,
   lessons,
   Availability,
+  studentTimeZone
 }) {
   const [step, setStep] = useState(1);
   const [selectedLesson, SetSelectedLesson] = useState(null);
@@ -24,7 +25,7 @@ export default function BookingPopup({
   console.log("selectedSlot",selectedSlot);
   console.log("selectedLesson",selectedLesson);
 
-  function getFormattedEndTime(time, durationInMinutes, studentTimeZone) {
+  function getFormattedEndTime(time, durationInMinutes) {
     const start = new Date(time);
     const end = new Date(start.getTime() + durationInMinutes * 60000);
 

@@ -116,18 +116,18 @@ const Index = ({ Availability, setIsPopupOpen, usedInPopup, setSelectedSlot, sel
   const [currentDate, setCurrentDate] = useState(new Date());
 
   const isEventWithinAvailability = (eventStartLocal, durationInMinutes, availabilityList) => {
-    const eventStart = new Date(eventStartLocal);
-    const eventEnd = new Date(eventStart.getTime() + durationInMinutes * 60000);
+    const eventStart = new Date(eventStartLocal); // Local time
+    const eventStartUTC = new Date(eventStart.toISOString()); // Accurate UTC time
+    const eventEndUTC = new Date(eventStartUTC.getTime() + durationInMinutes * 60000);
   
-    // Convert availability slots from UTC to local time once
     const isWithinSlot = availabilityList.some(slot => {
-      const slotStart = new Date(new Date(slot.startDateTime).getTime() - eventStart.getTimezoneOffset() * 60000);
-      const slotEnd = new Date(new Date(slot.endDateTime).getTime() - eventStart.getTimezoneOffset() * 60000);
-      return eventStart >= slotStart && eventEnd <= slotEnd;
+      const slotStart = new Date(slot.startDateTime); // Already in UTC
+      const slotEnd = new Date(slot.endDateTime);
+      return eventStartUTC >= slotStart && eventEndUTC <= slotEnd;
     });
   
     return isWithinSlot;
-  };
+  }; 
   
 
   const handleClick = (event) => {
@@ -146,7 +146,7 @@ const Index = ({ Availability, setIsPopupOpen, usedInPopup, setSelectedSlot, sel
       setSelectedSlot(event);
     }
   };
-  console.log("availability",Availability);
+  // console.log("availability",Availability);
 
   return (
     <>

@@ -34,7 +34,7 @@ export default function Index() {
     try {
       const main = new Listing();
       const response = await main.TeacherLessonGetForStudent(Id);
-      console.log("response", response);
+      // console.log("response", response);
       if (response.data) {
         setLessons(response.data.data);
       } else {

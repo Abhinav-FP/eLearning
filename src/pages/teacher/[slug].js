@@ -125,7 +125,7 @@ export default function Index() {
             <Calendar Availability={content} setIsPopupOpen={setIsPopupOpen} usedInPopup={false}/>
           </div>
         </div>
-        <Testimonial />
+        <Testimonial/>
         <BookingPopup
           isOpen={isPopupOpen}
           onClose={closePopup}

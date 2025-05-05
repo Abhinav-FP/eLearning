@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import Stripe from "../stripe/Stripe";
 import Payment from "../payment/index"
+import Image from "next/image";
 
 const PaymentCheckout = ({ selectedLesson, selectedSlot }) => {
 
@@ -70,10 +71,17 @@ const PaymentCheckout = ({ selectedLesson, selectedSlot }) => {
       {/* Right: Summary */}
       <div className="border border-[#CC2828] rounded-xl p-4 w-full md:w-1/2 space-y-4">
         <div className="flex items-center gap-4">
-          <img
+          {/* <img
             src="https://via.placeholder.com/48"
             alt="Tutor"
             className="w-12 h-12 rounded-full object-cover"
+          /> */}
+          <Image
+            src="/profile.png"
+            alt="Profile"
+            className="w-12 h-12 rounded-full object-cover"
+            height={44}
+            width={44}
           />
           <div>
             <p className="font-semibold capitalize">

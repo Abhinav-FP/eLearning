@@ -2,7 +2,7 @@
 
 import { PayPalScriptProvider, PayPalButtons, FUNDING } from "@paypal/react-paypal-js";
 import { useRouter } from "next/navigation";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Listing from "../api/Listing";
 import toast from "react-hot-toast";
 
@@ -13,6 +13,20 @@ const Index = ({ isPopupOpen, PricePayment, selectedLesson, selectedSlot, studen
 
   const [isProcessing, setIsProcessing] = useState(false);
   const [OrderId, setOrderId] = useState("")
+  const[endTime,setEndTime] = useState(null);
+
+  const addDurationToDate = (start, durationInMinutes) => {
+    const startDate = new Date(start);
+    const endDate = new Date(startDate.getTime() + durationInMinutes * 60000);
+    return endDate.toString(); // returns in the same format
+  };
+
+  useEffect(()=>{
+    if(selectedLesson && selectedSlot){
+      const time = addDurationToDate(selectedSlot?.start, selectedLesson?.duration);
+      setEndTime(time);
+    }
+  },[selectedSlot, selectedLesson])
 
   const handleCreateOrder = async () => {
     if (isProcessing) return;
@@ -26,7 +40,7 @@ const Index = ({ isPopupOpen, PricePayment, selectedLesson, selectedSlot, studen
         LessonId: selectedLesson?._id,
         teacherId: selectedLesson?.teacher?._id,
         startDateTime: selectedSlot?.start,
-        endDateTime: selectedSlot?.end
+        endDateTime: endTime,
       });
 
       if (response?.data?.id) {
@@ -56,7 +70,7 @@ const Index = ({ isPopupOpen, PricePayment, selectedLesson, selectedSlot, studen
         LessonId: selectedLesson?._id,
         teacherId: selectedLesson?.teacher?._id,
         startDateTime: selectedSlot?.start,
-        endDateTime: selectedSlot?.end,
+        endDateTime: endTime,
         timezone : studentTimeZone || "UTC",
       });
 

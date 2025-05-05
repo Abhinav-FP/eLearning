@@ -25,7 +25,7 @@ export default function BookingPopup({
   console.log("selectedSlot",selectedSlot);
   console.log("selectedLesson",selectedLesson);
 
-  function getFormattedEndTime(time, durationInMinutes, studentTimeZone) {
+  function getFormattedEndTime(time, durationInMinutes) {
     const start = new Date(time);
     const end = new Date(start.getTime() + durationInMinutes * 60000);
 

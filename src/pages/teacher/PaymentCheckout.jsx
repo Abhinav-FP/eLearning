@@ -20,11 +20,11 @@ const PaymentCheckout = ({ selectedLesson, selectedSlot, studentTimeZone }) => {
     return end.toLocaleString("en-US", options); // → "May 2, 7:40 PM"
   }
 
-  console.log("selectedLesson", selectedLesson)
+  // console.log("selectedLesson", selectedLesson)
 
   const [PaymentStatus, setPaymentStatus] = useState(false)
 
-  console.log("PaymentStatus", PaymentStatus)
+  // console.log("PaymentStatus", PaymentStatus)
 
   return (
     <div className="flex flex-col md:flex-row gap-6 p-6">

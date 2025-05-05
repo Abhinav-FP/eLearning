@@ -32,39 +32,41 @@ const Index = ({ Availability, setIsPopupOpen, usedInPopup, setSelectedSlot, sel
   const [events, setEvents] = useState([]);
   const { user } = useRole();
   const router = useRouter();
-
+  console.log("Availability", Availability)
   useEffect(() => {
-    if (Availability?.availabilityBlocks?.length) {
-      const getNextQuarter = (date) => {
-        const next = new Date(date);
-        const minutes = next.getMinutes();
-        const add =
-          minutes < 15
-            ? 15 - minutes
-            : minutes < 30
+    if (!Availability) return;
+
+    const getNextQuarter = (date) => {
+      const next = new Date(date);
+      const minutes = next.getMinutes();
+      const add =
+        minutes < 15
+          ? 15 - minutes
+          : minutes < 30
             ? 30 - minutes
             : minutes < 45
-            ? 45 - minutes
-            : 60 - minutes;
-        next.setMinutes(minutes + add, 0, 0);
-        return next;
-      };
-  
-      const parsedEvents = [];
-  
-      Availability.availabilityBlocks.forEach((block) => {
+              ? 45 - minutes
+              : 60 - minutes;
+      next.setMinutes(minutes + add, 0, 0);
+      return next;
+    };
+
+    const processBlocks = (blocks, title, color) => {
+      const events = [];
+
+      blocks.forEach((block) => {
         let current = moment.utc(block.startDateTime).toDate();
         const end = moment.utc(block.endDateTime).toDate();
-  
+
         let isFirst = true;
         let firstSlotEnd = null;
-  
+
         while (current < end) {
           const nextChunk = getNextQuarter(current);
           const chunkEnd = nextChunk < end ? nextChunk : end;
-  
+
           if (isFirst) {
-            const duration = (chunkEnd - current) / (1000 * 60); // in minutes
+            const duration = (chunkEnd - current) / (1000 * 60); // minutes
             if (duration < 15) {
               firstSlotEnd = chunkEnd;
               current = chunkEnd;
@@ -72,33 +74,33 @@ const Index = ({ Availability, setIsPopupOpen, usedInPopup, setSelectedSlot, sel
               continue;
             }
           }
-  
-          if (firstSlotEnd) {
-            parsedEvents.push({
-              id: `${block._id}_${block.startDateTime}`,
-              title: "Available",
-              start: moment.utc(block.startDateTime).toDate(),
-              end: moment.utc(chunkEnd).toDate(),
-              color: "#6ABB52",
-            });
-            firstSlotEnd = null;
-          } else {
-            parsedEvents.push({
-              id: `${block._id}_${moment.utc(current).toISOString()}`,
-              title: "Available",
-              start: moment.utc(current).toDate(),
-              end: moment.utc(chunkEnd).toDate(),
-              color: "#6ABB52",
-            });
-          }
-  
+
+          events.push({
+            id: `${block._id}_${isFirst && firstSlotEnd ? block.startDateTime : moment.utc(current).toISOString()}`,
+            title,
+            start: moment.utc(isFirst && firstSlotEnd ? block.startDateTime : current).toDate(),
+            end: moment.utc(chunkEnd).toDate(),
+            color,
+          });
+
           current = new Date(chunkEnd);
           isFirst = false;
+          firstSlotEnd = null;
         }
       });
-  
-      setEvents(parsedEvents);
-    }
+
+      return events;
+    };
+
+    const availabilityEvents = Availability.availabilityBlocks?.length
+      ? processBlocks(Availability.availabilityBlocks, "Available", "#6ABB52")
+      : [];
+
+    const bookedEvents = Availability.bookedSlots?.length
+      ? processBlocks(Availability.bookedSlots, "Blocked", "#185abc")
+      : [];
+
+    setEvents([...availabilityEvents, ...bookedEvents]);
   }, [Availability]);
 
   const eventStyleGetter = (event) => {
@@ -115,40 +117,38 @@ const Index = ({ Availability, setIsPopupOpen, usedInPopup, setSelectedSlot, sel
 
   const [currentDate, setCurrentDate] = useState(new Date());
 
-  // const isEventWithinAvailability = (eventStartLocal, durationInMinutes, availabilityList) => {
-  //   console.log("eventStartLocal" ,eventStartLocal ,durationInMinutes)
-  //   const eventStart = new Date(eventStartLocal);
-  //   console.log(eventStart)
-  //   const eventEnd = new Date(eventStart.getTime() + durationInMinutes * 60000);
-  // console.log("eventEnd" ,eventEnd)
-  //   // Convert availability slots from UTC to local time once
-  //   const isWithinSlot = availabilityList.some(slot => {
-  //     const slotStart = new Date(new Date(slot.startDateTime).getTime() - eventStart.getTimezoneOffset() * 60000);
-  //     const slotEnd = new Date(new Date(slot.endDateTime).getTime() - eventStart.getTimezoneOffset() * 60000);
-  //     return eventStart >= slotStart && eventEnd <= slotEnd;
-  //   });
-  
-  //   return isWithinSlot;
-  // };
-  
+  const isEventWithinAvailability = (eventStartLocal, durationInMinutes, availabilityList) => {
+    const eventStart = new Date(eventStartLocal); // Local time
+    const eventStartUTC = new Date(eventStart.toISOString()); // Accurate UTC time
+    const eventEndUTC = new Date(eventStartUTC.getTime() + durationInMinutes * 60000);
+
+    const isWithinSlot = availabilityList.some(slot => {
+      const slotStart = new Date(slot.startDateTime); // Already in UTC
+      const slotEnd = new Date(slot.endDateTime);
+      return eventStartUTC >= slotStart && eventEndUTC <= slotEnd;
+    });
+
+    return isWithinSlot;
+  };
+
 
   const handleClick = (event) => {
     if (!usedInPopup) {
-      if(!user){
+      if (!user) {
         toast.error("Please login first");
         router.push(`/login?redirect=${router.asPath}`);
       }
       setIsPopupOpen(true);
     }
-    else{
-      // if(!isEventWithinAvailability(event?.start, selectedLesson?.duration, Availability?.availabilityBlocks)){
-      //   toast.error("This time slot is too short for your selected lesson duration.");
-      //   return;
-      // }
+    else {
+      if(!isEventWithinAvailability(event?.start, selectedLesson?.duration, Availability?.availabilityBlocks)){
+        toast.error("This time slot is too short for your selected lesson duration.");
+        return;
+      }
       setSelectedSlot(event);
     }
   };
-  console.log("availability",Availability);
+  // console.log("availability",Availability);
 
   return (
     <>
@@ -174,18 +174,18 @@ const Index = ({ Availability, setIsPopupOpen, usedInPopup, setSelectedSlot, sel
               </div>
             </div>
             {!usedInPopup &&
-            <h3 className="text-base lg:text-lg font-semibold text-[#1E1E1E] m-0 tracking-[-0.03em]">
-              <button
-                onClick={() => {
-                  handleClick();
-                }}
-                className={
-                  "font-medium cursor-pointer rounded-full py-2 px-5 text-[#ffffff] bg-[#CC2828] hover:bg-[#ad0e0e] text-base w-full py-3.5"
-                }
-              >
-                Book Slot
-              </button>
-            </h3>}
+              <h3 className="text-base lg:text-lg font-semibold text-[#1E1E1E] m-0 tracking-[-0.03em]">
+                <button
+                  onClick={() => {
+                    handleClick();
+                  }}
+                  className={
+                    "font-medium cursor-pointer rounded-full py-2 px-5 text-[#ffffff] bg-[#CC2828] hover:bg-[#ad0e0e] text-base w-full py-3.5"
+                  }
+                >
+                  Book Slot
+                </button>
+              </h3>}
           </div>
           <div className="p-4 relative">
             <Calendar
@@ -202,7 +202,12 @@ const Index = ({ Availability, setIsPopupOpen, usedInPopup, setSelectedSlot, sel
               style={{ height: "1000px", width: "100%" }}
               selectable
               eventPropGetter={eventStyleGetter}
-              onSelectEvent={(event) => handleClick(event)}
+              onSelectEvent={(event) => {
+                if (event.title !== "Blocked") {
+                  handleClick(event);
+                }
+              }}
+              
               components={{ event: Event }}
               onSelectSlot={(slotInfo) => {
                 const overlap = events.some(
@@ -211,24 +216,14 @@ const Index = ({ Availability, setIsPopupOpen, usedInPopup, setSelectedSlot, sel
                     moment(slotInfo.end).isAfter(event.start)
                 );
                 if (!overlap && !usedInPopup) {
-                    handleClick(slotInfo);
+                  handleClick(slotInfo);
                 }
               }}
             />
           </div>
         </div>
       </div>
-      {/* {isPopupOpen && (
-                <Popup
-                isPopupOpen={isPopupOpen}
-                    isOpen={true}
-                    onClose={handleClosePopup}
-                    size={'max-w-[510px]'}
-                >         
-                    <PayPalButton isPopupOpen={isPopupOpen}/>
-                    <Stripe />
-                </Popup>
-            )} */}
+      
     </>
   );
 };

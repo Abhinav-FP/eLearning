@@ -87,20 +87,18 @@ const PaymentCheckout = ({ selectedLesson, selectedSlot }) => {
                 ? `${selectedLesson?.duration} mins`
                 : ""}
             </p>
-            <p className="text-sm text-gray-500 capitalize">
-              {new Date(selectedSlot.start).toLocaleString("en-US", {
-                month: "short",
-                day: "numeric",
-                hour: "numeric",
-                minute: "2-digit",
-                hour12: true,
-              })}{" "}
-              -
-              {getFormattedEndTime(
-                selectedSlot?.start,
-                selectedLesson?.duration
-              )}{" "}
-            </p>
+            {selectedSlot?.start && selectedLesson?.duration && (
+  <p className="text-sm text-gray-500 capitalize">
+    {new Date(selectedSlot?.start).toLocaleString("en-US", {
+      month: "short",
+      day: "numeric",
+      hour: "numeric",
+      minute: "2-digit",
+      hour12: true,
+    })}{" "}
+    - {getFormattedEndTime(selectedSlot?.start, selectedLesson?.duration)}
+  </p>
+)}
           </div>
         </div>
 

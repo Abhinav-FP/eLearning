@@ -31,6 +31,7 @@ export default function Index() {
       const allLessons = response?.data?.data || [];
   
       const now = new Date();
+      const nowDateOnly = new Date(now.getFullYear(), now.getMonth(), now.getDate());
   
       const categorized = {
         upcoming: [],
@@ -40,10 +41,11 @@ export default function Index() {
   
       allLessons.forEach(lesson => {
         const start = new Date(lesson.startDateTime);
+        const startDateOnly = new Date(start.getFullYear(), start.getMonth(), start.getDate());
   
-        if (lesson.status?.toLowerCase() === "cancelled") {
+        if (lesson.status?.toLowerCase() === "cancelled" || lesson.cancelled) {
           categorized.cancelled.push(lesson);
-        } else if (start > now) {
+        } else if (startDateOnly >= nowDateOnly) {
           categorized.upcoming.push(lesson);
         } else {
           categorized.past.push(lesson);
@@ -59,7 +61,7 @@ export default function Index() {
         cancelled: [],
       });
     }
-  };
+  };  
 
   useEffect(() => {
       fetchLessons();

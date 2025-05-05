@@ -1,4 +1,5 @@
 import Listing from "@/pages/api/Listing";
+import Link from "next/link";
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
 import { MdClose } from "react-icons/md";
@@ -32,9 +33,9 @@ export default function CancelPage() {
       <p className="text-gray-600 text-center max-w-sm mb-6">
         Unfortunately, your payment was not successful. Please try again or use a different payment method.
       </p>
-      <button className="bg-red-600 text-white px-6 py-2 rounded-full hover:bg-red-700 transition">
+      <Link href="/" className="bg-red-600 text-white px-6 py-2 rounded-full hover:bg-red-700 transition">
         Try Again
-      </button>
+      </Link>
     </div>
   );
 }

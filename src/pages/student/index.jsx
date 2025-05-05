@@ -8,6 +8,7 @@ import Image from 'next/image'
 export default function Index() {
 
   const [dahboard, setDashboard] = useState([]);
+  console.log("dahboard" ,dahboard)
 
   const StudentDashboards = async () => {
     try {

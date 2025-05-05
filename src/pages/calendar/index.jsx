@@ -115,19 +115,21 @@ const Index = ({ Availability, setIsPopupOpen, usedInPopup, setSelectedSlot, sel
 
   const [currentDate, setCurrentDate] = useState(new Date());
 
-  const isEventWithinAvailability = (eventStartLocal, durationInMinutes, availabilityList) => {
-    const eventStart = new Date(eventStartLocal);
-    const eventEnd = new Date(eventStart.getTime() + durationInMinutes * 60000);
+  // const isEventWithinAvailability = (eventStartLocal, durationInMinutes, availabilityList) => {
+  //   console.log("eventStartLocal" ,eventStartLocal ,durationInMinutes)
+  //   const eventStart = new Date(eventStartLocal);
+  //   console.log(eventStart)
+  //   const eventEnd = new Date(eventStart.getTime() + durationInMinutes * 60000);
+  // console.log("eventEnd" ,eventEnd)
+  //   // Convert availability slots from UTC to local time once
+  //   const isWithinSlot = availabilityList.some(slot => {
+  //     const slotStart = new Date(new Date(slot.startDateTime).getTime() - eventStart.getTimezoneOffset() * 60000);
+  //     const slotEnd = new Date(new Date(slot.endDateTime).getTime() - eventStart.getTimezoneOffset() * 60000);
+  //     return eventStart >= slotStart && eventEnd <= slotEnd;
+  //   });
   
-    // Convert availability slots from UTC to local time once
-    const isWithinSlot = availabilityList.some(slot => {
-      const slotStart = new Date(new Date(slot.startDateTime).getTime() - eventStart.getTimezoneOffset() * 60000);
-      const slotEnd = new Date(new Date(slot.endDateTime).getTime() - eventStart.getTimezoneOffset() * 60000);
-      return eventStart >= slotStart && eventEnd <= slotEnd;
-    });
-  
-    return isWithinSlot;
-  };
+  //   return isWithinSlot;
+  // };
   
 
   const handleClick = (event) => {
@@ -139,10 +141,10 @@ const Index = ({ Availability, setIsPopupOpen, usedInPopup, setSelectedSlot, sel
       setIsPopupOpen(true);
     }
     else{
-      if(!isEventWithinAvailability(event?.start, selectedLesson?.duration, Availability?.availabilityBlocks)){
-        toast.error("This time slot is too short for your selected lesson duration.");
-        return;
-      }
+      // if(!isEventWithinAvailability(event?.start, selectedLesson?.duration, Availability?.availabilityBlocks)){
+      //   toast.error("This time slot is too short for your selected lesson duration.");
+      //   return;
+      // }
       setSelectedSlot(event);
     }
   };

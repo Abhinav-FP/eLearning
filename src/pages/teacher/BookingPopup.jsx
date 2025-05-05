@@ -10,6 +10,7 @@ export default function BookingPopup({
   onClose,
   lessons,
   Availability,
+  studentTimeZone
 }) {
   const [step, setStep] = useState(1);
   const [selectedLesson, SetSelectedLesson] = useState(null);

@@ -3,7 +3,7 @@ import Stripe from "../stripe/Stripe";
 import Payment from "../payment/index"
 import Image from "next/image";
 
-const PaymentCheckout = ({ selectedLesson, selectedSlot }) => {
+const PaymentCheckout = ({ selectedLesson, selectedSlot, studentTimeZone }) => {
 
   function getFormattedEndTime(time, durationInMinutes) {
     const start = new Date(time);
@@ -96,17 +96,17 @@ const PaymentCheckout = ({ selectedLesson, selectedSlot }) => {
                 : ""}
             </p>
             {selectedSlot?.start && selectedLesson?.duration && (
-  <p className="text-sm text-gray-500 capitalize">
-    {new Date(selectedSlot?.start).toLocaleString("en-US", {
-      month: "short",
-      day: "numeric",
-      hour: "numeric",
-      minute: "2-digit",
-      hour12: true,
-    })}{" "}
-    - {getFormattedEndTime(selectedSlot?.start, selectedLesson?.duration)}
-  </p>
-)}
+              <p className="text-sm text-gray-500 capitalize">
+                {new Date(selectedSlot?.start).toLocaleString("en-US", {
+                  month: "short",
+                  day: "numeric",
+                  hour: "numeric",
+                  minute: "2-digit",
+                  hour12: true,
+                })}{" "}
+                - {getFormattedEndTime(selectedSlot?.start, selectedLesson?.duration)}
+              </p>
+            )}
           </div>
         </div>
 
@@ -120,9 +120,9 @@ const PaymentCheckout = ({ selectedLesson, selectedSlot }) => {
         </div>
 
         {PaymentStatus === false ? (
-          <Payment PricePayment={selectedLesson?.price + 0.1*selectedLesson?.price} selectedLesson={selectedLesson}  selectedSlot={selectedSlot}  />
+          <Payment PricePayment={selectedLesson?.price + 0.1*selectedLesson?.price} selectedLesson={selectedLesson}  selectedSlot={selectedSlot} studentTimeZone={studentTimeZone}/>
         ) : (
-          <Stripe PricePayment={selectedLesson?.price + 0.1*selectedLesson?.price} selectedLesson={selectedLesson}  selectedSlot= {selectedSlot}/>
+          <Stripe PricePayment={selectedLesson?.price + 0.1*selectedLesson?.price} selectedLesson={selectedLesson}  selectedSlot= {selectedSlot} studentTimeZone={studentTimeZone}/>
         )}
 
       </div>

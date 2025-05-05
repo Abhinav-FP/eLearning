@@ -24,7 +24,7 @@ export default function BookingPopup({
   console.log("selectedSlot",selectedSlot);
   console.log("selectedLesson",selectedLesson);
 
-  function getFormattedEndTime(time, durationInMinutes) {
+  function getFormattedEndTime(time, durationInMinutes, studentTimeZone) {
     const start = new Date(time);
     const end = new Date(start.getTime() + durationInMinutes * 60000);
 
@@ -94,6 +94,7 @@ export default function BookingPopup({
               Availability={Availability}
               usedInPopup={true}
               setSelectedSlot={setSelectedSlot}
+              selectedLesson={selectedLesson}
             />
             <div className="flex justify-between items-center mt-5">
               <button
@@ -141,6 +142,7 @@ export default function BookingPopup({
         <PaymentCheckout
           selectedLesson={selectedLesson}
           selectedSlot={selectedSlot}
+          studentTimeZone={studentTimeZone}
         />
       )}
     </Popup>

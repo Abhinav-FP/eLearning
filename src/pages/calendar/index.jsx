@@ -28,7 +28,7 @@ const Event = ({ event }) => {
 
   return <div style={eventStyle}></div>;
 };
-const Index = ({ Availability, setIsPopupOpen, usedInPopup, setSelectedSlot }) => {
+const Index = ({ Availability, setIsPopupOpen, usedInPopup, setSelectedSlot, selectedLesson }) => {
   const [events, setEvents] = useState([]);
   const { user } = useRole();
   const router = useRouter();
@@ -115,6 +115,21 @@ const Index = ({ Availability, setIsPopupOpen, usedInPopup, setSelectedSlot }) =
 
   const [currentDate, setCurrentDate] = useState(new Date());
 
+  const isEventWithinAvailability = (eventStartLocal, durationInMinutes, availabilityList) => {
+    const eventStart = new Date(eventStartLocal);
+    const eventEnd = new Date(eventStart.getTime() + durationInMinutes * 60000);
+  
+    // Convert availability slots from UTC to local time once
+    const isWithinSlot = availabilityList.some(slot => {
+      const slotStart = new Date(new Date(slot.startDateTime).getTime() - eventStart.getTimezoneOffset() * 60000);
+      const slotEnd = new Date(new Date(slot.endDateTime).getTime() - eventStart.getTimezoneOffset() * 60000);
+      return eventStart >= slotStart && eventEnd <= slotEnd;
+    });
+  
+    return isWithinSlot;
+  };
+  
+
   const handleClick = (event) => {
     if (!usedInPopup) {
       if(!user){
@@ -124,9 +139,14 @@ const Index = ({ Availability, setIsPopupOpen, usedInPopup, setSelectedSlot }) =
       setIsPopupOpen(true);
     }
     else{
-        setSelectedSlot(event);
+      if(!isEventWithinAvailability(event?.start, selectedLesson?.duration, Availability?.availabilityBlocks)){
+        toast.error("This time slot is too short for your selected lesson duration.");
+        return;
+      }
+      setSelectedSlot(event);
     }
   };
+  console.log("availability",Availability);
 
   return (
     <>

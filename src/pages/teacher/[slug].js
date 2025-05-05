@@ -11,6 +11,7 @@ import { MdOutlinePlayCircle } from "react-icons/md";
 import { useRouter } from "next/router";
 import Listing from "../api/Listing";
 import BookingPopup from "./BookingPopup";
+import { DateTime } from "luxon";
 
 export default function Index() {
   const router = useRouter();
@@ -19,8 +20,15 @@ export default function Index() {
   const [content, setContent] = useState("");
   const [lessons, setLessons] = useState([]);
   const [isPopupOpen, setIsPopupOpen] = useState(false);
+  const [studentTimeZone, setStudentTimeZone]=useState(null);
   const closePopup = () => setIsPopupOpen(false);
   const Id = data?.userId?._id;
+
+  // Get timezone
+  useEffect(() => {
+    const timeZone = Intl.DateTimeFormat().resolvedOptions().timeZone || "";
+    setStudentTimeZone(timeZone);
+  }, []);
 
   const fetchLessons = async (Id) => {
     try {
@@ -119,9 +127,12 @@ export default function Index() {
         <div className="pt-[40px md:pt-[60px] md:pt-[80px] xl:pt-[100px] pb-[40px] lg:pb-[60px] bg-[#F8F9FA]">
           <div className="container sm:container md:container lg:container xl:max-w-[1230px]  px-4 mx-auto">
             <Heading
-              classess={"text-[#1E1E1E] mg-6 lg:mb-8"}
+              classess={"text-[#1E1E1E] mb-2"}
               title={"Availabilities"}
             />
+            <p className="text-sm text-gray-600 mb-6 lg:mb-8">
+              {`All calendar times are displayed based on your device's current time zone: ${studentTimeZone || "NA"}. Please ensure your system time is accurate to avoid any scheduling discrepancies.`}
+            </p>
             <Calendar Availability={content} setIsPopupOpen={setIsPopupOpen} usedInPopup={false}/>
           </div>
         </div>
@@ -131,6 +142,7 @@ export default function Index() {
           onClose={closePopup}
           lessons={lessons}
           Availability={content}
+          studentTimeZone={studentTimeZone}
         />
       </Layout>
     </>

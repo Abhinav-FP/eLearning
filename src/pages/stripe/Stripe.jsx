@@ -2,12 +2,13 @@ import React, { useState } from 'react'
 import toast from 'react-hot-toast';
 import Listing from '../api/Listing';
 
-export default function Stripe({PricePayment ,selectedLesson , selectedSlot}) {
+export default function Stripe({PricePayment ,selectedLesson , selectedSlot, studentTimeZone}) {
   console.log("selectedSlot" ,selectedSlot)
   const [processing, setprocessing] = useState(false);
 
  
   const handlePayment = async () => {
+    if(processing){return;}
     try {
       setprocessing(true);
       const payment = new Listing();
@@ -17,7 +18,8 @@ export default function Stripe({PricePayment ,selectedLesson , selectedSlot}) {
         LessonId : selectedLesson?._id,
         teacherId :  selectedLesson?.teacher?._id,
         startDateTime : selectedSlot?.start ,
-        endDateTime : selectedSlot?.end
+        endDateTime : selectedSlot?.end,
+        timezone : studentTimeZone || "UTC",
       });
       resp.then((res) => {
           if (res.data.url) {
@@ -43,7 +45,7 @@ export default function Stripe({PricePayment ,selectedLesson , selectedSlot}) {
           handlePayment();
         }}
         >
-          Pay ${PricePayment} USD
+         {processing ? "Processing..." : `Pay ${PricePayment} USD`}
         </button> 
     </>
   )

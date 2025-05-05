@@ -7,7 +7,7 @@ import Listing from "../api/Listing";
 import toast from "react-hot-toast";
 
 
-const Index = ({ isPopupOpen, PricePayment, selectedLesson, selectedSlot }) => {
+const Index = ({ isPopupOpen, PricePayment, selectedLesson, selectedSlot, studentTimeZone }) => {
   const router = useRouter();
 
 
@@ -56,7 +56,8 @@ const Index = ({ isPopupOpen, PricePayment, selectedLesson, selectedSlot }) => {
         LessonId: selectedLesson?._id,
         teacherId: selectedLesson?.teacher?._id,
         startDateTime: selectedSlot?.start,
-        endDateTime: selectedSlot?.end
+        endDateTime: selectedSlot?.end,
+        timezone : studentTimeZone || "UTC",
       });
 
       if (response?.data?.status === "COMPLETED") {

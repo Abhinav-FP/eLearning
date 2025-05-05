@@ -16,7 +16,7 @@ export default function LessonList({ lessons, showSelected, selectedLesson, SetS
             }}
           >
             <h3 className="text-[#CC2828] tracking-[-0.04em] text-xl lg:text-2xl xl:text-[30px] font-inter font-extrabold mb-3 md:mb-4 lg:mb-6 capitalize">
-              {item?.title}{" "}
+              {item?.title} - {item?.duration} minutes
             </h3>
             <div className="flex flex-wrap ">
               <div className="mb-3 md:mb-0 w-full md:w-[calc(100%-170px)] md:pr-5">

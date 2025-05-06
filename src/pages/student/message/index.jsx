@@ -137,10 +137,8 @@ export default function Index() {
                     <h3 className="font-medium font-inter text-base mb-0 text-black ">{chat?.teacher?.name}</h3>
                     {chat?.count ? (
                       <p className="text-sm text-[#CC2828] font-inter tracking-[-0.04em] "> {chat?.count > 5 ? '5+' : chat?.count} unread messages</p>
-
                     ) : (
-                      <p className="text-sm text-[#7A7A7A] font-inter tracking-[-0.04em]"> Teacher</p>
-
+                      <p className="text-sm text-[#7A7A7A] font-inter tracking-[-0.04em]">Teacher</p>
                     )}
                   </div>
                   {chat?.count > 0 && (
@@ -149,12 +147,9 @@ export default function Index() {
                     </div>
                   )}
                 </div>
-
               ))}
-
             </div>
           </div>
-
           {/* Chat Panel */}
           <div className={`w-full lg:w-8/12  xl:w-9/12 flex flex-col  bg-[#F1F1F1] ${MobileOpen ? "block lg:block" : "hidden lg:block"}`}>
             {/* Chat Header */}
@@ -173,8 +168,7 @@ export default function Index() {
                 </div>
                 {MobileOpen && (
                   <button onClick={ () => setMobileOpen(false) } className='flex w-fit ml-auto px-6 md:px-8 lg:px-10 py-2 text-[#CC2828] border border-[#CC2828] rounded-md text-xs sm:text-sm hover:bg-[#CC2828] hover:text-white cursor-pointer'>Back</button>
-                )}
-                
+                )}                
               </div>
             )}
 

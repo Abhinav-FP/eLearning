@@ -18,6 +18,7 @@ export default function Index() {
     const [data, setData] = useState({
         name: "",
         email: "",
+        confirm_email: "",
         timezone: "",
         nationalities: "",
         password: "",
@@ -43,15 +44,18 @@ export default function Index() {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-
         if (loading) return;
         if(!isPasswordValid){
             toast.error("Password must include at least one uppercase letter, one lowercase letter, a number, a special character, and be at least 8 characters long.");
             return;
         }
 
+        if (data?.email !== data?.confirm_email) {
+            toast.error("Email and Confirm Email do not match");
+            return;
+        }
         if (data?.password !== data?.confirm_password) {
-            toast.error("Please match password and confirm password");
+            toast.error("Password and Confirm Password do not match");
             return;
         }
         setLoading(true);
@@ -72,6 +76,7 @@ export default function Index() {
                 toast.success(response.data.message);
                 setData({
                     email: "",
+                    confirm_email : "",
                     password: "",
                     confirm_password: "",
                     name: "",
@@ -120,6 +125,23 @@ export default function Index() {
                             />
                         </div>
                         <div className='w-full md:w-6/12 px-2.5 mb-5'>
+                            <label className="block text-base font-medium text-[#727272] tracking-[-0.06em] mb-1">Time-Zone</label>
+                            {/* Time-Zone */}
+                            <select className="w-full px-4 lg:px-5 py-2 border h-[48px] lg:h-[56px] border-[#F4F6F8] rounded-[6px] lg:rounded-[10px] bg-[#F4F6F8] focus:outline-none focus:ring-1 focus:ring-[#c9c9c9]"
+                                onChange={handleChange}
+                                value={data?.timezone}
+                                name='timezone'
+                                required
+                            >
+                                <option value="">Please select Time-Zone</option>
+                                {timeZones && timeZones?.map((zone, index) => (
+                                    <option key={index} value={zone.value}>
+                                        {zone.label}
+                                    </option>
+                                ))}
+                            </select>
+                        </div>
+                        <div className='w-full md:w-6/12 px-2.5 mb-5'>
                             <label className="block text-base font-medium text-[#727272] tracking-[-0.06em] mb-1">Email</label>
                             <input
                                 value={data?.email}
@@ -130,6 +152,18 @@ export default function Index() {
                                 className="w-full px-4 lg:px-5 py-2 border h-[48px] lg:h-[5 6px] border-[#F4F6F8] rounded-[6px] lg:rounded-[10px] bg-[#F4F6F8] focus:outline-none focus:ring-1 focus:ring-[#c9c9c9]"
                                 required
 
+                            />
+                        </div>
+                        <div className='w-full md:w-6/12 px-2.5 mb-5'>
+                            <label className="block text-base font-medium text-[#727272] tracking-[-0.06em] mb-1">Email</label>
+                            <input
+                                value={data?.confirm_email}
+                                onChange={handleChange}
+                                type="email"
+                                name='confirm_email'
+                                placeholder="Confirm Email"
+                                className="w-full px-4 lg:px-5 py-2 border h-[48px] lg:h-[5 6px] border-[#F4F6F8] rounded-[6px] lg:rounded-[10px] bg-[#F4F6F8] focus:outline-none focus:ring-1 focus:ring-[#c9c9c9]"
+                                required
                             />
                         </div>
                         <div className='w-full md:w-6/12 px-2.5 mb-5'>
@@ -162,26 +196,6 @@ export default function Index() {
                                     className="w-full px-4 lg:px-5 py-2 border h-[48px] lg:h-[56px] border-[#F4F6F8] rounded-[6px] lg:rounded-[10px] bg-[#F4F6F8] focus:outline-none focus:ring-1 focus:ring-[#c9c9c9]"
                                     required
                                 />
-                        </div>
-                        <div className='w-full md:w-4/12 px-2.5 mb-5'>
-                            <label className="block text-base font-medium text-[#727272] tracking-[-0.06em] mb-1">Time-Zone</label>
-                            {/* Time-Zone */}
-                            <select className="w-full px-4 lg:px-5 py-2 border h-[48px] lg:h-[56px] border-[#F4F6F8] rounded-[6px] lg:rounded-[10px] bg-[#F4F6F8] focus:outline-none focus:ring-1 focus:ring-[#c9c9c9]"
-                                onChange={handleChange}
-                                value={data?.timezone}
-                                name='timezone'
-                                required
-
-                            >
-                                <option value="">Please select Time-Zone</option>
-
-
-                                {timeZones && timeZones?.map((zone, index) => (
-                                    <option key={index} value={zone.value}>
-                                        {zone.label}
-                                    </option>
-                                ))}
-                            </select>
                         </div>
                         {/* Gender */}
                         {/* <select

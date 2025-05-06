@@ -1,20 +1,28 @@
 import Image from 'next/image';
 import React, { useEffect, useState } from 'react'
 import Profile_img from "../../Assets/Images/hero_top_img.png"
+import timeZones from "../../../Json/TimeZone";
 import Listing from '@/pages/api/Listing';
 import toast from 'react-hot-toast';
 
 export default function Profile() {
-
+    const [processing, setProcessing] = useState(false);
+    const [data, setData] = useState({
+        name: "",
+        email: "",
+        timezone: "",
+    })
+    
     useEffect(() => {
         const main = new Listing();
         main.profileVerify()
           .then((r) => {
             const profiledata = r?.data?.data?.user;
+            // console.log("profileData",profiledata);
             setData({
               name: profiledata?.name,
               email: profiledata?.email,
-              phone: profiledata?.phone,
+              timezone: profiledata?.time_zone,
             });
           })
           .catch((err) => {
@@ -22,12 +30,6 @@ export default function Profile() {
           });
       }, []);
 
-    const [processing, setProcessing] = useState(false);
-    const [data, setData] = useState({
-        name: "",
-        email: "",
-        phone: "",
-    })
     const handleChange = (e) => {
         const { name, value } = e.target;
         setData((prevState) => ({
@@ -40,22 +42,20 @@ export default function Profile() {
     const handleSubmit = async (e) => {
         e.preventDefault();
         if (processing) return;
-
+        if(data?.phone?.length <10){
+            toast.error("Phone Number must be 10 digits long");
+            return;
+        }
         setProcessing(true);
         try {
             const main = new Listing();
             const response = await main.ProfileUpdate({
                 name: data?.name,
                 email: data?.email,
-                phone: data?.phone
+                time_zone: data?.timezone
             });
             if (response?.data) {
                 toast.success(response.data.message);
-                setData({
-                    phone: "",
-                    name: "",
-                    email: "",
-                });
             } else {
                 toast.error(response.data.message);
             }
@@ -136,18 +136,24 @@ export default function Profile() {
                     </div>
                     <div className="flex flex-wrap">
                         <div className="w-full lg:w-5/12 xl:w-4/12 lg:pr-3 mb-2 lg:mb-0">
-                            <label className="block text-[#CC2828] font-medium text-base xl:text-xl mb-1 tracking-[-0.04em]">Phone Number</label>
-                            <p className="block text-[#535353] font-medium text-sm xl:text-base tracking-[-0.04em] mb-0">Edit your number here</p>
+                            <label className="block text-[#CC2828] font-medium text-base xl:text-xl mb-1 tracking-[-0.04em]">Time Zone</label>
+                            <p className="block text-[#535353] font-medium text-sm xl:text-base tracking-[-0.04em] mb-0">Edit your time zone here</p>
                         </div>
                         <div className="w-full lg:w-6/12 xl:w-5/12 lg:pl-3">
-                            <input type="text"
-                                value={data?.phone}
-                                required
-                                name='phone'
+                            <select className="w-full h-11 lg:h-[54px] font-medium appearance-none block bg-[#F4F6F8] text-[#46494D] text-base border border-[#F4F6F8] rounded-lg py-3 px-3 lg:px-6 leading-tight focus:outline-none  tracking-[-0.04em]"
                                 onChange={handleChange}
-                                className="w-full h-11 lg:h-[54px] font-medium appearance-none block bg-[#F4F6F8] text-[#46494D] text-base border border-[#F4F6F8] rounded-lg py-3 px-3 lg:px-6 leading-tight focus:outline-none  tracking-[-0.04em]"
-                            />
+                                value={data?.timezone}
+                                name='timezone'
+                                required
 
+                            >
+                                <option value="">Please select Time-Zone</option>
+                                {timeZones && timeZones?.map((zone, index) => (
+                                    <option key={index} value={zone.value}>
+                                        {zone.label}
+                                    </option>
+                                ))}
+                            </select>
                         </div>
                     </div>
                 </div>

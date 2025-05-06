@@ -7,14 +7,14 @@ import Listing from "@/pages/api/Listing";
 import Link from "next/link";
 
 export default function Index() {
-  const [teachers, setTeachers] = useState([]);
+  const [data, setData] = useState([]);
  
   
   const fetchStudentTeachers = async () => {
     try {
       const main = new Listing();
       const response = await main.StudentTeacher();
-      setTeachers(response?.data?.data || []);
+      setData(response?.data?.data || []);
     } catch (error) {
       console.log("error", error);
     }
@@ -52,12 +52,12 @@ const handleRemoveSubmit = async (Id) => {
     <StudentLayout page={"Find a teacher"}>
       <div className="min-h-screen p-5 lg:p-[30px]">
         <Link href="/student/favourite-teacher" className="flex w-fit ml-auto mb-4 lg:mb-5 px-2 sm:px-8 py-2.5 text-[#CC2828] border border-[#CC2828] rounded-[10px] tracking-[-0.06em] text-sm font-medium hover:bg-[#CC2828] hover:text-white cursor-pointer">
-          View Favourite Teachers
+          {`View Favourite Teachers (${data?.favouriteSize || "0"})`}
         </Link>
         {/* Lesson Cards */}
         <div className="space-y-4 lg:space-y-5">
-          {teachers &&
-            teachers?.map((teacher, idx) => (
+          {data && data?.teacher && 
+            data?.teacher?.map((teacher, idx) => (
               <div key={idx}>
                 <div className="bg-white rounded-[10px] lesson_list_shadow  p-3 md:p-4 lg:p-5 flex flex-col lg:flex-row lg:items-center justify-between transition border-[rgba(204,40,40,0.2)] border-1 gap-5">
                   <div className="flex flex-col sm:flex-row sm:items-center space-y-2 sm:space-x-3  mt-2">
@@ -70,7 +70,7 @@ const handleRemoveSubmit = async (Id) => {
                     />
                     <div>
                       <h3 className="flex font-inter gap-2 items-center text-md lg:text-xl text-[#CC2828] font-medium tracking-[-0.06em] mb-2">
-                        {teacher?.userId?.name || ""}
+                      <Link href={`/teacher/${teacher?._id}`}>{teacher?.userId?.name || ""}</Link>
                         {teacher?.isLiked  ? (
                           //Liked teacher
                           <span className="cursor-pointer" onClick={() => handleRemoveSubmit(teacher?.userId?._id)}>
@@ -98,9 +98,9 @@ const handleRemoveSubmit = async (Id) => {
                     </div>
                   </div>
                   <div className="flex flex-row gap-2 justify-between">
-                    <button className="tracking-[-0.06em] font-inter font-medium px-6 md:px-10 lg:px-12 py-2 lg:py-2.5 text-[#CC2828] border border-[#CC2828] rounded-[10px] text-sm hover:bg-[#CC2828] hover:text-white cursor-pointer">                    
+                    <Link href={`/teacher/${teacher?._id}`} className="tracking-[-0.06em] font-inter font-medium px-6 md:px-10 lg:px-12 py-2 lg:py-2.5 text-[#CC2828] border border-[#CC2828] rounded-[10px] text-sm hover:bg-[#CC2828] hover:text-white cursor-pointer">                    
                       Book
-                    </button>
+                    </Link>
                     <Link href={`/student/message?query=${teacher?.userId?._id}`} className="tracking-[-0.06em] font-inter font-medium px-6 md:px-10 lg:px-12 py-2 lg:py-2.5 bg-[#CC2828] text-white rounded-[10px]  text-sm hover:bg-white hover:text-[#CC2828] border border-[#CC2828] cursor-pointer">
                       Message
                     </Link>

@@ -4,11 +4,13 @@ import Image from "next/image";
 import Logo from "../Assets/Images/logo.png"; // Adjust the path as necessary
 import { IoIosArrowDown } from "react-icons/io";
 import Button from "./Button";
+import { useRole } from "@/context/RoleContext";
 
 export default function Header() {
 
     // mobile menu 
     const [menuOpen, setMenuOpen] = useState();
+    const { user } = useRole();
     const toggleMenu = () => {
         setMenuOpen(!menuOpen);
     }
@@ -34,6 +36,7 @@ export default function Header() {
         window.addEventListener('scroll', handleScroll);
         return () => window.removeEventListener('scroll', handleScroll);
     }, [])
+    // console.log("user",user);
 
     return (
         <>
@@ -43,9 +46,9 @@ export default function Header() {
                         <div className="flex-shrink-0">
                             <Link href="/">
                                 <Image
-                                    className="max-w-[81px] h-[69px]"
-                                    height={1000}
-                                    width={1000}
+                                    className="max-w-fit h-[69px]"
+                                    height={75}
+                                    width={94}
                                     layout="fixed"
                                     src={Logo}
                                     alt="Japanese Logo"
@@ -77,14 +80,24 @@ export default function Header() {
                                     </Link>
                                 </li>
                             </ul>
-                            <div className="flex flex-col lg:hidden">
-                                <Link href="/student/login" className="text-[#CC2828] hover:text-[#ad0e0e] border-t border-[#ddd] text-base py-3 px-4 font-medium cursor-pointer" >
-                                    Log In
-                                </Link>
-                                <Link href="/student/register" className="text-[#CC2828] hover:text-[#ad0e0e] border-t border-[#ddd] text-base py-3 px-4 font-medium cursor-pointer" >
-                                    Sign Up 
-                                </Link>
-                            </div>
+                            { user && user?.role ?
+                                <div className="flex flex-col lg:hidden">
+                                    <Link 
+                                        href={`${user?.role === "student" ? "/student" : "/teacher-dashboard"}`}
+                                        className="text-[#CC2828] hover:text-[#ad0e0e] border-t border-[#ddd] text-base py-3 px-4 font-medium cursor-pointer" >
+                                        View dashboard
+                                    </Link>
+                                </div>
+                            :
+                                <div className="flex flex-col lg:hidden">
+                                    <Link href="/login" className="text-[#CC2828] hover:text-[#ad0e0e] border-t border-[#ddd] text-base py-3 px-4 font-medium cursor-pointer" >
+                                        Log In
+                                    </Link>
+                                    <Link href="/student/register" className="text-[#CC2828] hover:text-[#ad0e0e] border-t border-[#ddd] text-base py-3 px-4 font-medium cursor-pointer" >
+                                        Sign Up 
+                                    </Link>
+                                </div>
+                            }
                         </div>
                         <div className="flex flex-wrap space-x-4 items-center ml-auto lg:ml-0 mr-2 lg:mr-0">
                             <div className="group relative mr-0 lg:mr-4 xl:mr-5">
@@ -96,11 +109,21 @@ export default function Header() {
                                     <button onClick={() => (handleLanguageSelect('Japanese'))} className="w-full cursor-pointer bg-transparent py-.5 px-2 py-2 [&:not(:last-child)]:border-b hover:text-[#CC2828]">Japanese</button>
                                 </div>
                             </div>
-                            <Link href="/student/register" className="hidden lg:block bg-[#CC2828] hover:bg-[#ad0e0e] text-white text-base py-3.5 px-8 xl:px-10 font-medium cursor-pointer rounded-full" >
-                                Sign Up                            </Link>
-                            <Link href="/student/login" className="hidden lg:block bg-[#CC2828] hover:bg-[#ad0e0e] text-white text-base py-3.5 px-8 xl:px-10 font-medium cursor-pointer rounded-full" >
-                                Log In
-                            </Link>
+                            { user && user?.role ? 
+                                <Link 
+                                href={`${user?.role === "student" ? "/student" : "/teacher-dashboard"}`} 
+                                className="hidden lg:block bg-[#CC2828] hover:bg-[#ad0e0e] text-white text-base py-3.5 px-8 xl:px-10 font-medium cursor-pointer rounded-full" >
+                                    View Dashboard                            
+                                </Link>
+                            :
+                                <>
+                                    <Link href="/student/register" className="hidden lg:block bg-[#CC2828] hover:bg-[#ad0e0e] text-white text-base py-3.5 px-8 xl:px-10 font-medium cursor-pointer rounded-full" >
+                                        Sign Up                            </Link>
+                                    <Link href="/login" className="hidden lg:block bg-[#CC2828] hover:bg-[#ad0e0e] text-white text-base py-3.5 px-8 xl:px-10 font-medium cursor-pointer rounded-full" >
+                                        Log In
+                                    </Link>
+                                </>
+                            }
 
                         </div>
                         <div className="flex lg:hidden">

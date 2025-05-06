@@ -1,15 +1,72 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import StudentLayout from "../Common/StudentLayout";
 import Image from "next/image";
+import Listing from "@/pages/api/Listing";
+import Link from "next/link";
 
 export default function Index() {
   const [tab, setTab] = useState("upcoming");
-  const lessons = Array(6).fill({
-    date: "April 15, 2025",
-    time: "2:00 PM",
-    duration: "1 Hour",
-    teacher: "John Doe",
-  });
+  const dateOptions = { year: 'numeric', month: 'long', day: 'numeric' };
+
+  // Extract the time (formatted as "2:00 PM")
+  const timeOptions = { hour: 'numeric', minute: 'numeric', hour12: true };
+
+  // const lessonss = Array(6).fill({
+  //   date: "April 15, 2025",
+  //   time: "2:00 PM",
+  //   duration: "1 Hour",
+  //   teacher: "John Doe",
+  // });
+
+  const [categorizedLessons, setCategorizedLessons] = useState({
+    upcoming: [],
+    past: [],
+    cancelled: [],
+  });  
+
+  const fetchLessons = async () => {
+    try {
+      const main = new Listing();
+      const response = await main.GetBooking();
+      const allLessons = response?.data?.data || [];
+  
+      const now = new Date();
+      const nowDateOnly = new Date(now.getFullYear(), now.getMonth(), now.getDate());
+  
+      const categorized = {
+        upcoming: [],
+        past: [],
+        cancelled: [],
+      };
+  
+      allLessons.forEach(lesson => {
+        const start = new Date(lesson.startDateTime);
+        const startDateOnly = new Date(start.getFullYear(), start.getMonth(), start.getDate());
+  
+        if (lesson.status?.toLowerCase() === "cancelled" || lesson.cancelled) {
+          categorized.cancelled.push(lesson);
+        } else if (startDateOnly >= nowDateOnly) {
+          categorized.upcoming.push(lesson);
+        } else {
+          categorized.past.push(lesson);
+        }
+      });
+  
+      setCategorizedLessons(categorized);
+    } catch (error) {
+      console.log("error", error);
+      setCategorizedLessons({
+        upcoming: [],
+        past: [],
+        cancelled: [],
+      });
+    }
+  };  
+
+  useEffect(() => {
+      fetchLessons();
+  }, []);
+  console.log("lessons",categorizedLessons);
 
   return (
     <StudentLayout page={"My Lessons"}>
@@ -38,15 +95,17 @@ export default function Index() {
 
         {/* Lesson Cards */}
         <div className="space-y-4 lg:space-y-5  px-5 lg:px-[30px]">
-          {lessons &&
-            lessons?.map((lesson, idx) => (
+        {categorizedLessons[tab]?.length ? (
+  categorizedLessons[tab].map((lesson, idx) => (
               <div key={idx}>
                 <div className="flex items-center gap-3 xl:gap-4 flex-wrap mb-3 lg:mb-4 xl:mb-5">
                   <p className="text-[#CC2828] font-bold text-lg xl:text-xl font-inter">
-                    {lesson.date}
+                    {lesson?.startDateTime ? new Date(lesson.startDateTime).toLocaleDateString('en-US', dateOptions) : ""}
                   </p>
-                  <p className="text-sm lg:text-base font-medium text-[#535353] font-inter ">{lesson?.time || ""}</p>
-                  <p className="text-sm lg:text-base font-medium text-[#535353] font-inter ">{lesson?.duration || ""}</p>
+                  <p className="text-sm lg:text-base font-medium text-[#535353] font-inter ">
+                    {lesson?.startDateTime ? new Date(lesson.startDateTime).toLocaleTimeString('en-US', timeOptions) : ""}
+                  </p>
+                  <p className="text-sm lg:text-base font-medium text-[#535353] font-inter ">{lesson?.LessonId?.duration ? `${lesson?.LessonId?.duration} minutes` : ""}</p>
                 </div>
                 <div
                   className="bg-white rounded-[10px] lesson_list_shadow p-3 md:p-4 lg:p-5 flex items-center justify-between transition border-[rgba(204,40,40,0.2)] border-1"
@@ -61,7 +120,7 @@ export default function Index() {
                     />
                     <div>
                       <p className="text-sm font-inter font-medium text-black tracking-[-0.06em]">
-                        {lesson?.teacher || ""}
+                        {lesson?.teacherId?.name || ""}
                       </p>
                       <p className="text-xs font-inter text-[#7A7A7A] tracking-[-0.04em]">Teacher</p>
                     </div>
@@ -70,13 +129,15 @@ export default function Index() {
                     <button className="tracking-[-0.06em] font-inter px-6 md:px-10 lg:px-12 xl:px-16 py-2 lg:py-2.5 text-[#CC2828] border border-[#CC2828] rounded-[10px]  text-sm hover:bg-[#CC2828] hover:text-white cursor-pointer">
                       Reschedule
                     </button>
-                    <button className="tracking-[-0.06em] font-inter px-6 md:px-10 lg:px-12 xl:px-16 py-2 lg:py-2.5 text-white border border-[#CC2828] rounded-[10px]  text-sm bg-[#CC2828] hover:bg-white hover:text-[#CC2828] cursor-pointer">
+                    <Link href={`/student/message?query=${lesson?.teacherId?._id}`} className="tracking-[-0.06em] font-inter px-6 md:px-10 lg:px-12 xl:px-16 py-2 lg:py-2.5 text-white border border-[#CC2828] rounded-[10px]  text-sm bg-[#CC2828] hover:bg-white hover:text-[#CC2828] cursor-pointer">
                       Message
-                    </button>
+                    </Link>
                   </div>
                 </div>
               </div>
-            ))}
+           ))) : (
+            <p className="text-gray-500">No {tab} lessons found.</p>
+          )}
         </div>
       </div>
     </StudentLayout>

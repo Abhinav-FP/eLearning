@@ -29,7 +29,7 @@ export default function Lesson({ title }) {
         try {
             const main = new Listing();
             const response = await main.HomeTeacherVideo();
-            console.log("response", response)
+            // console.log("response", response)
             setvideo(response?.data?.data?.record);
             console.log( video);
         } catch (error) {
@@ -41,7 +41,7 @@ export default function Lesson({ title }) {
         TeacherVideos();
     }, []);
 
-    console.log("video",video);
+    // console.log("video",video);
 
 
     return (

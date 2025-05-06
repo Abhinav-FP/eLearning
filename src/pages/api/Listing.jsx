@@ -41,6 +41,10 @@ class Listing extends Component {
     return Api.get(`/student/teacher/${data}`);
   }
 
+  async studentteacherAvaliability(id){
+    return Api.get(`/student/teacher/availability/${id}`);
+  }
+
   async StudentDashboard() {
     return Api.get("/student/dashboard");
   }
@@ -67,17 +71,70 @@ class Listing extends Component {
   }
 
   async PaypalCreate(data){
-    return Api.post(`/paypal/create-order` , data);
+    return Api.post(`/payment/create-order` , data);
   }
 
   async PaypalApprove(data){
-    return Api.post(`/paypal/capture-order` , data);
+    return Api.post(`/payment/capture-order` , data);
   }
 
   async PaypalCancel(data){
-    return Api.post(`/paypal/cancel-order` , data);
+    return Api.post(`/payment/cancel-order` , data);
   }
 
+
+  async Stripe_payment(data) {
+    return Api.post("/payment/create-checkout-session", data);
+  }
+
+  
+  async StripeSuccess(data) {
+    return Api.get(`/payment/payment-success/${data}`);
+  }
+
+  async StripeCancel(data) {
+    return Api.get(`/payment/payment-cancel/${data}`);
+  }
+
+  async LessonAdd(data){
+    return Api.post(`/lesson/add`, data);
+  }
+
+  async deleteLesson(id){
+    return Api.delete(`/lesson/delete/${id}`);
+  }
+
+  async LessonUpdate(id,data){
+    return Api.put(`/lesson/update/${id}`, data);
+  }
+
+  async TeacherLessonGet(){
+    return Api.get(`/teacher/lesson/get`);
+  }
+
+  async TeacherLessonGetForStudent(id){
+    return Api.get(`/student/lesson/get/${id}`);
+  }
+
+  async TeacherAvailabilityGet(){
+    return Api.get(`/teacher/availability/get`);
+  }
+  
+  async AddAvailablility(data){
+    return Api.post(`/teacher/availability/add`, data);
+  }
+
+  async deleteAvailability(id){
+    return Api.delete(`/teacher/availability/delete/${id}`);
+  }
+
+  async EditAvailability(id,data){
+    return Api.put(`/teacher/availability/update/${id}`, data);
+  }
+
+  async GetBooking(){
+    return Api.get(`/booking/getAll`);
+  }
 
   render() {
     return (

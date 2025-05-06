@@ -1,17 +1,32 @@
 'use client';
 
-import { PayPalScriptProvider, PayPalButtons } from "@paypal/react-paypal-js";
+import { PayPalScriptProvider, PayPalButtons, FUNDING } from "@paypal/react-paypal-js";
 import { useRouter } from "next/navigation";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Listing from "../api/Listing";
 import toast from "react-hot-toast";
 
-const Index = () => {
+
+const Index = ({ isPopupOpen, PricePayment, selectedLesson, selectedSlot, studentTimeZone }) => {
   const router = useRouter();
 
 
   const [isProcessing, setIsProcessing] = useState(false);
   const [OrderId, setOrderId] = useState("")
+  const[endTime,setEndTime] = useState(null);
+
+  const addDurationToDate = (start, durationInMinutes) => {
+    const startDate = new Date(start);
+    const endDate = new Date(startDate.getTime() + durationInMinutes * 60000);
+    return endDate.toString(); // returns in the same format
+  };
+
+  useEffect(()=>{
+    if(selectedLesson && selectedSlot){
+      const time = addDurationToDate(selectedSlot?.start, selectedLesson?.duration);
+      setEndTime(time);
+    }
+  },[selectedSlot, selectedLesson])
 
   const handleCreateOrder = async () => {
     if (isProcessing) return;
@@ -20,8 +35,12 @@ const Index = () => {
     try {
       const main = new Listing();
       const response = await main.PaypalCreate({
-        amount: 100,
+        amount: PricePayment,
         currency: "USD",
+        LessonId: selectedLesson?._id,
+        teacherId: selectedLesson?.teacher?._id,
+        startDateTime: selectedSlot?.start,
+        endDateTime: endTime,
       });
 
       if (response?.data?.id) {
@@ -48,6 +67,11 @@ const Index = () => {
       const main = new Listing();
       const response = await main.PaypalApprove({
         orderID: data.orderID, // or use OrderId if you prefer
+        LessonId: selectedLesson?._id,
+        teacherId: selectedLesson?.teacher?._id,
+        startDateTime: selectedSlot?.start,
+        endDateTime: endTime,
+        timezone : studentTimeZone || "UTC",
       });
 
       if (response?.data?.status === "COMPLETED") {
@@ -64,14 +88,13 @@ const Index = () => {
 
   const handleCancel = async (data, actions) => {
     if (isProcessing) return;
-
     setIsProcessing(true);
     try {
       const main = new Listing();
       const response = await main.PaypalCancel({
         orderID: data.orderID,
+        LessonId: selectedLesson?._id,
       });
-
       if (response?.data?.status === "CANCELLED") {
         router.push("/cancel")
         console.log("Payment CANCELLED", response);
@@ -86,25 +109,15 @@ const Index = () => {
 
   return (
     <PayPalScriptProvider options={{ "client-id": "Acq8BOAgNmN-iAGdJDmqJj9t-5VN6pA5KCsqGqvxdkrLis0-CRIjDwqtsYZwNRZ4F5uYEQfkxm_zMOXk" }}>
-      <div className="flex flex-col items-center">
-        <h2 className="text-2xl font-semibold text-gray-800 mb-4">    Trial Lessons</h2>
-        <p>
-    
-        </p>
-        <div className="w-full flex justify-between items-center text-lg font-bold mt-4 px-4 py-2 bg-gray-200 rounded-lg">
-          <span>Total:</span>
-          <span>${100}</span>
-        </div>
-
-        <div className="mt-6 w-full">
-          <PayPalButtons
-            createOrder={handleCreateOrder}
-            onApprove={handleApprove}
-            onCancel={handleCancel}
-            style={{ layout: 'vertical' }}
-            disabled={isProcessing}
-          />
-        </div>
+      <div className="mt-6 w-full">
+        <PayPalButtons
+          createOrder={handleCreateOrder}
+          onApprove={handleApprove}
+          onCancel={handleCancel}
+          disabled={isProcessing}
+          style={{ layout: 'vertical'}}
+          fundingSource={FUNDING.PAYPAL}
+        />
       </div>
     </PayPalScriptProvider>
   );

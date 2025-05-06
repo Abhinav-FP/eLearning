@@ -11,7 +11,8 @@ export default function Profile() {
         name: "",
         email: "",
         timezone: "",
-    })
+    });
+    const [file,setFile]=useState(null);
     
     useEffect(() => {
         const main = new Listing();
@@ -24,6 +25,7 @@ export default function Profile() {
               email: profiledata?.email,
               timezone: profiledata?.time_zone,
             });
+            setFile(profiledata?.profile_photo);
           })
           .catch((err) => {
             console.log(err);
@@ -38,6 +40,14 @@ export default function Profile() {
         }));
     };
 
+    const handleImageChange = (e) => {
+        const selectedFile = e.target.files[0];
+        if (selectedFile) {
+            setFile(selectedFile); // This triggers preview + file storing
+        }
+    };    
+
+    console.log("data",data);
 
     const handleSubmit = async (e) => {
         e.preventDefault();
@@ -49,11 +59,14 @@ export default function Profile() {
         setProcessing(true);
         try {
             const main = new Listing();
-            const response = await main.ProfileUpdate({
-                name: data?.name,
-                email: data?.email,
-                time_zone: data?.timezone
-            });
+            const formData = new FormData();
+            formData.append("name", data.name);
+            formData.append("email", data.email);
+            formData.append("time_zone", data.timezone);
+            if (file instanceof File) {
+            formData.append("profile_photo", file);
+            }
+            const response = await main.ProfileUpdate(formData);
             if (response?.data) {
                 toast.success(response.data.message);
             } else {
@@ -77,6 +90,7 @@ export default function Profile() {
         }
         setProcessing(false);
     };
+
     return (
             <>
                 <div className="border-b  border-[rgba(0,0,0,.1)] flex flex-wrap py-6 lg:py-8">
@@ -87,16 +101,22 @@ export default function Profile() {
                     <div className="w-full lg:w-6/12 xl:w-5/12 lg:pl-3">
                         <div className="flex items-center">
                             <div className="relative h-[52px] w-[52px] flex rounded-full text-sm text-white focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800 mr-4">
-                                <Image
-                                    className="h-[52px] w-[52px] rounded-full"
-                                    src={data?.profile_image instanceof File ? URL.createObjectURL(data?.profile_image) : data?.profile_image || Profile_img}
-                                    alt={data?.name || 'Profile Image'}
-                                />
+                            <Image
+                                className="h-[52px] w-[52px] rounded-full"
+                                src={file instanceof File ? URL.createObjectURL(file) : file || Profile_img}
+                                height={100}
+                                width={100}
+                                alt={data?.name || 'Profile Image'}
+                            />
 
                             </div>
-                            <input type="file"
-                                //  onChange={handleImageChange} 
-                                className="hidden" id="profileImageInput" />
+                            <input
+                                type="file"
+                                onChange={handleImageChange}
+                                className="hidden"
+                                id="profileImageInput"
+                                accept="image/*"
+                            />
                             <label htmlFor="profileImageInput" className="text-[#CC2828] font-medium text-base xl:text-xl border-none tracking-[-0.04em] cursor-pointer">Update Profile</label>
                         </div>
                     </div>
@@ -115,7 +135,6 @@ export default function Profile() {
                                 name='name'
                                 onChange={handleChange}
                             />
-
                         </div>
                     </div>
                     <div className="flex flex-wrap">
@@ -145,7 +164,6 @@ export default function Profile() {
                                 value={data?.timezone}
                                 name='timezone'
                                 required
-
                             >
                                 <option value="">Please select Time-Zone</option>
                                 {timeZones && timeZones?.map((zone, index) => (

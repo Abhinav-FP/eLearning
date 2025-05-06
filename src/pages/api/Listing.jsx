@@ -11,6 +11,9 @@ class Listing extends Component {
   async profileVerify(){
     return Api.get("/user/profile")
   }
+  async emailVerify(data){
+    return Api.post("/user/verify-email", data);
+  }
   async ResetPassword(data) {
     return Api.post("/user/reset-password", data);
   }

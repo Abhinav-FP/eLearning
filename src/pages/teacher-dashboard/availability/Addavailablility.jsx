@@ -60,14 +60,14 @@ export default function Addavailablility({ isOpen, onClose, TeacherAvailabilitys
     <Popup isOpen={isOpen} onClose={onClose} size={"max-w-[510px]"}>
       <form
         onSubmit={handleAdd}
-        className="max-w-md mx-auto mt-10 px-3 sm:px-6 pb-3 sm:pb-6 bg-white space-y-2 sm:space-y-4"
+        className="max-w-md mx-auto lg:px-6 lg:py-4 bg-white space-y-2 sm:space-y-4"
       >
-        <h2 className="text-2xl font-bold text-center text-[#CC2828]">
+        <h2 className="text-xl md:text-2xl font-bold lg:text-[28px] tracking-[-0.04em] text-center text-[#CC2828] mb-3 lg:mb-4">
           {"Add Availability"}
         </h2>
         {/* Title Field */}
         <div>
-          <label className="block text-[#CC2828] font-medium mb-1">Start Date and time</label>
+          <label className="block text-[#CC2828] text-base lg:text-xl font-medium mb-1 tracking-[-0.04em]">Start Date and time</label>
           <input
             type="datetime-local"
             name="startDateTime"
@@ -75,13 +75,13 @@ export default function Addavailablility({ isOpen, onClose, TeacherAvailabilitys
             onChange={handleChange}
             min={new Date().toISOString().slice(0, 16)} 
             placeholder="Enter start date and time"
-            className="w-full p-3 rounded-md bg-gray-100 text-gray-700 focus:outline-none focus:ring-2 focus:ring-[#CC2828]"
+            className="w-full p-3 rounded-md lg:rounded-lg text-base bg-[#F4F6F8] text-gray-700 focus:outline-none focus:ring-2 focus:ring-[#CC2828]"
             required
           />
         </div>
         {/* Description Field */}
         <div>
-          <label className="block text-[#CC2828] font-medium mb-1">
+          <label className="block text-[#CC2828] text-base lg:text-xl font-medium mb-1 tracking-[-0.04em]">
             End Date and time
           </label>
           <input
@@ -91,7 +91,7 @@ export default function Addavailablility({ isOpen, onClose, TeacherAvailabilitys
             value={formData.endDateTime}
             onChange={handleChange}
             placeholder="Enter description"
-            className="w-full p-3 rounded-md bg-gray-100 text-gray-700 focus:outline-none focus:ring-2 focus:ring-[#CC2828]"
+            className="w-full p-3 rounded-md lg:rounded-lg text-base bg-[#F4F6F8] text-gray-700 focus:outline-none focus:ring-2 focus:ring-[#CC2828]"
             required
           />
         </div>
@@ -99,7 +99,7 @@ export default function Addavailablility({ isOpen, onClose, TeacherAvailabilitys
         <div className="flex justify-between gap-4 mt-6">
           <button
             type="submit"
-            className="cursor-pointer flex-1 bg-red-600 text-white py-2 rounded-md hover:bg-red-700"
+            className="cursor-pointer font-medium text-base lg:text-xl tracking-[-0.04em] flex-1 bg-[#CC2828] text-white py-2 lg:py-2.5 rounded-md lg:rounded-xl hover:bg-[#ad0e0e]"
           >
             {loading ? "Adding..." : "Add"}
           </button>

@@ -8,19 +8,19 @@ import Delete from "./Delete";
 import Link from "next/link";
 
 export default function Index() {
-  const [data, setData]=useState([]);
-  const [editData, setEditData]=useState(null);
-  const [id, setId]=useState(null);
+  const [data, setData] = useState([]);
+  const [editData, setEditData] = useState(null);
+  const [id, setId] = useState(null);
   const [isLessonOpen, setIsLessonOpen] = useState(false);
   const closeLesson = () => setIsLessonOpen(false);
   const [isDeleteOpen, setIsDeleteOpen] = useState(false);
   const closeDelete = () => setIsDeleteOpen(false);
 
-  const getLessons=()=>{
+  const getLessons = () => {
     const main = new Listing();
     main.TeacherLessonGet()
       .then((r) => {
-        console.log("r",r?.data);
+        console.log("r", r?.data);
         setData(r?.data?.data);
       })
       .catch((err) => {
@@ -32,34 +32,34 @@ export default function Index() {
     getLessons();
   }, []);
 
-  const handleEdit=(item)=>{
+  const handleEdit = (item) => {
     setEditData(item);
-    setIsLessonOpen(true);    
+    setIsLessonOpen(true);
   }
 
-  const LessonCard = ({item}) => {
+  const LessonCard = ({ item }) => {
     return (
-      <div className="bg-white shadow-md rounded-2xl flex justify-between items-center p-4 mb-4">
+      <div className="bg-white lesson_list_shadow rounded-2xl flex flex-col md:flex-row gap-3 justify-between items-start md:items-center p-4 lg:px-5 lg:py-6 mb-3 lg:mb-4">
         <div>
           <div className="flex items-center gap-2">
-            <h3 className="text-lg font-bold text-[#CC2828]">{item?.title || ""}</h3>
-            <MdEditSquare size={16} className="text-[#CC2828] cursor-pointer" onClick={()=>{handleEdit(item)}}/>
-             <RiDeleteBin6Line size={18} className="text-red-600 hover:text-red-700 cursor-pointer" 
-              onClick={()=>{
+            <h3 className="text-base font-semibold text-[#CC2828] tracking-[-0.04em]">{item?.title || ""}</h3>
+            <MdEditSquare size={18} className="text-[#CC2828] cursor-pointer" onClick={() => { handleEdit(item) }} />
+            <RiDeleteBin6Line size={17} className="text-red-600 hover:text-red-700 cursor-pointer"
+              onClick={() => {
                 setId(item?._id);
                 setIsDeleteOpen(true);
               }}
-             />
+            />
           </div>
-          <div className="flex items-center text-yellow-400 text-sm mt-1">
-            ★★★★☆ (29)
+          <div className="flex items-center text-[#E4B750] text-lg mt-2">
+            ★★★★☆ <span className="text-black tracking-[-0.04em] text-xs font-medium">(29)</span>
           </div>
-          <p className="text-xs text-gray-600 mt-2">
+          <p className="text-xs text-[#CC2828] bg-[rgba(204,40,40,0.1)] mt-2 font-medium tracking-[-0.04em] px-2 py-1 rounded-full">
             {item?.description || ""}
           </p>
         </div>
         <div className="text-center sm:text-right">
-          <div className="bg-red-100 text-[#CC2828] font-bold p-2 rounded-full">
+          <div className="bg-[rgba(204,40,40,0.1)] tracking-[-0.04em] text-center text-sm lg:text-base text-[#CC2828] font-semibold capitalize min-w-[119px] md:min-w-[149px] px-2 py-2 rounded-full">
             {item?.price ? `USD $${item?.price}` : ""}
           </div>
         </div>
@@ -70,43 +70,44 @@ export default function Index() {
   return (
     <TeacherLayout page={"Profile"}>
       <div className="min-h-screen p-5 lg:p-[30px]">
-        <h1 className="font-inter text-lg lg:text-2xl xl:text-3xl font-bold text-[#CC2828] mb-6">Edit Profile</h1>
-        <div className="bg-red-100 p-6 rounded-2xl flex flex-col justify-between items-start relative">
-          {/* Profile Section */}
-          <div className="flex items-center gap-4">
-            <img
-              src="/profile.png"
-              alt="Profile"
-              className="w-20 h-20 rounded-full object-cover"
-            />
-            <div>
-              <h2 className="text-lg font-bold text-[#CC2828]">James Smith</h2>
-              <p className="text-[#46494D] text-sm">Teacher</p>
+        <h1 className="ont-inter text-lg lg:text-2xl font-bold text-[#CC2828] tracking-[-0.04em] mb-6">Edit Profile</h1>
+        <div className="bg-red-100 p-4 md:p-6 lg:p-8 rounded-2xl  items-start relative">
+          <div className="flex items-center flex-col gap-3 md:flex-row justify-between ">
+            {/* Profile Section */}
+            <div className="flex flex-row items-center gap-3 lg:gap-4">
+              <img
+                src="/profile.png"
+                alt="Profile"
+                className="w-16 h-16 lg:w-[94px] lg:h-[94px]  rounded-full object-cover"
+              />
+              <div>
+                <h2 className="text-lg lg:text-xl font-bold text-[#CC2828] tracking-[-0.04em] md:mb-1">James Smith</h2>
+                <p className="text-[#46494D] text-sm lg:text-base font-medium tracking-[-0.03em] mb-0">Teacher</p>
+              </div>
             </div>
+            {/* Edit Button */}
+            <Link href="/teacher-dashboard/setting" className="bg-[#CC2828] hover:bg-[#941111fd] tracking-[-0.03em] text-white text-sm px-3 md:px-4  py-1.5 md:py-2.5 rounded-[6px] cursor-pointer">
+              Edit Profile
+            </Link>
           </div>
 
-          {/* Edit Button */}
-          <Link href="/teacher-dashboard/setting" className="absolute top-[67px] sm:top-10 right-1 sm:right-4 bg-[#CC2828] hover:bg-[#941111fd] text-white text-sm px-4 py-1.5 rounded cursor-pointer">
-            Edit Profile
-          </Link>
-
           {/* Info Grid */}
-          <div className="w-full mt-10 mb-2 flex flex-wrap gap-x-10 gap-y-2 md:justify-center text-sm">
-            <p>
-              <span className="font-semibold text-red-500">Nationality:</span>{" "}
+          <div className="w-full mt-6 md:mt-8 lg:mt-10 mb-2 flex flex-wrap gap-x-4 lg:gap-x-10 gap-y-2 text-sm">
+            <p className="text-sm lg:text-base text-black tracking-[-0.04em]">
+              <span className="font-normal text-[#CC2828]">Nationality:</span>{" "}
               Japanese
             </p>
             <p>
-              <span className="font-semibold text-red-500">Gender:</span> Male
+              <span className="font-normal text-[#CC2828]">Gender:</span> Male
             </p>
-            <p>
-              <span className="font-semibold text-red-500">
+            <p className="text-sm lg:text-base text-black tracking-[-0.04em]">
+              <span className="font-normal text-[#CC2828]">
                 Language spoken:
               </span>{" "}
               Japanese, English
             </p>
-            <p>
-              <span className="font-semibold text-red-500">Interests:</span>{" "}
+            <p className="text-sm lg:text-base text-black tracking-[-0.04em]">
+              <span className="font-normal text-[#CC2828]">Interests:</span>{" "}
               Writing / Blogging
             </p>
           </div>
@@ -115,19 +116,19 @@ export default function Index() {
         <section className="mt-10">
           <h2 className="text-xl font-bold text-red-700 mb-4">Lessons</h2>
           <div className="space-y-4">
-            {data && data?.map((item,index)=>(
+            {data && data?.map((item, index) => (
               <LessonCard key={index} item={item} />
             ))}
           </div>
 
           {/* <div className=" mt-6"> */}
-            <button className="bg-[#CC2828] hover:bg-red-600 mt-6 text-white px-8 py-3 rounded font-bold cursor-pointer"
-            onClick={()=>{
+          <button className="bg-[#CC2828] tracking-[-0.04em] text-base mt-4 lg:mt-6 hover:bg-[#941111fd] mt-6 text-white px-6 lg:px-10 py-3 lg:py-3.5 rounded-[10px] font-bold cursor-pointer"
+            onClick={() => {
               setEditData(null);
               setIsLessonOpen(true);
             }}>
-              Add Lesson
-            </button>
+            Add Lesson
+          </button>
           {/* </div> */}
         </section>
       </div>

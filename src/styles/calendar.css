@@ -8,16 +8,16 @@
 .rbc-off-range .rbc-button-link{color: #8D929A;opacity: .4;}
 .rbc-calendar .rbc-toolbar button{border-color: #D9D9D9;font-family: Poppins; font-size: 14px; font-weight: 400; line-height: 21px; letter-spacing: -0.03em; text-align: left; color: #595959;
 border-radius: 20px;
-margin-left: 10px;
+margin-left: 0;
 }
   .rbc-day-slot .rbc-event-label {
   display: none;
 }
 .rbc-toolbar .rbc-toolbar-label{font-family: Poppins; font-size: 18px; font-weight: 600;   color: #1E1E1E;}
-.rbc-calendar .rbc-toolbar button:hover, .rbc-calendar .rbc-toolbar button:active, .rbc-calendar .rbc-toolbar button.rbc-active{background-color: #0367F7;color: #fff;border-color: #0367F7;}
+.rbc-calendar .rbc-toolbar button:hover, .rbc-calendar .rbc-toolbar button:active, .rbc-calendar .rbc-toolbar button.rbc-active{background-color: #cc2828;color: #fff;border-color: #cc2828;}
 
-.rbc-calendar .rbc-toolbar button:active:hover, .rbc-calendar .rbc-toolbar button:active:focus, .rbc-calendar .rbc-toolbar button.rbc-active:hover, .rbc-calendar .rbc-toolbar button.rbc-active:focus{background-color: #0367F7;color: #fff;
-  border-color: #68C32F;}
+.rbc-calendar .rbc-toolbar button:active:hover, .rbc-calendar .rbc-toolbar button:active:focus, .rbc-calendar .rbc-toolbar button.rbc-active:hover, .rbc-calendar .rbc-toolbar button.rbc-active:focus{background-color: #ad0e0e;color: #fff;
+  border-color: #ad0e0e;}
 
  .rbc-row-segment .rbc-event, .rbc-row-segment .rbc-day-slot .rbc-background-event{    background-color: #68C32F !important;}
 .rbc-event .font-bold{font-weight: 400;;}

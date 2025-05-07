@@ -32,10 +32,13 @@ const Index = ({ Availability, setIsPopupOpen, usedInPopup, setSelectedSlot, sel
   const [events, setEvents] = useState([]);
   const { user } = useRole();
   const router = useRouter();
-  console.log("Availability", Availability)
+
+  console.log("Availability", Availability);
+  console.log("events",events);
+
   useEffect(() => {
     if (!Availability) return;
-
+  
     const getNextQuarter = (date) => {
       const next = new Date(date);
       const minutes = next.getMinutes();
@@ -43,66 +46,94 @@ const Index = ({ Availability, setIsPopupOpen, usedInPopup, setSelectedSlot, sel
         minutes < 15
           ? 15 - minutes
           : minutes < 30
-            ? 30 - minutes
-            : minutes < 45
-              ? 45 - minutes
-              : 60 - minutes;
+          ? 30 - minutes
+          : minutes < 45
+          ? 45 - minutes
+          : 60 - minutes;
       next.setMinutes(minutes + add, 0, 0);
       return next;
     };
-
+  
     const processBlocks = (blocks, title, color) => {
       const events = [];
-
+  
       blocks.forEach((block) => {
         let current = moment.utc(block.startDateTime).toDate();
         const end = moment.utc(block.endDateTime).toDate();
-
-        let isFirst = true;
-        let firstSlotEnd = null;
-
-        while (current < end) {
-          const nextChunk = getNextQuarter(current);
-          const chunkEnd = nextChunk < end ? nextChunk : end;
-
-          if (isFirst) {
-            const duration = (chunkEnd - current) / (1000 * 60); // minutes
-            if (duration < 15) {
-              firstSlotEnd = chunkEnd;
-              current = chunkEnd;
-              isFirst = false;
-              continue;
-            }
-          }
-
+  
+        const firstChunkEnd = getNextQuarter(current);
+        const firstDuration = (firstChunkEnd - current) / (1000 * 60); // in minutes
+  
+        if (firstChunkEnd > end) {
+          // entire block fits before the first rounded quarter
           events.push({
-            id: `${block._id}_${isFirst && firstSlotEnd ? block.startDateTime : moment.utc(current).toISOString()}`,
+            id: `${block._id}_${block.startDateTime}`,
             title,
-            start: moment.utc(isFirst && firstSlotEnd ? block.startDateTime : current).toDate(),
+            start: moment.utc(current).toDate(),
+            end: moment.utc(end).toDate(),
+            color,
+          });
+          return;
+        }
+  
+        if (firstDuration < 15) {
+          // merge first chunk with next
+          const secondChunkEnd = getNextQuarter(firstChunkEnd);
+          const mergedEnd = secondChunkEnd < end ? secondChunkEnd : end;
+  
+          events.push({
+            id: `${block._id}_${block.startDateTime}`,
+            title,
+            start: moment.utc(current).toDate(),
+            end: moment.utc(mergedEnd).toDate(),
+            color,
+          });
+  
+          current = new Date(mergedEnd);
+        } else {
+          // normal first chunk
+          events.push({
+            id: `${block._id}_${block.startDateTime}`,
+            title,
+            start: moment.utc(current).toDate(),
+            end: moment.utc(firstChunkEnd).toDate(),
+            color,
+          });
+  
+          current = new Date(firstChunkEnd);
+        }
+  
+        // rest of the chunks
+        while (current < end) {
+          const nextChunkEnd = getNextQuarter(current);
+          const chunkEnd = nextChunkEnd < end ? nextChunkEnd : end;
+  
+          events.push({
+            id: `${block._id}_${moment.utc(current).toISOString()}`,
+            title,
+            start: moment.utc(current).toDate(),
             end: moment.utc(chunkEnd).toDate(),
             color,
           });
-
+  
           current = new Date(chunkEnd);
-          isFirst = false;
-          firstSlotEnd = null;
         }
       });
-
+  
       return events;
     };
-
+  
     const availabilityEvents = Availability.availabilityBlocks?.length
       ? processBlocks(Availability.availabilityBlocks, "Available", "#6ABB52")
       : [];
-
+  
     const bookedEvents = Availability.bookedSlots?.length
       ? processBlocks(Availability.bookedSlots, "Blocked", "#185abc")
       : [];
-
+  
     setEvents([...availabilityEvents, ...bookedEvents]);
   }, [Availability]);
-
+  
   const eventStyleGetter = (event) => {
     return {
       style: {

@@ -22,8 +22,8 @@ export default function BookingPopup({
     // setSelectedSlot(null);
   }, [isOpen]);
   
-  console.log("selectedSlot",selectedSlot);
-  console.log("selectedLesson",selectedLesson);
+  // console.log("selectedSlot",selectedSlot);
+  // console.log("selectedLesson",selectedLesson);
 
   function getFormattedEndTime(time, durationInMinutes) {
     const start = new Date(time);

@@ -130,7 +130,7 @@ console.log("selectedSlot" ,selectedSlot)
   };
 
   return (
-    <PayPalScriptProvider options={{ "client-id": "Acq8BOAgNmN-iAGdJDmqJj9t-5VN6pA5KCsqGqvxdkrLis0-CRIjDwqtsYZwNRZ4F5uYEQfkxm_zMOXk" }}>
+    <PayPalScriptProvider options={{ "client-id": "Af1V5-bpf6qTRgq6DPXI7S3AE6enoGtfsxXH0gDoXgpGFgOs7A1lLKBlhI1aaBTwbk4W_b3SwCbLCKpC" }}>
       <div className="mt-6 w-full">
         <PayPalButtons
           createOrder={handleCreateOrder}

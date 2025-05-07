@@ -1,5 +1,6 @@
 import React, { useState } from 'react'
 import Password from './Password'
+import Bank from './Bank'
 import Profile from './Profile'
 import TeacherLayout from '../Common/TeacherLayout';
 
@@ -40,8 +41,8 @@ export default function Index() {
                         {activeTab === 'password' &&
                             <Password />
                         }
-                        {activeTab === 'password' &&
-                            <></>
+                        {activeTab === 'bank' &&
+                          <Bank/>
                         }
                     </div>
                 </div>

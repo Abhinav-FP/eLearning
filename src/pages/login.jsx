@@ -135,9 +135,7 @@ export default function Login() {
               <a
                 href="#"
                 className="text-base font-medium text-[#CC2828] hover:underline tracking-[-0.06em] "
-              >
-                Forgot Password?
-              </a>
+              >Forgot Password?</a>
             </div>
 
             {/* Login Button */}
@@ -149,7 +147,6 @@ export default function Login() {
               {loading ? "Loading" : "LOG IN"}
             </button>
           </form>
-
           {/* Register */}
           <p className="text-center text-base text-[#727272] mt-6 lg:mt-12 tracking-[-0.03em] font-medium">
             Not registered?{" "}

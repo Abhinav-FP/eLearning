@@ -3,8 +3,6 @@ import toast from 'react-hot-toast';
 import Listing from '../api/Listing';
 
 export default function Stripe({PricePayment ,selectedLesson , selectedSlot, studentTimeZone}) {
-  console.log("selectedSlot" ,selectedSlot);
-  console.log("selectedLesson" ,selectedLesson);
   const [processing, setprocessing] = useState(false);
   const[endTime,setEndTime] = useState(null);
 

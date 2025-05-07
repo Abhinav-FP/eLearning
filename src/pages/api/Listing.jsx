@@ -73,6 +73,10 @@ class Listing extends Component {
     return Api.post(`/message/send` , data);
   }
 
+  async BookingUpdate(id,data){
+    return Api.post(`/booking/update/${id}`, data);
+  }
+
   async PaypalCreate(data){
     return Api.post(`/payment/create-order` , data);
   }

@@ -3,26 +3,27 @@ import StudentLayout from "../Common/StudentLayout";
 import Image from "next/image";
 import Listing from "@/pages/api/Listing";
 import Link from "next/link";
+import ReschedulePopup from "./ReschedulePopup";
 
 export default function Index() {
   const [tab, setTab] = useState("upcoming");
+  const[selectedLesson,setSelectedLesson] = useState(null);
   const dateOptions = { year: 'numeric', month: 'long', day: 'numeric' };
-
-  // Extract the time (formatted as "2:00 PM")
   const timeOptions = { hour: 'numeric', minute: 'numeric', hour12: true };
-
-  // const lessonss = Array(6).fill({
-  //   date: "April 15, 2025",
-  //   time: "2:00 PM",
-  //   duration: "1 Hour",
-  //   teacher: "John Doe",
-  // });
-
   const [categorizedLessons, setCategorizedLessons] = useState({
     upcoming: [],
     past: [],
     cancelled: [],
-  });  
+  });
+  const [isPopupOpen, setIsPopupOpen] = useState(false);
+  const closePopup = () => setIsPopupOpen(false);    
+  const [studentTimeZone, setStudentTimeZone]=useState(null);
+  
+    // Get timezone
+    useEffect(() => {
+      const timeZone = Intl.DateTimeFormat().resolvedOptions().timeZone || "";
+      setStudentTimeZone(timeZone);
+    }, []);
 
   const fetchLessons = async () => {
     try {
@@ -96,7 +97,7 @@ export default function Index() {
         {/* Lesson Cards */}
         <div className="space-y-4 lg:space-y-5  px-5 lg:px-[30px]">
         {categorizedLessons[tab]?.length ? (
-  categorizedLessons[tab].map((lesson, idx) => (
+            categorizedLessons[tab].map((lesson, idx) => (
               <div key={idx}>
                 <div className="flex items-center gap-3 xl:gap-4 flex-wrap mb-3 lg:mb-4 xl:mb-5">
                   <p className="text-[#CC2828] font-bold text-lg xl:text-xl font-inter">
@@ -126,7 +127,11 @@ export default function Index() {
                     </div>
                   </div>
                   <div className="flex flex-col sm:flex-row gap-2 md:gap-3 xl:gap-5">
-                    <button className="tracking-[-0.06em] font-inter px-6 md:px-10 lg:px-12 xl:px-16 py-2 lg:py-2.5 text-[#CC2828] border border-[#CC2828] rounded-[10px]  text-sm hover:bg-[#CC2828] hover:text-white cursor-pointer">
+                    <button className="tracking-[-0.06em] font-inter px-6 md:px-10 lg:px-12 xl:px-16 py-2 lg:py-2.5 text-[#CC2828] border border-[#CC2828] rounded-[10px]  text-sm hover:bg-[#CC2828] hover:text-white cursor-pointer"
+                    onClick={()=>{
+                      setSelectedLesson(lesson);
+                      setIsPopupOpen(true);
+                    }}>
                       Reschedule
                     </button>
                     <Link href={`/student/message?query=${lesson?.teacherId?._id}`} className="tracking-[-0.06em] font-inter px-6 md:px-10 lg:px-12 xl:px-16 py-2 lg:py-2.5 text-white border border-[#CC2828] rounded-[10px]  text-sm bg-[#CC2828] hover:bg-white hover:text-[#CC2828] cursor-pointer">
@@ -140,6 +145,13 @@ export default function Index() {
           )}
         </div>
       </div>
+      <ReschedulePopup
+        isOpen={isPopupOpen}
+        onClose={closePopup}
+        lesson={selectedLesson}
+        studentTimeZone={studentTimeZone}
+        fetchLessons={fetchLessons}
+      />
     </StudentLayout>
   );
 }

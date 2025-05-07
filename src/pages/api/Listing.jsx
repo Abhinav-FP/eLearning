@@ -36,6 +36,11 @@ class Listing extends Component {
     return Api.get("/home/teacher/video")
   }
   
+ 
+
+  async TeacherBank(data){
+    return Api.post("/teacher/bank" ,data)
+  }
   async StudentTeacher(data) {
     return Api.get("/student/teacherGet", data);
   }

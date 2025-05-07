@@ -26,7 +26,8 @@ export default function Bank() {
         setProcessing(true);
         try {
             const main = new Listing();
-            const response = await main.UpdateBankDetails(data);
+            const response = await main.UpdateB
+            ankDetails(data);
 
             if (response?.data) {
                 toast.success(response.data.message || "Bank details updated successfully.");

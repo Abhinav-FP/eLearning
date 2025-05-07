@@ -60,7 +60,7 @@ export default function Index() {
     try {
       const main = new Listing();
       const response = await main.studentteacherAvaliability(Id);
-      console.log("response", response);
+      // console.log("response", response);
       if (response.data) {
         setContent(response.data.data);
       }

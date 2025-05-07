@@ -76,7 +76,7 @@ export default function Stripe({PricePayment ,selectedLesson , selectedSlot, stu
   };
   return (
     <>
-        <button className="w-full bg-red-600 hover:bg-red-700 text-white font-medium py-2 rounded-full" 
+        <button className="w-full bg-red-600 hover:bg-red-700 text-white font-medium py-2 rounded-full cursor-pointer" 
          onClick={() => {
           handlePayment();
         }}

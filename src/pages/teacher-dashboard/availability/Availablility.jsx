@@ -87,8 +87,8 @@ const Availablility = ({ Availability, TeacherAvailabilitys }) => {
         <>
             <div className="w-full">
                 <div className="bg-white rounded-[20px] border-[#CC282880] border-1">
-                    <div className="py-1 py-2 lg:py-[15px] px-2 md:px-3 lg:px-6 flex flex-wrap justify-between items-center border-b border-black border-opacity-10">
-                        <div className="flex flex-wrap items-center gap-4 mb-4">
+                    <div className="py-4 lg:py-3 lg:py-[15px] px-4 md:px-4 lg:px-6 flex flex-wrap flex-col md:flex-row justify-between items-start md:items-center border-b border-[rgba(0,0,0,.1)]">
+                        <div className="flex flex-wrap items-center gap-4 mb-4 md:mb-0 ">
                             <div className="flex items-center gap-2">
                                 <span className="w-3 h-3 rounded-full bg-[#6ABB52] inline-block"></span>
                                 <span className="text-sm text-gray-700">Available</span>
@@ -109,7 +109,7 @@ const Availablility = ({ Availability, TeacherAvailabilitys }) => {
                         <h3 className="text-base lg:text-lg font-semibold text-[#1E1E1E] m-0 tracking-[-0.03em]">
                             <button
                                 onClick={() => { setIsPopupOpen(true); }}
-                                className="font-medium cursor-pointer rounded-full py-2 px-5 text-[#ffffff] bg-[#CC2828] hover:bg-[#ad0e0e] text-base w-full py-3.5"
+                                className="font-medium cursor-pointer rounded-full px-5 text-[#ffffff] bg-[#CC2828] hover:bg-[#ad0e0e] text-base w-full py-2.5 lg:py-3.5"
                             >
                                 Add Availablility
                             </button>

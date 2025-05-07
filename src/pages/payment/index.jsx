@@ -10,15 +10,36 @@ import toast from "react-hot-toast";
 const Index = ({ isPopupOpen, PricePayment, selectedLesson, selectedSlot, studentTimeZone }) => {
   const router = useRouter();
 
-
+console.log("selectedSlot" ,selectedSlot)
   const [isProcessing, setIsProcessing] = useState(false);
   const [OrderId, setOrderId] = useState("")
   const[endTime,setEndTime] = useState(null);
 
   const addDurationToDate = (start, durationInMinutes) => {
-    const startDate = new Date(start);
-    const endDate = new Date(startDate.getTime() + durationInMinutes * 60000);
-    return endDate.toString(); // returns in the same format
+    const originalDate = new Date(start);
+    const finalDate = new Date(originalDate.getTime() + durationInMinutes * 60000);
+  
+    // Detect if input was a string with timezone (for matching formatting)
+    const isStringInput = typeof start === 'string';
+  
+    // If it was a Date object, return Date object
+    if (!isStringInput) return finalDate;
+  
+    // Match the original locale and timezone style using toLocaleString
+    const localeString = originalDate.toLocaleString(undefined, {
+      timeZoneName: 'short',
+      hour12: false
+    });
+  
+    const timezoneAbbreviation = localeString.split(' ').pop();
+  
+    const formatted = finalDate.toLocaleString(undefined, {
+      timeZoneName: 'short',
+      hour12: false
+    });
+  
+    // Replace new abbreviation with old one (preserves input tz style)
+    return formatted.replace(/GMT[^\s]+|[A-Z]{2,5}$/, timezoneAbbreviation);
   };
 
   useEffect(()=>{
@@ -27,6 +48,7 @@ const Index = ({ isPopupOpen, PricePayment, selectedLesson, selectedSlot, studen
       setEndTime(time);
     }
   },[selectedSlot, selectedLesson])
+
 
   const handleCreateOrder = async () => {
     if (isProcessing) return;

@@ -1,7 +1,8 @@
-import React from "react";
+import React, { useState } from "react";
 import TeacherLayout from "../Common/TeacherLayout";
 import Card from "./Card";
 import { FaWallet } from 'react-icons/fa';
+import Earning from "./Earning";
 
 export default function index() {
   const earnings = [
@@ -13,33 +14,33 @@ export default function index() {
       time: "30 Min",
     },
     {
-        lesson: "English Speaking",
-        lessonDate: "12 April",
-        paymentId: "#1234",
-        amount: 200,
-        time: "30 Min",
-      },
-      {
-        lesson: "English Speaking",
-        lessonDate: "12 April",
-        paymentId: "#1234",
-        amount: 200,
-        time: "30 Min",
-      },
-      {
-        lesson: "English Speaking",
-        lessonDate: "12 April",
-        paymentId: "#1234",
-        amount: 200,
-        time: "30 Min",
-      },
-      {
-        lesson: "English Speaking",
-        lessonDate: "12 April",
-        paymentId: "#1234",
-        amount: 200,
-        time: "30 Min",
-      },
+      lesson: "English Speaking",
+      lessonDate: "12 April",
+      paymentId: "#1234",
+      amount: 200,
+      time: "30 Min",
+    },
+    {
+      lesson: "English Speaking",
+      lessonDate: "12 April",
+      paymentId: "#1234",
+      amount: 200,
+      time: "30 Min",
+    },
+    {
+      lesson: "English Speaking",
+      lessonDate: "12 April",
+      paymentId: "#1234",
+      amount: 200,
+      time: "30 Min",
+    },
+    {
+      lesson: "English Speaking",
+      lessonDate: "12 April",
+      paymentId: "#1234",
+      amount: 200,
+      time: "30 Min",
+    },
   ];
 
   const stats = [
@@ -47,6 +48,10 @@ export default function index() {
     { label: 'Pending Earnings', value: 300, icon: <FaWallet className="w-6 h-6 text-[#CC2828]" /> },
     { label: 'Completed Earnings', value: 20, icon: <FaWallet className="w-6 h-6 text-[#CC2828]" /> },
   ];
+
+  const [IsEarning, setIsEarning] = useState(false);
+  const close = () => setIsEarning(false);
+
 
   return (
     <TeacherLayout page={"Earnings & Payout"}>
@@ -57,6 +62,9 @@ export default function index() {
           </h2>
           <div className="flex items-center space-x-2">
             <button
+              onClick={() => {
+                setIsEarning(true);
+              }}
               className="w-fit px-2 sm:px-8 py-2.5 hover:bg-white hover:text-[#CC2828] border border-[#CC2828] rounded-[10px] tracking-[-0.06em] text-sm font-medium bg-[#CC2828] text-white cursor-pointer"
             >
               Request Payout
@@ -64,14 +72,14 @@ export default function index() {
           </div>
         </div>
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 mb-4">
-            {stats.map((item, idx) => (
-                <Card
-                key={idx}
-                label={item.label}
-                value={item.value}
-                icon={item.icon}
-                />
-            ))}
+          {stats.map((item, idx) => (
+            <Card
+              key={idx}
+              label={item.label}
+              value={item.value}
+              icon={item.icon}
+            />
+          ))}
         </div>
         <div className="rounded-[5px] border border-[rgba(204,40,40,0.3)] overflow-x-auto">
           <table className="min-w-full text-sm text-center rounded-[20px]">
@@ -123,6 +131,14 @@ export default function index() {
           </table>
         </div>
       </div>
+
+      {IsEarning && (
+        <Earning
+          isOpen={IsEarning}
+          onClose={close}
+          data={100}
+        />
+      )}
     </TeacherLayout>
   );
 }

@@ -26,9 +26,7 @@ export default function Bank() {
         setProcessing(true);
         try {
             const main = new Listing();
-            const response = await main.UpdateB
-            ankDetails(data);
-
+            const response = await main.TeacherBank(data);
             if (response?.data) {
                 toast.success(response.data.message || "Bank details updated successfully.");
                 setData({
@@ -71,7 +69,7 @@ export default function Bank() {
                 {/* Bank Number */}
                 <div className="flex flex-wrap items-start">
                     <div className="w-full lg:w-5/12 xl:w-4/12 lg:pr-3 mb-2 lg:mb-0">
-                        <label className="block text-[#CC2828] font-medium text-base lg:text-xl mb-1">Bank Number</label>
+                        <label className="block text-[#CC2828] font-medium text-base lg:text-xl mb-1">Bank Account Number</label>
                         <p className="text-[#535353] text-base">Enter your Bank Account Number here</p>
                     </div>
                     <div className="w-full lg:w-6/12 xl:w-5/12 lg:pl-3 relative">

@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react'
 import toast from 'react-hot-toast';
 import Listing from '../api/Listing';
 
-export default function Stripe({PricePayment ,selectedLesson , selectedSlot, studentTimeZone}) {
+export default function Stripe({PricePayment, selectedLesson, adminCommission, selectedSlot, studentTimeZone}) {
   const [processing, setprocessing] = useState(false);
   const[endTime,setEndTime] = useState(null);
 
@@ -47,6 +47,7 @@ export default function Stripe({PricePayment ,selectedLesson , selectedSlot, stu
       setprocessing(true);
       const payment = new Listing();
       const resp = payment.Stripe_payment({
+        adminCommission: adminCommission,
         amount: PricePayment,
         currency: "USD",
         LessonId : selectedLesson?._id,

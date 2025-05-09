@@ -165,18 +165,18 @@ export default function Bank() {
             {/* Submit Button */}
             <div className="flex justify-center gap-4 pt-6">
                 <button
-                    type="submit"
-                    className="w-full max-w-[183px] bg-[#CC2828] hover:bg-red-700 text-white py-2.5 rounded-[10px] text-base xl:text-xl"
-                    disabled={processing}
-                >
-                    {processing ? "Submitting..." : "Submit"}
-                </button>
-                <button
                     type="button"
                     className="w-full max-w-[183px] bg-[#CC2828] hover:bg-red-700 text-white py-2.5 rounded-[10px] text-base xl:text-xl cursor-pointer"
                     onClick={() => setShowDetails(!showDetails)}
                     >
                     {showDetails ? "Hide" : "View"}{" "}Details
+                </button>
+                <button
+                    type="submit"
+                    className="w-full max-w-[183px] bg-[#CC2828] hover:bg-red-700 text-white py-2.5 rounded-[10px] text-base xl:text-xl"
+                    disabled={processing}
+                >
+                    {processing ? "Submitting..." : "Submit"}
                 </button>
             </div>
         </form>

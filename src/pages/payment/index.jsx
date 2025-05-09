@@ -8,46 +8,49 @@ import toast from "react-hot-toast";
 
 
 const Index = ({ isPopupOpen, PricePayment, selectedLesson, selectedSlot, studentTimeZone }) => {
+  const clientId = process.env.NEXT_PUBLIC_PAYPAL_CLIENT_ID;
+
+  console.log("NEXT_APP_PAYPAL_CLIENT_ID", clientId)
   const router = useRouter();
 
-console.log("selectedSlot" ,selectedSlot)
+  console.log("selectedSlot", selectedSlot)
   const [isProcessing, setIsProcessing] = useState(false);
   const [OrderId, setOrderId] = useState("")
-  const[endTime,setEndTime] = useState(null);
+  const [endTime, setEndTime] = useState(null);
 
   const addDurationToDate = (start, durationInMinutes) => {
     const originalDate = new Date(start);
     const finalDate = new Date(originalDate.getTime() + durationInMinutes * 60000);
-  
+
     // Detect if input was a string with timezone (for matching formatting)
     const isStringInput = typeof start === 'string';
-  
+
     // If it was a Date object, return Date object
     if (!isStringInput) return finalDate;
-  
+
     // Match the original locale and timezone style using toLocaleString
     const localeString = originalDate.toLocaleString(undefined, {
       timeZoneName: 'short',
       hour12: false
     });
-  
+
     const timezoneAbbreviation = localeString.split(' ').pop();
-  
+
     const formatted = finalDate.toLocaleString(undefined, {
       timeZoneName: 'short',
       hour12: false
     });
-  
+
     // Replace new abbreviation with old one (preserves input tz style)
     return formatted.replace(/GMT[^\s]+|[A-Z]{2,5}$/, timezoneAbbreviation);
   };
 
-  useEffect(()=>{
-    if(selectedLesson && selectedSlot){
+  useEffect(() => {
+    if (selectedLesson && selectedSlot) {
       const time = addDurationToDate(selectedSlot?.start, selectedLesson?.duration);
       setEndTime(time);
     }
-  },[selectedSlot, selectedLesson])
+  }, [selectedSlot, selectedLesson])
 
 
   const handleCreateOrder = async () => {
@@ -93,7 +96,7 @@ console.log("selectedSlot" ,selectedSlot)
         teacherId: selectedLesson?.teacher?._id,
         startDateTime: selectedSlot?.start,
         endDateTime: endTime,
-        timezone : studentTimeZone || "UTC",
+        timezone: studentTimeZone || "UTC",
       });
 
       if (response?.data?.status === "COMPLETED") {
@@ -130,18 +133,19 @@ console.log("selectedSlot" ,selectedSlot)
   };
 
   return (
-    <PayPalScriptProvider options={{ "client-id": "Af1V5-bpf6qTRgq6DPXI7S3AE6enoGtfsxXH0gDoXgpGFgOs7A1lLKBlhI1aaBTwbk4W_b3SwCbLCKpC" }}>
+    <PayPalScriptProvider options={{ "client-id": clientId }}>
       <div className="mt-6 w-full">
         <PayPalButtons
           createOrder={handleCreateOrder}
           onApprove={handleApprove}
           onCancel={handleCancel}
           disabled={isProcessing}
-          style={{ layout: 'vertical'}}
+          style={{ layout: 'vertical' }}
           fundingSource={FUNDING.PAYPAL}
         />
       </div>
     </PayPalScriptProvider>
+
   );
 };
 

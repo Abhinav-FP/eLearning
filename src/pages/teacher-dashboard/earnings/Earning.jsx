@@ -5,34 +5,23 @@ import toast from "react-hot-toast";
 
 export default function Earning({ isOpen, onClose, data }) {
     const [loading, setLoading] = useState(false);
-    const [formData, setFormData] = useState({
-        amount: "",
-    });
+    const [amount, setAmount] = useState();
 
     const handleChange = (e) => {
-        const { name, value } = e.target;
-        setFormData((prev) => ({
-            ...prev,
-            [name]: value,
-        }));
+        setAmount(e.target.value);
     };
-
     const handleAdd = async (e) => {
         e.preventDefault();
         if (loading) return;
         setLoading(true);
         try {
             const main = new Listing();
-            const response = await main.LessonAdd({
-                amount: formData?.amount,
-              
+            const response = await main.payoutAdd({
+                amount: parseFloat(amount),
             });
-
             if (response?.data?.status) {
                 toast.success(response.data.message);
-                setFormData({
-                    amount: "",
-                });
+                setAmount("");
                 onClose();
             } else {
                 toast.error(response.data.message);
@@ -58,23 +47,28 @@ export default function Earning({ isOpen, onClose, data }) {
                 <div>
                     <label className="block text-[#CC2828] font-medium mb-1">Amount</label>
                     <input
-                        type="text"
+                        type="number"
                         name="amount"
-                        value={formData.amount}
+                        value={amount}
                         onChange={handleChange}
                         placeholder="Enter amount"
+                        min="0"
+                        step="0.01"
                         className="w-full p-3 rounded-md bg-gray-100 text-gray-700 focus:outline-none focus:ring-2 focus:ring-[#CC2828]"
                         required
                     />
+
                 </div>
                 {/* Action Buttons */}
                 <div className="flex justify-between gap-4 mt-6">
                     <button
                         type="submit"
-                        className="cursor-pointer flex-1 bg-red-600 text-white py-2 rounded-md hover:bg-red-700"
+                        className="cursor-pointer flex-1 bg-red-600 text-white py-2 rounded-md hover:bg-red-700 disabled:opacity-50"
+                        disabled={loading}
                     >
                         {loading ? "Processing..." : "Request Payout"}
                     </button>
+
                 </div>
             </form>
         </Popup>

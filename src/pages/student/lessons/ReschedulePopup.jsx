@@ -12,8 +12,11 @@ export default function ReschedulePopup({ isOpen, onClose, lesson, studentTimeZo
   console.log("lesson",lesson);
   console.log("selectedSlot",selectedSlot);
   const[endTime,setEndTime] = useState(null);
+  console.log("endTime",endTime);
   
     const addDurationToDate = (start, durationInMinutes) => {
+      console.log("start",start);
+      console.log("duration",durationInMinutes);
       const originalDate = new Date(start);
       const finalDate = new Date(originalDate.getTime() + durationInMinutes * 60000);
     
@@ -42,7 +45,7 @@ export default function ReschedulePopup({ isOpen, onClose, lesson, studentTimeZo
   
     useEffect(()=>{
       if(selectedSlot){
-        const time = addDurationToDate(selectedSlot?.start, lesson?.LessonId?.duration?.duration);
+        const time = addDurationToDate(selectedSlot?.start, lesson?.LessonId?.duration);
         setEndTime(time);
       }
     },[selectedSlot])

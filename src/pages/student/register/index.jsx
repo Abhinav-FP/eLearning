@@ -8,14 +8,21 @@ import Listing from '@/pages/api/Listing';
 import { IoEye, IoEyeOff } from 'react-icons/io5';
 import toast from 'react-hot-toast';
 import { useRouter } from 'next/router';
+import { FaCheckCircle, FaTimesCircle } from "react-icons/fa";
 
 export default function Index() {
     const router = useRouter();
     const [loading, setLoading] = useState(false);
     const [passwordFocused, setPasswordFocused] = useState(false);
-    const [isPasswordValid, setIsPasswordValid] = useState(true);
     const [showPassword, setShowPassword] = useState(false);
     const [showConfirmPassword, setShowConfirmPassword] = useState(false);
+    const [passwordCriteria, setPasswordCriteria] = useState({
+        hasUpper: false,
+        hasLower: false,
+        hasNumber: false,
+        hasSymbol: false,
+        hasMinLength: false,
+    });
 
     const [data, setData] = useState({
         name: "",
@@ -31,12 +38,14 @@ export default function Index() {
     const handleChange = (e) => {
         const { name, value } = e.target;
         if (name === 'password') {
-            const hasUpper = /[A-Z]/.test(value);
-            const hasLower = /[a-z]/.test(value);
-            const hasNumber = /[0-9]/.test(value);
-            const hasSymbol = /[!@#$%^&*(),.?":{}|<>]/.test(value);
-            const hasMinLength = value.length >= 8;
-            setIsPasswordValid(hasUpper && hasLower && hasNumber && hasSymbol && hasMinLength);
+            const criteria = {
+                hasUpper: /[A-Z]/.test(value),
+                hasLower: /[a-z]/.test(value),
+                hasNumber: /[0-9]/.test(value),
+                hasSymbol: /[!@#$%^&*(),.?":{}|<>]/.test(value),
+                hasMinLength: value.length >= 8,
+            };
+            setPasswordCriteria(criteria);
         }
         setData((prevState) => ({
             ...prevState,
@@ -47,8 +56,9 @@ export default function Index() {
     const handleSubmit = async (e) => {
         e.preventDefault();
         if (loading) return;
-        if(!isPasswordValid){
-            toast.error("Password must include at least one uppercase letter, one lowercase letter, a number, a special character, and be at least 8 characters long.");
+        if(!passwordCriteria?.hasUpper || !passwordCriteria?.hasLower || !passwordCriteria?.hasNumber 
+            || !passwordCriteria?.hasSymbol || !passwordCriteria?.hasMinLength ){
+            toast.error("Password must include uppercase, lowercase, number, symbol, and be 8+ characters.");
             return;
         }
         if (data?.email !== data?.confirm_email) {
@@ -196,10 +206,50 @@ export default function Index() {
                             >
                                 {showPassword ? <IoEyeOff size={24} /> : <IoEye size={24} />}
                             </div>
-                            {passwordFocused && !isPasswordValid && (
-                                <p className="text-red-600 text-sm mt-1">
-                                Password must include at least one uppercase letter, one lowercase letter, a number, a special character, and be at least 8 characters long.
-                                </p>
+
+                            {passwordFocused && (
+                                <div className="text-gray-700 text-sm mt-2 space-y-1">
+                                    <p className="flex items-center gap-2">
+                                        {passwordCriteria.hasLower ? (
+                                            <FaCheckCircle className="text-green-600" />
+                                        ) : (
+                                            <FaTimesCircle className="text-red-600" />
+                                        )}
+                                        Contains lowercase letter
+                                    </p>
+                                    <p className="flex items-center gap-2">
+                                        {passwordCriteria.hasUpper ? (
+                                            <FaCheckCircle className="text-green-600" />
+                                        ) : (
+                                            <FaTimesCircle className="text-red-600" />
+                                        )}
+                                        Contains uppercase letter
+                                    </p>
+                                    <p className="flex items-center gap-2">
+                                        {passwordCriteria.hasNumber ? (
+                                            <FaCheckCircle className="text-green-600" />
+                                        ) : (
+                                            <FaTimesCircle className="text-red-600" />
+                                        )}
+                                        Contains number
+                                    </p>
+                                    <p className="flex items-center gap-2">
+                                        {passwordCriteria.hasSymbol ? (
+                                            <FaCheckCircle className="text-green-600" />
+                                        ) : (
+                                            <FaTimesCircle className="text-red-600" />
+                                        )}
+                                        Contains special character
+                                    </p>
+                                    <p className="flex items-center gap-2">
+                                        {passwordCriteria.hasMinLength ? (
+                                            <FaCheckCircle className="text-green-600" />
+                                        ) : (
+                                            <FaTimesCircle className="text-red-600" />
+                                        )}
+                                        At least 8 characters long
+                                    </p>
+                                </div>
                             )}
                         </div>
                         <div className='w-full md:w-6/12 px-2.5 mb-5 relative'>

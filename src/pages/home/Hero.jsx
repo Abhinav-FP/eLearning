@@ -2,6 +2,7 @@ import Button from "../common/Button";
 import Image from "next/image";
 import HeroImg1 from '../Assets/Images/hero_top_img.png';
 import HeroImg2 from '../Assets/Images/hero_bottom_img.png';
+import Link from "next/link";
 
 export default function Hero({ title }) {
     return (
@@ -27,12 +28,16 @@ export default function Hero({ title }) {
                             <h1 className="text-[#CC2828] font-inter text-[24px] sm:text-[32px] lg:text-[36px] xl:text-[55px] font-extrabold leading-[30px] sm:leading-[42px] md:leading-[44px] lg:leading-[44px] xl:leading-[60px] mb-4 lg:mb-6 xl:mb-8 -tracking-[0.04em] max-w-[500px] mx-auto">
                                 {title}
                             </h1>
-                            <Button classes={'bg-[#CC2828] hover:bg-[#ad0e0e] text-base lg:text-lg xl:text-xl py-2.5 lg:py-3 xl:py-3.5 px-4 text-white w-full max-w-[438px]'} title={'Book a lesson'} />
+                            {/* <Button classes={'bg-[#CC2828] hover:bg-[#ad0e0e] text-base lg:text-lg xl:text-xl py-2.5 lg:py-3 xl:py-3.5 px-4 text-white w-full max-w-[438px]'} title={'Book a lesson'} /> */}
+                            <Link
+                            href="/#lesson"
+                            className="flex justify-center text-center w-full font-medium cursor-pointer rounded-full py-2 px-5 bg-[#CC2828] hover:bg-[#ad0e0e] text-base lg:text-lg xl:text-xl py-2.5 lg:py-3 xl:py-3.5 px-4 text-white max-w-[438px]"
+                            >
+                                Book a lesson
+                            </Link>
                         </div>
                     </div>
-
                 </div>
-
             </div>
         </>
     )

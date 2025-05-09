@@ -120,9 +120,9 @@ const PaymentCheckout = ({ selectedLesson, selectedSlot, studentTimeZone }) => {
         </div>
 
         {PaymentStatus === false ? (
-          <Payment PricePayment={selectedLesson?.price + 0.1*selectedLesson?.price} selectedLesson={selectedLesson}  selectedSlot={selectedSlot} studentTimeZone={studentTimeZone}/>
+          <Payment PricePayment={selectedLesson?.price + 0.1*selectedLesson?.price} adminCommission={0.1*selectedLesson?.price} selectedLesson={selectedLesson}  selectedSlot={selectedSlot} studentTimeZone={studentTimeZone}/>
         ) : (
-          <Stripe PricePayment={selectedLesson?.price + 0.1*selectedLesson?.price} selectedLesson={selectedLesson}  selectedSlot= {selectedSlot} studentTimeZone={studentTimeZone}/>
+          <Stripe PricePayment={selectedLesson?.price + 0.1*selectedLesson?.price} adminCommission={0.1*selectedLesson?.price} selectedLesson={selectedLesson}  selectedSlot= {selectedSlot} studentTimeZone={studentTimeZone}/>
         )}
 
       </div>

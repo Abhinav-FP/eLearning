@@ -11,6 +11,12 @@ class Listing extends Component {
   async profileVerify(){
     return Api.get("/user/profile")
   }
+
+  async Teacherprofile(){
+    return Api.get("/teacher/profile")
+  }
+
+ 
   async emailVerify(data){
     return Api.post("/user/verify-email", data);
   }
@@ -35,7 +41,10 @@ class Listing extends Component {
   async HomeTeacherVideo(){
     return Api.get("/home/teacher/video")
   }
-  
+
+  async TeacherBank(data){
+    return Api.post("/teacher/bank" ,data)
+  }
   async StudentTeacher(data) {
     return Api.get("/student/teacherGet", data);
   }
@@ -93,7 +102,6 @@ class Listing extends Component {
   async Stripe_payment(data) {
     return Api.post("/payment/create-checkout-session", data);
   }
-
   
   async StripeSuccess(data) {
     return Api.get(`/payment/payment-success/${data}`);
@@ -139,10 +147,22 @@ class Listing extends Component {
     return Api.put(`/teacher/availability/update/${id}`, data);
   }
 
+  async payoutAdd(data){
+    return Api.post(`/teacher/payout`, data);
+  }
+
+
+  async PayoutList(data){
+    return Api.get(`/teacher/payout`, data);
+  }
+  
   async GetBooking(){
     return Api.get(`/booking/getAll`);
   }
 
+   async teacherbankget(){
+    return Api.get(`/teacher/bank`);
+  }
   render() {
     return (
       <div>

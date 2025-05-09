@@ -1,14 +1,38 @@
 import Listing from '@/pages/api/Listing';
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import toast from "react-hot-toast";
 
 export default function Bank() {
     const [processing, setProcessing] = useState(false);
+
+    useEffect(() => {
+        const main = new Listing();
+        main.teacherbankget()
+            .then((r) => {
+                console.log("r", r)
+                const profiledata = r?.data?.data;
+                console.log("profileData", profiledata);
+                setData({
+                    BankName: profiledata?.BankName,
+                    BankNumber: profiledata?.BankNumber,
+                    BranchName: profiledata?.BranchName,
+                    IFSC: profiledata?.IFSC,
+                    _id: profiledata?._id,
+                    AccountHolderName: profiledata?.AccountHolderName
+
+                });
+            })
+            .catch((err) => {
+                console.log(err);
+            });
+    }, []);
+
     const [data, setData] = useState({
         BankName: "",
         BankNumber: "",
         BranchName: "",
         IFSC: "",
+        AccountHolderName: ""
     });
 
     const handleChange = (e) => {
@@ -26,17 +50,9 @@ export default function Bank() {
         setProcessing(true);
         try {
             const main = new Listing();
-            const response = await main.UpdateB
-            ankDetails(data);
-
+            const response = await main.TeacherBank(data);
             if (response?.data) {
                 toast.success(response.data.message || "Bank details updated successfully.");
-                setData({
-                    BankName: "",
-                    BankNumber: "",
-                    BranchName: "",
-                    IFSC: "",
-                });
             } else {
                 toast.error(response?.data?.message || "Failed to update.");
             }
@@ -50,6 +66,23 @@ export default function Bank() {
     return (
         <form onSubmit={handleSubmit}>
             <div className="space-y-6 py-6">
+                {/* Branch Name */}
+                <div className="flex flex-wrap items-start">
+                    <div className="w-full lg:w-5/12 xl:w-4/12 lg:pr-3 mb-2 lg:mb-0">
+                        <label className="block text-[#CC2828] font-medium text-base lg:text-xl mb-1">Account Holder Name</label>
+                        <p className="text-[#535353] text-base">Enter your Account Holder Name here</p>
+                    </div>
+                    <div className="w-full lg:w-6/12 xl:w-5/12 lg:pl-3 relative">
+                        <input
+                            required
+                            type="text"
+                            name="AccountHolderName"
+                            className="w-full h-11 lg:h-[54px] font-medium bg-[#F4F6F8] text-[#46494D] text-base border border-[#F4F6F8] rounded-lg py-3 px-6"
+                            value={data.AccountHolderName}
+                            onChange={handleChange}
+                        />
+                    </div>
+                </div>
                 {/* Bank Name */}
                 <div className="flex flex-wrap items-start">
                     <div className="w-full lg:w-5/12 xl:w-4/12 lg:pr-3 mb-2 lg:mb-0">
@@ -71,7 +104,7 @@ export default function Bank() {
                 {/* Bank Number */}
                 <div className="flex flex-wrap items-start">
                     <div className="w-full lg:w-5/12 xl:w-4/12 lg:pr-3 mb-2 lg:mb-0">
-                        <label className="block text-[#CC2828] font-medium text-base lg:text-xl mb-1">Bank Number</label>
+                        <label className="block text-[#CC2828] font-medium text-base lg:text-xl mb-1">Bank Account Number</label>
                         <p className="text-[#535353] text-base">Enter your Bank Account Number here</p>
                     </div>
                     <div className="w-full lg:w-6/12 xl:w-5/12 lg:pl-3 relative">
@@ -134,6 +167,5 @@ export default function Bank() {
                 </button>
             </div>
         </form>
-
     );
 }

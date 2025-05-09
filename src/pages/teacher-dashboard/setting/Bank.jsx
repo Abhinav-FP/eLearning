@@ -4,6 +4,7 @@ import toast from "react-hot-toast";
 
 export default function Bank() {
     const [processing, setProcessing] = useState(false);
+    const [showDetails, setShowDetails] = useState(false);
 
     useEffect(() => {
         const main = new Listing();
@@ -77,7 +78,8 @@ export default function Bank() {
                             required
                             type="text"
                             name="AccountHolderName"
-                            className="w-full h-11 lg:h-[54px] font-medium bg-[#F4F6F8] text-[#46494D] text-base border border-[#F4F6F8] rounded-lg py-3 px-6"
+                            disabled={!showDetails}
+                            className={`w-full h-11 lg:h-[54px] font-medium bg-[#F4F6F8] text-[#46494D] text-base border border-[#F4F6F8] rounded-lg py-3 px-6 ${!showDetails ? 'blur-sm' : ''}`}
                             value={data.AccountHolderName}
                             onChange={handleChange}
                         />
@@ -94,7 +96,8 @@ export default function Bank() {
                             required
                             type="text"
                             name="BankName"
-                            className="w-full h-11 lg:h-[54px] font-medium bg-[#F4F6F8] text-[#46494D] text-base border border-[#F4F6F8] rounded-lg py-3 px-6"
+                            disabled={!showDetails}
+                            className={`w-full h-11 lg:h-[54px] font-medium bg-[#F4F6F8] text-[#46494D] text-base border border-[#F4F6F8] rounded-lg py-3 px-6 ${!showDetails ? 'blur-sm' : ''}`}
                             value={data.BankName}
                             onChange={handleChange}
                         />
@@ -112,7 +115,8 @@ export default function Bank() {
                             required
                             type="text"
                             name="BankNumber"
-                            className="w-full h-11 lg:h-[54px] font-medium bg-[#F4F6F8] text-[#46494D] text-base border border-[#F4F6F8] rounded-lg py-3 px-6"
+                            disabled={!showDetails}
+                            className={`w-full h-11 lg:h-[54px] font-medium bg-[#F4F6F8] text-[#46494D] text-base border border-[#F4F6F8] rounded-lg py-3 px-6 ${!showDetails ? 'blur-sm' : ''}`}
                             value={data.BankNumber}
                             onChange={handleChange}
                         />
@@ -130,7 +134,8 @@ export default function Bank() {
                             required
                             type="text"
                             name="BranchName"
-                            className="w-full h-11 lg:h-[54px] font-medium bg-[#F4F6F8] text-[#46494D] text-base border border-[#F4F6F8] rounded-lg py-3 px-6"
+                            disabled={!showDetails}
+                            className={`w-full h-11 lg:h-[54px] font-medium bg-[#F4F6F8] text-[#46494D] text-base border border-[#F4F6F8] rounded-lg py-3 px-6 ${!showDetails ? 'blur-sm' : ''}`}
                             value={data.BranchName}
                             onChange={handleChange}
                         />
@@ -148,7 +153,8 @@ export default function Bank() {
                             required
                             type="text"
                             name="IFSC"
-                            className="w-full h-11 lg:h-[54px] font-medium bg-[#F4F6F8] text-[#46494D] text-base border border-[#F4F6F8] rounded-lg py-3 px-6"
+                            disabled={!showDetails}
+                            className={`w-full h-11 lg:h-[54px] font-medium bg-[#F4F6F8] text-[#46494D] text-base border border-[#F4F6F8] rounded-lg py-3 px-6 ${!showDetails ? 'blur-sm' : ''}`}
                             value={data.IFSC}
                             onChange={handleChange}
                         />
@@ -157,13 +163,20 @@ export default function Bank() {
             </div>
 
             {/* Submit Button */}
-            <div className="flex justify-center pt-6">
+            <div className="flex justify-center gap-4 pt-6">
                 <button
                     type="submit"
                     className="w-full max-w-[183px] bg-[#CC2828] hover:bg-red-700 text-white py-2.5 rounded-[10px] text-base xl:text-xl"
                     disabled={processing}
                 >
                     {processing ? "Submitting..." : "Submit"}
+                </button>
+                <button
+                    type="button"
+                    className="w-full max-w-[183px] bg-[#CC2828] hover:bg-red-700 text-white py-2.5 rounded-[10px] text-base xl:text-xl cursor-pointer"
+                    onClick={() => setShowDetails(!showDetails)}
+                    >
+                    {showDetails ? "Hide" : "View"}{" "}Details
                 </button>
             </div>
         </form>

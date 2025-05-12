@@ -2,6 +2,8 @@ import Image from 'next/image';
 import React, { useEffect, useState } from 'react'
 import Profile_img from "../../Assets/Images/hero_top_img.png"
 import timeZones from "../../../Json/TimeZone";
+import Nationality from "../../../Json/Nationality.json";
+
 import Listing from '@/pages/api/Listing';
 import toast from 'react-hot-toast';
 
@@ -28,11 +30,16 @@ export default function Profile() {
             .then((r) => {
                 console.log("r" ,r)
                 const profiledata = r?.data?.data?.user;
-                // console.log("profileData",profiledata);
+                console.log("profileData",profiledata);
                 setData({
-                    name: profiledata?.name,
-                    email: profiledata?.email,
-                    timezone: profiledata?.time_zone,
+                    name: profiledata?.userId?.name,
+                    email: profiledata?.userId?.email,
+                    timezone: profiledata?.userId?.time_zone,
+                    ais_trained : profiledata?.ais_trained,
+                    description :profiledata?.description,
+                    intro_video:profiledata?.intro_video ,
+                    experience : profiledata?.experience,
+                    gender :profiledata?.gender,
                 });
             })
             .catch((err) => {
@@ -116,8 +123,13 @@ export default function Profile() {
                         </select>
                     </div>
                     <div className="w-full lg:w-6/12  px-2">
-                        <label className="block text-[#CC2828] font-medium text-base xl:text-xl mb-1 tracking-[-0.04em]">Nationality</label>
-                        <input type="text" value={data?.nationality} required name="nationality" onChange={handleChange} className="w-full h-11 lg:h-[54px] font-medium appearance-none block bg-[#F4F6F8] text-[#46494D] text-base border border-[#F4F6F8] rounded-lg py-3 px-3 lg:px-6 leading-tight focus:outline-none" />
+                        <label className="block text-[#CC2828] font-medium text-base xl:text-xl mb-1 tracking-[-0.04em]" onChange={handleChange} value={data?.nationality} name="nationality" >Nationality</label>
+                        <select className="w-full h-11 lg:h-[54px] font-medium appearance-none block bg-[#F4F6F8] text-[#46494D] text-base border border-[#F4F6F8] rounded-lg py-3 px-3 lg:px-6 leading-tight focus:outline-none tracking-[-0.04em]" onChange={handleChange} value={data?.timezone} name="timezone" required>
+                            <option value="">Please select Nationality</option>
+                       {Nationality && Nationality.map((zone, index) => (<option key={index} value={zone.value}>{zone.label}</option>))}
+
+                        </select>
+                      
                     </div>
 
                     <div className="w-full lg:w-6/12  px-2">
@@ -165,6 +177,17 @@ export default function Profile() {
                                 />
                                 <span>Female</span>
                             </label>
+                                <label className="flex items-center space-x-1">
+                                <input
+                                    type="radio"
+                                    name="gender"
+                                    value="O"
+                                    checked={data.gender === 'O'}
+                                    onChange={handleChange}
+                                    className="text-[#CC2828] focus:ring-[#CC2828]"
+                                />
+                                <span>Other</span>
+                            </label>
                         </div>
                     </div>
 
@@ -176,8 +199,8 @@ export default function Profile() {
                                 <input
                                     type="radio"
                                     name="ais_trained"
-                                    value="yes"
-                                    checked={data.ais_trained === 'yes'}
+                                    value="true"
+                                    checked={data.ais_trained === true}
                                     onChange={handleChange}
                                     className="text-[#CC2828] focus:ring-[#CC2828]"
                                 />
@@ -187,8 +210,8 @@ export default function Profile() {
                                 <input
                                     type="radio"
                                     name="ais_trained"
-                                    value="no"
-                                    checked={data.ais_trained === 'no'}
+                                    value="false"
+                                    checked={data.ais_trained === false}
                                     onChange={handleChange}
                                     className="text-[#CC2828] focus:ring-[#CC2828]"
                                 />

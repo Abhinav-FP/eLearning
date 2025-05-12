@@ -91,14 +91,14 @@ const Index = ({ isPopupOpen, PricePayment, adminCommission, selectedLesson, sel
     try {
       const main = new Listing();
       const response = await main.PaypalApprove({
-        totalAmount: PricePayment,
-        adminCommission:adminCommission,
         orderID: data.orderID, // or use OrderId if you prefer
         LessonId: selectedLesson?._id,
         teacherId: selectedLesson?.teacher?._id,
         startDateTime: selectedSlot?.start,
         endDateTime: endTime,
         timezone: studentTimeZone || "UTC",
+        totalAmount: PricePayment,
+        adminCommission:adminCommission,
       });
 
       if (response?.data?.status === "COMPLETED") {
@@ -135,7 +135,7 @@ const Index = ({ isPopupOpen, PricePayment, adminCommission, selectedLesson, sel
   };
 
   return (
-    <PayPalScriptProvider options={{ "client-id": clientId }}>
+    <PayPalScriptProvider options={{ "client-id": "Af1V5-bpf6qTRgq6DPXI7S3AE6enoGtfsxXH0gDoXgpGFgOs7A1lLKBlhI1aaBTwbk4W_b3SwCbLCKpC" }}>
       <div className="mt-6 w-full">
         <PayPalButtons
           createOrder={handleCreateOrder}

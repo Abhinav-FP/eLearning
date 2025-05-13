@@ -3,6 +3,8 @@ import React, { useEffect, useState } from 'react'
 import Profile_img from "../../Assets/Images/hero_top_img.png"
 import timeZones from "../../../Json/TimeZone";
 import Nationality from "../../../Json/Nationality.json";
+import langauage from "../../../Json/langauage.json";
+
 
 import Listing from '@/pages/api/Listing';
 import toast from 'react-hot-toast';
@@ -22,24 +24,28 @@ export default function Profile() {
         experience: "",
         description: "",
         aisTrained: 'yes',
+        average_price :"",
+        average_time :'',
+        documentlink :""
+
     })
 
     useEffect(() => {
         const main = new Listing();
         main.Teacherprofile()
             .then((r) => {
-                console.log("r" ,r)
+                console.log("r", r)
                 const profiledata = r?.data?.data?.user;
-                console.log("profileData",profiledata);
+                console.log("profileData", profiledata);
                 setData({
                     name: profiledata?.userId?.name,
                     email: profiledata?.userId?.email,
                     timezone: profiledata?.userId?.time_zone,
-                    ais_trained : profiledata?.ais_trained,
-                    description :profiledata?.description,
-                    intro_video:profiledata?.intro_video ,
-                    experience : profiledata?.experience,
-                    gender :profiledata?.gender,
+                    ais_trained: profiledata?.ais_trained,
+                    description: profiledata?.description,
+                    intro_video: profiledata?.intro_video,
+                    experience: profiledata?.experience,
+                    gender: profiledata?.gender,
                 });
             })
             .catch((err) => {
@@ -83,6 +89,17 @@ export default function Profile() {
         setProcessing(false);
     };
 
+    const handlefileChange = (e) => {
+        const { name, type, files, value } = e.target;
+        const newValue = type === 'file' ? files[0] : value;
+
+        setData(prev => ({
+            ...prev,
+            [name]: newValue
+        }));
+    };
+
+
     return (
         <>
             <div className="border-b  border-[rgba(0,0,0,.1)] flex flex-wrap py-6 lg:py-8">
@@ -116,6 +133,7 @@ export default function Profile() {
                         <label className="block text-[#CC2828] font-medium text-base xl:text-xl mb-1 tracking-[-0.04em]">Email</label>
                         <input type="email" value={data?.email} required name="email" onChange={handleChange} className="w-full h-11 lg:h-[54px] font-medium appearance-none block bg-[#F4F6F8] text-[#46494D] text-base border border-[#F4F6F8] rounded-lg py-3 px-3 lg:px-6 leading-tight focus:outline-none" />
                     </div>
+                  
                     <div className="w-full lg:w-6/12  px-2"><label className="block text-[#CC2828] font-medium text-base xl:text-xl mb-1 tracking-[-0.04em]">Time Zone</label>
                         <select className="w-full h-11 lg:h-[54px] font-medium appearance-none block bg-[#F4F6F8] text-[#46494D] text-base border border-[#F4F6F8] rounded-lg py-3 px-3 lg:px-6 leading-tight focus:outline-none tracking-[-0.04em]" onChange={handleChange} value={data?.timezone} name="timezone" required>
                             <option value="">Please select Time-Zone</option>
@@ -126,30 +144,42 @@ export default function Profile() {
                         <label className="block text-[#CC2828] font-medium text-base xl:text-xl mb-1 tracking-[-0.04em]" onChange={handleChange} value={data?.nationality} name="nationality" >Nationality</label>
                         <select className="w-full h-11 lg:h-[54px] font-medium appearance-none block bg-[#F4F6F8] text-[#46494D] text-base border border-[#F4F6F8] rounded-lg py-3 px-3 lg:px-6 leading-tight focus:outline-none tracking-[-0.04em]" onChange={handleChange} value={data?.timezone} name="timezone" required>
                             <option value="">Please select Nationality</option>
-                       {Nationality && Nationality.map((zone, index) => (<option key={index} value={zone.value}>{zone.label}</option>))}
-
+                            {Nationality && Nationality.map((zone, index) => (<option key={index} value={zone.value}>{zone.label}</option>))}
                         </select>
-                      
+
                     </div>
 
                     <div className="w-full lg:w-6/12  px-2">
                         <label className="block text-[#CC2828] font-medium text-base xl:text-xl mb-1 tracking-[-0.04em]">Languages spoken</label>
-                        <input type="text" value={data?.languages_spoken} required name="languages_spoken" onChange={handleChange} className="w-full h-11 lg:h-[54px] font-medium appearance-none block bg-[#F4F6F8] text-[#46494D] text-base border border-[#F4F6F8] rounded-lg py-3 px-3 lg:px-6 leading-tight focus:outline-none" />
+                        <select className="w-full h-11 lg:h-[54px] font-medium appearance-none block bg-[#F4F6F8] text-[#46494D] text-base border border-[#F4F6F8] rounded-lg py-3 px-3 lg:px-6 leading-tight focus:outline-none tracking-[-0.04em]" onChange={handleChange} value={data?.languages_spoken} name="languages_spoken" required>
+                            <option value="">Please select Languages spoken</option>
+                            {langauage && langauage.map((zone, index) => (<option key={index} value={zone}>{zone}</option>))}
+                        </select>
+
                     </div>
 
                     <div className="w-full lg:w-6/12  px-2">
                         <label className="block text-[#CC2828] font-medium text-base xl:text-xl mb-1 tracking-[-0.04em]">Intro video link</label>
                         <input type="text" value={data?.intro_video} required name="intro_video" onChange={handleChange} className="w-full h-11 lg:h-[54px] font-medium appearance-none block bg-[#F4F6F8] text-[#46494D] text-base border border-[#F4F6F8] rounded-lg py-3 px-3 lg:px-6 leading-tight focus:outline-none" />
                     </div>
-
-
-                    <div className="w-full lg:w-6/12  px-2">
-                        <label className="block text-[#CC2828] font-medium text-base xl:text-xl mb-1 tracking-[-0.04em]">Interest</label>
-                        <input type="text" value={data?.interest} required name="interest" onChange={handleChange} className="w-full h-11 lg:h-[54px] font-medium appearance-none block bg-[#F4F6F8] text-[#46494D] text-base border border-[#F4F6F8] rounded-lg py-3 px-3 lg:px-6 leading-tight focus:outline-none" />
+                        <div className="w-full lg:w-6/12  px-2">
+                        <label className="block text-[#CC2828] font-medium text-base xl:text-xl mb-1 tracking-[-0.04em]">Upload of relevant documents </label>
+                        <input type="file"  value={data?.documentlink} required name="documentlink" onChange={handlefileChange} className="w-full h-11 lg:h-[54px] font-medium appearance-none block bg-[#F4F6F8] text-[#46494D] text-base border border-[#F4F6F8] rounded-lg py-3 px-3 lg:px-6 leading-tight focus:outline-none" />
                     </div>
+                 
                     <div className="w-full lg:w-6/12  px-2">
-                        <label className="block text-[#CC2828] font-medium text-base xl:text-xl mb-1 tracking-[-0.04em]">Experience</label>
+                        <label className="block text-[#CC2828] font-medium text-base xl:text-xl mb-1 tracking-[-0.04em]">Experience (In Year)</label>
                         <input type="text" value={data?.experience} required name="experience" onChange={handleChange} className="w-full h-11 lg:h-[54px] font-medium appearance-none block bg-[#F4F6F8] text-[#46494D] text-base border border-[#F4F6F8] rounded-lg py-3 px-3 lg:px-6 leading-tight focus:outline-none" />
+                    </div>
+
+                        <div className="w-full lg:w-6/12  px-2">
+                        <label className="block text-[#CC2828] font-medium text-base xl:text-xl mb-1 tracking-[-0.04em]">Average Price</label>
+                        <input type="number" value={data?.email} required name="email" onChange={handleChange} className="w-full h-11 lg:h-[54px] font-medium appearance-none block bg-[#F4F6F8] text-[#46494D] text-base border border-[#F4F6F8] rounded-lg py-3 px-3 lg:px-6 leading-tight focus:outline-none" />
+                    </div>
+
+                    <div className="w-full lg:w-6/12  px-2">
+                        <label className="block text-[#CC2828] font-medium text-base xl:text-xl mb-1 tracking-[-0.04em]">Average Time</label>
+                        <input type="time" value={data?.average_time} required name="email" onChange={handleChange} className="w-full h-11 lg:h-[54px] font-medium appearance-none block bg-[#F4F6F8] text-[#46494D] text-base border border-[#F4F6F8] rounded-lg py-3 px-3 lg:px-6 leading-tight focus:outline-none" />
                     </div>
 
                     <div className="w-full lg:w-6/12 px-2 mb-4">
@@ -177,7 +207,7 @@ export default function Profile() {
                                 />
                                 <span>Female</span>
                             </label>
-                                <label className="flex items-center space-x-1">
+                            <label className="flex items-center space-x-1">
                                 <input
                                     type="radio"
                                     name="gender"
@@ -219,7 +249,6 @@ export default function Profile() {
                             </label>
                         </div>
                     </div>
-
 
                     <div className="w-full   px-2">
                         <label className="block text-[#CC2828] font-medium text-base xl:text-xl mb-1 tracking-[-0.04em]">Description</label>

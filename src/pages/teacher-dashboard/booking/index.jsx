@@ -1,15 +1,30 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import TeacherLayout from '../Common/TeacherLayout'
+import Listing from '@/pages/api/Listing';
 
 export default function Index() {
 
   const [TabOpen, setTabOpen] = useState('upcoming');
 
-const data = [ 
-  {
+const [data, setData] = useState({});
 
-  }
-]
+    const fetchEarnings = async () => {
+        try {
+            const main = new Listing();
+            const response = await main.TeacherBooking();
+            setData(response?.data?.data || []);
+        } catch (error) {
+            console.log("error", error);
+            setData({})
+        }
+    };
+
+    console.log("data",data);
+
+    useEffect(() => {
+        fetchEarnings();
+    }, []);
+
 
   return (
     <TeacherLayout>
@@ -45,7 +60,7 @@ const data = [
                     </tr>
                   </thead>
 
-                  <tbody>
+                  {/* <tbody>
                     {data &&
                       data?.map((item, index) => (
                         <tr
@@ -66,7 +81,7 @@ const data = [
                           </td> 
                         </tr>
                       ))}
-                  </tbody>
+                  </tbody> */}
                 </table>
               </div>
             )

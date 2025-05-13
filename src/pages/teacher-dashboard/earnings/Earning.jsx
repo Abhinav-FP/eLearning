@@ -3,16 +3,20 @@ import Popup from "@/pages/common/Popup";
 import Listing from "@/pages/api/Listing";
 import toast from "react-hot-toast";
 
-export default function Earning({ isOpen, onClose, data }) {
+export default function Earning({ isOpen, onClose, data, fetchEarnings }) {
     const [loading, setLoading] = useState(false);
-    const [amount, setAmount] = useState();
+    const [amount, setAmount] = useState(data);
 
-    const handleChange = (e) => {
-        setAmount(e.target.value);
-    };
+    // const handleChange = (e) => {
+    //     setAmount(e.target.value);
+    // };
     const handleAdd = async (e) => {
         e.preventDefault();
         if (loading) return;
+        if(amount === 0){
+            toast.error("Cannot create request for 0 amount!");
+            return;
+        }
         setLoading(true);
         try {
             const main = new Listing();
@@ -22,6 +26,7 @@ export default function Earning({ isOpen, onClose, data }) {
             if (response?.data?.status) {
                 toast.success(response.data.message);
                 setAmount("");
+                fetchEarnings();
                 onClose();
             } else {
                 toast.error(response.data.message);
@@ -50,14 +55,13 @@ export default function Earning({ isOpen, onClose, data }) {
                         type="number"
                         name="amount"
                         value={amount}
-                        onChange={handleChange}
+                        readOnly
                         placeholder="Enter amount"
                         min="0"
                         step="0.01"
                         className="w-full p-3 rounded-md bg-gray-100 text-gray-700 focus:outline-none focus:ring-2 focus:ring-[#CC2828]"
                         required
                     />
-
                 </div>
                 {/* Action Buttons */}
                 <div className="flex justify-between gap-4 mt-6">

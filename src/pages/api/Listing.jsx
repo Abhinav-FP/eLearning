@@ -151,9 +151,16 @@ class Listing extends Component {
     return Api.post(`/teacher/payout`, data);
   }
 
-
   async PayoutList(data){
     return Api.get(`/teacher/payout`, data);
+  }
+
+  async TeacherEarning(){
+    return Api.get(`/teacher/earning`);
+  }
+
+  async TeacherBooking(){
+    return Api.get(`/teacher/booking`);
   }
   
   async GetBooking(){

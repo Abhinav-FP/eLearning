@@ -2,56 +2,61 @@ import React, { useEffect, useState } from 'react'
 import StudentLayout from '../Common/StudentLayout'
 import Listing from '@/pages/api/Listing';
 import moment from 'moment';
+import { TableLoader } from '@/pages/common/Loader';
 
 export default function Index() {
 
   const [payment, setPayment] = useState([]);
-  const payments=[
-    {
-      "orderId": "ORD123456",
-      "lessonName": "Intro to JavaScript",
-      "paymentTime": "2025-04-24T10:30:00Z",
-      "amount": 49.99,
-      "paymentStatus": "Success"
-    },
-    {
-      "orderId": "ORD123457",
-      "lessonName": "Advanced CSS Grid",
-      "paymentTime": "2025-04-23T14:15:00Z",
-      "amount": 29.99,
-      "paymentStatus": "Success"
-    },
-    {
-      "orderId": "ORD123458",
-      "lessonName": "React Fundamentals",
-      "paymentTime": "2025-04-22T09:45:00Z",
-      "amount": 59.99,
-      "paymentStatus": "Failed"
-    },
-    {
-      "orderId": "ORD123459",
-      "lessonName": "Node.js Crash Course",
-      "paymentTime": "2025-04-21T16:00:00Z",
-      "amount": 39.99,
-      "paymentStatus": "Success"
-    },
-    {
-      "orderId": "ORD123460",
-      "lessonName": "Full Stack Web Dev",
-      "paymentTime": "2025-04-20T18:20:00Z",
-      "amount": 99.99,
-      "paymentStatus": "Failed"
-    }
-  ];  
+  const[loading,setLoading]=useState(false);
+  // const payments=[
+  //   {
+  //     "orderId": "ORD123456",
+  //     "lessonName": "Intro to JavaScript",
+  //     "paymentTime": "2025-04-24T10:30:00Z",
+  //     "amount": 49.99,
+  //     "paymentStatus": "Success"
+  //   },
+  //   {
+  //     "orderId": "ORD123457",
+  //     "lessonName": "Advanced CSS Grid",
+  //     "paymentTime": "2025-04-23T14:15:00Z",
+  //     "amount": 29.99,
+  //     "paymentStatus": "Success"
+  //   },
+  //   {
+  //     "orderId": "ORD123458",
+  //     "lessonName": "React Fundamentals",
+  //     "paymentTime": "2025-04-22T09:45:00Z",
+  //     "amount": 59.99,
+  //     "paymentStatus": "Failed"
+  //   },
+  //   {
+  //     "orderId": "ORD123459",
+  //     "lessonName": "Node.js Crash Course",
+  //     "paymentTime": "2025-04-21T16:00:00Z",
+  //     "amount": 39.99,
+  //     "paymentStatus": "Success"
+  //   },
+  //   {
+  //     "orderId": "ORD123460",
+  //     "lessonName": "Full Stack Web Dev",
+  //     "paymentTime": "2025-04-20T18:20:00Z",
+  //     "amount": 99.99,
+  //     "paymentStatus": "Failed"
+  //   }
+  // ];  
 
   const PaymentHistory = async () => {
     try {
+      setLoading(true);
       const main = new Listing();
       const response = await main.PaymentUser();
       console.log("response", response)
       setPayment(response?.data?.data);
+      setLoading(false);
     } catch (error) {
       console.log("error", error);
+      setLoading(false);
     }
   };
 
@@ -93,6 +98,9 @@ export default function Index() {
                 <th className="font-normal text-sm lg:text-base px-3 lg:px-4 py-2 lg:py-3 border-t border-[rgba(204,40,40,0.2)] capitalize">Payment Status</th>
               </tr>
             </thead>
+            {loading ? 
+          <TableLoader length={5}/>
+          : 
             <tbody>
               {selectedPayment==="paypal" &&
               (payment && payment?.payment && payment?.payment?.map((item, index) => (
@@ -124,7 +132,7 @@ export default function Index() {
                   <td className="px-3 lg:px-4 py-2 lg:py-3 text-black text-sm lg:text-base font-medium font-inter ">{item.paymentStatus}</td>
                 </tr>
               ))} */}
-            </tbody>
+            </tbody>}
           </table>
         </div>
       </div>

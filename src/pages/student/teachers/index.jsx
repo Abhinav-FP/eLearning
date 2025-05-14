@@ -5,58 +5,71 @@ import { FaRegHeart } from "react-icons/fa";
 import { FaHeart } from "react-icons/fa6";
 import Listing from "@/pages/api/Listing";
 import Link from "next/link";
+import { TeacherLoader } from "@/pages/common/Loader";
 
 export default function Index() {
   const [data, setData] = useState([]);
- 
-  
+  const [loading, setLoading] = useState(false);
+
   const fetchStudentTeachers = async () => {
     try {
+      setLoading(true);
       const main = new Listing();
       const response = await main.StudentTeacher();
       setData(response?.data?.data || []);
+      setLoading(false);
     } catch (error) {
       console.log("error", error);
+      setLoading(false);
     }
   };
-  
 
   useEffect(() => {
     fetchStudentTeachers();
   }, []);
 
+  const handleAddSubmit = async (Id) => {
+    try {
+      const main = new Listing();
+      const response = await main.AddWishlist({ teacherId: Id });
+      fetchStudentTeachers();
+    } catch (error) {
+      console.log("error", error);
+    }
+  };
 
-
-const handleAddSubmit = async (Id) => {
-  try {
-    const main = new Listing();
-    const response = await main.AddWishlist({ teacherId: Id });
-    fetchStudentTeachers();
-  } catch (error) {
-    console.log("error", error);
-  }
-};
-
-const handleRemoveSubmit = async (Id) => {
-  try {
-    const main = new Listing();
-    const response = await main.RemoveWishlist({ teacherId: Id });
-    fetchStudentTeachers();
-  } catch (error) {
-    console.log("error", error);
-  }
-};
-
+  const handleRemoveSubmit = async (Id) => {
+    try {
+      const main = new Listing();
+      const response = await main.RemoveWishlist({ teacherId: Id });
+      fetchStudentTeachers();
+    } catch (error) {
+      console.log("error", error);
+    }
+  };
 
   return (
     <StudentLayout page={"Find a teacher"}>
       <div className="min-h-screen p-5 lg:p-[30px]">
-        <Link href="/student/favourite-teacher" className="flex w-fit ml-auto mb-4 lg:mb-5 px-2 sm:px-8 py-2.5 text-[#CC2828] border border-[#CC2828] rounded-[10px] tracking-[-0.06em] text-sm font-medium hover:bg-[#CC2828] hover:text-white cursor-pointer">
+        <Link
+          href="/student/favourite-teacher"
+          className="flex w-fit ml-auto mb-4 lg:mb-5 px-2 sm:px-8 py-2.5 text-[#CC2828] border border-[#CC2828] rounded-[10px] tracking-[-0.06em] text-sm font-medium hover:bg-[#CC2828] hover:text-white cursor-pointer"
+        >
           {`View Favourite Teachers (${data?.favouriteSize || "0"})`}
         </Link>
         {/* Lesson Cards */}
         <div className="space-y-4 lg:space-y-5">
-          {data && data?.teacher && 
+          {loading ? (
+            <>
+              {[1, 2, 3, 4].map((_, idx) => (
+                <div key={idx}>
+                  <TeacherLoader />
+                </div>
+              ))}
+            </>
+          ) : (
+            data &&
+            data?.teacher &&
             data?.teacher?.map((teacher, idx) => (
               <div key={idx}>
                 <div className="bg-white rounded-[10px] lesson_list_shadow  p-3 md:p-4 lg:p-5 flex flex-col lg:flex-row lg:items-center justify-between transition border-[rgba(204,40,40,0.2)] border-1 gap-5">
@@ -70,20 +83,28 @@ const handleRemoveSubmit = async (Id) => {
                     />
                     <div>
                       <h3 className="flex font-inter gap-2 items-center text-md lg:text-xl text-[#CC2828] font-medium tracking-[-0.06em] mb-2">
-                      <Link href={`/teacher/${teacher?._id}`}>{teacher?.userId?.name || ""}</Link>
-                        {teacher?.isLiked  ? (
+                        <Link href={`/teacher/${teacher?._id}`}>
+                          {teacher?.userId?.name || ""}
+                        </Link>
+                        {teacher?.isLiked ? (
                           //Liked teacher
-                          <span className="cursor-pointer" onClick={() => handleRemoveSubmit(teacher?.userId?._id)}>
+                          <span
+                            className="cursor-pointer"
+                            onClick={() =>
+                              handleRemoveSubmit(teacher?.userId?._id)
+                            }
+                          >
                             <FaHeart color="#CC2828" size={18} />
                           </span>
                         ) : (
-                             //Disliked teacher
-                          <span 
-                            className="cursor-pointer" 
-                            onClick={() => handleAddSubmit(teacher?.userId?._id)}
+                          //Disliked teacher
+                          <span
+                            className="cursor-pointer"
+                            onClick={() =>
+                              handleAddSubmit(teacher?.userId?._id)
+                            }
                           >
                             <FaRegHeart color={"#000000"} size={18} />
-                           
                           </span>
                         )}
                       </h3>
@@ -91,23 +112,29 @@ const handleRemoveSubmit = async (Id) => {
                         {teacher?.description || ""}
                       </p>
                       <p className="text-[#E4B750] text-base lg:text-lg font-inter">
-                        {teacher.average_price && (
-                          ` $${teacher.average_price}/${teacher?.average_duration} min`
-                        )}
+                        {teacher.average_price &&
+                          ` $${teacher.average_price}/${teacher?.average_duration} min`}
                       </p>
                     </div>
                   </div>
                   <div className="flex flex-row gap-2 justify-between">
-                    <Link href={`/teacher/${teacher?._id}`} className="tracking-[-0.06em] font-inter font-medium px-6 md:px-10 lg:px-12 py-2 lg:py-2.5 text-[#CC2828] border border-[#CC2828] rounded-[10px] text-sm hover:bg-[#CC2828] hover:text-white cursor-pointer">                    
+                    <Link
+                      href={`/teacher/${teacher?._id}`}
+                      className="tracking-[-0.06em] font-inter font-medium px-6 md:px-10 lg:px-12 py-2 lg:py-2.5 text-[#CC2828] border border-[#CC2828] rounded-[10px] text-sm hover:bg-[#CC2828] hover:text-white cursor-pointer"
+                    >
                       Book
                     </Link>
-                    <Link href={`/student/message?query=${teacher?.userId?._id}`} className="tracking-[-0.06em] font-inter font-medium px-6 md:px-10 lg:px-12 py-2 lg:py-2.5 bg-[#CC2828] text-white rounded-[10px]  text-sm hover:bg-white hover:text-[#CC2828] border border-[#CC2828] cursor-pointer">
+                    <Link
+                      href={`/student/message?query=${teacher?.userId?._id}`}
+                      className="tracking-[-0.06em] font-inter font-medium px-6 md:px-10 lg:px-12 py-2 lg:py-2.5 bg-[#CC2828] text-white rounded-[10px]  text-sm hover:bg-white hover:text-[#CC2828] border border-[#CC2828] cursor-pointer"
+                    >
                       Message
                     </Link>
                   </div>
                 </div>
               </div>
-            ))}
+            ))
+          )}
         </div>
       </div>
     </StudentLayout>

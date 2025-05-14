@@ -4,10 +4,12 @@ import Image from "next/image";
 import Listing from "@/pages/api/Listing";
 import Link from "next/link";
 import ReschedulePopup from "./ReschedulePopup";
+import { LessonLoader } from "@/pages/common/Loader";
 
 export default function Index() {
   const [tab, setTab] = useState("upcoming");
   const[selectedLesson,setSelectedLesson] = useState(null);
+  const[loading,setLoading]=useState(false)
   const dateOptions = { year: 'numeric', month: 'long', day: 'numeric' };
   const timeOptions = { hour: 'numeric', minute: 'numeric', hour12: true };
   const [categorizedLessons, setCategorizedLessons] = useState({
@@ -27,6 +29,7 @@ export default function Index() {
 
   const fetchLessons = async () => {
     try {
+      setLoading(true);
       const main = new Listing();
       const response = await main.GetBooking();
       const allLessons = response?.data?.data || [];
@@ -52,10 +55,11 @@ export default function Index() {
           categorized.past.push(lesson);
         }
       });
-  
+      setLoading(false);  
       setCategorizedLessons(categorized);
     } catch (error) {
       console.log("error", error);
+      setLoading(false);
       setCategorizedLessons({
         upcoming: [],
         past: [],
@@ -96,7 +100,14 @@ export default function Index() {
 
         {/* Lesson Cards */}
         <div className="space-y-4 lg:space-y-5  px-5 lg:px-[30px]">
-        {categorizedLessons[tab]?.length ? (
+          {loading ? 
+           <>
+          {[1, 2, 3].map((index) => (
+            <LessonLoader key={index} />
+          ))}
+        </>
+          : 
+        (categorizedLessons[tab]?.length ? (
             categorizedLessons[tab].map((lesson, idx) => (
               <div key={idx}>
                 <div className="flex items-center gap-3 xl:gap-4 flex-wrap mb-3 lg:mb-4 xl:mb-5">
@@ -142,7 +153,7 @@ export default function Index() {
               </div>
            ))) : (
             <p className="text-gray-500">No {tab} lessons found.</p>
-          )}
+          ))}
         </div>
       </div>
       <ReschedulePopup

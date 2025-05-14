@@ -3,12 +3,13 @@ import { FaStar } from "react-icons/fa";
 import StudentLayout from "../Common/StudentLayout";
 import Listing from "@/pages/api/Listing";
 import moment from "moment";
-
+import { ReviewLoader } from "@/pages/common/Loader";
 
 export default function ReviewsList() {
-
   const [reviews, setReviews] = useState([]);
+  const [loading,setLoading] = useState(false);
   useEffect(() => {
+    setLoading(true);
     const main = new Listing();
     const response = main.ReviewUserGet();
     response.then((res) => {
@@ -16,13 +17,19 @@ export default function ReviewsList() {
     }).catch((error) => {
       console.log("erorr", error)
     })
+    setLoading(false);
   }, [])
   return (
     <StudentLayout page={"Settings"}>
       <div className="p-5 lg:p-[30px] "> 
         <h2 className="text-base md:text-xl lg:text-2xl font-bold text-[#CC2828] tracking-[-0.04em] font-inter">Recent Reviews</h2>
         <div className="mt-3 md:mt-4 lg:mt-6 space-y-4 lg:space-5">
-          {reviews.map((review, index) => (
+          {loading ?
+          ([1, 2, 3, 4].map((_, index) => (  
+          <ReviewLoader key={index}/>
+          )))
+          :
+          (reviews.map((review, index) => (
             <div className="relative bg-[#F6F7F7] rounded-[10px] p-4 lg:p-5">
               <div className="flex justify-between items-start">
                 <h3 className="text-base font-semibold text-[#CC2828] -tracking-[0.04em] font-inter" >Review on Lesson –{review?.lessonId?.title}</h3>
@@ -37,7 +44,7 @@ export default function ReviewsList() {
                 <span className="text-sm text-[#CC2828] font-inter font-medium -tracking-[0.04em]">{moment(review?.updatedAt || review?.createdAt).format("MMMM DD, YYYY")}</span>
               </div>
             </div>
-          ))}
+          )))}
         </div>
       </div>
     </StudentLayout>

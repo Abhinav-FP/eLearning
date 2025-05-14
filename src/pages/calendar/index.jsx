@@ -161,6 +161,7 @@ const Index = ({ Availability, setIsPopupOpen, usedInPopup, setSelectedSlot, sel
 
     return isWithinSlot;
   };
+  console.log("user",user);
 
 
   const handleClick = (event) => {
@@ -168,6 +169,11 @@ const Index = ({ Availability, setIsPopupOpen, usedInPopup, setSelectedSlot, sel
       if (!user) {
         toast.error("Please login first");
         router.push(`/login?redirect=${router.asPath}`);
+        return;
+      }
+      if (user?.role != "student") {
+        toast.error("Only students can book lessons");
+        return;
       }
       setIsPopupOpen(true);
     }

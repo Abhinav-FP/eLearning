@@ -4,9 +4,9 @@ import Listing from '@/pages/api/Listing';
 
 export default function Index() {
 
-  const [TabOpen, setTabOpen] = useState('upcoming');
+const [TabOpen, setTabOpen] = useState('upcoming');
 
-const [data, setData] = useState({});
+const [data, setData] = useState([]);
 
     const fetchEarnings = async () => {
         try {
@@ -15,7 +15,7 @@ const [data, setData] = useState({});
             setData(response?.data?.data || []);
         } catch (error) {
             console.log("error", error);
-            setData({})
+            setData([])
         }
     };
 
@@ -35,9 +35,9 @@ const [data, setData] = useState({});
           </h2>
         </div>
         <div className="">
-          <div className='flex flex-wrap gap-10  mb-4'>
-            <button onClick={() => setTabOpen('upcoming')} className={ `text-lg font-medium tracking-[-0.04em] px-10 py-2 rounded-[10px] cursor-pointer ${TabOpen === 'upcoming' ? 'bg-[#CC2828] text-[#fff]' : 'bg-[#E0E0E0] text-[#727272]'}`}>Upcoming</button>
-            <button onClick={() => setTabOpen('completed')} className={ `text-lg font-medium tracking-[-0.04em] px-10 py-2 rounded-[10px] cursor-pointer ${TabOpen === 'completed' ? 'bg-[#CC2828] text-[#fff]' : 'bg-[#E0E0E0] text-[#727272]'}`}>Completed</button>
+          <div className='flex flex-wrap gap-5  mb-4'>
+            <button onClick={() => setTabOpen('upcoming')} className={ `text-sm lg:text-lg font-medium tracking-[-0.04em] px-6 lg:px-10 py-3 lg:py-2 rounded-[10px] cursor-pointer ${TabOpen === 'upcoming' ? 'bg-[#CC2828] text-[#fff]' : 'bg-[#E0E0E0] text-[#727272]'}`}>Upcoming</button>
+            <button onClick={() => setTabOpen('completed')} className={ `text-sm lg:text-lg font-medium tracking-[-0.04em] px-6 lg:px-10 py-3 lg:py-2 rounded-[10px] cursor-pointer ${TabOpen === 'completed' ? 'bg-[#CC2828] text-[#fff]' : 'bg-[#E0E0E0] text-[#727272]'}`}>Completed</button>
           </div>
           {
             TabOpen === 'upcoming' && (
@@ -121,7 +121,7 @@ const [data, setData] = useState({});
                             {item?.lessonDate}
                           </td>
                           <td className="px-3 lg:px-4 py-2 lg:py-3 text-black text-sm lg:text-base font-medium font-inter ">
-                            {item?.sudentName}
+                            {item?.studentName}
                           </td>
                           <td className="px-3 lg:px-4 py-2 lg:py-3 text-black text-sm lg:text-base font-medium font-inter ">
                             {item?.duration}

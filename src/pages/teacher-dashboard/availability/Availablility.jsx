@@ -195,7 +195,7 @@ const Availablility = ({ Availability, TeacherAvailabilitys }) => {
                             </button>
                         </h3>
                     </div>
-                    <div className="p-4 relative">
+                    <div className="pt-3 px-2 pb-3 lg:p-4 relative">
                         <Calendar
                             localizer={localizer}
                             events={events}

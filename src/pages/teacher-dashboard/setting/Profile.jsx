@@ -185,7 +185,7 @@ export default function Profile() {
                     <div className="w-full lg:w-6/12 px-2 mb-4">
                         <label className="text-[#CC2828] font-medium text-base xl:text-xl mb-2 block">Gender</label>
                         <div className="flex items-center space-x-4">
-                            <label className="flex items-center space-x-1">
+                            <label className="flex items-center space-x-1 text-base">
                                 <input
                                     type="radio"
                                     name="gender"
@@ -196,7 +196,7 @@ export default function Profile() {
                                 />
                                 <span>Male</span>
                             </label>
-                            <label className="flex items-center space-x-1">
+                            <label className="flex items-center space-x-1 text-base">
                                 <input
                                     type="radio"
                                     name="gender"
@@ -207,7 +207,7 @@ export default function Profile() {
                                 />
                                 <span>Female</span>
                             </label>
-                            <label className="flex items-center space-x-1">
+                            <label className="flex items-center space-x-1 text-base">
                                 <input
                                     type="radio"
                                     name="gender"
@@ -225,7 +225,7 @@ export default function Profile() {
                     <div className="w-full lg:w-6/12 px-2 mb-4">
                         <label className="text-[#CC2828] font-medium text-base xl:text-xl mb-2 block">AIS trained</label>
                         <div className="flex items-center space-x-4">
-                            <label className="flex items-center space-x-1">
+                            <label className="flex items-center space-x-1 text-base">
                                 <input
                                     type="radio"
                                     name="ais_trained"
@@ -236,7 +236,7 @@ export default function Profile() {
                                 />
                                 <span>Yes</span>
                             </label>
-                            <label className="flex items-center space-x-1">
+                            <label className="flex items-center space-x-1 text-base">
                                 <input
                                     type="radio"
                                     name="ais_trained"
@@ -258,7 +258,7 @@ export default function Profile() {
                             required
                             name="description"
                             onChange={handleChange}
-                            className="w-full font-medium appearance-none block bg-[#F4F6F8] text-[#46494D] text-base border border-[#F4F6F8] rounded-lg py-3 px-3 lg:px-6 leading-tight focus:outline-none"
+                            className="w-full font-medium text-base appearance-none block bg-[#F4F6F8] text-[#46494D] text-base border border-[#F4F6F8] rounded-lg py-3 px-3 lg:px-6 leading-tight focus:outline-none"
                         />
 
                     </div>

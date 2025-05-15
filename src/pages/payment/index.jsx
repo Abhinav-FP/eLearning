@@ -98,7 +98,7 @@ const Index = ({ isPopupOpen, PricePayment, adminCommission, selectedLesson, sel
         endDateTime: endTime,
         timezone: studentTimeZone || "UTC",
         totalAmount: PricePayment,
-        adminCommission:adminCommission,
+        adminCommission: adminCommission,
       });
 
       if (response?.data?.status === "COMPLETED") {
@@ -135,7 +135,7 @@ const Index = ({ isPopupOpen, PricePayment, adminCommission, selectedLesson, sel
   };
 
   return (
-    <PayPalScriptProvider options={{ "client-id": "Af1V5-bpf6qTRgq6DPXI7S3AE6enoGtfsxXH0gDoXgpGFgOs7A1lLKBlhI1aaBTwbk4W_b3SwCbLCKpC" }}>
+    <PayPalScriptProvider options={{ "client-id": clientId }}>
       <div className="mt-6 w-full">
         <PayPalButtons
           createOrder={handleCreateOrder}

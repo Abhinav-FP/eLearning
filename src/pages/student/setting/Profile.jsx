@@ -4,7 +4,7 @@ import Profile_img from "../../Assets/Images/hero_top_img.png";
 import timeZones from "../../../Json/TimeZone";
 import Listing from "@/pages/api/Listing";
 import toast from "react-hot-toast";
-import { ProfileFormLoader } from "@/pages/common/Loader";
+import { ProfileFormLoader } from "@/components/Loader";
 
 export default function Profile() {
   const [processing, setProcessing] = useState(false);

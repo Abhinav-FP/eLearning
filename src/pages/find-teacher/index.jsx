@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import Layout from "../common/Layout";
 import HowItWork from "../common/HowItWork";
 import Teacher from "./Teacher";
-import { BookLoader } from "../common/Loader";
+import { BookLoader } from "../../components/Loader";
 import Listing from "../api/Listing";
 import NoData from "../common/NoData";
 

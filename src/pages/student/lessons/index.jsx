@@ -4,7 +4,7 @@ import Image from "next/image";
 import Listing from "@/pages/api/Listing";
 import Link from "next/link";
 import ReschedulePopup from "./ReschedulePopup";
-import { LessonLoader } from "@/pages/common/Loader";
+import { LessonLoader } from "@/components/Loader";
 
 export default function Index() {
   const [tab, setTab] = useState("upcoming");

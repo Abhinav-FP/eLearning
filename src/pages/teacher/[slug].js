@@ -12,7 +12,7 @@ import { useRouter } from "next/router";
 import Listing from "../api/Listing";
 import BookingPopup from "./BookingPopup";
 import { DateTime } from "luxon";
-import { BookLoader } from "../common/Loader";
+import { BookLoader } from "../../components/Loader";
 
 export default function Index() {
   const router = useRouter();

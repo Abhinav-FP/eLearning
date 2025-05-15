@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react'
 import StudentLayout from '../Common/StudentLayout'
 import Listing from '@/pages/api/Listing';
 import moment from 'moment';
-import { TableLoader } from '@/pages/common/Loader';
+import { TableLoader } from '@/components/Loader';
 
 export default function Index() {
 

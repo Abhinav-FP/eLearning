@@ -5,7 +5,7 @@ import { FaRegHeart } from "react-icons/fa";
 import { FaHeart } from "react-icons/fa6";
 import Listing from "@/pages/api/Listing";
 import Link from "next/link";
-import { TeacherLoader } from "@/pages/common/Loader";
+import { TeacherLoader } from "@/components/Loader";
 
 export default function Index() {
   const [data, setData] = useState([]);

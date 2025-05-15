@@ -3,7 +3,7 @@ import { FaStar } from "react-icons/fa";
 import StudentLayout from "../Common/StudentLayout";
 import Listing from "@/pages/api/Listing";
 import moment from "moment";
-import { ReviewLoader } from "@/pages/common/Loader";
+import { ReviewLoader } from "@/components/Loader";
 
 export default function ReviewsList() {
   const [reviews, setReviews] = useState([]);

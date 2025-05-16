@@ -33,7 +33,7 @@ const Index = ({ Availability, setIsPopupOpen, usedInPopup, setSelectedSlot, sel
   const { user } = useRole();
   const router = useRouter();
 
-  console.log("Availability", Availability);
+  // console.log("Availability", Availability);
   // console.log("events",events);
 
   useEffect(() => {

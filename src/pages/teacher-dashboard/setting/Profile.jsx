@@ -34,9 +34,9 @@ export default function Profile() {
         const main = new Listing();
         main.Teacherprofile()
             .then((r) => {
-                console.log("r", r)
+                // console.log("r", r)
                 const profiledata = r?.data?.data?.user;
-                console.log("profileData", profiledata);
+                // console.log("profileData", profiledata);
                 setData({
                     name: profiledata?.userId?.name,
                     email: profiledata?.userId?.email,

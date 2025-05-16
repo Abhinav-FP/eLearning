@@ -53,7 +53,7 @@ export default function Profile() {
     }
   };
 
-  console.log("data", data);
+  // console.log("data", data);
 
   const handleSubmit = async (e) => {
     e.preventDefault();

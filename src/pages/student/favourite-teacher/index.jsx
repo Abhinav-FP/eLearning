@@ -31,11 +31,11 @@ export default function Index() {
 
 
     const handleRemoveSubmit = async (Id) => {
-        console.log("Id", Id)
+        // console.log("Id", Id)
         try {
             const main = new Listing();
             const response = await main.RemoveWishlist({ teacherId: Id });
-            console.log(response)
+            // console.log(response)
             if (response?.data?.status) {
                 fetchfavouriteStudentTeachers();
             }
@@ -44,7 +44,7 @@ export default function Index() {
         }
     };
 
-    console.log("teacher", teachers)
+    // console.log("teacher", teachers)
     return (
         <StudentLayout page={"Favourite teacher"}>
             <div className="min-h-screen bg-gray-50 p-4 sm:p-6">

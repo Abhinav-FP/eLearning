@@ -10,10 +10,10 @@ import toast from "react-hot-toast";
 const Index = ({ isPopupOpen, PricePayment, adminCommission, selectedLesson, selectedSlot, studentTimeZone }) => {
   const clientId = process.env.NEXT_PUBLIC_PAYPAL_CLIENT_ID;
 
-  console.log("NEXT_APP_PAYPAL_CLIENT_ID", clientId)
+  // console.log("NEXT_APP_PAYPAL_CLIENT_ID", clientId)
   const router = useRouter();
 
-  console.log("selectedSlot", selectedSlot)
+  // console.log("selectedSlot", selectedSlot)
   const [isProcessing, setIsProcessing] = useState(false);
   const [OrderId, setOrderId] = useState("")
   const [endTime, setEndTime] = useState(null);
@@ -103,7 +103,7 @@ const Index = ({ isPopupOpen, PricePayment, adminCommission, selectedLesson, sel
 
       if (response?.data?.status === "COMPLETED") {
         router.push("/success")
-        console.log("Payment approved", response);
+        // console.log("Payment approved", response);
       }
     } catch (error) {
       console.error("API error:", error);
@@ -124,7 +124,7 @@ const Index = ({ isPopupOpen, PricePayment, adminCommission, selectedLesson, sel
       });
       if (response?.data?.status === "CANCELLED") {
         router.push("/cancel")
-        console.log("Payment CANCELLED", response);
+        // console.log("Payment CANCELLED", response);
       }
     } catch (error) {
       console.error("API error:", error);

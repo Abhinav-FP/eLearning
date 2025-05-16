@@ -172,7 +172,7 @@ const Availablility = ({ Availability, TeacherAvailabilitys }) => {
         setSelectedEvent(false);
     };
 
-    console.log("selectedEvent", selectedEvent)
+    // console.log("selectedEvent", selectedEvent)
 
     return (
         <>

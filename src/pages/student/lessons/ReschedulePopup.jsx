@@ -9,14 +9,14 @@ export default function ReschedulePopup({ isOpen, onClose, lesson, studentTimeZo
   const [selectedSlot, setSelectedSlot] = useState(null);
   const [availability,setAvailability] = useState(null);
   const[loading,setLoading]=useState(false);
-  console.log("lesson",lesson);
-  console.log("selectedSlot",selectedSlot);
+  // console.log("lesson",lesson);
+  // console.log("selectedSlot",selectedSlot);
   const[endTime,setEndTime] = useState(null);
-  console.log("endTime",endTime);
+  // console.log("endTime",endTime);
   
     const addDurationToDate = (start, durationInMinutes) => {
-      console.log("start",start);
-      console.log("duration",durationInMinutes);
+      // console.log("start",start);
+      // console.log("duration",durationInMinutes);
       const originalDate = new Date(start);
       const finalDate = new Date(originalDate.getTime() + durationInMinutes * 60000);
     

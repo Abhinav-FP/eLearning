@@ -10,7 +10,7 @@ import { DateTime } from 'luxon';
 export default function Index() {
 
   const [dashboard, setDashboard] = useState([]);
-  console.log("dashboard" ,dashboard?.booking)
+  // console.log("dashboard" ,dashboard?.booking)
 
   const StudentDashboards = async () => {
     try {
@@ -26,7 +26,7 @@ export default function Index() {
     StudentDashboards();
   }, []);
 
-  console.log("dashboard?.booking?.StartDateTime",dashboard?.booking?.startDateTime);
+  // console.log("dashboard?.booking?.StartDateTime",dashboard?.booking?.startDateTime);
 
   return (
     <StudentLayout>

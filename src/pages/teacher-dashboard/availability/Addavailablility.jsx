@@ -52,7 +52,7 @@ export default function Addavailablility({ isOpen, onClose, TeacherAvailabilitys
     setLoading(false);
   };
 
-  console.log("formData",formData);
+  // console.log("formData",formData);
 
 
 

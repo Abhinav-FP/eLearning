@@ -20,7 +20,7 @@ export default function Index() {
     const main = new Listing();
     main.TeacherLessonGet()
       .then((r) => {
-        console.log("r", r?.data);
+        // console.log("r", r?.data);
         setData(r?.data?.data);
       })
       .catch((err) => {

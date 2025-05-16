@@ -43,13 +43,13 @@ function Index() {
     ];
 
     const [payout, setPayout] = useState([])
-    console.log("payout", payout)
+    // console.log("payout", payout)
 
     useEffect(() => {
         const main = new Listing();
         main.PayoutList()
             .then((r) => {
-                console.log("r", r)
+                // console.log("r", r)
                 setPayout(r?.data?.data)
             })
             .catch((err) => {

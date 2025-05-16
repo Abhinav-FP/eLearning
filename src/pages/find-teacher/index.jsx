@@ -30,14 +30,9 @@ export default function Index() {
 
   return (
     <Layout>
-      {loading ? (
-        <BookLoader />
-      ) : (
-        <>
-          <Teacher teacherData={teacherData} />
+        {/* <BookLoader /> */}
+          <Teacher teacherData={teacherData} loading={loading}/>
           <HowItWork classess={"mb-[40px] md:mb-[60px] lg:mb-[100px] !mt-0"} />
-        </>
-      )}
     </Layout>
   );
 }

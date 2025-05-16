@@ -11,7 +11,6 @@ import { MdOutlinePlayCircle } from "react-icons/md";
 import { useRouter } from "next/router";
 import Listing from "../api/Listing";
 import BookingPopup from "./BookingPopup";
-import { DateTime } from "luxon";
 import { BookLoader } from "../../components/Loader";
 
 export default function Index() {
@@ -91,7 +90,9 @@ export default function Index() {
     <>
       <Layout>
         {loading ?
+        <div className="min-h-screen flex items-center justify-center">
         <BookLoader/> 
+        </div>
         : <>
         <div className="pt-[114px] md:pt-[124px] lg:pt-[154px]  pb-[40px]  md:pb-[60px] lg:pb-[80px] xl:pb-[100px] ">
           <div className="container sm:container md:container lg:container xl:max-w-[1230px]  px-4 mx-auto">

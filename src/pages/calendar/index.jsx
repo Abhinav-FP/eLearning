@@ -34,7 +34,7 @@ const Index = ({ Availability, setIsPopupOpen, usedInPopup, setSelectedSlot, sel
   const router = useRouter();
 
   console.log("Availability", Availability);
-  console.log("events",events);
+  // console.log("events",events);
 
   useEffect(() => {
     if (!Availability) return;
@@ -122,13 +122,23 @@ const Index = ({ Availability, setIsPopupOpen, usedInPopup, setSelectedSlot, sel
   
       return events;
     };
+    // For processing full blocks
+    const processFullBlocks = (blocks, title, color) => {
+      return blocks.map((block) => ({
+        id: `${block._id}_${block.startDateTime}`,
+        title,
+        start: moment.utc(block.startDateTime).toDate(),
+        end: moment.utc(block.endDateTime).toDate(),
+        color,
+      }));
+    };
   
     const availabilityEvents = Availability.availabilityBlocks?.length
       ? processBlocks(Availability.availabilityBlocks, "Available", "#6ABB52")
       : [];
   
     const bookedEvents = Availability.bookedSlots?.length
-      ? processBlocks(Availability.bookedSlots, "Blocked", "#185abc")
+      ? processFullBlocks(Availability.bookedSlots, "Blocked", "#185abc")
       : [];
   
     setEvents([...availabilityEvents, ...bookedEvents]);

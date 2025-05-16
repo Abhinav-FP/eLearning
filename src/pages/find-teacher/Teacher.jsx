@@ -5,8 +5,9 @@ import LineImg from "../Assets/Images/linebar-red.png";
 import TeacherImg from "../Assets/Images/teacherimg01.png";
 import Listing from "../api/Listing";
 import Link from "next/link";
+import { BookLoader } from "@/components/Loader";
 
-export default function Teacher({teacherData}) {   
+export default function Teacher({teacherData, loading}) {   
     return (
         <div className="pt-[115px] md:pt-[120px] lg:pt-[150px] pb-[20px] md:pb-[40px] lg:pb-[60px]">
             <div className="mx-auto container sm:container md:container lg:container xl:max-w-[1230px]  px-4">
@@ -15,6 +16,9 @@ export default function Teacher({teacherData}) {
                 <div className="text-center mb-8 lg:mb-10">
                     <Image className="inline-block" src={LineImg} alt="icon" />
                 </div>
+                {loading ? 
+                <BookLoader/>
+                : 
                 <div className="flex flex-wrap justify-center -mx-2.5">
                     {
                         teacherData && teacherData?.map((item, i) => (
@@ -36,7 +40,7 @@ export default function Teacher({teacherData}) {
                             </Link>
                         ))
                     }
-                </div>
+                </div>}
             </div>
         </div>
     )

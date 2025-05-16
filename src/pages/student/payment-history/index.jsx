@@ -102,36 +102,21 @@ export default function Index() {
           <TableLoader length={5}/>
           : 
             <tbody>
-              {selectedPayment==="paypal" &&
-              (payment && payment?.payment && payment?.payment?.map((item, index) => (
-                <tr key={index} className="border-t hover:bg-[rgba(204,40,40,0.1)] border-t border-[rgba(204,40,40,0.2)]">
-                  <td className="px-3 lg:px-4 py-2 lg:py-3 text-black text-sm lg:text-base font-medium font-inter ">{item?.orderID}</td>
-                  <td className="px-3 lg:px-4 py-2 lg:py-3 text-black text-sm lg:text-base font-medium font-inter ">{item?.LessonId?.title}</td>
-                  <td className="px-3 lg:px-4 py-2 lg:py-3 text-black text-sm lg:text-base font-medium font-inter ">{moment(item?.createdAt).format("DD MMMM YYYY hh:mm A")}</td>
-                  <td className="px-3 lg:px-4 py-2 lg:py-3 text-black text-sm lg:text-base font-medium font-inter ">${item?.amount}</td>
-                  <td className="px-3 lg:px-4 py-2 lg:py-3 text-black text-sm lg:text-base font-medium font-inter ">{item?.status}</td>
-                </tr>
-              )))}
-              {selectedPayment==="stripe" &&
-              (payment && payment?.stripeData && payment?.stripeData?.map((item, index) => (
-                <tr key={index} className="border-t hover:bg-[rgba(204,40,40,0.1)] border-t border-[rgba(204,40,40,0.2)]">
-                  <td className="px-3 lg:px-4 py-2 lg:py-3 text-black text-sm lg:text-base font-medium font-inter ">{item?.payment_id}</td>
-                  <td className="px-3 lg:px-4 py-2 lg:py-3 text-black text-sm lg:text-base font-medium font-inter ">{item?.LessonId?.title}</td>
-                  <td className="px-3 lg:px-4 py-2 lg:py-3 text-black text-sm lg:text-base font-medium font-inter ">{moment(item?.createdAt).format("DD MMMM YYYY hh:mm A")}</td>
-                  <td className="px-3 lg:px-4 py-2 lg:py-3 text-black text-sm lg:text-base font-medium font-inter ">${item?.amount}</td>
-                  <td className="px-3 lg:px-4 py-2 lg:py-3 text-black text-sm lg:text-base font-medium font-inter ">{item?.payment_status}</td>
-                </tr>
-              )))}
-              {/* Mapping random data for client update */}
-              {/* {payments && payments.map((item, index) => (
-                <tr key={index} className="hover:bg-[rgba(204,40,40,0.1)] border-t border-[rgba(204,40,40,0.2)]">
-                  <td className="px-3 lg:px-4 py-2 lg:py-3 text-black text-sm lg:text-base font-medium font-inter ">{item.orderId}</td>
-                  <td className="px-3 lg:px-4 py-2 lg:py-3 text-black text-sm lg:text-base font-medium font-inter ">{item.lessonName}</td>
-                  <td className="px-3 lg:px-4 py-2 lg:py-3 text-black text-sm lg:text-base font-medium font-inter ">{moment(item?.paymentTime).format("DD MMMM YYYY hh:mm A")}</td>
-                  <td className="px-3 lg:px-4 py-2 lg:py-3 text-black text-sm lg:text-base font-medium font-inter ">${item.amount}</td>
-                  <td className="px-3 lg:px-4 py-2 lg:py-3 text-black text-sm lg:text-base font-medium font-inter ">{item.paymentStatus}</td>
-                </tr>
-              ))} */}
+              {(payment?.[selectedPayment === "paypal" ? "payment" : "stripeData"] || []).map((item, index) => {
+                  const isPaypal = selectedPayment === "paypal";
+                  const id = isPaypal ? item?.orderID : item?.payment_id;
+                  const status = isPaypal ? item?.status : item?.payment_status;
+
+                  return (
+                    <tr key={index} className="border-t hover:bg-[rgba(204,40,40,0.1)] border-[rgba(204,40,40,0.2)]">
+                      <td className="px-3 lg:px-4 py-2 lg:py-3 text-black text-sm lg:text-base font-medium font-inter">{id}</td>
+                      <td className="px-3 lg:px-4 py-2 lg:py-3 text-black text-sm lg:text-base font-medium font-inter">{item?.LessonId?.title}</td>
+                      <td className="px-3 lg:px-4 py-2 lg:py-3 text-black text-sm lg:text-base font-medium font-inter">{moment(item?.createdAt).format("DD MMMM YYYY hh:mm A")}</td>
+                      <td className="px-3 lg:px-4 py-2 lg:py-3 text-black text-sm lg:text-base font-medium font-inter">${item?.amount}</td>
+                      <td className="px-3 lg:px-4 py-2 lg:py-3 text-black text-sm lg:text-base font-medium font-inter">{status}</td>
+                    </tr>
+                  );
+                })}
             </tbody>}
           </table>
         </div>

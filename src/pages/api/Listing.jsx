@@ -19,6 +19,12 @@ class Listing extends Component {
     return Api.post("/teacher/profile",data);
   }
  
+  async ForgetPasswordLink(data){
+    return Api.post("/user/forget-link" ,data)
+  }
+  async ForgetPassword(data){
+    return Api.post("/user/forget-password" ,data )
+  }
   async emailVerify(data){
     return Api.post("/user/verify-email", data);
   }

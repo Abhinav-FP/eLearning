@@ -3,14 +3,17 @@ import Link from "next/link";
 import Image from "next/image";
 import Logo from "../Assets/Images/logo.png"; // Adjust the path as necessary
 import { IoIosArrowDown } from "react-icons/io";
-import Button from "./Button";
+// import Button from "./Button";
 import { useRole } from "@/context/RoleContext";
+import { useRouter } from "next/router";
+import toast from "react-hot-toast";
 
 export default function Header() {
 
     // mobile menu 
     const [menuOpen, setMenuOpen] = useState();
-    const { user } = useRole();
+    const { user, setUser } = useRole();
+    const router = useRouter();
     const toggleMenu = () => {
         setMenuOpen(!menuOpen);
     }
@@ -37,6 +40,13 @@ export default function Header() {
         return () => window.removeEventListener('scroll', handleScroll);
     }, [])
     // console.log("user",user);
+
+    const handleLogout = () => {
+      localStorage && localStorage.removeItem("token");
+      router.push("/login");
+      toast.success("Logout Successfully");
+      setUser(null);
+    };
 
     return (
         <>
@@ -87,6 +97,12 @@ export default function Header() {
                                         className="text-[#CC2828] hover:text-[#ad0e0e] border-t border-[#ddd] text-base py-3 px-4 font-medium cursor-pointer" >
                                         View dashboard
                                     </Link>
+                                    <button
+                                        onClick={handleLogout}
+                                        className="text-[#CC2828] hover:text-[#ad0e0e] border-t border-[#ddd] text-base py-3 px-4 font-medium cursor-pointer text-left appearance-none bg-transparent border-none"
+                                    >
+                                        Logout
+                                    </button>
                                 </div>
                             :
                                 <div className="flex flex-col lg:hidden">
@@ -110,11 +126,19 @@ export default function Header() {
                                 </div>
                             </div>
                             { user && user?.role ? 
+                            <>
                                 <Link 
                                 href={`${user?.role === "student" ? "/student" : "/teacher-dashboard"}`} 
                                 className="hidden lg:block bg-[#CC2828] hover:bg-[#ad0e0e] text-white text-base py-3.5 px-8 xl:px-10 font-medium cursor-pointer rounded-full" >
                                     View Dashboard                            
                                 </Link>
+                                <button
+                                onClick={handleLogout} 
+                                href={`${user?.role === "student" ? "/student" : "/teacher-dashboard"}`} 
+                                className="hidden lg:block bg-[#CC2828] hover:bg-[#ad0e0e] text-white text-base py-3.5 px-8 xl:px-10 font-medium cursor-pointer rounded-full" >
+                                    Logout                            
+                                </button>
+                            </>
                             :
                                 <>
                                     <Link href="/student/register" className="hidden lg:block bg-[#CC2828] hover:bg-[#ad0e0e] text-white text-base py-3.5 px-8 xl:px-10 font-medium cursor-pointer rounded-full" >

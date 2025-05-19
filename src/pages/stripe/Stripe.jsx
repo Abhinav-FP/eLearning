@@ -73,6 +73,7 @@ export default function Stripe({PricePayment, selectedLesson, adminCommission, s
       setprocessing(false);
     }
   };
+  
   return (
     <>
         <button className="w-full bg-red-600 hover:bg-red-700 text-white font-medium py-2 rounded-full cursor-pointer" 

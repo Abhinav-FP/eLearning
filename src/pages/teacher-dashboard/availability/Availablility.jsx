@@ -4,6 +4,7 @@ import moment from 'moment';
 import 'react-big-calendar/lib/css/react-big-calendar.css';
 import Addavailablility from './Addavailablility';
 import EditAvailablity from './EditAvailablity';
+import toast from 'react-hot-toast';
 // import { DateTime } from "luxon";
 
 // // Convert UTC to local time zone
@@ -172,8 +173,6 @@ const Availablility = ({ Availability, TeacherAvailabilitys }) => {
         setSelectedEvent(false);
     };
 
-    // console.log("selectedEvent", selectedEvent)
-
     return (
         <>
             <div className="w-full">
@@ -222,7 +221,14 @@ const Availablility = ({ Availability, TeacherAvailabilitys }) => {
                             selectable
                             eventPropGetter={eventStyleGetter}
                             components={{ event: Event }}
-                            onSelectEvent={(event) => setSelectedEvent(event)}
+                            onSelectEvent={(event) => {
+                              console.log("Clicked event", event);
+                              if(!event?.id || event?.id === "undefined"){
+                                toast.error("Slots having a booking are not editable");
+                                return;
+                              }
+                              setSelectedEvent(event)
+                            }}
                             onSelectSlot={(slotInfo) => {
                                 const overlap = events.some(event =>
                                     moment(slotInfo.start).isBefore(event.end) &&

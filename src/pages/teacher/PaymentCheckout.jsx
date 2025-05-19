@@ -115,8 +115,8 @@ const PaymentCheckout = ({ selectedLesson, selectedSlot, studentTimeZone }) => {
             <p className="font-medium">Total</p>
             <p className="font-medium">${selectedLesson?.price} USD</p>
           </div>
-          <p className="text-sm text-gray-500">{`+ Processing fee $${0.1*selectedLesson?.price} USD`}</p>
-          <p className="text-sm text-gray-500">Estimated ${selectedLesson?.price + 0.1*selectedLesson?.price} USD</p>
+          <p className="text-sm text-gray-500">{`+ Processing fee $${(0.1*selectedLesson?.price).toFixed(2)} USD`}</p>
+          <p className="text-sm text-gray-500">Estimated ${(selectedLesson?.price + 0.1*selectedLesson?.price).toFixed(2)} USD</p>
         </div>
 
         {PaymentStatus === false ? (
@@ -124,7 +124,6 @@ const PaymentCheckout = ({ selectedLesson, selectedSlot, studentTimeZone }) => {
         ) : (
           <Stripe PricePayment={selectedLesson?.price + 0.1*selectedLesson?.price} adminCommission={0.1*selectedLesson?.price} selectedLesson={selectedLesson}  selectedSlot= {selectedSlot} studentTimeZone={studentTimeZone}/>
         )}
-
       </div>
     </div>
   );

@@ -183,6 +183,22 @@ export default function BookingPopup({
                   {selectedLesson?.price}{" "}
                 </p>
               )}
+              {selectedSlot && (
+                      <p className="text-[#CC2828] capitalize text-base xl:text-lg font-semibold font-inter inline-block tracking-[-0.04em]">
+                        Selected Time Slot -{" "}
+                        {new Date(selectedSlot.start).toLocaleString("en-US", {
+                          month: "short",
+                          day: "numeric",
+                          hour: "numeric",
+                          minute: "2-digit",
+                          hour12: true,
+                        })}{" "}
+                        -
+                        {getFormattedEndTime(
+                          selectedSlot?.start,
+                          selectedLesson?.duration
+                        )}{" "}
+                      </p>)}
             </div>
             <div className="space-y-3 lg:space-y-0 lg:space-x-3">
               {step !== 1 && (

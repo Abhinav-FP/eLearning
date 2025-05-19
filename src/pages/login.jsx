@@ -7,6 +7,7 @@ import { useRouter } from "next/router";
 import toast from "react-hot-toast";
 import Listing from "@/pages/api/Listing";
 import { useSearchParams } from "next/navigation";
+import Forgot from "./forget-password/forgot";
 
 export default function Login() {
   const router = useRouter();
@@ -131,10 +132,7 @@ export default function Login() {
 
             {/* Forgot Password */}
             <div className="flex justify-end mb-4">
-              <a
-                href="#"
-                className="text-base font-medium text-[#CC2828] hover:underline tracking-[-0.06em] "
-              >Forgot Password?</a>
+             <Forgot />
             </div>
 
             {/* Login Button */}

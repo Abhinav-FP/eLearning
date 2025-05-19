@@ -116,7 +116,7 @@ export default function Index() {
         <section className="mt-10">
           <h2 className="text-xl font-bold text-red-700 mb-4">Lessons</h2>
           <div className="space-y-4">
-            {data && data?.map((item, index) => (
+            {data && data?.lessons && data?.lessons?.map((item, index) => (
               <LessonCard key={index} item={item} />
             ))}
           </div>

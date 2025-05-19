@@ -31,7 +31,7 @@ export default function Lesson({ title }) {
             const response = await main.HomeTeacherVideo();
             // console.log("response", response)
             setvideo(response?.data?.data?.record);
-            console.log( video);
+            // console.log( video);
         } catch (error) {
             console.log("error", error);
         }

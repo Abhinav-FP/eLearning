@@ -4,10 +4,12 @@ import Image from "next/image";
 import Listing from "@/pages/api/Listing";
 import Link from "next/link";
 import ReschedulePopup from "./ReschedulePopup";
+import { LessonLoader } from "@/components/Loader";
 
 export default function Index() {
   const [tab, setTab] = useState("upcoming");
   const[selectedLesson,setSelectedLesson] = useState(null);
+  const[loading,setLoading]=useState(false)
   const dateOptions = { year: 'numeric', month: 'long', day: 'numeric' };
   const timeOptions = { hour: 'numeric', minute: 'numeric', hour12: true };
   const [categorizedLessons, setCategorizedLessons] = useState({
@@ -27,6 +29,7 @@ export default function Index() {
 
   const fetchLessons = async () => {
     try {
+      setLoading(true);
       const main = new Listing();
       const response = await main.GetBooking();
       const allLessons = response?.data?.data || [];
@@ -44,7 +47,7 @@ export default function Index() {
         const start = new Date(lesson.startDateTime);
         const startDateOnly = new Date(start.getFullYear(), start.getMonth(), start.getDate());
   
-        if (lesson.status?.toLowerCase() === "cancelled" || lesson.cancelled) {
+        if (lesson.cancelled) {
           categorized.cancelled.push(lesson);
         } else if (startDateOnly >= nowDateOnly) {
           categorized.upcoming.push(lesson);
@@ -52,10 +55,11 @@ export default function Index() {
           categorized.past.push(lesson);
         }
       });
-  
+      setLoading(false);  
       setCategorizedLessons(categorized);
     } catch (error) {
       console.log("error", error);
+      setLoading(false);
       setCategorizedLessons({
         upcoming: [],
         past: [],
@@ -67,7 +71,16 @@ export default function Index() {
   useEffect(() => {
       fetchLessons();
   }, []);
-  console.log("lessons",categorizedLessons);
+
+  const isMoreThanOneHourFromNow = (startDateTime) => {
+  const now = new Date();
+  const start = new Date(startDateTime);
+  const diffInMs = start - now;
+  const oneHourInMs = 60 * 60 * 1000;
+
+  return diffInMs > oneHourInMs;
+};
+  // console.log("categorizedLessons", categorizedLessons);
 
   return (
     <StudentLayout page={"My Lessons"}>
@@ -96,7 +109,14 @@ export default function Index() {
 
         {/* Lesson Cards */}
         <div className="space-y-4 lg:space-y-5  px-5 lg:px-[30px]">
-        {categorizedLessons[tab]?.length ? (
+          {loading ? 
+           <>
+          {[1, 2, 3].map((index) => (
+            <LessonLoader key={index} />
+          ))}
+        </>
+          : 
+        (categorizedLessons[tab]?.length ? (
             categorizedLessons[tab].map((lesson, idx) => (
               <div key={idx}>
                 <div className="flex items-center gap-3 xl:gap-4 flex-wrap mb-3 lg:mb-4 xl:mb-5">
@@ -127,13 +147,14 @@ export default function Index() {
                     </div>
                   </div>
                   <div className="flex flex-col sm:flex-row gap-2 md:gap-3 xl:gap-5">
+                    {tab === "upcoming" && isMoreThanOneHourFromNow(lesson?.startDateTime) &&
                     <button className="tracking-[-0.06em] font-inter px-6 md:px-10 lg:px-12 xl:px-16 py-2 lg:py-2.5 text-[#CC2828] border border-[#CC2828] rounded-[10px]  text-sm hover:bg-[#CC2828] hover:text-white cursor-pointer"
                     onClick={()=>{
                       setSelectedLesson(lesson);
                       setIsPopupOpen(true);
                     }}>
                       Reschedule
-                    </button>
+                    </button> }
                     <Link href={`/student/message?query=${lesson?.teacherId?._id}`} className="tracking-[-0.06em] font-inter px-6 md:px-10 lg:px-12 xl:px-16 py-2 lg:py-2.5 text-white border border-[#CC2828] rounded-[10px]  text-sm bg-[#CC2828] hover:bg-white hover:text-[#CC2828] cursor-pointer">
                       Message
                     </Link>
@@ -142,7 +163,7 @@ export default function Index() {
               </div>
            ))) : (
             <p className="text-gray-500">No {tab} lessons found.</p>
-          )}
+          ))}
         </div>
       </div>
       <ReschedulePopup

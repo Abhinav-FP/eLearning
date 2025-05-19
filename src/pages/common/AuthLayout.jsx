@@ -17,6 +17,7 @@ export default function AuthLayout({ children, page , sidebar }) {
       localStorage && localStorage.removeItem("token");
       router.push("/login");
       toast.success("Logout Successfully");
+      setUser(null);
     };
     const fetchData = async (signal) => {
       try {

@@ -4,18 +4,23 @@ import Image from "next/image";
 import { FaHeart } from "react-icons/fa6";
 import Listing from "@/pages/api/Listing";
 import Link from "next/link";
+import { TeacherLoader } from "@/components/Loader";
 
 export default function Index() {
     const [teachers, setTeachers] = useState([]);
+    const [loading, setLoading] = useState(false);
 
     const fetchfavouriteStudentTeachers = async () => {
         try {
+            setLoading(true);
             const main = new Listing();
             const response = await main.StudentfavouriteTeacher();
             setTeachers(response?.data?.data || []);
+            setLoading(false);
         } catch (error) {
             console.log("error", error);
-            setTeachers([])
+            setTeachers([]);
+            setLoading(false);
         }
     };
 
@@ -26,11 +31,11 @@ export default function Index() {
 
 
     const handleRemoveSubmit = async (Id) => {
-        console.log("Id", Id)
+        // console.log("Id", Id)
         try {
             const main = new Listing();
             const response = await main.RemoveWishlist({ teacherId: Id });
-            console.log(response)
+            // console.log(response)
             if (response?.data?.status) {
                 fetchfavouriteStudentTeachers();
             }
@@ -39,7 +44,7 @@ export default function Index() {
         }
     };
 
-    console.log("teacher", teachers)
+    // console.log("teacher", teachers)
     return (
         <StudentLayout page={"Favourite teacher"}>
             <div className="min-h-screen bg-gray-50 p-4 sm:p-6">
@@ -49,7 +54,15 @@ export default function Index() {
                 </Link>
                   
                 <div className="space-y-4">
-                    {teachers &&
+                    {loading ? (
+            <>
+              {[1, 2, 3, 4].map((_, idx) => (
+                <div key={idx}>
+                  <TeacherLoader />
+                </div>
+              ))}
+            </>
+          ) : (teachers &&
                         teachers?.map((teacher, idx) => (
                             <div key={idx}>
                                 <div className="bg-white rounded-[10px] lesson_list_shadow  p-3 md:p-4 lg:p-5 flex flex-col lg:flex-row lg:items-center justify-between transition border-[rgba(204,40,40,0.2)] border-1 gap-5">
@@ -89,7 +102,8 @@ export default function Index() {
                                     </div>
                                 </div>
                             </div>
-                        ))}
+                        ))
+          )}
                 </div>
             </div>
         </StudentLayout>

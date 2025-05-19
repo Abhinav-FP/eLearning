@@ -63,7 +63,7 @@ export default function index() {
         fetchEarnings();
     }, []);
 
-    console.log("data",data);
+    // console.log("data",data);
 
   const stats = useMemo(() => [
     {

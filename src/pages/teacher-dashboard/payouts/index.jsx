@@ -43,13 +43,13 @@ function Index() {
     ];
 
     const [payout, setPayout] = useState([])
-    console.log("payout", payout)
+    // console.log("payout", payout)
 
     useEffect(() => {
         const main = new Listing();
         main.PayoutList()
             .then((r) => {
-                console.log("r", r)
+                // console.log("r", r)
                 setPayout(r?.data?.data)
             })
             .catch((err) => {
@@ -60,10 +60,9 @@ function Index() {
         <TeacherLayout page={"Payout"}>
             <div className="min-h-screen p-5 lg:p-[30px]">
                 <div className="flex justify-between items-center mb-4 lg:mb-5">
-                    <h2 className="text-lg md:text-xl lg:text-2xl font-bold text-[#CC2828] tracking-[-0.04em] font-inter">
-                        payouts
+                    <h2 className="capitalize text-lg md:text-xl lg:text-2xl font-bold text-[#CC2828] tracking-[-0.04em] font-inter">
+                        payout Entries
                     </h2>
-
                 </div>
                 <div className="rounded-[5px] border border-[rgba(204,40,40,0.3)] overflow-x-auto">
                     <table className="min-w-full text-sm text-center rounded-[20px]">

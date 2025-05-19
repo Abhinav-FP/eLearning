@@ -30,8 +30,8 @@ export default function Index() {
     setStudentTimeZone(timeZone);
   }, []);
 
-  console.log("Availability", Availability);
-  console.log("user", user);
+  // console.log("Availability", Availability);
+  // console.log("user", user);
   return (
     <TeacherLayout page={"Price & Availability"}>
       <div className="min-h-screen p-5 lg:p-[30px]">

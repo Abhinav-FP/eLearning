@@ -9,7 +9,7 @@ export default function Successpage() {
     const { id } = router.query;
     const [loading, setLoading] = useState(false);
     const fetch = (id) => {
-        console.log("id", id)
+        // console.log("id", id)
         setLoading(true);
         const main = new Listing();
         main.StripeSuccess(id)

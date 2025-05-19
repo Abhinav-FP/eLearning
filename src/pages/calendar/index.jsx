@@ -33,8 +33,8 @@ const Index = ({ Availability, setIsPopupOpen, usedInPopup, setSelectedSlot, sel
   const { user } = useRole();
   const router = useRouter();
 
-  console.log("Availability", Availability);
-  console.log("events",events);
+  // console.log("Availability", Availability);
+  // console.log("events",events);
 
   useEffect(() => {
     if (!Availability) return;
@@ -122,13 +122,23 @@ const Index = ({ Availability, setIsPopupOpen, usedInPopup, setSelectedSlot, sel
   
       return events;
     };
+    // For processing full blocks
+    const processFullBlocks = (blocks, title, color) => {
+      return blocks.map((block) => ({
+        id: `${block._id}_${block.startDateTime}`,
+        title,
+        start: moment.utc(block.startDateTime).toDate(),
+        end: moment.utc(block.endDateTime).toDate(),
+        color,
+      }));
+    };
   
     const availabilityEvents = Availability.availabilityBlocks?.length
       ? processBlocks(Availability.availabilityBlocks, "Available", "#6ABB52")
       : [];
   
     const bookedEvents = Availability.bookedSlots?.length
-      ? processBlocks(Availability.bookedSlots, "Blocked", "#185abc")
+      ? processFullBlocks(Availability.bookedSlots, "Blocked", "#185abc")
       : [];
   
     setEvents([...availabilityEvents, ...bookedEvents]);
@@ -161,6 +171,7 @@ const Index = ({ Availability, setIsPopupOpen, usedInPopup, setSelectedSlot, sel
 
     return isWithinSlot;
   };
+  console.log("user",user);
 
 
   const handleClick = (event) => {
@@ -168,6 +179,11 @@ const Index = ({ Availability, setIsPopupOpen, usedInPopup, setSelectedSlot, sel
       if (!user) {
         toast.error("Please login first");
         router.push(`/login?redirect=${router.asPath}`);
+        return;
+      }
+      if (user?.role != "student") {
+        toast.error("Only students can book lessons");
+        return;
       }
       setIsPopupOpen(true);
     }

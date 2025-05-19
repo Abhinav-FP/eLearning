@@ -1,13 +1,13 @@
 import React, { useEffect, useState } from "react";
-import LeassonBg from "../Assets/Images/leasson-bg.png";
-import Heading from "../common/Heading";
-import Listing from "../api/Listing";
+import NoData from "../common/NoData";
+
+
 export default function LessonList({ lessons, showSelected, selectedLesson, SetSelectedLesson}) {
-//   const [selectedLesson, SetSelectedLesson] = useState(null);
   return (
+    <>
+    {lessons && lessons?.length>0 ? 
     <ul className="space-y-5 lg:space-y-5">
-      {lessons &&
-        lessons?.map((item, index) => (
+      {lessons?.map((item, index) => (
           <li
             key={index}
             className={`bg-white rounded-[10px] ${showSelected && selectedLesson?._id == item?._id ? "border border-[#CC2828]" : "border border-white"} lg:rounded-[20px] p-5 lg:p-6 xl:p-10`}
@@ -33,5 +33,11 @@ export default function LessonList({ lessons, showSelected, selectedLesson, SetS
           </li>
         ))}
     </ul>
+    :
+    <NoData Heading={"No lessons available"} 
+    content={"There are no lessons available on this account. Message the teacher if you think it is a mistake. Also click the below button to go back to previous page."}
+    />
+    }
+    </>
   );
 }

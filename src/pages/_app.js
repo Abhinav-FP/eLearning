@@ -1,6 +1,7 @@
 import "@/styles/globals.css";
 import "./style.css";
 import "../styles/calendar.css";
+import "../styles/Loader.css";
 import { Toaster } from "react-hot-toast";
 import { RoleProvider } from "@/context/RoleContext";
 

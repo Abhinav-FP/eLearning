@@ -10,9 +10,9 @@ export default function Bank() {
         const main = new Listing();
         main.teacherbankget()
             .then((r) => {
-                console.log("r", r)
+                // console.log("r", r)
                 const profiledata = r?.data?.data;
-                console.log("profileData", profiledata);
+                // console.log("profileData", profiledata);
                 setData({
                     BankName: profiledata?.BankName,
                     BankNumber: profiledata?.BankNumber,

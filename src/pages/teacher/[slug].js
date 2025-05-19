@@ -11,12 +11,13 @@ import { MdOutlinePlayCircle } from "react-icons/md";
 import { useRouter } from "next/router";
 import Listing from "../api/Listing";
 import BookingPopup from "./BookingPopup";
-import { DateTime } from "luxon";
+import { BookLoader } from "../../components/Loader";
 
 export default function Index() {
   const router = useRouter();
   const { slug } = router.query;
   const [data, setdata] = useState([]);
+  const [loading,setLoading]=useState(true);
   const [content, setContent] = useState("");
   const [lessons, setLessons] = useState([]);
   const [isPopupOpen, setIsPopupOpen] = useState(false);
@@ -32,17 +33,21 @@ export default function Index() {
 
   const fetchLessons = async (Id) => {
     try {
+      setLoading(true);
       const main = new Listing();
       const response = await main.TeacherLessonGetForStudent(Id);
       // console.log("response", response);
       if (response.data) {
         setLessons(response.data.data);
+        setLoading(false);
       } else {
         setLessons([]);
+        setLoading(false);
       }
     } catch (error) {
       console.log("error", error);
       setLessons([]);
+      setLoading(false);
     }
   };
   const fetchData = async (slug) => {
@@ -84,6 +89,11 @@ export default function Index() {
   return (
     <>
       <Layout>
+        {loading ?
+        <div className="min-h-screen flex items-center justify-center">
+        <BookLoader/> 
+        </div>
+        : <>
         <div className="pt-[114px] md:pt-[124px] lg:pt-[154px]  pb-[40px]  md:pb-[60px] lg:pb-[80px] xl:pb-[100px] ">
           <div className="container sm:container md:container lg:container xl:max-w-[1230px]  px-4 mx-auto">
             <div className="bg-[rgba(204,40,40,0.8)] rounded-[20px] py-6 lg:py-[30px] px-6 md:px-[30px] lg:px-[30px] xl:px-[45px]">
@@ -137,6 +147,7 @@ export default function Index() {
           </div>
         </div>
         <Testimonial/>
+        </>}
         <BookingPopup
           isOpen={isPopupOpen}
           onClose={closePopup}

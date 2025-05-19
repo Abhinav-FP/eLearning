@@ -1,21 +1,14 @@
 import React, { useState } from "react";
-import { MdSpaceDashboard } from "react-icons/md";
+import { MdSpaceDashboard, MdReviews, MdPayments} from "react-icons/md"; 
 import { usePathname } from "next/navigation";
 import Link from "next/link";
 import { IoIosMenu } from "react-icons/io";
 import { IoMdArrowRoundBack } from "react-icons/io";
 import Logo from "../../Assets/Images/logo.png";
 import Image from "next/image";
-import { MdClass } from "react-icons/md";
-import { FaChalkboardTeacher } from "react-icons/fa";
-import { LuMessagesSquare } from "react-icons/lu";
-import { MdPayment } from "react-icons/md";
+import { PiChalkboardTeacherFill } from "react-icons/pi";
+import { FaCalendar } from "react-icons/fa";
 import { IoSettingsOutline } from "react-icons/io5";
-import { MdOutlineRateReview } from "react-icons/md";
-// New Icons
-import { CgProfile } from "react-icons/cg";
-import { IoPricetags } from "react-icons/io5";
-import { FaWallet } from "react-icons/fa6";
 import { useRole } from "@/context/RoleContext";
 
 function SideBar() {
@@ -82,44 +75,30 @@ function SideBar() {
                                 href="/teacher-dashboard/profile"
                                 className={`flex items-center py-2.5 x-3 md:px-4 lg:px-6  gap-2 text-[#565F66] text-base font-medium tracking-[-0.06em] ${pathname === "/teacher-dashboard/profile" ? "text-white bg-[#D6202C]" : "hover:bg-gray-100"} `}
                             >
-                                <CgProfile size={20} />
-                                Profile
+                                <PiChalkboardTeacherFill size={20} />
+                                Teachers
                             </Link>
                             <Link
                                 href="/teacher-dashboard/availability"
                                 className={`flex items-center py-2.5 x-3 md:px-4 lg:px-6 gap-2 text-[#565F66] text-base font-medium tracking-[-0.06em] ${pathname === "/teacher-dashboard/availability" ? "text-white bg-[#D6202C]" : "hover:bg-gray-100"} `}
                             >
-                                <IoPricetags size={20} />
-                                Pricing & Availability
+                                <MdReviews size={20} />
+                                Reviews
                             </Link>
                             <Link
                                 href="/teacher-dashboard/message"
                                 className={`flex items-center py-2.5 x-3 md:px-4 lg:px-6 gap-2 text-[#565F66] text-base font-medium tracking-[-0.06em] ${pathname === "/teacher-dashboard/message" ? "text-white bg-[#D6202C]" : "hover:bg-gray-100"}`}
                             >
-                                <LuMessagesSquare size={20} />
-                                Messages
+                                <MdPayments size={20} />
+                                Payments
                             </Link>
                             <Link
                                 href="/teacher-dashboard/earnings"
                                 className={`flex items-center py-2.5 x-3 md:px-4 lg:px-6 gap-2 text-[#565F66] text-base font-medium tracking-[-0.06em] ${pathname === "/teacher-dashboard/earnings" ? "text-white bg-[#D6202C]" : "hover:bg-gray-100"}`}
                             >
-                                <FaWallet size={20} />
-                                Earnings
-                            </Link>
-                            <Link
-                                href="/teacher-dashboard/payouts"
-                                className={`flex items-center py-2.5 x-3 md:px-4 lg:px-6 gap-2 text-[#565F66] text-base font-medium tracking-[-0.06em] ${pathname === "/teacher-dashboard/payouts" ? "text-white bg-[#D6202C]" : "hover:bg-gray-100"}`}
-                            >
-                                <MdOutlineRateReview size={20} />
-                                Payouts
-                            </Link>
-                            <Link
-                                href="/teacher-dashboard/booking"
-                                className={`flex items-center py-2.5 x-3 md:px-4 lg:px-6 gap-2 text-[#565F66] text-base font-medium tracking-[-0.06em] ${pathname === "/teacher-dashboard/lessons" ? "text-white bg-[#D6202C]" : "hover:bg-gray-100"}`}
-                            >
-                                <MdOutlineRateReview size={20} />
-                                Bookings
-                            </Link>
+                                <FaCalendar size={20} />
+                                Calendar management
+                            </Link> 
                             <Link
                                 href="/teacher-dashboard/setting"
                                 className={`flex items-center py-2.5 x-3 md:px-4 lg:px-6 gap-2 text-[#565F66] text-base font-medium tracking-[-0.06em] ${pathname === "/teacher-dashboard/setting" ? "text-white bg-[#D6202C]" : "hover:bg-gray-100"}`}

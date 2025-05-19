@@ -95,7 +95,7 @@ export default function AddLesson({ isOpen, onClose, data, getLessons }) {
       duration: data?.duration || "",
     });
   }, [data]);
-  console.log("data",data);
+  // console.log("data",data);
 
   return (
     <Popup isOpen={isOpen} onClose={onClose} size={"max-w-[510px]"}>

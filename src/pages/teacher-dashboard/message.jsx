@@ -53,7 +53,7 @@ export default function Message() {
     try {
       const main = new Listing();
       const response = await main.MessageGetAll(Id);
-      console.log("response.data.messages", response.data.messages);
+      // console.log("response.data.messages", response.data.messages);
       setUserMessage(response.data.messages);
       setSelectedIdUser(response.data.ReciverUser);
     } catch (error) {

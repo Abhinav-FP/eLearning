@@ -6,6 +6,8 @@ import Calendar from "../calendar/index.jsx";
 import PaymentCheckout from "./PaymentCheckout";
 import { IoCloseSharp } from "react-icons/io5";
 import { useRole } from "@/context/RoleContext";
+import { IoMdTime } from "react-icons/io";
+import { FaBookReader } from "react-icons/fa";
 export default function BookingPopup({
   isOpen,
   onClose,
@@ -176,16 +178,20 @@ export default function BookingPopup({
                 <p className="text-xs capitalize #7A7A7A text-[#7A7A7A]">{user?.role}</p>
               </div>
             </div>
-            <div>
+            <div className="flex gap-3 lg:gap-11 items-center">
               {selectedLesson && (
-                <p className="text-[#CC2828] capitalize text-base xl:text-lg font-semibold font-inter inline-block tracking-[-0.04em]">
-                  Selected Lesson - {selectedLesson?.title} - USD $
+                <div className="border border-gray-400 rounded-full p-3">
+                <p className="flex gap-1 items-center text-[#CC2828] capitalize text-sm lg:text-lg font-semibold font-inter tracking-[-0.04em]">
+                 <FaBookReader size={24} />
+                  {selectedLesson?.title} - $
                   {selectedLesson?.price}{" "}
                 </p>
+                </div>
               )}
               {selectedSlot && (
-                      <p className="text-[#CC2828] capitalize text-base xl:text-lg font-semibold font-inter inline-block tracking-[-0.04em]">
-                        Selected Time Slot -{" "}
+                <div className="border border-gray-400 rounded-full p-3">
+                      <p className="flex gap-1 items-center text-[#CC2828] capitalize text-sm lg:text-lg font-semibold font-inter tracking-[-0.04em]">
+                        <IoMdTime size={24} />
                         {new Date(selectedSlot.start).toLocaleString("en-US", {
                           month: "short",
                           day: "numeric",
@@ -193,12 +199,14 @@ export default function BookingPopup({
                           minute: "2-digit",
                           hour12: true,
                         })}{" "}
-                        -
+                        -{" "}
                         {getFormattedEndTime(
                           selectedSlot?.start,
                           selectedLesson?.duration
                         )}{" "}
-                      </p>)}
+                      </p>
+                      </div>
+                      )}
             </div>
             <div className="space-y-3 lg:space-y-0 lg:space-x-3">
               {step !== 1 && (

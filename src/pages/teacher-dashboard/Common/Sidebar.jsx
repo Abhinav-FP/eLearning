@@ -83,7 +83,7 @@ function SideBar() {
                                 className={`flex items-center py-2.5 x-3 md:px-4 lg:px-6  gap-2 text-[#565F66] text-base font-medium tracking-[-0.06em] ${pathname === "/teacher-dashboard/profile" ? "text-white bg-[#D6202C]" : "hover:bg-gray-100"} `}
                             >
                                 <CgProfile size={20} />
-                                Profile
+                                Profile & Lessons
                             </Link>
                             <Link
                                 href="/teacher-dashboard/availability"

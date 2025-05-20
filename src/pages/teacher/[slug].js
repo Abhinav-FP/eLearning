@@ -101,7 +101,7 @@ export default function Index() {
                 <div className="mx-auto md:mx-0 w-[280px] md:w-[280px] lg:w-[308px] px-4">
                   <VideoModalPlayer
                     video={data?.intro_video}
-                    image={data?.profile_photo || teacherImg}
+                    image={data?.userId?.profile_photo || teacherImg}
                     name={data?.userId?.name}
                     divClass="relative"
                     imgClass="rounded-[10px] h-[276px] w-[276px]"

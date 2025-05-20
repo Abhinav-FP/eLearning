@@ -10,18 +10,18 @@ import Link from "next/link";
 export default function Lesson({ title }) {
 
 
-    const lessons = [
-        {
-            ThumbnailImage: EmilyCarter,
-            Title: 'Emily Carter',
-            Price: 'USD 12.00'
-        },
-        {
-            ThumbnailImage: EmilyCarter,
-            Title: 'Daniel Foster',
-            Price: 'USD 12.00'
-        }
-    ]
+    // const lessons = [
+    //     {
+    //         ThumbnailImage: EmilyCarter,
+    //         Title: 'Emily Carter',
+    //         Price: 'USD 12.00'
+    //     },
+    //     {
+    //         ThumbnailImage: EmilyCarter,
+    //         Title: 'Daniel Foster',
+    //         Price: 'USD 12.00'
+    //     }
+    // ]
 
     const [video, setvideo] = useState([]);
 
@@ -63,7 +63,7 @@ export default function Lesson({ title }) {
                                             </button>
                                         </div> */}
                                         <VideoModalPlayer video={items?.intro_video} 
-                                        image={items?.profile_photo} 
+                                        image={items?.userId?.profile_photo} 
                                         name={items?.userId?.name} 
                                         divClass="relative lg:h-[311px]"
                                         imgClass="w-full h-[265px] sm:h-[295px]  md:h-[186px] lg:h-[311px] rounded-[6px] md:rounded-[10px]"

@@ -39,6 +39,7 @@ export default function Profile() {
           name: profiledata?.userId?.name,
           email: profiledata?.userId?.email,
           timezone: profiledata?.userId?.time_zone,
+          nationality: profiledata?.userId?.nationality,
           ais_trained: profiledata?.ais_trained,
           average_time:profiledata?.average_time,
           average_price: profiledata?.average_price,
@@ -84,10 +85,10 @@ export default function Profile() {
     }));
    };
 
+  //  console.log("data",data);
   const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log("data",data);
-    console.log("file",file);
+    // console.log("file",file);
     // return;
     if (processing) return;
     setProcessing(true);
@@ -107,10 +108,12 @@ export default function Profile() {
       formData.append("description", data?.description)
       formData.append("average_price", data?.average_price)
       formData.append("average_time", data?.average_time)
-    //   formData.append("documentlink", data?.documentlink)
-    //   if (file instanceof File) {
-    //     formData.append("profile_photo", file);
-    //   }
+      if (data?.documentlink instanceof File) {
+        formData.append("documentlink", data?.documentlink)
+      }
+      if (file instanceof File) {
+        formData.append("profile_photo", file);
+      }
       const response = await main.TeacherprofileUpdate(formData);
       if (response?.data) {
         toast.success(response.data.message);

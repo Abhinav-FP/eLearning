@@ -34,7 +34,7 @@ const PaymentCheckout = ({ selectedLesson, selectedSlot, studentTimeZone }) => {
         <div className="space-y-4">
           <div
             onClick={() => setPaymentStatus(false)}
-            className={`flex items-center justify-between border rounded-lg p-3 cursor-pointer ${!PaymentStatus ? 'border-red-400' : 'hover:border-red-400'
+            className={`flex items-center justify-between border rounded-lg p-3 cursor-pointer ${PaymentStatus === true ? 'border-red-300' : 'border-red-400'
               }`}
           >
             <div className="flex items-center gap-3">
@@ -50,7 +50,7 @@ const PaymentCheckout = ({ selectedLesson, selectedSlot, studentTimeZone }) => {
 
           <div
             onClick={() => setPaymentStatus(true)}
-            className={`flex items-center justify-between border rounded-lg p-3 cursor-pointer ${!PaymentStatus ? 'border-red-400' : 'hover:border-red-400'
+            className={`flex items-center justify-between border rounded-lg p-3 cursor-pointer ${PaymentStatus  === true ? 'border-red-400' : 'border-red-300'
               }`}
           >
             <div className="flex items-center gap-3">
@@ -87,9 +87,9 @@ const PaymentCheckout = ({ selectedLesson, selectedSlot, studentTimeZone }) => {
             <p className="font-semibold capitalize">
               {selectedLesson?.teacher?.name || ""}
             </p>
-            <p className="text-sm text-gray-500  capitalize">
+            {/* <p className="text-sm text-gray-500  capitalize">
               {selectedLesson?.title || ""}
-            </p>
+            </p> */}
             <p className="text-sm text-gray-500">
               {selectedLesson?.duration
                 ? `${selectedLesson?.duration} mins`
@@ -110,7 +110,7 @@ const PaymentCheckout = ({ selectedLesson, selectedSlot, studentTimeZone }) => {
           </div>
         </div>
 
-        <div className="border-t pt-4">
+        <div className="border-t border-[#CC2828] pt-4">
           <div className="flex justify-between">
             <p className="font-medium">Total</p>
             <p className="font-medium">${selectedLesson?.price} USD</p>

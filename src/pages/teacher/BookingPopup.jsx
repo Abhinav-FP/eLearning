@@ -236,9 +236,9 @@ export default function BookingPopup({
                     onClick={() => {
                       setStep(step + 1);
                     }}
-                    disabled={!selectedLesson}
+                    disabled={(step==1 &&!selectedLesson) || (step == 2 && !selectedSlot)}
                     className={`ml-auto font-medium rounded-full py-2 px-5 text-white text-base w-fit bg-[#CC2828] hover:bg-[#ad0e0e] 
-                  ${!selectedLesson ? "cursor-not-allowed" : "cursor-pointer"}`}
+                  ${(step==1 &&!selectedLesson) || (step == 2 && !selectedSlot) ? "cursor-not-allowed" : "cursor-pointer"}`}
                   >
                     Next
                   </button>

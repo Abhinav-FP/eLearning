@@ -15,6 +15,10 @@ class Listing extends Component {
   async Teacherprofile(){
     return Api.get("/teacher/profile");
   }
+async TeacherDashboard(){
+    return Api.get("/teacher/dashboard");
+  }
+  
   async TeacherprofileUpdate(data){
     return Api.post("/teacher/profile",data);
   }

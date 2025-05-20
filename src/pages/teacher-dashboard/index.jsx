@@ -1,16 +1,29 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import TeacherLayout from "./Common/TeacherLayout";
-import {
-  FaWallet,
-  FaCalendar,
-  FaStar,
-  FaFileAlt,
-} from "react-icons/fa";
-import { MdUpcoming, MdAttachMoney, MdReviews, MdCheckCircle} from "react-icons/md";
+import { FaWallet, FaCalendar, FaStar, FaFileAlt, } from "react-icons/fa";
+import { MdUpcoming, MdAttachMoney, MdReviews, MdCheckCircle } from "react-icons/md";
 import { FiPlus } from "react-icons/fi";
 import Link from "next/link";
+import Listing from "../api/Listing";
 
 export default function Index() {
+
+
+  const [Dashboard, SetDashboard] = useState("")
+  const DashboardCount = async () => {
+    try {
+      const main = new Listing();
+      const response = await main.TeacherDashboard();
+      console.log("response", response)
+      // SetmessageCount(response.data.data);
+    } catch (error) {
+      console.log("error", error);
+    }
+  };
+
+  useEffect(() => {
+    DashboardCount();
+  }, []);
   return (
     <TeacherLayout>
       <div className="min-h-screen p-5 lg:p-[30px]">
@@ -78,7 +91,7 @@ export default function Index() {
               <MdAttachMoney className="text-[#CC2828]" size={24} />
             </div>
             <div className="flex gap-3 text-lg font-semibold mt-6 xl:mt-4 items-center">
-              <p className="flex gap-1 items-center font-inter text-base lg:text-lg xl:text-xl font-medium tracking-[-0.04em] text-black "><MdCheckCircle size={18}/> $70/1 Hour</p>
+              <p className="flex gap-1 items-center font-inter text-base lg:text-lg xl:text-xl font-medium tracking-[-0.04em] text-black "><MdCheckCircle size={18} /> $70/1 Hour</p>
               <p className="flex gap-1 items-center font-inter text-base lg:text-lg xl:text-xl font-medium tracking-[-0.04em] text-black"><MdCheckCircle size={18} /> $40/30 min</p>
             </div>
           </div>

@@ -171,7 +171,7 @@ const Index = ({ Availability, setIsPopupOpen, usedInPopup, setSelectedSlot, sel
 
     return isWithinSlot;
   };
-  console.log("user",user);
+  // console.log("user",user);
 
 
   const handleClick = (event) => {
@@ -192,6 +192,14 @@ const Index = ({ Availability, setIsPopupOpen, usedInPopup, setSelectedSlot, sel
         toast.error("This time slot is too short for your selected lesson duration.");
         return;
       }
+      console.log("event",event);
+      const startTime = moment(event.start);
+      const now = moment();
+      // Check if start is today or in the past
+      if (startTime.isSameOrBefore(now, "minute")) {
+        toast.error("Cannot select a slot from today or the past.");
+        return;
+      }
       setSelectedSlot(event);
     }
   };
@@ -207,18 +215,18 @@ const Index = ({ Availability, setIsPopupOpen, usedInPopup, setSelectedSlot, sel
                 <span className="w-3 h-3 rounded-full bg-[#6ABB52] inline-block"></span>
                 <span className="text-sm text-gray-700">Available</span>
               </div>
-              <div className="flex items-center gap-2">
+              {/* <div className="flex items-center gap-2">
                 <span className="w-3 h-3 rounded-full bg-[#D9D9D9] inline-block"></span>
                 <span className="text-sm text-gray-700">Not Available</span>
-              </div>
+              </div> */}
               <div className="flex items-center gap-2">
-                <span className="w-3 h-3 rounded-full bg-[#D9D9D9] inline-block"></span>
+                <span className="w-3 h-3 rounded-full bg-[#185abc] inline-block"></span>
                 <span className="text-sm text-gray-700">Booked</span>
               </div>
-              <div className="flex items-center gap-2">
+              {/* <div className="flex items-center gap-2">
                 <span className="w-3 h-3 rounded-full bg-[#CC2828] inline-block"></span>
                 <span className="text-sm text-gray-700">Booked by You</span>
-              </div>
+              </div> */}
             </div>
             {!usedInPopup &&
               <h3 className="text-base lg:text-lg font-semibold text-[#1E1E1E] m-0 tracking-[-0.03em]">
@@ -254,7 +262,6 @@ const Index = ({ Availability, setIsPopupOpen, usedInPopup, setSelectedSlot, sel
                   handleClick(event);
                 }
               }}
-              
               components={{ event: Event }}
               onSelectSlot={(slotInfo) => {
                 const overlap = events.some(

@@ -6,6 +6,8 @@ import Calendar from "../calendar/index.jsx";
 import PaymentCheckout from "./PaymentCheckout";
 import { IoCloseSharp } from "react-icons/io5";
 import { useRole } from "@/context/RoleContext";
+import { IoMdTime } from "react-icons/io";
+import { FaBookReader } from "react-icons/fa";
 export default function BookingPopup({
   isOpen,
   onClose,
@@ -63,8 +65,8 @@ export default function BookingPopup({
 
     <div className="fixed inset-0 top-0 bottom-0 flex  justify-center bg-[rgba(0,0,0,.3)] z-50">
       <div className='bg-white mt-28 rounded-lg w-full shadow-lg w-ful '>
-        <div className="p-4 text-gray-800  relative pb-10">
-          <div className="text-gray-800 overflow-y-auto max-h-[80vh] ">
+        <div className="px-4 pt-4  h-full text-gray-800 relative ">
+          <div className="text-gray-800 pb-40 lg:pb-10 overflow-y-auto max-h-[80vh] ">
             <button
               onClick={onClose}
               className="cursor-pointer text-gray-600 hover:text-gray-800 focus:outline-none absolute right-6 lg:right-12 top-6 lg:top-8 z-[2]"
@@ -75,7 +77,7 @@ export default function BookingPopup({
             {step === 1 && (
               <div
                 style={{ backgroundImage: "url('/leasson-bg.png')" }}
-                className="bg-[rgba(249,190,191,.5)] bg-cover bg-center rounded-[20px] py-[40px] lg:py-[60px] pt-10 "
+                className="h-full bg-[rgba(249,190,191,.5)] bg-cover bg-center rounded-[20px] py-[40px] lg:py-[60px] pt-10 "
               >
                 <div className="container sm:container md:container lg:container xl:max-w-[1230px]  bg-[rgba(249,190,191, .1)] px-4 mx-auto">
                   <Heading
@@ -151,17 +153,26 @@ export default function BookingPopup({
               </div>
             )}
             {step === 3 && (
-              <PaymentCheckout
-                selectedLesson={selectedLesson}
-                selectedSlot={selectedSlot}
-                studentTimeZone={studentTimeZone}
-              />
+              <>
+               {selectedLesson && (
+                 <Heading
+                  classess="text-[#CC2828] !text-3xl !mb-0 text-center"
+                  title={selectedLesson?.title}
+                />
+              )}
+                
+                <PaymentCheckout
+                  selectedLesson={selectedLesson}
+                  selectedSlot={selectedSlot}
+                  studentTimeZone={studentTimeZone}
+                />
+              </>
             )}
 
 
 
           </div>
-          <div className="flex fixed px-4 bg-white py-4 bottom-0 w-full left-0 justify-between items-center mt-5 border-t border-gray-300 flex-col lg:flex-row space-y-3 lg:space-y-0">
+          <div className="flex fixed px-4 bg-white py-4 bottom-0 w-full left-0 justify-between items-center mt-5 border-t border-gray-300 flex-col lg:flex-row space-y-3 lg:space-y-0 z-10">
             <div className=" justify-between items-center hidden lg:flex">
               <div className="w-11 h-11 rounded-full bg-green-400 flex items-center justify-center text-white text-xl font-bold">
                 {/* Replace with an actual image if needed */}
@@ -176,37 +187,43 @@ export default function BookingPopup({
                 <p className="text-xs capitalize #7A7A7A text-[#7A7A7A]">{user?.role}</p>
               </div>
             </div>
-            <div>
+            <div className="w-full lg:w-auto flex flex-col lg:flex-row gap-2 lg:gap-4 items-center">
               {selectedLesson && (
-                <p className="text-[#CC2828] capitalize text-base xl:text-lg font-semibold font-inter inline-block tracking-[-0.04em]">
-                  Selected Lesson - {selectedLesson?.title} - USD $
-                  {selectedLesson?.price}{" "}
-                </p>
+                <div className="w-full lg:w-auto border border-gray-300 rounded-full px-4 py-2 ">
+                  <p className="flex gap-2 items-center justify-center text-[#CC2828] capitalize text-sm lg:text-base font-semibold font-inter tracking-[-0.04em]">
+                    <FaBookReader size={20} />
+                    {selectedLesson?.title} - $
+                    {selectedLesson?.price}{" "}
+                  </p>
+                </div>
               )}
               {selectedSlot && (
-                      <p className="text-[#CC2828] capitalize text-base xl:text-lg font-semibold font-inter inline-block tracking-[-0.04em]">
-                        Selected Time Slot -{" "}
-                        {new Date(selectedSlot.start).toLocaleString("en-US", {
-                          month: "short",
-                          day: "numeric",
-                          hour: "numeric",
-                          minute: "2-digit",
-                          hour12: true,
-                        })}{" "}
-                        -
-                        {getFormattedEndTime(
-                          selectedSlot?.start,
-                          selectedLesson?.duration
-                        )}{" "}
-                      </p>)}
+                <div className=" w-full lg:w-auto border border-gray-300 rounded-full px-4 py-2">
+                  <p className="flex gap-2 items-center justify-center text-[#CC2828] capitalize text-sm lg:text-base font-semibold font-inter tracking-[-0.04em]">
+                    <IoMdTime size={20} />
+                    {new Date(selectedSlot.start).toLocaleString("en-US", {
+                      month: "short",
+                      day: "numeric",
+                      hour: "numeric",
+                      minute: "2-digit",
+                      hour12: true,
+                    })}{" "}
+                    -{" "}
+                    {getFormattedEndTime(
+                      selectedSlot?.start,
+                      selectedLesson?.duration
+                    )}{" "}
+                  </p>
+                </div>
+              )}
             </div>
-            <div className="space-y-3 lg:space-y-0 lg:space-x-3">
+            <div className="flex justify-between w-full lg:w-auto space-x-2 lg:space-x-3">
               {step !== 1 && (
                 <button
                   onClick={() => {
                     setStep(step - 1);
                   }}
-                  className="font-medium cursor-pointer rounded-full py-2 px-5 text-[#ffffff] bg-[#CC2828] hover:bg-[#ad0e0e] text-base w-fit"
+                  className="font-medium cursor-pointer rounded-full py-2 px-5 text-[#ffffff] bg-[#CC2828] hover:bg-[#ad0e0e] text-base  "
                 >
                   Previous
                 </button>
@@ -219,9 +236,9 @@ export default function BookingPopup({
                     onClick={() => {
                       setStep(step + 1);
                     }}
-                    disabled={!selectedLesson}
-                    className={`w-full md:w-auto block md:inline-block font-medium rounded-full py-2 px-5 text-white text-base w-fit bg-[#CC2828] hover:bg-[#ad0e0e] 
-                  ${!selectedLesson ? "cursor-not-allowed" : "cursor-pointer"}`}
+                    disabled={(step==1 &&!selectedLesson) || (step == 2 && !selectedSlot)}
+                    className={`ml-auto font-medium rounded-full py-2 px-5 text-white text-base w-fit bg-[#CC2828] hover:bg-[#ad0e0e] 
+                  ${(step==1 &&!selectedLesson) || (step == 2 && !selectedSlot) ? "cursor-not-allowed" : "cursor-pointer"}`}
                   >
                     Next
                   </button>

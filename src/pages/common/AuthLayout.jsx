@@ -40,8 +40,7 @@ export default function AuthLayout({ children, page , sidebar }) {
       const { signal } = controller;
       fetchData(signal);  
       return () => controller.abort();
-    }, []);
-  
+    }, []);  
     return (
       <div className="md:flex flex-wrap bg-black items-start">
          {sidebar}

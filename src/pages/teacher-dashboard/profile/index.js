@@ -28,6 +28,12 @@ export default function Index() {
       });
   }
 
+  const keyMappings = {
+    M: "Male",
+    F: "Female",
+    O: "Other",
+  };
+
   useEffect(() => {
     getLessons();
   }, []);
@@ -42,7 +48,7 @@ export default function Index() {
       <div className="bg-white lesson_list_shadow rounded-2xl flex flex-col md:flex-row gap-3 justify-between items-start md:items-center p-4 lg:px-5 lg:py-6 mb-3 lg:mb-4">
         <div>
           <div className="flex items-center gap-2">
-            <h3 className="text-base font-semibold text-[#CC2828] tracking-[-0.04em]">{item?.title || ""}</h3>
+            <h3 className="text-base font-semibold text-[#CC2828] tracking-[-0.04em] capitalize">{item?.title || ""}</h3>
             <MdEditSquare size={18} className="text-[#CC2828] cursor-pointer" onClick={() => { handleEdit(item) }} />
             <RiDeleteBin6Line size={17} className="text-red-600 hover:text-red-700 cursor-pointer"
               onClick={() => {
@@ -81,7 +87,7 @@ export default function Index() {
                 className="w-16 h-16 lg:w-[94px] lg:h-[94px]  rounded-full object-cover"
               />
               <div>
-                <h2 className="text-lg lg:text-xl font-bold text-[#CC2828] tracking-[-0.04em] md:mb-1">James Smith</h2>
+                <h2 className="text-lg lg:text-xl font-bold text-[#CC2828] tracking-[-0.04em] md:mb-1">{data?.profile?.userId?.name || ""}</h2>
                 <p className="text-[#46494D] text-sm lg:text-base font-medium tracking-[-0.03em] mb-0">Teacher</p>
               </div>
             </div>
@@ -95,20 +101,20 @@ export default function Index() {
           <div className="w-full mt-6 md:mt-8 lg:mt-10 mb-2 flex flex-wrap gap-x-4 lg:gap-x-10 gap-y-2 text-sm">
             <p className="text-sm lg:text-base text-black tracking-[-0.04em]">
               <span className="font-normal text-[#CC2828]">Nationality:</span>{" "}
-              Japanese
+              {data?.profile?.userId?.nationality || "N/A"}
             </p>
             <p>
-              <span className="font-normal text-[#CC2828]">Gender:</span> Male
+              <span className="font-normal text-[#CC2828]">Gender:</span> {keyMappings[data?.profile?.gender] || "N/A"}
             </p>
             <p className="text-sm lg:text-base text-black tracking-[-0.04em]">
               <span className="font-normal text-[#CC2828]">
                 Language spoken:
               </span>{" "}
-              Japanese, English
+              {data?.profile?.languages_spoken?.join(", ") || "N/A"}
             </p>
             <p className="text-sm lg:text-base text-black tracking-[-0.04em]">
-              <span className="font-normal text-[#CC2828]">Interests:</span>{" "}
-              Writing / Blogging
+              <span className="font-normal text-[#CC2828]">Experience:</span>{" "}
+              {data?.profile?.experience ? `${data?.profile?.experience} years` : "N/A"}
             </p>
           </div>
         </div>

@@ -136,7 +136,7 @@ const Index = ({ isPopupOpen, PricePayment, adminCommission, selectedLesson, sel
 
   return (
     <PayPalScriptProvider options={{ "client-id": clientId }}>
-      <div className="mt-6 w-full">
+      <div className="w-full">
         <PayPalButtons
           createOrder={handleCreateOrder}
           onApprove={handleApprove}

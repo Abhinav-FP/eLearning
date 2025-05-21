@@ -173,8 +173,8 @@ export default function Bank() {
                 </button>
                 <button
                     type="submit"
-                    className="w-full max-w-[183px] bg-[#CC2828] hover:bg-red-700 text-white py-2.5 rounded-[10px] text-base xl:text-xl"
-                    disabled={processing}
+                    className={`w-full max-w-[183px] ${!showDetails ? "cursor-not-allowed" : "Cursor-pointer"} bg-[#CC2828] hover:bg-red-700 text-white py-2.5 rounded-[10px] text-base xl:text-xl`}
+                    disabled={processing || !showDetails}
                 >
                     {processing ? "Submitting..." : "Submit"}
                 </button>

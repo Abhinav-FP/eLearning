@@ -81,7 +81,7 @@ export default function Stripe({PricePayment, selectedLesson, adminCommission, s
           handlePayment();
         }}
         >
-         {processing ? "Processing..." : `Pay ${PricePayment} USD`}
+         {processing ? "Processing..." : `Pay $${PricePayment} USD`}
         </button> 
     </>
   )

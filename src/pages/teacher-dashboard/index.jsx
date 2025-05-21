@@ -5,6 +5,7 @@ import { MdUpcoming, MdAttachMoney, MdReviews, MdCheckCircle } from "react-icons
 import { FiPlus } from "react-icons/fi";
 import Link from "next/link";
 import Listing from "../api/Listing";
+import moment from "moment";
 
 export default function Index() {
 
@@ -15,7 +16,7 @@ export default function Index() {
       const main = new Listing();
       const response = await main.TeacherDashboard();
       console.log("response", response)
-      // SetmessageCount(response.data.data);
+      SetDashboard(response.data.data);
     } catch (error) {
       console.log("error", error);
     }
@@ -24,6 +25,8 @@ export default function Index() {
   useEffect(() => {
     DashboardCount();
   }, []);
+
+  console.log("Dashboard", Dashboard)
   return (
     <TeacherLayout>
       <div className="min-h-screen p-5 lg:p-[30px]">
@@ -40,48 +43,6 @@ export default function Index() {
         </div>
 
         <div className="grid grid-cols-1 sm:grid-cols-2 2xl:grid-cols-3 gap-4">
-
-          {/* Total Earnings */}
-          <div className="relative bg-white rounded-xl dashboard-box p-3.5 lg:p-4 xl:p-5 border border-[rgba(204,40,40,0.2)] flex flex-col min-h-[136px]">
-            <h2 className="font-inter text-[#CC2828] font-bold text-lg lg:text-xl xl:text-2xl capitalize tracking-[-0.04em]">
-              Total Earnings
-            </h2>
-            {/* <div className="relative"> */}
-            <div className="absolute right-4 lg:right-5 xl:right-6 bg-[#CC28281A] border-[0.67px] border-[#CC282880] p-3 rounded">
-              <FaWallet className="text-[#CC2828]" size={24} />
-            </div>
-            {/* </div> */}
-            <div className="text-sm text-[#535353] space-y-1 mt-4">
-              <p className="font-inter text-base lg:text-lg xl:text-xl font-bold tracking-[-0.04em]">$1200 + ¥1,76,882</p>
-            </div>
-          </div>
-
-          {/* Upcoming Lessons */}
-          <div className="relative bg-white rounded-xl dashboard-box p-3.5 lg:p-4 xl:p-5 border border-[rgba(204,40,40,0.2)] flex flex-col min-h-[136px]">
-            <h2 className="font-inter text-[#CC2828] font-bold text-lg lg:text-xl xl:text-2xl capitalize tracking-[-0.04em]">
-              Upcoming Lessons
-            </h2>
-            <div className="absolute right-4 lg:right-5 xl:right-6 bg-[#CC28281A] border-[0.67px] border-[#CC282880] p-3 rounded">
-              <MdUpcoming className="text-[#CC2828]" size={24} />
-            </div>
-            <div className="text-sm flex flex-row gap-12 text-[#535353] space-y-1 mt-4">
-              <div className="flex flex-col gap-1 text-lg">
-                <p className="font-inter text-base lg:text-lg xl:text-xl font-bold tracking-[-0.04em] text-[#535353] mb-.5 ">APRIL 25</p>
-                <p className="font-inter text-base lg:text-lg xl:text-xl font-bold tracking-[-0.04em] text-[#535353] mb-0 ">11:00 AM</p>
-              </div>
-              <div className="flex flex-col items-center gap-2">
-                <div className="flex mt-1.5 mb-1.5 text-yellow-500">
-                  {Array(5)
-                    .fill()
-                    .map((_, i) => (
-                      <FaStar key={i} className="w-4 h-4" />
-                    ))}
-                </div>
-                <span className="text-base text-black">(25)</span>
-              </div>
-            </div>
-          </div>
-
           {/* Lesson Prices */}
           <div className="relative bg-white rounded-xl dashboard-box p-3.5 lg:p-4 xl:p-5 border border-[rgba(204,40,40,0.2)] flex flex-col min-h-[136px]">
             <h2 className="font-inter text-[#CC2828] font-bold text-lg lg:text-xl xl:text-2xl capitalize tracking-[-0.04em]">
@@ -91,44 +52,8 @@ export default function Index() {
               <MdAttachMoney className="text-[#CC2828]" size={24} />
             </div>
             <div className="flex gap-3 text-lg font-semibold mt-6 xl:mt-4 items-center">
-              <p className="flex gap-1 items-center font-inter text-base lg:text-lg xl:text-xl font-medium tracking-[-0.04em] text-black "><MdCheckCircle size={18} /> $70/1 Hour</p>
-              <p className="flex gap-1 items-center font-inter text-base lg:text-lg xl:text-xl font-medium tracking-[-0.04em] text-black"><MdCheckCircle size={18} /> $40/30 min</p>
-            </div>
-          </div>
-
-          {/* Total Lessons Completed */}
-          <div className="relative bg-white rounded-xl dashboard-box p-3.5 lg:p-4 xl:p-5 border border-[rgba(204,40,40,0.2)] flex flex-col min-h-[136px]">
-            <h2 className="font-inter text-[#CC2828] font-bold text-lg lg:text-xl xl:text-2xl capitalize tracking-[-0.04em]">
-              Total lessons completed
-            </h2>
-            <div className="absolute right-4 lg:right-5 xl:right-6 bg-[#CC28281A] border-[0.67px] border-[#CC282880] p-3 rounded">
-              <FaFileAlt className="text-[#CC2828]" size={24} />
-            </div>
-            <div className="text-lg space-y-1.5 mt-6 xl:mt-8">
-              <p className="font-inter text-base lg:text-lg xl:text-xl font-medium tracking-[-0.04em] text-black flex justify-between">
-                30 mins: <span>14</span>
-              </p>
-              <p className="font-inter text-base lg:text-lg xl:text-xl font-medium tracking-[-0.04em] text-black flex justify-between">
-                50 mins: <span>20</span>
-              </p>
-              <p className="font-inter text-base lg:text-lg xl:text-xl font-medium tracking-[-0.04em] text-black flex justify-between">
-                Custom: <span>15</span>
-              </p>
-            </div>
-          </div>
-
-          {/* Add Availability */}
-          <div className="relative bg-white rounded-xl dashboard-box p-3.5 lg:p-4 xl:p-5 border border-[rgba(204,40,40,0.2)] flex flex-col min-h-[136px]">
-            <h2 className="font-inter text-[#CC2828] font-bold text-lg lg:text-xl xl:text-2xl capitalize tracking-[-0.04em]">
-              Add Availability
-            </h2>
-            <div className="absolute right-4 lg:right-5 xl:right-6 bg-[#CC28281A] border-[0.67px] border-[#CC282880] p-3 rounded">
-              <FiPlus className="text-[#CC2828]" size={24} />
-            </div>
-            <div className="text-sm text-[#535353] space-y-1 mt-4">
-              <div className="bg-[#CC28281A] border-[0.67px] border-[#CC282880]/50 p-3 w-12 h-12 rounded">
-                <FaCalendar className="text-[#CC2828] w-6 h-6" />
-              </div>
+              <p className="flex gap-1 items-center font-inter text-base lg:text-lg xl:text-xl font-medium tracking-[-0.04em] text-black "><MdCheckCircle size={18} /> ${Dashboard?.TeacherData?.average_price}/{Dashboard?.TeacherData?.average_time}</p>
+              {/* <p className="flex gap-1 items-center font-inter text-base lg:text-lg xl:text-xl font-medium tracking-[-0.04em] text-black"><MdCheckCircle size={18} /> $40/30 min</p> */}
             </div>
           </div>
 
@@ -141,23 +66,101 @@ export default function Index() {
               <MdReviews className="text-[#CC2828]" size={24} />
             </div>
             <div className="text-sm text-[#535353] space-y-1 mt-4">
-              <p className="font-inter text-base lg:text-lg xl:text-xl font-bold tracking-[-0.04em]">124</p>
+              <p className="font-inter text-base lg:text-lg xl:text-xl font-bold tracking-[-0.04em]">{Dashboard?.ReviewesCount}</p>
             </div>
           </div>
+
+
+          <div className="relative bg-white rounded-xl dashboard-box p-3.5 lg:p-4 xl:p-5 border border-[rgba(204,40,40,0.2)] flex flex-col min-h-[136px]">
+            <h2 className="font-inter text-[#CC2828] font-bold text-lg lg:text-xl xl:text-2xl capitalize tracking-[-0.04em]">
+              Payment Eraning
+            </h2>
+            <div className="absolute right-4 lg:right-5 xl:right-6 bg-[#CC28281A] border-[0.67px] border-[#CC282880] p-3 rounded">
+              <FaWallet className="w-6 h-6 text-[#CC2828]" />
+            </div>
+            <div className="text-lg space-y-1.5 mt-6 xl:mt-8">
+              <p className="font-inter text-base lg:text-lg xl:text-xl font-medium tracking-[-0.04em] text-black flex justify-between">
+                Stripe Earnings: <span>¥{Dashboard?.stripepay}</span>
+              </p>
+              <p className="font-inter text-base lg:text-lg xl:text-xl font-medium tracking-[-0.04em] text-black flex justify-between">
+                Paypal Earnings <span>${Dashboard?.paypalpay}</span>
+              </p>
+            </div>
+          </div>
+          {/* Upcoming Lessons */}
+          <div className="relative bg-white rounded-xl dashboard-box p-3.5 lg:p-4 xl:p-5 border border-[rgba(204,40,40,0.2)] flex flex-col min-h-[136px]">
+            <h2 className="font-inter text-[#CC2828] font-bold text-lg lg:text-xl xl:text-2xl capitalize tracking-[-0.04em]">
+              Upcoming Lessons
+            </h2>
+            <div className="absolute right-4 lg:right-5 xl:right-6 bg-[#CC28281A] border-[0.67px] border-[#CC282880] p-3 rounded">
+              <MdUpcoming className="text-[#CC2828]" size={24} />
+            </div>
+            <div className="text-sm  gap-12 text-[#535353] space-y-1 mt-4">
+              {Dashboard?.upcomingLesson?.map((item, index) => (
+                <div className="flex flex-row items-center gap-4 text-lg py-2" key={index}>
+                  <p className="font-inter text-base lg:text-lg xl:text-xl font-bold tracking-[-0.04em] text-[#535353] mb-0.5">
+                    {item?.LessonId?.title}
+                  </p>
+                  <p className="font-inter text-base lg:text-lg xl:text-xl font-bold tracking-[-0.04em] text-[#535353] mb-0.5">
+                    {moment(item?.startDateTime).format("DD MMM YYYY")}
+                  </p>
+                  <p className="font-inter text-base lg:text-lg xl:text-xl font-bold tracking-[-0.04em] text-[#535353] mb-0">
+                    {moment(item?.startDateTime).format("hh:mm A")}
+                  </p>
+                </div>
+              ))}
+
+            </div>
+          </div>
+
+
+
+          {/* Total Lessons Completed */}
+          <div className="relative bg-white rounded-xl dashboard-box p-3.5 lg:p-4 xl:p-5 border border-[rgba(204,40,40,0.2)] flex flex-col min-h-[136px]">
+            <h2 className="font-inter text-[#CC2828] font-bold text-lg lg:text-xl xl:text-2xl capitalize tracking-[-0.04em]">
+              Total lessons completed
+            </h2>
+            <div className="absolute right-4 lg:right-5 xl:right-6 bg-[#CC28281A] border-[0.67px] border-[#CC282880] p-3 rounded">
+              <FaFileAlt className="text-[#CC2828]" size={24} />
+            </div>
+            <div className="text-lg space-y-1.5 mt-6 xl:mt-8">
+              <p className="font-inter text-base lg:text-lg xl:text-xl font-medium tracking-[-0.04em] text-black flex justify-between">
+                30 mins: <span>{Dashboard?.counts?.duration30}</span>
+              </p>
+              <p className="font-inter text-base lg:text-lg xl:text-xl font-medium tracking-[-0.04em] text-black flex justify-between">
+                50 mins: <span>{Dashboard?.counts?.duration50}</span>
+              </p>
+              <p className="font-inter text-base lg:text-lg xl:text-xl font-medium tracking-[-0.04em] text-black flex justify-between">
+                Custom: <span>{Dashboard?.counts?.duration60}</span>
+              </p>
+            </div>
+          </div>
+
+          <div className="relative bg-white rounded-xl dashboard-box p-3.5 lg:p-4 xl:p-5 border border-[rgba(204,40,40,0.2)] flex flex-col min-h-[136px]">
+            <h2 className="font-inter text-[#CC2828] font-bold text-lg lg:text-xl xl:text-2xl capitalize tracking-[-0.04em]">
+              Total Eraning
+            </h2>
+            <div className="absolute right-4 lg:right-5 xl:right-6 bg-[#CC28281A] border-[0.67px] border-[#CC282880] p-3 rounded">
+              <FaWallet className="w-6 h-6 text-[#CC2828]" />
+            </div>
+            <div className="text-lg space-y-1.5 mt-6 xl:mt-8">
+              <p className="font-inter text-base lg:text-lg xl:text-xl font-medium tracking-[-0.04em] text-black flex justify-between">
+                Total Earnings: <span>${Dashboard?.earningsSummary?.totalEarnings}</span>
+              </p>
+              <p className="font-inter text-base lg:text-lg xl:text-xl font-medium tracking-[-0.04em] text-black flex justify-between">
+                Requested Earnings: <span>${Dashboard?.earningsSummary?.requestedEarnings}</span>
+              </p>
+              <p className="font-inter text-base lg:text-lg xl:text-xl font-medium tracking-[-0.04em] text-black flex justify-between">
+                Paid Earnings: <span>${Dashboard?.earningsSummary?.approvedEarnings}</span>
+              </p>
+              <p className="font-inter text-base lg:text-lg xl:text-xl font-medium tracking-[-0.04em] text-black flex justify-between">
+                Available Earnings: <span>${Dashboard?.earningsSummary?.pendingEarnings}</span>
+              </p>
+            </div>
+          </div>
+
         </div>
       </div>
     </TeacherLayout>
   );
 }
-
-// function Card({ title, icon, children }) {
-//   return (
-//     <div className="relative bg-white rounded-xl shadow-sm p-4 border border-red-100 flex flex-col justify-between">
-//         <h2 className="font-inter text-[#CC2828] font-bold text-lg lg:text-xl capitalize">{title}</h2>
-//       <div className="relative">
-//         <div className="absolute right-2 bg-[#CC28281A] border-[0.67px] border-[#CC282880]/50 p-3 rounded">{icon}</div>
-//       </div>
-//       <div className="text-sm text-[#535353] space-y-1">{children}</div>
-//     </div>
-//   );
-// }

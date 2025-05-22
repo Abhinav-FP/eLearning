@@ -7,7 +7,7 @@ import Listing from "../api/Listing";
 import toast from "react-hot-toast";
 
 
-const Index = ({ isPopupOpen, PricePayment, adminCommission, selectedLesson, selectedSlot, studentTimeZone }) => {
+const Index = ({ isPopupOpen, PricePayment, adminCommission, selectedLesson, selectedSlot, studentTimeZone, email }) => {
   const clientId = process.env.NEXT_PUBLIC_PAYPAL_CLIENT_ID;
 
   // console.log("NEXT_APP_PAYPAL_CLIENT_ID", clientId)
@@ -89,6 +89,7 @@ const Index = ({ isPopupOpen, PricePayment, adminCommission, selectedLesson, sel
 
     setIsProcessing(true);
     try {
+      localStorage && localStorage.setItem("email", email);
       const main = new Listing();
       const response = await main.PaypalApprove({
         orderID: data.orderID, // or use OrderId if you prefer
@@ -96,6 +97,7 @@ const Index = ({ isPopupOpen, PricePayment, adminCommission, selectedLesson, sel
         teacherId: selectedLesson?.teacher?._id,
         startDateTime: selectedSlot?.start,
         endDateTime: endTime,
+        email:email,
         timezone: studentTimeZone || "UTC",
         totalAmount: PricePayment,
         adminCommission: adminCommission,

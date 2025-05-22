@@ -63,7 +63,7 @@ export default function index() {
         fetchEarnings();
     }, []);
 
-    // console.log("data",data);
+    console.log("data",data);
 
   const stats = useMemo(() => [
     {
@@ -134,6 +134,9 @@ export default function index() {
                   Payment Id
                 </th>
                 <th className="font-normal text-sm lg:text-base px-3 lg:px-4 py-2 lg:py-3 border-t border-[rgba(204,40,40,0.2)] capitalize">
+                  Payment date
+                </th>
+                <th className="font-normal text-sm lg:text-base px-3 lg:px-4 py-2 lg:py-3 border-t border-[rgba(204,40,40,0.2)] capitalize">
                   Amount
                 </th>
                 {/* <th className="font-normal text-sm lg:text-base px-3 lg:px-4 py-2 lg:py-3 border-t border-[rgba(204,40,40,0.2)] capitalize">
@@ -157,6 +160,9 @@ export default function index() {
                     </td>
                     <td className="px-3 lg:px-4 py-2 lg:py-3 text-black text-sm lg:text-base font-medium font-inter">
                       {item?.StripepaymentId?.payment_id || item?.paypalpaymentId?.orderID || ""}
+                    </td>
+                    <td className="px-3 lg:px-4 py-2 lg:py-3 text-black text-sm lg:text-base font-medium font-inter">
+                      {moment(item?.StripepaymentId?.created_at || item?.paypalpaymentId?.created_at).format("DD MMM YYYY, hh:mm A") || ""}
                     </td>
                     <td className="px-3 lg:px-4 py-2 lg:py-3 text-black text-sm lg:text-base font-medium font-inter">
                       ${item?.teacherEarning}

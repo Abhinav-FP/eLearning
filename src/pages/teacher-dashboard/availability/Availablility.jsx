@@ -183,18 +183,18 @@ const Availablility = ({ Availability, TeacherAvailabilitys }) => {
                                 <span className="w-3 h-3 rounded-full bg-[#6ABB52] inline-block"></span>
                                 <span className="text-sm text-gray-700">Available</span>
                             </div>
-                            <div className="flex items-center gap-2">
+                            {/* <div className="flex items-center gap-2">
                                 <span className="w-3 h-3 rounded-full bg-[#D9D9D9] inline-block"></span>
                                 <span className="text-sm text-gray-700">Not Available</span>
-                            </div>
+                            </div> */}
                             <div className="flex items-center gap-2">
-                                <span className="w-3 h-3 rounded-full bg-[#D9D9D9] inline-block"></span>
+                                <span className="w-3 h-3 rounded-full bg-[#185abc] inline-block"></span>
                                 <span className="text-sm text-gray-700">Booked</span>
                             </div>
-                            <div className="flex items-center gap-2">
+                            {/* <div className="flex items-center gap-2">
                                 <span className="w-3 h-3 rounded-full bg-[#CC2828] inline-block"></span>
                                 <span className="text-sm text-gray-700">Booked by You</span>
-                            </div>
+                            </div> */}
                         </div>
                         <h3 className="text-base lg:text-lg font-semibold text-[#1E1E1E] m-0 tracking-[-0.03em]">
                             <button

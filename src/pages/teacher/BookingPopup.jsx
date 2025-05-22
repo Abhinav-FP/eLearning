@@ -165,6 +165,7 @@ export default function BookingPopup({
                   selectedLesson={selectedLesson}
                   selectedSlot={selectedSlot}
                   studentTimeZone={studentTimeZone}
+                  user={user}
                 />
               </>
             )}

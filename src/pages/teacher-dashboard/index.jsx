@@ -73,7 +73,7 @@ export default function Index() {
 
           <div className="relative bg-white rounded-xl dashboard-box p-3.5 lg:p-4 xl:p-5 border border-[rgba(204,40,40,0.2)] flex flex-col min-h-[136px]">
             <h2 className="font-inter text-[#CC2828] font-bold text-lg lg:text-xl xl:text-2xl capitalize tracking-[-0.04em]">
-              Payment Eraning
+              Payment Earning
             </h2>
             <div className="absolute right-4 lg:right-5 xl:right-6 bg-[#CC28281A] border-[0.67px] border-[#CC282880] p-3 rounded">
               <FaWallet className="w-6 h-6 text-[#CC2828]" />
@@ -138,7 +138,7 @@ export default function Index() {
 
           <div className="relative bg-white rounded-xl dashboard-box p-3.5 lg:p-4 xl:p-5 border border-[rgba(204,40,40,0.2)] flex flex-col min-h-[136px]">
             <h2 className="font-inter text-[#CC2828] font-bold text-lg lg:text-xl xl:text-2xl capitalize tracking-[-0.04em]">
-              Total Eraning
+              Total Earnings
             </h2>
             <div className="absolute right-4 lg:right-5 xl:right-6 bg-[#CC28281A] border-[0.67px] border-[#CC282880] p-3 rounded">
               <FaWallet className="w-6 h-6 text-[#CC2828]" />

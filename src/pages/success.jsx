@@ -1,8 +1,15 @@
 import Link from "next/link";
+import { useEffect, useState } from "react";
 import { FaCheckCircle } from "react-icons/fa";
 
 export default function Success() {
-  return (
+  const [email,setEmail] = useState("");
+  
+  useEffect(()=>{
+    const item=localStorage && localStorage.getItem("email") || "";
+    setEmail(item);
+  },[])
+    return (
     <div className="min-h-screen flex flex-col items-center justify-center bg-gray-50 px-4">
       <FaCheckCircle className="w-20 h-20 text-green-600 mb-6" />
       <h2 className="text-3xl font-bold text-red-600 mb-2">
@@ -12,7 +19,7 @@ export default function Success() {
         Your booking has been confirmed.
       </p>
       <p className="text-gray-600 text-center max-w-sm mb-6">
-        A confirmation email has been sent to <span className="font-medium">emily@example.com</span>
+        A confirmation email has been sent to <span className="font-medium">{email || ""}</span>
       </p>
       <Link href="/" className="bg-red-600 text-white px-6 py-2 rounded-full hover:bg-red-700 ">
         Go to Homepage

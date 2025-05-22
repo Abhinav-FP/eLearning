@@ -3,8 +3,16 @@ import Stripe from "../stripe/Stripe";
 import Payment from "../payment/index"
 import Image from "next/image";
 
-const PaymentCheckout = ({ selectedLesson, selectedSlot, studentTimeZone }) => {
+const PaymentCheckout = ({ selectedLesson, selectedSlot, studentTimeZone, user }) => {
+  const [email, setEmail] = useState(user?.email || "");
 
+  const handleEmailChange = (e) => {
+    setEmail(e.target.value);
+  };
+
+  // console.log("user", user);
+  const [PaymentStatus, setPaymentStatus] = useState(false)
+  // console.log("PaymentStatus", PaymentStatus)
   function getFormattedEndTime(time, durationInMinutes) {
     const start = new Date(time);
     const end = new Date(start.getTime() + durationInMinutes * 60000);
@@ -19,12 +27,6 @@ const PaymentCheckout = ({ selectedLesson, selectedSlot, studentTimeZone }) => {
 
     return end.toLocaleString("en-US", options); // → "May 2, 7:40 PM"
   }
-
-  // console.log("selectedLesson", selectedLesson)
-
-  const [PaymentStatus, setPaymentStatus] = useState(false)
-
-  // console.log("PaymentStatus", PaymentStatus)
 
   return (
     <div className="flex flex-col md:flex-row gap-6 p-6">
@@ -110,19 +112,37 @@ const PaymentCheckout = ({ selectedLesson, selectedSlot, studentTimeZone }) => {
           </div>
         </div>
 
+        {/* Email Input field */}
+        <div className="space-y-2">
+          <label htmlFor="email" className="text-sm font-medium text-gray-700">
+            Email Address for Payment
+          </label>
+          <input
+            type="email"
+            id="email"
+            value={email}
+            onChange={handleEmailChange}
+            className="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-[#CC2828] focus:border-[#CC2828]"
+            placeholder="Enter your email"
+          />
+        </div>
+
         <div className="border-t border-[#CC2828] pt-4">
           <div className="flex justify-between">
             <p className="font-medium">Total</p>
-            <p className="font-medium">${selectedLesson?.price} USD</p>
+            {/* <p className="font-medium">${selectedLesson?.price} USD</p> */}
+            <p className="font-medium">
+              ${(selectedLesson?.price + 0.1*selectedLesson?.price).toFixed(2)} USD
+            </p>
           </div>
-          <p className="text-sm text-gray-500">{`+ Processing fee $${(0.1*selectedLesson?.price).toFixed(2)} USD`}</p>
-          <p className="text-sm text-gray-500">Estimated ${(selectedLesson?.price + 0.1*selectedLesson?.price).toFixed(2)} USD</p>
+          <p className="text-sm text-gray-500">{`Included processing fee of $${(0.1*selectedLesson?.price).toFixed(2)} USD`}</p>
+          {/* <p className="text-sm text-gray-500">Estimated ${(selectedLesson?.price + 0.1*selectedLesson?.price).toFixed(2)} USD</p> */}
         </div>
 
         {PaymentStatus === false ? (
-          <Payment PricePayment={selectedLesson?.price + 0.1*selectedLesson?.price} adminCommission={0.1*selectedLesson?.price} selectedLesson={selectedLesson}  selectedSlot={selectedSlot} studentTimeZone={studentTimeZone}/>
+          <Payment PricePayment={selectedLesson?.price + 0.1*selectedLesson?.price} adminCommission={0.1*selectedLesson?.price} selectedLesson={selectedLesson}  selectedSlot={selectedSlot} studentTimeZone={studentTimeZone} email={email}/>
         ) : (
-          <Stripe PricePayment={selectedLesson?.price + 0.1*selectedLesson?.price} adminCommission={0.1*selectedLesson?.price} selectedLesson={selectedLesson}  selectedSlot= {selectedSlot} studentTimeZone={studentTimeZone}/>
+          <Stripe PricePayment={selectedLesson?.price + 0.1*selectedLesson?.price} adminCommission={0.1*selectedLesson?.price} selectedLesson={selectedLesson}  selectedSlot= {selectedSlot} studentTimeZone={studentTimeZone} email={email}/>
         )}
       </div>
     </div>

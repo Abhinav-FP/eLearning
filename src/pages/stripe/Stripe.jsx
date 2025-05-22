@@ -61,11 +61,11 @@ export default function Stripe({PricePayment, selectedLesson, adminCommission, s
         timezone : studentTimeZone || "UTC",
       });
       resp.then((res) => {
-        console.log("resp" ,resp)
+        console.log("resp" ,res)
         if (resp.error) {
-                setMessage(resp.error.message);
+                // setMessage(res.error.message);
                 router("/stripe/cancel")
-            } else if (resp.paymentIntent.status === 'succeeded') {
+            } else if (res.paymentIntent.status === 'succeeded') {
                 router("/stripe/success")
 
             }

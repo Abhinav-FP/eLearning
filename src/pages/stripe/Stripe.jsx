@@ -62,13 +62,13 @@ export default function Stripe({PricePayment, selectedLesson, adminCommission, s
       });
       resp.then((res) => {
         console.log("resp" ,res)
-        if (resp.error) {
-                // setMessage(res.error.message);
-                router("/stripe/cancel")
-            } else if (res.paymentIntent.status === 'succeeded') {
-                router("/stripe/success")
+        // if (resp.error) {
+        //         // setMessage(res.error.message);
+        //         router("/stripe/cancel")
+        //     } else if (res.paymentIntent === 'succeeded') {
+        //         router("/stripe/success")
 
-            }
+        //     }
           setprocessing(false);
         })
         .catch((err) => {

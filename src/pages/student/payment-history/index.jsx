@@ -98,26 +98,37 @@ export default function Index() {
                 <th className="font-normal text-sm lg:text-base px-3 lg:px-4 py-2 lg:py-3 border-t border-[rgba(204,40,40,0.2)] capitalize">Payment Status</th>
               </tr>
             </thead>
-            {loading ? 
-          <TableLoader length={5}/>
-          : 
-            <tbody>
-              {(payment?.[selectedPayment === "paypal" ? "payment" : "stripeData"] || []).map((item, index) => {
-                  const isPaypal = selectedPayment === "paypal";
-                  const id = isPaypal ? item?.orderID : item?.payment_id;
-                  const status = isPaypal ? item?.status : item?.payment_status;
+            {loading ? (
+              <TableLoader length={5} />
+            ) : (
+              <tbody>
+                {(payment?.[selectedPayment === "paypal" ? "payment" : "stripeData"] || []).length > 100 ? (
+                  (payment?.[selectedPayment === "paypal" ? "payment" : "stripeData"] || []).map((item, index) => {
+                    const isPaypal = selectedPayment === "paypal";
+                    const id = isPaypal ? item?.orderID : item?.payment_id;
+                    const status = isPaypal ? item?.status : item?.payment_status;
 
-                  return (
-                    <tr key={index} className="border-t hover:bg-[rgba(204,40,40,0.1)] border-[rgba(204,40,40,0.2)]">
-                      <td className="px-3 lg:px-4 py-2 lg:py-3 text-black text-sm lg:text-base font-medium font-inter">{id}</td>
-                      <td className="px-3 lg:px-4 py-2 lg:py-3 text-black text-sm lg:text-base font-medium font-inter">{item?.LessonId?.title}</td>
-                      <td className="px-3 lg:px-4 py-2 lg:py-3 text-black text-sm lg:text-base font-medium font-inter">{moment(item?.createdAt).format("DD MMMM YYYY hh:mm A")}</td>
-                      <td className="px-3 lg:px-4 py-2 lg:py-3 text-black text-sm lg:text-base font-medium font-inter">${item?.amount}</td>
-                      <td className="px-3 lg:px-4 py-2 lg:py-3 text-black text-sm lg:text-base font-medium font-inter">{status}</td>
-                    </tr>
-                  );
-                })}
-            </tbody>}
+                    return (
+                      <tr key={index} className="border-t hover:bg-[rgba(204,40,40,0.1)] border-[rgba(204,40,40,0.2)]">
+                        <td className="px-3 lg:px-4 py-2 lg:py-3 text-black text-sm lg:text-base font-medium font-inter">{id}</td>
+                        <td className="px-3 lg:px-4 py-2 lg:py-3 text-black text-sm lg:text-base font-medium font-inter">{item?.LessonId?.title}</td>
+                        <td className="px-3 lg:px-4 py-2 lg:py-3 text-black text-sm lg:text-base font-medium font-inter">
+                          {moment(item?.createdAt).format("DD MMMM YYYY hh:mm A")}
+                        </td>
+                        <td className="px-3 lg:px-4 py-2 lg:py-3 text-black text-sm lg:text-base font-medium font-inter">${item?.amount}</td>
+                        <td className="px-3 lg:px-4 py-2 lg:py-3 text-black text-sm lg:text-base font-medium font-inter">{status}</td>
+                      </tr>
+                    );
+                  })
+                ) : (
+                  <tr>
+                    <td colSpan={5} className="text-center text-gray-500 py-6 font-inter">
+                      No payment data available.
+                    </td>
+                  </tr>
+                )}
+              </tbody>
+            )}
           </table>
         </div>
       </div>

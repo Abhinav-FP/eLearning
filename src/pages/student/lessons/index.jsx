@@ -5,6 +5,7 @@ import Listing from "@/pages/api/Listing";
 import Link from "next/link";
 import ReschedulePopup from "./ReschedulePopup";
 import { LessonLoader } from "@/components/Loader";
+import NoData from "@/pages/common/NoData";
 
 export default function Index() {
   const [tab, setTab] = useState("upcoming");
@@ -162,7 +163,8 @@ export default function Index() {
                 </div>
               </div>
            ))) : (
-            <p className="text-gray-500">No {tab} lessons found.</p>
+            // <p className="text-gray-500">No {tab} lessons found.</p>
+            <NoData Heading={`No ${tab} Bookings available`}/>
           ))}
         </div>
       </div>

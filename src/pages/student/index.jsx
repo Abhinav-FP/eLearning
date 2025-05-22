@@ -6,19 +6,26 @@ import { FaStar } from 'react-icons/fa';
 import Image from 'next/image'
 import moment from 'moment';
 import { DateTime } from 'luxon';
+import { StudentDashboardLoader } from '@/components/Loader';
+import NoData from '../common/NoData';
 
 export default function Index() {
 
   const [dashboard, setDashboard] = useState([]);
+  const[loading, setLoading]=useState(false);
   // console.log("dashboard" ,dashboard?.booking)
 
   const StudentDashboards = async () => {
     try {
+      setLoading(true);
       const main = new Listing();
       const response = await main.StudentDashboard();
       setDashboard(response?.data?.data);
+      setLoading(false);
     } catch (error) {
       console.log("error", error);
+      setLoading(false);
+      setDashboard([]);
     }
   };
 
@@ -30,16 +37,23 @@ export default function Index() {
 
   return (
     <StudentLayout>
+      {loading ?
+      <StudentDashboardLoader/> 
+      :
       <div className="min-h-screen p-5 lg:p-[30px]">
         <h1 className="font-inter text-lg lg:text-2xl font-bold text-[#CC2828] tracking-[-0.04em] mb-2">Welcome Back !</h1>
         <p className="text-sm lg:text-base text-[#565F66] mb-6">
-          {`Next Lesson: ${moment(dashboard?.booking?.startDateTime).format("DD MMMM hh:mm A")} with ${dashboard?.booking?.teacherId?.name}`}
+          {dashboard && dashboard?.booking
+            ? `Next Lesson: ${moment(dashboard.booking.startDateTime).format("DD MMMM hh:mm A")} with ${dashboard.booking.teacherId?.name}`
+            : "You don't have any upcoming bookings"}
         </p>
 
         {/* Row 1: Upcoming Lessons & Favorite Teachers */}
         <div className="flex flex-wrap -mx-4 mb-5 space-y-5 lg:space-y-0">
           <div className='w-full lg:w-1/2 px-4'>
             <div className="bg-white p-4 lg:p-5 border border-[rgba(204,40,40,0.2)] dashboard-box rounded-[20px]">
+              {dashboard && dashboard?.booking ?
+              <>
               <h2 className="font-inter text-lg lg:text-xl tracking-[-0.04em] font-bold text-[#CC2828] mb-4">Upcoming Lessons</h2>
               <div className="space-y-3">
                 <p className='text-[#565F66] text-base lg:text-lg font-normal flex flex-wrap'><span className='font-medium min-w-[100px]  lg:min-w-[128px]'>Date :</span> {moment(dashboard?.booking?.startDateTime).format("DD MMMM")}</p>
@@ -47,16 +61,18 @@ export default function Index() {
                 <p className='text-[#565F66] text-base lg:text-lg font-normal flex flex-wrap'><span className='font-medium min-w-[100px]  lg:min-w-[128px]'>Teacher :</span> {dashboard?.booking?.teacherId?.name}</p>
                 <p className='text-[#565F66] text-base lg:text-lg font-normal flex flex-wrap'><span className='font-medium min-w-[100px]  lg:min-w-[128px]'>Time :</span> {moment(dashboard?.booking?.startDateTime).format("hh:mm A")}</p>
               </div>
-              {/* <button className="mt-4 md:mt-8 bg-[rgba(204,40,40,0.1)] text-[#CC2828] px-8 py-2.5 rounded-full text-lg hover:bg-red-200 transition cursor-pointer">
-                Reschedule
-              </button> */}
               <Link href="/student/lessons" className="inline-block mt-4 md:mt-8 bg-[rgba(204,40,40,0.1)] text-[#CC2828] px-8 py-2.5 rounded-full text-lg hover:bg-red-200 transition cursor-pointer">
                 Reschedule
               </Link>
+              </>
+              :
+              <NoData Heading={"No upcoming booking available"}/>}
             </div>
           </div>
           <div className='w-full lg:w-1/2 px-4'>
             <div className="bg-white p-4 lg:p-5 border border-[rgba(204,40,40,0.2)] dashboard-box rounded-[20px]">
+              {dashboard && dashboard?.wishlistResult && dashboard?.wishlistResult?.length>0 ?
+              <>
               <h2 className="font-inter text-lg lg:text-xl tracking-[-0.04em] font-bold text-[#CC2828] mb-4">Favorite Teachers</h2>
               <div className="space-y-4">
                 {dashboard?.wishlistResult?.map((wish, idx) => (
@@ -86,6 +102,12 @@ export default function Index() {
                   </Link>
                 ))}
               </div>
+              </>
+              :
+              <NoData
+                Heading={"No favourite teacher available"}
+                content={"It looks like you haven't added any favourite teachers yet. Add some to see them here."}
+              />}
             </div>
           </div>
         </div>
@@ -94,6 +116,7 @@ export default function Index() {
           <div className='w-full px-4'>
             <div className="bg-white p-4 lg:p-5 border border-[rgba(204,40,40,0.2)]  rounded-[20px]">
               <h2 className="font-inter text-lg lg:text-xl tracking-[-0.04em] font-bold text-[#CC2828] mb-4">Recent Reviews</h2>
+              {dashboard && dashboard?.reviews && dashboard?.reviews?.length>0 ?
               <div className="space-y-2">
                 {dashboard?.reviews?.map((item, idx) => (
                   <div
@@ -113,10 +136,14 @@ export default function Index() {
                   </div>
                 ))}
               </div>
+               :
+              <NoData
+                Heading={"No reviews available"}
+              />}
             </div>
           </div>
         </div>
-      </div>
+      </div>}
     </StudentLayout>
   )
 }

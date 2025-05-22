@@ -247,5 +247,83 @@ const ProfileFormLoader = () => {
   );
 };
 
+const StudentDashboardLoader = () => {
+  return (
+    <div className="min-h-screen p-5 lg:p-[30px] animate-pulse">
+      {/* Welcome Back Text */}
+      <div className="h-6 w-48 bg-gray-200 rounded mb-2"></div>
+      <div className="h-4 w-72 bg-gray-200 rounded mb-6"></div>
 
-export { Loader, BookLoader, LessonLoader, TeacherLoader, TableLoader, ReviewLoader, ProfileFormLoader };
+      {/* Row 1: Upcoming Lessons & Favorite Teachers */}
+      <div className="flex flex-wrap -mx-4 mb-5 space-y-5 lg:space-y-0">
+        {/* Upcoming Lessons */}
+        <div className="w-full lg:w-1/2 px-4">
+          <div className="bg-white p-4 lg:p-5 border border-[rgba(204,40,40,0.2)] rounded-[20px]">
+            <div className="h-6 w-40 bg-gray-200 rounded mb-4"></div>
+            <div className="space-y-3">
+              {[1, 2, 3, 4].map((_, i) => (
+                <div key={i} className="flex flex-wrap">
+                  <div className="h-5 w-32 bg-gray-200 rounded mr-3 mb-2"></div>
+                  <div className="h-5 w-40 bg-gray-200 rounded mb-2"></div>
+                </div>
+              ))}
+              <div className="mt-4 md:mt-8 h-10 w-36 bg-gray-200 rounded-full"></div>
+            </div>
+          </div>
+        </div>
+
+        {/* Favorite Teachers */}
+        <div className="w-full lg:w-1/2 px-4">
+          <div className="bg-white p-4 lg:p-5 border border-[rgba(204,40,40,0.2)] rounded-[20px]">
+            <div className="h-6 w-40 bg-gray-200 rounded mb-4"></div>
+            <div className="space-y-4">
+              {[1, 2].map((_, i) => (
+                <div
+                  key={i}
+                  className="flex items-center justify-between border border-[rgba(204,40,40,0.3)] rounded-xl p-2.5"
+                >
+                  <div className="flex items-center space-x-3">
+                    <div className="w-11 h-11 bg-gray-200 rounded-full"></div>
+                    <div>
+                      <div className="h-4 w-24 bg-gray-200 rounded mb-1"></div>
+                      <div className="h-3 w-20 bg-gray-200 rounded"></div>
+                    </div>
+                  </div>
+                  <div className="h-4 w-16 bg-gray-200 rounded"></div>
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
+      </div>
+
+      {/* Recent Reviews */}
+      <div className="flex flex-wrap -mx-4">
+        <div className="w-full px-4">
+          <div className="bg-white p-4 lg:p-5 border border-[rgba(204,40,40,0.2)] rounded-[20px]">
+            <div className="h-6 w-40 bg-gray-200 rounded mb-4"></div>
+            <div className="space-y-3">
+              {[1, 2].map((_, i) => (
+                <div
+                  key={i}
+                  className="bg-[rgba(204,40,40,0.1)] p-2.5 rounded-xl"
+                >
+                  <div className="h-4 w-full bg-gray-200 rounded mb-2"></div>
+                  <div className="flex gap-1 text-yellow-300 mb-2">
+                    {[...Array(5)].map((_, j) => (
+                      <div key={j} className="h-4 w-4 bg-gray-200 rounded"></div>
+                    ))}
+                  </div>
+                  <div className="h-5 w-40 bg-gray-200 rounded"></div>
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+};
+
+
+export { Loader, BookLoader, LessonLoader, TeacherLoader, TableLoader, ReviewLoader, ProfileFormLoader, StudentDashboardLoader };

@@ -35,7 +35,7 @@ export default function LessonList({ lessons, showSelected, selectedLesson, SetS
     </ul>
     :
     <NoData Heading={"No lessons available"} 
-    content={"There are no lessons available on this account. Message the teacher if you think it is a mistake. Also click the below button to go back to previous page."}
+    content={"There are no lessons available on this account. Message the teacher if you think it is a mistake."}
     />
     }
     </>

@@ -43,32 +43,67 @@ export default function Stripe({PricePayment, selectedLesson, adminCommission, s
   },[selectedSlot, selectedLesson])
 
  
-  const handlePayment = async () => {
+  // const handlePayment = async () => {
+  //   if(processing){return;}
+  //   try {
+  //     localStorage && localStorage.setItem("email", email);
+  //     setprocessing(true);
+  //     const payment = new Listing();
+  //     const resp = payment.Stripe_payment({
+  //       adminCommission: adminCommission,
+  //       amount: PricePayment,
+  //       currency: "USD",
+  //       email:email,
+  //       LessonId : selectedLesson?._id,
+  //       teacherId :  selectedLesson?.teacher?._id,
+  //       startDateTime : selectedSlot?.start ,
+  //       endDateTime : endTime,
+  //       timezone : studentTimeZone || "UTC",
+  //     });
+  //     resp.then((res) => {
+  //       console.log("resp" ,res)
+  //       // if (resp.error) {
+  //       //         // setMessage(res.error.message);
+  //       //         router("/stripe/cancel")
+  //       //     } else if (res.paymentIntent === 'succeeded') {
+  //       //         router("/stripe/success")
+
+  //       //     }
+  //         setprocessing(false);
+  //       })
+  //       .catch((err) => {
+  //         console.log("err", err);
+  //         toast.error(err?.response?.data?.error);
+  //         setprocessing(false);
+  //       });
+  //   } catch (error) {
+  //     console.error("Error:", error);
+  //     toast.error("Error during payment");
+  //     setprocessing(false);
+  //   }
+  // };
+
+
+ const handlePayment = async () => {
     if(processing){return;}
     try {
-      localStorage && localStorage.setItem("email", email);
       setprocessing(true);
       const payment = new Listing();
       const resp = payment.Stripe_payment({
         adminCommission: adminCommission,
         amount: PricePayment,
         currency: "USD",
-        email:email,
         LessonId : selectedLesson?._id,
         teacherId :  selectedLesson?.teacher?._id,
         startDateTime : selectedSlot?.start ,
         endDateTime : endTime,
         timezone : studentTimeZone || "UTC",
+        email: email,
       });
       resp.then((res) => {
-        console.log("resp" ,res)
-        // if (resp.error) {
-        //         // setMessage(res.error.message);
-        //         router("/stripe/cancel")
-        //     } else if (res.paymentIntent === 'succeeded') {
-        //         router("/stripe/success")
-
-        //     }
+          if (res.data.url) {
+            window.location.href = res.data.url;
+          }
           setprocessing(false);
         })
         .catch((err) => {

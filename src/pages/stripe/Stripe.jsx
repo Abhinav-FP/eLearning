@@ -63,9 +63,9 @@ export default function Stripe({PricePayment, selectedLesson, adminCommission, s
       resp.then((res) => {
         console.log("resp" ,resp)
         if (resp.error) {
-                setMessage(paymentResult.error.message);
+                setMessage(resp.error.message);
                 router("/stripe/cancel")
-            } else if (paymentResult.paymentIntent.status === 'succeeded') {
+            } else if (resp.paymentIntent.status === 'succeeded') {
                 router("/stripe/success")
 
             }

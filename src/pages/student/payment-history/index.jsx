@@ -3,6 +3,7 @@ import StudentLayout from '../Common/StudentLayout'
 import Listing from '@/pages/api/Listing';
 import moment from 'moment';
 import { TableLoader } from '@/components/Loader';
+import NoData from '@/pages/common/NoData';
 
 export default function Index() {
 
@@ -102,7 +103,7 @@ export default function Index() {
               <TableLoader length={5} />
             ) : (
               <tbody>
-                {(payment?.[selectedPayment === "paypal" ? "payment" : "stripeData"] || []).length > 100 ? (
+                {(payment?.[selectedPayment === "paypal" ? "payment" : "stripeData"] || []).length > 0 ? (
                   (payment?.[selectedPayment === "paypal" ? "payment" : "stripeData"] || []).map((item, index) => {
                     const isPaypal = selectedPayment === "paypal";
                     const id = isPaypal ? item?.orderID : item?.payment_id;
@@ -123,7 +124,7 @@ export default function Index() {
                 ) : (
                   <tr>
                     <td colSpan={5} className="text-center text-gray-500 py-6 font-inter">
-                      No payment data available.
+                      <NoData Heading={"No payment data available."}/>
                     </td>
                   </tr>
                 )}

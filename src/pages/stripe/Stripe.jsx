@@ -1,11 +1,13 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useReducer, useState } from 'react'
 import toast from 'react-hot-toast';
 import Listing from '../api/Listing';
+import { useRouter } from 'next/router';
 
 export default function Stripe({PricePayment, selectedLesson, adminCommission, selectedSlot, studentTimeZone, email}) {
   const [processing, setprocessing] = useState(false);
   const[endTime,setEndTime] = useState(null);
 
+  const router = useRouter();
   const addDurationToDate = (start, durationInMinutes) => {
     const originalDate = new Date(start);
     const finalDate = new Date(originalDate.getTime() + durationInMinutes * 60000);
@@ -59,9 +61,14 @@ export default function Stripe({PricePayment, selectedLesson, adminCommission, s
         timezone : studentTimeZone || "UTC",
       });
       resp.then((res) => {
-          if (res.data.url) {
-            window.location.href = res.data.url;
-          }
+        console.log("resp" ,resp)
+        if (resp.error) {
+                setMessage(paymentResult.error.message);
+                router("/stripe/cancel")
+            } else if (paymentResult.paymentIntent.status === 'succeeded') {
+                router("/stripe/success")
+
+            }
           setprocessing(false);
         })
         .catch((err) => {

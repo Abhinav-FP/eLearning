@@ -112,7 +112,7 @@ async TeacherDashboard(){
 
 
   async Stripe_payment(data) {
-    return Api.post("/payment/create-checkout-session", data);
+    return Api.post("/payment/create-payment-intent", data);
   }
   
   async StripeSuccess(data) {

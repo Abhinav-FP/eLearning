@@ -1,15 +1,46 @@
+// pages/payment.js
 import { loadStripe } from '@stripe/stripe-js';
 import { Elements } from '@stripe/react-stripe-js';
 import CheckoutForm from './CheckoutForm';
 
-const stripePromise = loadStripe('pk_test_51NrWrwLC7I4RGdNgPDqyNBZkwtOQi21nQF4EJ0PjVVvf1oEn0G61NGw1zraI9evynLYk0ctxymwCAPina13jUXhz00TxQmEzhO');
+const stripePromise = loadStripe(process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY);
 
-function PaymentPage() {
-    return (
-        <Elements stripe={stripePromise}>
-            <CheckoutForm />
-        </Elements>
-    );
+export default function PaymentPage({ clientSecret, error }) {
+  if (error) return <p style={{ color: 'red' }}>Error: {error}</p>;
+  if (!clientSecret) return <p>Loading…</p>;
+
+  return (
+    <Elements stripe={stripePromise} options={{ clientSecret }}>
+      <CheckoutForm />
+    </Elements>
+  );
 }
 
-export default PaymentPage;
+export async function getServerSideProps() {
+  try {
+    const res = await fetch(
+      `https://8fb7-122-180-247-198.ngrok-free.app/webhook`,
+      {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ amount: 2000 })
+      }
+    );
+
+    if (!res.ok) {
+      const text = await res.text();
+      throw new Error(`Backend error: ${text}`);
+    }
+
+    const { clientSecret } = await res.json();
+    return { props: { clientSecret } };
+  } catch (err) {
+    console.error('getServerSideProps error:', err);
+    return {
+      props: {
+        clientSecret: null,
+        error: err.message
+      }
+    };
+  }
+}

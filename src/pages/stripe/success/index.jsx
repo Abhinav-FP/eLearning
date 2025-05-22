@@ -4,7 +4,7 @@ import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
 import { FaCheckCircle } from "react-icons/fa";
 
-export default function Successpage() {
+export default function Index() {
     const router = useRouter();
     const { id } = router.query;
     const [loading, setLoading] = useState(false);

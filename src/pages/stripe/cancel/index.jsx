@@ -3,28 +3,9 @@ import Link from "next/link";
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
 import { MdClose } from "react-icons/md";
-export default function CancelPage() {
+export default function Index() {
     const router = useRouter();
-    const { id } = router.query;
-    const[loading, setLoading] = useState(false);
-
-    const fetch = (id) => {
-        const main = new Listing();
-        main
-          .StripeCancel(id)
-          .then((r) => {
-          })
-          .catch((err) => {
-            console.log("error", err);
-          });
-      };
-    
-    
-      useEffect(() => {
-        if (id) {
-            fetch(id);
-        }
-    }, [id]); 
+   
     
   return (
     <div className="min-h-screen flex flex-col items-center justify-center bg-gray-50 px-4">

@@ -115,7 +115,7 @@ export default function Index() {
                         {teacher?.description || ""}
                       </p>
                       <p className="text-[#E4B750] text-base lg:text-lg font-inter">
-                        {teacher.average_price &&
+                        {teacher.average_price && teacher?.average_duration &&
                           ` $${teacher.average_price}/${teacher?.average_duration} min`}
                       </p>
                     </div>

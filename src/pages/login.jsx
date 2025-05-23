@@ -143,7 +143,7 @@ export default function Login() {
               type="submit"
               disabled={loading}
             >
-              {loading ? "Loading" : "LOG IN"}
+              {loading ? "Logging In..." : "LOG IN"}
             </button>
           </form>
           {/* Register */}

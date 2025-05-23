@@ -34,7 +34,7 @@ export default function Profile() {
       .then((r) => {
         // console.log("r", r)
         const profiledata = r?.data?.data?.user;
-        console.log("profileData", profiledata);
+        // console.log("profileData", profiledata);
         setData({
           name: profiledata?.userId?.name,
           email: profiledata?.userId?.email,
@@ -48,6 +48,7 @@ export default function Profile() {
           intro_video: profiledata?.intro_video,
           experience: profiledata?.experience,
           gender: profiledata?.gender,
+          documentlink: profiledata?.documentlink,
         });
         setFile(profiledata?.userId?.profile_photo);
       })
@@ -85,7 +86,7 @@ export default function Profile() {
     }));
    };
 
-  //  console.log("data",data);
+   console.log("data",data);
   const handleSubmit = async (e) => {
     e.preventDefault();
     // console.log("file",file);
@@ -314,18 +315,32 @@ export default function Profile() {
               className="w-full h-11 lg:h-[54px] font-medium appearance-none block bg-[#F4F6F8] text-[#46494D] text-base border border-[#F4F6F8] rounded-lg py-3 px-3 lg:px-6 leading-tight focus:outline-none"
             />
           </div>
-          <div className="w-full lg:w-6/12  px-2">
+          <div className="w-full lg:w-6/12 px-2">
             <label className="block text-[#CC2828] font-medium text-base xl:text-xl mb-1 tracking-[-0.04em]">
-              Upload of any relevant document{" "}
+              Upload any relevant document
             </label>
+
+            {/* File input always visible for uploads */}
             <input
               type="file"
-            //   value={data?.documentlink}
-              required
               name="documentlink"
               onChange={handlefileChange}
               className="w-full h-11 lg:h-[54px] font-medium appearance-none block bg-[#F4F6F8] text-[#46494D] text-base border border-[#F4F6F8] rounded-lg py-3 px-3 lg:px-6 leading-tight focus:outline-none"
             />
+
+            {/* Show view button only if there's a valid document link */}
+            {data?.documentlink && typeof data.documentlink === 'string' && (
+              <div className="mt-2">
+                <a
+                  href={data.documentlink}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-block text-sm font-medium text-blue-600 underline hover:text-blue-800"
+                >
+                  View uploaded document
+                </a>
+              </div>
+            )}
           </div>
 
           <div className="w-full lg:w-6/12  px-2">

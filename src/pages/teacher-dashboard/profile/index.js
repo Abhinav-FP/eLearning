@@ -82,9 +82,9 @@ export default function Index() {
             {/* Profile Section */}
             <div className="flex flex-row items-center gap-3 lg:gap-4">
               <img
-                src="/profile.png"
+                src={data?.profile?.userId?.profile_photo || "/profile.png"}
                 alt="Profile"
-                className="w-16 h-16 lg:w-[94px] lg:h-[94px]  rounded-full object-cover"
+                className="w-16 h-16 lg:w-[94px] lg:h-[94px] rounded-full object-cover"
               />
               <div>
                 <h2 className="text-lg lg:text-xl font-bold text-[#CC2828] tracking-[-0.04em] md:mb-1">{data?.profile?.userId?.name || ""}</h2>

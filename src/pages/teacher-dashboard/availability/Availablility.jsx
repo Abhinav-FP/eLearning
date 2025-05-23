@@ -209,6 +209,7 @@ const Availablility = ({ Availability, TeacherAvailabilitys }) => {
                         <Calendar
                             localizer={localizer}
                             events={events}
+                            defaultDate={new Date()}
                             startAccessor="start"
                             endAccessor="end"
                             defaultView={Views.WEEK}

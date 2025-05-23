@@ -56,7 +56,7 @@ function SideBar() {
                         <div className="w-11 h-11 rounded-full bg-green-400 flex items-center justify-center text-white text-xl font-bold">
                             {/* Replace with an actual image if needed */}
                             <img
-                                src="https://www.svgrepo.com/show/384674/account-avatar-profile-user-11.svg"
+                                src={user?.profile_photo || "/profile.png"}
                                 alt="User Avatar"
                                 className="w-11 h-11 rounded-full object-cover"
                             />

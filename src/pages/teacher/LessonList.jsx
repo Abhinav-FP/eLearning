@@ -1,8 +1,10 @@
 import React, { useEffect, useState } from "react";
 import NoData from "../common/NoData";
+import { useRouter } from "next/router";
 
 
-export default function LessonList({ lessons, showSelected, selectedLesson, SetSelectedLesson}) {
+export default function LessonList({ lessons, showSelected, selectedLesson, SetSelectedLesson, slug}) {
+  const router = useRouter();
   return (
     <>
     {lessons && lessons?.length>0 ? 
@@ -10,9 +12,12 @@ export default function LessonList({ lessons, showSelected, selectedLesson, SetS
       {lessons?.map((item, index) => (
           <li
             key={index}
-            className={`bg-white rounded-[10px] ${showSelected && selectedLesson?._id == item?._id ? "border border-[#CC2828]" : "border border-white"} lg:rounded-[20px] p-5 lg:p-6 xl:p-10`}
+            className={`bg-white rounded-[10px] ${showSelected && selectedLesson?._id == item?._id ? "border border-[#CC2828]" : "border border-white"} lg:rounded-[20px] p-5 lg:p-6 xl:p-10 cursor-pointer`}
             onClick={()=>{
                 if(showSelected){SetSelectedLesson(item);}
+                else{
+                  router.push(`/teacher/${slug}#calendar`)
+                }
             }}
           >
             <h3 className="text-[#CC2828] tracking-[-0.04em] text-xl lg:text-2xl xl:text-[30px] font-inter font-extrabold mb-3 md:mb-4 lg:mb-6 capitalize">

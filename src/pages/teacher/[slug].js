@@ -86,6 +86,36 @@ export default function Index() {
   // console.log("data", data);
   // console.log("content" ,content)
 
+  const DescriptionWithViewMore = ({ description }) => {
+  const [expanded, setExpanded] = useState(false);
+
+  const words = description?.split(" ") || [];
+  const isLong = words.length > 250;
+  const shortText = words.slice(0, 250).join(" ");
+  const remainingText = words.slice(250).join(" ");
+
+  return (
+    <div className="text-white tracking-[-0.03em] text-base lg:text-lg xl:text-xl font-medium">
+      <p>
+        {expanded || !isLong ? description : shortText + "..."}
+        {isLong && !expanded && (
+          <button
+            className="ml-2 text-blue-400 underline"
+            onClick={() => setExpanded(true)}
+          >
+            View More
+          </button>
+        )}
+      </p>
+      {expanded && isLong && (
+        <p className="mt-2">
+          {remainingText}
+        </p>
+      )}
+    </div>
+  );
+};
+
   return (
     <>
       <Layout>
@@ -114,7 +144,7 @@ export default function Index() {
                       {data?.userId?.name || ""}
                     </h3>
                     <p className="text-white tracking-[-0.03em] text-base lg:text-lg xl:text-xl font-medium">
-                      {data?.description || ""}
+                      <DescriptionWithViewMore description={data?.description || ""} />
                     </p>
                   </div>
                 </div>
@@ -131,10 +161,10 @@ export default function Index() {
               classess={"text-[#CC2828] mb-6 lg:mb-8"}
               title={"Lessons"}
             />
-            <LessonList lessons={lessons} showSelected={false}/>
+            <LessonList lessons={lessons} showSelected={false} slug={slug}/>
           </div>
         </div>
-        <div className="pt-[40px md:pt-[60px] md:pt-[80px] xl:pt-[100px] pb-[40px] lg:pb-[60px] bg-[#F8F9FA]">
+        <div className="pt-[40px] md:pt-[60px] md:pt-[80px] xl:pt-[100px] pb-[40px] lg:pb-[60px] bg-[#F8F9FA]" id="calendar">
           <div className="container sm:container md:container lg:container xl:max-w-[1230px]  px-4 mx-auto">
             <Heading
               classess={"text-[#1E1E1E] mb-2"}

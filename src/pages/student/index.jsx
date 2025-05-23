@@ -13,7 +13,7 @@ export default function Index() {
 
   const [dashboard, setDashboard] = useState([]);
   const[loading, setLoading]=useState(false);
-  // console.log("dashboard" ,dashboard?.booking)
+  // console.log("dashboard" ,dashboard?.wishlistResult)
 
   const StudentDashboards = async () => {
     try {
@@ -84,7 +84,7 @@ export default function Index() {
                     <div className="flex items-center space-x-3">
                       <div>
                         <Image
-                          src="/profile.png"
+                          src={wish?.teacher?.profile_photo || "/profile.png"}
                           alt="Profile"
                           className="w-11 h-11 rounded-full object-cover"
                           height={40}

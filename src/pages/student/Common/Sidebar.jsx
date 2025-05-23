@@ -19,6 +19,7 @@ function SideBar() {
     const pathname = usePathname();
     const [isOpen, setIsOpen] = useState(false);
     const { user } = useRole();
+    // console.log("user",user);
 
     return (
         <>
@@ -53,8 +54,8 @@ function SideBar() {
                         <div className="w-11 h-11 rounded-full bg-green-400 flex items-center justify-center text-white text-xl font-bold">
                             {/* Replace with an actual image if needed */}
                             <img
-                                src="https://www.svgrepo.com/show/384674/account-avatar-profile-user-11.svg"
-                                alt="User Avatar"
+                                src={user?.profile_photo || "/profile.png"}
+                                alt="User profile photo"
                                 className="w-11 h-11 rounded-full object-cover"
                             />
                         </div>

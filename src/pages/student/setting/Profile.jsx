@@ -116,7 +116,7 @@ export default function Profile() {
               <div className="flex items-center">
                 <div className="relative h-[52px] w-[52px] flex rounded-full text-sm text-white focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800 mr-4">
                   <Image
-                    className="h-[52px] w-[52px] rounded-full"
+                    className="h-[52px] w-[52px] rounded-full object-cover"
                     src={
                       file instanceof File
                         ? URL.createObjectURL(file)

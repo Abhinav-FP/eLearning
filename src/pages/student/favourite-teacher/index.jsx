@@ -11,9 +11,11 @@ export default function Index() {
   const [teachers, setTeachers] = useState([]);
   const [loading, setLoading] = useState(false);
 
-  const fetchfavouriteStudentTeachers = async () => {
+  const fetchfavouriteStudentTeachers = async (startLoading=true) => {
     try {
-      setLoading(true);
+      if(startLoading){
+        setLoading(true);
+      }
       const main = new Listing();
       const response = await main.StudentfavouriteTeacher();
       setTeachers(response?.data?.data || []);
@@ -36,7 +38,7 @@ export default function Index() {
       const response = await main.RemoveWishlist({ teacherId: Id });
       // console.log(response)
       if (response?.data?.status) {
-        fetchfavouriteStudentTeachers();
+        fetchfavouriteStudentTeachers(false);
       }
     } catch (error) {
       console.log("error", error);

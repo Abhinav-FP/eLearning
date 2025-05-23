@@ -81,7 +81,7 @@ export default function Index() {
       if (teacherId) {
         MessageGetAlls(teacherId);
       }
-    }, 1000);
+    }, 2000);
 
     return () => clearInterval(interval);
   }, [teacherId]);
@@ -194,11 +194,11 @@ export default function Index() {
                   className={`flex items-center  text-[#ffffff] min-h-[56px] pr-[66px] pl-[89px] py-[8px] hover:bg-[#CC28281A] relative cursor-pointer min-h-[72px] ${teacherId === chat?.teacher?._id ? "bg-[#CC28281A]" : "bg-[#fff]"}`}
                 >
                   <Image
-                    src={"/profile.png"}
+                    src={chat?.teacher?.profile_photo || "/profile.png"}
                     width={50}
                     height={50}
                     alt={chat?.teacher?.name}
-                    className="w-[50px] h-[50px] lg:w-[56px] lg:h-[56px] rounded-lg absolute left-[22px] top-1/2 -translate-y-1/2"
+                    className="w-[50px] h-[50px] lg:w-[56px] lg:h-[56px] rounded-full object-cover absolute left-[22px] top-1/2 -translate-y-1/2"
                   />
                   <div className="flex-1">
                     <h3 className="font-medium font-inter text-base mb-0 text-black capitalize">{chat?.teacher?.name}</h3>
@@ -219,11 +219,11 @@ export default function Index() {
               {teacherId && (
                 <div className="flex items-center gap-3 lg:gap-4 bg-[#FFFFFF] px-4 lg:px-5 py-3.5 lg:py-4">
                   <Image
-                    src={"/profile.png"}
+                    src={selectedIdUser?.profile_photo || "/profile.png"}
                     width={45}
                     height={45}
                     alt={"chat.nam"}
-                    className="w-[32px] xl:w-[45px] h-[32px] xl:h-[45px] rounded-full left-[22px] "
+                    className="w-[32px] xl:w-[45px] h-[32px] xl:h-[45px] rounded-full left-[22px] object-cover"
                   />
                   <div>
                     <h2 className="font-medium text-base text-black mb-0 tracking-[-0.06em]">{selectedIdUser?.name}</h2>

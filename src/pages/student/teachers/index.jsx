@@ -11,9 +11,11 @@ export default function Index() {
   const [data, setData] = useState([]);
   const [loading, setLoading] = useState(false);
 
-  const fetchStudentTeachers = async () => {
+  const fetchStudentTeachers = async (startLoading=true) => {
     try {
-      setLoading(true);
+      if(startLoading){
+        setLoading(true);
+      }
       const main = new Listing();
       const response = await main.StudentTeacher();
       setData(response?.data?.data || []);
@@ -32,7 +34,7 @@ export default function Index() {
     try {
       const main = new Listing();
       const response = await main.AddWishlist({ teacherId: Id });
-      fetchStudentTeachers();
+      fetchStudentTeachers(false);
     } catch (error) {
       console.log("error", error);
     }
@@ -42,11 +44,12 @@ export default function Index() {
     try {
       const main = new Listing();
       const response = await main.RemoveWishlist({ teacherId: Id });
-      fetchStudentTeachers();
+      fetchStudentTeachers(false);
     } catch (error) {
       console.log("error", error);
     }
   };
+  // console.log("data",data);
 
   return (
     <StudentLayout page={"Find a teacher"}>
@@ -75,7 +78,7 @@ export default function Index() {
                 <div className="bg-white rounded-[10px] lesson_list_shadow  p-3 md:p-4 lg:p-5 flex flex-col lg:flex-row lg:items-center justify-between transition border-[rgba(204,40,40,0.2)] border-1 gap-5">
                   <div className="flex flex-col sm:flex-row sm:items-center space-y-2 sm:space-x-3  mt-2">
                     <Image
-                      src={teacher?.teacher?.profile_photo || "/profile.png"}
+                      src={teacher?.userId?.profile_photo || "/profile.png"}
                       alt="Profile"
                       className="w-16 h-16 md:w-20 md:h-20 lg:w-[104px] lg:h-[104px] rounded-full object-cover"
                       height={104}

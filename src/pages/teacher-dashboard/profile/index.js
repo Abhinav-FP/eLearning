@@ -25,11 +25,12 @@ export default function Index() {
       .then((r) => {
         // console.log("r", r?.data);
         setData(r?.data?.data);
+        setLoading(false);
       })
       .catch((err) => {
         console.log(err);
-      });
       setLoading(false);
+      });
   }
 
   const keyMappings = {

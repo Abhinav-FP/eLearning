@@ -14,12 +14,13 @@ function Index() {
         main.PayoutList()
             .then((r) => {
                 // console.log("r", r)
-                setPayout(r?.data?.data)
+                setPayout(r?.data?.data);
+                setLoading(false);
             })
             .catch((err) => {
                 console.log(err);
+                setLoading(false);
             });
-            setLoading(false);
     }, []);
 
     return (<>

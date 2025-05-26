@@ -56,11 +56,12 @@ export default function Profile() {
           qualifications: profiledata?.qualifications,
         });
         setFile(profiledata?.userId?.profile_photo);
+        setLoading(false);
       })
       .catch((err) => {
         console.log(err);
+        setLoading(false);
       });
-      setLoading(false);
   }, []);
 
   const handleChange = (e) => {

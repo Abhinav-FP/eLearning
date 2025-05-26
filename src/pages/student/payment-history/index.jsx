@@ -9,50 +9,12 @@ export default function Index() {
 
   const [payment, setPayment] = useState([]);
   const[loading,setLoading]=useState(false);
-  // const payments=[
-  //   {
-  //     "orderId": "ORD123456",
-  //     "lessonName": "Intro to JavaScript",
-  //     "paymentTime": "2025-04-24T10:30:00Z",
-  //     "amount": 49.99,
-  //     "paymentStatus": "Success"
-  //   },
-  //   {
-  //     "orderId": "ORD123457",
-  //     "lessonName": "Advanced CSS Grid",
-  //     "paymentTime": "2025-04-23T14:15:00Z",
-  //     "amount": 29.99,
-  //     "paymentStatus": "Success"
-  //   },
-  //   {
-  //     "orderId": "ORD123458",
-  //     "lessonName": "React Fundamentals",
-  //     "paymentTime": "2025-04-22T09:45:00Z",
-  //     "amount": 59.99,
-  //     "paymentStatus": "Failed"
-  //   },
-  //   {
-  //     "orderId": "ORD123459",
-  //     "lessonName": "Node.js Crash Course",
-  //     "paymentTime": "2025-04-21T16:00:00Z",
-  //     "amount": 39.99,
-  //     "paymentStatus": "Success"
-  //   },
-  //   {
-  //     "orderId": "ORD123460",
-  //     "lessonName": "Full Stack Web Dev",
-  //     "paymentTime": "2025-04-20T18:20:00Z",
-  //     "amount": 99.99,
-  //     "paymentStatus": "Failed"
-  //   }
-  // ];  
 
   const PaymentHistory = async () => {
     try {
       setLoading(true);
       const main = new Listing();
       const response = await main.PaymentUser();
-      console.log("response", response)
       setPayment(response?.data?.data);
       setLoading(false);
     } catch (error) {
@@ -105,15 +67,14 @@ export default function Index() {
                 {(payment?.[selectedPayment === "paypal" ? "payment" : "stripeData"] || []).length > 0 ? (
                   (payment?.[selectedPayment === "paypal" ? "payment" : "stripeData"] || []).map((item, index) => {
                     const isPaypal = selectedPayment === "paypal";
-                    const id = isPaypal ? item?.orderID : item?.payment_id;
+                    const id = isPaypal ? item?.orderID : item?.payment_id || item?.session_id;
                     const status = isPaypal ? item?.status : item?.payment_status;
-
                     return (
                       <tr key={index} className="border-t hover:bg-[rgba(204,40,40,0.1)] border-[rgba(204,40,40,0.2)]">
                         <td className="px-3 lg:px-4 py-2 lg:py-3 text-black text-sm lg:text-base font-medium font-inter">{id}</td>
                         <td className="px-3 lg:px-4 py-2 lg:py-3 text-black text-sm lg:text-base font-medium font-inter">{item?.LessonId?.title}</td>
                         <td className="px-3 lg:px-4 py-2 lg:py-3 text-black text-sm lg:text-base font-medium font-inter">
-                          {moment(item?.createdAt).format("DD MMMM YYYY hh:mm A")}
+                          {moment(item?.created_at).format("DD MMMM YYYY hh:mm A")}
                         </td>
                         <td className="px-3 lg:px-4 py-2 lg:py-3 text-black text-sm lg:text-base font-medium font-inter">${item?.amount}</td>
                         <td className="px-3 lg:px-4 py-2 lg:py-3 text-black text-sm lg:text-base font-medium font-inter">{status}</td>

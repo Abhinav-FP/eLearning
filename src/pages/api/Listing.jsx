@@ -182,6 +182,9 @@ async TeacherDashboard(){
    async teacherbankget(){
     return Api.get(`/teacher/bank`);
   }
+  async adminteacherlist(){
+    return Api.get(`/admin/existingteacher`);
+  }
   render() {
     return (
       <div>

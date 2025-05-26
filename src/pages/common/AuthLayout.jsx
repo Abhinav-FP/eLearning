@@ -38,7 +38,7 @@ export default function AuthLayout({ children, page , sidebar }) {
     useEffect(() => {
       const controller = new AbortController();
       const { signal } = controller;
-      fetchData(signal);  
+      // fetchData(signal);  
       return () => controller.abort();
     }, []);  
     return (

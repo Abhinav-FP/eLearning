@@ -54,7 +54,6 @@ console.log("paymentResult" ,paymentResult)
         } catch (error) {
             setMessage(error.response?.data?.error || error.message);
         }
-
         setIsLoading(false);
     };
 

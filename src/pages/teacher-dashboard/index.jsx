@@ -19,7 +19,7 @@ export default function Index() {
       setLoading(true);
       const main = new Listing();
       const response = await main.TeacherDashboard();
-      console.log("response", response)
+      // console.log("response", response)
       SetDashboard(response.data.data);
     } catch (error) {
       console.log("error", error);
@@ -103,17 +103,15 @@ export default function Index() {
             <div className="absolute right-4 lg:right-5 xl:right-6 bg-[#CC28281A] border-[0.67px] border-[#CC282880] p-3 rounded">
               <MdUpcoming className="text-[#CC2828]" size={24} />
             </div>
-            <div className="text-sm  gap-12 text-[#535353] space-y-1 mt-4">
+            <div className="text-lg space-y-1.5 mt-6 xl:mt-8">
               {Dashboard?.upcomingLesson?.map((item, index) => (
-                <div className="flex flex-row items-center gap-4 text-lg py-2" key={index}>
-                  <p className="font-inter text-base lg:text-lg xl:text-xl font-bold tracking-[-0.04em] text-[#535353] mb-0.5">
+                <div className="" key={index}>
+                  <p className="font-inter text-base lg:text-lg xl:text-xl font-medium tracking-[-0.04em] text-black flex justify-between">
                     {item?.LessonId?.title}
-                  </p>
-                  <p className="font-inter text-base lg:text-lg xl:text-xl font-bold tracking-[-0.04em] text-[#535353] mb-0.5">
-                    {moment(item?.startDateTime).format("DD MMM YYYY")}
-                  </p>
-                  <p className="font-inter text-base lg:text-lg xl:text-xl font-bold tracking-[-0.04em] text-[#535353] mb-0">
+                    <span>
+                    {moment(item?.startDateTime).format("DD MMM YYYY")}{" "}
                     {moment(item?.startDateTime).format("hh:mm A")}
+                    </span>
                   </p>
                 </div>
               ))}

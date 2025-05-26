@@ -83,16 +83,16 @@ export default function Index() {
       fetchLessons(Id);
     }
   }, [slug, Id]);
-  // console.log("data", data);
+  console.log("data", data);
   // console.log("content" ,content)
 
   const DescriptionWithViewMore = ({ description }) => {
   const [expanded, setExpanded] = useState(false);
 
   const words = description?.split(" ") || [];
-  const isLong = words.length > 250;
-  const shortText = words.slice(0, 250).join(" ");
-  const remainingText = words.slice(250).join(" ");
+  const isLong = words.length > 100;
+  const shortText = words.slice(0, 100).join(" ");
+  const remainingText = words.slice(100).join(" ");
 
   return (
     <div className="text-white tracking-[-0.03em] text-base lg:text-lg xl:text-xl font-medium">
@@ -100,7 +100,7 @@ export default function Index() {
         {expanded || !isLong ? description : shortText + "..."}
         {isLong && !expanded && (
           <button
-            className="ml-2 text-blue-400 underline"
+            className="ml-2 text-white hover:text-blue-400 underline cursor-pointer"
             onClick={() => setExpanded(true)}
           >
             View More
@@ -152,6 +152,48 @@ export default function Index() {
             </div>
           </div>
         </div>
+
+
+        {/* Extra fields div */}
+         <div className="pb-[40px] md:pb-[80px] bg-[#F8F9FA]">
+          <div className="container sm:container md:container lg:container xl:max-w-[1230px]  px-4 mx-auto">
+            <Heading
+              classess={"text-[#1E1E1E] mb-2"}
+              title={"Other Details"}
+            />
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-x-10 gap-y-4 text-gray-600 text-base xl:text-lg font-semibold font-inter py-2.5 lg:rounded-full mb-6 lg:mb-8">
+               {data?.userId?.nationality &&               
+              <p><strong>Nationality:</strong> {data?.userId?.nationality}</p>}
+               {data?.userId?.time_zone &&               
+              <p><strong>Timezone:</strong> {data?.userId?.time_zone}</p>}
+               {data?.userId?.nationality &&               
+              <p><strong>Gender:</strong> 
+                {data?.gender === 'M' ? 'Male' :
+                data?.gender === 'F' ? 'Female' :
+                'Other'
+                }</p>}
+               {data?.experience &&               
+              <p><strong>Experience:</strong> {data?.experience} years</p>}
+               {data?.qualifications &&               
+              <p><strong>Qualifications:</strong> {data?.qualifications}</p>}
+               {data?.languages_spoken &&               
+              <p><strong>Languages:</strong> {data?.languages_spoken?.join(', ')}</p>}
+               {data?.average_duration &&               
+              <p><strong>Avg. Duration:</strong> {data?.average_duration} mins</p>}
+               {data?.average_price &&               
+              <p><strong>Avg. Price:</strong> ${data?.average_price}</p>}
+               {data?.documentlink  && 
+               <p><strong>Certification:{" "}</strong>
+               <a href={data?.documentlink} target="_blank" rel="noopener noreferrer" 
+               className="underline">
+                View Document
+              </a></p>
+               }
+            </div>
+          </div>
+        </div>
+
+
         <div
           style={{ backgroundImage: "url('/leasson-bg.png')" }}
           className="bg-[rgba(249,190,191,.5)] bg-cover bg-center rounded-[20px] py-[40px] lg:py-[60px]"

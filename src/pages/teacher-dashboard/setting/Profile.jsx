@@ -328,7 +328,7 @@ export default function Profile() {
           </div>
           <div className="w-full lg:w-6/12 px-2">
             <label className="block text-[#CC2828] font-medium text-base xl:text-xl mb-1 tracking-[-0.04em]">
-              Upload any relevant document
+              Upload any relevant certificate
             </label>
 
             {/* File input always visible for uploads */}

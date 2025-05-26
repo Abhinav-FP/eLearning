@@ -4,9 +4,7 @@ import { MdRemoveRedEye } from "react-icons/md";
 import { GoBlocked } from "react-icons/go";
 import Image from "next/image";
 function StudentListing() {
-    const [tabActive, setTabActive] = useState('existing');
-
-    const teacherListing = [
+   const teacherListing = [
         {
             name: 'Ismael Maddox',
             email: "Ismael Maddox@gmail.com", 

@@ -15,7 +15,8 @@ export default function BookingPopup({
   Availability,
   studentTimeZone
 }) {
- 
+   const { user } = useRole();
+
   const [step, setStep] = useState(1);
   const [selectedLesson, SetSelectedLesson] = useState(null);
   const [selectedSlot, setSelectedSlot] = useState(null);

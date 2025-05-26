@@ -52,7 +52,7 @@ export default function Index() {
       setLoading(true);
       const main = new Listing();
       const response = await main.PaymentUser();
-      // console.log("response", response)
+      console.log("response", response)
       setPayment(response?.data?.data);
       setLoading(false);
     } catch (error) {
@@ -65,8 +65,7 @@ export default function Index() {
     PaymentHistory();
   }, []);
 
-  // console.log("payment", payment)
-  const [showFilter, setShowFilter] = useState(false);
+  console.log("payment", payment)
   const [selectedPayment, setSelectedPayment] = useState("paypal");
 
   return (

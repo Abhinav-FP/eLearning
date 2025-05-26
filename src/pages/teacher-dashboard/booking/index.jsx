@@ -2,13 +2,16 @@ import React, { useEffect, useMemo, useState } from 'react';
 import TeacherLayout from '../Common/TeacherLayout';
 import Listing from '@/pages/api/Listing';
 import moment from 'moment';
+import { TableLoader } from '@/components/Loader';
 
 export default function Index() {
   const [TabOpen, setTabOpen] = useState('upcoming');
   const [data, setData] = useState([]);
+  const [loading, setLoading] = useState(false);
 
   const fetchEarnings = async () => {
     try {
+      setLoading(true);
       const main = new Listing();
       const response = await main.TeacherBooking();
       setData(response?.data?.data || []);
@@ -16,6 +19,7 @@ export default function Index() {
       console.log('error', error);
       setData([]);
     }
+    setLoading(false);
   };
 
   useEffect(() => {
@@ -86,7 +90,9 @@ export default function Index() {
                   </th>
                 </tr>
               </thead>
-
+               {loading ? 
+                  <TableLoader length={5} />
+                :
               <tbody>
                 {currentList && currentList.length > 0 ? (
                   currentList.map((item, index) => (
@@ -118,7 +124,7 @@ export default function Index() {
                     </td>
                   </tr>
                 )}
-              </tbody>
+              </tbody>}
             </table>
           </div>
         </div>

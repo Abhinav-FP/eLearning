@@ -6,10 +6,12 @@ import Listing from "@/pages/api/Listing";
 import { RiDeleteBin6Line } from "react-icons/ri";
 import Delete from "./Delete";
 import Link from "next/link";
+import { EditProfileLoader } from "@/components/Loader";
 
 export default function Index() {
   const [data, setData] = useState([]);
   const [editData, setEditData] = useState(null);
+  const [loading, setLoading] = useState(false);
   const [id, setId] = useState(null);
   const [isLessonOpen, setIsLessonOpen] = useState(false);
   const closeLesson = () => setIsLessonOpen(false);
@@ -17,6 +19,7 @@ export default function Index() {
   const closeDelete = () => setIsDeleteOpen(false);
 
   const getLessons = () => {
+    setLoading(true);
     const main = new Listing();
     main.TeacherLessonGet()
       .then((r) => {
@@ -26,6 +29,7 @@ export default function Index() {
       .catch((err) => {
         console.log(err);
       });
+      setLoading(false);
   }
 
   const keyMappings = {
@@ -75,6 +79,9 @@ export default function Index() {
 
   return (
     <TeacherLayout page={"Profile"}>
+      {loading ? 
+      <EditProfileLoader/>
+      :
       <div className="min-h-screen p-5 lg:p-[30px]">
         <h1 className="ont-inter text-lg lg:text-2xl font-bold text-[#CC2828] tracking-[-0.04em] mb-6">Edit Profile</h1>
         <div className="bg-red-100 p-4 md:p-6 lg:p-8 rounded-2xl  items-start relative">
@@ -137,7 +144,7 @@ export default function Index() {
           </button>
           {/* </div> */}
         </section>
-      </div>
+      </div>}
       <AddLesson
         isOpen={isLessonOpen}
         onClose={closeLesson}

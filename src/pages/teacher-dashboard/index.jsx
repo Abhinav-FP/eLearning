@@ -6,13 +6,17 @@ import { FiPlus } from "react-icons/fi";
 import Link from "next/link";
 import Listing from "../api/Listing";
 import moment from "moment";
+import { TeacherDashboardLoader } from "@/components/Loader";
 
 export default function Index() {
 
 
   const [Dashboard, SetDashboard] = useState("")
+  const [loading, setLoading] = useState(false);
+
   const DashboardCount = async () => {
     try {
+      setLoading(true);
       const main = new Listing();
       const response = await main.TeacherDashboard();
       console.log("response", response)
@@ -20,6 +24,7 @@ export default function Index() {
     } catch (error) {
       console.log("error", error);
     }
+    setLoading(false);
   };
 
   useEffect(() => {
@@ -29,6 +34,9 @@ export default function Index() {
   console.log("Dashboard", Dashboard)
   return (
     <TeacherLayout>
+      {loading ? 
+      <TeacherDashboardLoader/>
+      :
       <div className="min-h-screen p-5 lg:p-[30px]">
         <div className="flex justify-between items-center">
           <h1 className="font-inter text-lg lg:text-2xl font-bold text-[#CC2828] tracking-[-0.04em] mb-2">
@@ -160,7 +168,7 @@ export default function Index() {
           </div>
 
         </div>
-      </div>
+      </div>}
     </TeacherLayout>
   );
 }

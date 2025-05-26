@@ -325,5 +325,204 @@ const StudentDashboardLoader = () => {
   );
 };
 
+const TeacherDashboardLoader = () => {
+  return (
+    <div className="min-h-screen p-5 lg:p-[30px] animate-pulse">
+      {/* Header Skeleton */}
+      <div className="flex justify-between items-center mb-6">
+        <div className="h-6 lg:h-8 bg-gray-200 rounded w-40 lg:w-60"></div>
+        <div className="h-10 bg-gray-200 rounded w-32 sm:w-40"></div>
+      </div>
 
-export { Loader, BookLoader, LessonLoader, TeacherLoader, TableLoader, ReviewLoader, ProfileFormLoader, StudentDashboardLoader };
+      {/* Dashboard Cards Skeleton Grid */}
+      <div className="grid grid-cols-1 sm:grid-cols-2 2xl:grid-cols-3 gap-4">
+        {Array(6).fill(0).map((_, idx) => (
+          <div
+            key={idx}
+            className="relative bg-white rounded-xl border border-[rgba(204,40,40,0.2)] p-4 min-h-[136px] flex flex-col justify-between"
+          >
+            <div className="h-6 bg-gray-200 rounded w-1/2 mb-4"></div>
+
+            {/* Icon Placeholder */}
+            <div className="absolute top-4 right-4 h-10 w-10 bg-gray-200 rounded-full"></div>
+
+            {/* Lines below the title */}
+            <div className="space-y-2 mt-6">
+              <div className="h-4 bg-gray-200 rounded w-3/4"></div>
+              <div className="h-4 bg-gray-200 rounded w-1/2"></div>
+              <div className="h-4 bg-gray-200 rounded w-2/3"></div>
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+  );
+};
+
+const EditProfileLoader = () => {
+  return (
+    <div className="min-h-screen p-5 lg:p-[30px] animate-pulse">
+      {/* Page Title */}
+      <div className="h-6 lg:h-8 bg-gray-200 rounded w-40 mb-6"></div>
+
+      {/* Profile Card */}
+      <div className="bg-red-100 p-4 md:p-6 lg:p-8 rounded-2xl">
+        {/* Profile Section */}
+        <div className="flex items-center flex-col gap-3 md:flex-row justify-between">
+          <div className="flex items-center gap-3 lg:gap-4">
+            <div className="w-16 h-16 lg:w-[94px] lg:h-[94px] bg-gray-200 rounded-full"></div>
+            <div>
+              <div className="h-5 bg-gray-200 rounded w-32 mb-2"></div>
+              <div className="h-4 bg-gray-200 rounded w-20"></div>
+            </div>
+          </div>
+          {/* Edit Button */}
+          <div className="h-10 bg-gray-200 rounded w-28 sm:w-32"></div>
+        </div>
+
+        {/* Info Grid */}
+        <div className="w-full mt-6 md:mt-8 lg:mt-10 mb-2 flex flex-wrap gap-x-4 lg:gap-x-10 gap-y-3 text-sm">
+          {Array(4).fill(0).map((_, i) => (
+            <div key={i} className="h-4 bg-gray-200 rounded w-40 lg:w-48"></div>
+          ))}
+        </div>
+      </div>
+
+      {/* Lessons Section */}
+      <section className="mt-10">
+        <div className="h-6 bg-gray-200 rounded w-32 mb-4"></div>
+        <div className="space-y-4">
+          {Array(3).fill(0).map((_, i) => (
+            <div key={i} className="h-20 bg-gray-200 rounded-lg w-full"></div>
+          ))}
+        </div>
+
+        {/* Add Lesson Button */}
+        <div className="h-11 bg-gray-200 rounded-[10px] w-40 mt-6"></div>
+      </section>
+    </div>
+  );
+};
+
+const TeacherEarningsLoader = () => {
+  return (
+    <div className="min-h-screen p-5 lg:p-[30px] animate-pulse">
+      {/* Header */}
+      <div className="flex justify-between items-center mb-4 lg:mb-5">
+        <div className="h-6 lg:h-8 bg-gray-200 rounded w-36"></div>
+        <div className="h-10 bg-gray-200 rounded w-32"></div>
+      </div>
+
+      {/* Stat Cards */}
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 mb-4">
+        {Array(4).fill(0).map((_, i) => (
+          <div key={i} className="h-24 bg-gray-200 rounded-lg w-full"></div>
+        ))}
+      </div>
+
+      {/* Table Skeleton */}
+      <div className="rounded-[5px] border border-[rgba(204,40,40,0.3)] overflow-x-auto">
+        <table className="min-w-full text-sm text-center rounded-[20px]">
+          <thead className="bg-[rgba(204,40,40,0.1)] text-[#535353] tracking-[-0.04em] font-inter rounded-[20px] whitespace-nowrap">
+            <tr>
+              {["Lesson Name", "Lesson Date", "Payment Id", "Payment Date", "Amount"].map((header, idx) => (
+                <th
+                  key={idx}
+                  className="font-normal text-sm lg:text-base px-3 lg:px-4 py-2 lg:py-3 border-t border-[rgba(204,40,40,0.2)] capitalize"
+                >
+                  {header}
+                </th>
+              ))}
+            </tr>
+          </thead>
+          <tbody>
+            {Array(5).fill(0).map((_, i) => (
+              <tr
+                key={i}
+                className="hover:bg-[rgba(204,40,40,0.05)] border-t border-[rgba(204,40,40,0.2)]"
+              >
+                {Array(5).fill(0).map((_, j) => (
+                  <td
+                    key={j}
+                    className="px-3 lg:px-4 py-2 lg:py-3 text-sm lg:text-base"
+                  >
+                    <div className="h-4 bg-gray-200 rounded w-24 mx-auto"></div>
+                  </td>
+                ))}
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+    </div>
+  );
+};
+
+const TeacherProfileFormLoader = () => {
+  const shimmerClass = "bg-[#e0e0e0] animate-pulse";
+  return (
+    <>
+      {/* Profile Image Upload Section */}
+      <div className="border-b border-[rgba(0,0,0,.1)] flex flex-wrap py-6 lg:py-8">
+        <div className="w-full lg:w-5/12 lg:pr-3 mb-2 sm:mb-0">
+          <div className={`${shimmerClass} h-6 w-32 mb-2 rounded`} />
+          <div className={`${shimmerClass} h-4 w-48 rounded`} />
+        </div>
+        <div className="w-full lg:w-6/12 xl:w-5/12 lg:pl-3">
+          <div className="flex items-center">
+            <div className={`${shimmerClass} h-[52px] w-[52px] rounded-full mr-4`} />
+            <div className={`${shimmerClass} h-5 w-32 rounded`} />
+          </div>
+        </div>
+      </div>
+
+      {/* Form Fields Section */}
+      <div className="border-b border-[rgba(0,0,0,.1)] py-6 lg:py-8 space-y-4 lg:space-y-6">
+        <div className="flex flex-wrap -mx-2 space-y-4">
+          {Array.from({ length: 10 }).map((_, idx) => (
+            <div key={idx} className="w-full lg:w-6/12 px-2">
+              <div className={`${shimmerClass} h-5 w-40 mb-2 rounded`} />
+              <div className={`${shimmerClass} h-11 lg:h-[54px] rounded-lg`} />
+            </div>
+          ))}
+
+          {/* Languages Spoken Tag Display */}
+          <div className="w-full lg:w-6/12 px-2">
+            <div className={`${shimmerClass} h-5 w-40 mb-2 rounded`} />
+            <div className={`${shimmerClass} h-11 lg:h-[54px] rounded-lg`} />
+            <div className="mt-3 flex flex-wrap gap-2">
+              {Array.from({ length: 2 }).map((_, idx) => (
+                <div key={idx} className={`${shimmerClass} h-7 w-24 rounded-full`} />
+              ))}
+            </div>
+          </div>
+
+          {/* Gender & AIS Trained Radios */}
+          {["Gender", "AIS trained"].map((label, idx) => (
+            <div key={idx} className="w-full lg:w-6/12 px-2 mb-4">
+              <div className={`${shimmerClass} h-5 w-32 mb-2 rounded`} />
+              <div className="flex items-center space-x-4">
+                {Array.from({ length: 3 }).map((_, i) => (
+                  <div key={i} className={`${shimmerClass} h-4 w-20 rounded`} />
+                ))}
+              </div>
+            </div>
+          ))}
+
+          {/* Description */}
+          <div className="w-full px-2">
+            <div className={`${shimmerClass} h-5 w-40 mb-2 rounded`} />
+            <div className={`${shimmerClass} h-[120px] rounded-lg`} />
+          </div>
+        </div>
+      </div>
+
+      {/* Submit Button */}
+      <div className="flex w-full lg:w-12/12 xl:w-11/12 flex-wrap justify-center items-center pt-6 lg:pt-10 space-x-4 lg:space-x-6">
+        <div className={`${shimmerClass} w-full max-w-[183px] h-[54px] rounded-[10px]`} />
+      </div>
+    </>
+  );
+};
+
+export { Loader, BookLoader, LessonLoader, TeacherLoader, TableLoader, ReviewLoader, ProfileFormLoader, StudentDashboardLoader, TeacherDashboardLoader, EditProfileLoader, TeacherEarningsLoader, TeacherProfileFormLoader };

@@ -1,51 +1,15 @@
 import Listing from "@/pages/api/Listing";
 import TeacherLayout from "../Common/TeacherLayout";
 import { useEffect, useState } from "react";
+import { TableLoader } from "@/components/Loader";
 
 function Index() {
-
-    const earnings = [
-        {
-            lesson: "English Speaking",
-            lessonDate: "12 April",
-            paymentId: "#1234",
-            amount: 200,
-            time: "30 Min",
-        },
-        {
-            lesson: "English Speaking",
-            lessonDate: "12 April",
-            paymentId: "#1234",
-            amount: 200,
-            time: "30 Min",
-        },
-        {
-            lesson: "English Speaking",
-            lessonDate: "12 April",
-            paymentId: "#1234",
-            amount: 200,
-            time: "30 Min",
-        },
-        {
-            lesson: "English Speaking",
-            lessonDate: "12 April",
-            paymentId: "#1234",
-            amount: 200,
-            time: "30 Min",
-        },
-        {
-            lesson: "English Speaking",
-            lessonDate: "12 April",
-            paymentId: "#1234",
-            amount: 200,
-            time: "30 Min",
-        },
-    ];
-
-    const [payout, setPayout] = useState([])
+    const [payout, setPayout] = useState([]);
+    const [loading,setLoading]=useState(false);
     // console.log("payout", payout)
 
     useEffect(() => {
+        setLoading(true);
         const main = new Listing();
         main.PayoutList()
             .then((r) => {
@@ -55,7 +19,9 @@ function Index() {
             .catch((err) => {
                 console.log(err);
             });
+            setLoading(false);
     }, []);
+
     return (<>
         <TeacherLayout page={"Payout"}>
             <div className="min-h-screen p-5 lg:p-[30px]">
@@ -85,7 +51,9 @@ function Index() {
                                 </th>
                             </tr>
                         </thead>
-
+                        {loading ? 
+                        <TableLoader length={5} />
+                        :
                         <tbody>
                             {payout &&
                                 payout?.map((item, index) => (
@@ -110,7 +78,7 @@ function Index() {
                                         </td>
                                     </tr>
                                 ))}
-                        </tbody>
+                        </tbody>}
                     </table>
                 </div>
             </div>

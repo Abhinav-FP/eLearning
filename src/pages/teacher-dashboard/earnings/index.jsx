@@ -5,6 +5,7 @@ import { FaWallet } from 'react-icons/fa';
 import Earning from "./Earning";
 import Listing from "@/pages/api/Listing";
 import moment from 'moment';
+import { TeacherEarningsLoader } from "@/components/Loader";
 
 export default function index() {
   // const earnings = [
@@ -46,16 +47,19 @@ export default function index() {
   // ];
 
   const [data, setData] = useState({});
+  const [loading, setLoading] = useState(false);
 
     const fetchEarnings = async () => {
         try {
-            const main = new Listing();
-            const response = await main.TeacherEarning();
-            setData(response?.data?.data || []);
+          setLoading(true);
+          const main = new Listing();
+          const response = await main.TeacherEarning();
+          setData(response?.data?.data || []);
         } catch (error) {
-            console.log("error", error);
-            setData({})
+          console.log("error", error);
+          setData({})
         }
+          setLoading(false);
     };
 
 
@@ -63,7 +67,7 @@ export default function index() {
         fetchEarnings();
     }, []);
 
-    console.log("data",data);
+    // console.log("data",data);
 
   const stats = useMemo(() => [
     {
@@ -94,6 +98,9 @@ export default function index() {
 
   return (
     <TeacherLayout page={"Earnings & Payout"}>
+      {loading ? 
+      <TeacherEarningsLoader/>
+      :
       <div className="min-h-screen p-5 lg:p-[30px]">
         <div className="flex justify-between items-center mb-4 lg:mb-5">
           <h2 className="text-lg md:text-xl lg:text-2xl font-bold text-[#CC2828] tracking-[-0.04em] font-inter">
@@ -175,7 +182,7 @@ export default function index() {
             </tbody>
           </table>
         </div>
-      </div>
+      </div>}
 
       {IsEarning && (
         <Earning

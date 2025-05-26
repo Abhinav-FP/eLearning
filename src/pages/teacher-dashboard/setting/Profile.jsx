@@ -3,9 +3,11 @@ import React, { useEffect, useState } from "react";
 import Profile_img from "../../Assets/Images/hero_top_img.png";
 import timeZones from "../../../Json/TimeZone";
 import Nationality from "../../../Json/Nationality.json";
+import Qualification from "../../../Json/Qualification.json";
 import langauage from "../../../Json/langauage.json";
 import Listing from "@/pages/api/Listing";
 import toast from "react-hot-toast";
+import { TeacherProfileFormLoader } from "@/components/Loader";
 
 export default function Profile() {
   const [processing, setProcessing] = useState(false);
@@ -24,15 +26,17 @@ export default function Profile() {
     average_price: "",
     average_time: "",
     documentlink: "",
+    qualifications: "",
   });
   const [file, setFile] = useState(null);
+  const [loading, setLoading] = useState(false);
 
   useEffect(() => {
+    setLoading(true);
     const main = new Listing();
     main
       .Teacherprofile()
       .then((r) => {
-        // console.log("r", r)
         const profiledata = r?.data?.data?.user;
         // console.log("profileData", profiledata);
         setData({
@@ -49,12 +53,14 @@ export default function Profile() {
           experience: profiledata?.experience,
           gender: profiledata?.gender,
           documentlink: profiledata?.documentlink,
+          qualifications: profiledata?.qualifications,
         });
         setFile(profiledata?.userId?.profile_photo);
       })
       .catch((err) => {
         console.log(err);
       });
+      setLoading(false);
   }, []);
 
   const handleChange = (e) => {
@@ -86,7 +92,7 @@ export default function Profile() {
     }));
    };
 
-   console.log("data",data);
+  //  console.log("data",data);
   const handleSubmit = async (e) => {
     e.preventDefault();
     // console.log("file",file);
@@ -109,6 +115,7 @@ export default function Profile() {
       formData.append("description", data?.description)
       formData.append("average_price", data?.average_price)
       formData.append("average_time", data?.average_time)
+      formData.append("qualifications", data?.qualifications)
       if (data?.documentlink instanceof File) {
         formData.append("documentlink", data?.documentlink)
       }
@@ -146,6 +153,10 @@ export default function Profile() {
   };
 
   return (
+    <>
+    {loading ? 
+    <TeacherProfileFormLoader/>
+    :
     <>
       <div className="border-b  border-[rgba(0,0,0,.1)] flex flex-wrap py-6 lg:py-8">
         <div className="w-full lg:w-5/12  lg:pr-3 mb-2 sm:mb-0">
@@ -385,6 +396,27 @@ export default function Profile() {
             />
           </div>
 
+          <div className="w-full px-2">
+            <label className="block text-[#CC2828] font-medium text-base xl:text-xl mb-1 tracking-[-0.04em]">
+              Qualification
+            </label>
+            <select
+              className="w-full h-11 lg:h-[54px] font-medium appearance-none block bg-[#F4F6F8] text-[#46494D] text-base border border-[#F4F6F8] rounded-lg py-3 px-3 lg:px-6 leading-tight focus:outline-none tracking-[-0.04em]"
+              onChange={handleChange}
+              value={data?.qualifications}
+              name="qualifications"
+              required
+            >
+              <option value="">Please select Qualification</option>
+              {Qualification &&
+                Qualification.map((zone, index) => (
+                  <option key={index} value={zone.value}>
+                    {zone.label}
+                  </option>
+                ))}
+            </select>
+          </div>
+
           <div className="w-full lg:w-6/12 px-2 mb-4">
             <label className="text-[#CC2828] font-medium text-base xl:text-xl mb-2 block">
               Gender
@@ -457,7 +489,7 @@ export default function Profile() {
             </div>
           </div>
 
-          <div className="w-full   px-2">
+          <div className="w-full px-2">
             <label className="block text-[#CC2828] font-medium text-base xl:text-xl mb-1 tracking-[-0.04em]">
               Description
             </label>
@@ -483,6 +515,7 @@ export default function Profile() {
           {processing ? "Submitting..." : "Submit"}
         </button>
       </div>
+      </>}
     </>
   );
 }

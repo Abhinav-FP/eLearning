@@ -22,6 +22,7 @@ function SideBar() {
     const pathname = usePathname();
     const [isOpen, setIsOpen] = useState(false);
     const { user } = useRole();
+    // console.log("user",user);
 
     return (
         <>

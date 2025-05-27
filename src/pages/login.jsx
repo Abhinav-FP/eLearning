@@ -28,7 +28,6 @@ export default function Login() {
       [name]: value,
     }));
   };
-  // console.log("redirect", redirect);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -46,6 +45,7 @@ export default function Login() {
       if (response?.data?.status) {
         toast.success(response.data.message);
         localStorage && localStorage.setItem("token", response?.data?.token);
+        console.log("response?.data",response?.data);
         if (redirect) {
           router.push(`${redirect}`);
           return;
@@ -55,7 +55,12 @@ export default function Login() {
         } else if (response?.data?.role === "teacher") {
           router.push("/teacher-dashboard");
         }
-      } else {
+       else if (response?.data?.role === "admin") {
+        console.log("Hello admin");
+        router.push("/admin");
+      }
+    }
+      else{
         toast.error(response.data.message);
       }
       setData({
@@ -133,7 +138,7 @@ export default function Login() {
             </div>
 
             {/* Forgot Password */}
-            <div className="flex justify-end mb-4">
+            <div className="flex justify-end mb-4 cursor-pointer">
              <Forgot />
             </div>
 

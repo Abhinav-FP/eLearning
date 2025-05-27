@@ -31,7 +31,7 @@ export default function Teacher({teacherData, loading}) {
                                     <p className="text-[#535353] text-base font-medium -tracking-[0.03em] mb-4 lg:mb-5 line-clamp-2 text-center">{item?.description}</p> 
                                     <div className="flex flex-wrap gap-3 justify-center">
                                         <span className="text-[#CC2828] -tracking-[0.03em] font-bold text-base">
-                                            {item?.average_price && (
+                                            {item?.average_price && item?.average_duration && (
                                                 `$${item?.average_price}/${item?.average_duration} min`
                                             )}
                                         </span>

@@ -25,6 +25,37 @@ export default function Index() {
   const closePopup = () => setIsPopupOpen(false);
   const Id = data?.userId?._id;
 
+  const QualificationMapping = {
+  "high_school": "High School Diploma",
+  "associate_degree": "Associate Degree",
+  "ba": "Bachelor of Arts (BA)",
+  "bsc": "Bachelor of Science (BSc)",
+  "bcom": "Bachelor of Commerce (BCom)",
+  "be": "Bachelor of Engineering (BE)",
+  "btech": "Bachelor of Technology (BTech)",
+  "bed": "Bachelor of Education (B.Ed)",
+  "ma": "Master of Arts (MA)",
+  "msc": "Master of Science (MSc)",
+  "mcom": "Master of Commerce (MCom)",
+  "me": "Master of Engineering (ME)",
+  "mtech": "Master of Technology (MTech)",
+  "med": "Master of Education (M.Ed)",
+  "mba": "Master of Business Administration (MBA)",
+  "phd": "Doctor of Philosophy (PhD)",
+  "edd": "Doctor of Education (EdD)",
+  "jd": "Juris Doctor (JD)",
+  "md": "Medical Doctor (MD)",
+  "ca": "Chartered Accountant (CA)",
+  "cs": "Company Secretary (CS)",
+  "cpa": "Certified Public Accountant (CPA)",
+  "diploma_education": "Diploma in Education",
+  "diploma_engineering": "Diploma in Engineering",
+  "pg_diploma": "Postgraduate Diploma",
+  "senmonshi": "Senmonshi (専門士 - Vocational School Degree)",
+  "kosen": "Kōtō Senmon Gakkō (高等専門学校 - College of Technology)",
+  "other": "Other"
+  };
+
   // Get timezone
   useEffect(() => {
     const timeZone = Intl.DateTimeFormat().resolvedOptions().timeZone || "";
@@ -83,7 +114,7 @@ export default function Index() {
       fetchLessons(Id);
     }
   }, [slug, Id]);
-  console.log("data", data);
+  // console.log("data", data);
   // console.log("content" ,content)
 
   const DescriptionWithViewMore = ({ description }) => {
@@ -167,7 +198,7 @@ export default function Index() {
                {data?.userId?.time_zone &&               
               <p><strong>Timezone:</strong> {data?.userId?.time_zone}</p>}
                {data?.userId?.nationality &&               
-              <p><strong>Gender:</strong> 
+              <p><strong>Gender:{" "}</strong> 
                 {data?.gender === 'M' ? 'Male' :
                 data?.gender === 'F' ? 'Female' :
                 'Other'
@@ -175,7 +206,9 @@ export default function Index() {
                {data?.experience &&               
               <p><strong>Experience:</strong> {data?.experience} years</p>}
                {data?.qualifications &&               
-              <p><strong>Qualifications:</strong> {data?.qualifications}</p>}
+              <p><strong>Qualifications:{" "}</strong> 
+                {QualificationMapping[data?.qualifications] || ""}
+              </p>}
                {data?.languages_spoken &&               
               <p><strong>Languages:</strong> {data?.languages_spoken?.join(', ')}</p>}
                {data?.average_duration &&               

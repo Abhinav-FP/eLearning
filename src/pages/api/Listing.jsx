@@ -190,7 +190,10 @@ async TeacherDashboard(){
     return Api.get(`/teacher/bank`);
   }
   async adminteacherlist(){
-    return Api.get(`/admin/existingteacher`);
+    return Api.get(`/admin/teachers`);
+  }
+  async userBlock(data){
+    return Api.post(`/admin/blockuser`, data);
   }
   render() {
     return (

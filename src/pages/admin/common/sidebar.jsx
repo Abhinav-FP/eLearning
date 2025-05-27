@@ -7,8 +7,10 @@ import { IoMdArrowRoundBack } from "react-icons/io";
 import Logo from "../../Assets/Images/logo.png";
 import Image from "next/image";
 import { PiChalkboardTeacherFill } from "react-icons/pi";
-import { FaCalendar } from "react-icons/fa";
+import { PiStudentFill } from "react-icons/pi";
 import { IoSettingsOutline } from "react-icons/io5";
+import { MdOutlineRateReview } from "react-icons/md";
+import { FaEdit } from "react-icons/fa";
 import { useRole } from "@/context/RoleContext";
 
 function SideBar() {
@@ -45,11 +47,11 @@ function SideBar() {
                 </div>
 
                 <div className="px-3 lg:px-4">
-                    <Link href = "/teacher-dashboard/setting" className="user_row p-2.5 bg-white shadow-md rounded-lg lg:rounded-xl flex items-center gap-3">
+                    <Link href = "/admin/setting" className="user_row p-2.5 bg-white shadow-md rounded-lg lg:rounded-xl flex items-center gap-3">
                         <div className="w-11 h-11 rounded-full bg-green-400 flex items-center justify-center text-white text-xl font-bold">
                             {/* Replace with an actual image if needed */}
                             <img
-                                src="https://www.svgrepo.com/show/384674/account-avatar-profile-user-11.svg"
+                                src={user?.profile_photo || "/profile.png"}
                                 alt="User Avatar"
                                 className="w-11 h-11 rounded-full object-cover"
                             />
@@ -65,43 +67,64 @@ function SideBar() {
                         <div className="x-3 md:px-4 lg:px-6 uppercase text-[#727272] text-sm font-medium mb-4 lg:mb-5">MAIN MENU</div>
                         <ul className="mt-2 space-y-1 mb-10">
                             <Link
-                                href="/teacher-dashboard"
-                                className={`flex items-center py-2.5 x-3 md:px-4 lg:px-6 gap-2 text-[#565F66] text-base font-medium tracking-[-0.06em] ${pathname === "/teacher-dashboard" ? "text-white bg-[#D6202C]" : "hover:bg-gray-100"} `}
+                                href="/admin"
+                                className={`flex items-center py-2.5 x-3 md:px-4 lg:px-6 gap-2 text-[#565F66] text-base font-medium tracking-[-0.06em] ${pathname === "/admin" ? "text-white bg-[#D6202C]" : "hover:bg-gray-100"} `}
                             >
                                 <MdSpaceDashboard  size={20} />
                                 Dashboard
                             </Link>
                             <Link
-                                href="/teacher-dashboard/profile"
-                                className={`flex items-center py-2.5 x-3 md:px-4 lg:px-6  gap-2 text-[#565F66] text-base font-medium tracking-[-0.06em] ${pathname === "/teacher-dashboard/profile" ? "text-white bg-[#D6202C]" : "hover:bg-gray-100"} `}
+                                href="/admin/teacher"
+                                className={`flex items-center py-2.5 x-3 md:px-4 lg:px-6  gap-2 text-[#565F66] text-base font-medium tracking-[-0.06em] ${pathname === "/admin/teacher" ? "text-white bg-[#D6202C]" : "hover:bg-gray-100"} `}
                             >
                                 <PiChalkboardTeacherFill size={20} />
                                 Teachers
                             </Link>
                             <Link
-                                href="/teacher-dashboard/availability"
-                                className={`flex items-center py-2.5 x-3 md:px-4 lg:px-6 gap-2 text-[#565F66] text-base font-medium tracking-[-0.06em] ${pathname === "/teacher-dashboard/availability" ? "text-white bg-[#D6202C]" : "hover:bg-gray-100"} `}
+                                href="/admin/student"
+                                className={`flex items-center py-2.5 x-3 md:px-4 lg:px-6  gap-2 text-[#565F66] text-base font-medium tracking-[-0.06em] ${pathname === "/admin/student" ? "text-white bg-[#D6202C]" : "hover:bg-gray-100"} `}
+                            >
+                                <PiStudentFill size={20} />
+                                Students
+                            </Link>
+                            <Link
+                                href="/admin/review"
+                                className={`flex items-center py-2.5 x-3 md:px-4 lg:px-6 gap-2 text-[#565F66] text-base font-medium tracking-[-0.06em] ${pathname === "/admin/review" ? "text-white bg-[#D6202C]" : "hover:bg-gray-100"} `}
                             >
                                 <MdReviews size={20} />
                                 Reviews
                             </Link>
                             <Link
-                                href="/teacher-dashboard/message"
-                                className={`flex items-center py-2.5 x-3 md:px-4 lg:px-6 gap-2 text-[#565F66] text-base font-medium tracking-[-0.06em] ${pathname === "/teacher-dashboard/message" ? "text-white bg-[#D6202C]" : "hover:bg-gray-100"}`}
+                                href="/admin/home"
+                                className={`flex items-center py-2.5 x-3 md:px-4 lg:px-6 gap-2 text-[#565F66] text-base font-medium tracking-[-0.06em] ${pathname === "/admin/home" ? "text-white bg-[#D6202C]" : "hover:bg-gray-100"} `}
                             >
-                                <MdPayments size={20} />
-                                Payments
+                                <FaEdit size={20}/>
+                                Edit Home
                             </Link>
                             <Link
+                                href="/admin/payment"
+                                className={`flex items-center py-2.5 x-3 md:px-4 lg:px-6 gap-2 text-[#565F66] text-base font-medium tracking-[-0.06em] ${pathname === "/admin/payment" ? "text-white bg-[#D6202C]" : "hover:bg-gray-100"}`}
+                            >
+                                <MdPayments size={20} />
+                                Earnings and Payments
+                            </Link>
+                            <Link
+                                href="/admin/payout"
+                                className={`flex items-center py-2.5 x-3 md:px-4 lg:px-6 gap-2 text-[#565F66] text-base font-medium tracking-[-0.06em] ${pathname === "/admin/payment" ? "text-white bg-[#D6202C]" : "hover:bg-gray-100"}`}
+                            >
+                                <MdOutlineRateReview size={20} />
+                                Payouts
+                            </Link>
+                            {/* <Link
                                 href="/teacher-dashboard/earnings"
                                 className={`flex items-center py-2.5 x-3 md:px-4 lg:px-6 gap-2 text-[#565F66] text-base font-medium tracking-[-0.06em] ${pathname === "/teacher-dashboard/earnings" ? "text-white bg-[#D6202C]" : "hover:bg-gray-100"}`}
                             >
                                 <FaCalendar size={20} />
                                 Calendar management
-                            </Link> 
+                            </Link>  */}
                             <Link
-                                href="/teacher-dashboard/setting"
-                                className={`flex items-center py-2.5 x-3 md:px-4 lg:px-6 gap-2 text-[#565F66] text-base font-medium tracking-[-0.06em] ${pathname === "/teacher-dashboard/setting" ? "text-white bg-[#D6202C]" : "hover:bg-gray-100"}`}
+                                href="/admin/setting"
+                                className={`flex items-center py-2.5 x-3 md:px-4 lg:px-6 gap-2 text-[#565F66] text-base font-medium tracking-[-0.06em] ${pathname === "/admin/setting" ? "text-white bg-[#D6202C]" : "hover:bg-gray-100"}`}
                             >
                                 <IoSettingsOutline size={20} />
                                 Settings

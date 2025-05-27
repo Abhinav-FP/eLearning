@@ -16,12 +16,15 @@ export default function ReviewsList() {
     response
       .then((res) => {
         setReviews(res?.data?.data?.reviews || []);
+        setLoading(false);
       })
       .catch((error) => {
         console.log("erorr", error);
+        setReviews([]);
+        setLoading(false);
       });
-    setLoading(false);
   }, []);
+  
   return (
     <StudentLayout page={"Settings"}>
       <div className="p-5 lg:p-[30px] ">

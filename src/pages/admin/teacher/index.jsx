@@ -106,7 +106,7 @@ function TeacherListing() {
                                                             <Link href={`/admin/teacher/${item?._id}`} className="border border-[#CC2828] text-[#CC2828] hover:bg-[#CC2828] hover:text-white inline-flex items-center justify-center h-[38px] w-[38px] rounded text-center leading-1 cursor-pointer">
                                                                 <MdRemoveRedEye className="inline" size={18} />
                                                             </Link>
-                                                            <button title="Block" href="#" className="border border-[#CC2828] text-[#CC2828] hover:bg-[#CC2828] hover:text-white inline-block h-[38px] w-[38px] rounded text-center leading-1 cursor-pointer">
+                                                            <button title="Block" onClick={() => handleBlocked(item?._id)} className="border border-[#CC2828] text-[#CC2828] hover:bg-[#CC2828] hover:text-white inline-block h-[38px] w-[38px] rounded text-center leading-1 cursor-pointer">
                                                                 <GoBlocked className="inline" size={18} />
                                                             </button>
                                                         </div>
@@ -114,7 +114,6 @@ function TeacherListing() {
                                                 </tr>
                                             )
                                             )}
-
                                     </tbody>
                                 </table>
                             </div>

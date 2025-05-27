@@ -115,8 +115,8 @@ export default function Message() {
       <>
         <div className="flex flex-wrap w-full">
           {/* Sidebar */}
-          <div className="w-full lg:w-1/4  rounded-lg pb-5 pt-2">
-            <div className="mt-0 space-y-1 h-[calc(100vh-300px)] overflow-y-auto customscroll">
+          <div className="w-full lg:w-1/4  rounded-lg ">
+            <div className="mt-0 space-y-1 h-[calc(100vh-128px)] min-h-[300px] overflow-y-auto customscroll pb-5 pt-2">
               {messageCount && messageCount.map((chat, index) => (
                 <div
                   key={index}
@@ -170,7 +170,7 @@ export default function Message() {
               {/* Chat Body */}
               <div
                 ref={chatContainerRef}
-                className="px-4 lg:px-5 pt-5 lg:pt-[30px] pb-[10px] min-h-[500px] max-h-[500px] overflow-y-auto"
+                className="px-4 lg:px-5 pt-5 lg:pt-[30px] pb-[10px] min-h-[300px] h-[calc(100%-159px)] overflow-y-auto"
               >
                 <div className="bg-[#FEECDC] rounded-[14px] relative pl-[50px] lg:pl-[60px] pr-[20px] lg:pr-[30px] py-[12px] mb-[30px] text-sm text-[#1E1E1E] max-w-[570px] mx-auto">
                   <div className="absolute top-1/2 left-[20px] lg:left-[20px] -translate-y-1/2">

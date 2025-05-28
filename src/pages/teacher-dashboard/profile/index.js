@@ -7,6 +7,7 @@ import { RiDeleteBin6Line } from "react-icons/ri";
 import Delete from "./Delete";
 import Link from "next/link";
 import { EditProfileLoader } from "@/components/Loader";
+import NoData from "@/pages/common/NoData";
 
 export default function Index() {
   const [data, setData] = useState([]);
@@ -129,12 +130,14 @@ export default function Index() {
 
         <section className="mt-10">
           <h2 className="text-xl font-bold text-red-700 mb-4">Lessons</h2>
+          {data && data?.lessons?.length >0 ?
           <div className="space-y-4">
             {data && data?.lessons && data?.lessons?.map((item, index) => (
               <LessonCard key={index} item={item} />
             ))}
-          </div>
-
+          </div> :
+          <NoData Heading={"No lessons found."} content={"Add some lessons to view them here"}/>
+          }
           {/* <div className=" mt-6"> */}
           <button className="bg-[#CC2828] tracking-[-0.04em] text-base mt-4 lg:mt-6 hover:bg-[#941111fd] mt-6 text-white px-6 lg:px-10 py-3 lg:py-3.5 rounded-[10px] font-bold cursor-pointer"
             onClick={() => {

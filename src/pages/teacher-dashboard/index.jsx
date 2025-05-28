@@ -7,6 +7,7 @@ import Link from "next/link";
 import Listing from "../api/Listing";
 import moment from "moment";
 import { TeacherDashboardLoader } from "@/components/Loader";
+import NoData from "../common/NoData";
 
 export default function Index() {
 
@@ -31,7 +32,7 @@ export default function Index() {
     DashboardCount();
   }, []);
 
-  console.log("Dashboard", Dashboard)
+  // console.log("Dashboard", Dashboard)
   return (
     <TeacherLayout>
       {loading ? 
@@ -60,7 +61,15 @@ export default function Index() {
               <MdAttachMoney className="text-[#CC2828]" size={24} />
             </div>
             <div className="flex gap-3 text-lg font-semibold mt-6 xl:mt-4 items-center">
-              <p className="flex gap-1 items-center font-inter text-base lg:text-lg xl:text-xl font-medium tracking-[-0.04em] text-black "><MdCheckCircle size={18} /> ${Dashboard?.TeacherData?.average_price}/{Dashboard?.TeacherData?.average_time}</p>
+              {Dashboard?.TeacherData?.average_price && Dashboard?.TeacherData?.average_time ? (
+                <p className="flex gap-1 items-center font-inter text-base lg:text-lg xl:text-xl font-medium tracking-[-0.04em] text-black">
+                  <MdCheckCircle size={18} /> ${Dashboard.TeacherData.average_price}/{Dashboard.TeacherData.average_time}
+                </p>
+              ) : (
+                <p className="font-inter text-base lg:text-lg xl:text-xl font-medium tracking-[-0.04em] text-black">
+                  N/A
+                </p>
+              )}
               {/* <p className="flex gap-1 items-center font-inter text-base lg:text-lg xl:text-xl font-medium tracking-[-0.04em] text-black"><MdCheckCircle size={18} /> $40/30 min</p> */}
             </div>
           </div>
@@ -88,7 +97,7 @@ export default function Index() {
             </div>
             <div className="text-lg space-y-1.5 mt-6 xl:mt-8">
               <p className="font-inter text-base lg:text-lg xl:text-xl font-medium tracking-[-0.04em] text-black flex justify-between">
-                Stripe Earnings: <span>¥{Dashboard?.stripepay}</span>
+                Stripe Earnings: <span>${Dashboard?.stripepay}</span>
               </p>
               <p className="font-inter text-base lg:text-lg xl:text-xl font-medium tracking-[-0.04em] text-black flex justify-between">
                 Paypal Earnings <span>${Dashboard?.paypalpay}</span>
@@ -103,6 +112,7 @@ export default function Index() {
             <div className="absolute right-4 lg:right-5 xl:right-6 bg-[#CC28281A] border-[0.67px] border-[#CC282880] p-3 rounded">
               <MdUpcoming className="text-[#CC2828]" size={24} />
             </div>
+            {Dashboard?.upcomingLesson && Dashboard?.upcomingLesson?.length>0 ? 
             <div className="text-lg space-y-1.5 mt-6 xl:mt-8">
               {Dashboard?.upcomingLesson?.map((item, index) => (
                 <div className="" key={index}>
@@ -117,6 +127,11 @@ export default function Index() {
               ))}
 
             </div>
+            : 
+            <NoData
+              Heading={"No upcoming lesson found."}
+            />
+            }
           </div>
 
 

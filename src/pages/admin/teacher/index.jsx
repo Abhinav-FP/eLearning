@@ -1,17 +1,19 @@
 import React, { useEffect, useState } from "react";
 import AdminLayout from "../common/AdminLayout";
-import { MdRemoveRedEye } from "react-icons/md";
-import { GoBlocked } from "react-icons/go";
 import Image from "next/image";
 import Listing from "../../api/Listing";
 import Link from "next/link";
 import toast from "react-hot-toast";
+import DetailPopup from "./DetailPopup";
 
 function TeacherListing() {
   const [tabActive, setTabActive] = useState("existing");
   const [teacherData, setTeacherData] = useState([]);
   const [loading, setLoading] = useState(false);
   const [blockloading, setBlockloading] = useState(false);
+  const [isPopupOpen, setIsPopupOpen] = useState(false);
+  const closePopup = () => setIsPopupOpen(false);
+  const [data, setData] = useState(null);
 
   const handleBlock=async(id)=>{
     try {
@@ -34,8 +36,33 @@ function TeacherListing() {
     }
   };
 
-  const TeacherRow = ({ item }) => (
-    <tr className="border-t hover:bg-[rgba(204,40,40,0.1)] border-[rgba(204,40,40,0.2)]">
+  const handleApproveReject=async(id, approve)=>{
+    try {
+      setBlockloading(true);
+      const main = new Listing();
+      const response = await main.approveRejectTeacher({
+        id:id,
+        approved: approve
+      });
+      if (response?.data) {
+        if(response?.data?.status){
+            toast.success(response?.data?.message);
+        }
+        else{
+            toast.error(response?.data?.message);
+        }
+        fetchData();
+      }
+      setBlockloading(false);
+    } catch (error) {
+      console.log("error", error);
+      toast.error(error?.response?.data?.message || "An error occured");
+      setBlockloading(false);
+    }
+  };
+
+  const TeacherRow = ({ item, category }) => (
+    <tr className={`border-t hover:bg-[rgba(204,40,40,0.1)] border-[rgba(204,40,40,0.2)] ${item?.userId?.block ? "opacity-50" : ""}`}>
       <td className="capitalize px-3 lg:px-4 py-2 lg:py-3 text-black text-sm lg:text-base font-medium font-inter text-left">
         {item?.userId?.name || ""}
       </td>
@@ -66,12 +93,16 @@ function TeacherListing() {
       </td> */}
       <td className="capitalize px-3 lg:px-4 py-2 lg:py-3 text-black text-sm lg:text-base font-medium font-inter">
         <div className="flex gap-2 justify-center items-center">
-            <Link
-            href={`/admin/teacher/${item?._id}`}
+            <button
+            onClick={(()=>{
+              setData(item);
+              setIsPopupOpen(true);
+            })}
             className="border border-[#CC2828] text-[#CC2828] hover:bg-[#CC2828] hover:text-white px-3 py-1 text-xs rounded cursor-pointer"
             >
             View 
-            </Link>
+            </button>
+            {category === "existing" ? 
             <button
             onClick={() => handleBlock(item?.userId?._id)}
             className="border border-[#CC2828] text-[#CC2828] hover:bg-[#CC2828] hover:text-white px-3 py-1 text-xs rounded cursor-pointer"
@@ -84,6 +115,30 @@ function TeacherListing() {
             ? "Unblock"
             : "Block"}
             </button>
+            : category === "reject" ?
+            <button
+            onClick={() => handleApproveReject(item?._id, true)}
+            className="border border-[#CC2828] text-[#CC2828] hover:bg-[#CC2828] hover:text-white px-3 py-1 text-xs rounded cursor-pointer"
+            >
+             {blockloading ? "Approving..." : "Approve"}
+            </button>
+            : category === "new" ?
+            <>
+            <button
+            onClick={() => handleApproveReject(item?._id, true)}
+            className="border border-[#CC2828] text-[#CC2828] hover:bg-[#CC2828] hover:text-white px-3 py-1 text-xs rounded cursor-pointer"
+            >
+             {blockloading ? "Approving..." : "Approve"}
+            </button>
+            <button
+            onClick={() => handleApproveReject(item?._id, false)}
+            className="border border-[#CC2828] text-[#CC2828] hover:bg-[#CC2828] hover:text-white px-3 py-1 text-xs rounded cursor-pointer"
+            >
+             {blockloading ? "Rejecting..." : "Reject"}
+            </button>
+            </>
+            : <></>
+            }
         </div>
       </td>
     </tr>
@@ -188,7 +243,7 @@ function TeacherListing() {
                   {teacherData &&
                     teacherData?.approvedTeachers &&
                     teacherData?.approvedTeachers?.map((item, index) => (
-                      <TeacherRow key={index} item={item} />
+                      <TeacherRow key={index} item={item} category={"existing"}/>
                     ))}
                 </tbody>
               )}
@@ -197,7 +252,7 @@ function TeacherListing() {
                   {teacherData &&
                     teacherData?.pendingApproval &&
                     teacherData?.pendingApproval?.map((item, index) => (
-                      <TeacherRow key={index} item={item} />
+                      <TeacherRow key={index} item={item} category={"new"}/>
                     ))}
                 </tbody>
               )}
@@ -206,7 +261,7 @@ function TeacherListing() {
                   {teacherData &&
                     teacherData?.rejectedTeachers &&
                     teacherData?.rejectedTeachers?.map((item, index) => (
-                      <TeacherRow key={index} item={item} />
+                      <TeacherRow key={index} item={item} category={"reject"}/>
                     ))}
                 </tbody>
               )}
@@ -214,6 +269,11 @@ function TeacherListing() {
           </div>
         </div>
       </div>
+      <DetailPopup
+        isOpen={isPopupOpen}
+        onClose={closePopup}
+        data={data}
+      />
     </AdminLayout>
   );
 }

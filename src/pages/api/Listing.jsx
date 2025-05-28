@@ -195,6 +195,12 @@ async TeacherDashboard(){
   async userBlock(data){
     return Api.post(`/admin/blockuser`, data);
   }
+  async approveRejectTeacher(data){
+    return Api.post(`/admin/approveteacher`, data);
+  }
+  async adminStudentList(){
+    return Api.get(`/admin/studentlist`);
+  }
   render() {
     return (
       <div>

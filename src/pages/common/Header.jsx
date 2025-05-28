@@ -47,6 +47,7 @@ export default function Header() {
       toast.success("Logout Successfully");
       setUser(null);
     };
+    // console.log("user",user);
 
     return (
         <>
@@ -93,7 +94,7 @@ export default function Header() {
                             { user && user?.role ?
                                 <div className="flex flex-col lg:hidden">
                                     <Link 
-                                        href={`${user?.role === "student" ? "/student" : "/teacher-dashboard"}`}
+                                        href={`${user && user?.role === "student" ? "/student" : user?.role === "teacher" ? "/teacher-dashboard" : "/admin"}`} 
                                         className="text-[#CC2828] hover:text-[#ad0e0e] border-t border-[#ddd] text-base py-3 px-4 font-medium cursor-pointer" >
                                         View dashboard
                                     </Link>
@@ -128,7 +129,7 @@ export default function Header() {
                             { user && user?.role ? 
                             <>
                                 <Link 
-                                href={`${user?.role === "student" ? "/student" : "/teacher-dashboard"}`} 
+                                href={`${user && user?.role === "student" ? "/student" : user?.role === "teacher" ? "/teacher-dashboard" : "/admin"}`} 
                                 className="hidden lg:block bg-[#CC2828] hover:bg-[#ad0e0e] text-white text-base py-3.5 px-8 xl:px-10 font-medium cursor-pointer rounded-full" >
                                     View Dashboard                            
                                 </Link>

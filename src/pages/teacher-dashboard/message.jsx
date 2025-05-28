@@ -115,8 +115,8 @@ export default function Message() {
       <>
         <div className="flex flex-wrap w-full">
           {/* Sidebar */}
-          <div className="w-full lg:w-1/4  rounded-lg ">
-            <div className="mt-0 space-y-1 h-[calc(100vh-128px)] min-h-[300px] overflow-y-auto customscroll pb-5 pt-2">
+          <div className="w-full  mb-3 lg:mb-0  lg:w-1/4  rounded-lg ">
+            <div className="mt-0 space-y-1 max-h-[calc(100vh-128px)] md:h-[calc(100vh-128px)] min-h-[300px] overflow-y-auto customscroll pb-5 pt-2">
               {messageCount && messageCount.map((chat, index) => (
                 <div
                   key={index}

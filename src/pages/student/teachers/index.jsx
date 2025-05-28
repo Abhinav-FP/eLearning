@@ -76,11 +76,11 @@ export default function Index() {
             data?.teacher?.map((teacher, idx) => (
               <div key={idx}>
                 <div className="bg-white rounded-[10px] lesson_list_shadow  p-3 md:p-4 lg:p-5 flex flex-col lg:flex-row lg:items-center justify-between transition border-[rgba(204,40,40,0.2)] border-1 gap-5">
-                  <div className="flex flex-col sm:flex-row sm:items-center space-y-2 sm:space-x-3  mt-2">
+                  <div className="flex flex-col sm:flex-row sm:items-center space-y-2 md:pl-24 lg:pl-[130px] mt-2 relative min-h-20 lg:min-h-[104px]">
                     <Image
                       src={teacher?.userId?.profile_photo || "/profile.png"}
                       alt="Profile"
-                      className="w-16 h-16 md:w-20 md:h-20 lg:w-[104px] lg:h-[104px] rounded-full object-cover"
+                      className="w-16 h-16 md:w-20 md:h-20 lg:w-[104px] lg:h-[104px] rounded-full object-cover left-0 md:absolute top-0"
                       height={104}
                       width={104}
                     />

@@ -11,7 +11,7 @@ export default function DefaultMessage() {
                         Select a Chat to Start Messaging
                     </h2>
                     <p className="mt-2 text-sm text-gray-600 px-2">
-                        Start a new chat, send messages, and connect anytime with ease. Everything’s just one click away!
+                        Start a new chat, send messages, and connect anytime with ease. Everythings just one click away!
                     </p>
                 </div>
             </div>

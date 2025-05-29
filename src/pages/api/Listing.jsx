@@ -214,6 +214,10 @@ async TeacherDashboard(){
     return Api.post(`/admin/payoutUpdate/${id}`, data);
   }
 
+  async AdminBooking(){
+    return Api.get(`/admin/booking`);
+  }
+
   render() {
     return (
       <div>

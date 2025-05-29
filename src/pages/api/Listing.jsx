@@ -189,9 +189,31 @@ async TeacherDashboard(){
    async teacherbankget(){
     return Api.get(`/teacher/bank`);
   }
+
   async adminteacherlist(){
-    return Api.get(`/admin/existingteacher`);
+    return Api.get(`/admin/teachers`);
   }
+
+  async userBlock(data){
+    return Api.post(`/admin/blockuser`, data);
+  }
+
+  async approveRejectTeacher(data){
+    return Api.post(`/admin/approveteacher`, data);
+  }
+
+  async adminStudentList(){
+    return Api.get(`/admin/studentlist`);
+  }
+
+  async AdminPayoutList(){
+    return Api.get(`/admin/payout`);
+  }
+
+  async AdminPayoutAction(id, data){
+    return Api.post(`/admin/payoutUpdate/${id}`, data);
+  }
+
   render() {
     return (
       <div>

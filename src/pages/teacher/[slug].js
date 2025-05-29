@@ -25,6 +25,37 @@ export default function Index() {
   const closePopup = () => setIsPopupOpen(false);
   const Id = data?.userId?._id;
 
+  const QualificationMapping = {
+  "high_school": "High School Diploma",
+  "associate_degree": "Associate Degree",
+  "ba": "Bachelor of Arts (BA)",
+  "bsc": "Bachelor of Science (BSc)",
+  "bcom": "Bachelor of Commerce (BCom)",
+  "be": "Bachelor of Engineering (BE)",
+  "btech": "Bachelor of Technology (BTech)",
+  "bed": "Bachelor of Education (B.Ed)",
+  "ma": "Master of Arts (MA)",
+  "msc": "Master of Science (MSc)",
+  "mcom": "Master of Commerce (MCom)",
+  "me": "Master of Engineering (ME)",
+  "mtech": "Master of Technology (MTech)",
+  "med": "Master of Education (M.Ed)",
+  "mba": "Master of Business Administration (MBA)",
+  "phd": "Doctor of Philosophy (PhD)",
+  "edd": "Doctor of Education (EdD)",
+  "jd": "Juris Doctor (JD)",
+  "md": "Medical Doctor (MD)",
+  "ca": "Chartered Accountant (CA)",
+  "cs": "Company Secretary (CS)",
+  "cpa": "Certified Public Accountant (CPA)",
+  "diploma_education": "Diploma in Education",
+  "diploma_engineering": "Diploma in Engineering",
+  "pg_diploma": "Postgraduate Diploma",
+  "senmonshi": "Senmonshi (専門士 - Vocational School Degree)",
+  "kosen": "Kōtō Senmon Gakkō (高等専門学校 - College of Technology)",
+  "other": "Other"
+  };
+
   // Get timezone
   useEffect(() => {
     const timeZone = Intl.DateTimeFormat().resolvedOptions().timeZone || "";
@@ -90,9 +121,9 @@ export default function Index() {
   const [expanded, setExpanded] = useState(false);
 
   const words = description?.split(" ") || [];
-  const isLong = words.length > 250;
-  const shortText = words.slice(0, 250).join(" ");
-  const remainingText = words.slice(250).join(" ");
+  const isLong = words.length > 100;
+  const shortText = words.slice(0, 100).join(" ");
+  const remainingText = words.slice(100).join(" ");
 
   return (
     <div className="text-white tracking-[-0.03em] text-base lg:text-lg xl:text-xl font-medium">
@@ -100,7 +131,7 @@ export default function Index() {
         {expanded || !isLong ? description : shortText + "..."}
         {isLong && !expanded && (
           <button
-            className="ml-2 text-blue-400 underline"
+            className="ml-2 text-white hover:text-blue-400 underline cursor-pointer"
             onClick={() => setExpanded(true)}
           >
             View More
@@ -152,6 +183,50 @@ export default function Index() {
             </div>
           </div>
         </div>
+
+
+        {/* Extra fields div */}
+         <div className="pb-[40px] md:pb-[80px] bg-[#F8F9FA]">
+          <div className="container sm:container md:container lg:container xl:max-w-[1230px]  px-4 mx-auto">
+            <Heading
+              classess={"text-[#1E1E1E] mb-2"}
+              title={"Other Details"}
+            />
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-x-10 gap-y-4 text-gray-600 text-base xl:text-lg font-semibold font-inter py-2.5 lg:rounded-full mb-6 lg:mb-8">
+               {data?.userId?.nationality &&               
+              <p><strong>Nationality:</strong> {data?.userId?.nationality}</p>}
+               {data?.userId?.time_zone &&               
+              <p><strong>Timezone:</strong> {data?.userId?.time_zone}</p>}
+               {data?.userId?.nationality &&               
+              <p><strong>Gender:{" "}</strong> 
+                {data?.gender === 'M' ? 'Male' :
+                data?.gender === 'F' ? 'Female' :
+                'Other'
+                }</p>}
+               {data?.experience &&               
+              <p><strong>Experience:</strong> {data?.experience} years</p>}
+               {data?.qualifications &&               
+              <p><strong>Qualifications:{" "}</strong> 
+                {QualificationMapping[data?.qualifications] || ""}
+              </p>}
+               {data?.languages_spoken &&               
+              <p><strong>Languages:</strong> {data?.languages_spoken?.join(', ')}</p>}
+               {data?.average_duration &&               
+              <p><strong>Avg. Duration:</strong> {data?.average_duration} mins</p>}
+               {data?.average_price &&               
+              <p><strong>Avg. Price:</strong> ${data?.average_price}</p>}
+               {data?.documentlink  && 
+               <p><strong>Certification:{" "}</strong>
+               <a href={data?.documentlink} target="_blank" rel="noopener noreferrer" 
+               className="underline">
+                View Document
+              </a></p>
+               }
+            </div>
+          </div>
+        </div>
+
+
         <div
           style={{ backgroundImage: "url('/leasson-bg.png')" }}
           className="bg-[rgba(249,190,191,.5)] bg-cover bg-center rounded-[20px] py-[40px] lg:py-[60px]"

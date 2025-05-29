@@ -1,7 +1,20 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { IoCloseSharp } from "react-icons/io5";
 
 const Popup = ({ isOpen, onClose, children, size }) => {
+   
+  useEffect(() => {
+    if (isOpen) {
+      document.body.style.overflow = "hidden"; 
+    } else {
+      document.body.style.overflow = "";
+    }
+
+    return () => {
+      document.body.style.overflow = "";
+    };
+  }, [isOpen]);
+
   if (!isOpen) return null; // Render nothing if the popup is not open
 
   return (

@@ -61,7 +61,7 @@ export default function AuthLayout({ children, page , sidebar }) {
                     <div className="absolute right-0 mt-2 w-48 bg-white border border-gray-300 rounded-md shadow-lg z-50">
                       <ul className="py-1">
                         <Link 
-                        href={`${user && user?.role === "student" ? "/student/setting" : "/teacher-dashboard/setting"}`} 
+                        href={`${user && user?.role === "student" ? "/student/setting" : user?.role === "teacher" ? "/teacher-dashboard/setting" : "/admin/setting"}`} 
                         className="flex gap-2 px-4 py-2 hover:bg-gray-100 cursor-pointer">
                           <IoSettingsOutline size={20} /> Settings
                         </Link>

@@ -3,6 +3,7 @@ import TeacherLayout from '../Common/TeacherLayout';
 import Listing from '@/pages/api/Listing';
 import moment from 'moment';
 import { TableLoader } from '@/components/Loader';
+import NoData from '@/pages/common/NoData';
 
 export default function Index() {
   const [TabOpen, setTabOpen] = useState('upcoming');
@@ -119,8 +120,15 @@ export default function Index() {
                   ))
                 ) : (
                   <tr>
-                    <td colSpan="5" className="text-center py-4 text-[#727272]">
-                      No {TabOpen} bookings
+                    <td colSpan={5}>
+                      <div className="mt-2">
+                          <NoData
+                              Heading={"No bookings found."}
+                              content={
+                                  `Your account does not have any ${TabOpen} booking. If a booking is made it will be shown here`
+                              }
+                          />
+                      </div>
                     </td>
                   </tr>
                 )}

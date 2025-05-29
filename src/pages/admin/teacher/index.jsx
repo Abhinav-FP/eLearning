@@ -164,7 +164,7 @@ function TeacherListing() {
     fetchData();
   }, []);
 
-  console.log("teacherData", teacherData);
+  // console.log("teacherData", teacherData);
 
   const tabs = [
     {

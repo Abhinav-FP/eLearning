@@ -59,8 +59,8 @@ function Index() {
                 <TableLoader length={5} />
               ) : (
                 <tbody>
-                  {payout && payout.length > 0 ? (
-                    payout.map((item, index) => (
+                  {payout && payout?.length > 0 ? (
+                    payout?.map((item, index) => (
                       <tr
                         key={index}
                         className="hover:bg-[rgba(204,40,40,0.1)] border-t border-[rgba(204,40,40,0.2)]"

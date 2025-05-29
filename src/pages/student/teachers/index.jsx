@@ -111,7 +111,7 @@ export default function Index() {
                           </span>
                         )}
                       </h3>
-                      <p className="text-xs text-[#7A7A7A] font-inter tracking-[-0.04em] mb-1">
+                      <p className="text-xs text-[#7A7A7A] font-inter tracking-[-0.04em] mb-1 line-clamp-2">
                         {teacher?.description || ""}
                       </p>
                       <p className="text-[#E4B750] text-base lg:text-lg font-inter">

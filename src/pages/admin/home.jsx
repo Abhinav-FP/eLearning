@@ -7,6 +7,7 @@ import { IoCloseSharp } from 'react-icons/io5';
 import { IoMdEye } from 'react-icons/io';
 import Link from 'next/link';
 import FaqManager from './FaqManager';
+import TeacherFaq from './TeacherFaq';
 
 export default function Home() {
     const [processing, setProcessing] = useState(false);
@@ -135,7 +136,7 @@ export default function Home() {
 
         const handleRemove = () => {
             setImages(prev => ({ ...prev, [name]: null }));
-             HomeLists();
+            HomeLists();
         };
 
         return (
@@ -237,6 +238,8 @@ export default function Home() {
                 </div>
             </form>
             <FaqManager />
+
+            <TeacherFaq />
         </AdminLayout>
     );
 }

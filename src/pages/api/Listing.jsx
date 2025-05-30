@@ -245,6 +245,21 @@ async HomeFaqAdd(data){
     return Api.post(`/home/delete` ,data);
   }
   
+
+  async TeacherFaqAdd(data){
+    return Api.post(`/teacher/faqAdd` ,data);
+  }
+
+   async TeacherFaqList(){
+    return Api.get("/teacher/faqfind")
+  }
+   async TeacherFaqUpdate(data){
+    return Api.post(`/teacher/faqUpdate` ,data);
+  }
+
+  async TeacherFaqDelete(data){
+    return Api.post(`/teacher/delete` ,data);
+  }
   render() {
     return (
       <div>

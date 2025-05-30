@@ -41,6 +41,7 @@ const Availablility = ({ Availability, TeacherAvailabilitys }) => {
     const closeAvailablility = () => setIsPopupOpen(false);
 
     const handleSelectSlot = (slotInfo) => {
+        // console.log("slot",slotInfo);
         setSelectedSlot(slotInfo);
         setIsPopupOpen(true);
     };
@@ -172,6 +173,7 @@ const Availablility = ({ Availability, TeacherAvailabilitys }) => {
     const closeModal = () => {
         setSelectedEvent(false);
     };
+    // console.log("selectedSlot",selectedSlot);
 
     return (
         <>
@@ -223,7 +225,7 @@ const Availablility = ({ Availability, TeacherAvailabilitys }) => {
                             eventPropGetter={eventStyleGetter}
                             components={{ event: Event }}
                             onSelectEvent={(event) => {
-                              console.log("Clicked event", event);
+                              // console.log("Clicked event", event);
                               if(!event?.id || event?.id === "undefined"){
                                 toast.error("Slots having a booking are not editable");
                                 return;
@@ -231,6 +233,7 @@ const Availablility = ({ Availability, TeacherAvailabilitys }) => {
                               setSelectedEvent(event)
                             }}
                             onSelectSlot={(slotInfo) => {
+                              // console.log("sloInfo",slotInfo);
                                 const overlap = events.some(event =>
                                     moment(slotInfo.start).isBefore(event.end) &&
                                     moment(slotInfo.end).isAfter(event.start)
@@ -249,6 +252,7 @@ const Availablility = ({ Availability, TeacherAvailabilitys }) => {
                     isOpen={isPopupOpen}
                     onClose={closeAvailablility}
                     TeacherAvailabilitys={TeacherAvailabilitys}
+                    selectedSlot={selectedSlot}
                 />
             )}
 

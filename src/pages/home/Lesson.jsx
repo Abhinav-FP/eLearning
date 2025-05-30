@@ -7,6 +7,7 @@ import VideoModalPlayer from "../common/VideoModalPlayer";
 import { MdOutlinePlayCircle } from 'react-icons/md';
 import Image from "next/image";
 import Link from "next/link";
+import { formatMultiPrice } from "@/components/ValueDataHook";
 export default function Lesson({ title }) {
 
 
@@ -73,8 +74,11 @@ export default function Lesson({ title }) {
                                             <h3 className="font-bold text-xl xl:text-[25px] -tracking-[0.03em] m-0 pb-[20px] xl:pb-[35px] border-b border-[rgba(204,40,40,.2)] border-opacity-20 ">{items.userId.name}</h3>
                                         </div>
                                         <div className="flex justify-between items-center pt-4 lg:pt-5">
-                                            <div className="text-black font-bold text-lg lg:text-xl -tracking-[0.03em]">{items.average_price && `$${items.average_price}`}</div>
-                                            <Link href={`/teacher/${items._id}`} className='font-medium cursor-pointer rounded-full py-2 px-5 bg-[#CC2828] hover:bg-[#ad0e0e] text-white text-base xl:text-xl py-2.5 px-8 lg:px-9'>
+                                            <div className="text-black font-bold text-lg lg:text-xl -tracking-[0.03em]">
+                                                {items?.average_price && items?.average_duration && 
+                                                `${formatMultiPrice(items?.average_price,"USD")}/${items?.average_duration} minutes`}
+                                            </div>
+                                            <Link href={`/teacher/${items?._id}`} className='font-medium cursor-pointer rounded-full py-2 px-5 bg-[#CC2828] hover:bg-[#ad0e0e] text-white text-base xl:text-xl py-2.5 px-8 lg:px-9'>
                                               Book a Lesson
                                             </Link>
                                         </div>

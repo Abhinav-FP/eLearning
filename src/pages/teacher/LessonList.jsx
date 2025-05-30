@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import NoData from "../common/NoData";
 import { useRouter } from "next/router";
+import { formatMultiPrice } from "@/components/ValueDataHook";
 
 
 export default function LessonList({ lessons, showSelected, selectedLesson, SetSelectedLesson, slug}) {
@@ -31,7 +32,7 @@ export default function LessonList({ lessons, showSelected, selectedLesson, SetS
               </div>
               <div className="w-full md:w-[170px]  md:text-right">
                 <button className="text-center inline-block bg-[rgba(204,40,40,0.1)] tracking-[-0.04em] text-[#CC2828] text-base xl:text-lg font-semibold font-inter block px-4 lg:px-5 lg:px-6 py-2.5 rounded-full ">
-                  USD ${item?.price}
+                  {formatMultiPrice(item?.price, "USD")}
                 </button>
               </div>
             </div>

@@ -6,6 +6,7 @@ import Listing from "@/pages/api/Listing";
 import Link from "next/link";
 import { TeacherLoader } from "@/components/Loader";
 import NoData from "@/pages/common/NoData";
+import { formatMultiPrice } from "@/components/ValueDataHook";
 
 export default function Index() {
   const [teachers, setTeachers] = useState([]);
@@ -94,8 +95,8 @@ export default function Index() {
                         {teacher?.teacher?.description || ""}
                       </p>
                       <p className="text-yellow-500 text-lg">
-                        {teacher?.teacher.average_price &&
-                          ` $${teacher?.teacher.average_price}/${teacher?.teacher?.average_duration} min`}
+                        {teacher?.teacher.average_price && teacher?.teacher?.average_duration &&
+                          ` ${formatMultiPrice(teacher?.teacher.average_price, "USD")}/${teacher?.teacher?.average_duration} min`}
                       </p>
                     </div>
                   </div>

@@ -8,6 +8,7 @@ import Listing from "../api/Listing";
 import moment from "moment";
 import { TeacherDashboardLoader } from "@/components/Loader";
 import NoData from "../common/NoData";
+import { formatMultiPrice } from "@/components/ValueDataHook";
 
 export default function Index() {
 
@@ -63,7 +64,7 @@ export default function Index() {
             <div className="flex gap-3 text-lg font-semibold mt-6 xl:mt-4 items-center">
               {Dashboard?.TeacherData?.average_price && Dashboard?.TeacherData?.average_time ? (
                 <p className="flex gap-1 items-center font-inter text-base lg:text-lg xl:text-xl font-medium tracking-[-0.04em] text-black">
-                  <MdCheckCircle size={18} /> ${Dashboard.TeacherData.average_price}/{Dashboard.TeacherData.average_time}
+                  <MdCheckCircle size={18} /> {formatMultiPrice(Dashboard.TeacherData.average_price, "USD")}/{Dashboard.TeacherData.average_time} minutes
                 </p>
               ) : (
                 <p className="font-inter text-base lg:text-lg xl:text-xl font-medium tracking-[-0.04em] text-black">
@@ -97,10 +98,10 @@ export default function Index() {
             </div>
             <div className="text-lg space-y-1.5 mt-6 xl:mt-8">
               <p className="font-inter text-base lg:text-lg xl:text-xl font-medium tracking-[-0.04em] text-black flex justify-between">
-                Stripe Earnings: <span>${Dashboard?.stripepay}</span>
+                Stripe Earnings: <span>{formatMultiPrice(Dashboard?.stripepay, "USD")}</span>
               </p>
               <p className="font-inter text-base lg:text-lg xl:text-xl font-medium tracking-[-0.04em] text-black flex justify-between">
-                Paypal Earnings <span>${Dashboard?.paypalpay}</span>
+                Paypal Earnings <span>{formatMultiPrice(Dashboard?.paypalpay, "USD")}</span>
               </p>
             </div>
           </div>
@@ -129,7 +130,7 @@ export default function Index() {
             </div>
             : 
             <NoData
-              Heading={"No upcoming lesson found."}
+              Heading={"No upcoming lesson found"}
             />
             }
           </div>
@@ -166,16 +167,16 @@ export default function Index() {
             </div>
             <div className="text-lg space-y-1.5 mt-6 xl:mt-8">
               <p className="font-inter text-base lg:text-lg xl:text-xl font-medium tracking-[-0.04em] text-black flex justify-between">
-                Total Earnings: <span>${Dashboard?.earningsSummary?.totalEarnings}</span>
+                Total Earnings: <span>{formatMultiPrice(Dashboard?.earningsSummary?.totalEarnings, "USD")}</span>
               </p>
               <p className="font-inter text-base lg:text-lg xl:text-xl font-medium tracking-[-0.04em] text-black flex justify-between">
-                Requested Earnings: <span>${Dashboard?.earningsSummary?.requestedEarnings}</span>
+                Requested Earnings: <span>{formatMultiPrice(Dashboard?.earningsSummary?.requestedEarnings, "USD")}</span>
               </p>
               <p className="font-inter text-base lg:text-lg xl:text-xl font-medium tracking-[-0.04em] text-black flex justify-between">
-                Paid Earnings: <span>${Dashboard?.earningsSummary?.approvedEarnings}</span>
+                Paid Earnings: <span>{formatMultiPrice(Dashboard?.earningsSummary?.approvedEarnings, "USD")}</span>
               </p>
               <p className="font-inter text-base lg:text-lg xl:text-xl font-medium tracking-[-0.04em] text-black flex justify-between">
-                Available Earnings: <span>${Dashboard?.earningsSummary?.pendingEarnings}</span>
+                Available Earnings: <span>{formatMultiPrice(Dashboard?.earningsSummary?.pendingEarnings, "USD")}</span>
               </p>
             </div>
           </div>

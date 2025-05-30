@@ -6,19 +6,19 @@ import EmilyCarter from "../Assets/Images/emily-carter.png";
 
 function getYouTubeID(url) {
     const regExp = /(?:youtube\.com.*(?:\?|&)v=|youtu\.be\/)([^&\n?#]+)/;
-    const match = url && url.match(regExp);
+    const match = url && url?.match(regExp);
     return match && match[1] ? match[1] : null;
 }
 
 function getVimeoID(url) {
     const regExp = /vimeo\.com\/(\d+)/;
-    const match = url && url.match(regExp);
+    const match = url && url?.match(regExp);
     return match && match[1] ? match[1] : null;
 }
 
 function getVideoPlatform(url) {
-    if (url.includes('youtube.com') || url.includes('youtu.be')) return 'youtube';
-    if (url.includes('vimeo.com')) return 'vimeo';
+    if (url && url?.includes('youtube.com') || url?.includes('youtu.be')) return 'youtube';
+    if (url && url?.includes('vimeo.com')) return 'vimeo';
     return 'unknown';
 }
 

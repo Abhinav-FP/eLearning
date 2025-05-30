@@ -2,7 +2,7 @@ import React, { useEffect } from "react";
 import { IoCloseSharp } from "react-icons/io5";
 
 const Popup = ({ isOpen, onClose, children, size }) => {
-   
+   console.log("onClose" ,onClose)
   useEffect(() => {
     if (isOpen) {
       document.body.style.overflow = "hidden"; 

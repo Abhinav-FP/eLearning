@@ -1,5 +1,5 @@
 import { Component } from "react";
-import { Api } from "./Api";
+import { Api, ApiallowFile } from "./Api";
 
 class Listing extends Component {
   async Register(data) {
@@ -218,6 +218,48 @@ async TeacherDashboard(){
     return Api.get(`/admin/booking`);
   }
 
+
+  
+
+  async HomeUpdate(data){
+    return ApiallowFile.post(`/home/update` , data);
+  }
+
+   async HomeList(){
+    return Api.get(`/home/find`);
+  }
+
+  async HomeFaqList(){
+    return Api.get("/home/faqfind")
+  }
+
+
+async HomeFaqAdd(data){
+    return Api.post(`/home/faqAdd` ,data);
+  }
+   async HomeFaqUpdate(data){
+    return Api.post(`/home/faqUpdate` ,data);
+  }
+
+  async HomeFaqDelete(data){
+    return Api.post(`/home/delete` ,data);
+  }
+  
+
+  async TeacherFaqAdd(data){
+    return Api.post(`/teacher/faqAdd` ,data);
+  }
+
+   async TeacherFaqList(){
+    return Api.get("/teacher/faqfind")
+  }
+   async TeacherFaqUpdate(data){
+    return Api.post(`/teacher/faqUpdate` ,data);
+  }
+
+  async TeacherFaqDelete(data){
+    return Api.post(`/teacher/delete` ,data);
+  }
   render() {
     return (
       <div>

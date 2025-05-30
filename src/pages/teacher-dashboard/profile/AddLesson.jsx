@@ -143,7 +143,14 @@ export default function AddLesson({ isOpen, onClose, data, getLessons }) {
             type="text"
             name="price"
             value={formData.price}
-            onChange={handleChange}
+            onChange={(e) => {
+              if (
+                /^[0-9]*$/.test(e.target.value)
+              ) {
+                handleChange(e);
+              }
+            }}
+            maxLength="7"
             placeholder="Enter price"
             className="w-full p-3 rounded-md bg-gray-100 text-gray-700 focus:outline-none focus:ring-2 focus:ring-[#CC2828]"
           />

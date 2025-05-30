@@ -96,8 +96,15 @@ export default function Profile() {
   //  console.log("data",data);
   const handleSubmit = async (e) => {
     e.preventDefault();
-    // console.log("file",file);
-    // return;
+    if (data?.intro_video) {
+      const url = data.intro_video;
+      const isYouTube = url.includes('youtube.com') || url.includes('youtu.be');
+      const isVimeo = url.includes('vimeo.com');
+      if (!isYouTube && !isVimeo) {
+        toast.error('Only YouTube and Vimeo links are allowed in intro video.');
+        return;
+      }
+    }
     if (processing) return;
     setProcessing(true);
     try {
@@ -315,8 +322,8 @@ export default function Profile() {
             </div>
 
           <div className="w-full lg:w-6/12  px-2">
-            <label className="block text-[#CC2828] font-medium text-base xl:text-xl mb-1 tracking-[-0.04em]">
-              Intro video link
+            <label className="block text-[#CC2828] font-medium text-base xl:text-xl mb-1 tracking-[-0.04em] capitalize">
+              Intro video link (Only Youtube and vimeo allowed)
             </label>
             <input
               type="text"

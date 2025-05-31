@@ -89,7 +89,7 @@ const FaqManager = () => {
     };
 
     return (
-        <div className="min-h-screen p-5 lg:p-[30px] space-y-10">
+        <div className="px-5 lg:px-[30px] pb-5 lg:pb-[30px] space-y-6">
             <div className="w-full lg:w-6/12 pl-6 lg:pl-0 mb-4 flex justify-between">
                 <h2 className="text-[#CC2828] text-xl lg:text-2xl font-semibold">FAQ Management</h2>
             </div>
@@ -103,24 +103,25 @@ const FaqManager = () => {
                             value={faq.question}
                             onChange={(e) => handleFaqChange(index, 'question', e.target.value)}
                             placeholder="Enter question"
-                            className="w-full border border-[#CC282880] bg-[#CC28281A] text-[#46494D] rounded-full px-4 py-2"
+                            className="w-full bg-[#F4F6F8] text-[#727272] border border-[#F4F6F8] rounded-[10px] px-4 py-2 focus:outline-none"
                         />
                     </div>
 
                     <div>
                         <div className="flex justify-between items-center mb-2">
                             <label className="block text-[#CC2828] font-medium">Answer</label>
-                            <div className="flex gap-3">
+                            <div className="flex items-center gap-2">
                                 <button
                                     onClick={() => handleFaqSubmit(index)}
-                                    className="bg-red-500 text-white rounded-full p-2 hover:bg-red-700"
+                                    className="bg-red-500 text-white rounded-full p-1 hover:bg-red-700"
                                     title={faq._id ? "Update FAQ" : "Add FAQ"}
                                 >
                                     {faq._id ? <MdEdit /> : <MdAdd />}
                                 </button>
+                                 <span className="text-[#b1a9a9]">|</span>
                                 <button
                                     onClick={() => deleteFaq(index)}
-                                    className="bg-red-500 text-white rounded-full p-2 hover:bg-red-700"
+                                    className="bg-red-500 text-white rounded-full p-1 hover:bg-red-700"
                                     title="Delete FAQ"
                                 >
                                     <MdDelete />
@@ -132,16 +133,16 @@ const FaqManager = () => {
                             value={faq.answer}
                             onChange={(e) => handleFaqChange(index, 'answer', e.target.value)}
                             placeholder="Enter answer"
-                            className="w-full border border-[#CC282880] bg-[#CC28281A] text-[#46494D] rounded-full px-4 py-2"
+                            className="w-full bg-[#F4F6F8] text-[#727272] border border-[#F4F6F8] rounded-[10px] px-4 py-2 focus:outline-none"
                         />
                     </div>
                 </div>
             ))}
 
-            <div className="flex justify-center pt-10">
+            <div className="flex justify-center ">
                 <button
                     onClick={addFaq}
-                    className="w-full max-w-[183px] border border-[#CC2828] bg-[#CC2828] hover:bg-red-700 text-white py-3.5 rounded-[10px] text-base xl:text-xl transition"
+                    className="w-full max-w-[170px] border border-[#CC2828] bg-[#CC2828] hover:bg-red-700 text-white py-3 rounded-[10px] text-base xl:text-lg transition"
                 >
                     + Add More
                 </button>

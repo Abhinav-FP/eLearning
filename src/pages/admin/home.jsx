@@ -106,23 +106,6 @@ export default function Home() {
     };
 
 
-
-
-
-    const Input = ({ label, name, type = "text", ...props }) => (
-        <div className="mb-4 w-full lg:w-6/12 xl:w-6/12 lg:pr-3">
-            <label className="block text-[#CC2828] font-medium text-base xl:text-xl mb-1">{label}</label>
-            <input
-                type={type}
-                name={name}
-                onChange={handleChange}
-                value={data[name]}
-                className="w-full h-11 lg:h-[54px] font-medium appearance-none block bg-[#CC28281A] text-[#46494D] border border-[#CC282880] rounded-[20px] py-3 px-6 focus:outline-none"
-                {...props}
-            />
-        </div>
-    );
-
     const FileUpload = ({ label, name, view }) => {
         const fileValue = images[name];
 
@@ -141,7 +124,7 @@ export default function Home() {
 
         return (
             <div className="mb-4 w-full lg:w-6/12 xl:w-6/12 lg:pr-3">
-                <label className="text-[#CC2828] font-medium text-base xl:text-xl mb-1 flex items-center">
+                <label className="text-[#CC2828] font-medium text-base xl:text-lg mb-1 flex items-center">
                     {label}
                     {view && typeof fileValue === 'string' && (
                         <Link href={view} target="_blank" rel="noopener noreferrer" className="ml-2 text-blue-600 underline p-1 bg-[#CC28281A] rounded">
@@ -155,7 +138,7 @@ export default function Home() {
                     name={name}
                     accept="image/*"
                     onChange={handleImageChange}
-                    className="w-full h-11 lg:h-[54px] font-medium appearance-none block bg-[#CC28281A] text-[#46494D] border border-[#CC282880] rounded-[20px] py-3 px-6 focus:outline-none"
+                    className="w-full h-11 lg:h-[54px] font-medium appearance-none block bg-[#F4F6F8] text-[#727272] border border-[#F4F6F8] rounded-[10px] py-3 px-6 focus:outline-none"
                 />
 
                 {fileValue && (
@@ -192,50 +175,95 @@ export default function Home() {
 
     return (
         <AdminLayout page="Home Edit">
-            <form onSubmit={handleSubmit} className="min-h-screen p-5 lg:p-[30px] space-y-10">
-                {/* Hero Section */}
-                <SectionHeading title="Hero Section" />
-                <div className="flex flex-wrap">
-                    <Input label="Heading" name="hero_heading" placeholder="Enter Heading" />
-                    <FileUpload label="Upload Image 1" name="hero_img_first" view={images?.hero_img_first} />
-                    <FileUpload label="Upload Image 2" name="hero_img_second" view={images?.hero_img_second} />
-                </div>
+            <form onSubmit={handleSubmit} className="min-h-screen p-5 lg:p-[30px] space-y-6">
+                <div>
+                    {/* Hero Section */}
+                    <SectionHeading title="Hero Section" />
+                    <div className="flex flex-wrap">
+                        <div className="mb-4 w-full lg:w-6/12 xl:w-6/12 lg:pr-3">
+                            <label className="block text-[#CC2828] font-medium text-base xl:text-lg mb-1">Hero Heading</label>
+                            <input
+                                type={"text"}
+                                name={"hero_heading"}
+                                onChange={handleChange}
+                                value={data.hero_heading || ""}
+                                className="w-full h-11 lg:h-[54px] font-medium appearance-none block bg-[#F4F6F8] text-[#727272] border border-[#F4F6F8] rounded-[10px] py-3 px-6 focus:outline-none"
+                            />
+                        </div>
 
-                {/* Find Your Course Section */}
-                <SectionHeading title="Find Your Course" />
-                <div className="flex flex-wrap">
-                    <Input label="Heading" name="course_heading" placeholder="Course Heading" />
-                    <FileUpload label="Upload Image 2" name="course_img" view={images?.course_img} />
-                    <div className="w-full mb-4">
-                        <label className="block text-[#CC2828] font-medium text-base xl:text-xl mb-1">Description</label>
-                        <textarea
-                            rows={5}
-                            name="course_paragraph"
-                            onChange={handleChange}
-                            value={data.course_paragraph}
-                            placeholder="Enter description"
-                            className="w-full bg-[#CC28281A] text-[#46494D] border border-[#CC282880] rounded-[20px] py-3 px-6 focus:outline-none"
-                        />
+                        <FileUpload label="Upload Image 1" name="hero_img_first" view={images?.hero_img_first} />
+                        <FileUpload label="Upload Image 2" name="hero_img_second" view={images?.hero_img_second} />
                     </div>
                 </div>
 
-                <SectionHeading title="Ready" />
-                <Input label="Heading" name="learn" placeholder="Ready Heading" />
+                <div>
+                    {/* Find Your Course Section */}
+                    <SectionHeading title="Find Your Course" />
+                    <div className="flex flex-wrap">
+                        <div className="mb-4 w-full lg:w-6/12 xl:w-6/12 lg:pr-3">
+                            <label className="block text-[#CC2828] font-medium text-base xl:text-lg mb-1">Course Heading</label>
+                            <input
+                                type={"text"}
+                                name={"course_heading"}
+                                onChange={handleChange}
+                                value={data.course_heading || ""}
+                                className="w-full h-11 lg:h-[54px] font-medium appearance-none block bg-[#F4F6F8] text-[#727272] border border-[#F4F6F8] rounded-[10px] py-3 px-6 focus:outline-none"
+                            />
+                        </div>
+                        <FileUpload label="Upload Image 2" name="course_img" view={images?.course_img} />
+                        <div className="w-full mb-4">
+                            <label className="block text-[#CC2828] font-medium text-base xl:text-xl mb-1">Description</label>
+                            <textarea
+                                rows={5}
+                                name="course_paragraph"
+                                onChange={handleChange}
+                                value={data.course_paragraph}
+                                placeholder="Enter description"
+                                className="w-full bg-[#F4F6F8] text-[#727272] border border-[#F4F6F8] rounded-[20px] py-3 px-6 focus:outline-none"
+                            />
+                        </div>
+                    </div>
+                </div>
 
-                {/* Teacher Section */}
-                <SectionHeading title="Teacher" />
-                <Input label="Heading" name="best_teacher" placeholder="Teacher Heading" />
+                <div className='flex flex-wrap'>
+                    <div className="mb-4 w-full lg:w-6/12 xl:w-6/12 lg:pr-3">
+                        <SectionHeading title="Ready" />
+                        <label className="block text-[#CC2828] font-medium text-base xl:text-lg mb-1">learn Heading</label>
+                        <input
+                            type={"text"}
+                            name={"learn"}
+                            onChange={handleChange}
+                            value={data.learn || ""}
+                            className="w-full h-11 lg:h-[54px] font-medium appearance-none block bg-[#F4F6F8] text-[#727272] border border-[#F4F6F8] rounded-[10px] py-3 px-6 focus:outline-none"
+                        />
+                    </div>
+                    {/* Teacher Section */}
+                    <div className="mb-4 w-full lg:w-6/12 xl:w-6/12 lg:pr-3">
+                        <SectionHeading title="Teacher" />
 
+                        <label className="block text-[#CC2828] font-medium text-base xl:text-lg mb-1">best teacher Heading</label>
+                        <input
+                            type={"text"}
+                            name={"best_teacher"}
+                            onChange={handleChange}
+                            value={data.best_teacher || ""}
+                            className="w-full h-11 lg:h-[54px] font-medium appearance-none block bg-[#F4F6F8] text-[#727272] border border-[#F4F6F8] rounded-[10px] py-3 px-6 focus:outline-none"
+                        />
+                    </div>
+
+               
                 {/* Submit Button */}
-                <div className="flex justify-center pt-10">
+                <div className="flex justify-center w-full">
                     <button
                         type="submit"
                         disabled={processing}
-                        className="w-full max-w-[183px] border border-[#CC2828] bg-[#CC2828] hover:bg-red-700 text-white py-3.5 rounded-[10px] font-normal text-base xl:text-xl transition tracking-[-0.04em]"
+                        className="w-full max-w-[170px] border border-[#CC2828] bg-[#CC2828] hover:bg-red-700 text-white py-3  rounded-[10px] font-normal text-base xl:text-lg transition tracking-[-0.04em]"
                     >
                         {processing ? "Loading..." : "Submit"}
                     </button>
                 </div>
+                 </div>
+
             </form>
             <FaqManager />
 

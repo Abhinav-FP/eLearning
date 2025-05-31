@@ -218,6 +218,9 @@ async TeacherDashboard(){
     return Api.get(`/admin/booking`);
   }
 
+ async AdminTeacherData(id){
+    return Api.get(`/admin/teacher/${id}`, );
+  }
 
   
 

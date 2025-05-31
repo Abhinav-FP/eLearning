@@ -1,10 +1,27 @@
 import React from 'react';
+import axios from 'axios';
 import { PayPalScriptProvider, PayPalButtons } from '@paypal/react-paypal-js';
 
 export default function PaypalCheckout() {
+  // Make this async to handle the axios call properly
+  const BACKEND_URL = process.env.NEXT_PUBLIC_BASE_URL
+ const handlePaymentSave = async (details) => {
+  try {
+    const response = await axios.post(`${BACKEND_URL}payment/save`, {
+      orderID: details.id,
+      amount: details.purchase_units?.[0]?.amount?.value,
+      payer: details.payer,
+      status: details.status,
+    });
+    console.log("Payment saved:", response.data);
+  } catch (error) {
+    console.error("Error saving payment:", error);
+  }
+};
+
   return (
     <PayPalScriptProvider options={{ "client-id": process.env.NEXT_PUBLIC_PAYPAL_CLIENT_ID }}>
-      <div style={{ maxWidth: '400px', margin: 'auto' }}>
+      <div style={{ maxWidth: '400px', margin: 'auto', marginTop: 40 }}>
         <h2>Pay $20 with PayPal</h2>
         <PayPalButtons
           style={{ layout: "vertical" }}
@@ -15,21 +32,10 @@ export default function PaypalCheckout() {
               }],
             });
           }}
-          onApprove={(data, actions) => {
-            return actions.order.capture().then(function (details) {
-              alert('Transaction completed by ' + details.payer.name.given_name);
-
-              fetch("https://a107-122-180-247-198.ngrok-free.app/api/paypal/webhook", {
-                method: "POST",
-                headers: { "Content-Type": "application/json" },
-                body: JSON.stringify(details),
-              }).then(res => res.json())
-                .then(response => {
-                  console.log("Saved to backend:", response);
-                }).catch(err => {
-                  console.error("Error saving to backend:", err);
-                });
-            });
+          onApprove={async (data, actions) => {
+            const details = await actions.order.capture();
+            alert('Transaction completed by ' + details.payer.name.given_name);
+            await handlePaymentSave(details);
           }}
         />
       </div>

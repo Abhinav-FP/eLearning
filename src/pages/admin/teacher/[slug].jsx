@@ -4,7 +4,36 @@ import teacherImg from '../../Assets/Images/teacherimg.jpg';
 import { FaCheckCircle, FaGlobe, FaRegCalendarAlt, FaPlay, FaPhoneAlt } from "react-icons/fa";
 import { FiMapPin } from "react-icons/fi";
 import { MdOutlineEmail } from "react-icons/md";
-const Detail = () => {
+import { useRouter } from "next/router";
+import { useEffect, useState } from "react";
+import Listing from "@/pages/api/Listing";
+const Index = ({ }) => {
+    const router = useRouter();
+    console.log(router)
+    const Id = router?.query?.slug
+    console.log(Id)
+
+    const [record, setRecord] = useState("")
+    const AdminTteacher = async () => {
+        try {
+            const main = new Listing();
+            const response = await main.AdminTeacherData(Id);
+            console.log("response", response)
+            setRecord(response?.data?.data?.record);
+        } catch (error) {
+            console.log("error", error);
+        }
+    };
+
+    useEffect(() => {
+        if (Id) {
+            AdminTteacher(Id);
+        }
+    }, [Id]); // ✅ Only run when the Id (slug) is available
+
+
+
+
     const teacherData = {
         userId: {
             name: "Rahul Jain",
@@ -80,23 +109,23 @@ const Detail = () => {
                         <a href="mailto:james@gmail.com" class="font-medium text-sm md:text-base xl:text-lg tracking-[-0.03em] text-[#8D929A] hover:text-[#CC2828]"> <MdOutlineEmail className="inline" size={18} /> james@gmail.com</a>
                     </div>
                     <div className="w-full md:w-6/12 lg:w-4/12 mb-3">
-                        <a href="#" className="font-medium text-sm md:text-base xl:text-lg tracking-[-0.03em] text-[#8D929A] hover:text-[#CC2828]"> <FaPhoneAlt className="inline"  size={18} /> 1234567890</a>
+                        <a href="#" className="font-medium text-sm md:text-base xl:text-lg tracking-[-0.03em] text-[#8D929A] hover:text-[#CC2828]"> <FaPhoneAlt className="inline" size={18} /> 1234567890</a>
                     </div>
                     <div className="w-full md:w-6/12 lg:w-4/12 mb-3">
-                      <p className="font-medium text-sm md:text-base xl:text-lg tracking-[-0.03em] text-[#8D929A]">
-                       <FiMapPin className="inline"  size={18} /> 123 Main Street, Huston,
-                      </p>
+                        <p className="font-medium text-sm md:text-base xl:text-lg tracking-[-0.03em] text-[#8D929A]">
+                            <FiMapPin className="inline" size={18} /> 123 Main Street, Huston,
+                        </p>
                     </div>
                     <div className="w-full md:w-6/12 lg:w-4/12 mb-3 ">
                         <a href="mailto:james@gmail.com" class="font-medium text-sm md:text-base xl:text-lg tracking-[-0.03em] text-[#8D929A] hover:text-[#CC2828]"> <MdOutlineEmail className="inline" size={18} /> james@gmail.com</a>
                     </div>
                     <div className="w-full md:w-6/12 lg:w-4/12 mb-3">
-                        <a href="#" className="font-medium text-sm md:text-base xl:text-lg tracking-[-0.03em] text-[#8D929A] hover:text-[#CC2828]"> <FaPhoneAlt className="inline"  size={18} /> 1234567890</a>
+                        <a href="#" className="font-medium text-sm md:text-base xl:text-lg tracking-[-0.03em] text-[#8D929A] hover:text-[#CC2828]"> <FaPhoneAlt className="inline" size={18} /> 1234567890</a>
                     </div>
                     <div className="w-full md:w-6/12 lg:w-4/12 mb-3">
-                      <p className="font-medium text-sm md:text-base xl:text-lg tracking-[-0.03em] text-[#8D929A]">
-                       <FiMapPin className="inline"  size={18} /> 123 Main Street, Huston,
-                      </p>
+                        <p className="font-medium text-sm md:text-base xl:text-lg tracking-[-0.03em] text-[#8D929A]">
+                            <FiMapPin className="inline" size={18} /> 123 Main Street, Huston,
+                        </p>
                     </div>
 
                 </div>
@@ -107,4 +136,4 @@ const Detail = () => {
     );
 };
 
-export default Detail;
+export default Index;

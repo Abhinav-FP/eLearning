@@ -11,7 +11,6 @@ const Index = ({ }) => {
     const router = useRouter();
     console.log(router)
     const Id = router?.query?.slug
-    console.log(Id)
 
     const [record, setRecord] = useState("")
     const AdminTteacher = async () => {

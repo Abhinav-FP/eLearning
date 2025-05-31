@@ -4,6 +4,7 @@ import Listing from '@/pages/api/Listing';
 import moment from 'moment';
 import { TableLoader } from '@/components/Loader';
 import NoData from '@/pages/common/NoData';
+import { formatMultiPrice } from '@/components/ValueDataHook';
 
 export default function Index() {
   const [TabOpen, setTabOpen] = useState('upcoming');
@@ -36,6 +37,7 @@ export default function Index() {
   }, [data]);
 
   const currentList = TabOpen === 'upcoming' ? upcoming : past;
+  console.log("currentList",currentList);
 
   return (
     <TeacherLayout>
@@ -111,10 +113,12 @@ export default function Index() {
                         {item?.UserId?.name}
                       </td>
                       <td className="px-3 lg:px-4 py-2 lg:py-3 capitalize text-black text-sm lg:text-base font-medium font-inter ">
-                        {item?.LessonId?.duration}
+                        {item?.LessonId?.duration} min{" "}
+                        ({moment(item?.startDateTime).format('hh:mm A')} -{" "}
+                        {moment(item?.endDateTime).format('hh:mm A')})
                       </td>
                       <td className="px-3 lg:px-4 py-2 lg:py-3 capitalize text-black text-sm lg:text-base font-medium font-inter ">
-                        ${item?.teacherEarning}
+                        {formatMultiPrice(item?.teacherEarning, "USD")}
                       </td>
                     </tr>
                   ))

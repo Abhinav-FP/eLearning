@@ -525,4 +525,29 @@ const TeacherProfileFormLoader = () => {
   );
 };
 
-export { Loader, BookLoader, LessonLoader, TeacherLoader, TableLoader, ReviewLoader, ProfileFormLoader, StudentDashboardLoader, TeacherDashboardLoader, EditProfileLoader, TeacherEarningsLoader, TeacherProfileFormLoader };
+const ChatListShimmer = () => {
+  return (
+      <div className="mt-0 space-y-1 max-h-[calc(100vh-128px)] md:h-[calc(100vh-128px)] min-h-[300px] overflow-y-auto pb-5 pt-2">
+        {Array.from({ length: 6 }).map((_, index) => (
+          <div
+            key={index}
+            className="flex items-center bg-white min-h-[72px] pr-[66px] pl-[89px] py-[8px] relative animate-pulse"
+          >
+            {/* Avatar */}
+            <div className="w-[50px] h-[50px] lg:w-[56px] lg:h-[56px] rounded-lg bg-gray-300 absolute left-[22px] top-1/2 -translate-y-1/2" />
+
+            {/* Name + Message lines */}
+            <div className="flex-1">
+              <div className="h-4 w-1/2 bg-gray-300 rounded mb-2" />
+              <div className="h-3 w-1/3 bg-gray-200 rounded" />
+            </div>
+
+            {/* Unread badge shimmer */}
+            <div className="h-[28px] w-[28px] bg-gray-300 rounded-full absolute right-[22px] top-1/2 -translate-y-1/2" />
+          </div>
+        ))}
+      </div>
+  );
+};
+
+export { Loader, BookLoader, LessonLoader, TeacherLoader, TableLoader, ReviewLoader, ProfileFormLoader, StudentDashboardLoader, TeacherDashboardLoader, EditProfileLoader, TeacherEarningsLoader, TeacherProfileFormLoader, ChatListShimmer };

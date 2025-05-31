@@ -7,6 +7,7 @@ import Listing from "@/pages/api/Listing";
 import moment from "moment";
 import { TeacherEarningsLoader } from "@/components/Loader";
 import NoData from "@/pages/common/NoData";
+import { formatMultiPrice } from "@/components/ValueDataHook";
 
 export default function index() {
   // const earnings = [
@@ -182,7 +183,7 @@ export default function index() {
                         ).format("DD MMM YYYY, hh:mm A") || ""}
                       </td>
                       <td className="px-3 lg:px-4 py-2 lg:py-3 text-black text-sm lg:text-base font-medium font-inter">
-                        ${item?.teacherEarning}
+                        {formatMultiPrice(item?.teacherEarning, "USD")}
                       </td>
                       {/* <td className="px-3 lg:px-4 py-2 lg:py-3 text-black text-sm lg:text-base font-medium font-inter capitalize">
                                     {item?.payoutStatus}

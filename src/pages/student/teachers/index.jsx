@@ -6,6 +6,7 @@ import { FaHeart } from "react-icons/fa6";
 import Listing from "@/pages/api/Listing";
 import Link from "next/link";
 import { TeacherLoader } from "@/components/Loader";
+import { formatMultiPrice } from "@/components/ValueDataHook";
 
 export default function Index() {
   const [data, setData] = useState([]);
@@ -116,7 +117,7 @@ export default function Index() {
                       </p>
                       <p className="text-[#E4B750] text-base lg:text-lg font-inter">
                         {teacher.average_price && teacher?.average_duration &&
-                          ` $${teacher.average_price}/${teacher?.average_duration} min`}
+                          ` ${formatMultiPrice(teacher.average_price, "USD")}/${teacher?.average_duration} min`}
                       </p>
                     </div>
                   </div>

@@ -8,6 +8,7 @@ import Delete from "./Delete";
 import Link from "next/link";
 import { EditProfileLoader } from "@/components/Loader";
 import NoData from "@/pages/common/NoData";
+import { formatMultiPrice } from "@/components/ValueDataHook";
 
 export default function Index() {
   const [data, setData] = useState([]);
@@ -66,18 +67,21 @@ export default function Index() {
           <div className="flex items-center text-[#E4B750] text-lg mt-2">
             ★★★★☆ <span className="text-black tracking-[-0.04em] text-xs font-medium">(29)</span>
           </div>
-          <p className="text-xs text-[#CC2828] bg-[rgba(204,40,40,0.1)] mt-2 font-medium tracking-[-0.04em] px-2 py-1 rounded-full">
+          <p className="text-xs text-[#CC2828] bg-[rgba(204,40,40,0.1)] mt-2 font-medium tracking-[-0.04em] px-2 py-1 rounded-full line-clamp-2">
             {item?.description || ""}
           </p>
         </div>
         <div className="text-center sm:text-right">
           <div className="bg-[rgba(204,40,40,0.1)] tracking-[-0.04em] text-center text-sm lg:text-base text-[#CC2828] font-semibold capitalize min-w-[119px] md:min-w-[149px] px-2 py-2 rounded-full">
-            {item?.price ? `USD $${item?.price}` : ""}
+            {item?.price && item?.duration 
+            ? `${formatMultiPrice(item?.price, "USD")}/${item?.duration} min` : ""}
           </div>
         </div>
       </div>
     );
   };
+
+  // console.log("data", data);
 
   return (
     <TeacherLayout page={"Profile"}>

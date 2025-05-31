@@ -3,12 +3,32 @@ import Popup from '@/pages/common/Popup';
 import React, { useEffect, useState } from 'react'
 import toast from 'react-hot-toast';
 
-export default function Addavailablility({ isOpen, onClose, TeacherAvailabilitys }) {
+export default function Addavailablility({ isOpen, onClose, TeacherAvailabilitys, selectedSlot }) {
   const [loading, setLoading] = useState(false);
   const [formData, setFormData] = useState({
-    startDateTime: "",
-    endDateTime: "",
+     startDateTime: "",
+     endDateTime: "",
   });
+
+  function toDatetimeLocal(date) {
+  const pad = (n) => n.toString().padStart(2, '0');
+  const year = date.getFullYear();
+  const month = pad(date.getMonth() + 1);
+  const day = pad(date.getDate());
+  const hours = pad(date.getHours());
+  const minutes = pad(date.getMinutes());
+  return `${year}-${month}-${day}T${hours}:${minutes}`;
+  };
+
+  useEffect(()=>{
+    if(selectedSlot?.start && selectedSlot?.end){
+    setFormData((prev)=>({
+      ...prev,
+      startDateTime: toDatetimeLocal(new Date(selectedSlot?.start)),
+      endDateTime: toDatetimeLocal(new Date(selectedSlot?.end)),
+    }));
+  }
+  },[selectedSlot])
 
   const handleChange = (e) => {
     const { name, value } = e.target;

@@ -12,6 +12,7 @@ import { useRouter } from "next/router";
 import Listing from "../api/Listing";
 import BookingPopup from "./BookingPopup";
 import { BookLoader } from "../../components/Loader";
+import { formatMultiPrice } from "@/components/ValueDataHook";
 
 export default function Index() {
   const router = useRouter();
@@ -214,7 +215,7 @@ export default function Index() {
                {data?.average_duration &&               
               <p><strong>Avg. Duration:</strong> {data?.average_duration} mins</p>}
                {data?.average_price &&               
-              <p><strong>Avg. Price:</strong> ${data?.average_price}</p>}
+              <p><strong>Avg. Price:</strong> {formatMultiPrice(data?.average_price, "USD")}</p>}
                {data?.documentlink  && 
                <p><strong>Certification:{" "}</strong>
                <a href={data?.documentlink} target="_blank" rel="noopener noreferrer" 

@@ -3,6 +3,7 @@ import TeacherLayout from "../Common/TeacherLayout";
 import { useEffect, useState } from "react";
 import { TableLoader } from "@/components/Loader";
 import NoData from "@/pages/common/NoData";
+import { formatMultiPrice } from "@/components/ValueDataHook";
 
 function Index() {
   const [payout, setPayout] = useState([]);
@@ -69,7 +70,7 @@ function Index() {
                           {index + 1}
                         </td>
                         <td className="px-3 lg:px-4 py-2 lg:py-3 text-black text-sm lg:text-base font-medium font-inter ">
-                          ${item?.amount}
+                          {formatMultiPrice(item?.amount, "USD")}
                         </td>
                         <td className="capitalize px-3 lg:px-4 py-2 lg:py-3 text-black text-sm lg:text-base font-medium font-inter ">
                           {item?.Status}

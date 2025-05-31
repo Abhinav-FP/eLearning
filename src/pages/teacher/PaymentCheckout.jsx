@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import Stripe from "../stripe/Stripe";
 import Payment from "../payment/index"
 import Image from "next/image";
+import { formatMultiPrice } from "@/components/ValueDataHook";
 
 const PaymentCheckout = ({ selectedLesson, selectedSlot, studentTimeZone, user }) => {
   const [email, setEmail] = useState(user?.email || "");
@@ -132,10 +133,10 @@ const PaymentCheckout = ({ selectedLesson, selectedSlot, studentTimeZone, user }
             <p className="font-medium">Total</p>
             {/* <p className="font-medium">${selectedLesson?.price} USD</p> */}
             <p className="font-medium">
-              ${(selectedLesson?.price + 0.1*selectedLesson?.price).toFixed(2)} USD
+              {formatMultiPrice(selectedLesson?.price + 0.1*selectedLesson?.price, "USD")}
             </p>
           </div>
-          <p className="text-sm text-gray-500">{`Included processing fee of $${(0.1*selectedLesson?.price).toFixed(2)} USD`}</p>
+          <p className="text-sm text-gray-500">{`Included processing fee of ${formatMultiPrice(0.1*selectedLesson?.price, "USD")}`}</p>
           {/* <p className="text-sm text-gray-500">Estimated ${(selectedLesson?.price + 0.1*selectedLesson?.price).toFixed(2)} USD</p> */}
         </div>
 

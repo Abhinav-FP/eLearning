@@ -151,7 +151,7 @@ function TeacherListing() {
       const response = await main.adminteacherlist();
       if (response?.data) {
         setTeacherData(response?.data?.data || []);
-        console.log(response?.data);
+        // console.log(response?.data);
       }
       setLoading(false);
     } catch (error) {

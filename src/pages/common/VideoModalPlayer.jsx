@@ -10,9 +10,31 @@ function getYouTubeID(url) {
     return match && match[1] ? match[1] : null;
 }
 
+function getVimeoID(url) {
+    const regExp = /vimeo\.com\/(\d+)/;
+    const match = url && url?.match(regExp);
+    return match && match[1] ? match[1] : null;
+}
+
+function getVideoPlatform(url) {
+    if (url && url?.includes('youtube.com') || url?.includes('youtu.be')) return 'youtube';
+    if (url && url?.includes('vimeo.com')) return 'vimeo';
+    return 'unknown';
+}
+
+
 export default function VideoModalPlayer({ video, image, name, divClass, imgClass, btnClass }) {
-    const [isOpen, setIsOpen] = useState(false);
-    const videoId = getYouTubeID(video);
+     const [isOpen, setIsOpen] = useState(false);
+    const platform = getVideoPlatform(video);
+    const youTubeId = getYouTubeID(video);
+    const vimeoId = getVimeoID(video);
+
+    let videoSrc = '';
+    if (platform === 'youtube' && youTubeId) {
+        videoSrc = `https://www.youtube.com/embed/${youTubeId}?autoplay=1`;
+    } else if (platform === 'vimeo' && vimeoId) {
+        videoSrc = `https://player.vimeo.com/video/${vimeoId}?autoplay=1`;
+    }
 
     return (
         <>
@@ -45,7 +67,7 @@ export default function VideoModalPlayer({ video, image, name, divClass, imgClas
                         <iframe
                             width="100%"
                             height="100%"
-                            src={`https://www.youtube.com/embed/${videoId}?autoplay=1`}
+                            src={videoSrc}
                             title="YouTube video"
                             frameBorder="0"
                             allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"

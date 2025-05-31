@@ -5,6 +5,7 @@ import LineImg from "../Assets/Images/linebar-red.png";
 import TeacherImg from "../Assets/Images/teacherimg01.png";
 import Link from "next/link";
 import { BookLoader } from "@/components/Loader";
+import { formatMultiPrice } from "@/components/ValueDataHook";
 
 export default function Teacher({teacherData, loading}) {   
     // console.log("teacherData",teacherData);
@@ -32,7 +33,7 @@ export default function Teacher({teacherData, loading}) {
                                     <div className="flex flex-wrap gap-3 justify-center">
                                         <span className="text-[#CC2828] -tracking-[0.03em] font-bold text-base">
                                             {item?.average_price && item?.average_duration && (
-                                                `$${item?.average_price}/${item?.average_duration} min`
+                                                `${formatMultiPrice(item?.average_price, "USD")}/${item?.average_duration} min`
                                             )}
                                         </span>
                                     </div>

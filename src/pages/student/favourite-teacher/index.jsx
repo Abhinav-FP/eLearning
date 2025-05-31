@@ -6,6 +6,7 @@ import Listing from "@/pages/api/Listing";
 import Link from "next/link";
 import { TeacherLoader } from "@/components/Loader";
 import NoData from "@/pages/common/NoData";
+import { formatMultiPrice } from "@/components/ValueDataHook";
 
 export default function Index() {
   const [teachers, setTeachers] = useState([]);
@@ -45,7 +46,7 @@ export default function Index() {
     }
   };
 
-  // console.log("teacher", teachers)
+  console.log("teacher", teachers)
   return (
     <StudentLayout page={"Favourite teacher"}>
       <div className="min-h-screen bg-gray-50 p-4 sm:p-6">
@@ -94,8 +95,8 @@ export default function Index() {
                         {teacher?.teacher?.description || ""}
                       </p>
                       <p className="text-yellow-500 text-lg">
-                        {teacher?.teacher.average_price &&
-                          ` $${teacher?.teacher.average_price}/${teacher?.teacher?.average_duration} min`}
+                        {teacher?.teacher.average_price && teacher?.teacher?.average_duration &&
+                          ` ${formatMultiPrice(teacher?.teacher.average_price, "USD")}/${teacher?.teacher?.average_duration} min`}
                       </p>
                     </div>
                   </div>
@@ -104,7 +105,7 @@ export default function Index() {
                       Book
                     </button>
                     <Link
-                      href={`/student/message?query=${teacher?.teacher?._id}`}
+                      href={`/student/message?query=${teacher?.teacher?.userId}`}
                       className="px-6 md:px-10 lg:px-12 xl:px-16 py-2 lg:py-2.5 bg-[#CC2828] text-white rounded-md text-xs sm:text-sm hover:bg-white hover:text-[#CC2828] border border-[#CC2828] cursor-pointer"
                     >
                       Message

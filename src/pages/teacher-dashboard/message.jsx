@@ -8,13 +8,15 @@ import toast from 'react-hot-toast';
 import { useRouter } from 'next/router';
 import TeacherLayout from './Common/TeacherLayout';
 import DefaultMessage from '../common/DefaultMessage';
+import { ChatListShimmer } from '@/components/Loader';
 
 export default function Message() {
   const [teacherId, setTeacherId] = useState("")
   const [message, setMessage] = useState('');
   const [usermessage, setUserMessage] = useState();
   const [Loading, setLoading] = useState();
-  const [messageCount, SetmessageCount] = useState([])
+  const [chatListLoading, setChatListLoading] = useState(false);
+  const [messageCount, SetmessageCount] = useState([]);
   const [selectedIdUser, setSelectedIdUser] = useState();
 
   const chatContainerRef = useRef(null);
@@ -31,12 +33,15 @@ export default function Message() {
 
   const MessageCount = async () => {
     try {
+      setChatListLoading(true);
       const main = new Listing();
       const response = await main.getCountmessage();
       SetmessageCount(response.data.data);
+      
     } catch (error) {
       console.log("error", error);
     }
+      setChatListLoading(false);
   };
   useEffect(() => {
     MessageCount();
@@ -116,8 +121,11 @@ export default function Message() {
         <div className="flex flex-wrap w-full">
           {/* Sidebar */}
           <div className="w-full  mb-3 lg:mb-0  lg:w-1/4  rounded-lg ">
+          {chatListLoading ? 
+          <ChatListShimmer/>
+          : 
             <div className="mt-0 space-y-1 max-h-[calc(100vh-128px)] md:h-[calc(100vh-128px)] min-h-[300px] overflow-y-auto customscroll pb-5 pt-2">
-              {messageCount && messageCount.map((chat, index) => (
+              {messageCount && messageCount?.map((chat, index) => (
                 <div
                   key={index}
                   onClick={() => handleUserSelect(chat)}
@@ -145,10 +153,9 @@ export default function Message() {
                     </div>
                   )}
                 </div>
-
               ))}
 
-            </div>
+            </div>}
           </div>
 
           {teacherId ? (

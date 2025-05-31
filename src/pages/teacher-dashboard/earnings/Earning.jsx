@@ -51,7 +51,7 @@ export default function Earning({ isOpen, onClose, data, fetchEarnings }) {
                 {/* Title Field */}
                 <div>
                     <label className="block text-[#CC2828] font-medium mb-1">Amount</label>
-                    <input
+                    {/* <input
                         type="number"
                         name="amount"
                         value={amount}
@@ -61,7 +61,12 @@ export default function Earning({ isOpen, onClose, data, fetchEarnings }) {
                         step="0.01"
                         className="w-full p-3 rounded-md bg-gray-100 text-gray-700 focus:outline-none focus:ring-2 focus:ring-[#CC2828]"
                         required
-                    />
+                    /> */}
+                    <div
+                        className="w-full p-3 rounded-md bg-gray-100 text-gray-700 focus:outline-none focus:ring-2 focus:ring-[#CC2828] text-base"
+                    >
+                        {amount ?? "—"}
+                    </div>
                 </div>
                 {/* Action Buttons */}
                 <div className="flex justify-between gap-4 mt-6">

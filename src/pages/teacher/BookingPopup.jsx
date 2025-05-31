@@ -8,6 +8,7 @@ import { IoCloseSharp } from "react-icons/io5";
 import { useRole } from "@/context/RoleContext";
 import { IoMdTime } from "react-icons/io";
 import { FaBookReader } from "react-icons/fa";
+import { formatMultiPrice } from "@/components/ValueDataHook";
 export default function BookingPopup({
   isOpen,
   onClose,
@@ -194,8 +195,8 @@ export default function BookingPopup({
                 <div className="w-full lg:w-auto border border-gray-300 rounded-full px-4 py-2 ">
                   <p className="flex gap-2 items-center justify-center text-[#CC2828] capitalize text-sm lg:text-base font-semibold font-inter tracking-[-0.04em]">
                     <FaBookReader size={20} />
-                    {selectedLesson?.title} - $
-                    {selectedLesson?.price}{" "}
+                    {selectedLesson?.title} -{" "}
+                    {formatMultiPrice(selectedLesson?.price, "USD")}{" "}
                   </p>
                 </div>
               )}

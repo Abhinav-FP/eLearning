@@ -66,8 +66,8 @@ export default function Lesson({ title }) {
                                         <VideoModalPlayer video={items?.intro_video} 
                                         image={items?.userId?.profile_photo} 
                                         name={items?.userId?.name} 
-                                        divClass="relative lg:h-[311px]"
-                                        imgClass="w-full h-[265px] sm:h-[295px]  md:h-[186px] lg:h-[311px] rounded-[6px] md:rounded-[10px]"
+                                        divClass="relative lg:!h-[311px]"
+                                        imgClass="w-full !h-[265px] sm:!h-[295px]  md:h-[186px] lg:h-[311px] rounded-[6px] md:rounded-[10px] object-cover"
                                         btnClass="absolute top-1/2 left-0 right-0 mx-auto -translate-y-1/2 text-white hover:text-[#CC2828] w-[85px] text-center cursor-pointer"
                                         />
                                         <div className="pt-[20px] lg:pt-[30px]">

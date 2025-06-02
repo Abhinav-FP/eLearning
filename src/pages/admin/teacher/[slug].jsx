@@ -97,7 +97,7 @@ const Index = ({ }) => {
                                                 image={record?.userId?.profile_photo}
                                                 name={record?.userId?.name}
                                                 divClass="relative lg:h-[200px]"
-                                                imgClass="w-full h-[150px] sm:h-[150px]  md:h-[170px] lg:h-[200px] rounded-[6px] md:rounded-[10px]"
+                                                imgClass="w-full h-[150px] sm:h-[150px]  md:h-[170px] lg:h-[200px] rounded-[6px] md:rounded-[10px] object-cover"
                                                 btnClass="absolute top-1/2 left-0 right-0 mx-auto -translate-y-1/2 text-white hover:text-[#CC2828] w-[65px] text-center cursor-pointer"
                                             />
                                

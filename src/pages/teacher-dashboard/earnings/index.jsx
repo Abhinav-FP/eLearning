@@ -1,13 +1,14 @@
 import React, { useEffect, useMemo, useState } from "react";
 import TeacherLayout from "../Common/TeacherLayout";
 import Card from "./Card";
-import { FaWallet } from "react-icons/fa";
 import Earning from "./Earning";
 import Listing from "@/pages/api/Listing";
 import moment from "moment";
 import { TeacherEarningsLoader } from "@/components/Loader";
 import NoData from "@/pages/common/NoData";
 import { formatMultiPrice } from "@/components/ValueDataHook";
+import { FaWallet, FaMoneyBillWave } from "react-icons/fa";
+import { MdPaid } from "react-icons/md";
 
 export default function index() {
   // const earnings = [
@@ -75,7 +76,7 @@ export default function index() {
       {
         label: "Total Earnings",
         value: data?.earningsSummary?.totalEarnings ?? "N/A",
-        icon: <FaWallet className="w-6 h-6 text-[#CC2828]" />,
+        icon: <FaMoneyBillWave className="w-6 h-6 text-[#CC2828]" />,
       },
       {
         label: "Available Earnings",
@@ -85,7 +86,7 @@ export default function index() {
       {
         label: "Paid Earnings",
         value: data?.earningsSummary?.approvedEarnings ?? "N/A",
-        icon: <FaWallet className="w-6 h-6 text-[#CC2828]" />,
+        icon: <MdPaid className="w-6 h- text-[#CC2828]" />,
       },
       {
         label: "Requested Earnings",

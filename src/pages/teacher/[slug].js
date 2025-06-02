@@ -166,7 +166,7 @@ export default function Index() {
                     image={data?.userId?.profile_photo || teacherImg}
                     name={data?.userId?.name}
                     divClass="relative"
-                    imgClass="rounded-[10px] h-[276px] w-[276px]"
+                    imgClass="rounded-[10px] h-[276px] w-[276px] object-cover"
                     btnClass="absolute top-1/2  cursor-pointer left-0 w-[81px] text-center text-white hover:text-[#CC2828] right-0 mx-auto -translate-y-1/2"
                   />
                 </div>

@@ -5,8 +5,14 @@ import { GoBlocked } from "react-icons/go";
 
 export default function Index() {
   const [tabActive, setTabActive] = useState("all");
-
   const reviewListing = [{}];
+  const tabOptions = [
+    { key: "all", label: "All", minWidth: "min-w-[98px]" },
+    { key: "approved", label: "Approved", minWidth: "min-w-[150px]" },
+    { key: "pending", label: "Pending", minWidth: "min-w-[139px]" },
+    { key: "unapproved", label: "Unapproved", minWidth: "min-w-[168px]" },
+  ];
+
   return (
     <AdminLayout page={"Reviews"}>
       <div className="min-h-screen p-5 lg:p-[30px]">
@@ -15,47 +21,18 @@ export default function Index() {
             Reviews
           </h2>
         </div>
-        <div className="flex flex-wrap gap-3 md:gap-3 lg:gap-5">
-          <button
-            onClick={() => setTabActive("all")}
-            className={`text-sm lg:text-lg font-medium tracking-[-0.04em] px-2 py-3 lg:py-1.5  cursor-pointer border border-[#CC2828] rounded-[10px] min-w-[98px] ${
-              tabActive === "all"
-                ? "bg-[#CC2828] text-white"
-                : "bg-white text-[#CC2828]"
-            }`}
-          >
-            All
-          </button>
-          <button
-            onClick={() => setTabActive("approved")}
-            className={`text-sm lg:text-lg font-medium tracking-[-0.04em] px-2 py-3 lg:py-1.5  cursor-pointer border border-[#CC2828] rounded-[10px]  min-w-[150px]  ${
-              tabActive === "approved"
-                ? "bg-[#CC2828] text-white"
-                : "bg-white text-[#CC2828]"
-            }`}
-          >
-            Approved
-          </button>
-          <button
-            onClick={() => setTabActive("pending")}
-            className={`text-sm lg:text-lg font-medium tracking-[-0.04em] px-2 py-3 lg:py-1.5  cursor-pointer border border-[#CC2828] rounded-[10px] min-w-[139px] ${
-              tabActive === "pending"
-                ? "bg-[#CC2828] text-white"
-                : "bg-white text-[#CC2828]"
-            }`}
-          >
-            Pending
-          </button>
-          <button
-            onClick={() => setTabActive("unapproved")}
-            className={`text-sm lg:text-lg font-medium tracking-[-0.04em] px-2 py-3 lg:py-1.5  cursor-pointer border border-[#CC2828] rounded-[10px] min-w-[168px] ${
-              tabActive === "unapproved"
-                ? "bg-[#CC2828] text-white"
-                : "bg-white text-[#CC2828]"
-            }`}
-          >
-            Unapproved
-          </button>
+        <div className="flex flex-wrap gap-3 md:gap-3 lg:gap-5 mb-4">
+          {tabOptions && tabOptions?.map(({ key, label, minWidth }) => (
+            <button
+              key={key}
+              onClick={() => setTabActive(key)}
+              className={`text-sm lg:text-lg font-medium tracking-[-0.04em] px-2 py-3 lg:py-1.5 cursor-pointer border border-[#CC2828] rounded-[10px] ${minWidth} ${
+                tabActive === key ? "bg-[#CC2828] text-white" : "bg-white text-[#CC2828]"
+              }`}
+            >
+              {label}
+            </button>
+          ))}
         </div>
         <div className="block">
           {tabActive === "all" && (
@@ -121,8 +98,8 @@ export default function Index() {
               </table>
             </div>
           )}
-          {tabActive === "approved" && <div className=""></div>}
-          {tabActive === "pending" && <div className=""></div>}
+          {tabActive === "approved" && <div className="">approved</div>}
+          {tabActive === "pending" && <div className="">pending</div>}
           {tabActive === "unapproved" && <div className="">unapproved</div>}
         </div>
       </div>

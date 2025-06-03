@@ -1,7 +1,8 @@
 import AdminLayout from "../common/AdminLayout";
 import Image from "next/image";
 import teacherImg from '../../Assets/Images/teacherimg.jpg';
-import { FaCheckCircle, FaGlobe, FaRegCalendarAlt, FaPlay, FaPhoneAlt } from "react-icons/fa";
+import { FaGlobe, FaRegCalendarAlt, FaPlay, FaPhoneAlt } from "react-icons/fa";
+import { IoShieldCheckmark } from "react-icons/io5";
 import { FiMapPin } from "react-icons/fi";
 import { MdOutlineEmail } from "react-icons/md";
 import { useRouter } from "next/router";
@@ -35,10 +36,7 @@ const Index = ({ }) => {
         }
     }, [Id]); // ✅ Only run when the Id (slug) is available
 
-
-    const handleWatch = () => {
-        setShowVideo(true)
-    }
+ 
 
 
     const teacherData = {
@@ -74,17 +72,21 @@ const Index = ({ }) => {
                             <div className="flex-2">
                                 <div className="flex items-center gap-3 mb-1">
                                     <h1 className="text-3xl font-bold">{record?.userId?.name}</h1>
-                                    <FaCheckCircle size={18} />
+                                    <IoShieldCheckmark className= {`${record?.admin_approved === true ? 'text-green-500' : 'text-gray-400'}`} size={18} />
+                                    
                                 </div>
-                                <p className="text-gray-600 text-base mb-1">{record?.description || 'Na'}</p>
+                                <div className="flex items-center mb-2 gap-1">
+                                    <a className="text-base text-gray-400 hover:text-[#CC2828]" href={`mailto:${record?.userId?.email}`}>{record?.userId?.email}</a>
+                                </div>
+                                                       
                                 <div className="flex flex-wrap items-center gap-4 text-sm text-gray-400">
                                     <div className="flex items-center gap-1">
                                         <FiMapPin className="w-4 h-4" />
-                                        <span>{record?.city || 'Na'}</span>
+                                        <span>{record?.city} </span><span>{record?.userId?.nationality || 'Na'}</span>
                                     </div>
                                     <div className="flex items-center gap-1">
                                         <FaGlobe className="w-4 h-4" />
-                                        <span> {record?.userId?.nationality || 'Na'}</span>
+                                        <span> {record?.userId?.time_zone || 'Na'}</span>
                                     </div>
                                     <div className="flex items-center gap-1">
                                         <FaRegCalendarAlt className="w-4 h-4" />
@@ -93,43 +95,64 @@ const Index = ({ }) => {
                                 </div>
                             </div>
                             <div className="flex flex-col gap-3">
-                                 <VideoModalPlayer video={record?.intro_video}
-                                                image={record?.userId?.profile_photo}
-                                                name={record?.userId?.name}
-                                                divClass="relative lg:h-[200px]"
-                                                imgClass="w-full h-[150px] sm:h-[150px]  md:h-[170px] lg:h-[200px] rounded-[6px] md:rounded-[10px] object-cover"
-                                                btnClass="absolute top-1/2 left-0 right-0 mx-auto -translate-y-1/2 text-white hover:text-[#CC2828] w-[65px] text-center cursor-pointer"
-                                            />
-                               
+                                <VideoModalPlayer video={record?.intro_video}
+                                    image={record?.userId?.profile_photo}
+                                    name={record?.userId?.name}
+                                    divClass="relative lg:h-[200px]"
+                                    imgClass="w-full h-[150px] sm:h-[150px]  md:h-[170px] lg:h-[200px] rounded-[6px] md:rounded-[10px]"
+                                    btnClass="absolute top-1/2 left-0 right-0 mx-auto -translate-y-1/2 text-white hover:text-[#CC2828] w-[65px] text-center cursor-pointer"
+                                    iconClass="h-16 w-16"
+                                />
+
                             </div>
                         </div>
 
                     </div>
                 </div>
-                <div className="flex flex-wrap items-center   mt-6">
-                    <div className="w-full md:w-6/12 lg:w-4/12 mb-3 ">
-                         
-                        <div><a href="mailto:james@gmail.com" class="font-medium text-sm md:text-base xl:text-lg tracking-[-0.03em] text-[#8D929A] hover:text-[#CC2828]"> <MdOutlineEmail className="inline" size={18} /> {record?.userId?.email}</a></div>
+                <div className="flex flex-wrap gap-3">
+
+                </div>
+                <div className="flex flex-wrap items-center   mt-6"> 
+                     <div className="w-full md:w-6/12 mb-3 ">
+                        <label className="text-base font-medium -tracking-[0.03em] text-[#1E1E1E] block mb-1">gender </label>
+                        <div><p className="font-medium text-sm md:text-base tracking-[-0.03em] text-[#8D929A] max-w-full ">{record?.gender || "null"}</p></div>
                     </div>
-                    <div className="w-full md:w-6/12 lg:w-4/12 mb-3">
-                        <a href="#" className="font-medium text-sm md:text-base xl:text-lg tracking-[-0.03em] text-[#8D929A] hover:text-[#CC2828]"> <FaPhoneAlt className="inline" size={18} /> 1234567890</a>
+                     <div className="w-full md:w-6/12 mb-3 ">
+                        <label className="text-base font-medium -tracking-[0.03em] text-[#1E1E1E] block mb-1">Japanese for me approved </label>
+                        <div><p className={`font-medium text-sm md:text-base tracking-[-0.03em]  max-w-full ${record?.japanese_for_me_approved === true ? 'text-green-500' : 'text-[#8D929A]' }`}>{record?.japanese_for_me_approved || "null"}</p></div>
                     </div>
-                    <div className="w-full md:w-6/12 lg:w-4/12 mb-3">
-                        <p className="font-medium text-sm md:text-base xl:text-lg tracking-[-0.03em] text-[#8D929A]">
-                            <FiMapPin className="inline" size={18} /> 123 Main Street, Huston,
-                        </p>
+
+                    
+                    <div className="w-full md:w-6/12 mb-3 ">
+                        <label className="text-base font-medium -tracking-[0.03em] text-[#1E1E1E] block mb-1">Qualifications</label>
+                        <div><p className="font-medium text-sm md:text-base tracking-[-0.03em] text-[#8D929A] max-w-full ">{record?.qualifications || "null"}</p></div>
                     </div>
-                    <div className="w-full md:w-6/12 lg:w-4/12 mb-3 ">
-                        <a href="mailto:james@gmail.com" class="font-medium text-sm md:text-base xl:text-lg tracking-[-0.03em] text-[#8D929A] hover:text-[#CC2828]"> <MdOutlineEmail className="inline" size={18} /> james@gmail.com</a>
+                    <div className="w-full md:w-6/12 mb-3 ">
+                        <label className="text-base font-medium -tracking-[0.03em] text-[#1E1E1E] block mb-1">Languages Spoken </label>
+                        <div><p className="font-medium text-sm md:text-base tracking-[-0.03em] text-[#8D929A] max-w-full ">{record?.languages_spoken || "null"}</p></div>
                     </div>
-                    <div className="w-full md:w-6/12 lg:w-4/12 mb-3">
-                        <a href="#" className="font-medium text-sm md:text-base xl:text-lg tracking-[-0.03em] text-[#8D929A] hover:text-[#CC2828]"> <FaPhoneAlt className="inline" size={18} /> 1234567890</a>
+                     <div className="w-full md:w-6/12 mb-3 ">
+                        <label className="text-base font-medium -tracking-[0.03em] text-[#1E1E1E] block mb-1">Experience </label>
+                        <div><p className="font-medium text-sm md:text-base tracking-[-0.03em] text-[#8D929A] max-w-full ">{record?.experience || "null"}</p></div>
                     </div>
-                    <div className="w-full md:w-6/12 lg:w-4/12 mb-3">
-                        <p className="font-medium text-sm md:text-base xl:text-lg tracking-[-0.03em] text-[#8D929A]">
-                            <FiMapPin className="inline" size={18} /> 123 Main Street, Huston,
-                        </p>
+                    <div className="w-full md:w-6/12 mb-3 ">
+                        <label className="text-base font-medium -tracking-[0.03em] text-[#1E1E1E] block mb-1">Average Duration </label>
+                        <div><p className="font-medium text-sm md:text-base tracking-[-0.03em] text-[#8D929A] max-w-full ">{record?.average_duration || "null"}</p></div>
                     </div>
+                    <div className="w-full md:w-6/12 mb-3">
+                        <label className="text-base font-medium -tracking-[0.03em] text-[#1E1E1E] block mb-1">Average Time </label>
+                        <p className="font-medium text-sm md:text-base tracking-[-0.03em] text-[#8D929A]">{record?.average_time || "null"}</p>
+                    </div>
+
+                    <div className="w-full md:w-6/12 mb-3">
+                        <label className="text-base font-medium -tracking-[0.03em] text-[#1E1E1E] block mb-1">Average Price </label>
+                        <p className="font-medium text-sm md:text-base tracking-[-0.03em] text-[#8D929A]">{record?.average_price}</p>
+                    </div> 
+                     <div className="w-full md:w-12/12 mb-3">
+                        <label className="text-base font-medium -tracking-[0.03em] text-[#1E1E1E] block mb-1">Decription</label> 
+                         <p className="font-medium text-sm md:text-base tracking-[-0.03em] text-[#8D929A]">{record?.description || 'Na'}</p>
+                    </div> 
+
 
                 </div>
 

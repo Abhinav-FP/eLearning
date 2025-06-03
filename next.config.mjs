@@ -8,9 +8,17 @@ const nextConfig = {
       {
         protocol: 'https',
         hostname: 'student-teacher-platform.sgp1.digitaloceanspaces.com',
-        port: '',
         pathname: '**',
-        search: '',
+      },
+      {
+        protocol: 'https',
+        hostname: 'img.youtube.com',
+        pathname: '**',
+      },
+      {
+        protocol: 'https',
+        hostname: 'i.vimeocdn.com',
+        pathname: '**',
       },
     ],
   },

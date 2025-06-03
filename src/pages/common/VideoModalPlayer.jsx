@@ -1,5 +1,5 @@
 'use client';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import Image from 'next/image';
 import { MdClose, MdOutlinePlayCircle } from 'react-icons/md';
 import EmilyCarter from "../Assets/Images/emily-carter.png";
@@ -22,10 +22,10 @@ function getVideoPlatform(url) {
     return 'unknown';
 }
 
-
 export default function VideoModalPlayer({ video, image, name, divClass, imgClass, btnClass, iconClass }) {
-     const [isOpen, setIsOpen] = useState(false);
+    const [isOpen, setIsOpen] = useState(false);
     const platform = getVideoPlatform(video);
+    const [thumbnail, setThumbnail] = useState(image || EmilyCarter);
     const youTubeId = getYouTubeID(video);
     const vimeoId = getVimeoID(video);
 
@@ -36,13 +36,29 @@ export default function VideoModalPlayer({ video, image, name, divClass, imgClas
         videoSrc = `https://player.vimeo.com/video/${vimeoId}?autoplay=1`;
     }
 
+   useEffect(() => {
+        if (platform === 'youtube' && youTubeId) {
+            setThumbnail(`https://img.youtube.com/vi/${youTubeId}/hqdefault.jpg`);
+        } else if (platform === 'vimeo' && vimeoId) {
+            fetch(`https://vimeo.com/api/oembed.json?url=https://vimeo.com/${vimeoId}`)
+                .then(res => res.json())
+                .then(data => {
+                    if (data?.thumbnail_url) setThumbnail(data.thumbnail_url);
+                })
+                .catch(err => {
+                    console.error("Failed to load Vimeo thumbnail:", err);
+                    setThumbnail(EmilyCarter); // fallback
+                });
+        }
+    }, [platform, youTubeId, vimeoId]);
+
     return (
         <>
             <div className={divClass}>
                 <Image
-                    className={'object-cover ' + `${imgClass}`}
-                    src={image || EmilyCarter}
-                    alt={name || "video"}
+                    className={'object-cover ' + imgClass}
+                    src={thumbnail}
+                    alt={name || "video thumbnail"}
                     width={527}
                     height={311}
                 />

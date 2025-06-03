@@ -23,7 +23,7 @@ function getVideoPlatform(url) {
 }
 
 
-export default function VideoModalPlayer({ video, image, name, divClass, imgClass, btnClass }) {
+export default function VideoModalPlayer({ video, image, name, divClass, imgClass, btnClass, iconClass }) {
      const [isOpen, setIsOpen] = useState(false);
     const platform = getVideoPlatform(video);
     const youTubeId = getYouTubeID(video);
@@ -40,17 +40,17 @@ export default function VideoModalPlayer({ video, image, name, divClass, imgClas
         <>
             <div className={divClass}>
                 <Image
-                    className={imgClass}
+                    className={'object-cover ' + `${imgClass}`}
                     src={image || EmilyCarter}
                     alt={name || "video"}
-                    width={530}
+                    width={527}
                     height={311}
                 />
                 <button
                     onClick={() => setIsOpen(true)}
                     className={btnClass}
                 >
-                    <MdOutlinePlayCircle size={80} />
+                    <MdOutlinePlayCircle className={iconClass} size={80} />
                 </button>
             </div>
 
@@ -62,7 +62,7 @@ export default function VideoModalPlayer({ video, image, name, divClass, imgClas
                             onClick={() => setIsOpen(false)}
                             className="absolute top-2 right-2 text-white text-2xl z-10 cursor-pointer "
                         >
-                            <MdClose size={24} />
+                            <MdClose  size={24} />
                         </button>
                         <iframe
                             width="100%"

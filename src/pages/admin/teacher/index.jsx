@@ -77,22 +77,6 @@ function TeacherListing() {
       <td className="capitalize px-3 lg:px-4 py-2 lg:py-3 text-black text-sm lg:text-base font-medium font-inter">
         {item?.experience || "N/A"} years
       </td>
-      {/* <td className="capitalize px-3 lg:px-4 py-2 lg:py-3 text-black text-sm lg:text-base font-medium font-inter">
-        <div className="flex flex-col gap-1 justify-center items-center">
-          <Link
-            href={`/admin/teacher/${item?._id}`}
-            className="border border-[#CC2828] text-[#CC2828] hover:bg-[#CC2828] hover:text-white inline-flex items-center justify-center h-[38px] w-[38px] rounded text-center leading-1 cursor-pointer"
-          >
-            <MdRemoveRedEye className="inline" size={18} />
-          </Link>
-          <button
-            onClick={()=>{handleBlock(item?.userId?._id)}}
-            className="border border-[#CC2828] text-[#CC2828] hover:bg-[#CC2828] hover:text-white inline-block h-[38px] w-[38px] rounded text-center leading-1 cursor-pointer"
-          >
-            <GoBlocked className="inline" size={18} />
-          </button>
-        </div>
-      </td> */}
       <td className="capitalize px-3 lg:px-4 py-2 lg:py-3 text-black text-sm lg:text-base font-medium font-inter">
         <div className="flex gap-2 justify-center items-center">
             <button

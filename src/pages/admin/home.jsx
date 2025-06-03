@@ -251,18 +251,18 @@ export default function Home() {
                         />
                     </div>
 
-               
-                {/* Submit Button */}
-                <div className="flex justify-center w-full">
-                    <button
-                        type="submit"
-                        disabled={processing}
-                        className="w-full max-w-[170px] border border-[#CC2828] bg-[#CC2828] hover:bg-red-700 text-white py-3  rounded-[10px] font-normal text-base xl:text-lg transition tracking-[-0.04em]"
-                    >
-                        {processing ? "Loading..." : "Submit"}
-                    </button>
+
+                    {/* Submit Button */}
+                    <div className="flex justify-center w-full">
+                        <button
+                            type="submit"
+                            disabled={processing}
+                            className="w-full max-w-[170px] border border-[#CC2828] bg-[#CC2828] hover:bg-red-700 text-white py-3  rounded-[10px] font-normal text-base xl:text-lg transition tracking-[-0.04em]"
+                        >
+                            {processing ? "Loading..." : "Submit"}
+                        </button>
+                    </div>
                 </div>
-                 </div>
 
             </form>
             <FaqManager />
@@ -271,3 +271,6 @@ export default function Home() {
         </AdminLayout>
     );
 }
+
+
+

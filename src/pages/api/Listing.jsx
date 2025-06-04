@@ -174,8 +174,8 @@ async TeacherDashboard(){
     return Api.get(`/teacher/payout`, data);
   }
 
-  async TeacherEarning(){
-    return Api.get(`/teacher/earning`);
+  async TeacherEarning(date){
+    return Api.get(`/teacher/earning?date=${date}`);
   }
 
   async TeacherBooking(){

@@ -9,54 +9,35 @@ import NoData from "@/pages/common/NoData";
 import { formatMultiPrice } from "@/components/ValueDataHook";
 import { FaWallet, FaMoneyBillWave } from "react-icons/fa";
 import { MdPaid } from "react-icons/md";
+import { FiSearch } from "react-icons/fi";
 
 export default function index() {
-  // const earnings = [
-  //   {
-  //     lesson: "English Speaking",
-  //     lessonDate: "12 April",
-  //     paymentId: "#1234",
-  //     amount: 200,
-  //     time: "30 Min",
-  //   },
-  //   {
-  //     lesson: "English Speaking",
-  //     lessonDate: "12 April",
-  //     paymentId: "#1234",
-  //     amount: 200,
-  //     time: "30 Min",
-  //   },
-  //   {
-  //     lesson: "English Speaking",
-  //     lessonDate: "12 April",
-  //     paymentId: "#1234",
-  //     amount: 200,
-  //     time: "30 Min",
-  //   },
-  //   {
-  //     lesson: "English Speaking",
-  //     lessonDate: "12 April",
-  //     paymentId: "#1234",
-  //     amount: 200,
-  //     time: "30 Min",
-  //   },
-  //   {
-  //     lesson: "English Speaking",
-  //     lessonDate: "12 April",
-  //     paymentId: "#1234",
-  //     amount: 200,
-  //     time: "30 Min",
-  //   },
-  // ];
-
   const [data, setData] = useState({});
   const [loading, setLoading] = useState(false);
+  const [selectedOption, setSelectedOption] = useState("");
+  const [searchText, setSearchText] = useState("");
+
+  const handleSearchChange = (e) => {
+    setSearchText(e.target.value);
+  };
+
+  const handleDropdownChange = (e) => {
+    setSelectedOption(e.target.value);
+    console.log("Selected:", e.target.value);
+  };
+
+  // Generate years from current year down to 2025
+  const currentYear = new Date().getFullYear();
+  const yearOptions = [];
+  for (let year = currentYear; year >= 2025; year--) {
+    yearOptions.push(year);
+  }
 
   const fetchEarnings = async () => {
     try {
       setLoading(true);
       const main = new Listing();
-      const response = await main.TeacherEarning();
+      const response = await main.TeacherEarning(selectedOption);
       setData(response?.data?.data || []);
     } catch (error) {
       console.log("error", error);
@@ -67,7 +48,7 @@ export default function index() {
 
   useEffect(() => {
     fetchEarnings();
-  }, []);
+  }, [selectedOption, setSearchText]);
 
   // console.log("data",data);
 
@@ -86,7 +67,7 @@ export default function index() {
       {
         label: "Paid Earnings",
         value: data?.earningsSummary?.approvedEarnings ?? "N/A",
-        icon: <MdPaid className="w-6 h- text-[#CC2828]" />,
+        icon: <MdPaid className="w-6 h-6 text-[#CC2828]" />,
       },
       {
         label: "Requested Earnings",
@@ -107,10 +88,34 @@ export default function index() {
       ) : (
         <div className="min-h-screen p-5 lg:p-[30px]">
           <div className="flex justify-between items-center mb-4 lg:mb-5">
-            <h2 className="text-lg md:text-xl lg:text-2xl font-bold text-[#CC2828] tracking-[-0.04em] font-inter">
+            {/* <h2 className="text-lg md:text-xl lg:text-2xl font-bold text-[#CC2828] tracking-[-0.04em] font-inter">
               Earnings
-            </h2>
-            <div className="flex items-center space-x-2">
+            </h2> */}
+            <div className="w-1/3 max-w-sm relative">
+              <span className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                <FiSearch className="text-[#CC2828]" />
+              </span>
+              <input
+                type="text"
+                value={searchText}
+                onChange={handleSearchChange}
+                placeholder="Search using lesson or payment id..."
+                className="w-full pl-10 pr-4 py-2 border border-[#CC2828] text-[#CC2828] rounded focus:outline-none focus:ring-2 focus:ring-[#CC2828] placeholder-gray-400"
+              />
+            </div>
+            <div className="flex items-center space-x-3">
+            <select
+              value={selectedOption}
+              onChange={handleDropdownChange}
+              className="border border-[#CC2828] text-[#CC2828] px-3 py-2 rounded focus:outline-none"
+            >
+              <option value="">All</option>
+              <option value="last7">Last 7 Days</option>
+              <option value="last30">Last 30 Days</option>
+              {yearOptions.map((year) => (
+                <option key={year} value={year}>{year}</option>
+              ))}
+            </select>
               <button
                 onClick={() => {
                   setIsEarning(true);

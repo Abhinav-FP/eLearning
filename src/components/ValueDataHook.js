@@ -4,8 +4,9 @@ export const formatMultiPrice = (amount, currency) => {
   return new Intl.NumberFormat("en-GB", {
     style: "currency",
     currency: currency,
-    minimumFractionDigits: 0,
-    maximumFractionDigits: 0,
+    currencyDisplay: "code", // Show 'USD' instead of '$'
+    minimumFractionDigits: 2,
+    maximumFractionDigits: 2,
   }).format(amount);
 };
 

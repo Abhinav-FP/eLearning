@@ -1,275 +1,290 @@
-import { Component } from "react";
-import { Api, ApiallowFile } from "./Api";
+  import { Component } from "react";
+  import { Api, ApiallowFile } from "./Api";
 
-class Listing extends Component {
-  async Register(data) {
-    return Api.post("/user/register", data);
-  }
-  async Login(data) {
-    return Api.post("/user/login", data);
-  }
-  async profileVerify(){
-    return Api.get("/user/profile")
-  }
+  class Listing extends Component {
+    async Register(data) {
+      return Api.post("/user/register", data);
+    }
+    async Login(data) {
+      return Api.post("/user/login", data);
+    }
+    async profileVerify() {
+      return Api.get("/user/profile")
+    }
 
-  async Teacherprofile(){
-    return Api.get("/teacher/profile");
-  }
-async TeacherDashboard(){
-    return Api.get("/teacher/dashboard");
-  }
-  
-  async TeacherprofileUpdate(data){
-    return Api.post("/teacher/profile",data);
-  }
- 
-  async ForgetPasswordLink(data){
-    return Api.post("/user/forget-link" ,data)
-  }
-  async ForgetPassword(data){
-    return Api.post("/user/forget-password" ,data )
-  }
-  async emailVerify(data){
-    return Api.post("/user/verify-email", data);
-  }
-  async ResetPassword(data) {
-    return Api.post("/user/reset-password", data);
-  }
-  async ProfileUpdate(data) {
-    return Api.post("/user/update-profile", data);
-  }
-  async ReviewUserGet(data) {
-    return Api.get("/student/review", data);
-  }
+    async Teacherprofile() {
+      return Api.get("/teacher/profile");
+    }
+    async TeacherDashboard() {
+      return Api.get("/teacher/dashboard");
+    }
 
-  async PaymentUser() {
-    return Api.get("/student/payment", );
-  }
+    async TeacherprofileUpdate(data) {
+      return Api.post("/teacher/profile", data);
+    }
 
-  async homeTeacher() {
-    return Api.get("/home/teacher", );
-  }
+    async ForgetPasswordLink(data) {
+      return Api.post("/user/forget-link", data)
+    }
+    async ForgetPassword(data) {
+      return Api.post("/user/forget-password", data)
+    }
+    async emailVerify(data) {
+      return Api.post("/user/verify-email", data);
+    }
+    async ResetPassword(data) {
+      return Api.post("/user/reset-password", data);
+    }
+    async ProfileUpdate(data) {
+      return Api.post("/user/update-profile", data);
+    }
+    async ReviewUserGet(data) {
+      return Api.get("/student/review", data);
+    }
 
-  async HomeTeacherVideo(){
-    return Api.get("/home/teacher/video")
-  }
+    async PaymentUser() {
+      return Api.get("/student/payment",);
+    }
 
-  async TeacherBank(data){
-    return Api.post("/teacher/bank" ,data)
-  }
-  async StudentTeacher(data) {
-    return Api.get("/student/teacherGet", data);
-  }
+    async homeTeacher() {
+      return Api.get("/home/teacher",);
+    }
 
-  async TeachergetbyId(data) {
-    return Api.get(`/student/teacher/${data}`);
-  }
+    async HomeTeacherVideo() {
+      return Api.get("/home/teacher/video")
+    }
 
-  async studentteacherAvaliability(id){
-    return Api.get(`/student/teacher/availability/${id}`);
-  }
+    async TeacherBank(data) {
+      return Api.post("/teacher/bank", data)
+    }
+    async StudentTeacher(data) {
+      return Api.get("/student/teacherGet", data);
+    }
 
-  async StudentDashboard() {
-    return Api.get("/student/dashboard");
-  }
-  async StudentfavouriteTeacher(data) {
-    return Api.get("/student/favourite/get_all", data);
-  }
+    async TeachergetbyId(data) {
+      return Api.get(`/student/teacher/${data}`);
+    }
 
-  async AddWishlist(data) {
-    return Api.post("/favourite/add", data);
-  }
+    async studentteacherAvaliability(id) {
+      return Api.get(`/student/teacher/availability/${id}`);
+    }
 
-  async RemoveWishlist(data) {
-    return Api.post("/favourite/delete", data);
-  }
+    async StudentDashboard() {
+      return Api.get("/student/dashboard");
+    }
+    async StudentfavouriteTeacher(data) {
+      return Api.get("/student/favourite/get_all", data);
+    }
 
-  async getCountmessage(){
-    return Api.get("/message/getAll");
-  }
-  async MessageGetAll(id){
-    return Api.get(`/message/get/${id}`);
-  }
-  async SendMessage(data){
-    return Api.post(`/message/send` , data);
-  }
+    async AddWishlist(data) {
+      return Api.post("/favourite/add", data);
+    }
 
-  async BookingUpdate(id,data){
-    return Api.post(`/booking/update/${id}`, data);
-  }
+    async RemoveWishlist(data) {
+      return Api.post("/favourite/delete", data);
+    }
 
-  async PaypalCreate(data){
-    return Api.post(`/payment/create-order` , data);
-  }
+    async getCountmessage() {
+      return Api.get("/message/getAll");
+    }
+    async MessageGetAll(id) {
+      return Api.get(`/message/get/${id}`);
+    }
+    async SendMessage(data) {
+      return Api.post(`/message/send`, data);
+    }
 
-  async PaypalApprove(data){
-    return Api.post(`/payment/capture-order` , data);
-  }
+    async BookingUpdate(id, data) {
+      return Api.post(`/booking/update/${id}`, data);
+    }
 
-  async PaypalCancel(data){
-    return Api.post(`/payment/cancel-order` , data);
-  }
+    async PaypalCreate(data) {
+      return Api.post(`/payment/create-order`, data);
+    }
+
+    async PaypalApprove(data) {
+      return Api.post(`/payment/capture-order`, data);
+    }
+
+    async PaypalCancel(data) {
+      return Api.post(`/payment/cancel-order`, data);
+    }
 
 
-  // async Stripe_payment(data) {
-  //   return Api.post("/payment/create-checkout-session", data);
-  // }
+    // async Stripe_payment(data) {
+    //   return Api.post("/payment/create-checkout-session", data);
+    // }
 
     async Stripe_payment(data) {
-    return Api.post("/payment/create-payment-intent", data);
-  }
-  
+      return Api.post("/payment/create-payment-intent", data);
+    }
+
     async stripe_webhook(data) {
-    return Api.post("/webhook", data);
-  }
-  async StripeSuccess(data) {
-    return Api.get(`/payment/payment-success/${data}`);
-  }
+      return Api.post("/webhook", data);
+    }
+    async StripeSuccess(data) {
+      return Api.get(`/payment/payment-success/${data}`);
+    }
 
-  async StripeCancel(data) {
-    return Api.get(`/payment/payment-cancel/${data}`);
-  }
+    async StripeCancel(data) {
+      return Api.get(`/payment/payment-cancel/${data}`);
+    }
 
-  async LessonAdd(data){
-    return Api.post(`/lesson/add`, data);
-  }
+    async LessonAdd(data) {
+      return Api.post(`/lesson/add`, data);
+    }
 
-  async deleteLesson(id){
-    return Api.delete(`/lesson/delete/${id}`);
-  }
+    async deleteLesson(id) {
+      return Api.delete(`/lesson/delete/${id}`);
+    }
 
-  async LessonUpdate(id,data){
-    return Api.put(`/lesson/update/${id}`, data);
-  }
+    async LessonUpdate(id, data) {
+      return Api.put(`/lesson/update/${id}`, data);
+    }
 
-  async TeacherLessonGet(){
-    return Api.get(`/teacher/lesson/get`);
-  }
+    async TeacherLessonGet() {
+      return Api.get(`/teacher/lesson/get`);
+    }
 
-  async TeacherLessonGetForStudent(id){
-    return Api.get(`/student/lesson/get/${id}`);
-  }
+    async TeacherLessonGetForStudent(id) {
+      return Api.get(`/student/lesson/get/${id}`);
+    }
 
-  async TeacherAvailabilityGet(){
-    return Api.get(`/teacher/availability/get`);
-  }
-  
-  async AddAvailablility(data){
-    return Api.post(`/teacher/availability/add`, data);
-  }
+    async TeacherAvailabilityGet() {
+      return Api.get(`/teacher/availability/get`);
+    }
 
-  async deleteAvailability(id){
-    return Api.delete(`/teacher/availability/delete/${id}`);
-  }
+    async AddAvailablility(data) {
+      return Api.post(`/teacher/availability/add`, data);
+    }
 
-  async EditAvailability(id,data){
-    return Api.put(`/teacher/availability/update/${id}`, data);
-  }
+    async deleteAvailability(id) {
+      return Api.delete(`/teacher/availability/delete/${id}`);
+    }
 
-  async payoutAdd(data){
-    return Api.post(`/teacher/payout`, data);
-  }
+    async EditAvailability(id, data) {
+      return Api.put(`/teacher/availability/update/${id}`, data);
+    }
 
-  async PayoutList(data){
-    return Api.get(`/teacher/payout`, data);
-  }
+    async payoutAdd(data) {
+      return Api.post(`/teacher/payout`, data);
+    }
 
-  async TeacherEarning(date){
-    return Api.get(`/teacher/earning?date=${date}`);
-  }
+    async PayoutList(data) {
+      return Api.get(`/teacher/payout`, data);
+    }
 
-  async TeacherBooking(){
-    return Api.get(`/teacher/booking`);
-  }
-  
-  async GetBooking(){
-    return Api.get(`/booking/getAll`);
-  }
+    async TeacherEarning(date) {
+      return Api.get(`/teacher/earning?date=${date}`);
+    }
 
-   async teacherbankget(){
-    return Api.get(`/teacher/bank`);
-  }
+    async TeacherBooking() {
+      return Api.get(`/teacher/booking`);
+    }
 
-  async adminteacherlist(){
-    return Api.get(`/admin/teachers`);
-  }
+    async GetBooking() {
+      return Api.get(`/booking/getAll`);
+    }
 
-  async userBlock(data){
-    return Api.post(`/admin/blockuser`, data);
-  }
+    async teacherbankget() {
+      return Api.get(`/teacher/bank`);
+    }
 
-  async approveRejectTeacher(data){
-    return Api.post(`/admin/approveteacher`, data);
-  }
+    async adminteacherlist() {
+      return Api.get(`/admin/teachers`);
+    }
 
-  async adminStudentList(){
-    return Api.get(`/admin/studentlist`);
-  }
+    async userBlock(data) {
+      return Api.post(`/admin/blockuser`, data);
+    }
 
-  async AdminPayoutList(){
-    return Api.get(`/admin/payout`);
-  }
+    async approveRejectTeacher(data) {
+      return Api.post(`/admin/approveteacher`, data);
+    }
 
-  async AdminPayoutAction(id, data){
-    return Api.post(`/admin/payoutUpdate/${id}`, data);
-  }
+    async adminStudentList() {
+      return Api.get(`/admin/studentlist`);
+    }
 
-  async AdminBooking(){
-    return Api.get(`/admin/booking`);
-  }
+    async AdminPayoutList() {
+      return Api.get(`/admin/payout`);
+    }
 
- async AdminTeacherData(id){
-    return Api.get(`/admin/teacher/${id}`, );
-  }
+    async AdminPayoutAction(id, data) {
+      return Api.post(`/admin/payoutUpdate/${id}`, data);
+    }
 
-  
+    async AdminBooking() {
+      return Api.get(`/admin/booking`);
+    }
 
-  async HomeUpdate(data){
-    return ApiallowFile.post(`/home/update` , data);
-  }
-
-   async HomeList(){
-    return Api.get(`/home/find`);
-  }
-
-  async HomeFaqList(){
-    return Api.get("/home/faqfind")
-  }
+    async AdminTeacherData(id) {
+      return Api.get(`/admin/teacher/${id}`,);
+    }
 
 
-async HomeFaqAdd(data){
-    return Api.post(`/home/faqAdd` ,data);
-  }
-   async HomeFaqUpdate(data){
-    return Api.post(`/home/faqUpdate` ,data);
+
+
+    async HomeUpdate(data) {
+      return ApiallowFile.post(`/home/update`, data);
+    }
+
+    async HomeList() {
+      return Api.get(`/home/find`);
+    }
+
+    async HomeFaqList() {
+      return Api.get("/home/faqfind")
+    }
+
+
+    async HomeFaqAdd(data) {
+      return Api.post(`/home/faqAdd`, data);
+    }
+    async HomeFaqUpdate(data) {
+      return Api.post(`/home/faqUpdate`, data);
+    }
+
+    async HomeFaqDelete(data) {
+      return Api.post(`/home/delete`, data);
+    }
+
+
+    async TeacherFaqAdd(data) {
+      return Api.post(`/teacher/faqAdd`, data);
+    }
+
+    async TeacherFaqList() {
+      return Api.get("/teacher/faqfind")
+    }
+    async TeacherFaqUpdate(data) {
+      return Api.post(`/teacher/faqUpdate`, data);
+    }
+
+    async TeacherFaqDelete(data) {
+      return Api.post(`/teacher/delete`, data);
+    }
+
+
+    async ReviewList() {
+      return Api.get(`/review/list`);
+    }
+
+    async ReviewStatus(data) {
+      return Api.post(`/review/status`, data);
+    }
+
+    async ReviewEdit(data) {
+      return Api.post(`/review/edit`, data);
+    }
+
+    render() {
+      return (
+        <div>
+          <></>
+        </div>
+      );
+    }
   }
 
-  async HomeFaqDelete(data){
-    return Api.post(`/home/delete` ,data);
-  }
-  
-
-  async TeacherFaqAdd(data){
-    return Api.post(`/teacher/faqAdd` ,data);
-  }
-
-   async TeacherFaqList(){
-    return Api.get("/teacher/faqfind")
-  }
-   async TeacherFaqUpdate(data){
-    return Api.post(`/teacher/faqUpdate` ,data);
-  }
-
-  async TeacherFaqDelete(data){
-    return Api.post(`/teacher/delete` ,data);
-  }
-  render() {
-    return (
-      <div>
-        <></>
-      </div>
-    );
-  }
-}
-
-export default Listing;
+  export default Listing;

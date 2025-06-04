@@ -155,7 +155,7 @@ const Index = ({ }) => {
                             <LessonList lessons={record?.lessondata} />
                         }
                         {activeTab === 'review' &&
-                            <ReviewList reviews={record?.reviews} />
+                            <ReviewList reviews={record?.filteredReviews} />
                         }
                     </div>
                 </div>

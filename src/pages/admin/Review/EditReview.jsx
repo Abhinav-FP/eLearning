@@ -4,11 +4,21 @@ import Listing from "@/pages/api/Listing";
 import toast from "react-hot-toast";
 
 export default function EditReview({ isOpen, onClose, data, getLessons }) {
+    console.log("data", data)
     const [loading, setLoading] = useState(false);
+
+
     const [formData, setFormData] = useState({
         description: "",
         _id: "",
     });
+
+    useEffect(() => {
+        setFormData({
+            description: data?.description || "",
+            _id: data?._id || "",
+        });
+    }, [data]);
 
     const handleChange = (e) => {
         const { name, value } = e.target;
@@ -64,7 +74,9 @@ export default function EditReview({ isOpen, onClose, data, getLessons }) {
                     <label className="block text-[#CC2828] font-medium mb-1">
                         Description
                     </label>
-                    <input
+                    <textarea
+                        rows={5}
+                        cols={5}
                         type="text"
                         name="description"
                         value={formData.description}

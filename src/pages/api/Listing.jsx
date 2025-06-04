@@ -177,10 +177,6 @@
       return Api.post(`/teacher/payout`, data);
     }
 
-    async TeacherEarning(date) {
-      return Api.get(`/teacher/earning?date=${date}`);
-    }
-
     async TeacherBooking() {
       return Api.get(`/teacher/booking`);
     }

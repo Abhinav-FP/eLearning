@@ -14,6 +14,7 @@ import AboutUs from "./AboutUs";
 import Payout from "./Payout";
 import LessonList from "./LessonList";
 import BookingList from "./BookingList";
+import ReviewList from "./ReviewList";
 
 const Index = ({ }) => {
     const router = useRouter();
@@ -152,6 +153,9 @@ const Index = ({ }) => {
                         }
                         {activeTab === 'lesson' &&
                             <LessonList lessons={record?.lessondata} />
+                        }
+                        {activeTab === 'review' &&
+                            <ReviewList reviews={record?.reviews} />
                         }
                     </div>
                 </div>

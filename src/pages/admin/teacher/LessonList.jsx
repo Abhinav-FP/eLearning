@@ -13,7 +13,7 @@ export default function LessonList({ lessons }) {
           {lessons.map((item, index) => (
             <li
               key={index}
-              className="bg-white  rounded-xl lg:rounded-2xl p-4 md:p-6 lg:p-8 shadow-sm hover:shadow-md transition-shadow duration-200 cursor-pointer"
+              className="bg-white  rounded-xl lg:rounded-2xl p-4 md:p-6 lg:p-8 shadow-sm transition-shadow duration-200 cursor-pointer"
             >
               {/* Title */}
               <h3 className="text-[#CC2828] text-lg md:text-xl xl:text-2xl font-bold font-inter mb-4 tracking-tight capitalize">

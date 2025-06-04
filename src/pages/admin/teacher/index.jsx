@@ -4,17 +4,12 @@ import Image from "next/image";
 import Listing from "../../api/Listing";
 import Link from "next/link";
 import toast from "react-hot-toast";
-import DetailPopup from "./DetailPopup";
 
 function TeacherListing() {
   const [tabActive, setTabActive] = useState("existing");
   const [teacherData, setTeacherData] = useState([]);
   const [loading, setLoading] = useState(false);
   const [blockloading, setBlockloading] = useState(false);
-  const [isPopupOpen, setIsPopupOpen] = useState(false);
-  const closePopup = () => setIsPopupOpen(false);
-  const [data, setData] = useState(null);
-
   const handleBlock=async(id)=>{
     try {
       setBlockloading(true);
@@ -79,7 +74,7 @@ function TeacherListing() {
       </td>
       <td className="capitalize px-3 lg:px-4 py-2 lg:py-3 text-black text-sm lg:text-base font-medium font-inter">
         <div className="flex gap-2 justify-center items-center">
-            <button
+            {/* <button
             onClick={(()=>{
               setData(item);
               setIsPopupOpen(true);
@@ -87,7 +82,7 @@ function TeacherListing() {
             className="border border-[#CC2828] text-[#CC2828] hover:bg-[#CC2828] hover:text-white px-3 py-1 text-xs rounded cursor-pointer"
             >
             View 
-            </button>
+            </button> */}
             {category === "existing" ? 
             <button
             onClick={() => handleBlock(item?.userId?._id)}
@@ -255,11 +250,6 @@ function TeacherListing() {
           </div>
         </div>
       </div>
-      <DetailPopup
-        isOpen={isPopupOpen}
-        onClose={closePopup}
-        data={data}
-      />
     </AdminLayout>
   );
 }

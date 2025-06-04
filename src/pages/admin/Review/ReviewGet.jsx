@@ -1,15 +1,16 @@
 import Listing from '@/pages/api/Listing';
-import moment from 'moment'
-import React, { useState } from 'react'
+import moment from 'moment';
+import React, { useState } from 'react';
 import toast from 'react-hot-toast';
-import { AiFillStar } from 'react-icons/ai'
+import { AiFillStar } from 'react-icons/ai';
 import { MdEdit } from 'react-icons/md';
 import EditReview from './EditReview';
+import NoData from '@/pages/common/NoData';
 
 export default function ReviewGet({ reviews, Adminreview }) {
+    console.log("reviews", reviews)
     const [processing, setProcessing] = useState(false);
-    const [isLessonOpen, setIsLessonOpen] = useState(false);
-    const closeLesson = () => setIsLessonOpen(false);
+    const [selectedReview, setSelectedReview] = useState(null); // ✅ changed from isLessonOpen
 
     const handleReviewAction = async (id, status) => {
         if (processing) return;
@@ -23,7 +24,7 @@ export default function ReviewGet({ reviews, Adminreview }) {
             });
             if (response) {
                 Adminreview();
-                toast.success(response.data.message)
+                toast.success(response.data.message);
             }
         } catch (error) {
             const status = error?.response?.status;
@@ -38,19 +39,21 @@ export default function ReviewGet({ reviews, Adminreview }) {
         setProcessing(false);
     };
 
-
     return (
         <section className="mt-6 mx-auto px-4">
             <div className="grid grid-cols-1 gap-6">
-                {reviews?.length === 0 ? (
-                    <p className="text-gray-500">No reviews found.</p>
+                {!Array.isArray(reviews) ? (
+                    <div className=' p-6'>
+                        <NoData Heading={"No reviews found."} />
+                    </div>
                 ) : (
-                    reviews && reviews?.map((review) => (
+                    reviews &&
+                    reviews?.map((review) => (
                         <div
                             key={review._id}
                             className="bg-white border border-gray-200 rounded-2xl p-6 transition"
                         >
-                            {/* Header: User Info & Status */}
+                            {/* Header */}
                             <div className="flex justify-between items-center mb-4">
                                 <div className="flex items-center gap-4">
                                     <img
@@ -96,45 +99,56 @@ export default function ReviewGet({ reviews, Adminreview }) {
                                 ))}
                             </div>
 
-                            {/* Review Text */}
+                            {/* Description */}
                             <p className="text-gray-700 text-sm whitespace-pre-line leading-relaxed mb-4">
                                 {review.description}
                             </p>
 
-                            {/* Accept / Reject Buttons (only if pending) */}
+                            {/* Action Buttons */}
                             {review.review_status === 'Pending' && (
+
                                 <div className="flex gap-3">
                                     <button
-                                        onClick={() => handleReviewAction(review._id, 'Accept')}
-                                        className="bg-green-500 hover:bg-green-600 text-white px-4 py-2 rounded-lg text-sm"
+                                        className="bg-[#CC2828]  hover:bg-red-600 text-white px-4 py-2 rounded-lg text-sm cursor-pointer"
+                                        onClick={() => setSelectedReview(review)}
                                     >
-                                        Accept
+                                        Edit
                                     </button>
-                                    <button
-                                        onClick={() => handleReviewAction(review._id, 'Reject')}
-                                        className="bg-red-500 hover:bg-red-600 text-white px-4 py-2 rounded-lg text-sm"
-                                    >
-                                        Reject
-                                    </button>
+                                    <>
+                                        <button
+                                            onClick={() => handleReviewAction(review._id, 'Accept')}
+                                            className="bg-green-500 hover:bg-green-600 text-white px-4 py-2 rounded-lg text-sm"
+                                        >
+                                            Accept
+                                        </button>
+                                        <button
+                                            onClick={() => handleReviewAction(review._id, 'Reject')}
+                                            className="bg-red-500 hover:bg-red-600 text-white px-4 py-2 rounded-lg text-sm"
+                                        >
+                                            Reject
+                                        </button>
+                                    </>
+
                                 </div>
                             )}
 
-                            <button className="bg-[#CC2828] tracking-[-0.04em] text-base mt-4 lg:mt-6 hover:bg-[#941111fd] mt-6 text-white px-6 lg:px-10 py-3 lg:py-3.5 rounded-[10px] font-bold cursor-pointer"
-                                onClick={() => {
-                                    setIsLessonOpen(true);
-                                }}>
-                                Edit Review
-                            </button>
-                            <EditReview
-                                isOpen={isLessonOpen}
-                                onClose={closeLesson}
-                                data={review}
-                                getLessons={Adminreview}
-                            />
+
+                            {/* Edit Button */}
+
+
+                            {/* Conditionally Render EditReview for this review only */}
+                            {selectedReview?._id === review._id && (
+                                <EditReview
+                                    isOpen={true}
+                                    onClose={() => setSelectedReview(null)}
+                                    data={selectedReview}
+                                    getLessons={Adminreview}
+                                />
+                            )}
                         </div>
                     ))
                 )}
             </div>
         </section>
-    )
+    );
 }

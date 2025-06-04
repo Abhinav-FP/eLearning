@@ -11,12 +11,14 @@ export default function EditReview({ isOpen, onClose, data, getLessons }) {
     const [formData, setFormData] = useState({
         description: "",
         _id: "",
+        rating: ""
     });
 
     useEffect(() => {
         setFormData({
             description: data?.description || "",
             _id: data?._id || "",
+            rating: data?.rating || ""
         });
     }, [data]);
 
@@ -71,6 +73,25 @@ export default function EditReview({ isOpen, onClose, data, getLessons }) {
                 </h2>
                 {/* Description Field */}
                 <div>
+
+                    <div>
+                        <label className="block text-[#CC2828] font-medium mb-1">
+                            Rating
+                        </label>
+                        <input
+                            type="number"
+                            name="rating"
+                            value={formData.rating}
+                            onChange={handleChange}
+                            min={1}                     // 👈 Set minimum value
+                            max={3}                     // 👈 Set maximum value
+                            placeholder="Enter rating (1–3)"
+                            className="w-full p-3 rounded-md bg-gray-100 text-gray-700 focus:outline-none focus:ring-2 focus:ring-[#CC2828]"
+                            required
+                        />
+
+                    </div>
+
                     <label className="block text-[#CC2828] font-medium mb-1">
                         Description
                     </label>
@@ -86,6 +107,7 @@ export default function EditReview({ isOpen, onClose, data, getLessons }) {
                         required
                     />
                 </div>
+
 
 
                 {/* Action Buttons */}

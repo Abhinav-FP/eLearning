@@ -4,17 +4,25 @@ import { useEffect, useState } from "react";
 import { TableLoader } from "@/components/Loader";
 import NoData from "@/pages/common/NoData";
 import { formatMultiPrice } from "@/components/ValueDataHook";
+import * as XLSX from 'xlsx';
+import toast from "react-hot-toast";
 
 function Index() {
   const [payout, setPayout] = useState([]);
   const [loading, setLoading] = useState(false);
+  const [selectedOption, setSelectedOption] = useState("");
+  
+  const handleDropdownChange = (e) => {
+    setSelectedOption(e.target.value);
+    // console.log("Selected:", e.target.value);
+  };
   // console.log("payout", payout)
 
   useEffect(() => {
     setLoading(true);
     const main = new Listing();
     main
-      .PayoutList()
+      .PayoutList(selectedOption)
       .then((r) => {
         // console.log("r", r)
         setPayout(r?.data?.data);
@@ -23,8 +31,28 @@ function Index() {
       .catch((err) => {
         console.log(err);
         setLoading(false);
+        setPayout([]);
       });
-  }, []);
+  }, [selectedOption]);
+
+  const downloadExcel = () => {
+    if(payout && payout?.length == 0){
+      toast.error("No data to export");
+      return;
+    }
+    const result = payout && payout?.map(item => ({
+      Amount: formatMultiPrice(item?.amount, "USD") || "",
+      Status: item?.Status || "",
+      TransactionDetails: item?.TranscationId || item?.Reasons || "-",
+      Bank: item?.BankId?.BankName || "",
+    }));
+    const worksheet = XLSX.utils.json_to_sheet(result);
+    const workbook = XLSX.utils.book_new();
+    XLSX.utils.book_append_sheet(workbook, worksheet, 'Sheet1');
+    //let buffer = XLSX.write(workbook, { bookType: "xlsx", type: "buffer" });
+    //XLSX.write(workbook, { bookType: "xlsx", type: "binary" });
+    XLSX.writeFile(workbook, 'Payouts.xlsx');
+  };
 
   return (
     <>
@@ -34,6 +62,26 @@ function Index() {
             <h2 className="capitalize text-lg md:text-xl lg:text-2xl font-bold text-[#CC2828] tracking-[-0.04em] font-inter">
               payout Entries
             </h2>
+            <div className="flex items-center space-x-3">
+              <select
+                value={selectedOption}
+                onChange={handleDropdownChange}
+                className="border border-[#CC2828] text-[#CC2828] px-3 py-2 rounded focus:outline-none"
+                >
+                <option value="">All</option>
+                <option value="approved">Approved</option>
+                <option value="pending">Pending</option>
+                <option value="rejected">Rejected</option>
+              </select>
+              <button
+                onClick={() => {
+                  downloadExcel();
+                }}
+                className="w-fit px-2 sm:px-8 py-2.5 hover:bg-white hover:text-[#CC2828] border border-[#CC2828] rounded-[10px] tracking-[-0.06em] text-sm font-medium bg-[#CC2828] text-white cursor-pointer"
+              >
+                Export as Excel
+              </button>
+            </div>
           </div>
           <div className="rounded-[5px] border border-[rgba(204,40,40,0.3)] overflow-x-auto">
             <table className="min-w-full text-sm text-center rounded-[20px]">

@@ -10,6 +10,9 @@ import { formatMultiPrice } from "@/components/ValueDataHook";
 import { FaWallet, FaMoneyBillWave } from "react-icons/fa";
 import { MdPaid } from "react-icons/md";
 import { FiSearch } from "react-icons/fi";
+import { MdRequestQuote } from "react-icons/md";
+import * as XLSX from 'xlsx';
+import toast from "react-hot-toast";
 
 export default function index() {
   const [data, setData] = useState({});
@@ -23,7 +26,7 @@ export default function index() {
 
   const handleDropdownChange = (e) => {
     setSelectedOption(e.target.value);
-    console.log("Selected:", e.target.value);
+    // console.log("Selected:", e.target.value);
   };
 
   // Generate years from current year down to 2025
@@ -37,7 +40,7 @@ export default function index() {
     try {
       setLoading(true);
       const main = new Listing();
-      const response = await main.TeacherEarning(selectedOption);
+      const response = await main.TeacherEarning(selectedOption, searchText);
       setData(response?.data?.data || []);
     } catch (error) {
       console.log("error", error);
@@ -48,7 +51,29 @@ export default function index() {
 
   useEffect(() => {
     fetchEarnings();
-  }, [selectedOption, setSearchText]);
+  }, [selectedOption, searchText]);
+
+  const downloadExcel = () => {
+    if(data && data?.bookings && data?.bookings?.length == 0){
+      toast.error("No data to export");
+      return;
+    }
+    const result = data && data?.bookings && data?.bookings?.map(item => ({
+      LessonName: item?.LessonId?.title || "",
+      LessonDate: moment(item?.startDateTime).format("DD MMM YYYY, hh:mm A") || "",
+      PaymentId: moment(item?.StripepaymentId?.created_at || item?.paypalpaymentId?.created_at)
+                 .format("DD MMM YYYY, hh:mm A") || "" || "",
+      PaymentDate: moment(item?.StripepaymentId?.created_at || item?.paypalpaymentId?.created_at)
+                   .format("DD MMM YYYY, hh:mm A") || "",
+      Amount: formatMultiPrice(item?.teacherEarning, "USD") || ""
+    }));
+    const worksheet = XLSX.utils.json_to_sheet(result);
+    const workbook = XLSX.utils.book_new();
+    XLSX.utils.book_append_sheet(workbook, worksheet, 'Sheet1');
+    //let buffer = XLSX.write(workbook, { bookType: "xlsx", type: "buffer" });
+    //XLSX.write(workbook, { bookType: "xlsx", type: "binary" });
+    XLSX.writeFile(workbook, 'Earnings.xlsx');
+  };
 
   // console.log("data",data);
 
@@ -72,7 +97,7 @@ export default function index() {
       {
         label: "Requested Earnings",
         value: data?.earningsSummary?.requestedEarnings ?? "N/A",
-        icon: <FaWallet className="w-6 h-6 text-[#CC2828]" />,
+        icon: <MdRequestQuote className="w-6 h-6 text-[#CC2828]" />,
       },
     ],
     [data]
@@ -83,11 +108,8 @@ export default function index() {
 
   return (
     <TeacherLayout page={"Earnings & Payout"}>
-      {loading ? (
-        <TeacherEarningsLoader />
-      ) : (
-        <div className="min-h-screen p-5 lg:p-[30px]">
-          <div className="flex justify-between items-center mb-4 lg:mb-5">
+      <div className="min-h-screen p-5 lg:p-[30px]">
+        <div className="flex justify-between items-center mb-4 lg:mb-5">
             {/* <h2 className="text-lg md:text-xl lg:text-2xl font-bold text-[#CC2828] tracking-[-0.04em] font-inter">
               Earnings
             </h2> */}
@@ -99,7 +121,7 @@ export default function index() {
                 type="text"
                 value={searchText}
                 onChange={handleSearchChange}
-                placeholder="Search using lesson or payment id..."
+                placeholder="Search using name or payment id"
                 className="w-full pl-10 pr-4 py-2 border border-[#CC2828] text-[#CC2828] rounded focus:outline-none focus:ring-2 focus:ring-[#CC2828] placeholder-gray-400"
               />
             </div>
@@ -116,7 +138,7 @@ export default function index() {
                 <option key={year} value={year}>{year}</option>
               ))}
             </select>
-              <button
+            <button
                 onClick={() => {
                   setIsEarning(true);
                 }}
@@ -124,8 +146,20 @@ export default function index() {
               >
                 Request Payout
               </button>
+              <button
+                onClick={() => {
+                  downloadExcel();
+                }}
+                className="w-fit px-2 sm:px-8 py-2.5 hover:bg-white hover:text-[#CC2828] border border-[#CC2828] rounded-[10px] tracking-[-0.06em] text-sm font-medium bg-[#CC2828] text-white cursor-pointer"
+              >
+                Export as Excel
+              </button>
             </div>
           </div>
+      {loading ? (
+        <TeacherEarningsLoader />
+      ) : (
+        <>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 mb-4">
             {stats &&
               stats?.map((item, idx) => (
@@ -163,7 +197,7 @@ export default function index() {
               </thead>
 
               <tbody>
-                {data && data.bookings && data.bookings.length > 0 ? (
+                {data && data?.bookings && data?.bookings?.length > 0 ? (
                   data.bookings.map((item, index) => (
                     <tr
                       key={index}
@@ -189,7 +223,7 @@ export default function index() {
                         ).format("DD MMM YYYY, hh:mm A") || ""}
                       </td>
                       <td className="px-3 lg:px-4 py-2 lg:py-3 text-black text-sm lg:text-base font-medium font-inter">
-                        {formatMultiPrice(item?.teacherEarning, "USD")}
+                        {formatMultiPrice(item?.teacherEarning, "USD") || ""}
                       </td>
                       {/* <td className="px-3 lg:px-4 py-2 lg:py-3 text-black text-sm lg:text-base font-medium font-inter capitalize">
                                     {item?.payoutStatus}
@@ -213,8 +247,9 @@ export default function index() {
               </tbody>
             </table>
           </div>
-        </div>
+          </>
       )}
+        </div>
 
       {IsEarning && (
         <Earning

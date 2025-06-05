@@ -138,22 +138,22 @@ const TeacherLoader = () => {
   );
 };
 
-const TableLoader=({length})=>{
-  return(
-     <tbody>
-    {[1, 2, 3, 4].map((_, index) => (
-      <tr key={index} className="border-t border-[rgba(204,40,40,0.2)] animate-pulse">
-        {[...Array(length || 2)].map((__, colIdx) => (
-          <td
-            key={colIdx}
-            className="px-3 lg:px-4 py-2 lg:py-3"
-          >
-            <div className="h-4 bg-gray-200 rounded w-full mx-auto"></div>
-          </td>
-        ))}
-      </tr>
-    ))}
-  </tbody>
+const TableLoader = ({ length }) => {
+  return (
+    <tbody>
+      {[1, 2, 3, 4].map((_, index) => (
+        <tr key={index} className="border-t border-[rgba(204,40,40,0.2)] animate-pulse">
+          {[...Array(length || 2)].map((__, colIdx) => (
+            <td
+              key={colIdx}
+              className="px-3 lg:px-4 py-2 lg:py-3"
+            >
+              <div className="h-4 bg-gray-200 rounded w-full mx-auto"></div>
+            </td>
+          ))}
+        </tr>
+      ))}
+    </tbody>
   );
 }
 
@@ -186,64 +186,64 @@ const ReviewLoader = () => {
 const ProfileFormLoader = () => {
   return (
     <>
-    <div className="border-b border-[rgba(0,0,0,.1)] flex flex-wrap py-6 lg:py-8 animate-pulse">
-      {/* Label and Photo Loader */}
-      <div className="w-full lg:w-5/12 xl:w-4/12 lg:pr-3 mb-2 sm:mb-0">
-        <div className="h-5 bg-gray-200 rounded w-1/2"></div>
-        <div className="h-4 bg-gray-200 rounded w-2/3 mt-2"></div>
-      </div>
+      <div className="border-b border-[rgba(0,0,0,.1)] flex flex-wrap py-6 lg:py-8 animate-pulse">
+        {/* Label and Photo Loader */}
+        <div className="w-full lg:w-5/12 xl:w-4/12 lg:pr-3 mb-2 sm:mb-0">
+          <div className="h-5 bg-gray-200 rounded w-1/2"></div>
+          <div className="h-4 bg-gray-200 rounded w-2/3 mt-2"></div>
+        </div>
 
-      {/* Profile Photo Placeholder */}
-      <div className="w-full lg:w-6/12 xl:w-5/12 lg:pl-3">
-        <div className="flex items-center">
-          <div className="relative h-[52px] w-[52px] flex rounded-full text-sm text-white mr-4">
-            <div className="h-[52px] w-[52px] bg-gray-200 rounded-full"></div>
+        {/* Profile Photo Placeholder */}
+        <div className="w-full lg:w-6/12 xl:w-5/12 lg:pl-3">
+          <div className="flex items-center">
+            <div className="relative h-[52px] w-[52px] flex rounded-full text-sm text-white mr-4">
+              <div className="h-[52px] w-[52px] bg-gray-200 rounded-full"></div>
+            </div>
+            <div className="h-5 bg-gray-200 rounded w-32"></div>
           </div>
-          <div className="h-5 bg-gray-200 rounded w-32"></div>
-        </div>
-      </div>
-    </div>
-
-    {/* Name Field Loader */}
-    <div className="border-b border-[rgba(0,0,0,.1)] py-6 lg:py-8 space-y-4 lg:space-y-6 animate-pulse">
-      <div className="flex flex-wrap">
-        <div className="w-full lg:w-5/12 xl:w-4/12 lg:pr-3 mb-2 lg:mb-0">
-          <div className="h-5 bg-gray-200 rounded w-1/2"></div>
-          <div className="h-4 bg-gray-200 rounded w-2/3 mt-2"></div>
-        </div>
-        <div className="w-full lg:w-6/12 xl:w-5/12 lg:pl-3">
-          <div className="h-11 bg-gray-200 rounded-lg w-full"></div>
         </div>
       </div>
 
-      {/* Email Field Loader */}
-      <div className="flex flex-wrap">
-        <div className="w-full lg:w-5/12 xl:w-4/12 lg:pr-3 mb-2 lg:mb-0">
-          <div className="h-5 bg-gray-200 rounded w-1/2"></div>
-          <div className="h-4 bg-gray-200 rounded w-2/3 mt-2"></div>
+      {/* Name Field Loader */}
+      <div className="border-b border-[rgba(0,0,0,.1)] py-6 lg:py-8 space-y-4 lg:space-y-6 animate-pulse">
+        <div className="flex flex-wrap">
+          <div className="w-full lg:w-5/12 xl:w-4/12 lg:pr-3 mb-2 lg:mb-0">
+            <div className="h-5 bg-gray-200 rounded w-1/2"></div>
+            <div className="h-4 bg-gray-200 rounded w-2/3 mt-2"></div>
+          </div>
+          <div className="w-full lg:w-6/12 xl:w-5/12 lg:pl-3">
+            <div className="h-11 bg-gray-200 rounded-lg w-full"></div>
+          </div>
         </div>
-        <div className="w-full lg:w-6/12 xl:w-5/12 lg:pl-3">
-          <div className="h-11 bg-gray-200 rounded-lg w-full"></div>
+
+        {/* Email Field Loader */}
+        <div className="flex flex-wrap">
+          <div className="w-full lg:w-5/12 xl:w-4/12 lg:pr-3 mb-2 lg:mb-0">
+            <div className="h-5 bg-gray-200 rounded w-1/2"></div>
+            <div className="h-4 bg-gray-200 rounded w-2/3 mt-2"></div>
+          </div>
+          <div className="w-full lg:w-6/12 xl:w-5/12 lg:pl-3">
+            <div className="h-11 bg-gray-200 rounded-lg w-full"></div>
+          </div>
+        </div>
+
+        {/* Time Zone Field Loader */}
+        <div className="flex flex-wrap">
+          <div className="w-full lg:w-5/12 xl:w-4/12 lg:pr-3 mb-2 lg:mb-0">
+            <div className="h-5 bg-gray-200 rounded w-1/2"></div>
+            <div className="h-4 bg-gray-200 rounded w-2/3 mt-2"></div>
+          </div>
+          <div className="w-full lg:w-6/12 xl:w-5/12 lg:pl-3">
+            <div className="h-11 bg-gray-200 rounded-lg w-full"></div>
+          </div>
         </div>
       </div>
 
-      {/* Time Zone Field Loader */}
-      <div className="flex flex-wrap">
-        <div className="w-full lg:w-5/12 xl:w-4/12 lg:pr-3 mb-2 lg:mb-0">
-          <div className="h-5 bg-gray-200 rounded w-1/2"></div>
-          <div className="h-4 bg-gray-200 rounded w-2/3 mt-2"></div>
-        </div>
-        <div className="w-full lg:w-6/12 xl:w-5/12 lg:pl-3">
-          <div className="h-11 bg-gray-200 rounded-lg w-full"></div>
-        </div>
+      {/* Submit Button Loader */}
+      <div className="flex w-full lg:w-12/12 xl:w-11/12 flex-wrap justify-center items-center pt-6 lg:pt-10 space-x-4 lg:space-x-6">
+        <div className="h-11 bg-gray-200 rounded-lg w-full max-w-[183px]"></div>
       </div>
-    </div>
-
-    {/* Submit Button Loader */}
-    <div className="flex w-full lg:w-12/12 xl:w-11/12 flex-wrap justify-center items-center pt-6 lg:pt-10 space-x-4 lg:space-x-6">
-      <div className="h-11 bg-gray-200 rounded-lg w-full max-w-[183px]"></div>
-    </div>
-  </>
+    </>
   );
 };
 
@@ -521,27 +521,44 @@ const TeacherProfileFormLoader = () => {
 
 const ChatListShimmer = () => {
   return (
-      <div className="mt-0 space-y-1 max-h-[calc(100vh-128px)] md:h-[calc(100vh-128px)] min-h-[300px] overflow-y-auto pb-5 pt-2">
-        {Array.from({ length: 6 }).map((_, index) => (
-          <div
-            key={index}
-            className="flex items-center bg-white min-h-[72px] pr-[66px] pl-[89px] py-[8px] relative animate-pulse"
-          >
-            {/* Avatar */}
-            <div className="w-[50px] h-[50px] lg:w-[56px] lg:h-[56px] rounded-lg bg-gray-300 absolute left-[22px] top-1/2 -translate-y-1/2" />
+    <div className="mt-0 space-y-1 max-h-[calc(100vh-128px)] md:h-[calc(100vh-128px)] min-h-[300px] overflow-y-auto pb-5 pt-2">
+      {Array.from({ length: 6 }).map((_, index) => (
+        <div
+          key={index}
+          className="flex items-center bg-white min-h-[72px] pr-[66px] pl-[89px] py-[8px] relative animate-pulse"
+        >
+          {/* Avatar */}
+          <div className="w-[50px] h-[50px] lg:w-[56px] lg:h-[56px] rounded-lg bg-gray-300 absolute left-[22px] top-1/2 -translate-y-1/2" />
 
-            {/* Name + Message lines */}
-            <div className="flex-1">
-              <div className="h-4 w-1/2 bg-gray-300 rounded mb-2" />
-              <div className="h-3 w-1/3 bg-gray-200 rounded" />
-            </div>
-
-            {/* Unread badge shimmer */}
-            <div className="h-[28px] w-[28px] bg-gray-300 rounded-full absolute right-[22px] top-1/2 -translate-y-1/2" />
+          {/* Name + Message lines */}
+          <div className="flex-1">
+            <div className="h-4 w-1/2 bg-gray-300 rounded mb-2" />
+            <div className="h-3 w-1/3 bg-gray-200 rounded" />
           </div>
-        ))}
-      </div>
+
+          {/* Unread badge shimmer */}
+          <div className="h-[28px] w-[28px] bg-gray-300 rounded-full absolute right-[22px] top-1/2 -translate-y-1/2" />
+        </div>
+      ))}
+    </div>
   );
 };
 
-export { Loader, BookLoader, LessonLoader, TeacherLoader, TableLoader, ReviewLoader, ProfileFormLoader, StudentDashboardLoader, TeacherDashboardLoader, EditProfileLoader, TeacherEarningsLoader, TeacherProfileFormLoader, ChatListShimmer };
+const MessageLoader = () => {
+  return (
+    <div className="mt-4 space-y-4">
+      {[...Array(8)].map((_, i) => {
+        const isLeft = i % 2 === 0; // alternate left/right
+        return (
+          <div key={i} className="animate-pulse">
+            <div className={`flex ${isLeft ? 'justify-start' : 'justify-end'}`}>
+              <div className={`h-8 w-[180px] bg-gray-200 rounded-md mb-1 ${isLeft ? '' : 'bg-[rgba(204,40,40,0.1)]'}`} />
+            </div>
+          </div>
+        );
+      })}
+    </div>
+  );
+};
+
+export { Loader, BookLoader, LessonLoader, TeacherLoader, TableLoader, ReviewLoader, ProfileFormLoader, MessageLoader, StudentDashboardLoader, TeacherDashboardLoader, EditProfileLoader, TeacherEarningsLoader, TeacherProfileFormLoader, ChatListShimmer };

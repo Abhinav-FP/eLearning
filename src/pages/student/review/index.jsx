@@ -24,7 +24,7 @@ export default function ReviewsList() {
         setLoading(false);
       });
   }, []);
-  
+
   return (
     <StudentLayout page={"Settings"}>
       <div className="p-5 lg:p-[30px] ">
@@ -63,7 +63,7 @@ export default function ReviewsList() {
               </div>
             ))
           ) : (
-            <NoData Heading={"No reviews available"}/>
+            <NoData Heading={"No reviews available"} />
           )}
         </div>
       </div>

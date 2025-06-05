@@ -162,6 +162,8 @@ export default function AddLesson({ isOpen, onClose, data, getLessons }) {
             }}
             maxLength="7"
             placeholder="Enter price"
+            required
+
             className="w-full p-3 rounded-md bg-gray-100 text-gray-700 focus:outline-none focus:ring-2 focus:ring-[#CC2828]"
           />
         </div>
@@ -191,6 +193,8 @@ export default function AddLesson({ isOpen, onClose, data, getLessons }) {
                 value="50"
                 checked={formData.duration == "50"}
                 onChange={handleChange}
+                required
+
               />
               <span>50 minutes</span>
             </label>
@@ -199,6 +203,8 @@ export default function AddLesson({ isOpen, onClose, data, getLessons }) {
               <input
                 type="radio"
                 name="duration"
+                required
+
                 value="custom"
                 checked={
                   formData.duration != "30" && formData.duration != "50"
@@ -223,7 +229,6 @@ export default function AddLesson({ isOpen, onClose, data, getLessons }) {
             </label>
           </div>
         </div>
-
         {/* Action Buttons */}
         <div className="flex justify-between gap-4 mt-6">
           {data ? (

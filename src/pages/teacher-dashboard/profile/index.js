@@ -9,6 +9,7 @@ import Link from "next/link";
 import { EditProfileLoader } from "@/components/Loader";
 import NoData from "@/pages/common/NoData";
 import { formatMultiPrice } from "@/components/ValueDataHook";
+import ViewLesson from "@/pages/common/ViewLesson";
 
 export default function Index() {
   const [data, setData] = useState([]);
@@ -25,7 +26,6 @@ export default function Index() {
     const main = new Listing();
     main.TeacherLessonGet()
       .then((r) => {
-        // console.log("r", r?.data);
         setData(r?.data?.data);
         setLoading(false);
       })
@@ -52,8 +52,8 @@ export default function Index() {
 
   const LessonCard = ({ item }) => {
     return (
-      <div className="bg-white lesson_list_shadow rounded-2xl flex flex-col md:flex-row gap-3 justify-between items-start md:items-center p-4 lg:px-5 lg:py-6 mb-3 lg:mb-4">
-        <div>
+      <div className="bg-white lesson_list_shadow rounded-2xl flex flex-col md:flex-row gap-8 justify-between items-start md:items-center p-4 lg:px-5 lg:py-6 mb-3 lg:mb-4 ">
+        <div className="flex-1">
           <div className="flex items-center gap-2">
             <h3 className="text-base font-semibold text-[#CC2828] tracking-[-0.04em] capitalize">{item?.title || ""}</h3>
             <MdEditSquare size={18} className="text-[#CC2828] cursor-pointer" onClick={() => { handleEdit(item) }} />
@@ -67,11 +67,12 @@ export default function Index() {
           <div className="flex items-center text-[#E4B750] text-lg mt-2">
             ★★★★☆ <span className="text-black tracking-[-0.04em] text-xs font-medium">(29)</span>
           </div>
-          <p className="text-xs text-[#CC2828] bg-[rgba(204,40,40,0.1)] mt-2 font-medium tracking-[-0.04em] px-2 py-1 rounded-full line-clamp-1">
+          {/* <p className="text-xs text-[#CC2828] bg-[rgba(204,40,40,0.1)] mt-2 font-medium tracking-[-0.04em] px-2 leading-[28px] rounded-full line-clamp-1 overflow-hidden" >
             {item?.description || ""}
-          </p>
+          </p> */}
+          <ViewLesson title={item?.title} description={item?.description} price={item?.price} duration={item?.duration} />
         </div>
-        <div className="text-center sm:text-right">
+        <div className="text-center sm:text-right ">
           <div className="bg-[rgba(204,40,40,0.1)] tracking-[-0.04em] text-center text-sm lg:text-base text-[#CC2828] font-semibold capitalize min-w-[119px] md:min-w-[149px] px-2 py-2 rounded-full">
             {item?.price && item?.duration
               ? `${formatMultiPrice(item?.price, "USD")}/${item?.duration} min` : ""}
@@ -159,7 +160,7 @@ export default function Index() {
         data={editData}
         getLessons={getLessons}
       />
-      
+
       <Delete
         isOpen={isDeleteOpen}
         onClose={closeDelete}

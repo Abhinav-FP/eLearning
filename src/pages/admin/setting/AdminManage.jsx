@@ -4,6 +4,7 @@ import toast from 'react-hot-toast';
 
 export default function AdminManage() {
     const [processing, setProcessing] = useState(false)
+
     const [data, setData] = useState({
         admin_comission: "",
         privcay_policy: "",
@@ -41,7 +42,7 @@ export default function AdminManage() {
         HomeLists();
     }, []);
 
-    const handleSubmit = async (e) => {
+     const handleSubmit = async (e) => {
         e.preventDefault();
         if (processing) return;
 

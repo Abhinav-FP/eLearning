@@ -8,13 +8,13 @@ import toast from 'react-hot-toast';
 import { useRouter } from 'next/router';
 import TeacherLayout from './Common/TeacherLayout';
 import DefaultMessage from '../common/DefaultMessage';
-import { ChatListShimmer } from '@/components/Loader';
-
+import { ChatListShimmer, MessageLoader } from '@/components/Loader';
 export default function Message() {
   const [teacherId, setTeacherId] = useState("")
   const [message, setMessage] = useState('');
   const [usermessage, setUserMessage] = useState();
   const [Loading, setLoading] = useState();
+  const [processing, setProcessing] = useState(false);
   const [chatListLoading, setChatListLoading] = useState(false);
   const [messageCount, SetmessageCount] = useState([]);
   const [selectedIdUser, setSelectedIdUser] = useState();
@@ -37,17 +37,15 @@ export default function Message() {
       const main = new Listing();
       const response = await main.getCountmessage();
       SetmessageCount(response.data.data);
-      
+
     } catch (error) {
       console.log("error", error);
     }
-      setChatListLoading(false);
+    setChatListLoading(false);
   };
   useEffect(() => {
     MessageCount();
   }, []);
-
-
 
   const handleUserSelect = (user) => {
     setTeacherId(user?.student?._id)
@@ -56,13 +54,15 @@ export default function Message() {
 
   const MessageGetAlls = async (Id) => {
     try {
+      setProcessing(true)
       const main = new Listing();
       const response = await main.MessageGetAll(Id);
-      // console.log("response.data.messages", response.data.messages);
       setUserMessage(response.data.messages);
       setSelectedIdUser(response.data.ReciverUser);
+      setProcessing(false);
     } catch (error) {
       console.log("error", error);
+      setProcessing(false);
     }
   };
 
@@ -121,41 +121,41 @@ export default function Message() {
         <div className="flex flex-wrap w-full">
           {/* Sidebar */}
           <div className="w-full  mb-3 lg:mb-0  lg:w-1/4  rounded-lg ">
-          {chatListLoading ? 
-          <ChatListShimmer/>
-          : 
-            <div className="mt-0 space-y-1 max-h-[calc(100vh-128px)] md:h-[calc(100vh-128px)] min-h-[300px] overflow-y-auto customscroll pb-5 pt-2">
-              {messageCount && messageCount?.map((chat, index) => (
-                <div
-                  key={index}
-                  onClick={() => handleUserSelect(chat)}
-                  className={`flex items-center  text-[#ffffff] min-h-[56px] pr-[66px] pl-[89px] py-[8px] hover:bg-[#CC28281A] relative cursor-pointer min-h-[72px] ${teacherId === chat?.teacher?._id ? "bg-[#CC28281A]" : "bg-[#fff]"}`}
-                >
-                  <Image
-                    src={"/profile.png"}
-                    width={50}
-                    height={50}
-                    alt={chat?.student?.name}
-                    className="w-[50px] h-[50px] lg:w-[56px] lg:h-[56px] rounded-lg absolute left-[22px] top-1/2 -translate-y-1/2"
-                  />
-                  <div className="flex-1">
-                    <h3 className="font-medium font-inter text-base mb-0 text-black capitalize">{chat?.student?.name}</h3>
-                    {chat?.count ? (
-                      <p className="text-sm text-[#CC2828] font-inter tracking-[-0.04em] "> {chat?.count > 5 ? '5+' : chat?.count} unread messages</p>
+            {chatListLoading ?
+              <ChatListShimmer />
+              :
+              <div className="mt-0 space-y-1 max-h-[calc(100vh-128px)] md:h-[calc(100vh-128px)] min-h-[300px] overflow-y-auto customscroll pb-5 pt-2">
+                {messageCount && messageCount?.map((chat, index) => (
+                  <div
+                    key={index}
+                    onClick={() => handleUserSelect(chat)}
+                    className={`flex items-center  text-[#ffffff] min-h-[56px] pr-[66px] pl-[89px] py-[8px] hover:bg-[#CC28281A] relative cursor-pointer min-h-[72px] ${teacherId === chat?.teacher?._id ? "bg-[#CC28281A]" : "bg-[#fff]"}`}
+                  >
+                    <Image
+                      src={"/profile.png"}
+                      width={50}
+                      height={50}
+                      alt={chat?.student?.name}
+                      className="w-[50px] h-[50px] lg:w-[56px] lg:h-[56px] rounded-lg absolute left-[22px] top-1/2 -translate-y-1/2"
+                    />
+                    <div className="flex-1">
+                      <h3 className="font-medium font-inter text-base mb-0 text-black capitalize">{chat?.student?.name}</h3>
+                      {chat?.count ? (
+                        <p className="text-sm text-[#CC2828] font-inter tracking-[-0.04em] "> {chat?.count > 5 ? '5+' : chat?.count} unread messages</p>
 
-                    ) : (
-                      <p className="text-sm text-[#7A7A7A] font-inter tracking-[-0.04em]">Student</p>
+                      ) : (
+                        <p className="text-sm text-[#7A7A7A] font-inter tracking-[-0.04em]">Student</p>
+                      )}
+                    </div>
+                    {chat?.count > 0 && (
+                      <div className={` h-[28px] w-[28px] text-[#535353] text-xs font-bold flex items-center justify-center absolute right-[22px] rounded-full top-1/2 -translate-y-1/2 ${teacherId === chat?.tecaher?._id ? "bg-white" : "bg-[rgba(204,40,40,0.1)]"}`}>
+                        {chat?.count > 5 ? '5+' : chat?.count}
+                      </div>
                     )}
                   </div>
-                  {chat?.count > 0 && (
-                    <div className={` h-[28px] w-[28px] text-[#535353] text-xs font-bold flex items-center justify-center absolute right-[22px] rounded-full top-1/2 -translate-y-1/2 ${teacherId === chat?.tecaher?._id ? "bg-white" : "bg-[rgba(204,40,40,0.1)]"}`}>
-                      {chat?.count > 5 ? '5+' : chat?.count}
-                    </div>
-                  )}
-                </div>
-              ))}
+                ))}
 
-            </div>}
+              </div>}
           </div>
 
           {teacherId ? (
@@ -185,8 +185,10 @@ export default function Message() {
                   </div>
                   <span>Messages are end-to-end encrypted. No one outside of this chat can read or listen to them.</span>
                 </div>
-
-                {usermessage && usermessage?.map((item, index) => {
+                {processing ? (
+                  // 🌀 Loading State (same layout spacing)
+                  <MessageLoader />
+                ) : (usermessage && usermessage?.map((item, index) => {
                   const isIncoming = item.sent_by !== selectedIdUser?.role;
                   return (
                     <div className="mt-4 space-y-1" key={index}>
@@ -228,7 +230,7 @@ export default function Message() {
                       )}
                     </div>
                   );
-                })}
+                }))}
               </div>
 
 

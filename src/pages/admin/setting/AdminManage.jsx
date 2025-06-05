@@ -4,7 +4,6 @@ import toast from 'react-hot-toast';
 
 export default function AdminManage() {
     const [processing, setProcessing] = useState(false)
-
     const [data, setData] = useState({
         admin_comission: "",
         privcay_policy: "",

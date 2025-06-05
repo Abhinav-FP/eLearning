@@ -98,7 +98,7 @@ export default function AddLesson({ isOpen, onClose, data, getLessons }) {
   // console.log("data",data);
 
   return (
-    <Popup isOpen={isOpen} onClose={onClose} size={"max-w-[510px]"}>
+    <Popup isOpen={isOpen} onClose={onClose} size={"max-w-[540px]"}>
       <form
         onSubmit={data ? handleUpdate : handleAdd}
         className="max-w-md mx-auto mt-10 px-3 sm:px-6 pb-3 sm:pb-6 bg-white space-y-2 sm:space-y-4"
@@ -107,33 +107,43 @@ export default function AddLesson({ isOpen, onClose, data, getLessons }) {
           {data ? "Edit Lesson" : "Add lesson"}
         </h2>
         {/* Title Field */}
+        {/* Title Field with 50 character limit */}
         <div>
-          <label className="block text-[#CC2828] font-medium mb-1">Title</label>
+          <label className="flex justify-between text-[#CC2828] font-medium mb-1">
+            Title <span className="text-sm text-gray-500">({formData.title.length}/50)</span>
+          </label>
           <input
             type="text"
             name="title"
             value={formData.title}
-            onChange={handleChange}
+            onChange={(e) => {
+              if (e.target.value.length <= 50) handleChange(e);
+            }}
             placeholder="Enter title"
             className="w-full p-3 rounded-md bg-gray-100 text-gray-700 focus:outline-none focus:ring-2 focus:ring-[#CC2828]"
             required
           />
         </div>
-        {/* Description Field */}
+
+        {/* Description Field changed to textarea with 300 character limit */}
         <div>
-          <label className="block text-[#CC2828] font-medium mb-1">
-            Description
+          <label className="flex justify-between text-[#CC2828] font-medium mb-1">
+            <span>Description</span>
+            <span className="text-sm text-gray-500">({formData.description.length}/300)</span>
           </label>
-          <input
-            type="text"
+          <textarea
             name="description"
             value={formData.description}
-            onChange={handleChange}
+            onChange={(e) => {
+              if (e.target.value.length <= 300) handleChange(e);
+            }}
             placeholder="Enter description"
+            rows={10}
             className="w-full p-3 rounded-md bg-gray-100 text-gray-700 focus:outline-none focus:ring-2 focus:ring-[#CC2828]"
             required
           />
         </div>
+
         {/* Price Field */}
         <div>
           <label className="block text-[#CC2828] font-medium mb-1">

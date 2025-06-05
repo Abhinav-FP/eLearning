@@ -24,7 +24,6 @@ export default function Index() {
   const router = useRouter();
   const { slug } = router.query;
   const [loading,setLoading]=useState(false);
-  // console.log("slug", slug);
 
   const Verify = async (slug) => {
     setLoading(true);

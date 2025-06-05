@@ -45,7 +45,6 @@ export default function Login() {
       if (response?.data?.status) {
         toast.success(response.data.message);
         localStorage && localStorage.setItem("token", response?.data?.token);
-        console.log("response?.data",response?.data);
         if (redirect) {
           router.push(`${redirect}`);
           return;
@@ -56,7 +55,6 @@ export default function Login() {
           router.push("/teacher-dashboard");
         }
        else if (response?.data?.role === "admin") {
-        console.log("Hello admin");
         router.push("/admin");
       }
     }

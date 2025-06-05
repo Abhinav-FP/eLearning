@@ -18,7 +18,6 @@ import ReviewList from "./ReviewList";
 
 const Index = ({ }) => {
     const router = useRouter();
-    console.log(router)
     const Id = router?.query?.slug
     const [showVideo, setShowVideo] = useState(false);
     const [record, setRecord] = useState("")
@@ -26,7 +25,6 @@ const Index = ({ }) => {
         try {
             const main = new Listing();
             const response = await main.AdminTeacherData(Id);
-            console.log("response", response)
             setRecord(response?.data?.data);
         } catch (error) {
             console.log("error", error);
@@ -35,7 +33,6 @@ const Index = ({ }) => {
 
     };
 
-    console.log("record", record)
     useEffect(() => {
         if (Id) {
             AdminTteacher(Id);

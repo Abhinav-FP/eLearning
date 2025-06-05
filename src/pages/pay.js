@@ -45,7 +45,6 @@ const CheckoutForm = () => {
                     card: cardElement,
                 },
             });
-console.log("paymentResult" ,paymentResult)
             if (paymentResult.error) {
                 setMessage(paymentResult.error.message);
             } else if (paymentResult.paymentIntent.status === 'succeeded') {

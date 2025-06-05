@@ -70,11 +70,9 @@ const TeacherFaq = () => {
         }
     };
 
-    console.log("faqs", faqs)
 
     const handleFaqSubmit = async (index) => {
         const target = faqs[index];
-        console.log("target", target)
         if (!target?.question?.trim() || !target?.answer?.trim()) {
             toast.error("Question and Answer cannot be empty.");
             return;
@@ -206,7 +204,7 @@ const TeacherFaq = () => {
                     <div className="mb-4">
                         <label className="block font-medium mb-1">Question</label>
                         <textarea
-                        rows={5}
+                            rows={5}
                             type="text"
                             value={selectedFaq?.question || ""}
                             onChange={(e) =>
@@ -218,7 +216,7 @@ const TeacherFaq = () => {
                     <div className="mb-4">
                         <label className="block font-medium mb-1">Answer</label>
                         <textarea
-                        rows={5}
+                            rows={5}
                             type="text"
                             value={selectedFaq?.answer || ""}
                             onChange={(e) =>

@@ -37,7 +37,7 @@ export default function Index() {
               : "text-[#535353]  border-[rgba(0,0,0,.0)] "
             }`}
         >
-          Admin ManageMent
+          Admin management
         </button>
       </div>
       <div className="px-3 md:px-8 lg:px-12 pb-6 lg:pb-[30px] min-h-[75vh]">

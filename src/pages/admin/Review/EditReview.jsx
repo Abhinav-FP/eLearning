@@ -4,10 +4,7 @@ import Listing from "@/pages/api/Listing";
 import toast from "react-hot-toast";
 
 export default function EditReview({ isOpen, onClose, data, getLessons }) {
-    console.log("data", data)
     const [loading, setLoading] = useState(false);
-
-
     const [formData, setFormData] = useState({
         description: "",
         _id: "",

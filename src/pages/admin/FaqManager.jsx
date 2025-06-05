@@ -72,11 +72,9 @@ const FaqManager = () => {
         }
     };
 
-    console.log("faqs", faqs)
 
     const handleFaqSubmit = async (index) => {
         const target = faqs[index];
-        console.log("target", target)
         if (!target?.question?.trim() || !target?.answer?.trim()) {
             toast.error("Question and Answer cannot be empty.");
             return;

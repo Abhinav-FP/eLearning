@@ -21,7 +21,6 @@ export default function Index() {
     try {
       const main = new Listing();
       const response = await main.ReviewList();
-      console.log("response", response)
       setRecord(response?.data?.data);
     } catch (error) {
       console.log("error", error);
@@ -30,7 +29,6 @@ export default function Index() {
 
   };
 
-  console.log("record", record)
   useEffect(() => {
     Adminreview();
   }, []);

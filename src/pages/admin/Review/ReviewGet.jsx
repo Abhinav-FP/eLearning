@@ -3,12 +3,10 @@ import moment from 'moment';
 import React, { useState } from 'react';
 import toast from 'react-hot-toast';
 import { AiFillStar } from 'react-icons/ai';
-import { MdEdit } from 'react-icons/md';
 import EditReview from './EditReview';
 import NoData from '@/pages/common/NoData';
 
 export default function ReviewGet({ reviews, Adminreview }) {
-    console.log("reviews", reviews)
     const [processing, setProcessing] = useState(false);
     const [selectedReview, setSelectedReview] = useState(null); // ✅ changed from isLessonOpen
 

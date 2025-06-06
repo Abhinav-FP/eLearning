@@ -1,13 +1,25 @@
-'use client';
+"use client";
 
-import { PayPalScriptProvider, PayPalButtons, FUNDING } from "@paypal/react-paypal-js";
+import {
+  PayPalScriptProvider,
+  PayPalButtons,
+  FUNDING,
+} from "@paypal/react-paypal-js";
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 import Listing from "../api/Listing";
 import toast from "react-hot-toast";
 
-
-const Index = ({ PricePayment, adminCommission, selectedLesson, selectedSlot, studentTimeZone, email, isSpecialSlot = false, specialSlotData }) => {
+const Index = ({
+  PricePayment,
+  adminCommission,
+  selectedLesson,
+  selectedSlot,
+  studentTimeZone,
+  email,
+  isSpecialSlot = false,
+  specialSlotData,
+}) => {
   const clientId = process.env.NEXT_PUBLIC_PAYPAL_CLIENT_ID;
 
   // console.log("NEXT_APP_PAYPAL_CLIENT_ID", clientId)
@@ -15,30 +27,34 @@ const Index = ({ PricePayment, adminCommission, selectedLesson, selectedSlot, st
 
   // console.log("selectedSlot", selectedSlot)
   const [isProcessing, setIsProcessing] = useState(false);
-  const [OrderId, setOrderId] = useState("")
-  const [endTime, setEndTime] = useState(isSpecialSlot ? specialSlotData?.endDateTime : null);
+  const [OrderId, setOrderId] = useState("");
+  const [endTime, setEndTime] = useState(
+    isSpecialSlot ? specialSlotData?.endDateTime : null
+  );
 
   const addDurationToDate = (start, durationInMinutes) => {
     const originalDate = new Date(start);
-    const finalDate = new Date(originalDate.getTime() + durationInMinutes * 60000);
+    const finalDate = new Date(
+      originalDate.getTime() + durationInMinutes * 60000
+    );
 
     // Detect if input was a string with timezone (for matching formatting)
-    const isStringInput = typeof start === 'string';
+    const isStringInput = typeof start === "string";
 
     // If it was a Date object, return Date object
     if (!isStringInput) return finalDate;
 
     // Match the original locale and timezone style using toLocaleString
     const localeString = originalDate.toLocaleString(undefined, {
-      timeZoneName: 'short',
-      hour12: false
+      timeZoneName: "short",
+      hour12: false,
     });
 
-    const timezoneAbbreviation = localeString.split(' ').pop();
+    const timezoneAbbreviation = localeString.split(" ").pop();
 
     const formatted = finalDate.toLocaleString(undefined, {
-      timeZoneName: 'short',
-      hour12: false
+      timeZoneName: "short",
+      hour12: false,
     });
 
     // Replace new abbreviation with old one (preserves input tz style)
@@ -47,11 +63,13 @@ const Index = ({ PricePayment, adminCommission, selectedLesson, selectedSlot, st
 
   useEffect(() => {
     if (selectedLesson && selectedSlot && !isSpecialSlot) {
-      const time = addDurationToDate(selectedSlot?.start, selectedLesson?.duration);
+      const time = addDurationToDate(
+        selectedSlot?.start,
+        selectedLesson?.duration
+      );
       setEndTime(time);
     }
-  }, [selectedSlot, selectedLesson])
-
+  }, [selectedSlot, selectedLesson]);
 
   const handleCreateOrder = async () => {
     if (isProcessing) return;
@@ -79,7 +97,6 @@ const Index = ({ PricePayment, adminCommission, selectedLesson, selectedSlot, st
     }
   };
 
-
   const handleApprove = async (data, actions) => {
     if (isProcessing) return;
 
@@ -89,19 +106,23 @@ const Index = ({ PricePayment, adminCommission, selectedLesson, selectedSlot, st
       const main = new Listing();
       const response = await main.PaypalApprove({
         orderID: data.orderID, // or use OrderId if you prefer
-        LessonId: isSpecialSlot ? specialSlotData?.lesson?._id : selectedLesson?._id,
-        teacherId: isSpecialSlot ? specialSlotData?.teacher?._id : selectedLesson?.teacher?._id,
+        LessonId: isSpecialSlot
+          ? specialSlotData?.lesson?._id
+          : selectedLesson?._id,
+        teacherId: isSpecialSlot
+          ? specialSlotData?.teacher?._id
+          : selectedLesson?.teacher?._id,
         startDateTime: selectedSlot?.start,
         endDateTime: isSpecialSlot ? specialSlotData?.startDateTime : endTime,
         email: email,
         timezone: studentTimeZone || "UTC",
         totalAmount: PricePayment,
         adminCommission: adminCommission,
-        isSpecialSlot: isSpecialSlot
+        isSpecialSlot: isSpecialSlot,
       });
 
       if (response?.data?.status === "COMPLETED") {
-        router.push("/success")
+        router.push("/success");
         // console.log("Payment approved", response);
       }
     } catch (error) {
@@ -119,10 +140,12 @@ const Index = ({ PricePayment, adminCommission, selectedLesson, selectedSlot, st
       const main = new Listing();
       const response = await main.PaypalCancel({
         orderID: data.orderID,
-        LessonId: isSpecialSlot ? specialSlotData?.lesson?._id : selectedLesson?._id,
+        LessonId: isSpecialSlot
+          ? specialSlotData?.lesson?._id
+          : selectedLesson?._id,
       });
       if (response?.data?.status === "CANCELLED") {
-        router.push("/cancel")
+        router.push("/cancel");
         // console.log("Payment CANCELLED", response);
       }
     } catch (error) {
@@ -141,12 +164,11 @@ const Index = ({ PricePayment, adminCommission, selectedLesson, selectedSlot, st
           onApprove={handleApprove}
           onCancel={handleCancel}
           disabled={isProcessing}
-          style={{ layout: 'vertical' }}
+          style={{ layout: "vertical" }}
           fundingSource={FUNDING.PAYPAL}
         />
       </div>
     </PayPalScriptProvider>
-
   );
 };
 

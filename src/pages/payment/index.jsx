@@ -11,14 +11,13 @@ import Listing from "../api/Listing";
 import toast from "react-hot-toast";
 
 const Index = ({
+  isPopupOpen,
   PricePayment,
   adminCommission,
   selectedLesson,
   selectedSlot,
   studentTimeZone,
   email,
-  isSpecialSlot = false,
-  specialSlotData,
 }) => {
   const clientId = process.env.NEXT_PUBLIC_PAYPAL_CLIENT_ID;
 
@@ -28,9 +27,7 @@ const Index = ({
   // console.log("selectedSlot", selectedSlot)
   const [isProcessing, setIsProcessing] = useState(false);
   const [OrderId, setOrderId] = useState("");
-  const [endTime, setEndTime] = useState(
-    isSpecialSlot ? specialSlotData?.endDateTime : null
-  );
+  const [endTime, setEndTime] = useState(null);
 
   const addDurationToDate = (start, durationInMinutes) => {
     const originalDate = new Date(start);
@@ -62,7 +59,7 @@ const Index = ({
   };
 
   useEffect(() => {
-    if (selectedLesson && selectedSlot && !isSpecialSlot) {
+    if (selectedLesson && selectedSlot) {
       const time = addDurationToDate(
         selectedSlot?.start,
         selectedLesson?.duration
@@ -80,6 +77,10 @@ const Index = ({
       const response = await main.PaypalCreate({
         amount: PricePayment,
         currency: "USD",
+        LessonId: selectedLesson?._id,
+        teacherId: selectedLesson?.teacher?._id,
+        startDateTime: selectedSlot?.start,
+        endDateTime: endTime,
       });
 
       if (response?.data?.id) {
@@ -106,19 +107,14 @@ const Index = ({
       const main = new Listing();
       const response = await main.PaypalApprove({
         orderID: data.orderID, // or use OrderId if you prefer
-        LessonId: isSpecialSlot
-          ? specialSlotData?.lesson?._id
-          : selectedLesson?._id,
-        teacherId: isSpecialSlot
-          ? specialSlotData?.teacher?._id
-          : selectedLesson?.teacher?._id,
+        LessonId: selectedLesson?._id,
+        teacherId: selectedLesson?.teacher?._id,
         startDateTime: selectedSlot?.start,
-        endDateTime: isSpecialSlot ? specialSlotData?.startDateTime : endTime,
+        endDateTime: endTime,
         email: email,
         timezone: studentTimeZone || "UTC",
         totalAmount: PricePayment,
         adminCommission: adminCommission,
-        isSpecialSlot: isSpecialSlot,
       });
 
       if (response?.data?.status === "COMPLETED") {
@@ -140,9 +136,7 @@ const Index = ({
       const main = new Listing();
       const response = await main.PaypalCancel({
         orderID: data.orderID,
-        LessonId: isSpecialSlot
-          ? specialSlotData?.lesson?._id
-          : selectedLesson?._id,
+        LessonId: selectedLesson?._id,
       });
       if (response?.data?.status === "CANCELLED") {
         router.push("/cancel");

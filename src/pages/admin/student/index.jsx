@@ -59,7 +59,7 @@ function Index() {
   return (
     <AdminLayout page={"Students Listing"}>
       <div className="min-h-screen p-5 lg:p-[30px]">
-        <div class="relative mb-3 md:mb-4 lg:mb-6 w-full md:w-auto">
+        <div className="relative mb-3 md:mb-4 lg:mb-6 w-full md:w-auto">
           <input
             type="text"
             name="search"

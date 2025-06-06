@@ -195,6 +195,18 @@
       return Api.get(`/teacher/studentLesson`);
     }
 
+    async SpecialSlot(data) {
+      return Api.post(`/teacher/specialSlot`, data);
+    }
+
+    async SpecialSlotGet(data) {
+      return Api.get(`/teacher/specialSlot`, data);
+    }
+
+    async SpecialSlotdata(data) {
+      return Api.get(`/teacher/specialSlotdata/${data}`);
+    }
+
     async GetBooking() {
       return Api.get(`/booking/getAll`);
     }

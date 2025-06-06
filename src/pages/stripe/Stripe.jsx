@@ -12,11 +12,11 @@ import {
 
 const stripePromise = loadStripe(process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY);
 
-function StripeForm({ PricePayment, selectedLesson, adminCommission, selectedSlot, studentTimeZone, email }) {
+function StripeForm({ PricePayment, selectedLesson, adminCommission, selectedSlot, studentTimeZone, email, isSpecialSlot=false, specialSlotData }) {
   const stripe = useStripe();
   const elements = useElements();
   const [processing, setProcessing] = useState(false);
-  const [endTime, setEndTime] = useState(null);
+  const [endTime, setEndTime] = useState(isSpecialSlot ? specialSlotData?.slotEnd : null);
   const [message, setMessage] = useState(null);
   const router = useRouter()
   const addDurationToDate = (start, durationInMinutes) => {
@@ -42,7 +42,7 @@ function StripeForm({ PricePayment, selectedLesson, adminCommission, selectedSlo
   };
 
   useEffect(() => {
-    if (selectedLesson && selectedSlot) {
+    if (selectedLesson && selectedSlot && !isSpecialSlot) {
       const time = addDurationToDate(selectedSlot?.start, selectedLesson?.duration);
       setEndTime(time);
     }
@@ -61,11 +61,12 @@ function StripeForm({ PricePayment, selectedLesson, adminCommission, selectedSlo
         amount: PricePayment,
         currency: "USD",
         email,
-        LessonId: selectedLesson?._id,
-        teacherId: selectedLesson?.teacher?._id,
-        startDateTime: selectedSlot?.start,
+        LessonId: isSpecialSlot ? specialSlotData?.lesson?._id : selectedLesson?._id,
+        teacherId: isSpecialSlot ? specialSlotData?.teacher?._id : selectedLesson?.teacher?._id,
+        startDateTime: isSpecialSlot ? specialSlotData?.startDateTime : selectedSlot?.start,
         endDateTime: endTime,
         timezone: studentTimeZone || "UTC",
+        isSpecial: isSpecialSlot,
       });
       const clientSecret = res?.data?.clientSecret;
       const cardElement = elements.getElement(CardElement);

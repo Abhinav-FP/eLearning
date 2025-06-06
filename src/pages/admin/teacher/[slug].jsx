@@ -19,7 +19,6 @@ import ReviewList from "./ReviewList";
 const Index = ({ }) => {
     const router = useRouter();
     const Id = router?.query?.slug
-    const [showVideo, setShowVideo] = useState(false);
     const [record, setRecord] = useState("")
     const AdminTteacher = async () => {
         try {

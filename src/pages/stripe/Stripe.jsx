@@ -16,7 +16,7 @@ function StripeForm({ PricePayment, selectedLesson, adminCommission, selectedSlo
   const stripe = useStripe();
   const elements = useElements();
   const [processing, setProcessing] = useState(false);
-  const [endTime, setEndTime] = useState(isSpecialSlot ? specialSlotData?.slotEnd : null);
+  const [endTime, setEndTime] = useState(isSpecialSlot ? specialSlotData?.endDateTime : null);
   const [message, setMessage] = useState(null);
   const router = useRouter()
   const addDurationToDate = (start, durationInMinutes) => {

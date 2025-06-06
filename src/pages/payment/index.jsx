@@ -16,7 +16,7 @@ const Index = ({ PricePayment, adminCommission, selectedLesson, selectedSlot, st
   // console.log("selectedSlot", selectedSlot)
   const [isProcessing, setIsProcessing] = useState(false);
   const [OrderId, setOrderId] = useState("")
-  const [endTime, setEndTime] = useState(isSpecialSlot ? specialSlotData?.slotEnd : null);
+  const [endTime, setEndTime] = useState(isSpecialSlot ? specialSlotData?.endDateTime : null);
 
   const addDurationToDate = (start, durationInMinutes) => {
     const originalDate = new Date(start);

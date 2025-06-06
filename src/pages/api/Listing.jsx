@@ -54,6 +54,11 @@
       return Api.get("/home/teacher/video")
     }
 
+
+     async HomePage() {
+      return Api.get("/home/find")
+    }
+
     async TeacherBank(data) {
       return Api.post("/teacher/bank", data)
     }
@@ -145,6 +150,11 @@
     async TeacherLessonGet() {
       return Api.get(`/teacher/lesson/get`);
     }
+
+       async TeacherDelete(data) {
+      return Api.post(`/teacher/lesson/delete` , data);
+    }
+
 
     async TeacherLessonGetForStudent(id) {
       return Api.get(`/student/lesson/get/${id}`);

@@ -38,7 +38,6 @@ export default function Profile() {
       .Teacherprofile()
       .then((r) => {
         const profiledata = r?.data?.data?.user;
-        // console.log("profileData", profiledata);
         setData({
           name: profiledata?.userId?.name,
           email: profiledata?.userId?.email,
@@ -377,7 +376,7 @@ export default function Profile() {
                 />
               </div>
 
-              <div className="w-full lg:w-6/12  px-2">
+              {/* <div className="w-full lg:w-6/12  px-2">
                 <label className="block text-[#CC2828] font-medium text-base xl:text-xl mb-1 tracking-[-0.04em]">
                   Average Price (In USD)
                 </label>
@@ -403,7 +402,7 @@ export default function Profile() {
                   onChange={handleChange}
                   className="w-full h-11 lg:h-[54px] font-medium appearance-none block bg-[#F4F6F8] text-[#46494D] text-base border border-[#F4F6F8] rounded-lg py-3 px-3 lg:px-6 leading-tight focus:outline-none"
                 />
-              </div>
+              </div> */}
 
               <div className="w-full px-2">
                 <label className="block text-[#CC2828] font-medium text-base xl:text-xl mb-1 tracking-[-0.04em]">

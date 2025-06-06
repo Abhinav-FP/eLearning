@@ -10,17 +10,17 @@ export default function Bank() {
         const main = new Listing();
         main.teacherbankget()
             .then((r) => {
-                // console.log("r", r)
                 const profiledata = r?.data?.data;
-                // console.log("profileData", profiledata);
                 setData({
-                    BankName: profiledata?.BankName,
-                    BankNumber: profiledata?.BankNumber,
-                    BranchName: profiledata?.BranchName,
-                    IFSC: profiledata?.IFSC,
-                    _id: profiledata?._id,
-                    AccountHolderName: profiledata?.AccountHolderName
-
+                    BankName: profiledata?.BankName || "",
+                    BankNumber: profiledata?.BankNumber || "",
+                    BranchName: profiledata?.BranchName || "",
+                    BranchCode: profiledata?.BranchCode || "",
+                    IFSC: profiledata?.IFSC || "",
+                    AccountHolderName: profiledata?.AccountHolderName || "",
+                    AccountType: profiledata?.AccountType || "",
+                    OverseasDetails: profiledata?.OverseasDetails || "",
+                    _id: profiledata?._id || ""
                 });
             })
             .catch((err) => {
@@ -32,8 +32,12 @@ export default function Bank() {
         BankName: "",
         BankNumber: "",
         BranchName: "",
+        BranchCode: "",
         IFSC: "",
-        AccountHolderName: ""
+        AccountHolderName: "",
+        AccountType: "",
+        OverseasDetails: "",
+        _id: ""
     });
 
     const handleChange = (e) => {
@@ -47,7 +51,6 @@ export default function Bank() {
     const handleSubmit = async (e) => {
         e.preventDefault();
         if (processing) return;
-
         setProcessing(true);
         try {
             const main = new Listing();
@@ -67,24 +70,6 @@ export default function Bank() {
     return (
         <form onSubmit={handleSubmit}>
             <div className="space-y-6 py-6">
-                {/* Branch Name */}
-                <div className="flex flex-wrap items-start">
-                    <div className="w-full lg:w-5/12 xl:w-4/12 lg:pr-3 mb-2 lg:mb-0">
-                        <label className="block text-[#CC2828] font-medium text-base lg:text-xl mb-1">Account Holder Name</label>
-                        <p className="text-[#535353] text-base">Enter your Account Holder Name here</p>
-                    </div>
-                    <div className="w-full lg:w-6/12 xl:w-5/12 lg:pl-3 relative">
-                        <input
-                            required
-                            type="text"
-                            name="AccountHolderName"
-                            disabled={!showDetails}
-                            className={`w-full h-11 lg:h-[54px] font-medium bg-[#F4F6F8] text-[#46494D] text-base border border-[#F4F6F8] rounded-lg py-3 px-6 ${!showDetails ? 'blur-sm' : ''}`}
-                            value={data.AccountHolderName}
-                            onChange={handleChange}
-                        />
-                    </div>
-                </div>
                 {/* Bank Name */}
                 <div className="flex flex-wrap items-start">
                     <div className="w-full lg:w-5/12 xl:w-4/12 lg:pr-3 mb-2 lg:mb-0">
@@ -97,8 +82,29 @@ export default function Bank() {
                             type="text"
                             name="BankName"
                             disabled={!showDetails}
-                            className={`w-full h-11 lg:h-[54px] font-medium bg-[#F4F6F8] text-[#46494D] text-base border border-[#F4F6F8] rounded-lg py-3 px-6 ${!showDetails ? 'blur-sm' : ''}`}
+                            className={`w-full h-11 lg:h-[54px] font-medium bg-[#F4F6F8] text-[#46494D] text-base border 
+                                border-[#F4F6F8] rounded-lg py-3 px-6 ${!showDetails ? 'blur-sm' : ''}`}
                             value={data.BankName}
+                            onChange={handleChange}
+                        />
+                    </div>
+                </div>
+
+                {/* Branch Code */}
+                <div className="flex flex-wrap items-start">
+                    <div className="w-full lg:w-5/12 xl:w-4/12 lg:pr-3 mb-2 lg:mb-0">
+                        <label className="block text-[#CC2828] font-medium text-base lg:text-xl mb-1">Branch Code</label>
+                        <p className="text-[#535353] text-base">Enter your Branch Code here</p>
+                    </div>
+                    <div className="w-full lg:w-6/12 xl:w-5/12 lg:pl-3 relative">
+                        <input
+                            required
+                            type="text"
+                            name="BranchCode"
+                            disabled={!showDetails}
+                            className={`w-full h-11 lg:h-[54px] font-medium bg-[#F4F6F8] text-[#46494D] text-base border 
+                                border-[#F4F6F8] rounded-lg py-3 px-6 ${!showDetails ? 'blur-sm' : ''}`}
+                            value={data.BranchCode || ""}
                             onChange={handleChange}
                         />
                     </div>
@@ -116,15 +122,64 @@ export default function Bank() {
                             type="text"
                             name="BankNumber"
                             disabled={!showDetails}
-                            className={`w-full h-11 lg:h-[54px] font-medium bg-[#F4F6F8] text-[#46494D] text-base border border-[#F4F6F8] rounded-lg py-3 px-6 ${!showDetails ? 'blur-sm' : ''}`}
+                            className={`w-full h-11 lg:h-[54px] font-medium bg-[#F4F6F8] text-[#46494D] text-base border 
+                                border-[#F4F6F8] rounded-lg py-3 px-6 ${!showDetails ? 'blur-sm' : ''}`}
                             value={data.BankNumber}
                             onChange={handleChange}
                         />
                     </div>
                 </div>
 
-                {/* Branch Name */}
+                {/* User Name */}
                 <div className="flex flex-wrap items-start">
+                    <div className="w-full lg:w-5/12 xl:w-4/12 lg:pr-3 mb-2 lg:mb-0">
+                        <label className="block text-[#CC2828] font-medium text-base lg:text-xl mb-1">Account Holder Name</label>
+                        <p className="text-[#535353] text-base">Enter your Account Holder Name here</p>
+                    </div>
+                    <div className="w-full lg:w-6/12 xl:w-5/12 lg:pl-3 relative">
+                        <input
+                            required
+                            type="text"
+                            name="AccountHolderName"
+                            disabled={!showDetails}
+                            className={`w-full h-11 lg:h-[54px] font-medium bg-[#F4F6F8] text-[#46494D] text-base border border-[#F4F6F8] rounded-lg py-3 px-6 ${!showDetails ? 'blur-sm' : ''}`}
+                            value={data.AccountHolderName}
+                            onChange={handleChange}
+                        />
+                    </div>
+                </div>
+
+                {/* Account Type */}
+                <div className="flex flex-wrap items-start">
+                    <div className="w-full lg:w-5/12 xl:w-4/12 lg:pr-3 mb-2 lg:mb-0">
+                        <label className="block text-[#CC2828] font-medium text-base lg:text-xl mb-1">Account Type (Optional)</label>
+                        <p className="text-[#535353] text-base">Select the type of your bank account</p>
+                    </div>
+                    <div className="w-full lg:w-6/12 xl:w-5/12 lg:pl-3 relative">
+                        <select
+                            name="AccountType"
+                            disabled={!showDetails}
+                            className={`w-full h-11 lg:h-[54px] font-medium bg-[#F4F6F8] text-[#46494D] 
+                                text-base border border-[#F4F6F8] rounded-lg py-3 px-6 
+                                ${!showDetails ? 'blur-sm' : ''}`}
+                            value={data.AccountType}
+                            onChange={handleChange}
+                        >
+                            <option value="">Select Account Type</option>
+                            <option value="savings">Savings Account</option>
+                            <option value="current">Current / Checking Account</option>
+                            <option value="fixed">Fixed Deposit Account</option>
+                            <option value="recurring">Recurring Deposit Account</option>
+                            <option value="nre">NRE (Non-Resident External)</option>
+                            <option value="nro">NRO (Non-Resident Ordinary)</option>
+                            <option value="business">Business Account</option>
+                            <option value="joint">Joint Account</option>
+                            <option value="salary">Salary Account</option>
+                        </select>
+                    </div>
+                </div>
+                {/* Branch Name */}
+                {/* <div className="flex flex-wrap items-start">
                     <div className="w-full lg:w-5/12 xl:w-4/12 lg:pr-3 mb-2 lg:mb-0">
                         <label className="block text-[#CC2828] font-medium text-base lg:text-xl mb-1">Branch Name</label>
                         <p className="text-[#535353] text-base">Enter your Branch Name here</p>
@@ -140,10 +195,10 @@ export default function Bank() {
                             onChange={handleChange}
                         />
                     </div>
-                </div>
+                </div> */}
 
                 {/* IFSC Code */}
-                <div className="flex flex-wrap items-start">
+                {/* <div className="flex flex-wrap items-start">
                     <div className="w-full lg:w-5/12 xl:w-4/12 lg:pr-3 mb-2 lg:mb-0">
                         <label className="block text-[#CC2828] font-medium text-base lg:text-xl mb-1">IFSC Code</label>
                         <p className="text-[#535353] text-base">Enter your Bank IFSC Code here</p>
@@ -159,21 +214,43 @@ export default function Bank() {
                             onChange={handleChange}
                         />
                     </div>
+                </div> */}
+
+                <div className="flex flex-wrap items-start">
+                    <div className="w-full lg:w-5/12 xl:w-4/12 lg:pr-3 mb-2 lg:mb-0">
+                        <label className="block text-[#CC2828] font-medium text-base lg:text-xl mb-1">
+                            Overseas Bank Account Details (Optional)</label>
+                        <p className="text-[#535353] text-base">Enter overseas bank details if applicable</p>
+                    </div>
+                    <div className="w-full lg:w-6/12 xl:w-5/12 lg:pl-3 relative">
+                        <textarea
+                            name="OverseasDetails"
+                            disabled={!showDetails}
+                            rows={3}
+                            className={`w-full font-medium bg-[#F4F6F8] text-[#46494D] text-base border 
+                                border-[#F4F6F8] rounded-lg py-3 px-6 ${!showDetails ? 'blur-sm' : ''}`}
+                            value={data.OverseasDetails}
+                            onChange={handleChange}
+                        ></textarea>
+                    </div>
                 </div>
             </div>
+
 
             {/* Submit Button */}
             <div className="flex justify-center gap-4 pt-6">
                 <button
                     type="button"
-                    className="w-full max-w-[183px] bg-[#CC2828] hover:bg-red-700 text-white py-2.5 rounded-[10px] text-base xl:text-xl cursor-pointer"
+                    className="w-full max-w-[183px] bg-[#CC2828] hover:bg-red-700 text-white py-2.5 
+                    rounded-[10px] text-base xl:text-xl cursor-pointer"
                     onClick={() => setShowDetails(!showDetails)}
-                    >
+                >
                     {showDetails ? "Hide" : "View"}{" "}Details
                 </button>
                 <button
                     type="submit"
-                    className={`w-full max-w-[183px] ${!showDetails ? "cursor-not-allowed" : "Cursor-pointer"} bg-[#CC2828] hover:bg-red-700 text-white py-2.5 rounded-[10px] text-base xl:text-xl`}
+                    className={`w-full max-w-[183px] ${!showDetails ? "cursor-not-allowed" : "Cursor-pointer"} 
+                        bg-[#CC2828] hover:bg-red-700 text-white py-2.5 rounded-[10px] text-base xl:text-xl`}
                     disabled={processing || !showDetails}
                 >
                     {processing ? "Submitting..." : "Submit"}

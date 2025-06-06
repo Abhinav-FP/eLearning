@@ -10,6 +10,9 @@ import { EditProfileLoader } from "@/components/Loader";
 import NoData from "@/pages/common/NoData";
 import { formatMultiPrice } from "@/components/ValueDataHook";
 import ViewLesson from "@/pages/common/ViewLesson";
+import toast from "react-hot-toast";
+import { FaUndo } from 'react-icons/fa'; // Delete and Restore icons
+
 
 export default function Index() {
   const [data, setData] = useState([]);
@@ -50,19 +53,42 @@ export default function Index() {
     setIsLessonOpen(true);
   }
 
+  const handleIsDelete = (item) => {
+    const main = new Listing();
+    const response = main.TeacherDelete({
+      _id: item?._id,
+      status: false
+    });
+    response.then((res) => {
+      console.log("res", res);
+
+      toast.success(res.data.message)
+      getLessons();
+    }).catch((error) => {
+      console.log("erorr", error)
+    })
+  }
   const LessonCard = ({ item }) => {
     return (
-      <div className="bg-white lesson_list_shadow rounded-2xl flex flex-col md:flex-row gap-8 justify-between items-start md:items-center p-4 lg:px-5 lg:py-6 mb-3 lg:mb-4 ">
+      <div className={`${item?.
+        is_deleted === true ? "bg-gray-200" : "bg-white"} lesson_list_shadow rounded-2xl flex flex-col md:flex-row gap-8 justify-between items-start md:items-center p-4 lg:px-5 lg:py-6 mb-3 lg:mb-4 `}>
         <div className="flex-1">
           <div className="flex items-center gap-2">
             <h3 className="text-base font-semibold text-[#CC2828] tracking-[-0.04em] capitalize">{item?.title || ""}</h3>
-            <MdEditSquare size={18} className="text-[#CC2828] cursor-pointer" onClick={() => { handleEdit(item) }} />
-            <RiDeleteBin6Line size={17} className="text-red-600 hover:text-red-700 cursor-pointer"
-              onClick={() => {
-                setId(item?._id);
-                setIsDeleteOpen(true);
-              }}
-            />
+            {item?.
+              is_deleted === true ? (
+              <FaUndo size={18} className="text-[#CC2828] cursor-pointer" onClick={() => { handleIsDelete(item) }} />
+            ) : (
+              <>
+                <MdEditSquare size={18} className="text-[#CC2828] cursor-pointer" onClick={() => { handleEdit(item) }} />
+                <RiDeleteBin6Line size={17} className="text-red-600 hover:text-red-700 cursor-pointer"
+                  onClick={() => {
+                    setId(item?._id);
+                    setIsDeleteOpen(true);
+                  }}
+                />
+              </>
+            )}
           </div>
           <div className="flex items-center text-[#E4B750] text-lg mt-2">
             ★★★★☆ <span className="text-black tracking-[-0.04em] text-xs font-medium">(29)</span>
@@ -70,6 +96,7 @@ export default function Index() {
           {/* <p className="text-xs text-[#CC2828] bg-[rgba(204,40,40,0.1)] mt-2 font-medium tracking-[-0.04em] px-2 leading-[28px] rounded-full line-clamp-1 overflow-hidden" >
             {item?.description || ""}
           </p> */}
+
           <ViewLesson title={item?.title} description={item?.description} price={item?.price} duration={item?.duration} />
         </div>
         <div className="text-center sm:text-right ">
@@ -143,7 +170,6 @@ export default function Index() {
               </div> :
               <NoData Heading={"No lessons found."} content={"Add some lessons to view them here"} />
             }
-            {/* <div className=" mt-6"> */}
             <button className="bg-[#CC2828] tracking-[-0.04em] text-base mt-4 lg:mt-6 hover:bg-[#941111fd] mt-6 text-white px-6 lg:px-10 py-3 lg:py-3.5 rounded-[10px] font-bold cursor-pointer"
               onClick={() => {
                 setEditData(null);

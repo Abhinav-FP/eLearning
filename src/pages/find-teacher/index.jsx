@@ -15,7 +15,7 @@ export default function Index() {
       const main = new Listing();
       const response = await main.homeTeacher();
       if (response.data) {
-        setTeacherData(response.data.data.record);
+        setTeacherData(response.data.data);
       }
       setLoading(false);
     } catch (error) {
@@ -30,7 +30,6 @@ export default function Index() {
 
   return (
     <Layout>
-      {/* <BookLoader /> */}
       <Teacher teacherData={teacherData} loading={loading} />
       <HowItWork classess={"mb-[40px] md:mb-[60px] lg:mb-[100px] !mt-0"} />
     </Layout>

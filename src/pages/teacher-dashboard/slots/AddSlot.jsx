@@ -28,7 +28,7 @@ export default function AddSlot({ isOpen, onClose }) {
     setLoading(true);
     try {
       const main = new Listing();
-      const response = await main.LessonAdd({
+      const response = await main.SpecialSlot({
         student: formData.student,
         lesson: formData.lesson,
         amount: formData.amount,

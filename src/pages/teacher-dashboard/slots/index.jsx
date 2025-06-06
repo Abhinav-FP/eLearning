@@ -5,6 +5,8 @@ import { TableLoader } from '@/components/Loader';
 import Listing from '@/pages/api/Listing';
 import AddLesson from '../profile/AddLesson';
 import AddSlot from './AddSlot';
+import { formatMultiPrice } from '@/components/ValueDataHook';
+import moment from 'moment';
 
 export default function index() {
   const [payout, setPayout] = useState([]);
@@ -23,7 +25,7 @@ export default function index() {
     setLoading(true);
     const main = new Listing();
     main
-      .PayoutList(selectedOption)
+      .SpecialSlotGet(selectedOption)
       .then((r) => {
         // console.log("r", r)
         setPayout(r?.data?.data);
@@ -35,6 +37,8 @@ export default function index() {
         setPayout([]);
       });
   }, [selectedOption]);
+
+  console.log("payout",payout);
 
   return (
     <TeacherLayout page={"Slots"}>
@@ -71,16 +75,19 @@ export default function index() {
                     Index
                   </th>
                   <th className="font-normal text-sm lg:text-base px-3 lg:px-4 py-2 lg:py-3 border-t border-[rgba(204,40,40,0.2)] capitalize">
+                    Lesson Name
+                  </th>
+                  <th className="font-normal text-sm lg:text-base px-3 lg:px-4 py-2 lg:py-3 border-t border-[rgba(204,40,40,0.2)] capitalize">
+                    Student Name
+                  </th>
+                  <th className="font-normal text-sm lg:text-base px-3 lg:px-4 py-2 lg:py-3 border-t border-[rgba(204,40,40,0.2)] capitalize">
                     Amount
                   </th>
                   <th className="font-normal text-sm lg:text-base px-3 lg:px-4 py-2 lg:py-3 border-t border-[rgba(204,40,40,0.2)] capitalize">
-                    payout status
+                    Start Time
                   </th>
                   <th className="font-normal text-sm lg:text-base px-3 lg:px-4 py-2 lg:py-3 border-t border-[rgba(204,40,40,0.2)] capitalize">
-                    transaction ID / payment Reasons
-                  </th>
-                  <th className="font-normal text-sm lg:text-base px-3 lg:px-4 py-2 lg:py-3 border-t border-[rgba(204,40,40,0.2)] capitalize">
-                    Bank Name
+                    Payment status
                   </th>
                 </tr>
               </thead>
@@ -88,7 +95,7 @@ export default function index() {
                 <TableLoader length={5} />
               ) : (
                 <tbody>
-                  {/* {payout && payout?.length > 0 ? (
+                  {payout && payout?.length > 0 ? (
                     payout?.map((item, index) => (
                       <tr
                         key={index}
@@ -98,16 +105,19 @@ export default function index() {
                           {index + 1}
                         </td>
                         <td className="px-3 lg:px-4 py-2 lg:py-3 text-black text-sm lg:text-base font-medium font-inter ">
+                          {item?.lesson?.title}
+                        </td>
+                        <td className="capitalize px-3 lg:px-4 py-2 lg:py-3 text-black text-sm lg:text-base font-medium font-inter ">
+                          {item?.student?.name}
+                        </td>
+                        <td className="capitalize px-3 lg:px-4 py-2 lg:py-3 text-black text-sm lg:text-base font-medium font-inter ">
+                          {moment(item?.startDateTime).format('DD MMM YYYY, hh:mm A') || ''}
+                        </td>
+                        <td className="px-3 lg:px-4 py-2 lg:py-3 text-black text-sm lg:text-base font-medium font-inter ">
                           {formatMultiPrice(item?.amount, "USD")}
                         </td>
                         <td className="capitalize px-3 lg:px-4 py-2 lg:py-3 text-black text-sm lg:text-base font-medium font-inter ">
-                          {item?.Status}
-                        </td>
-                        <td className="px-3 lg:px-4 py-2 lg:py-3 text-black text-sm lg:text-base font-medium font-inter ">
-                          {item?.TranscationId || item?.Reasons || "-"}
-                        </td>
-                        <td className="capitalize px-3 lg:px-4 py-2 lg:py-3 text-black text-sm lg:text-base font-medium font-inter ">
-                          {item?.BankId?.BankName}
+                          {item?.paymentStatus}
                         </td>
                       </tr>
                     ))
@@ -124,7 +134,7 @@ export default function index() {
                         </div>
                       </td>
                     </tr>
-                  )} */}
+                  )}
                 </tbody>
               )}
             </table>

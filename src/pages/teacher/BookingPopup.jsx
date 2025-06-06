@@ -171,9 +171,6 @@ export default function BookingPopup({
                 />
               </>
             )}
-
-
-
           </div>
           <div className="flex fixed px-4 bg-white py-4 bottom-0 w-full left-0 justify-between items-center mt-5 border-t border-gray-300 flex-col lg:flex-row space-y-3 lg:space-y-0 z-10">
             <div className=" justify-between items-center hidden lg:flex">

@@ -66,7 +66,7 @@ function StripeForm({ PricePayment, selectedLesson, adminCommission, selectedSlo
         startDateTime: isSpecialSlot ? specialSlotData?.startDateTime : selectedSlot?.start,
         endDateTime: endTime,
         timezone: studentTimeZone || "UTC",
-        isSpecialSlot: true,
+        isSpecial: isSpecialSlot,
       });
       const clientSecret = res?.data?.clientSecret;
       const cardElement = elements.getElement(CardElement);

@@ -10,7 +10,7 @@ import { useEffect, useState } from "react";
 import Listing from "../api/Listing";
 import toast from "react-hot-toast";
 
-const Index = ({
+function Index({
   PricePayment,
   adminCommission,
   selectedLesson,
@@ -19,7 +19,7 @@ const Index = ({
   email,
   isSpecialSlot = false,
   specialSlotData,
-}) => {
+}) {
   const clientId = process.env.NEXT_PUBLIC_PAYPAL_CLIENT_ID;
 
   // console.log("NEXT_APP_PAYPAL_CLIENT_ID", clientId)
@@ -157,7 +157,7 @@ const Index = ({
   };
 
   return (
-    <PayPalScriptProvider options={{ "client-id": "Af1V5-bpf6qTRgq6DPXI7S3AE6enoGtfsxXH0gDoXgpGFgOs7A1lLKBlhI1aaBTwbk4W_b3SwCbLCKpC" }}>
+    <PayPalScriptProvider options={{ "client-id": clientId }}>
       <div className="w-full">
         <PayPalButtons
           createOrder={handleCreateOrder}
@@ -170,6 +170,6 @@ const Index = ({
       </div>
     </PayPalScriptProvider>
   );
-};
+}
 
 export default Index;

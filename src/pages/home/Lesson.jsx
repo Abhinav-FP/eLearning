@@ -31,7 +31,6 @@ export default function Lesson({ title }) {
                             video && video?.map((items, i) => (
 
                                 <div className="w-full md:w-6/12 px-2.5" key={i}>
-
                                     <div id={i} className="bg-[#EFD1D1] border border-[rgba(56,121,117,0.2)]  rounded-[10px] lg:rounded-[20px] p-4 md:p-[20px] lg:p-[30px]">
                                         <VideoModalPlayer video={items?.intro_video}
                                             image={items?.userId?.profile_photo}

@@ -6,16 +6,13 @@ import { IoIosMenu } from "react-icons/io";
 import { IoMdArrowRoundBack } from "react-icons/io";
 import Logo from "../../Assets/Images/logo.png";
 import Image from "next/image";
-import { MdClass } from "react-icons/md";
-import { FaChalkboardTeacher } from "react-icons/fa";
 import { LuMessagesSquare } from "react-icons/lu";
-import { MdPayment } from "react-icons/md";
 import { IoSettingsOutline } from "react-icons/io5";
 import { MdOutlineRateReview } from "react-icons/md";
-// New Icons
 import { CgProfile } from "react-icons/cg";
 import { IoPricetags } from "react-icons/io5";
 import { FaWallet } from "react-icons/fa6";
+import { FaCheckToSlot } from "react-icons/fa6";
 import { useRole } from "@/context/RoleContext";
 
 function SideBar() {
@@ -120,6 +117,13 @@ function SideBar() {
                             >
                                 <MdOutlineRateReview size={20} />
                                 Bookings
+                            </Link>
+                            <Link
+                                href="/teacher-dashboard/slots"
+                                className={`flex items-center py-2.5 x-3 md:px-4 lg:px-6 gap-2 text-[#565F66] text-base font-medium tracking-[-0.06em] ${pathname === "/teacher-dashboard/slots" ? "text-white bg-[#D6202C]" : "hover:bg-gray-100"}`}
+                            >
+                                <FaCheckToSlot size={20} />
+                                Special Slots
                             </Link>
                             <Link
                                 href="/teacher-dashboard/setting"

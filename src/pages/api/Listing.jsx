@@ -181,6 +181,10 @@
       return Api.get(`/teacher/booking`);
     }
 
+    async TeacherStudentLesson() {
+      return Api.get(`/teacher/studentLesson`);
+    }
+
     async GetBooking() {
       return Api.get(`/booking/getAll`);
     }

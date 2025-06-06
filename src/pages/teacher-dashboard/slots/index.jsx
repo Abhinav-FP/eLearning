@@ -38,7 +38,7 @@ export default function index() {
       });
   }, [selectedOption]);
 
-  console.log("payout",payout);
+  // console.log("payout",payout);
 
   return (
     <TeacherLayout page={"Slots"}>
@@ -126,9 +126,9 @@ export default function index() {
                       <td colSpan={5}>
                         <div className="mt-2">
                             <NoData
-                                Heading={"No Payouts found."}
+                                Heading={"No special slots found."}
                                 content={
-                                    "Your have not created any payout requests yet."
+                                    "Your have not created any special slots yet."
                                 }
                             />
                         </div>

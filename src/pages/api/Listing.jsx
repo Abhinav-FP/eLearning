@@ -200,7 +200,7 @@
     }
 
     async SpecialSlotGet(data) {
-      return Api.get(`/teacher/specialSlot`, data);
+      return Api.get(`/teacher/specialSlot?status=${data}`);
     }
 
     async SpecialSlotdata(data) {

@@ -3,7 +3,7 @@ import React from "react";
 const Loader = () => {
   return (
     <div className="h-[50vh] flex items-center justify-center">
-      <div class="loader text-center">
+      <div className="loader text-center">
         <div>
           <ul>
             <li>
@@ -47,7 +47,7 @@ const Loader = () => {
 const BookLoader = () => {
   return (
     <div className="h-[50vh] flex items-center justify-center">
-      <div class="loader text-center">
+      <div className="loader text-center">
         <div>
           <ul>
             <li>

@@ -28,7 +28,7 @@ export default function Lesson({ title }) {
                     <Heading classess={'text-[#1E1E1E] mb-[30px] lg:mb-[40px] max-w-[834px] mx-auto text-center '} title={title} />
                     <div className="flex flex-wrap -mx-2.5 space-y-3">
                         {
-                            video && video?.map((items, i) => (
+                            video && video?.teacherData?.map((items, i) => (
 
                                 <div className="w-full md:w-6/12 px-2.5" key={i}>
 

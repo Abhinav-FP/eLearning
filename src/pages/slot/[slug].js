@@ -74,9 +74,8 @@ export default function Index() {
             <div className="space-y-4">
               <div
                 onClick={() => setPaymentStatus(false)}
-                className={`flex items-center justify-between border rounded-lg p-3 cursor-pointer ${
-                  PaymentStatus === true ? "border-red-300" : "border-red-400"
-                }`}
+                className={`flex items-center justify-between border rounded-lg p-3 cursor-pointer ${PaymentStatus === true ? "border-red-300" : "border-red-400"
+                  }`}
               >
                 <div className="flex items-center gap-3">
                   <span className="text-xl">🅿️</span>
@@ -91,9 +90,8 @@ export default function Index() {
 
               <div
                 onClick={() => setPaymentStatus(true)}
-                className={`flex items-center justify-between border rounded-lg p-3 cursor-pointer ${
-                  PaymentStatus === true ? "border-red-400" : "border-red-300"
-                }`}
+                className={`flex items-center justify-between border rounded-lg p-3 cursor-pointer ${PaymentStatus === true ? "border-red-400" : "border-red-300"
+                  }`}
               >
                 <div className="flex items-center gap-3">
                   <span className="text-xl">💳</span>
@@ -126,25 +124,25 @@ export default function Index() {
               {selectedLesson?.title || ""}
             </p> */}
                 <p className="text-sm text-gray-500">
-              {getDurationInMinutes(data?.startDateTime, data?.endDateTime)} mins
-            </p>
-              <p className="text-sm text-gray-500 capitalize">
-                {new Date(data?.startDateTime).toLocaleString("en-US", {
-                  month: "short",
-                  day: "numeric",
-                  hour: "numeric",
-                  minute: "2-digit",
-                  hour12: true,
-                })}{" "} 
-                - {" "}
-                {new Date(data?.endDateTime).toLocaleString("en-US", {
-                  month: "short",
-                  day: "numeric",
-                  hour: "numeric",
-                  minute: "2-digit",
-                  hour12: true,
-                })}
-              </p>
+                  {getDurationInMinutes(data?.startDateTime, data?.endDateTime)} mins
+                </p>
+                <p className="text-sm text-gray-500 capitalize">
+                  {new Date(data?.startDateTime).toLocaleString("en-US", {
+                    month: "short",
+                    day: "numeric",
+                    hour: "numeric",
+                    minute: "2-digit",
+                    hour12: true,
+                  })}{" "}
+                  - {" "}
+                  {new Date(data?.endDateTime).toLocaleString("en-US", {
+                    month: "short",
+                    day: "numeric",
+                    hour: "numeric",
+                    minute: "2-digit",
+                    hour12: true,
+                  })}
+                </p>
               </div>
             </div>
 
@@ -182,10 +180,10 @@ export default function Index() {
             </div>
 
             {PaymentStatus === false ? (
-          <Payment PricePayment={data?.amount + 0.1 * data?.amount} adminCommission={0.1 * data?.amount} selectedLesson={data?.lesson}  selectedSlot={data?.startDateTime} studentTimeZone={studentTimeZone} email={email} isSpecialSlot={true} specialSlotData={data}/>
-        ) : (
-          <Stripe PricePayment={data?.amount + 0.1 * data?.amount} adminCommission={0.1 * data?.amount} selectedLesson={data?.lesson}  selectedSlot= {data?.startDateTime} studentTimeZone={studentTimeZone} email={email} isSpecialSlot={true} specialSlotData={data}/>
-        )}
+              <Payment PricePayment={data?.amount + 0.1 * data?.amount} adminCommission={0.1 * data?.amount} selectedLesson={data?.lesson} selectedSlot={data?.startDateTime} studentTimeZone={studentTimeZone} email={email} isSpecialSlot={true} specialSlotData={data} />
+            ) : (
+              <Stripe PricePayment={data?.amount + 0.1 * data?.amount} adminCommission={0.1 * data?.amount} selectedLesson={data?.lesson} selectedSlot={data?.startDateTime} studentTimeZone={studentTimeZone} email={email} isSpecialSlot={true} specialSlotData={data} />
+            )}
           </div>
         </div>
       </div>

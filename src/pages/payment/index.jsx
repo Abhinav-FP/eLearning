@@ -7,7 +7,7 @@ import Listing from "../api/Listing";
 import toast from "react-hot-toast";
 
 
-const Index = ({ PricePayment, adminCommission, selectedLesson, selectedSlot, studentTimeZone, email, isSpecialSlot=false, specialSlotData}) => {
+const Index = ({ PricePayment, adminCommission, selectedLesson, selectedSlot, studentTimeZone, email, isSpecialSlot = false, specialSlotData }) => {
   const clientId = process.env.NEXT_PUBLIC_PAYPAL_CLIENT_ID;
 
   // console.log("NEXT_APP_PAYPAL_CLIENT_ID", clientId)
@@ -62,10 +62,6 @@ const Index = ({ PricePayment, adminCommission, selectedLesson, selectedSlot, st
       const response = await main.PaypalCreate({
         amount: PricePayment,
         currency: "USD",
-        LessonId: isSpecialSlot ? specialSlotData?.lesson?._id : selectedLesson?._id,
-        teacherId: isSpecialSlot ? specialSlotData?.teacher?._id : selectedLesson?.teacher?._id,
-        startDateTime: isSpecialSlot ? specialSlotData?.startDateTime : selectedSlot?.start,
-        endDateTime: endTime,
       });
 
       if (response?.data?.id) {
@@ -97,10 +93,11 @@ const Index = ({ PricePayment, adminCommission, selectedLesson, selectedSlot, st
         teacherId: isSpecialSlot ? specialSlotData?.teacher?._id : selectedLesson?.teacher?._id,
         startDateTime: selectedSlot?.start,
         endDateTime: isSpecialSlot ? specialSlotData?.startDateTime : endTime,
-        email:email,
+        email: email,
         timezone: studentTimeZone || "UTC",
         totalAmount: PricePayment,
         adminCommission: adminCommission,
+        isSpecialSlot: isSpecialSlot
       });
 
       if (response?.data?.status === "COMPLETED") {

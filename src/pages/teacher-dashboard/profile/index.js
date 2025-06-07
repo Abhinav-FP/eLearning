@@ -68,11 +68,13 @@ export default function Index() {
       console.log("erorr", error)
     })
   }
-  const LessonCard = ({ item }) => {
+  const [isOpen, setIsOpen] = useState(false);
+  const [Lesson, setLesson] = useState(null);
+  const LessonCard = ({ item ,datalesson }) => {
     return (
       <div className={`${item?.
         is_deleted === true ? "bg-gray-200" : "bg-white"} lesson_list_shadow rounded-2xl flex flex-col md:flex-row gap-8 justify-between items-start md:items-center p-4 lg:px-5 lg:py-6 mb-3 lg:mb-4 `}>
-        <div className="flex-1">
+        <div className="flex-1 cursor-pointer" onClick={datalesson}>
           <div className="flex items-center gap-2">
             <h3 className="text-base font-semibold text-[#CC2828] tracking-[-0.04em] capitalize">{item?.title || ""}</h3>
             {item?.
@@ -93,7 +95,13 @@ export default function Index() {
           <div className="flex items-center text-[#E4B750] text-lg mt-2">
             ★★★★☆ <span className="text-black tracking-[-0.04em] text-xs font-medium">(29)</span>
           </div>
-          <ViewLesson title={item?.title} description={item?.description} price={item?.price} duration={item?.duration} />
+          <div className="mb-3 md:mb-0 w-full md:w-[calc(100%-170px)] md:pr-5">
+            <span className="text-base text-[#CC2828]
+                     bg-[rgba(204,40,40,0.1)] font-medium tracking-[-0.04em] 
+                     px-5 leading-[40px] py-1 rounded-full line-clamp-1 overflow-hidden">
+              {item?.description}
+            </span>
+          </div>
         </div>
         <div className="text-center sm:text-right ">
           <div className="bg-[rgba(204,40,40,0.1)] tracking-[-0.04em] text-center text-sm lg:text-base text-[#CC2828] font-semibold capitalize min-w-[119px] md:min-w-[149px] px-2 py-2 rounded-full">
@@ -101,6 +109,7 @@ export default function Index() {
               ? `${formatMultiPrice(item?.price, "USD")}/${item?.duration} min` : ""}
           </div>
         </div>
+
       </div>
     );
   };
@@ -161,7 +170,12 @@ export default function Index() {
             {data && data?.lessons?.length > 0 ?
               <div className="space-y-4">
                 {data && data?.lessons && data?.lessons?.map((item, index) => (
-                  <LessonCard key={index} item={item} />
+                  <LessonCard key={index} item={item}
+                    datalesson={() => {
+                      setLesson(item);
+                      setIsOpen(true);
+                    }}
+                  />
                 ))}
               </div> :
               <NoData Heading={"No lessons found."} content={"Add some lessons to view them here"} />
@@ -189,6 +203,18 @@ export default function Index() {
         getLessons={getLessons}
         Id={id}
       />
+
+      {isOpen && Lesson && (
+        <ViewLesson
+          title={Lesson.title}
+          description={Lesson.description}
+          price={Lesson.price}
+          duration={Lesson.duration}
+          isOpen={isOpen}
+          setIsOpen={setIsOpen}
+        />
+      )}
+
     </TeacherLayout>
   );
 }

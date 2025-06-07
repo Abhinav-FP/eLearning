@@ -93,10 +93,6 @@ export default function Index() {
           <div className="flex items-center text-[#E4B750] text-lg mt-2">
             ★★★★☆ <span className="text-black tracking-[-0.04em] text-xs font-medium">(29)</span>
           </div>
-          {/* <p className="text-xs text-[#CC2828] bg-[rgba(204,40,40,0.1)] mt-2 font-medium tracking-[-0.04em] px-2 leading-[28px] rounded-full line-clamp-1 overflow-hidden" >
-            {item?.description || ""}
-          </p> */}
-
           <ViewLesson title={item?.title} description={item?.description} price={item?.price} duration={item?.duration} />
         </div>
         <div className="text-center sm:text-right ">

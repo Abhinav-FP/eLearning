@@ -1,50 +1,37 @@
-import React, { useState } from 'react'
-import Popup from './Popup'
-import { formatMultiPrice } from '@/components/ValueDataHook';
+import { formatMultiPrice } from "@/components/ValueDataHook";
+import Popup from "./Popup";
 
-export default function ViewLesson({ title, description, price, duration }) {
-    const [isOpen, setIsOpen] = useState(false)
+export default function ViewLesson({ title, description, price, duration, isOpen, setIsOpen }) {
     const onClose = () => setIsOpen(false);
 
     return (
         <>
-            <p onClick={() => { setIsOpen(true) }} className="text-xs text-[#CC2828]
-             bg-[rgba(204,40,40,0.1)] mt-2 font-medium tracking-[-0.04em] 
-             px-2 leading-[28px] rounded-full line-clamp-1 overflow-hidden" >
-                {description || ""}
-            </p>
-
             {isOpen && (
                 <Popup isOpen={isOpen} onClose={onClose} size={"max-w-[540px]"}>
-                    <div className="max-w-md mx-auto mt-10 px-4 sm:px-6 pb-6 bg-white  space-y-5">
+                    <div className="max-w-md mx-auto mt-5 px-4 sm:px-6 pb-6 bg-white space-y-5">
                         {/* Title */}
-                        <h3 className="text-lg sm:text-xl font-semibold text-[#CC2828] 
-                           tracking-tight capitalize">
+                        <h3 className="text-lg sm:text-xl font-semibold text-[#CC2828] tracking-tight capitalize">
                             {title || ""}
                         </h3>
                         {/* Description */}
                         <p
-                            onClick={() => setIsOpen(true)}
-                            className="text-sm sm:text-base text-gray-800 bg-gray-50 px-4 
-                            py-3 rounded-md font-medium tracking-tight cursor-pointer 
-                            hover:bg-gray-100 transition"
+                            className="text-sm sm:text-base text-gray-800   rounded-md font-medium tracking-tight"
                         >
                             {description || ""}
                         </p>
                         {/* Price & Duration */}
                         {price && duration && (
                             <div className="text-left sm:text-left">
-                                <div className="inline-block bg-[rgba(204,40,40,0.1)] tracking-[-0.04em]
-                                 text-sm lg:text-base text-[#CC2828] font-semibold capitalize min-w-[140px]
-                                  px-4 py-2 rounded-full">
+                                <div className="inline-block bg-[rgba(204,40,40,0.1)] tracking-[-0.04em] text-sm lg:text-base text-[#CC2828] font-semibold capitalize min-w-[140px] px-4 py-2 rounded-full">
                                     {`${formatMultiPrice(price, "USD")} / ${duration} min`}
                                 </div>
                             </div>
                         )}
+                        {/* Close Button */}
+                     
                     </div>
                 </Popup>
             )}
-
         </>
-    )
+    );
 }

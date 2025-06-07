@@ -44,16 +44,16 @@ export default function Teacher({ teacherData, loading }) {
                                             <div className="flex flex-wrap  gap-x-2 md:gap-x-6 lg:gap-x-8 mb-3 lg:mb-5">
                                                 <div>
                                                     <span className="text-[#8D929A] text-base -tracking-[0.03em] pr-2">Language :</span>
-                                                    <span className="text-black text-base -tracking-[0.03em] ">{item?.languages_spoken.join(' , ') || "N/A"}</span>
+                                                    <span className="capitalize text-black text-base -tracking-[0.03em] ">{item?.languages_spoken.join(' , ') || "N/A"}</span>
                                                 </div>
                                                 <div>
                                                     <span className="text-[#8D929A] text-base -tracking-[0.03em] pr-2">Nationality :</span>
-                                                    <span className="text-black text-base -tracking-[0.03em] ">{item?.userId?.nationality || "N/A"}</span>
+                                                    <span className="capitalize text-black text-base -tracking-[0.03em] ">{item?.userId?.nationality || "N/A"}</span>
                                                 </div>
                                                 {/* {item?.userId?.nationality} */}
                                                 <div>
                                                     <span className="text-[#8D929A] text-base -tracking-[0.03em] pr-2">Gender :</span>
-                                                    <span className="text-black text-base -tracking-[0.03em] ">{item?.gender === 'M' ? 'Male' : item?.gender === 'F' ? 'Female' : "N/A"}</span>
+                                                    <span className="capitalize text-black text-base -tracking-[0.03em] ">{item?.gender === 'M' ? 'Male' : item?.gender === 'F' ? 'Female' : "N/A"}</span>
                                                 </div>
                                                 <div>
                                                     <span className="text-[#8D929A] text-base -tracking-[0.03em] pr-2">Experience :</span>

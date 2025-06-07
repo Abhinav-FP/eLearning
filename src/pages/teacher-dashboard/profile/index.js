@@ -74,7 +74,7 @@ export default function Index() {
     return (
       <div className={`${item?.
         is_deleted === true ? "bg-gray-200" : "bg-white"} lesson_list_shadow rounded-2xl flex flex-col md:flex-row gap-8 justify-between items-start md:items-center p-4 lg:px-5 lg:py-6 mb-3 lg:mb-4 `}>
-        <div className="flex-1 cursor-pointer" onClick={datalesson}>
+        <div className="flex-1 cursor-pointer" >
           <div className="flex items-center gap-2">
             <h3 className="text-base font-semibold text-[#CC2828] tracking-[-0.04em] capitalize">{item?.title || ""}</h3>
             {item?.
@@ -98,7 +98,7 @@ export default function Index() {
           <div className="mb-3 md:mb-0 w-full md:w-[calc(100%-170px)] md:pr-5">
             <span className="text-base text-[#CC2828]
                      bg-[rgba(204,40,40,0.1)] font-medium tracking-[-0.04em] 
-                     px-5 leading-[40px] py-1 rounded-full line-clamp-1 overflow-hidden">
+                     px-5 leading-[40px] py-1 rounded-full line-clamp-1 overflow-hidden" onClick={datalesson} >
               {item?.description}
             </span>
           </div>

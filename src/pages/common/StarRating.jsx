@@ -1,6 +1,6 @@
 import { MdOutlineStarPurple500, MdStarHalf } from "react-icons/md";
 
-function StarRating({ rating }) {
+function StarRating({ rating=0 }) {
     const fullStars = Math.floor(rating);
     const hasHalfStar = rating % 1 >= 0.25 && rating % 1 <= 0.75;
 

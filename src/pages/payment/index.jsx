@@ -22,7 +22,7 @@ function Index({
 }) {
   const clientId = process.env.NEXT_PUBLIC_PAYPAL_CLIENT_ID;
 
-  console.log("NEXT_APP_PAYPAL_CLIENT_ID", clientId)
+  // console.log("NEXT_APP_PAYPAL_CLIENT_ID", clientId)
   const router = useRouter();
 
   // console.log("selectedSlot", selectedSlot)

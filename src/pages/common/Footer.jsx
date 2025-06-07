@@ -29,7 +29,7 @@ export default function Footer() {
                               <Link href="/#faq" className="-tracking-[0.03em] text-base text-[#CC2828] hover:underline" >FAQ</Link>
                            </li>
                            <li>
-                              <Link href="/" className="-tracking-[0.03em] text-base text-[#CC2828] hover:underline" >Contact</Link>
+                              <Link href="/contact" className="-tracking-[0.03em] text-base text-[#CC2828] hover:underline" >Contact</Link>
                            </li>
                         </ul>
                      </div>

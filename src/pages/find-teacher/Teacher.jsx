@@ -41,7 +41,7 @@ export default function Teacher({ teacherData, loading }) {
                                         </div>
                                         <div className="w-full md:w-[calc(100%-112px)] mt-2 md:mt-0 md:pl-6 lg:pl-8">
                                             <h3 className="text-black text-xl lg:text-2xl font-bold -tracking-[0.03em] text-left mb-2.5 lg:mb-4">{item?.userId?.name}</h3>
-                                            <div className="flex flex-wrap  gap-2 md:gap-6 lg:gap-8 mb-3 lg:mb-5">
+                                            <div className="flex flex-wrap  gap-x-2 md:gap-x-6 lg:gap-x-8 mb-3 lg:mb-5">
                                                 <div>
                                                     <span className="text-[#8D929A] text-base -tracking-[0.03em] pr-2">Language :</span>
                                                     <span className="text-black text-base -tracking-[0.03em] ">{item?.languages_spoken.join(' , ') || "N/A"}</span>

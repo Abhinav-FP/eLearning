@@ -18,8 +18,12 @@ export default function LessonList({ lessons, showSelected, selectedLesson, SetS
               key={index}
               className={`bg-white rounded-[10px] ${showSelected && selectedLesson?._id == item?._id ? "border border-[#CC2828]" : "border border-white"} lg:rounded-[20px] p-5 lg:p-6 xl:p-10 cursor-pointer`}
               onClick={() => {
+                if(!showSelected){
                 setLesson(item);
-                setIsOpen(true);
+                setIsOpen(true);}
+                else{
+                  SetSelectedLesson(item);
+                }
               }}
             >
               <h3 className="text-[#CC2828] tracking-[-0.04em] text-xl lg:text-2xl xl:text-[30px] font-inter font-extrabold mb-3 md:mb-3 lg:mb-3 capitalize">
@@ -29,19 +33,29 @@ export default function LessonList({ lessons, showSelected, selectedLesson, SetS
                 <div className="mb-3 md:mb-0 w-full md:w-[calc(100%-170px)] md:pr-5">
                   <span className="text-base text-[#CC2828]
                      bg-[rgba(204,40,40,0.1)] font-medium tracking-[-0.04em] 
-                     px-5 leading-[40px] py-1 rounded-full line-clamp-1 overflow-hidden">
+                     px-5 leading-[40px] py-1 rounded-full line-clamp-1 overflow-hidden"
+                     onClick={()=>{
+                      if(showSelected){
+                        setLesson(item);
+                        setIsOpen(true);
+                      }
+                     }}
+                     >
                     {item?.description}
                   </span>
                 </div>
                 <div className="w-full md:w-[170px]  md:text-right">
                   <button
-                    onClick={() => {
-                      if (showSelected) { SetSelectedLesson(item); }
-                      else {
-                        router.push(`/teacher/${slug}#calendar`)
+                    onClick={(e) => {
+                      e.stopPropagation(); // ⛔ Prevent <li> click from firing
+                      if (showSelected) {
+                        SetSelectedLesson(item);
+                      } else {
+                        router.push(`/teacher/${slug}#calendar`);
                       }
                     }}
-                    className="cursor-pointer text-center inline-block bg-[rgba(204,40,40,0.1)] tracking-[-0.04em] text-[#CC2828] text-base xl:text-lg font-semibold font-inter block px-4 lg:px-5 lg:px-6 py-2.5 rounded-full ">
+                    className="z-[100] cursor-pointer text-center inline-block bg-[rgba(204,40,40,0.1)] tracking-[-0.04em] text-[#CC2828] text-base xl:text-lg font-semibold font-inter block px-4 lg:px-5 lg:px-6 py-2.5 rounded-full"
+                  >
                     {formatMultiPrice(item?.price, "USD")}
                   </button>
                 </div>

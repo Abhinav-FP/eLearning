@@ -6,6 +6,7 @@ import Link from "next/link";
 import { formatMultiPrice } from "@/components/ValueDataHook";
 import { MdOutlineStarPurple500 } from "react-icons/md";
 import { data } from "autoprefixer";
+import StarRating from "../common/StarRating";
 
 export default function Lesson({ title }) {
     const [video, setvideo] = useState([]);
@@ -30,8 +31,7 @@ export default function Lesson({ title }) {
                     <Heading classess={'text-[#1E1E1E] mb-[30px] lg:mb-[40px] max-w-[834px] mx-auto text-center '} title={title} />
                     <div className="flex flex-wrap -mx-2.5 space-y-3">
                         {
-                            video && video?.teacherData?.map((items, i) => (
-
+                            video && video?.map((items, i) => (
                                 <div className="w-full md:w-4/12 px-2.5" key={i}>
                                     <div id={i} className="bg-white border teacher_box border-[rgba(56,121,117,0.2)] rounded-[8px] lg:rounded-[13px] p-3 md:p-4 lg:p-5">
                                         <VideoModalPlayer video={items?.intro_video}
@@ -46,15 +46,11 @@ export default function Lesson({ title }) {
                                                 <h3 className="font-bold text-base lg:text-lg -tracking-[0.03em] m-0 text-[#000000]">{items.userId.name}</h3>
                                             </div>
                                             <div className="w-4/12 px-2 text-right">
-                                                <MdOutlineStarPurple500 className="text-[#FFE100] inline" size={18} />
-                                                <MdOutlineStarPurple500 className="text-[#FFE100] inline" size={18} />
-                                                <MdOutlineStarPurple500 className="text-[#FFE100] inline" size={18} />
-                                                <MdOutlineStarPurple500 className="text-[#FFE100] inline" size={18} />
-                                                <MdOutlineStarPurple500 className="text-[#FFE100] inline" size={18} />
-                                                {/* {[...Array(rating?.data)].map((_, index) => (
-                                                    <MdOutlineStarPurple500 key={index} size={16} className="text-[#FFE100] inline" />
-                                                ))} */}
-                                                <div className="text-black text-sm -tracking-[0.03em] text-sm">254 LESSONS</div>
+                                                <StarRating rating={items?.averageRating} />
+                                                {items?.totalLessons != 0 &&
+
+                                                    <div className="text-black text-sm -tracking-[0.03em] text-sm">{items?.totalLessons}  LESSONS</div>
+                                                }
                                             </div>
                                         </div>
                                         <div className="flex justify-between items-center pt-4 lg:pt-5">
@@ -62,8 +58,8 @@ export default function Lesson({ title }) {
                                                 <span className="text-black text-sm -tracking-[0.03em] text-sm">
                                                     Lessons starts from
                                                 </span>
-                                                <div className="text-black font-bold text-base -tracking-[0.03em]">{items?.lowestPriceLesson.price &&
-                                                    `${formatMultiPrice(items?.lowestPriceLesson.price, "USD")}`}
+                                                <div className="text-black font-bold text-base -tracking-[0.03em]">{items?.lowestLesson.price &&
+                                                    `${formatMultiPrice(items?.lowestLesson.price, "USD")}`}
                                                 </div>
                                             </div>
                                             <div className="w-6/12 text-right">

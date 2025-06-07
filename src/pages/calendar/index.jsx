@@ -138,7 +138,7 @@ const Index = ({ Availability, setIsPopupOpen, usedInPopup, setSelectedSlot, sel
       : [];
   
     const bookedEvents = Availability.bookedSlots?.length
-      ? processFullBlocks(Availability.bookedSlots, "Blocked", "#185abc")
+      ? processFullBlocks(Availability.bookedSlots, "Blocked", "#8f97a3")
       : [];
   
     setEvents([...availabilityEvents, ...bookedEvents]);
@@ -216,7 +216,7 @@ const Index = ({ Availability, setIsPopupOpen, usedInPopup, setSelectedSlot, sel
                 <span className="text-sm text-gray-700">Available</span>
               </div>
               <div className="flex items-center gap-2">
-                <span className="w-3 h-3 rounded-full bg-[#185abc] inline-block"></span>
+                <span className="w-3 h-3 rounded-full bg-[#8f97a3] inline-block"></span>
                 <span className="text-sm text-gray-700">Booked</span>
               </div>
             </div>

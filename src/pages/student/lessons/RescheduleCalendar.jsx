@@ -30,7 +30,7 @@ const RescheduleCalendar = ({ Availability, setSelectedSlot, selectedLesson }) =
 
   useEffect(() => {
     if (!Availability) return;
-  
+
     const getNextQuarter = (date) => {
       const next = new Date(date);
       const minutes = next.getMinutes();
@@ -38,24 +38,24 @@ const RescheduleCalendar = ({ Availability, setSelectedSlot, selectedLesson }) =
         minutes < 15
           ? 15 - minutes
           : minutes < 30
-          ? 30 - minutes
-          : minutes < 45
-          ? 45 - minutes
-          : 60 - minutes;
+            ? 30 - minutes
+            : minutes < 45
+              ? 45 - minutes
+              : 60 - minutes;
       next.setMinutes(minutes + add, 0, 0);
       return next;
     };
-  
+
     const processBlocks = (blocks, title, color) => {
       const events = [];
-  
+
       blocks.forEach((block) => {
         let current = moment.utc(block.startDateTime).toDate();
         const end = moment.utc(block.endDateTime).toDate();
-  
+
         const firstChunkEnd = getNextQuarter(current);
         const firstDuration = (firstChunkEnd - current) / (1000 * 60); // in minutes
-  
+
         if (firstChunkEnd > end) {
           // entire block fits before the first rounded quarter
           events.push({
@@ -67,12 +67,12 @@ const RescheduleCalendar = ({ Availability, setSelectedSlot, selectedLesson }) =
           });
           return;
         }
-  
+
         if (firstDuration < 15) {
           // merge first chunk with next
           const secondChunkEnd = getNextQuarter(firstChunkEnd);
           const mergedEnd = secondChunkEnd < end ? secondChunkEnd : end;
-  
+
           events.push({
             id: `${block._id}_${block.startDateTime}`,
             title,
@@ -80,7 +80,7 @@ const RescheduleCalendar = ({ Availability, setSelectedSlot, selectedLesson }) =
             end: moment.utc(mergedEnd).toDate(),
             color,
           });
-  
+
           current = new Date(mergedEnd);
         } else {
           // normal first chunk
@@ -91,15 +91,15 @@ const RescheduleCalendar = ({ Availability, setSelectedSlot, selectedLesson }) =
             end: moment.utc(firstChunkEnd).toDate(),
             color,
           });
-  
+
           current = new Date(firstChunkEnd);
         }
-  
+
         // rest of the chunks
         while (current < end) {
           const nextChunkEnd = getNextQuarter(current);
           const chunkEnd = nextChunkEnd < end ? nextChunkEnd : end;
-  
+
           events.push({
             id: `${block._id}_${moment.utc(current).toISOString()}`,
             title,
@@ -107,25 +107,25 @@ const RescheduleCalendar = ({ Availability, setSelectedSlot, selectedLesson }) =
             end: moment.utc(chunkEnd).toDate(),
             color,
           });
-  
+
           current = new Date(chunkEnd);
         }
       });
-  
+
       return events;
     };
-  
+
     const availabilityEvents = Availability.availabilityBlocks?.length
       ? processBlocks(Availability.availabilityBlocks, "Available", "#6ABB52")
       : [];
-  
+
     const bookedEvents = Availability.bookedSlots?.length
-      ? processBlocks(Availability.bookedSlots, "Blocked", "#185abc")
+      ? processBlocks(Availability.bookedSlots, "Blocked", "#8f97a3")
       : [];
-  
+
     setEvents([...availabilityEvents, ...bookedEvents]);
   }, [Availability]);
-  
+
   const eventStyleGetter = (event) => {
     return {
       style: {
@@ -156,11 +156,11 @@ const RescheduleCalendar = ({ Availability, setSelectedSlot, selectedLesson }) =
 
 
   const handleClick = (event) => {
-      if(!isEventWithinAvailability(event?.start, selectedLesson?.duration, Availability?.availabilityBlocks)){
-        toast.error("This time slot is too short for your selected lesson duration.");
-        return;
-      }
-      setSelectedSlot(event);
+    if (!isEventWithinAvailability(event?.start, selectedLesson?.duration, Availability?.availabilityBlocks)) {
+      toast.error("This time slot is too short for your selected lesson duration.");
+      return;
+    }
+    setSelectedSlot(event);
   };
   // console.log("availability",Availability);
 
@@ -174,17 +174,10 @@ const RescheduleCalendar = ({ Availability, setSelectedSlot, selectedLesson }) =
                 <span className="w-3 h-3 rounded-full bg-[#6ABB52] inline-block"></span>
                 <span className="text-sm text-gray-700">Available</span>
               </div>
+
               <div className="flex items-center gap-2">
-                <span className="w-3 h-3 rounded-full bg-[#D9D9D9] inline-block"></span>
-                <span className="text-sm text-gray-700">Not Available</span>
-              </div>
-              <div className="flex items-center gap-2">
-                <span className="w-3 h-3 rounded-full bg-[#D9D9D9] inline-block"></span>
+                <span className="w-3 h-3 rounded-full bg-[#8f97a3] inline-block"></span>
                 <span className="text-sm text-gray-700">Booked</span>
-              </div>
-              <div className="flex items-center gap-2">
-                <span className="w-3 h-3 rounded-full bg-[#CC2828] inline-block"></span>
-                <span className="text-sm text-gray-700">Booked by You</span>
               </div>
             </div>
           </div>
@@ -208,7 +201,7 @@ const RescheduleCalendar = ({ Availability, setSelectedSlot, selectedLesson }) =
                   handleClick(event);
                 }
               }}
-              
+
               components={{ event: Event }}
             //   onSelectSlot={(slotInfo) => {
             //     const overlap = events.some(
@@ -224,7 +217,7 @@ const RescheduleCalendar = ({ Availability, setSelectedSlot, selectedLesson }) =
           </div>
         </div>
       </div>
-      
+
     </>
   );
 };

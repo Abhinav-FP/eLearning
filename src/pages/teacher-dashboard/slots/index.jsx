@@ -17,7 +17,6 @@ export default function index() {
   
   const handleDropdownChange = (e) => {
     setSelectedOption(e.target.value);
-    // console.log("Selected:", e.target.value);
   };
   // console.log("payout", payout)
 

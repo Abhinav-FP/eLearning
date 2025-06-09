@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import Popup from "@/pages/common/Popup";
 import Listing from "@/pages/api/Listing";
 import toast from "react-hot-toast";
@@ -12,7 +12,11 @@ export default function AddSlot({ isOpen, onClose }) {
     startDateTime: "",
     endDateTime: "",
   });
+  const[filteredStudents, setfilteredStudents]=useState(null);
   const [data, setData]=useState({});
+  const [search, setSearch] = useState("");
+  const [isFocused, setIsFocused] = useState(false);
+  const wrapperRef = useRef(null);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -64,7 +68,7 @@ export default function AddSlot({ isOpen, onClose }) {
     main
       .TeacherStudentLesson()
       .then((r) => {
-        console.log("r", r?.data)
+        // console.log("r", r?.data)
         setData(r?.data?.data);
         // setLoading(false);
       })
@@ -74,6 +78,24 @@ export default function AddSlot({ isOpen, onClose }) {
         setData({});
       });
   }, []);
+  
+  useEffect(()=>{
+    setfilteredStudents(data?.students?.filter((student) =>
+    student?.name?.toLowerCase().includes(search.toLowerCase())
+  ));
+  },[data,search])
+
+  const handleStudentSelect = (student) => {
+    // console.log("student",student);
+    setFormData((prev) => ({
+      ...prev,
+      student: student._id,
+    }));
+    setSearch(student?.name); 
+    setIsFocused(false); 
+  };
+
+  // console.log("formData",formData);
 
   return (
     <Popup isOpen={isOpen} onClose={onClose} size={"max-w-[540px]"}>
@@ -86,23 +108,47 @@ export default function AddSlot({ isOpen, onClose }) {
         </h2>
 
         {/* Student Field */}
-        <div>
-          <label className="block text-[#CC2828] font-medium mb-1">Select Student</label>
-           <select
-             name="student"
-             value={formData.student}
-             onChange={handleChange}
-             className="capitalize w-full p-3 rounded-md bg-gray-100 text-gray-700 focus:outline-none focus:ring-2 focus:ring-[#CC2828]"
-             required
-           >
-             <option value="">Select a student </option>
-             {data && data?.students && data?.students?.map((item,index)=>(
-             <option key={index} value={item?._id}
-             >
-              {item?.name}
-             </option>
-             ))}
-           </select>
+        <div className="mb-6 relative z-10">
+          <label className="block text-[#CC2828] font-medium mb-2">Select Student</label>
+          <input
+            type="text"
+            placeholder="Search student..."
+            value={search}
+            onChange={(e) => setSearch(e.target.value)}
+            onFocus={() => setIsFocused(true)}
+            // onBlur={()=>{setIsFocused(false)}} 
+            onBlur={() => setTimeout(() => setIsFocused(false), 200)}
+            className="w-full p-3 rounded-md bg-gray-100 text-gray-700 focus:outline-none focus:ring-2 focus:ring-[#CC2828]"
+          />
+
+          {isFocused && (
+            <div className="absolute top-full left-0 right-0 mt-1 bg-white shadow-md rounded-md max-h-60 overflow-y-auto border border-gray-200">
+              {filteredStudents?.length > 0 ? (
+                filteredStudents.map((student) => (
+                  <div
+                    key={student._id}
+                    onClick={() => handleStudentSelect(student)}
+                    className={`flex items-center gap-3 p-3 cursor-pointer hover:bg-gray-100 ${
+                      formData.student === student._id ? "bg-gray-300" : ""
+                    }`}
+                  >
+                    <img
+                      src={student?.profile_photo || "/profile.png"}
+                      alt={student?.name}
+                      className="w-10 h-10 rounded-full object-cover"
+                    />
+                    <div className="text-gray-800">
+                      <div className="capitalize">{student?.name}</div>
+                      <div className="text-sm text-gray-500">{student?.email}</div>
+                    </div>
+
+                  </div>
+                ))
+              ) : (
+                <p className="p-3 text-gray-500">No students found</p>
+              )}
+            </div>
+          )}
         </div>
 
         {/* Lesson Field */}

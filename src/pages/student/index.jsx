@@ -114,7 +114,7 @@ export default function Index() {
                             </div>
                             <div>
                               <p className="font-medium text-sm text-black
-                               tracking-[-0.06em] font-inter mb-1">{wish?.teacher?.name}</p>
+                               tracking-[-0.06em] font-inter mb-1 capitalize">{wish?.teacher?.name}</p>
                               <p className="text-xs text-[#7A7A7A] tracking-[-0.04em]
                                font-inter capitalize">{wish?.teacher?.role}</p>
                             </div>

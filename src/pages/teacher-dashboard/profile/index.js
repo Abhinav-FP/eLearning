@@ -92,9 +92,9 @@ export default function Index() {
               </>
             )}
           </div>
-          <div className="flex items-center text-[#E4B750] text-lg mt-2">
+          {/* <div className="flex items-center text-[#E4B750] text-lg mt-2">
             ★★★★☆ <span className="text-black tracking-[-0.04em] text-xs font-medium">(29)</span>
-          </div>
+          </div> */}
           <div className="mb-3 md:mb-0 w-full md:w-[calc(100%-170px)] md:pr-5">
             <span className="text-base text-[#CC2828]
                      bg-[rgba(204,40,40,0.1)] font-medium tracking-[-0.04em] 

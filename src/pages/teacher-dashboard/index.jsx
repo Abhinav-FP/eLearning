@@ -179,14 +179,14 @@ export default function Index() {
                 <p className="font-inter text-base lg:text-lg xl:text-xl font-medium tracking-[-0.04em] text-black flex justify-between">
                   Total Earnings: <span>{formatMultiPrice(Dashboard?.earningsSummary?.totalEarnings, "USD")}</span>
                 </p>
+                 <p className="font-inter text-base lg:text-lg xl:text-xl font-medium tracking-[-0.04em] text-black flex justify-between">
+                  Available Earnings: <span>{formatMultiPrice(Dashboard?.earningsSummary?.pendingEarnings, "USD")}</span>
+                </p>
                 <p className="font-inter text-base lg:text-lg xl:text-xl font-medium tracking-[-0.04em] text-black flex justify-between">
                   Requested Earnings: <span>{formatMultiPrice(Dashboard?.earningsSummary?.requestedEarnings, "USD")}</span>
                 </p>
                 <p className="font-inter text-base lg:text-lg xl:text-xl font-medium tracking-[-0.04em] text-black flex justify-between">
                   Paid Earnings: <span>{formatMultiPrice(Dashboard?.earningsSummary?.approvedEarnings, "USD")}</span>
-                </p>
-                <p className="font-inter text-base lg:text-lg xl:text-xl font-medium tracking-[-0.04em] text-black flex justify-between">
-                  Available Earnings: <span>{formatMultiPrice(Dashboard?.earningsSummary?.pendingEarnings, "USD")}</span>
                 </p>
               </div>
             </div>

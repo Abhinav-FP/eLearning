@@ -17,11 +17,12 @@ import { formatMultiPrice } from "@/components/ValueDataHook";
 export default function Index() {
   const router = useRouter();
   const { slug } = router.query;
+  const { book } = router.query;
   const [data, setdata] = useState([]);
   const [loading, setLoading] = useState(true);
   const [content, setContent] = useState("");
   const [lessons, setLessons] = useState([]);
-  const [isPopupOpen, setIsPopupOpen] = useState(false);
+  const [isPopupOpen, setIsPopupOpen] = useState(book ? true : false);
   const [studentTimeZone, setStudentTimeZone] = useState(null);
   const closePopup = () => setIsPopupOpen(false);
   const Id = data?.userId?._id;
@@ -194,7 +195,7 @@ export default function Index() {
                   classess={"text-[#1E1E1E] mb-2"}
                   title={"Other Details"}
                 />
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-x-10 gap-y-4 text-gray-600 text-base xl:text-lg font-semibold font-inter py-2.5 lg:rounded-full mb-6 lg:mb-8">
+                <div className="capitalize grid grid-cols-1 md:grid-cols-2 gap-x-10 gap-y-4 text-gray-600 text-base xl:text-lg font-semibold font-inter py-2.5 lg:rounded-full mb-6 lg:mb-8">
                   {data?.userId?.nationality &&
                     <p><strong>Nationality:</strong> {data?.userId?.nationality}</p>}
                   {data?.userId?.time_zone &&

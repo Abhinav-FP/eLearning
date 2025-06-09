@@ -90,14 +90,14 @@ export default function index() {
         icon: <FaWallet className="w-6 h-6 text-[#CC2828]" />,
       },
       {
-        label: "Paid Earnings",
-        value: data?.earningsSummary?.approvedEarnings ?? "N/A",
-        icon: <MdPaid className="w-6 h-6 text-[#CC2828]" />,
-      },
-      {
         label: "Requested Earnings",
         value: data?.earningsSummary?.requestedEarnings ?? "N/A",
         icon: <MdRequestQuote className="w-6 h-6 text-[#CC2828]" />,
+      },
+      {
+        label: "Paid Earnings",
+        value: data?.earningsSummary?.approvedEarnings ?? "N/A",
+        icon: <MdPaid className="w-6 h-6 text-[#CC2828]" />,
       },
     ],
     [data]

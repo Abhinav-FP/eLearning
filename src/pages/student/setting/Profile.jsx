@@ -49,7 +49,13 @@ export default function Profile() {
   const handleImageChange = (e) => {
     const selectedFile = e.target.files[0];
     if (selectedFile) {
-      setFile(selectedFile); // This triggers preview + file storing
+      const maxSizeInMB = 5;
+      const maxSizeInBytes = maxSizeInMB * 1024 * 1024;
+      if (selectedFile.size > maxSizeInBytes) {
+        toast.error("Image size must be less than 5MB");
+        return;
+      }
+      setFile(selectedFile);
     }
   };
 

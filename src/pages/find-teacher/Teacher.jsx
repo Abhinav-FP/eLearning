@@ -24,20 +24,20 @@ export default function Teacher({ teacherData, loading }) {
                     <div className="flex flex-wrap justify-center ">
                         {
                             teacherData && teacherData?.map((item, i) => (
-                                <div key={i} className="w-full mb-6 lg:mb-8 bg-[#FFE8E8] rounded-[10px] p-5 md:p-8 lg:p-10">
+                                <Link href={`/teacher/${item?._id}`} key={i} className="w-full mb-6 lg:mb-8 bg-[#FFE8E8] rounded-[10px] p-5 md:p-8 lg:p-10">
                                     <div className="flex flex-wrap">
                                         <div className="w-full md:w-[112px]">
                                             <div className="h-[80px] w-[80px] lg:h-[112px] lg:w-[112px] rounded-full overflow-hidden   mx-0 mb-3 lg:mb-6 ">
                                                 <Image src={item?.userId?.profile_photo || TeacherImg} alt={item?.userId?.name} width={164} height={164} />
                                             </div>
-                                            <div className=" md:text-center">
+                                            {/* <div className=" md:text-center">
                                           <StarRating rating={item?.averageRating} />
 
                                                 {item?.totalLessons != 0 &&
 
                                                     <div className="text-black text-sm -tracking-[0.03em] text-sm">{item?.totalLessons} LESSONS</div>
                                                 }
-                                            </div>
+                                            </div> */}
                                         </div>
                                         <div className="w-full md:w-[calc(100%-112px)] mt-2 md:mt-0 md:pl-6 lg:pl-8">
                                             <h3 className="text-black text-xl lg:text-2xl font-bold -tracking-[0.03em] text-left mb-2.5 lg:mb-4">{item?.userId?.name}</h3>
@@ -73,14 +73,14 @@ export default function Teacher({ teacherData, loading }) {
                                                     </div>
                                                 </div>
                                                 <div className="w-6/12 text-right">
-                                                    <Link href={`/teacher/${item?._id}`} className='inline-block font-medium cursor-pointer rounded-full py-2 px-5 bg-[#CC2828] hover:bg-[#ad0e0e] text-white text-sm lg:text-base py-2.5 px-3 lg:px-4 lg:px-6'>
+                                                    <Link href={`/teacher/${item?._id}?book=true`} className='inline-block font-medium cursor-pointer rounded-full py-2 px-5 bg-[#CC2828] hover:bg-[#ad0e0e] text-white text-sm lg:text-base py-2.5 px-3 lg:px-4 lg:px-6'>
                                                         Book a Lesson
                                                     </Link>
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
-                                </div>
+                                </Link>
                             ))
                         }
                     </div>}

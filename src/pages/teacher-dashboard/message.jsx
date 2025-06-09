@@ -115,6 +115,8 @@ export default function Message() {
     }
   };
 
+  // console.log("messageCount",messageCount);
+
   return (
     <TeacherLayout page={"Messages"}>
       <>
@@ -132,11 +134,11 @@ export default function Message() {
                     className={`flex items-center  text-[#ffffff] min-h-[56px] pr-[66px] pl-[89px] py-[8px] hover:bg-[#CC28281A] relative cursor-pointer min-h-[72px] ${teacherId === chat?.teacher?._id ? "bg-[#CC28281A]" : "bg-[#fff]"}`}
                   >
                     <Image
-                      src={"/profile.png"}
+                      src={chat?.student?.profile_photo || "/profile.png"}
                       width={50}
                       height={50}
                       alt={chat?.student?.name}
-                      className="w-[50px] h-[50px] lg:w-[56px] lg:h-[56px] rounded-lg absolute left-[22px] top-1/2 -translate-y-1/2"
+                      className="w-[50px] h-[50px] lg:w-[56px] lg:h-[56px] rounded-full absolute left-[22px] top-1/2 -translate-y-1/2"
                     />
                     <div className="flex-1">
                       <h3 className="font-medium font-inter text-base mb-0 text-black capitalize">{chat?.student?.name}</h3>
@@ -163,7 +165,7 @@ export default function Message() {
               {/* Chat Header */}
               <div className="flex items-center gap-3 lg:gap-4 bg-[#FFFFFF] px-4 lg:px-5 py-3.5 lg:py-4">
                 <Image
-                  src={"/profile.png"}
+                  src={selectedIdUser?.profile_photo || "/profile.png"}
                   width={45}
                   height={45}
                   alt={"chat.nam"}

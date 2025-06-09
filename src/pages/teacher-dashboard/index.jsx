@@ -21,7 +21,7 @@ export default function Index() {
       setLoading(true);
       const main = new Listing();
       const response = await main.TeacherDashboard();
-      console.log("response", response)
+      // console.log("response", response)
       SetDashboard(response.data.data);
     } catch (error) {
       console.log("error", error);
@@ -41,6 +41,9 @@ export default function Index() {
     duration50: 0,
     durationOther: 0
   });
+
+  console.log("Dashboard",Dashboard);
+
   return (
     <TeacherLayout>
       {loading ?
@@ -63,15 +66,15 @@ export default function Index() {
             {/* Lesson Prices */}
             <div className="relative bg-white rounded-xl dashboard-box p-3.5 lg:p-4 xl:p-5 border border-[rgba(204,40,40,0.2)] flex flex-col min-h-[136px]">
               <h2 className="font-inter text-[#CC2828] font-bold text-lg lg:text-xl xl:text-2xl capitalize tracking-[-0.04em]">
-                Lesson Prices
+                Lesson Prices starts from
               </h2>
               <div className="absolute right-4 lg:right-5 xl:right-6 bg-[#CC28281A] border-[0.67px] border-[#CC282880] p-3 rounded">
                 <MdAttachMoney className="text-[#CC2828]" size={24} />
               </div>
               <div className="flex gap-3 text-lg font-semibold mt-6 xl:mt-4 items-center">
-                {Dashboard?.TeacherData?.average_price && Dashboard?.TeacherData?.average_time ? (
+                {Dashboard?.TeacherData ? (
                   <p className="flex gap-1 items-center font-inter text-base lg:text-lg xl:text-xl font-medium tracking-[-0.04em] text-black">
-                    <MdCheckCircle size={18} /> {formatMultiPrice(Dashboard.TeacherData.average_price, "USD")}/{Dashboard.TeacherData.average_time} minutes
+                    <MdCheckCircle size={18} /> {formatMultiPrice(Dashboard?.TeacherData?.price, "USD")}/{Dashboard?.TeacherData?.duration} minutes
                   </p>
                 ) : (
                   <p className="font-inter text-base lg:text-lg xl:text-xl font-medium tracking-[-0.04em] text-black">

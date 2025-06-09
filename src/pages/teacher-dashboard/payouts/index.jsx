@@ -43,7 +43,7 @@ function Index() {
     const result = payout && payout?.map(item => ({
       Amount: formatMultiPrice(item?.amount, "USD") || "",
       Status: item?.Status || "",
-      TransactionDetails: item?.TranscationId || item?.Reasons || "-",
+      "TransactionDetails/Payment Details": item?.TransactionId || item?.Reasons || "-",
       Bank: item?.BankId?.BankName || "",
     }));
     const worksheet = XLSX.utils.json_to_sheet(result);
@@ -124,7 +124,7 @@ function Index() {
                           {item?.Status}
                         </td>
                         <td className="px-3 lg:px-4 py-2 lg:py-3 text-black text-sm lg:text-base font-medium font-inter ">
-                          {item?.TranscationId || item?.Reasons || "-"}
+                          {item?.TransactionId || item?.Reasons || "-"}
                         </td>
                         <td className="capitalize px-3 lg:px-4 py-2 lg:py-3 text-black text-sm lg:text-base font-medium font-inter ">
                           {item?.BankId?.BankName}
@@ -138,7 +138,7 @@ function Index() {
                             <NoData
                                 Heading={"No Payouts found."}
                                 content={
-                                    "Your have not created any payout requests yet."
+                                    "You don't have any payout request with the above filter."
                                 }
                             />
                         </div>

@@ -181,6 +181,10 @@ const Index = ({ Availability, setIsPopupOpen, usedInPopup, setSelectedSlot, sel
         router.push(`/login?redirect=${router.asPath}`);
         return;
       }
+      if(!user?.email_verify){
+        router.push("/verify");
+        return;
+    }
       if (user?.role != "student") {
         toast.error("Only students can book lessons");
         return;

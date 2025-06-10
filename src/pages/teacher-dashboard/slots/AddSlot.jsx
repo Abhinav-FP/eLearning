@@ -215,7 +215,7 @@ export default function AddSlot({ isOpen, onClose }) {
        <div className="flex justify-center mt-6">
         <button
           type="submit"
-          className="bg-red-600 text-white py-2 px-6 rounded-md hover:bg-red-700 transition duration-200"
+          className="bg-red-600 text-white py-2 px-6 rounded-md hover:bg-red-700 transition duration-200 cursor-pointer"
         >
           {loading ? "Adding..." : "Create Slot"}
         </button>

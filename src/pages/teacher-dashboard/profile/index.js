@@ -75,7 +75,7 @@ export default function Index() {
       <div className={`${item?.
         is_deleted === true ? "bg-gray-200" : "bg-white"} lesson_list_shadow rounded-2xl flex flex-col md:flex-row gap-8 justify-between items-start md:items-center p-4 lg:px-5 lg:py-6 mb-3 lg:mb-4 `}>
         <div className="flex-1 cursor-pointer" >
-          <div className="flex items-center gap-2">
+          <div className="flex items-center gap-2 mb-2">
             <h3 className="text-base font-semibold text-[#CC2828] tracking-[-0.04em] capitalize">{item?.title || ""}</h3>
             {item?.
               is_deleted === true ? (
@@ -117,7 +117,7 @@ export default function Index() {
   // console.log("data", data);
 
   return (
-    <TeacherLayout page={"Profile"}>
+    <TeacherLayout page={"Profile & Lessons"}>
       {loading ?
         <EditProfileLoader />
         :
@@ -158,10 +158,10 @@ export default function Index() {
                 </span>{" "}
                 {data?.profile?.languages_spoken?.join(", ") || "N/A"}
               </p>
-              <p className="text-sm lg:text-base text-black tracking-[-0.04em]">
+              {/* <p className="text-sm lg:text-base text-black tracking-[-0.04em]">
                 <span className="font-normal text-[#CC2828]">Experience:</span>{" "}
                 {data?.profile?.experience ? `${data?.profile?.experience} years` : "N/A"}
-              </p>
+              </p> */}
             </div>
           </div>
 

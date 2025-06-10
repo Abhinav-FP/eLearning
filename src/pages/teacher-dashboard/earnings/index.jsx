@@ -107,7 +107,7 @@ export default function index() {
   const close = () => setIsEarning(false);
 
   return (
-    <TeacherLayout page={"Earnings & Payout"}>
+    <TeacherLayout page={"Earnings"}>
       <div className="min-h-screen p-5 lg:p-[30px]">
         <div className="flex justify-between items-center mb-4 lg:mb-5">
             {/* <h2 className="text-lg md:text-xl lg:text-2xl font-bold text-[#CC2828] tracking-[-0.04em] font-inter">

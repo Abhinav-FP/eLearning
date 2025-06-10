@@ -15,7 +15,7 @@ export default function Index() {
     try {
       setLoading(true);
       const main = new Listing();
-      const response = await main.TeacherBooking();
+      const response = await main.TeacherBooking(TabOpen);
       setData(response?.data?.data || []);
     } catch (error) {
       console.log('error', error);
@@ -26,18 +26,7 @@ export default function Index() {
 
   useEffect(() => {
     fetchEarnings();
-  }, []);
-
-  // Categorize data
-  const { upcoming, past } = useMemo(() => {
-    const now = moment();
-    const upcoming = data.filter(item => moment(item.startDateTime).isAfter(now));
-    const past = data.filter(item => moment(item.startDateTime).isBefore(now));
-    return { upcoming, past };
-  }, [data]);
-
-  const currentList = TabOpen === 'upcoming' ? upcoming : past;
-  console.log("currentList",currentList);
+  }, [TabOpen]);
 
   return (
     <TeacherLayout>
@@ -97,8 +86,8 @@ export default function Index() {
                   <TableLoader length={5} />
                 :
               <tbody>
-                {currentList && currentList.length > 0 ? (
-                  currentList.map((item, index) => (
+                {data && data.length > 0 ? (
+                  data?.map((item, index) => (
                     <tr
                       key={index}
                       className="hover:bg-[rgba(204,40,40,0.1)] border-t border-[rgba(204,40,40,0.2)]"

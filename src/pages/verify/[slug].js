@@ -50,7 +50,7 @@ export default function Index() {
   }, [slug]);
 
   return (
-    <div className="h-screen w-screen flex items-center justify-center bg-black">
+    <div className="h-screen w-screen flex items-center justify-center bg-white">
         {loading ? 
       <Button />
       :

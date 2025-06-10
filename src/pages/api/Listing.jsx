@@ -11,6 +11,9 @@
     async profileVerify() {
       return Api.get("/user/profile")
     }
+    async SendVerificationLink() {
+      return Api.get("/user/verification-link")
+    }
 
     async Teacherprofile() {
       return Api.get("/teacher/profile");
@@ -187,8 +190,8 @@
       return Api.post(`/teacher/payout`, data);
     }
 
-    async TeacherBooking() {
-      return Api.get(`/teacher/booking`);
+    async TeacherBooking(data) {
+      return Api.get(`/teacher/booking?type=${data}`);
     }
 
     async TeacherStudentLesson() {

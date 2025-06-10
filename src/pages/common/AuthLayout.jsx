@@ -26,6 +26,9 @@ export default function AuthLayout({ children, page , sidebar }) {
         if (response.data) {
           setUser(response.data.data.user);
         }
+        if(!response?.data?.data?.user?.email_verify){
+          router.push("/verify");
+        }
       } catch (error) {
         console.log("error", error);
         localStorage?.removeItem("token");
@@ -34,6 +37,7 @@ export default function AuthLayout({ children, page , sidebar }) {
         toast.error("Please log in first.");
       }
     };
+    // console.log("user",user);
   
     useEffect(() => {
       const controller = new AbortController();

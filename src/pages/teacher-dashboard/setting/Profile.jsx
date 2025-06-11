@@ -23,12 +23,14 @@ export default function Profile() {
     interest: "",
     experience: "",
     description: "",
-    average_price: "",
-    average_time: "",
+    // average_price: "",
+    // average_time: "",
     documentlink: "",
     qualifications: "",
+    specialities: [],
   });
   const [file, setFile] = useState(null);
+  const [newSpeciality, setNewSpeciality] = useState("");
   const [loading, setLoading] = useState(false);
 
   useEffect(() => {
@@ -44,8 +46,8 @@ export default function Profile() {
           timezone: profiledata?.userId?.time_zone,
           nationality: profiledata?.userId?.nationality,
           ais_trained: profiledata?.ais_trained,
-          average_time: profiledata?.average_time,
-          average_price: profiledata?.average_price,
+          // average_time: profiledata?.average_time,
+          // average_price: profiledata?.average_price,
           languages_spoken: profiledata?.languages_spoken,
           description: profiledata?.description,
           intro_video: profiledata?.intro_video,
@@ -53,6 +55,7 @@ export default function Profile() {
           gender: profiledata?.gender,
           documentlink: profiledata?.documentlink,
           qualifications: profiledata?.qualifications,
+          specialities: profiledata?.tags || [],
         });
         setFile(profiledata?.userId?.profile_photo);
         setLoading(false);
@@ -64,10 +67,8 @@ export default function Profile() {
   }, []);
 
   const handleChange = (e) => {
-    // console.log("e.target",e?.target);
     const { name, value } = e.target;
     if (name === "languages_spoken") {
-      // Prevent duplicate entries
       if (!data?.languages_spoken?.includes(value) && value !== "")
         setData((prev) => ({
           ...prev,
@@ -93,7 +94,6 @@ export default function Profile() {
     }));
   };
 
-  //  console.log("data",data);
   const handleSubmit = async (e) => {
     e.preventDefault();
     if (data?.intro_video) {
@@ -121,8 +121,9 @@ export default function Profile() {
       formData.append("interest", data?.interest)
       formData.append("experience", data?.experience)
       formData.append("description", data?.description)
-      formData.append("average_price", data?.average_price)
-      formData.append("average_time", data?.average_time)
+      formData.append("tags", JSON.stringify(data?.specialities))
+      // formData.append("average_price", data?.average_price)
+      // formData.append("average_time", data?.average_time)
       formData.append("qualifications", data?.qualifications)
       if (data?.documentlink instanceof File) {
         formData.append("documentlink", data?.documentlink)
@@ -142,6 +143,33 @@ export default function Profile() {
     }
     setProcessing(false);
   };
+
+  const handleAddSpeciality = () => {
+    const trimmed = newSpeciality && newSpeciality?.trim();
+    if(data && data?.specialities && data?.specialities?.includes(trimmed)){
+      toast.error("Speciality already present");
+      return;
+    }
+    if(data && data?.specialities && data?.specialities?.length>=5){
+      toast.error("Only 5 specialities are allowed");
+      return;
+    }
+    if (trimmed) {
+      setData((prev) => ({
+        ...prev,
+        specialities: [...prev.specialities, trimmed],
+      }));
+      setNewSpeciality("");
+    }
+  };
+
+  const handleRemoveSpeciality = (item) => {
+    setData((prev) => ({
+      ...prev,
+      specialities: prev.specialities.filter((spec) => spec !== item),
+    }));
+  };
+
 
   const handlefileChange = (e) => {
     const { name, type, files, value } = e.target;
@@ -165,6 +193,8 @@ export default function Profile() {
       setFile(selectedFile);
     }
   };
+
+  // console.log("data",data);
 
   return (
     <>
@@ -503,6 +533,58 @@ export default function Profile() {
                 </div>
               </div>
 
+              {/* Speciality Tags */}
+              <div className="w-full px-2 mb-4">
+                <label className="text-[#CC2828] font-medium text-base xl:text-xl mb-2 block">
+                  Specialities (Upto 5 allowed)
+                </label>
+                <div className="flex items-center space-x-2">
+                  <input
+                    type="text"
+                    className="w-full h-11 lg:h-[54px] font-medium appearance-none block bg-[#F4F6F8] text-[#46494D] text-base border border-[#F4F6F8] rounded-lg py-3 px-3 lg:px-6 leading-tight focus:outline-none"
+                    value={newSpeciality}
+                    placeholder="Enter a speciality"
+                    onChange={(e) => setNewSpeciality(e.target.value)}
+                    onKeyDown={(e) => {
+                      if (e.key === "Enter") {
+                        e.preventDefault();
+                        handleAddSpeciality();
+                      }
+                    }}
+                  />
+                  <button
+                    type="button"
+                    onClick={handleAddSpeciality}
+                    className="bg-[#CC2828] text-white px-4 py-2 rounded-lg hover:bg-[#a81e1e] text-sm cursor-pointer"
+                  >
+                    Add
+                  </button>
+              </div>
+
+              {/* Show Added Specialities */}
+              {data?.specialities?.length > 0 && (
+                <div className="mt-3 flex flex-wrap gap-2">
+                  {data.specialities.map((spec, idx) => (
+                    <div
+                      key={idx}
+                      className="bg-red-100 text-red-700 px-3 py-1 rounded-full text-sm flex items-center gap-2"
+                    >
+                      {spec}
+                      <button
+                        type="button"
+                        onClick={() => handleRemoveSpeciality(spec)}
+                        className="text-red-500 hover:text-red-800 text-xs"
+                      >
+                        ✕
+                      </button>
+                    </div>
+                  ))}
+                </div>
+  )}
+</div>
+
+
+              {/* Description */}
               <div className="w-full px-2">
                 <label className="block text-[#CC2828] font-medium text-base xl:text-xl mb-1 tracking-[-0.04em]">
                   Description

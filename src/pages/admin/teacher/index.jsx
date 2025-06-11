@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import AdminLayout from "../common/AdminLayout";
 import Image from "next/image";
 import Listing from "../../api/Listing";
@@ -10,6 +10,9 @@ function TeacherListing() {
   const [teacherData, setTeacherData] = useState([]);
   const [loading, setLoading] = useState(false);
   const [blockloading, setBlockloading] = useState(false);
+  const [searchQuery, setSearchQuery] = useState("");
+  const timerRef = useRef(null);
+  
   const handleBlock=async(id)=>{
     try {
       setBlockloading(true);
@@ -22,7 +25,7 @@ function TeacherListing() {
         else{
             toast.success("Teacher unblocked successfully");
         }
-        fetchData();
+        fetchData("");
       }
       setBlockloading(false);
     } catch (error) {
@@ -46,7 +49,7 @@ function TeacherListing() {
         else{
             toast.error(response?.data?.message);
         }
-        fetchData();
+        fetchData("");
       }
       setBlockloading(false);
     } catch (error) {
@@ -70,7 +73,7 @@ function TeacherListing() {
         {item?.qualifications?.replaceAll("_", " ") || "N/A"}
       </td>
       <td className="capitalize px-3 lg:px-4 py-2 lg:py-3 text-black text-sm lg:text-base font-medium font-inter">
-        {item?.experience || "N/A"} years
+        {item?.experience ? `${item?.experience} years` : "N/A"}
       </td>
       <td className="capitalize px-3 lg:px-4 py-2 lg:py-3 text-black text-sm lg:text-base font-medium font-inter">
         <div className="flex gap-2 justify-center items-center">
@@ -125,11 +128,11 @@ function TeacherListing() {
     </tr>
   );
 
-  const fetchData = async () => {
+  const fetchData = async (search) => {
     try {
       setLoading(true);
       const main = new Listing();
-      const response = await main.adminteacherlist();
+      const response = await main.adminteacherlist(search);
       if (response?.data) {
         setTeacherData(response?.data?.data || []);
         // console.log(response?.data);
@@ -141,8 +144,27 @@ function TeacherListing() {
     }
   };
 
+  const handleChange = (e) => {
+    const sval = e.target.value;
+    setSearchQuery(sval);
+
+    if (timerRef.current) {
+      clearTimeout(timerRef.current);
+    }
+
+    if (!sval || sval.trim() === "") {
+      timerRef.current = setTimeout(() => {
+        fetchData(sval);
+      }, 1500);
+    } else if (sval.length >= 2) {
+      timerRef.current = setTimeout(() => {
+        fetchData(sval);
+      }, 1500);
+    }
+  };
+
   useEffect(() => {
-    fetchData();
+    fetchData("");
   }, []);
 
   // console.log("teacherData", teacherData);
@@ -185,7 +207,8 @@ function TeacherListing() {
           <input
             type="text"
             name="search"
-            // value=""
+            value={searchQuery}
+            onChange={handleChange}
             placeholder="Search"
             className="w-full rounded-[10px] border border-[rgba(0,0,0,0.1)] text-[#595959] text-sm tracking-[-0.03em] pl-12 pr-4 bg-[rgba(204,40,40,0.1)] outline-0 h-[44px]"
           />
@@ -212,7 +235,7 @@ function TeacherListing() {
                     Qualification
                   </th>
                   <th className="font-normal text-sm lg:text-base px-3 lg:px-4 py-2 lg:py-3 border-t border-[rgba(204,40,40,0.2)] capitalize">
-                    Status
+                    Experience
                   </th>
                   <th className="font-normal text-sm lg:text-base px-3 lg:px-4 py-2 lg:py-3 border-t border-[rgba(204,40,40,0.2)] capitalize">
                     Action

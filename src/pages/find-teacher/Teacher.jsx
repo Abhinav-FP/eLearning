@@ -46,6 +46,36 @@ export default function Teacher({ teacherData, loading }) {
                                         </div>
                                         <div className="w-full md:w-[calc(100%-112px)] mt-2 md:mt-0 md:pl-6 lg:pl-8">
                                             <h3 className="text-black text-xl lg:text-2xl font-bold -tracking-[0.03em] text-left mb-2.5 lg:mb-4">{item?.userId?.name}</h3>
+                                            {item?.tags?.length > 0 &&
+                                            <div className="flex gap-1 items-center">
+                                                <span className="text-[#8D929A] text-base -tracking-[0.03em] pr-2">
+                                                    Specialities :
+                                                </span>
+                                                <div className="flex flex-wrap gap-x-2 gap-y-1">
+                                                    {item.tags.map((tag, idx) => (
+                                                        <span key={idx} className="flex items-center text-black text-base -tracking-[0.03em] capitalize">
+                                                        <svg
+                                                            xmlns="http://www.w3.org/2000/svg"
+                                                            className="w-4 h-4 mr-1"
+                                                            viewBox="0 0 48 48"
+                                                        >
+                                                            <path
+                                                            fill="#4CAF50"
+                                                            d="M44,24c0,11.045-8.955,20-20,20S4,35.045,4,24S12.955,4,24,4S44,12.955,44,24z"
+                                                            />
+                                                            <path
+                                                            d="M32.172,16.172L22,26.344l-5.172-5.172c-0.781-0.781-2.047-0.781-2.828,0l-1.414,1.414
+                                                            c-0.781,0.781-0.781,2.047,0,2.828l8,8c0.781,0.781,2.047,0.781,2.828,0l13-13c0.781-0.781,0.781-2.047,0-2.828L35,16.172
+                                                            C34.219,15.391,32.953,15.391,32.172,16.172z"
+                                                            fill="#FFF"
+                                                            />
+                                                        </svg>
+                                                        {tag}
+                                                        </span>
+                                                    ))}
+                                                </div>
+                                            </div>}
+
                                             <div className="flex flex-wrap  gap-x-2 md:gap-x-6 lg:gap-x-8 mb-3 lg:mb-5">
                                                 <div>
                                                     <span className="text-[#8D929A] text-base -tracking-[0.03em] pr-2">Language :</span>

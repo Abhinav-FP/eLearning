@@ -158,6 +158,12 @@ export default function Index() {
                 </span>{" "}
                 {data?.profile?.languages_spoken?.join(", ") || "N/A"}
               </p>
+              <p className="text-sm lg:text-base text-black tracking-[-0.04em]">
+                <span className="font-normal text-[#CC2828]">
+                  Specialities:
+                </span>{" "}
+                {data?.profile?.tags?.join(", ") || "N/A"}
+              </p>
               {/* <p className="text-sm lg:text-base text-black tracking-[-0.04em]">
                 <span className="font-normal text-[#CC2828]">Experience:</span>{" "}
                 {data?.profile?.experience ? `${data?.profile?.experience} years` : "N/A"}

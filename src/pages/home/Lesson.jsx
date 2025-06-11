@@ -10,15 +10,17 @@ import StarRating from "../common/StarRating";
 import { useRole } from "@/context/RoleContext";
 import { useRouter } from "next/router";
 import toast from "react-hot-toast";
+import { BestTeacherLoader } from "@/components/Loader";
 
 export default function Lesson({ title }) {
     const { user } = useRole();
-    // console.log("user",user);
     const router = useRouter();
-    // console.log("router",router); 
     const [video, setvideo] = useState([]);
+    const[loading, setLoading] = useState(false);
+
     const TeacherVideos = async () => {
         try {
+            setLoading(true);
             const main = new Listing();
             const response = await main.HomeTeacherVideo();
             // console.log("response", response)
@@ -26,6 +28,7 @@ export default function Lesson({ title }) {
         } catch (error) {
             console.log("error", error);
         }
+            setLoading(false);
     };
     useEffect(() => {
         TeacherVideos();
@@ -40,6 +43,9 @@ export default function Lesson({ title }) {
                     <Heading classess={'text-[#1E1E1E] mb-[30px] lg:mb-[40px] max-w-[834px] mx-auto text-center '} title={title} />
                     <div className="flex flex-wrap -mx-2.5 space-y-3">
                         {
+                            loading ? 
+                            <BestTeacherLoader rows={3}/>
+                            :
                             video && video?.map((items, i) => (
                                 <div className="w-full md:w-4/12 px-2.5" key={i}>
                                     <div id={i} className="bg-white border teacher_box border-[rgba(56,121,117,0.2)] rounded-[8px] lg:rounded-[13px] p-3 md:p-4 lg:p-5">

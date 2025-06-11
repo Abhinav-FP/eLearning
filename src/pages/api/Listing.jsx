@@ -218,8 +218,8 @@
       return Api.get(`/teacher/bank`);
     }
 
-    async adminteacherlist() {
-      return Api.get(`/admin/teachers`);
+    async adminteacherlist(data) {
+      return Api.get(`/admin/teachers?search=${data}`);
     }
 
     async userBlock(data) {

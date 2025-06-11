@@ -14,7 +14,8 @@ export default function BookingPopup({
   onClose,
   lessons,
   Availability,
-  studentTimeZone
+  studentTimeZone,
+  loading
 }) {
    const { user } = useRole();
 
@@ -91,6 +92,7 @@ export default function BookingPopup({
                     showSelected={true}
                     selectedLesson={selectedLesson}
                     SetSelectedLesson={SetSelectedLesson}
+                    loading={loading}
                   />
 
                 </div>

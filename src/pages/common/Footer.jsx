@@ -13,26 +13,31 @@ export default function Footer() {
                            <Image className="block mx-auto md:mx-0" src={FooterLogo} alt="img" />
                         </Link>
                      </div>
-                     <div className="w-full md:w-[324px] px-4 ">
-                        <h3 className="text-[#CC2828] text-lg lg:text-xl -tracking-[0.04em] font-bold mb-3 md:mb-4">Quick Links</h3>
+                     <div className="w-full md:w-[324px] px-4 text-center md:text-left">
+                        <h3 className="text-[#CC2828] text-lg lg:text-xl -tracking-[0.04em] font-bold mb-3 md:mb-4">
+                           Quick Links
+                        </h3>
                         <ul className="space-y-1">
                            <li>
-                              <Link href="/" className="-tracking-[0.03em] text-base text-[#CC2828] hover:underline " >Home</Link>
+                              <Link href="/" className="-tracking-[0.03em] text-base text-[#CC2828] hover:underline">Home</Link>
                            </li>
                            <li>
-                              <Link href="/find-teacher" className="-tracking-[0.03em] text-base text-[#CC2828] hover:underline" >Find a Teacher</Link>
+                              <Link href="/find-teacher" className="-tracking-[0.03em] text-base text-[#CC2828] hover:underline">Find a Teacher</Link>
                            </li>
                            <li>
-                              <Link href="/#howitwork" className="-tracking-[0.03em] text-base text-[#CC2828] hover:underline" >How It Works</Link>
+                              <Link href="/#howitwork" className="-tracking-[0.03em] text-base text-[#CC2828] hover:underline">How It Works</Link>
                            </li>
                            <li>
-                              <Link href="/#faq" className="-tracking-[0.03em] text-base text-[#CC2828] hover:underline" >FAQ</Link>
+                              <Link href="/#faq" className="-tracking-[0.03em] text-base text-[#CC2828] hover:underline">FAQ</Link>
                            </li>
                            <li>
-                              <p className="flex -tracking-[0.03em] text-base text-[#CC2828] hover:underline" >Contact: office@japaneseforme.com</p>
+                              <p className="-tracking-[0.03em] text-base text-[#CC2828] hover:underline">
+                              Contact: office@japaneseforme.com
+                              </p>
                            </li>
                         </ul>
                      </div>
+
                      <div className="w-full md:w-[324px] px-4 ">
                         {/* <ul className="space-y-1">
                            <li>

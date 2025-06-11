@@ -3,15 +3,20 @@ import NoData from "../common/NoData";
 import { useRouter } from "next/router";
 import { formatMultiPrice } from "@/components/ValueDataHook";
 import ViewLesson from "../common/ViewLesson";
+import { LessonListLoader } from "@/components/Loader";
 
 
-export default function LessonList({ lessons, showSelected, selectedLesson, SetSelectedLesson, slug }) {
+export default function LessonList({ lessons, showSelected, selectedLesson, SetSelectedLesson, slug, loading }) {
   const [isOpen, setIsOpen] = useState(false);
   const [Lesson, setLesson] = useState(null);
   const router = useRouter();
   return (
     <>
-      {lessons && lessons?.length > 0 ?
+      {
+        loading ?
+        <LessonListLoader rows={3}/>
+        :
+      (lessons && lessons?.length > 0 ?
         <ul className="space-y-5 lg:space-y-5">
           {lessons?.map((item, index) => (
             <li
@@ -68,7 +73,7 @@ export default function LessonList({ lessons, showSelected, selectedLesson, SetS
         :
         <NoData Heading={"No lessons available"}
           content={"There are no lessons available on this account. Message the teacher if you think it is a mistake."}
-        />
+        />)
       }
       {isOpen && Lesson && (
         <ViewLesson

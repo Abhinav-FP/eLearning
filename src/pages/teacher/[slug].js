@@ -14,6 +14,7 @@ import { BookLoader } from "../../components/Loader";
 import { BiSolidBadgeCheck } from "react-icons/bi";
 import TeacherImg from "../Assets/Images/teacherimg01.png";
 import Link from "next/link";
+import { formatMultiPrice } from "@/components/ValueDataHook";
 
 
 export default function Index() {
@@ -29,36 +30,36 @@ export default function Index() {
   const closePopup = () => setIsPopupOpen(false);
   const Id = data?.userId?._id;
 
-  const QualificationMapping = {
-    "high_school": "High School Diploma",
-    "associate_degree": "Associate Degree",
-    "ba": "Bachelor of Arts (BA)",
-    "bsc": "Bachelor of Science (BSc)",
-    "bcom": "Bachelor of Commerce (BCom)",
-    "be": "Bachelor of Engineering (BE)",
-    "btech": "Bachelor of Technology (BTech)",
-    "bed": "Bachelor of Education (B.Ed)",
-    "ma": "Master of Arts (MA)",
-    "msc": "Master of Science (MSc)",
-    "mcom": "Master of Commerce (MCom)",
-    "me": "Master of Engineering (ME)",
-    "mtech": "Master of Technology (MTech)",
-    "med": "Master of Education (M.Ed)",
-    "mba": "Master of Business Administration (MBA)",
-    "phd": "Doctor of Philosophy (PhD)",
-    "edd": "Doctor of Education (EdD)",
-    "jd": "Juris Doctor (JD)",
-    "md": "Medical Doctor (MD)",
-    "ca": "Chartered Accountant (CA)",
-    "cs": "Company Secretary (CS)",
-    "cpa": "Certified Public Accountant (CPA)",
-    "diploma_education": "Diploma in Education",
-    "diploma_engineering": "Diploma in Engineering",
-    "pg_diploma": "Postgraduate Diploma",
-    "senmonshi": "Senmonshi (専門士 - Vocational School Degree)",
-    "kosen": "Kōtō Senmon Gakkō (高等専門学校 - College of Technology)",
-    "other": "Other"
-  };
+  // const QualificationMapping = {
+  //   "high_school": "High School Diploma",
+  //   "associate_degree": "Associate Degree",
+  //   "ba": "Bachelor of Arts (BA)",
+  //   "bsc": "Bachelor of Science (BSc)",
+  //   "bcom": "Bachelor of Commerce (BCom)",
+  //   "be": "Bachelor of Engineering (BE)",
+  //   "btech": "Bachelor of Technology (BTech)",
+  //   "bed": "Bachelor of Education (B.Ed)",
+  //   "ma": "Master of Arts (MA)",
+  //   "msc": "Master of Science (MSc)",
+  //   "mcom": "Master of Commerce (MCom)",
+  //   "me": "Master of Engineering (ME)",
+  //   "mtech": "Master of Technology (MTech)",
+  //   "med": "Master of Education (M.Ed)",
+  //   "mba": "Master of Business Administration (MBA)",
+  //   "phd": "Doctor of Philosophy (PhD)",
+  //   "edd": "Doctor of Education (EdD)",
+  //   "jd": "Juris Doctor (JD)",
+  //   "md": "Medical Doctor (MD)",
+  //   "ca": "Chartered Accountant (CA)",
+  //   "cs": "Company Secretary (CS)",
+  //   "cpa": "Certified Public Accountant (CPA)",
+  //   "diploma_education": "Diploma in Education",
+  //   "diploma_engineering": "Diploma in Engineering",
+  //   "pg_diploma": "Postgraduate Diploma",
+  //   "senmonshi": "Senmonshi (専門士 - Vocational School Degree)",
+  //   "kosen": "Kōtō Senmon Gakkō (高等専門学校 - College of Technology)",
+  //   "other": "Other"
+  // };
 
   // Get timezone
   useEffect(() => {
@@ -91,7 +92,7 @@ export default function Index() {
       const response = await main.TeachergetbyId(slug);
       if (response.data) {
         setdata(response.data.data);
-        console.log("response", response);
+        // console.log("response", response);
       }
     } catch (error) {
       console.log("error", error);
@@ -126,25 +127,25 @@ export default function Index() {
     const [expanded, setExpanded] = useState(false);
 
     const words = description?.split(" ") || [];
-    const isLong = words.length > 100;
-    const shortText = words.slice(0, 100).join(" ");
-    const remainingText = words.slice(100).join(" ");
+    const isLong = words.length > 50;
+    const shortText = words.slice(0, 50).join(" ");
+    const remainingText = words.slice(50).join(" ");
 
     return (
-      <div className="text-black tracking-[-0.03em] text-base lg:text-lg xl:text-xl font-medium">
+      <div className="text-black text-base font-normal -tracking-[0.03em] mb-3 lg:mb-6">
         <p>
           {expanded || !isLong ? description : shortText + "..."}
           {isLong && !expanded && (
             <button
-              className="ml-2 text-black hover:text-blue-400 underline cursor-pointer"
+              className="ml-2 text-[#CC2828] italic text-base -tracking-[0.03em] font-bold cursor-pointer"
               onClick={() => setExpanded(true)}
             >
-              View More
+             ...Read More
             </button>
           )}
         </p>
         {expanded && isLong && (
-          <p className="mt-2">
+          <p className="text-black text-base font-normal -tracking-[0.03em] mb-3 lg:mb-6">
             {remainingText}
           </p>
         )}
@@ -173,10 +174,15 @@ export default function Index() {
                       <div className="w-full md:w-[calc(100%-112px)] mt-2 md:mt-0 md:pl-6 lg:pl-8">
                         <h3 className="text-black text-xl lg:text-2xl font-bold -tracking-[0.03em] text-left mb-2.5 lg:mb-4"> {data?.userId?.name || ""} {data?.admin_approved === true ?  ( <BiSolidBadgeCheck className="inline text-[#6ABB52]" size={22} /> ) : ""} </h3>
                         <div className="flex flex-wrap  gap-x-2 md:gap-x-6 lg:gap-x-8 mb-3 lg:mb-5">
+                          {data?.tags && data?.tags?.length>0 &&
+                            <div>
+                              <span className="text-[#8D929A] text-base -tracking-[0.03em] pr-2">Specialities :</span>
+                              <span className="capitalize text-black text-base -tracking-[0.03em] ">{data?.tags?.join(", ") || ""}</span>
+                            </div>}
                           {data?.languages_spoken &&
                             <div>
                               <span className="text-[#8D929A] text-base -tracking-[0.03em] pr-2">Language :</span>
-                              <span className="capitalize text-black text-base -tracking-[0.03em] ">{data?.languages_spoken}</span>
+                              <span className="capitalize text-black text-base -tracking-[0.03em] ">{data?.languages_spoken?.join(", ") || ""}</span>
                             </div>}
                           {data?.userId?.nationality &&
                             <div>
@@ -204,9 +210,11 @@ export default function Index() {
                             </div>
                           } 
                         </div>
-                        <p className="text-black text-base font-normal -tracking-[0.03em] mb-3 lg:mb-6 line-clamp-2">{data?.description} 
-                          <span className="text-[#CC2828] italic text-base -tracking-[0.03em] font-bold">...Read More</span>
-                        </p>
+                        {/* <p className="text-black text-base font-normal -tracking-[0.03em] mb-3 lg:mb-6 ">{ */}
+                          <DescriptionWithViewMore description={data?.description}/>
+                          {/* // }  */}
+                          {/* <span className="text-[#CC2828] italic text-base -tracking-[0.03em] font-bold">...Read More</span> */}
+                        {/* </p> */}
                       </div>
                     </div>
                   </div>
@@ -232,13 +240,17 @@ export default function Index() {
                             {/* {data?.lowestLesson && data?.lowestLesson && (
                               `${formatMultiPrice(data?.lowestLesson?.price, "USD")}`
                             )} */}
-                           USD 50 
+                           {formatMultiPrice(data?.priceStart, "USD")} 
                           </div>
                         </div>
                         <div className="w-6/12 text-right">
-                          <Link href={`/teacher/${data?._id}?book=true`} className='inline-block font-medium cursor-pointer rounded-full py-2 px-5 bg-[#CC2828] hover:bg-[#ad0e0e] text-white text-sm lg:text-base py-2.5 px-3 lg:px-4 lg:px-6'>
+                          <button className='inline-block font-medium cursor-pointer rounded-full py-2 px-5 bg-[#CC2828] hover:bg-[#ad0e0e] text-white text-sm lg:text-base py-2.5 px-3 lg:px-4 lg:px-6'
+                            onClick={()=>{
+                              setIsPopupOpen(true);
+                            }}
+                          >
                             Book a Lesson
-                          </Link> 
+                          </button> 
                         </div>
                       </div>
                     </div>
@@ -258,7 +270,7 @@ export default function Index() {
                   classess={"text-[#CC2828] mb-6 lg:mb-8"}
                   title={"Lessons"}
                 />
-                <LessonList lessons={lessons} showSelected={false} slug={slug} />
+                <LessonList lessons={lessons} showSelected={false} slug={slug}/>
               </div>
             </div>
             <div className="pt-[40px] md:pt-[60px] md:pt-[80px] xl:pt-[100px] pb-[40px] lg:pb-[60px] bg-[#F8F9FA]" id="calendar">
@@ -281,6 +293,7 @@ export default function Index() {
           lessons={lessons}
           Availability={content}
           studentTimeZone={studentTimeZone}
+          loading={loading}
         />
       </Layout>
     </>

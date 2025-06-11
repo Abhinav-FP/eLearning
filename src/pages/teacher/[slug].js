@@ -6,13 +6,15 @@ import LessonList from "./LessonList";
 import Testimonial from "./Testimonial";
 import Heading from "../common/Heading";
 import Calendar from "../calendar/index.jsx";
-import VideoModalPlayer from "../common/VideoModalPlayer";
-import { MdOutlinePlayCircle } from "react-icons/md";
+import VideoModalPlayer from "../common/VideoModalPlayer"; 
 import { useRouter } from "next/router";
 import Listing from "../api/Listing";
 import BookingPopup from "./BookingPopup";
 import { BookLoader } from "../../components/Loader";
-import { formatMultiPrice } from "@/components/ValueDataHook";
+import { BiSolidBadgeCheck } from "react-icons/bi";
+import TeacherImg from "../Assets/Images/teacherimg01.png";
+import Link from "next/link";
+
 
 export default function Index() {
   const router = useRouter();
@@ -69,7 +71,7 @@ export default function Index() {
       setLoading(true);
       const main = new Listing();
       const response = await main.TeacherLessonGetForStudent(Id);
-      // console.log("response", response);
+
       if (response.data) {
         setLessons(response.data.data);
         setLoading(false);
@@ -89,6 +91,7 @@ export default function Index() {
       const response = await main.TeachergetbyId(slug);
       if (response.data) {
         setdata(response.data.data);
+        console.log("response", response);
       }
     } catch (error) {
       console.log("error", error);
@@ -98,7 +101,7 @@ export default function Index() {
     try {
       const main = new Listing();
       const response = await main.studentteacherAvaliability(Id);
-      // console.log("response", response);
+      console.log("response", response);
       if (response.data) {
         setContent(response.data.data);
       }
@@ -128,12 +131,12 @@ export default function Index() {
     const remainingText = words.slice(100).join(" ");
 
     return (
-      <div className="text-white tracking-[-0.03em] text-base lg:text-lg xl:text-xl font-medium">
+      <div className="text-black tracking-[-0.03em] text-base lg:text-lg xl:text-xl font-medium">
         <p>
           {expanded || !isLong ? description : shortText + "..."}
           {isLong && !expanded && (
             <button
-              className="ml-2 text-white hover:text-blue-400 underline cursor-pointer"
+              className="ml-2 text-black hover:text-blue-400 underline cursor-pointer"
               onClick={() => setExpanded(true)}
             >
               View More
@@ -159,27 +162,84 @@ export default function Index() {
           : <>
             <div className="pt-[114px] md:pt-[124px] lg:pt-[154px]  pb-[40px]  md:pb-[60px] lg:pb-[80px] xl:pb-[100px] ">
               <div className="container sm:container md:container lg:container xl:max-w-[1230px]  px-4 mx-auto">
-                <div className="bg-[rgba(204,40,40,0.8)] rounded-[20px] py-6 lg:py-[30px] px-6 md:px-[30px] lg:px-[30px] xl:px-[45px]">
-                  <div className="flex flex-wrap -mx-4 space-y-4">
-                    {data?.intro_video &&
-                    <div className="mx-auto md:mx-0 w-[280px] md:w-[280px] lg:w-[308px] px-4">
-                      <VideoModalPlayer
-                        video={data?.intro_video}
-                        image={data?.userId?.profile_photo || teacherImg}
-                        name={data?.userId?.name}
-                        divClass="relative"
-                        imgClass="rounded-[10px] h-[276px] w-[276px] object-cover"
-                        btnClass="absolute top-1/2  cursor-pointer left-0 w-[81px] text-center text-white hover:text-[#CC2828] right-0 mx-auto -translate-y-1/2"
-                      />
-                    </div>}
-                    <div className="w-full md:w-[calc(100%-280px)] lg:w-[calc(100%-308px)] px-4">
-                      <div className="relative after:right-0 after:top-2 after:bottom-2 after:width-[1px] after-bg-white">
-                        <h3 className="text-white text-[24px] md:text-[30px] lg:text-[36px] xl:text-[45px] font-inter font-extrabold tracking-[-0.04em] mb-2">
-                          {data?.userId?.name || ""}
-                        </h3>
-                        <p className="text-white tracking-[-0.03em] text-base lg:text-lg xl:text-xl font-medium">
-                          <DescriptionWithViewMore description={data?.description || ""} />
+                <div className="flex flex-wrap -mx-4 space-y-4 md:space-y-0">
+                  <div className="w-full md:w-8/12 px-4">
+                    <div className="flex flex-wrap teacherBox p-6 lg:p-10 rounded-[20px] min-h-full ">
+                      <div className="w-full md:w-[112px] ">
+                        <div className="h-[80px] w-[80px] lg:h-[112px] lg:w-[112px] rounded-full overflow-hidden   mx-0 mb-3 lg:mb-6 ">
+                          <Image src={data?.userId?.profile_photo || TeacherImg} alt={data?.userId?.name} width={164} height={164} />
+                        </div>
+                      </div>
+                      <div className="w-full md:w-[calc(100%-112px)] mt-2 md:mt-0 md:pl-6 lg:pl-8">
+                        <h3 className="text-black text-xl lg:text-2xl font-bold -tracking-[0.03em] text-left mb-2.5 lg:mb-4"> {data?.userId?.name || ""} {data?.admin_approved === true ?  ( <BiSolidBadgeCheck className="inline text-[#6ABB52]" size={22} /> ) : ""} </h3>
+                        <div className="flex flex-wrap  gap-x-2 md:gap-x-6 lg:gap-x-8 mb-3 lg:mb-5">
+                          {data?.languages_spoken &&
+                            <div>
+                              <span className="text-[#8D929A] text-base -tracking-[0.03em] pr-2">Language :</span>
+                              <span className="capitalize text-black text-base -tracking-[0.03em] ">{data?.languages_spoken}</span>
+                            </div>}
+                          {data?.userId?.nationality &&
+                            <div>
+                              <span className="text-[#8D929A] text-base -tracking-[0.03em] pr-2">Nationality :</span>
+                              <span className="capitalize text-black text-base -tracking-[0.03em] ">{data?.userId?.nationality}</span>
+                            </div>
+                          }
+
+                          <div>
+                            <span className="text-[#8D929A] text-base -tracking-[0.03em] pr-2">Gender :</span>
+                            <span className="capitalize text-black text-base -tracking-[0.03em] ">
+                              {data?.gender === 'M' ? 'Male' : data?.gender === 'F' ? 'Female' : 'Other'}</span>
+                          </div>
+
+                          {data?.userId?.time_zone &&
+                            <div>
+                              <span className="text-[#8D929A] text-base -tracking-[0.03em] pr-2">Time zone: :</span>
+                              <span className="text-black text-base -tracking-[0.03em] ">{data?.userId?.time_zone} </span>
+                            </div>
+                          }
+                          {data?.experience &&
+                            <div>
+                              <span className="text-[#8D929A] text-base -tracking-[0.03em] pr-2">Experience :</span>
+                              <span className="text-black text-base -tracking-[0.03em] ">{data?.experience}  Years</span>
+                            </div>
+                          } 
+                        </div>
+                        <p className="text-black text-base font-normal -tracking-[0.03em] mb-3 lg:mb-6 line-clamp-2">{data?.description} 
+                          <span className="text-[#CC2828] italic text-base -tracking-[0.03em] font-bold">...Read More</span>
                         </p>
+                      </div>
+                    </div>
+                  </div>
+                  <div className="w-full md:w-4/12 px-4">
+                    <div className="teacherBox rounded-[20px] p-4 lg:p-5">
+                      {data?.intro_video &&
+                        <VideoModalPlayer
+                          video={data?.intro_video}
+                          image={data?.userId?.profile_photo || teacherImg}
+                          name={data?.userId?.name}
+                          iconClass="w-16 h-16 mx-auto block"
+                          divClass="relative"
+                          imgClass="rounded-[10px] h-[187px] w-full object-cover"
+                          btnClass="absolute top-1/2  cursor-pointer left-0 w-[81px] text-center text-white hover:text-[#CC2828] right-0 mx-auto -translate-y-1/2"
+                        />
+                      }
+                      <div className="flex flex-wrap mt-4 lg:mt-6">
+                        <div className="w-6/12">
+                          <span className="text-black text-sm -tracking-[0.03em] text-sm">
+                            Lessons starts from
+                          </span>
+                          <div className="text-black font-bold text-base -tracking-[0.03em]">
+                            {/* {data?.lowestLesson && data?.lowestLesson && (
+                              `${formatMultiPrice(data?.lowestLesson?.price, "USD")}`
+                            )} */}
+                           USD 50 
+                          </div>
+                        </div>
+                        <div className="w-6/12 text-right">
+                          <Link href={`/teacher/${data?._id}?book=true`} className='inline-block font-medium cursor-pointer rounded-full py-2 px-5 bg-[#CC2828] hover:bg-[#ad0e0e] text-white text-sm lg:text-base py-2.5 px-3 lg:px-4 lg:px-6'>
+                            Book a Lesson
+                          </Link> 
+                        </div>
                       </div>
                     </div>
                   </div>
@@ -189,49 +249,8 @@ export default function Index() {
 
 
             {/* Extra fields div */}
-            <div className="pb-[40px] md:pb-[80px] bg-[#F8F9FA]">
-              <div className="container sm:container md:container lg:container xl:max-w-[1230px]  px-4 mx-auto">
-                <Heading
-                  classess={"text-[#1E1E1E] mb-2"}
-                  title={"Other Details"}
-                />
-                <div className="capitalize grid grid-cols-1 md:grid-cols-2 gap-x-10 gap-y-4 text-gray-600 text-base xl:text-lg font-semibold font-inter py-2.5 lg:rounded-full mb-6 lg:mb-8">
-                  {data?.userId?.nationality &&
-                    <p><strong>Nationality:</strong> {data?.userId?.nationality}</p>}
-                  {data?.userId?.time_zone &&
-                    <p><strong>Timezone:</strong> {data?.userId?.time_zone}</p>}
-                  {data?.userId?.nationality &&
-                    <p><strong>Gender:{" "}</strong>
-                      {data?.gender === 'M' ? 'Male' :
-                        data?.gender === 'F' ? 'Female' :
-                          'Other'
-                      }</p>}
-                  {data?.experience &&
-                    <p><strong>Experience:</strong> {data?.experience} years</p>}
-                  {data?.qualifications &&
-                    <p><strong>Qualifications:{" "}</strong>
-                      {QualificationMapping[data?.qualifications] || ""}
-                    </p>}
-                  {data?.languages_spoken &&
-                    <p><strong>Languages:</strong> {data?.languages_spoken?.join(', ')}</p>}
-                  {data?.average_duration &&
-                    <p><strong>Avg. Duration:</strong> {data?.average_duration} mins</p>}
-                  {data?.average_price &&
-                    <p><strong>Avg. Price:</strong> {formatMultiPrice(data?.average_price, "USD")}</p>}
-                  {data?.documentlink &&
-                    <p><strong>Certification:{" "}</strong>
-                      <a href={data?.documentlink} target="_blank" rel="noopener noreferrer"
-                        className="underline">
-                        View Document
-                      </a></p>
-                  }
-                </div>
-              </div>
-            </div>
-
-
             <div
-              style={{ backgroundImage: "url('/leasson-bg.png')" }}
+              style={{ backgroundImage: "url('/leasson-bg.png')"}}
               className="bg-[rgba(249,190,191,.5)] bg-cover bg-center rounded-[20px] py-[40px] lg:py-[60px]"
             >
               <div className="container sm:container md:container lg:container xl:max-w-[1230px]  bg-[rgba(249,190,191, .1)] px-4 mx-auto">

@@ -7,14 +7,21 @@ import { formatMultiPrice } from "@/components/ValueDataHook";
 import { MdOutlineStarPurple500 } from "react-icons/md";
 import { data } from "autoprefixer";
 import StarRating from "../common/StarRating";
+import { useRole } from "@/context/RoleContext";
+import { useRouter } from "next/router";
+import toast from "react-hot-toast";
 
 export default function Lesson({ title }) {
+    const { user } = useRole();
+    // console.log("user",user);
+    const router = useRouter();
+    // console.log("router",router); 
     const [video, setvideo] = useState([]);
     const TeacherVideos = async () => {
         try {
             const main = new Listing();
             const response = await main.HomeTeacherVideo();
-            console.log("response", response)
+            // console.log("response", response)
             setvideo(response?.data?.data);
         } catch (error) {
             console.log("error", error);
@@ -66,9 +73,24 @@ export default function Lesson({ title }) {
                                                 </div>
                                             </div>
                                             <div className="w-6/12 text-right">
-                                                <Link href={`/teacher/${items?._id}?book=true`} className='font-medium cursor-pointer rounded-full py-2 px-5 bg-[#CC2828] hover:bg-[#ad0e0e] text-white text-sm lg:text-base py-2.5 px-3 lg:px-4 lg:px-6'>
+                                                <button className='font-medium cursor-pointer rounded-full py-2 px-5 bg-[#CC2828] hover:bg-[#ad0e0e] text-white text-sm lg:text-base py-2.5 px-3 lg:px-4 lg:px-6'
+                                                onClick={(e)=>{
+                                                    e.stopPropagation(); 
+                                                    e.preventDefault(); 
+                                                    if(!user){
+                                                        toast.error("Please login first");
+                                                        const redirectUrl = encodeURIComponent(`/#lesson`)
+                                                        router.push(`/login?redirect=${redirectUrl}`);
+                                                    }
+                                                    else if(user?.role != "student"){
+                                                        toast.error("Only students can book lessons");
+                                                    }
+                                                    else{
+                                                        router.push(`/teacher/${items?._id}?book=true`);
+                                                    }
+                                                }}>
                                                     Book a Lesson
-                                                </Link>
+                                                </button>
                                             </div>
                                         </div>
                                         </Link>

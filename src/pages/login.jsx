@@ -15,6 +15,7 @@ export default function Login() {
   const [loading, setLoading] = useState(false);
   const searchParams = useSearchParams();
   const redirect = searchParams.get("redirect");
+  console.log("redirect",redirect);
 
   const [data, setData] = useState({
     email: "",

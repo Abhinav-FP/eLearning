@@ -7,9 +7,14 @@ import Link from "next/link";
 import { BookLoader } from "@/components/Loader";
 import { formatMultiPrice } from "@/components/ValueDataHook";
 import StarRating from "../common/StarRating"
+import { useRole } from "@/context/RoleContext";
+import { useRouter } from "next/router";
+import toast from "react-hot-toast";
 
 export default function Teacher({ teacherData, loading }) {
-    console.log("teacherData", teacherData);
+    const { user } = useRole();
+    const router = useRouter();
+    // console.log("teacherData", teacherData);
     return (
         <div className="pt-[115px] md:pt-[120px] lg:pt-[150px] pb-[20px] md:pb-[40px] lg:pb-[60px]">
             <div className="mx-auto container sm:container md:container lg:container xl:max-w-[1230px]  px-4">
@@ -73,9 +78,24 @@ export default function Teacher({ teacherData, loading }) {
                                                     </div>
                                                 </div>
                                                 <div className="w-6/12 text-right">
-                                                    <Link href={`/teacher/${item?._id}?book=true`} className='inline-block font-medium cursor-pointer rounded-full py-2 px-5 bg-[#CC2828] hover:bg-[#ad0e0e] text-white text-sm lg:text-base py-2.5 px-3 lg:px-4 lg:px-6'>
+                                                    <button className='inline-block font-medium cursor-pointer rounded-full py-2 px-5 bg-[#CC2828] hover:bg-[#ad0e0e] text-white text-sm lg:text-base py-2.5 px-3 lg:px-4 lg:px-6'
+                                                    onClick={(e)=>{
+                                                        e.stopPropagation(); 
+                                                        e.preventDefault(); 
+                                                         if(!user){
+                                                            toast.error("Please login first");
+                                                            router.push("/login?redirect=/find-teacher");
+                                                        }
+                                                        else if(user?.role != "student"){
+                                                            toast.error("Only students can book lessons");
+                                                        }
+                                                        else{
+                                                            router.push(`/teacher/${item?._id}?book=true`);
+                                                        }
+                                                    }}
+                                                    >
                                                         Book a Lesson
-                                                    </Link>
+                                                    </button>
                                                 </div>
                                             </div>
                                         </div>

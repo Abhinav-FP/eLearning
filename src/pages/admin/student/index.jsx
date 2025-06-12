@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import AdminLayout from "../common/AdminLayout";
 import Image from "next/image";
 import Listing from "@/pages/api/Listing";
@@ -10,20 +10,24 @@ function Index() {
   const [loading, setLoading] = useState(false);
   const [blockloading, setBlockloading] = useState(false);
   const [isPopupOpen, setIsPopupOpen] = useState(false);
+  const [selectedOption, setSelectedOption] = useState("");
+
   const closePopup = () => setIsPopupOpen(false);
   const [item, setItem] = useState(null);
+  const timerRef = useRef(null);
+  const [searchQuery, setSearchQuery] = useState("");
 
-  const handleBlock=async(id)=>{
+  const handleBlock = async (id) => {
     try {
       setBlockloading(true);
       const main = new Listing();
-      const response = await main.userBlock({id:id});
+      const response = await main.userBlock({ id: id });
       if (response?.data) {
-        if(response?.data?.data?.block == true){
-            toast.success("Student blocked successfully");
+        if (response?.data?.data?.block == true) {
+          toast.success("Student blocked successfully");
         }
-        else{
-            toast.success("Student unblocked successfully");
+        else {
+          toast.success("Student unblocked successfully");
         }
         fetchData();
       }
@@ -34,11 +38,11 @@ function Index() {
     }
   };
 
-  const fetchData = async () => {
+  const fetchData = async (search = "", filter = "") => {
     try {
       setLoading(true);
       const main = new Listing();
-      const response = await main.adminStudentList();
+      const response = await main.adminStudentList(search, filter);
       if (response?.data) {
         setData(response?.data?.data || []);
         console.log(response?.data);
@@ -50,31 +54,77 @@ function Index() {
     }
   };
 
+  const handleChange = (e) => {
+    const sval = e.target.value;
+    setSearchQuery(sval);
+    if (timerRef.current) {
+      clearTimeout(timerRef.current);
+    }
+    if (!sval || sval.trim() === "") {
+      timerRef.current = setTimeout(() => {
+        fetchData(sval);
+      }, 1500);
+    } else if (sval.length >= 2) {
+      timerRef.current = setTimeout(() => {
+        fetchData(sval);
+      }, 1500);
+    }
+  };
+
   useEffect(() => {
-    fetchData();
+    fetchData("");
   }, []);
+
+  const handleSelectChange = (e) => {
+    setSelectedOption(e.target.value);
+    console.log("Selected Option:", e.target.value);
+    fetchData(searchQuery, e.target.value);
+  };
+
+
 
   console.log("data", data);
 
   return (
     <AdminLayout page={"Students Listing"}>
       <div className="min-h-screen p-5 lg:p-[30px]">
-        <div className="relative mb-3 md:mb-4 lg:mb-6 w-full md:w-auto">
-          <input
-            type="text"
-            name="search"
-            value=""
-            placeholder="Search"
-            className="w-full rounded-[10px] border border-[rgba(0,0,0,0.1)] text-[#595959] text-sm tracking-[-0.03em] pl-12 pr-4 bg-[rgba(204,40,40,0.1)] outline-0 h-[44px]"
-          />
-          <Image
-            src="/search-icon.png"
-            width={20}
-            height={20}
-            alt="search icon"
-            className="absolute left-5 top-1/2 -translate-y-1/2 cursor-pointer"
-          />
+        <div className="flex flex-col md:flex-row items-center gap-4 mb-6 md:mb-10 w-full">
+          {/* Search Input */}
+          <div className="relative w-full md:w-auto flex-1">
+            <input
+              type="text"
+              name="search"
+              value={searchQuery || ""}
+              onChange={handleChange}
+              placeholder="Search By Name"
+              className="w-full rounded-[10px] border border-[rgba(0,0,0,0.1)] text-[#595959] text-sm tracking-[-0.03em] pl-12 pr-4 bg-[rgba(204,40,40,0.1)] outline-0 h-[44px]"
+            />
+            <Image
+              src="/search-icon.png"
+              width={20}
+              height={20}
+              alt="search icon"
+              className="absolute left-5 top-1/2 -translate-y-1/2 cursor-pointer"
+            />
+          </div>
+
+          {/* Select Dropdown */}
+          <div className="w-full md:w-auto">
+            <select
+              name="filter"
+              value={selectedOption}
+              onChange={handleSelectChange}
+              className="w-full rounded-[10px] border border-[rgba(0,0,0,0.1)] text-[#595959] text-sm tracking-[-0.03em] pl-12 pr-4 bg-[rgba(204,40,40,0.1)] outline-0 h-[44px]"
+
+            >
+              <option value="">All</option>
+              <option value="true">Blocked</option>
+              <option value="false">Unblocked</option>
+            </select>
+          </div>
+
         </div>
+
         <div className="border-t border-[rgba(0,0,0,.1)] pt-3 md:pt-4 lg:pt-6 overflow-x-auto">
           <table className="min-w-full text-sm text-center rounded-[20px]">
             <thead className="bg-[rgba(204,40,40,0.1)] text-[#535353] tracking-[-0.04em] font-inter rounded-[20px] whitespace-nowrap">
@@ -136,8 +186,8 @@ function Index() {
                               ? "Unblocking"
                               : "Blocking"
                             : item?.block
-                            ? "Unblock"
-                            : "Block"}
+                              ? "Unblock"
+                              : "Block"}
                         </button>
                       </div>
                     </td>

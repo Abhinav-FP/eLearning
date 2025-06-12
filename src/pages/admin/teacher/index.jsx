@@ -12,18 +12,18 @@ function TeacherListing() {
   const [blockloading, setBlockloading] = useState(false);
   const [searchQuery, setSearchQuery] = useState("");
   const timerRef = useRef(null);
-  
-  const handleBlock=async(id)=>{
+
+  const handleBlock = async (id) => {
     try {
       setBlockloading(true);
       const main = new Listing();
-      const response = await main.userBlock({id:id});
+      const response = await main.userBlock({ id: id });
       if (response?.data) {
-        if(response?.data?.data?.block == true){
-            toast.success("Teacher blocked successfully");
+        if (response?.data?.data?.block == true) {
+          toast.success("Teacher blocked successfully");
         }
-        else{
-            toast.success("Teacher unblocked successfully");
+        else {
+          toast.success("Teacher unblocked successfully");
         }
         fetchData("");
       }
@@ -34,20 +34,20 @@ function TeacherListing() {
     }
   };
 
-  const handleApproveReject=async(id, approve)=>{
+  const handleApproveReject = async (id, approve) => {
     try {
       setBlockloading(true);
       const main = new Listing();
       const response = await main.approveRejectTeacher({
-        id:id,
+        id: id,
         approved: approve
       });
       if (response?.data) {
-        if(response?.data?.status){
-            toast.success(response?.data?.message);
+        if (response?.data?.status) {
+          toast.success(response?.data?.message);
         }
-        else{
-            toast.error(response?.data?.message);
+        else {
+          toast.error(response?.data?.message);
         }
         fetchData("");
       }
@@ -63,7 +63,7 @@ function TeacherListing() {
     <tr className={`border-t hover:bg-[rgba(204,40,40,0.1)] border-[rgba(204,40,40,0.2)] ${item?.userId?.block ? "opacity-50" : ""}`}>
       <td className="capitalize px-3 lg:px-4 py-2 lg:py-3 text-black text-sm lg:text-base font-medium font-inter text-left">
         <Link href={`/admin/teacher/${item?.userId?._id}`}>
-        {item?.userId?.name || ""}
+          {item?.userId?.name || ""}
         </Link>
       </td>
       <td className="px-3 lg:px-4 py-2 lg:py-3 text-black text-sm lg:text-base font-medium font-inter text-left">
@@ -77,7 +77,7 @@ function TeacherListing() {
       </td>
       <td className="capitalize px-3 lg:px-4 py-2 lg:py-3 text-black text-sm lg:text-base font-medium font-inter">
         <div className="flex gap-2 justify-center items-center">
-            {/* <button
+          {/* <button
             onClick={(()=>{
               setData(item);
               setIsPopupOpen(true);
@@ -86,43 +86,43 @@ function TeacherListing() {
             >
             View 
             </button> */}
-            {category === "existing" ? 
+          {category === "existing" ?
             <button
-            onClick={() => handleBlock(item?.userId?._id)}
-            className="border border-[#CC2828] text-[#CC2828] hover:bg-[#CC2828] hover:text-white px-3 py-1 text-xs rounded cursor-pointer"
+              onClick={() => handleBlock(item?.userId?._id)}
+              className="border border-[#CC2828] text-[#CC2828] hover:bg-[#CC2828] hover:text-white px-3 py-1 text-xs rounded cursor-pointer"
             >
-            {blockloading
-            ? item?.userId?.block
-            ? "Unblocking"
-            : "Blocking"
-            : item?.userId?.block
-            ? "Unblock"
-            : "Block"}
+              {blockloading
+                ? item?.userId?.block
+                  ? "Unblocking"
+                  : "Blocking"
+                : item?.userId?.block
+                  ? "Unblock"
+                  : "Block"}
             </button>
             : category === "reject" ?
-            <button
-            onClick={() => handleApproveReject(item?._id, true)}
-            className="border border-[#CC2828] text-[#CC2828] hover:bg-[#CC2828] hover:text-white px-3 py-1 text-xs rounded cursor-pointer"
-            >
-             {blockloading ? "Approving..." : "Approve"}
-            </button>
-            : category === "new" ?
-            <>
-            <button
-            onClick={() => handleApproveReject(item?._id, true)}
-            className="border border-[#CC2828] text-[#CC2828] hover:bg-[#CC2828] hover:text-white px-3 py-1 text-xs rounded cursor-pointer"
-            >
-             {blockloading ? "Approving..." : "Approve"}
-            </button>
-            <button
-            onClick={() => handleApproveReject(item?._id, false)}
-            className="border border-[#CC2828] text-[#CC2828] hover:bg-[#CC2828] hover:text-white px-3 py-1 text-xs rounded cursor-pointer"
-            >
-             {blockloading ? "Rejecting..." : "Reject"}
-            </button>
-            </>
-            : <></>
-            }
+              <button
+                onClick={() => handleApproveReject(item?._id, true)}
+                className="border border-[#CC2828] text-[#CC2828] hover:bg-[#CC2828] hover:text-white px-3 py-1 text-xs rounded cursor-pointer"
+              >
+                {blockloading ? "Approving..." : "Approve"}
+              </button>
+              : category === "new" ?
+                <>
+                  <button
+                    onClick={() => handleApproveReject(item?._id, true)}
+                    className="border border-[#CC2828] text-[#CC2828] hover:bg-[#CC2828] hover:text-white px-3 py-1 text-xs rounded cursor-pointer"
+                  >
+                    {blockloading ? "Approving..." : "Approve"}
+                  </button>
+                  <button
+                    onClick={() => handleApproveReject(item?._id, false)}
+                    className="border border-[#CC2828] text-[#CC2828] hover:bg-[#CC2828] hover:text-white px-3 py-1 text-xs rounded cursor-pointer"
+                  >
+                    {blockloading ? "Rejecting..." : "Reject"}
+                  </button>
+                </>
+                : <></>
+          }
         </div>
       </td>
     </tr>
@@ -135,7 +135,6 @@ function TeacherListing() {
       const response = await main.adminteacherlist(search);
       if (response?.data) {
         setTeacherData(response?.data?.data || []);
-        // console.log(response?.data);
       }
       setLoading(false);
     } catch (error) {
@@ -147,11 +146,9 @@ function TeacherListing() {
   const handleChange = (e) => {
     const sval = e.target.value;
     setSearchQuery(sval);
-
     if (timerRef.current) {
       clearTimeout(timerRef.current);
     }
-
     if (!sval || sval.trim() === "") {
       timerRef.current = setTimeout(() => {
         fetchData(sval);
@@ -193,11 +190,10 @@ function TeacherListing() {
               <button
                 key={index}
                 onClick={() => setTabActive(item?.value)}
-                className={`text-sm lg:text-lg capitalize font-medium tracking-[-0.04em] px-2 py-3 lg:py-2  cursor-pointer border-b-2 ${
-                  tabActive === item?.value
+                className={`text-sm lg:text-lg capitalize font-medium tracking-[-0.04em] px-2 py-3 lg:py-2  cursor-pointer border-b-2 ${tabActive === item?.value
                     ? "text-[#CC2828] border-[#CC2828]"
                     : "text-[#727272] border-transparent"
-                }`}
+                  }`}
               >
                 {item?.name}
               </button>
@@ -209,7 +205,7 @@ function TeacherListing() {
             name="search"
             value={searchQuery}
             onChange={handleChange}
-            placeholder="Search"
+            placeholder="Search By Name"
             className="w-full rounded-[10px] border border-[rgba(0,0,0,0.1)] text-[#595959] text-sm tracking-[-0.03em] pl-12 pr-4 bg-[rgba(204,40,40,0.1)] outline-0 h-[44px]"
           />
           <Image
@@ -247,7 +243,7 @@ function TeacherListing() {
                   {teacherData &&
                     teacherData?.approvedTeachers &&
                     teacherData?.approvedTeachers?.map((item, index) => (
-                      <TeacherRow key={index} item={item} category={"existing"}/>
+                      <TeacherRow key={index} item={item} category={"existing"} />
                     ))}
                 </tbody>
               )}
@@ -256,7 +252,7 @@ function TeacherListing() {
                   {teacherData &&
                     teacherData?.pendingApproval &&
                     teacherData?.pendingApproval?.map((item, index) => (
-                      <TeacherRow key={index} item={item} category={"new"}/>
+                      <TeacherRow key={index} item={item} category={"new"} />
                     ))}
                 </tbody>
               )}
@@ -265,7 +261,7 @@ function TeacherListing() {
                   {teacherData &&
                     teacherData?.rejectedTeachers &&
                     teacherData?.rejectedTeachers?.map((item, index) => (
-                      <TeacherRow key={index} item={item} category={"reject"}/>
+                      <TeacherRow key={index} item={item} category={"reject"} />
                     ))}
                 </tbody>
               )}

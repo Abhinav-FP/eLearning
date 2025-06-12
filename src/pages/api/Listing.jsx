@@ -56,8 +56,6 @@
     async HomeTeacherVideo() {
       return Api.get("/home/teacher/video")
     }
-
-
      async HomePage() {
       return Api.get("/home/find")
     }
@@ -230,8 +228,8 @@
       return Api.post(`/admin/approveteacher`, data);
     }
 
-    async adminStudentList() {
-      return Api.get(`/admin/studentlist`);
+    async adminStudentList(data , block) {
+      return Api.get(`/admin/studentlist?search=${data}&block=${block}`);
     }
 
     async AdminPayoutList() {
@@ -249,14 +247,9 @@
     async AdminTeacherData(id) {
       return Api.get(`/admin/teacher/${id}`,);
     }
-
-
-
-
     async HomeUpdate(data) {
       return ApiallowFile.post(`/home/update`, data);
     }
-
     async HomeList() {
       return Api.get(`/home/find`);
     }
@@ -264,8 +257,6 @@
     async HomeFaqList() {
       return Api.get("/home/faqfind")
     }
-
-
     async HomeFaqAdd(data) {
       return Api.post(`/home/faqAdd`, data);
     }
@@ -304,6 +295,10 @@
 
     async ReviewEdit(data) {
       return Api.post(`/review/edit`, data);
+    }
+
+    async AdminDashboard() {
+      return Api.get("/admin/dashboard")
     }
 
     render() {

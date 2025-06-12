@@ -1,4 +1,4 @@
-import React, { useEffect, useMemo, useState } from "react";
+import React, { useEffect, useMemo, useRef, useState } from "react";
 import Card from "../../teacher-dashboard/earnings/Card";
 import Listing from "@/pages/api/Listing";
 import moment from "moment";
@@ -18,9 +18,24 @@ export default function index() {
   const [loading, setLoading] = useState(false);
   const [selectedOption, setSelectedOption] = useState("");
   const [searchText, setSearchText] = useState("");
+  const timerRef = useRef(null);
 
   const handleSearchChange = (e) => {
-    setSearchText(e.target.value);
+    // setSearchText(e.target.value);
+    const sval = e.target.value;
+    setSearchText(sval);
+    if (timerRef.current) {
+      clearTimeout(timerRef.current);
+    }
+    if (!sval || sval.trim() === "") {
+      timerRef.current = setTimeout(() => {
+        fetchEarnings(sval);
+      }, 1500);
+    } else if (sval.length >= 2) {
+      timerRef.current = setTimeout(() => {
+        fetchEarnings(sval);
+      }, 1500);
+    }
   };
 
   const handleDropdownChange = (e) => {
@@ -35,11 +50,11 @@ export default function index() {
     yearOptions.push(year);
   }
 
-  const fetchEarnings = async () => {
+  const fetchEarnings = async (search) => {
     try {
       setLoading(true);
       const main = new Listing();
-      const response = await main.AdminEarning(selectedOption, searchText);
+      const response = await main.AdminEarning(selectedOption, search || searchText);
       setData(response?.data?.data || []);
     } catch (error) {
       console.log("error", error);
@@ -50,28 +65,29 @@ export default function index() {
 
   useEffect(() => {
     fetchEarnings();
-  }, [selectedOption, searchText]);
+  }, [selectedOption]);
 
   const downloadExcel = () => {
-    if(data && data?.bookings && data?.bookings?.length == 0){
+    if (!data?.bookings || data.bookings.length === 0) {
       toast.error("No data to export");
       return;
     }
-    const result = data && data?.bookings && data?.bookings?.map(item => ({
-      LessonName: item?.LessonId?.title || "",
-      LessonDate: moment(item?.startDateTime).format("DD MMM YYYY, hh:mm A") || "",
-      PaymentId: moment(item?.StripepaymentId?.created_at || item?.paypalpaymentId?.created_at)
-                 .format("DD MMM YYYY, hh:mm A") || "" || "",
-      PaymentDate: moment(item?.StripepaymentId?.created_at || item?.paypalpaymentId?.created_at)
-                   .format("DD MMM YYYY, hh:mm A") || "",
-      Amount: formatMultiPrice(item?.teacherEarning, "USD") || ""
+    const result = data.bookings.map(item => ({
+      "Lesson Name": item?.LessonId?.title || "",
+      "Payment ID": item?.StripepaymentId?.payment_id || item?.paypalpaymentId?.orderID || "",
+      "Start Time": moment(item?.startDateTime).format("DD MMM YYYY, hh:mm A") || "",
+      "Teacher Name": item?.teacherId?.name || "",
+      "Total Payment": formatMultiPrice(item?.totalAmount, "USD") || "",
+      "Admin Commission": formatMultiPrice(item?.adminCommission, "USD") || "",
+      "Student Name": item?.UserId?.name || "",
+      "Duration (mins)": item?.LessonId?.duration || ""
     }));
+
     const worksheet = XLSX.utils.json_to_sheet(result);
     const workbook = XLSX.utils.book_new();
-    XLSX.utils.book_append_sheet(workbook, worksheet, 'Sheet1');
-    //let buffer = XLSX.write(workbook, { bookType: "xlsx", type: "buffer" });
-    //XLSX.write(workbook, { bookType: "xlsx", type: "binary" });
-    XLSX.writeFile(workbook, 'Earnings.xlsx');
+    XLSX.utils.book_append_sheet(workbook, worksheet, "Sheet1");
+
+    XLSX.writeFile(workbook, "Earnings.xlsx");
   };
 
   const stats = useMemo(
@@ -99,6 +115,8 @@ export default function index() {
     ],
     [data]
   );
+
+  // console.log("data",data);
 
   return (
     <AdminLayout page={"Earnings"}>
@@ -198,7 +216,7 @@ export default function index() {
                         <td className="px-3 lg:px-4 py-2 lg:py-3 text-black text-sm lg:text-base font-medium font-inter capitalize">
                           {item?.LessonId?.title || ""}
                         </td>
-                        <td className="px-3 lg:px-4 py-2 lg:py-3 text-black text-sm lg:text-base font-medium font-inter capitalize">
+                        <td className="px-3 lg:px-4 py-2 lg:py-3 text-black text-sm lg:text-base font-medium font-inter">
                           {item?.StripepaymentId?.payment_id ||
                             item?.paypalpaymentId?.orderID ||
                             ""}

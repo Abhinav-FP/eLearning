@@ -16,7 +16,6 @@ import TeacherImg from "../Assets/Images/teacherimg01.png";
 import Link from "next/link";
 import { formatMultiPrice } from "@/components/ValueDataHook";
 
-
 export default function Index() {
   const router = useRouter();
   const { slug } = router.query;
@@ -127,25 +126,25 @@ export default function Index() {
     const [expanded, setExpanded] = useState(false);
 
     const words = description?.split(" ") || [];
-    const isLong = words.length > 50;
-    const shortText = words.slice(0, 50).join(" ");
-    const remainingText = words.slice(50).join(" ");
+    const isLong = words.length > 100;
+    const shortText = words.slice(0, 100).join(" ");
+    const remainingText = words.slice(100).join(" ");
 
     return (
-      <div className="text-black text-base font-normal -tracking-[0.03em] mb-3 lg:mb-6">
+      <div className="text-white tracking-[-0.03em] text-base font-medium">
         <p>
           {expanded || !isLong ? description : shortText + "..."}
           {isLong && !expanded && (
             <button
-              className="ml-2 text-[#CC2828] italic text-base -tracking-[0.03em] font-bold cursor-pointer"
+              className="ml-2 text-white hover:text-blue-400 underline cursor-pointer"
               onClick={() => setExpanded(true)}
             >
-             ...Read More
+              Read More
             </button>
           )}
         </p>
         {expanded && isLong && (
-          <p className="text-black text-base font-normal -tracking-[0.03em] mb-3 lg:mb-6">
+          <p className="mt-2">
             {remainingText}
           </p>
         )}
@@ -162,6 +161,84 @@ export default function Index() {
           </div>
           : <>
             <div className="pt-[114px] md:pt-[124px] lg:pt-[154px]  pb-[40px]  md:pb-[60px] lg:pb-[80px] xl:pb-[100px] ">
+              <div className="container sm:container md:container lg:container xl:max-w-[1230px]  px-4 mx-auto">
+                <div className="bg-[rgba(204,40,40,0.8)] rounded-[20px] py-6 lg:py-[30px] px-6 md:px-[30px] lg:px-[30px] xl:px-[45px]">
+                  <div className="flex flex-wrap -mx-4 space-y-4">
+                    {data?.intro_video &&
+                    <div className="mx-auto md:mx-0 w-[280px] md:w-[280px] lg:w-[308px] px-4">
+                      <VideoModalPlayer
+                        video={data?.intro_video}
+                        image={data?.userId?.profile_photo || teacherImg}
+                        name={data?.userId?.name}
+                        divClass="relative"
+                        imgClass="rounded-[10px] h-[276px] w-[276px] object-cover"
+                        btnClass="absolute top-1/2  cursor-pointer left-0 w-[81px] text-center text-white hover:text-[#CC2828] right-0 mx-auto -translate-y-1/2"
+                      />
+                    </div>}
+                    <div className="w-full md:w-[calc(100%-280px)] lg:w-[calc(100%-308px)] px-4">
+                      <div className="relative after:right-0 after:top-2 after:bottom-2 after:width-[1px] after-bg-white">
+                        <div className="flex items-center gap-2 mb-2 lg:mb-4">
+                          <div className="h-[15px] w-[15px] lg:h-[45px] lg:w-[45px] rounded-full overflow-hidden">
+                            <Image
+                              src={data?.userId?.profile_photo || TeacherImg}
+                              alt={data?.userId?.name}
+                              width={164}
+                              height={164}
+                            />
+                          </div>
+                          <h3 className="text-white text-[24px] md:text-[30px] lg:text-[36px] xl:text-[45px] font-inter font-extrabold tracking-[-0.04em]">
+                            {data?.userId?.name || ""}{" "}
+                            {data?.admin_approved === true ?  ( <BiSolidBadgeCheck className="inline text-[#6ABB52]" size={32} /> ) : ""}
+                          </h3>
+                        </div>
+                        {/* Fields other than description */}
+                        <div className="flex flex-wrap  gap-x-2 md:gap-x-6 lg:gap-x-8 mb-2 lg:mb-4 text-white text-base font-medium">
+                          {data?.tags && data?.tags?.length>0 &&
+                            <div>
+                              <span className="-tracking-[0.03em] pr-2">Specialities :</span>
+                              <span className="capitalize -tracking-[0.03em] ">{data?.tags?.join(", ") || ""}</span>
+                            </div>}
+                          {data?.languages_spoken &&
+                            <div>
+                              <span className="-tracking-[0.03em] pr-2">Language :</span>
+                              <span className="capitalize -tracking-[0.03em] ">{data?.languages_spoken?.join(", ") || ""}</span>
+                            </div>}
+                          {data?.userId?.nationality &&
+                            <div>
+                              <span className="-tracking-[0.03em] pr-2">Nationality :</span>
+                              <span className="capitalize -tracking-[0.03em] ">{data?.userId?.nationality}</span>
+                            </div>
+                          }
+
+                          <div>
+                            <span className="-tracking-[0.03em] pr-2">Gender :</span>
+                            <span className="capitalize -tracking-[0.03em] ">
+                              {data?.gender === 'M' ? 'Male' : data?.gender === 'F' ? 'Female' : 'Other'}</span>
+                          </div>
+
+                          {data?.userId?.time_zone &&
+                            <div>
+                              <span className="-tracking-[0.03em] pr-2">Time zone: :</span>
+                              <span className="-tracking-[0.03em] ">{data?.userId?.time_zone} </span>
+                            </div>
+                          }
+                          {data?.experience &&
+                            <div>
+                              <span className="-tracking-[0.03em] pr-2">Experience :</span>
+                              <span className="-tracking-[0.03em] ">{data?.experience}  Years</span>
+                            </div>
+                          } 
+                        </div>
+                        {/* Description field with view more */}
+                        <DescriptionWithViewMore description={data?.description || ""} />
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            {/* New Design */}
+            {/* <div className="pt-[114px] md:pt-[124px] lg:pt-[154px]  pb-[40px]  md:pb-[60px] lg:pb-[80px] xl:pb-[100px] ">
               <div className="container sm:container md:container lg:container xl:max-w-[1230px]  px-4 mx-auto">
                 <div className="flex flex-wrap -mx-4 space-y-4 md:space-y-0">
                   <div className="w-full md:w-8/12 px-4">
@@ -210,11 +287,7 @@ export default function Index() {
                             </div>
                           } 
                         </div>
-                        {/* <p className="text-black text-base font-normal -tracking-[0.03em] mb-3 lg:mb-6 ">{ */}
                           <DescriptionWithViewMore description={data?.description}/>
-                          {/* // }  */}
-                          {/* <span className="text-[#CC2828] italic text-base -tracking-[0.03em] font-bold">...Read More</span> */}
-                        {/* </p> */}
                       </div>
                     </div>
                   </div>
@@ -237,9 +310,6 @@ export default function Index() {
                             Lessons starts from
                           </span>
                           <div className="text-black font-bold text-base -tracking-[0.03em]">
-                            {/* {data?.lowestLesson && data?.lowestLesson && (
-                              `${formatMultiPrice(data?.lowestLesson?.price, "USD")}`
-                            )} */}
                            {formatMultiPrice(data?.priceStart, "USD")} 
                           </div>
                         </div>
@@ -257,8 +327,7 @@ export default function Index() {
                   </div>
                 </div>
               </div>
-            </div>
-
+            </div> */}
 
             {/* Extra fields div */}
             <div

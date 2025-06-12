@@ -247,6 +247,12 @@
     async AdminTeacherData(id) {
       return Api.get(`/admin/teacher/${id}`,);
     }
+
+    async AdminEarning(date,search){
+    return Api.get(`/admin/earning?date=${date}&search=${search}`);
+    }
+
+
     async HomeUpdate(data) {
       return ApiallowFile.post(`/home/update`, data);
     }

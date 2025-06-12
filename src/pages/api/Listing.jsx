@@ -250,6 +250,10 @@
       return Api.get(`/admin/teacher/${id}`,);
     }
 
+    async AdminEarning(date,search){
+    return Api.get(`/admin/earning?date=${date}&search=${search}`);
+    }
+
 
 
 

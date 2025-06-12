@@ -146,6 +146,10 @@ export default function Profile() {
 
   const handleAddSpeciality = () => {
     const trimmed = newSpeciality && newSpeciality?.trim();
+    if (!trimmed) {
+      toast.error("Speciality can't be empty");
+      return;
+    }
     if(data && data?.specialities && data?.specialities?.includes(trimmed)){
       toast.error("Speciality already present");
       return;
@@ -194,7 +198,7 @@ export default function Profile() {
     }
   };
 
-  // console.log("data",data);
+  console.log("data",data?.ais_trained);
 
   return (
     <>
@@ -505,31 +509,10 @@ export default function Profile() {
               {/* AIS Trained */}
               <div className="w-full lg:w-6/12 px-2 mb-4">
                 <label className="text-[#CC2828] font-medium text-base xl:text-xl mb-2 block">
-                  AIS trained
+                  Akita Inaka School Trained(AIS)
                 </label>
                 <div className="flex items-center space-x-4">
-                  <label className="flex items-center space-x-1 text-base">
-                    <input
-                      type="radio"
-                      name="ais_trained"
-                      value={true}
-                      checked={data?.ais_trained === true}
-                      onChange={handleChange}
-                      className="text-[#CC2828] focus:ring-[#CC2828]"
-                    />
-                    <span>Yes</span>
-                  </label>
-                  <label className="flex items-center space-x-1 text-base">
-                    <input
-                      type="radio"
-                      name="ais_trained"
-                      value={false}
-                      checked={data?.ais_trained === false}
-                      onChange={handleChange}
-                      className="text-[#CC2828] focus:ring-[#CC2828]"
-                    />
-                    <span>No</span>
-                  </label>
+                  {data?.ais_trained ? "True" : "False"} (Can be changed by the Admin only)
                 </div>
               </div>
 
@@ -559,29 +542,29 @@ export default function Profile() {
                   >
                     Add
                   </button>
-              </div>
-
-              {/* Show Added Specialities */}
-              {data?.specialities?.length > 0 && (
-                <div className="mt-3 flex flex-wrap gap-2">
-                  {data.specialities.map((spec, idx) => (
-                    <div
-                      key={idx}
-                      className="bg-red-100 text-red-700 px-3 py-1 rounded-full text-sm flex items-center gap-2"
-                    >
-                      {spec}
-                      <button
-                        type="button"
-                        onClick={() => handleRemoveSpeciality(spec)}
-                        className="text-red-500 hover:text-red-800 text-xs"
-                      >
-                        ✕
-                      </button>
-                    </div>
-                  ))}
                 </div>
-  )}
-</div>
+
+                {/* Show Added Specialities */}
+                {data?.specialities?.length > 0 && (
+                  <div className="mt-3 flex flex-wrap gap-2">
+                    {data.specialities.map((spec, idx) => (
+                      <div
+                        key={idx}
+                        className="bg-red-100 text-red-700 px-3 py-1 rounded-full text-sm flex items-center gap-2"
+                      >
+                        {spec}
+                        <button
+                          type="button"
+                          onClick={() => handleRemoveSpeciality(spec)}
+                          className="text-red-500 hover:text-red-800 text-xs"
+                        >
+                          ✕
+                        </button>
+                      </div>
+                    ))}
+                  </div>
+                )}
+              </div>
 
 
               {/* Description */}

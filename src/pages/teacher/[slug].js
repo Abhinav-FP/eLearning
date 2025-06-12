@@ -218,7 +218,7 @@ export default function Index() {
 
                           {data?.userId?.time_zone &&
                             <div>
-                              <span className="-tracking-[0.03em] pr-2">Time zone: :</span>
+                              <span className="-tracking-[0.03em] pr-2">Time zone :</span>
                               <span className="-tracking-[0.03em] ">{data?.userId?.time_zone} </span>
                             </div>
                           }

@@ -4,7 +4,6 @@ import toast from "react-hot-toast";
 import Listing from "@/pages/api/Listing";
 
 export default function ApproveRejectPopup({ isOpen, onClose, actionKey, id, fetchData }) {
-//   console.log("id", id);
   const [formData, setFormData] = useState({
     reason: "",
     transactionId: "",
@@ -17,44 +16,43 @@ export default function ApproveRejectPopup({ isOpen, onClose, actionKey, id, fet
   };
 
   const handleSubmit = async (e) => {
-  e.preventDefault();
-  setLoading(true); // Optional: show loading spinner
-  try {
-    if (actionKey === "rejected" && !formData.reason.trim()) {
-      toast.error("Please provide a reason for rejection.");
-      return;
-    }
-    if (actionKey === "approved" && !formData.transactionId.trim()) {
-      toast.error("Please enter the transaction ID.");
-      return;
-    }
-    const main = new Listing();
+    e.preventDefault();
+    setLoading(true); // Optional: show loading spinner
+    try {
+      if (actionKey === "rejected" && !formData.reason.trim()) {
+        toast.error("Please provide a reason for rejection.");
+        return;
+      }
+      if (actionKey === "approved" && !formData.transactionId.trim()) {
+        toast.error("Please enter the transaction ID.");
+        return;
+      }
+      const main = new Listing();
 
-    const payload = {
-      status: actionKey,
-      ...(actionKey === "approved" && { transactionId: formData.transactionId }),
-      ...(actionKey === "rejected" && { reason: formData.reason }),
-    };
-    const response = await main.AdminPayoutAction(id, payload);
-    if (response?.data?.status) {
-      toast.success(response.data.message);
-    //   console.log("response?.data", response?.data);
-      onClose();
-      fetchData();      
-    } else {
-      toast.error(response.data.message);
+      const payload = {
+        status: actionKey,
+        ...(actionKey === "approved" && { transactionId: formData.transactionId }),
+        ...(actionKey === "rejected" && { reason: formData.reason }),
+      };
+      const response = await main.AdminPayoutAction(id, payload);
+      if (response?.data?.status) {
+        toast.success(response.data.message);
+        onClose();
+        fetchData();
+      } else {
+        toast.error(response.data.message);
+      }
+      setFormData({
+        reason: "",
+        transactionId: "",
+      });
+    } catch (error) {
+      console.error("API error:", error);
+      toast.error(error?.response?.data?.message || "Something went wrong!");
     }
-    setFormData({
-      reason: "",
-      transactionId: "",
-    });
-  } catch (error) {
-    console.error("API error:", error);
-    toast.error(error?.response?.data?.message || "Something went wrong!");
-  }
 
-  setLoading(false);
-};
+    setLoading(false);
+  };
 
 
   return (

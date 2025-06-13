@@ -39,15 +39,13 @@ export default function Header() {
         window.addEventListener('scroll', handleScroll);
         return () => window.removeEventListener('scroll', handleScroll);
     }, [])
-    // console.log("user",user);
 
     const handleLogout = () => {
-      localStorage && localStorage.removeItem("token");
-      router.push("/login");
-      toast.success("Logout Successfully");
-      setUser(null);
+        localStorage && localStorage.removeItem("token");
+        router.push("/login");
+        toast.success("Logout Successfully");
+        setUser(null);
     };
-    // console.log("user",user);
 
     return (
         <>
@@ -91,10 +89,10 @@ export default function Header() {
                                     </Link>
                                 </li>
                             </ul>
-                            { user && user?.role ?
+                            {user && user?.role ?
                                 <div className="flex flex-col lg:hidden">
-                                    <Link 
-                                        href={`${user && user?.role === "student" ? "/student" : user?.role === "teacher" ? "/teacher-dashboard" : "/admin"}`} 
+                                    <Link
+                                        href={`${user && user?.role === "student" ? "/student" : user?.role === "teacher" ? "/teacher-dashboard" : "/admin"}`}
                                         className="text-[#CC2828] hover:text-[#ad0e0e] border-t border-[#ddd] text-base py-3 px-4 font-medium cursor-pointer" >
                                         View dashboard
                                     </Link>
@@ -105,13 +103,13 @@ export default function Header() {
                                         Logout
                                     </button>
                                 </div>
-                            :
+                                :
                                 <div className="flex flex-col lg:hidden">
                                     <Link href="/login" className="text-[#CC2828] hover:text-[#ad0e0e] border-t border-[#ddd] text-base py-3 px-4 font-medium cursor-pointer" >
                                         Log In
                                     </Link>
                                     <Link href="/student/register" className="text-[#CC2828] hover:text-[#ad0e0e] border-t border-[#ddd] text-base py-3 px-4 font-medium cursor-pointer" >
-                                        Sign Up 
+                                        Sign Up
                                     </Link>
                                 </div>
                             }
@@ -126,21 +124,21 @@ export default function Header() {
                                     <button onClick={() => (handleLanguageSelect('Japanese'))} className="w-full cursor-pointer bg-transparent py-.5 px-2 py-2 [&:not(:last-child)]:border-b hover:text-[#CC2828]">Japanese</button>
                                 </div>
                             </div>
-                            { user && user?.role ? 
-                            <>
-                                <Link 
-                                href={`${user && user?.role === "student" ? "/student" : user?.role === "teacher" ? "/teacher-dashboard" : "/admin"}`} 
-                                className="hidden lg:block bg-[#CC2828] hover:bg-[#ad0e0e] text-white text-base py-3.5 px-8 xl:px-10 font-medium cursor-pointer rounded-full" >
-                                    View Dashboard                            
-                                </Link>
-                                <button
-                                onClick={handleLogout} 
-                                href={`${user?.role === "student" ? "/student" : "/teacher-dashboard"}`} 
-                                className="hidden lg:block bg-[#CC2828] hover:bg-[#ad0e0e] text-white text-base py-3.5 px-8 xl:px-10 font-medium cursor-pointer rounded-full" >
-                                    Logout                            
-                                </button>
-                            </>
-                            :
+                            {user && user?.role ?
+                                <>
+                                    <Link
+                                        href={`${user && user?.role === "student" ? "/student" : user?.role === "teacher" ? "/teacher-dashboard" : "/admin"}`}
+                                        className="hidden lg:block bg-[#CC2828] hover:bg-[#ad0e0e] text-white text-base py-3.5 px-8 xl:px-10 font-medium cursor-pointer rounded-full" >
+                                        View Dashboard
+                                    </Link>
+                                    <button
+                                        onClick={handleLogout}
+                                        href={`${user?.role === "student" ? "/student" : "/teacher-dashboard"}`}
+                                        className="hidden lg:block bg-[#CC2828] hover:bg-[#ad0e0e] text-white text-base py-3.5 px-8 xl:px-10 font-medium cursor-pointer rounded-full" >
+                                        Logout
+                                    </button>
+                                </>
+                                :
                                 <>
                                     <Link href="/student/register" className="hidden lg:block bg-[#CC2828] hover:bg-[#ad0e0e] text-white text-base py-3.5 px-8 xl:px-10 font-medium cursor-pointer rounded-full" >
                                         Sign Up                            </Link>

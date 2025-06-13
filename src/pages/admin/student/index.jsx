@@ -79,13 +79,11 @@ function Index() {
 
   const handleSelectChange = (e) => {
     setSelectedOption(e.target.value);
-    // console.log("Selected Option:", e.target.value);
     fetchData(searchQuery, e.target.value);
   };
 
 
 
-  // console.log("data", data);
 
   return (
     <AdminLayout page={"Students Listing"}>

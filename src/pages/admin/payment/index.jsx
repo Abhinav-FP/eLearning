@@ -40,7 +40,6 @@ export default function index() {
 
   const handleDropdownChange = (e) => {
     setSelectedOption(e.target.value);
-    // console.log("Selected:", e.target.value);
   };
 
   // Generate years from current year down to 2025
@@ -116,28 +115,24 @@ export default function index() {
     [data]
   );
 
-  // console.log("data",data);
 
   return (
     <AdminLayout page={"Earnings"}>
       <div className="min-h-screen p-5 lg:p-[30px]">
         <div className="flex justify-between items-center mb-4 lg:mb-5">
-            {/* <h2 className="text-lg md:text-xl lg:text-2xl font-bold text-[#CC2828] tracking-[-0.04em] font-inter">
-              Earnings
-            </h2> */}
-            <div className="w-1/3 relative">
-              <span className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-                <FiSearch className="text-[#CC2828]" />
-              </span>
-              <input
-                type="text"
-                value={searchText}
-                onChange={handleSearchChange}
-                placeholder="Search using payment id or lesson, teacher or student name"
-                className="w-full pl-10 pr-4 py-2 border border-[#CC2828] text-[#CC2828] rounded-md focus:outline-none focus:ring-2 focus:ring-[#CC2828] placeholder-gray-400"
-              />
-            </div>
-            <div className="flex items-center space-x-3">
+          <div className="w-1/3 relative">
+            <span className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+              <FiSearch className="text-[#CC2828]" />
+            </span>
+            <input
+              type="text"
+              value={searchText}
+              onChange={handleSearchChange}
+              placeholder="Search using payment id or lesson, teacher or student name"
+              className="w-full pl-10 pr-4 py-2 border border-[#CC2828] text-[#CC2828] rounded-md focus:outline-none focus:ring-2 focus:ring-[#CC2828] placeholder-gray-400"
+            />
+          </div>
+          <div className="flex items-center space-x-3">
             <select
               value={selectedOption}
               onChange={handleDropdownChange}
@@ -150,16 +145,16 @@ export default function index() {
                 <option key={year} value={year}>{year}</option>
               ))}
             </select>
-              <button
-                onClick={() => {
-                  downloadExcel();
-                }}
-                className="w-fit px-2 sm:px-8 py-2.5 hover:bg-white hover:text-[#CC2828] border border-[#CC2828] rounded-[10px] tracking-[-0.06em] text-sm font-medium bg-[#CC2828] text-white cursor-pointer"
-              >
-                Export as Excel
-              </button>
-            </div>
+            <button
+              onClick={() => {
+                downloadExcel();
+              }}
+              className="w-fit px-2 sm:px-8 py-2.5 hover:bg-white hover:text-[#CC2828] border border-[#CC2828] rounded-[10px] tracking-[-0.06em] text-sm font-medium bg-[#CC2828] text-white cursor-pointer"
+            >
+              Export as Excel
+            </button>
           </div>
+        </div>
         {loading ? (
           <TeacherEarningsLoader />
         ) : (
@@ -240,7 +235,7 @@ export default function index() {
                         </td>
                         <td className="px-3 lg:px-4 py-2 lg:py-3 text-black text-sm lg:text-base font-medium font-inter capitalize">
                           {item?.LessonId?.duration || ""}{" "}mins
-                        </td>  
+                        </td>
                       </tr>
                     ))
                   ) : (
@@ -260,7 +255,7 @@ export default function index() {
                 </tbody>
               </table>
             </div>
-            </>
+          </>
         )}
       </div>
     </AdminLayout>

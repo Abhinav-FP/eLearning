@@ -16,7 +16,6 @@ export default function Index() {
       const response = await main.homeTeacher();
       if (response.data) {
         setTeacherData(response.data.data);
-        console.log("response", response)
       }
       setLoading(false);
     } catch (error) {

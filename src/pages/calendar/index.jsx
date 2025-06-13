@@ -33,12 +33,9 @@ const Index = ({ Availability, setIsPopupOpen, usedInPopup, setSelectedSlot, sel
   const { user } = useRole();
   const router = useRouter();
 
-  // console.log("Availability", Availability);
-  // console.log("events",events);
-
   useEffect(() => {
     if (!Availability) return;
-  
+
     const getNextQuarter = (date) => {
       const next = new Date(date);
       const minutes = next.getMinutes();
@@ -46,24 +43,24 @@ const Index = ({ Availability, setIsPopupOpen, usedInPopup, setSelectedSlot, sel
         minutes < 15
           ? 15 - minutes
           : minutes < 30
-          ? 30 - minutes
-          : minutes < 45
-          ? 45 - minutes
-          : 60 - minutes;
+            ? 30 - minutes
+            : minutes < 45
+              ? 45 - minutes
+              : 60 - minutes;
       next.setMinutes(minutes + add, 0, 0);
       return next;
     };
-  
+
     const processBlocks = (blocks, title, color) => {
       const events = [];
-  
+
       blocks.forEach((block) => {
         let current = moment.utc(block.startDateTime).toDate();
         const end = moment.utc(block.endDateTime).toDate();
-  
+
         const firstChunkEnd = getNextQuarter(current);
         const firstDuration = (firstChunkEnd - current) / (1000 * 60); // in minutes
-  
+
         if (firstChunkEnd > end) {
           // entire block fits before the first rounded quarter
           events.push({
@@ -75,12 +72,12 @@ const Index = ({ Availability, setIsPopupOpen, usedInPopup, setSelectedSlot, sel
           });
           return;
         }
-  
+
         if (firstDuration < 15) {
           // merge first chunk with next
           const secondChunkEnd = getNextQuarter(firstChunkEnd);
           const mergedEnd = secondChunkEnd < end ? secondChunkEnd : end;
-  
+
           events.push({
             id: `${block._id}_${block.startDateTime}`,
             title,
@@ -88,7 +85,7 @@ const Index = ({ Availability, setIsPopupOpen, usedInPopup, setSelectedSlot, sel
             end: moment.utc(mergedEnd).toDate(),
             color,
           });
-  
+
           current = new Date(mergedEnd);
         } else {
           // normal first chunk
@@ -99,15 +96,15 @@ const Index = ({ Availability, setIsPopupOpen, usedInPopup, setSelectedSlot, sel
             end: moment.utc(firstChunkEnd).toDate(),
             color,
           });
-  
+
           current = new Date(firstChunkEnd);
         }
-  
+
         // rest of the chunks
         while (current < end) {
           const nextChunkEnd = getNextQuarter(current);
           const chunkEnd = nextChunkEnd < end ? nextChunkEnd : end;
-  
+
           events.push({
             id: `${block._id}_${moment.utc(current).toISOString()}`,
             title,
@@ -115,11 +112,11 @@ const Index = ({ Availability, setIsPopupOpen, usedInPopup, setSelectedSlot, sel
             end: moment.utc(chunkEnd).toDate(),
             color,
           });
-  
+
           current = new Date(chunkEnd);
         }
       });
-  
+
       return events;
     };
     // For processing full blocks
@@ -132,18 +129,18 @@ const Index = ({ Availability, setIsPopupOpen, usedInPopup, setSelectedSlot, sel
         color,
       }));
     };
-  
+
     const availabilityEvents = Availability.availabilityBlocks?.length
       ? processBlocks(Availability.availabilityBlocks, "Available", "#6ABB52")
       : [];
-  
+
     const bookedEvents = Availability.bookedSlots?.length
       ? processFullBlocks(Availability.bookedSlots, "Blocked", "#8f97a3")
       : [];
-  
+
     setEvents([...availabilityEvents, ...bookedEvents]);
   }, [Availability]);
-  
+
   const eventStyleGetter = (event) => {
     return {
       style: {
@@ -171,7 +168,6 @@ const Index = ({ Availability, setIsPopupOpen, usedInPopup, setSelectedSlot, sel
 
     return isWithinSlot;
   };
-  // console.log("user",user);
 
 
   const handleClick = (event) => {
@@ -181,10 +177,10 @@ const Index = ({ Availability, setIsPopupOpen, usedInPopup, setSelectedSlot, sel
         router.push(`/login?redirect=${router.asPath}`);
         return;
       }
-      if(!user?.email_verify){
+      if (!user?.email_verify) {
         router.push("/verify");
         return;
-    }
+      }
       if (user?.role != "student") {
         toast.error("Only students can book lessons");
         return;
@@ -192,11 +188,10 @@ const Index = ({ Availability, setIsPopupOpen, usedInPopup, setSelectedSlot, sel
       setIsPopupOpen(true);
     }
     else {
-      if(!isEventWithinAvailability(event?.start, selectedLesson?.duration, Availability?.availabilityBlocks)){
+      if (!isEventWithinAvailability(event?.start, selectedLesson?.duration, Availability?.availabilityBlocks)) {
         toast.error("This time slot is too short for your selected lesson duration.");
         return;
       }
-      console.log("event",event);
       const startTime = moment(event.start);
       const now = moment();
       // Check if start is today or in the past
@@ -207,7 +202,6 @@ const Index = ({ Availability, setIsPopupOpen, usedInPopup, setSelectedSlot, sel
       setSelectedSlot(event);
     }
   };
-  // console.log("availability",Availability);
 
   return (
     <>
@@ -273,7 +267,7 @@ const Index = ({ Availability, setIsPopupOpen, usedInPopup, setSelectedSlot, sel
           </div>
         </div>
       </div>
-      
+
     </>
   );
 };

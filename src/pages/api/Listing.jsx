@@ -64,7 +64,7 @@ class Listing extends Component {
     return Api.post("/teacher/bank", data)
   }
   async StudentTeacher(data) {
-    return Api.get("/student/teacherGet", data);
+    return Api.get(`/student/teacherGet?search=${data}`);
   }
 
   async TeachergetbyId(data) {

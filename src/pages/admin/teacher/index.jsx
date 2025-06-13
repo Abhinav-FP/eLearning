@@ -24,8 +24,7 @@ function TeacherListing() {
       if (response?.data) {
         if (response?.data?.data?.block == true) {
           toast.success("Teacher blocked successfully");
-        }
-        else {
+        } else {
           toast.success("Teacher unblocked successfully");
         }
         fetchData("");
@@ -43,13 +42,12 @@ function TeacherListing() {
       const main = new Listing();
       const response = await main.approveRejectTeacher({
         id: id,
-        approved: approve
+        approved: approve,
       });
       if (response?.data) {
         if (response?.data?.status) {
           toast.success(response?.data?.message);
-        }
-        else {
+        } else {
           toast.error(response?.data?.message);
         }
         fetchData("");
@@ -63,7 +61,11 @@ function TeacherListing() {
   };
 
   const TeacherRow = ({ item, category }) => (
-    <tr className={`border-t hover:bg-[rgba(204,40,40,0.1)] border-[rgba(204,40,40,0.2)] ${item?.userId?.block ? "opacity-50" : ""}`}>
+    <tr
+      className={`border-t hover:bg-[rgba(204,40,40,0.1)] border-[rgba(204,40,40,0.2)] ${
+        item?.userId?.block ? "opacity-50" : ""
+      }`}
+    >
       <td className="capitalize px-3 lg:px-4 py-2 lg:py-3 text-black text-sm lg:text-base font-medium font-inter text-left">
         <Link href={`/admin/teacher/${item?.userId?._id}`}>
           {item?.userId?.name || ""}
@@ -89,7 +91,7 @@ function TeacherListing() {
             >
             View 
             </button> */}
-          {category === "existing" ?
+          {category === "existing" ? (
             <button
               onClick={() => handleBlock(item?.userId?._id)}
               className="border border-[#CC2828] text-[#CC2828] hover:bg-[#CC2828] hover:text-white px-3 py-1 text-xs rounded cursor-pointer"
@@ -99,33 +101,34 @@ function TeacherListing() {
                   ? "Unblocking"
                   : "Blocking"
                 : item?.userId?.block
-                  ? "Unblock"
-                  : "Block"}
+                ? "Unblock"
+                : "Block"}
             </button>
-            : category === "reject" ?
+          ) : category === "reject" ? (
+            <button
+              onClick={() => handleApproveReject(item?._id, true)}
+              className="border border-[#CC2828] text-[#CC2828] hover:bg-[#CC2828] hover:text-white px-3 py-1 text-xs rounded cursor-pointer"
+            >
+              {blockloading ? "Approving..." : "Approve"}
+            </button>
+          ) : category === "new" ? (
+            <>
               <button
                 onClick={() => handleApproveReject(item?._id, true)}
                 className="border border-[#CC2828] text-[#CC2828] hover:bg-[#CC2828] hover:text-white px-3 py-1 text-xs rounded cursor-pointer"
               >
                 {blockloading ? "Approving..." : "Approve"}
               </button>
-              : category === "new" ?
-                <>
-                  <button
-                    onClick={() => handleApproveReject(item?._id, true)}
-                    className="border border-[#CC2828] text-[#CC2828] hover:bg-[#CC2828] hover:text-white px-3 py-1 text-xs rounded cursor-pointer"
-                  >
-                    {blockloading ? "Approving..." : "Approve"}
-                  </button>
-                  <button
-                    onClick={() => handleApproveReject(item?._id, false)}
-                    className="border border-[#CC2828] text-[#CC2828] hover:bg-[#CC2828] hover:text-white px-3 py-1 text-xs rounded cursor-pointer"
-                  >
-                    {blockloading ? "Rejecting..." : "Reject"}
-                  </button>
-                </>
-                : <></>
-          }
+              <button
+                onClick={() => handleApproveReject(item?._id, false)}
+                className="border border-[#CC2828] text-[#CC2828] hover:bg-[#CC2828] hover:text-white px-3 py-1 text-xs rounded cursor-pointer"
+              >
+                {blockloading ? "Rejecting..." : "Reject"}
+              </button>
+            </>
+          ) : (
+            <></>
+          )}
         </div>
       </td>
     </tr>
@@ -196,17 +199,17 @@ function TeacherListing() {
               <button
                 key={index}
                 onClick={() => setTabActive(item?.value)}
-                className={`text-sm lg:text-lg capitalize font-medium tracking-[-0.04em] px-2 py-3 lg:py-2  cursor-pointer border-b-2 ${tabActive === item?.value
-                  ? "text-[#CC2828] border-[#CC2828]"
-                  : "text-[#727272] border-transparent"
-                  }`}
+                className={`text-sm lg:text-lg capitalize font-medium tracking-[-0.04em] px-2 py-3 lg:py-2  cursor-pointer border-b-2 ${
+                  tabActive === item?.value
+                    ? "text-[#CC2828] border-[#CC2828]"
+                    : "text-[#727272] border-transparent"
+                }`}
               >
                 {item?.name}
               </button>
             ))}
         </div>
         <div className="flex flex-col md:flex-row items-center justify-between gap-4 mb-6 md:mb-10 w-full">
-
           <div className="w-1/3 relative">
             <span className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
               <FiSearch className="text-[#CC2828]" />
@@ -233,7 +236,6 @@ function TeacherListing() {
               <option value="false">Unblocked</option>
             </select>
           </div>
-
         </div>
         <div>
           <div className="rounded-[5px] border border-[rgba(204,40,40,0.3)] overflow-x-auto">
@@ -257,69 +259,89 @@ function TeacherListing() {
                   </th>
                 </tr>
               </thead>
-              {tabActive === "existing" && (
-                <tbody>
-                  {loading ? (
-                    <TableLoader length={5} />
-                  ) : teacherData?.approvedTeachers?.length > 0 ? (
-                    teacherData.approvedTeachers.map((item, index) => (
-                      <TeacherRow key={index} item={item} category="existing" />
-                    ))
-                  ) : (
-                    <tr>
-                      <td colSpan={5} className="text-center py-4 text-gray-400">
-                        <NoData
-                          heading="No approved teachers found."
-                          content="Once teachers are approved, they will appear in this list."
-                        />
-                      </td>
-                    </tr>
-                  )}
-                </tbody>
-              )}
-              {tabActive === "new" && (
-                <tbody>
-                  {loading ? (
-                    <TableLoader length={5} />
-                  ) : teacherData?.pendingApproval?.length > 0 ? (
-                    teacherData.pendingApproval.map((item, index) => (
-                      <TeacherRow key={index} item={item} category="new" />
-                    ))
-                  ) : (
-                    <tr>
-                      <td colSpan={5} className="text-center py-4 text-gray-400">
-                        <NoData
-                          heading="No approved teachers found."
-                          content="Once teachers are approved, they will appear in this list."
-                        />
-                      </td>
-                    </tr>
-                  )}
-                </tbody>
-              )}
-
-
-              {tabActive === "reject" && (
-                <tbody>
-                  {loading ? (
-                    <TableLoader length={5} />
-                  ) : teacherData?.rejectedTeachers?.length > 0 ? (
-                    teacherData.rejectedTeachers.map((item, index) => (
-                      <TeacherRow key={index} item={item} category="reject" />
-                    ))
-                  ) : (
-                    <tr>
-                      <td colSpan={5} className="text-center py-4 text-gray-400">
-                        <NoData
-                          heading="No approved teachers found."
-                          content="Once teachers are approved, they will appear in this list."
-                        />
-                      </td>
-                    </tr>
-                  )}
-                </tbody>
-              )}
-
+              <>
+                {loading ? (
+                  <TableLoader length={5} />
+                ) : (
+                  <>
+                    {tabActive === "existing" && (
+                      <tbody>
+                        {teacherData?.approvedTeachers?.length > 0 ? (
+                          teacherData.approvedTeachers.map((item, index) => (
+                            <TeacherRow
+                              key={index}
+                              item={item}
+                              category="existing"
+                            />
+                          ))
+                        ) : (
+                          <tr>
+                            <td
+                              colSpan={5}
+                              className="text-center py-4 text-gray-400"
+                            >
+                              <NoData
+                                heading="No approved teachers found."
+                                content="Once teachers are approved, they will appear in this list."
+                              />
+                            </td>
+                          </tr>
+                        )}
+                      </tbody>
+                    )}
+                    {tabActive === "new" && (
+                      <tbody>
+                        {teacherData?.pendingApproval?.length > 0 ? (
+                          teacherData.pendingApproval.map((item, index) => (
+                            <TeacherRow
+                              key={index}
+                              item={item}
+                              category="new"
+                            />
+                          ))
+                        ) : (
+                          <tr>
+                            <td
+                              colSpan={5}
+                              className="text-center py-4 text-gray-400"
+                            >
+                              <NoData
+                                heading="No approved teachers found."
+                                content="Once teachers are approved, they will appear in this list."
+                              />
+                            </td>
+                          </tr>
+                        )}
+                      </tbody>
+                    )}
+                    {tabActive === "reject" && (
+                      <tbody>
+                        {teacherData?.rejectedTeachers?.length > 0 ? (
+                          teacherData.rejectedTeachers.map((item, index) => (
+                            <TeacherRow
+                              key={index}
+                              item={item}
+                              category="reject"
+                            />
+                          ))
+                        ) : (
+                          <tr>
+                            <td
+                              colSpan={5}
+                              className="text-center py-4 text-gray-400"
+                            >
+                              <NoData
+                                heading="No approved teachers found."
+                                content="Once teachers are approved, they will appear in this list."
+                              />
+                            </td>
+                          </tr>
+                        )}
+                      </tbody>
+                    )}
+                  </>
+                )}
+              </>
             </table>
           </div>
         </div>

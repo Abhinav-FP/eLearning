@@ -14,7 +14,6 @@ import toast from "react-hot-toast";
 export default function Teacher({ teacherData, loading }) {
     const { user } = useRole();
     const router = useRouter();
-    // console.log("teacherData", teacherData);
     return (
         <div className="pt-[115px] md:pt-[120px] lg:pt-[150px] pb-[20px] md:pb-[40px] lg:pb-[60px]">
             <div className="mx-auto container sm:container md:container lg:container xl:max-w-[1230px]  px-4">

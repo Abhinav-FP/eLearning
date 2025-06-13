@@ -21,7 +21,6 @@ export default function Index() {
       setLoading(true);
       const main = new Listing();
       const response = await main.TeacherDashboard();
-      // console.log("response", response)
       SetDashboard(response.data.data);
     } catch (error) {
       console.log("error", error);
@@ -42,7 +41,6 @@ export default function Index() {
     durationOther: 0
   });
 
-  console.log("Dashboard",Dashboard);
 
   return (
     <TeacherLayout>
@@ -179,7 +177,7 @@ export default function Index() {
                 <p className="font-inter text-sm sm:text-base lg:text-lg xl:text-xl font-medium tracking-[-0.04em] text-black flex justify-between">
                   Total Earnings: <span>{formatMultiPrice(Dashboard?.earningsSummary?.totalEarnings, "USD")}</span>
                 </p>
-                 <p className="font-inter text-sm sm:text-base lg:text-lg xl:text-xl font-medium tracking-[-0.04em] text-black flex justify-between">
+                <p className="font-inter text-sm sm:text-base lg:text-lg xl:text-xl font-medium tracking-[-0.04em] text-black flex justify-between">
                   Available Earnings: <span>{formatMultiPrice(Dashboard?.earningsSummary?.pendingEarnings, "USD")}</span>
                 </p>
                 <p className="font-inter text-sm sm:text-base lg:text-lg xl:text-xl font-medium tracking-[-0.04em] text-black flex justify-between">

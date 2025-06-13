@@ -13,7 +13,6 @@ export default function Index() {
 
   const [dashboard, setDashboard] = useState([]);
   const [loading, setLoading] = useState(false);
-  // console.log("dashboard" ,dashboard?.wishlistResult)
 
   const StudentDashboards = async () => {
     try {
@@ -33,7 +32,6 @@ export default function Index() {
     StudentDashboards();
   }, []);
 
-  // console.log("dashboard?.booking?.StartDateTime",dashboard?.booking?.startDateTime);
 
   return (
     <StudentLayout>

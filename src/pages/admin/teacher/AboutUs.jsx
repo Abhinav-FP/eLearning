@@ -10,7 +10,6 @@ const qualificationLookup = QualificationMapping.reduce((acc, item) => {
 }, {});
 
 export default function AboutUs({ record ,loading }) {
-  console.log("record", record)
   const formatBoolean = (val) => (val === true ? 'Yes' : val === false ? 'No' : 'N/A');
   const formatGender = (val) => (val === 'M' ? 'Male' : val === 'F' ? 'Female' : val ? 'Other' : 'N/A');
   const formatQualification = (val) => qualificationLookup[val] || 'N/A';

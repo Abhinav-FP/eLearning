@@ -64,7 +64,6 @@ export default function Index() {
     }
   };
 
-  // console.log("payout",payout);
 
   return (
     <AdminLayout page={"Payouts"}>

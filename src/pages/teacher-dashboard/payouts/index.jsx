@@ -14,9 +14,8 @@ function Index() {
   
   const handleDropdownChange = (e) => {
     setSelectedOption(e.target.value);
-    // console.log("Selected:", e.target.value);
   };
-  // console.log("payout", payout)
+
 
   useEffect(() => {
     setLoading(true);
@@ -24,7 +23,6 @@ function Index() {
     main
       .PayoutList(selectedOption)
       .then((r) => {
-        // console.log("r", r)
         setPayout(r?.data?.data);
         setLoading(false);
       })

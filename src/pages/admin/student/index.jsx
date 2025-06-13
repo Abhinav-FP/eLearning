@@ -48,7 +48,6 @@ function Index() {
       const response = await main.adminStudentList(search, filter);
       if (response?.data) {
         setData(response?.data?.data || []);
-        console.log(response?.data);
       }
       setLoading(false);
     } catch (error) {
@@ -80,13 +79,11 @@ function Index() {
 
   const handleSelectChange = (e) => {
     setSelectedOption(e.target.value);
-    // console.log("Selected Option:", e.target.value);
     fetchData(searchQuery, e.target.value);
   };
 
 
 
-  // console.log("data", data);
 
   return (
     <AdminLayout page={"Students Listing"}>

@@ -23,7 +23,6 @@ export default function Profile() {
       .profileVerify()
       .then((r) => {
         const profiledata = r?.data?.data?.user;
-        // console.log("profileData",profiledata);
         setData({
           name: profiledata?.name,
           email: profiledata?.email,
@@ -59,7 +58,6 @@ export default function Profile() {
     }
   };
 
-  // console.log("data", data);
 
   const handleSubmit = async (e) => {
     e.preventDefault();

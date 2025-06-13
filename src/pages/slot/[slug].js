@@ -63,7 +63,6 @@ export default function Index() {
       fetchData(slug);
     }
   }, [slug]);
-  // console.log("data", data);
 
   return (
     <Layout>

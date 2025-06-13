@@ -13,7 +13,6 @@ export default function PaypalCheckout() {
       payer: details.payer,
       status: details.status,
     });
-    console.log("Payment saved:", response.data);
   } catch (error) {
     console.error("Error saving payment:", error);
   }

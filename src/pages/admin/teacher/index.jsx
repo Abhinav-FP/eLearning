@@ -170,7 +170,6 @@ function TeacherListing() {
 
   const handleSelectChange = (e) => {
     setSelectedOption(e.target.value);
-    // console.log("Selected Option:", e.target.value);
     fetchData(searchQuery, e.target.value);
   };
 

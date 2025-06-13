@@ -13,7 +13,6 @@ export default function Index() {
     try {
       const main = new Listing();
       const response = await main.TeacherAvailabilityGet();
-      // console.log("response" ,response)
       setAvailability(response?.data?.data);
     } catch (error) {
       console.log("error", error);
@@ -24,14 +23,12 @@ export default function Index() {
     TeacherAvailabilitys();
   }, []);
 
-  // Get timezone
   useEffect(() => {
     const timeZone = Intl.DateTimeFormat().resolvedOptions().timeZone || "";
     setStudentTimeZone(timeZone);
   }, []);
 
-  // console.log("Availability", Availability);
-  // console.log("user", user);
+
   return (
     <TeacherLayout page={"Price & Availability"}>
       <div className="min-h-screen p-5 lg:p-[30px]">

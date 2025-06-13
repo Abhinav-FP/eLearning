@@ -11,9 +11,7 @@ const PaymentCheckout = ({ selectedLesson, selectedSlot, studentTimeZone, user }
     setEmail(e.target.value);
   };
 
-  // console.log("user", user);
   const [PaymentStatus, setPaymentStatus] = useState(false)
-  // console.log("PaymentStatus", PaymentStatus)
   function getFormattedEndTime(time, durationInMinutes) {
     const start = new Date(time);
     const end = new Date(start.getTime() + durationInMinutes * 60000);
@@ -53,7 +51,7 @@ const PaymentCheckout = ({ selectedLesson, selectedSlot, studentTimeZone, user }
 
           <div
             onClick={() => setPaymentStatus(true)}
-            className={`flex items-center justify-between border rounded-lg p-3 cursor-pointer ${PaymentStatus  === true ? 'border-red-400' : 'border-red-300'
+            className={`flex items-center justify-between border rounded-lg p-3 cursor-pointer ${PaymentStatus === true ? 'border-red-400' : 'border-red-300'
               }`}
           >
             <div className="flex items-center gap-3">
@@ -133,17 +131,17 @@ const PaymentCheckout = ({ selectedLesson, selectedSlot, studentTimeZone, user }
             <p className="font-medium">Total</p>
             {/* <p className="font-medium">${selectedLesson?.price} USD</p> */}
             <p className="font-medium">
-              {formatMultiPrice(selectedLesson?.price + 0.1*selectedLesson?.price, "USD")}
+              {formatMultiPrice(selectedLesson?.price + 0.1 * selectedLesson?.price, "USD")}
             </p>
           </div>
-          <p className="text-sm text-gray-500">{`Included processing fee of ${formatMultiPrice(0.1*selectedLesson?.price, "USD")}`}</p>
+          <p className="text-sm text-gray-500">{`Included processing fee of ${formatMultiPrice(0.1 * selectedLesson?.price, "USD")}`}</p>
           {/* <p className="text-sm text-gray-500">Estimated ${(selectedLesson?.price + 0.1*selectedLesson?.price).toFixed(2)} USD</p> */}
         </div>
 
         {PaymentStatus === false ? (
-          <Payment PricePayment={selectedLesson?.price + 0.1*selectedLesson?.price} adminCommission={0.1*selectedLesson?.price} selectedLesson={selectedLesson}  selectedSlot={selectedSlot} studentTimeZone={studentTimeZone} email={email}/>
+          <Payment PricePayment={selectedLesson?.price + 0.1 * selectedLesson?.price} adminCommission={0.1 * selectedLesson?.price} selectedLesson={selectedLesson} selectedSlot={selectedSlot} studentTimeZone={studentTimeZone} email={email} />
         ) : (
-          <Stripe PricePayment={selectedLesson?.price + 0.1*selectedLesson?.price} adminCommission={0.1*selectedLesson?.price} selectedLesson={selectedLesson}  selectedSlot= {selectedSlot} studentTimeZone={studentTimeZone} email={email}/>
+          <Stripe PricePayment={selectedLesson?.price + 0.1 * selectedLesson?.price} adminCommission={0.1 * selectedLesson?.price} selectedLesson={selectedLesson} selectedSlot={selectedSlot} studentTimeZone={studentTimeZone} email={email} />
         )}
       </div>
     </div>

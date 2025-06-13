@@ -198,7 +198,6 @@ export default function Profile() {
     }
   };
 
-  console.log("data",data?.ais_trained);
 
   return (
     <>

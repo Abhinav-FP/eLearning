@@ -101,7 +101,7 @@ function Index() {
               value={searchQuery}
               onChange={handleChange}
               placeholder="Search by name or email"
-              className="w-full pl-10 pr-4 py-2 border border-[#CC2828] text-[#CC2828] rounded focus:outline-none focus:ring-2 focus:ring-[#CC2828] placeholder-gray-400"
+              className="w-full pl-10 pr-4 py-2 border border-[#CC2828] text-[#CC2828] rounded-md focus:outline-none focus:ring-2 focus:ring-[#CC2828] placeholder-gray-400"
             />
           </div>
 
@@ -110,7 +110,7 @@ function Index() {
               name="filter"
               value={selectedOption}
               onChange={handleSelectChange}
-              className="border border-[#CC2828] text-[#CC2828] px-3 py-2 rounded focus:outline-none"
+              className="border border-[#CC2828] text-[#CC2828] px-3 py-2 rounded-md focus:outline-none"
             >
               <option value="">All</option>
               <option value="true">Blocked</option>
@@ -132,65 +132,69 @@ function Index() {
               </tr>
             </thead>
 
-            <tbody>
-              {loading ? (
-                <TableLoader length={5} />
-              ) : data?.length > 0 ? (
-                data.map((item, index) => (
-                  <tr
-                    key={index}
-                    className={`border-t hover:bg-[rgba(204,40,40,0.1)] border-[rgba(204,40,40,0.2)] ${item?.block ? "opacity-50" : ""}`}
-                  >
-                    <td className="capitalize px-3 lg:px-4 py-2 lg:py-3 text-black text-sm lg:text-base font-medium font-inter text-left">
-                      {item?.name || "N/A"}
-                    </td>
-                    <td className="px-3 lg:px-4 py-2 lg:py-3 text-black text-sm lg:text-base font-medium font-inter">
-                      {item?.email || "N/A"}
-                    </td>
-                    <td className="px-3 lg:px-4 py-2 lg:py-3 text-black text-sm lg:text-base font-medium font-inter">
-                      {item?.phone || "N/A"}
-                    </td>
-                    <td className="capitalize px-3 lg:px-4 py-2 lg:py-3 text-black text-sm lg:text-base font-medium font-inter">
-                      {item?.time_zone || "N/A"}
-                    </td>
-                    <td className="px-3 lg:px-4 py-2 lg:py-3 text-black text-sm lg:text-base font-medium font-inter">
-                      <div className="flex gap-2 justify-center items-center">
-                        <button
-                          onClick={() => {
-                            setItem(item);
-                            setIsPopupOpen(true);
-                          }}
-                          className="border border-[#CC2828] text-[#CC2828] hover:bg-[#CC2828] hover:text-white px-3 py-1 text-xs rounded cursor-pointer"
-                        >
-                          View
-                        </button>
-                        <button
-                          onClick={() => handleBlock(item?._id)}
-                          className="border border-[#CC2828] text-[#CC2828] hover:bg-[#CC2828] hover:text-white px-3 py-1 text-xs rounded cursor-pointer"
-                        >
-                          {blockloading
-                            ? item?.block
-                              ? "Unblocking"
-                              : "Blocking"
-                            : item?.block
-                              ? "Unblock"
-                              : "Block"}
-                        </button>
-                      </div>
+            {loading ? (
+              <TableLoader length={5} />
+            ) : (
+              <tbody>
+                {data?.length > 0 ? (
+                  data.map((item, index) => (
+                    <tr
+                      key={index}
+                      className={`border-t hover:bg-[rgba(204,40,40,0.1)] border-[rgba(204,40,40,0.2)] ${item?.block ? "opacity-50" : ""}`}
+                    >
+                      <td className="capitalize px-3 lg:px-4 py-2 lg:py-3 text-black text-sm lg:text-base font-medium font-inter text-left">
+                        {item?.name || "N/A"}
+                      </td>
+                      <td className="px-3 lg:px-4 py-2 lg:py-3 text-black text-sm lg:text-base font-medium font-inter">
+                        {item?.email || "N/A"}
+                      </td>
+                      <td className="px-3 lg:px-4 py-2 lg:py-3 text-black text-sm lg:text-base font-medium font-inter">
+                        {item?.phone || "N/A"}
+                      </td>
+                      <td className="capitalize px-3 lg:px-4 py-2 lg:py-3 text-black text-sm lg:text-base font-medium font-inter">
+                        {item?.time_zone || "N/A"}
+                      </td>
+                      <td className="px-3 lg:px-4 py-2 lg:py-3 text-black text-sm lg:text-base font-medium font-inter">
+                        <div className="flex gap-2 justify-center items-center">
+                          <button
+                            onClick={() => {
+                              setItem(item);
+                              setIsPopupOpen(true);
+                            }}
+                            className="border border-[#CC2828] text-[#CC2828] hover:bg-[#CC2828] hover:text-white px-3 py-1 text-xs rounded cursor-pointer"
+                          >
+                            View
+                          </button>
+                          <button
+                            onClick={() => handleBlock(item?._id)}
+                            className="border border-[#CC2828] text-[#CC2828] hover:bg-[#CC2828] hover:text-white px-3 py-1 text-xs rounded cursor-pointer"
+                          >
+                            {blockloading
+                              ? item?.block
+                                ? "Unblocking"
+                                : "Blocking"
+                              : item?.block
+                                ? "Unblock"
+                                : "Block"}
+                          </button>
+                        </div>
+                      </td>
+                    </tr>
+                  ))
+                ) : (
+                  <tr>
+                    <td colSpan={5} className="text-center py-4 text-gray-400">
+                      <NoData
+                        heading="No rejected teachers found."
+                        content="If any teachers are rejected, they will be listed here for your reference."
+                      />
                     </td>
                   </tr>
-                ))
-              ) : (
-                <tr>
-                  <td colSpan={5} className="text-center py-4 text-gray-400">
-                    <NoData
-                      heading="No rejected teachers found."
-                      content="If any teachers are rejected, they will be listed here for your reference."
-                    />
-                  </td>
-                </tr>
-              )}
-            </tbody>
+                )}
+              </tbody>
+            )}
+
+
           </table>
         </div>
 

@@ -188,8 +188,8 @@ class Listing extends Component {
     return Api.post(`/teacher/payout`, data);
   }
 
-  async TeacherBooking(data) {
-    return Api.get(`/teacher/booking?type=${data}`);
+  async TeacherBooking(data, search) {
+    return Api.get(`/teacher/booking?type=${data}&search=${search}`);
   }
 
   async TeacherStudentLesson() {

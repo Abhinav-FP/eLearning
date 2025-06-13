@@ -94,10 +94,8 @@ export default function Index() {
             </div>
           </div>
         </div>
-        { loading ? (
-          <TableLoader length={4} />
-        ) : (
-           <div className="bg-white rounded-2xl shadow border border-[rgba(204,40,40,0.2)] overflow-auto mt-4  p-5">
+
+        <div className="bg-white rounded-2xl shadow border border-[rgba(204,40,40,0.2)] overflow-auto mt-4  p-5">
           <h2 className="text-[#CC2828] text-xl lg:text-2xl font-semibold mb-4">Teacher Management</h2>
           <table className="min-w-full text-sm text-left">
             <thead className="bg-[rgba(204,40,40,0.05)] text-[#535353]">
@@ -116,28 +114,40 @@ export default function Index() {
                 </th>
               </tr>
             </thead>
-            <tbody>
-              {listing?.TeacherData?.map((item, index) => (
-                <tr
-                  key={index}
-                  className={`border-t hover:bg-[rgba(204,40,40,0.05)] ${item?.userId?.block ? "opacity-50" : ""}`}
-                >
-                  <td className="py-3 px-4 font-medium text-sm lg:text-base">
-                    <Link href={`/admin/teacher/${item?.userId?._id}`} className="">
-                      {item?.userId?.name || "—"}
-                    </Link>
-                  </td>
-                  <td className="py-3 px-4 text-sm">{item?.userId?.email || "—"}</td>
-                  <td className="py-3 px-4 capitalize text-sm">{item?.qualifications?.replaceAll("_", " ") || "N/A"}</td>
-                  <td className="py-3 px-4 text-sm">{item?.experience ? `${item.experience} years` : "N/A"}</td>
-                </tr>
-              ))}
-            </tbody>
+            {loading ? (
+              <TableLoader length={4} />
+            ) : (
+              <tbody>
+                {listing?.TeacherData?.map((item, index) => {
+                  const user = item?.userId;
+                  return (
+                    <tr
+                      key={index}
+                      className={`border-t hover:bg-[rgba(204,40,40,0.05)] ${user?.block ? "opacity-50" : ""}`}
+                    >
+                      <td className="py-3 px-4 font-medium text-sm lg:text-base">
+                        <Link href={`/admin/teacher/${user?._id}`} className="hover:underline">
+                          {user?.name || "—"}
+                        </Link>
+                      </td>
+                      <td className="py-3 px-4 text-sm">
+                        {user?.email || "—"}
+                      </td>
+                      <td className="py-3 px-4 capitalize text-sm">
+                        {item?.qualifications?.replaceAll("_", " ") || "N/A"}
+                      </td>
+                      <td className="py-3 px-4 text-sm">
+                        {item?.experience ? `${item.experience} years` : "N/A"}
+                      </td>
+                    </tr>
+                  );
+                })}
+              </tbody>)}
+
 
           </table>
         </div>
-        ) }
-       
+
         <div className="bg-white p-5 rounded-2xl shadow border border-[rgba(204,40,40,0.2)]  mt-3 ">
           <h2 className="text-[#CC2828] text-xl lg:text-2xl font-semibold mb-4">Reviews</h2>
 
@@ -146,44 +156,43 @@ export default function Index() {
               <ReviewLoader />
             ) : (
               listing?.ReviewData?.length > 0 ? (
-            listing.ReviewData.map((review) => (
-              <div key={review._id} className="border border-gray-100 rounded-xl p-4 mb-4 shadow-sm">
-                <div className="flex justify-between items-center mb-3">
-                  <div className="flex gap-3 items-center">
-                    <img src={review.userId?.profile_photo ? review.userId?.profile_photo : TeacherImg || TeacherImg} alt="avatar" className="w-10 h-10 rounded-full object-cover border" />
-                    <div>
-                      <p className="font-semibold text-gray-800">{review.userId?.name}</p>
-                      <p className="text-xs text-gray-500">
-                        {moment(review.updatedAt).format("MMMM D, YYYY [at] hh:mm A")}
-                      </p>
-                    </div>
-                  </div>
-                  <span className={`text-xs font-semibold px-3 py-1 rounded-full 
+                listing.ReviewData.map((review) => (
+                  <div key={review._id} className="border border-gray-100 rounded-xl p-4 mb-4 shadow-sm">
+                    <div className="flex justify-between items-center mb-3">
+                      <div className="flex gap-3 items-center">
+                        <img src={review.userId?.profile_photo ? review.userId?.profile_photo : TeacherImg || TeacherImg} alt="avatar" className="w-10 h-10 rounded-full object-cover border" />
+                        <div>
+                          <p className="font-semibold text-gray-800">{review.userId?.name}</p>
+                          <p className="text-xs text-gray-500">
+                            {moment(review.updatedAt).format("MMMM D, YYYY [at] hh:mm A")}
+                          </p>
+                        </div>
+                      </div>
+                      <span className={`text-xs font-semibold px-3 py-1 rounded-full 
                     ${review.review_status === 'Pending' ? 'bg-yellow-100 text-yellow-700'
-                      : review.review_status === 'Reject' ? 'bg-red-100 text-red-700'
-                        : 'bg-green-100 text-green-700'}`}>
-                    {review.review_status}
-                  </span>
-                </div>
+                          : review.review_status === 'Reject' ? 'bg-red-100 text-red-700'
+                            : 'bg-green-100 text-green-700'}`}>
+                        {review.review_status}
+                      </span>
+                    </div>
 
-                <p className="text-sm text-gray-600 mb-1">
-                  Lesson: <span className="font-medium text-gray-800">{review.lessonId?.title}</span>
-                </p>
+                    <p className="text-sm text-gray-600 mb-1">
+                      Lesson: <span className="font-medium text-gray-800">{review.lessonId?.title}</span>
+                    </p>
 
-                <div className="flex items-center gap-1 text-yellow-500 mb-2">
-                  {Array.from({ length: review.rating }, (_, i) => (
-                    <AiFillStar key={i} className="w-4 h-4" />
-                  ))}
-                </div>
-
-                <p className="text-gray-700 text-sm leading-relaxed">
-                  {review.description}
-                </p>
-              </div>
-            ))
-          ) : (
-            <NoData  Heading={"No reviews available"}/>
-          )
+                    <div className="flex items-center gap-1 text-yellow-500 mb-2">
+                      {Array.from({ length: review.rating }, (_, i) => (
+                        <AiFillStar key={i} className="w-4 h-4" />
+                      ))}
+                    </div>
+                    <p className="text-gray-700 text-sm leading-relaxed">
+                      {review.description}
+                    </p>
+                  </div>
+                ))
+              ) : (
+                <NoData Heading={"No reviews available"} />
+              )
             )
           }
         </div>

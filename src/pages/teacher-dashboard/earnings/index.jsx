@@ -122,14 +122,14 @@ export default function index() {
                 value={searchText}
                 onChange={handleSearchChange}
                 placeholder="Search using name or payment id"
-                className="w-full pl-10 pr-4 py-2 border border-[#CC2828] text-[#CC2828] rounded focus:outline-none focus:ring-2 focus:ring-[#CC2828] placeholder-gray-400"
+                className="w-full pl-10 pr-4 py-2 border border-[#CC2828] text-[#CC2828] rounded-md focus:outline-none focus:ring-2 focus:ring-[#CC2828] placeholder-gray-400"
               />
             </div>
             <div className="flex items-center space-x-3">
             <select
               value={selectedOption}
               onChange={handleDropdownChange}
-              className="border border-[#CC2828] text-[#CC2828] px-3 py-2 rounded focus:outline-none"
+              className="border border-[#CC2828] text-[#CC2828] px-2 sm:px-8 py-2.5 rounded-md focus:outline-none"
             >
               <option value="">All</option>
               <option value="last7">Last 7 Days</option>

@@ -1,21 +1,25 @@
-import React, { useEffect, useMemo, useState } from 'react';
+import React, { useEffect, useMemo, useRef, useState } from 'react';
 import TeacherLayout from '../Common/TeacherLayout';
 import Listing from '@/pages/api/Listing';
 import moment from 'moment';
 import { TableLoader } from '@/components/Loader';
 import NoData from '@/pages/common/NoData';
 import { formatMultiPrice } from '@/components/ValueDataHook';
+import { FiSearch } from 'react-icons/fi';
 
 export default function Index() {
   const [TabOpen, setTabOpen] = useState('upcoming');
   const [data, setData] = useState([]);
   const [loading, setLoading] = useState(false);
+  const [searchText, setSearchText] = useState("");
+  const timerRef = useRef(null);
 
-  const fetchEarnings = async () => {
+
+  const fetchEarnings = async (search = "") => {
     try {
       setLoading(true);
       const main = new Listing();
-      const response = await main.TeacherBooking(TabOpen);
+      const response = await main.TeacherBooking(TabOpen, search);
       setData(response?.data?.data || []);
     } catch (error) {
       console.log('error', error);
@@ -28,37 +32,63 @@ export default function Index() {
     fetchEarnings();
   }, [TabOpen]);
 
+
+  const handleSearchChange = (e) => {
+    const sval = e.target.value;
+    setSearchText(sval);
+    if (timerRef.current) {
+      clearTimeout(timerRef.current);
+    }
+    if (!sval || sval.trim() === "") {
+      timerRef.current = setTimeout(() => {
+        fetchEarnings(sval);
+      }, 1500);
+    } else if (sval.length >= 2) {
+      timerRef.current = setTimeout(() => {
+        fetchEarnings(sval);
+      }, 1500);
+    }
+  };
+
+
   return (
     <TeacherLayout>
       <div className="min-h-screen p-5 lg:p-[30px]">
-        <div className="flex justify-between items-center mb-4 lg:mb-5">
-          <h2 className="text-lg md:text-xl lg:text-2xl font-bold text-[#CC2828] tracking-[-0.04em] font-inter">
-            Bookings
-          </h2>
-        </div>
-
         <div className="">
-          <div className="flex flex-wrap gap-5 mb-4">
-            <button
-              onClick={() => setTabOpen('upcoming')}
-              className={`text-sm lg:text-lg font-medium tracking-[-0.04em] px-6 lg:px-10 py-3 lg:py-2 rounded-[10px] cursor-pointer ${
-                TabOpen === 'upcoming'
+          <div className="flex justify-between items-center mb-4 lg:mb-5">
+
+            <div className="flex flex-wrap gap-5 mb-4">
+              <button
+                onClick={() => setTabOpen('upcoming')}
+                className={`text-sm lg:text-lg font-medium tracking-[-0.04em] px-6 lg:px-10 py-3 lg:py-2 rounded-[10px] cursor-pointer ${TabOpen === 'upcoming'
                   ? 'bg-[#CC2828] text-[#fff]'
                   : 'bg-[#E0E0E0] text-[#727272]'
-              }`}
-            >
-              Upcoming
-            </button>
-            <button
-              onClick={() => setTabOpen('past')}
-              className={`text-sm lg:text-lg font-medium tracking-[-0.04em] px-6 lg:px-10 py-3 lg:py-2 rounded-[10px] cursor-pointer ${
-                TabOpen === 'past'
+                  }`}
+              >
+                Upcoming
+              </button>
+              <button
+                onClick={() => setTabOpen('past')}
+                className={`text-sm lg:text-lg font-medium tracking-[-0.04em] px-6 lg:px-10 py-3 lg:py-2 rounded-[10px] cursor-pointer ${TabOpen === 'past'
                   ? 'bg-[#CC2828] text-[#fff]'
                   : 'bg-[#E0E0E0] text-[#727272]'
-              }`}
-            >
-              Past
-            </button>
+                  }`}
+              >
+                Past
+              </button>
+            </div>
+            <div className="w-1/3 max-w-sm relative">
+              <span className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                <FiSearch className="text-[#CC2828]" />
+              </span>
+              <input
+                type="text"
+                value={searchText}
+                onChange={handleSearchChange}
+                placeholder="Search using lesson or student name"
+                className="w-full pl-10 pr-4 py-2 border border-[#CC2828] text-[#CC2828] rounded-md focus:outline-none focus:ring-2 focus:ring-[#CC2828] placeholder-gray-400"
+              />
+            </div>
           </div>
 
           <div className="rounded-[5px] border border-[rgba(204,40,40,0.3)] overflow-x-auto">
@@ -82,50 +112,50 @@ export default function Index() {
                   </th>
                 </tr>
               </thead>
-               {loading ? 
-                  <TableLoader length={5} />
+              {loading ?
+                <TableLoader length={5} />
                 :
-              <tbody>
-                {data && data.length > 0 ? (
-                  data?.map((item, index) => (
-                    <tr
-                      key={index}
-                      className="hover:bg-[rgba(204,40,40,0.1)] border-t border-[rgba(204,40,40,0.2)]"
-                    >
-                      <td className="px-3 lg:px-4 py-2 lg:py-3 capitalize text-black text-sm lg:text-base font-medium font-inter ">
-                        {item?.LessonId?.title}
-                      </td>
-                      <td className="px-3 lg:px-4 py-2 lg:py-3 capitalize text-black text-sm lg:text-base font-medium font-inter ">
-                        {moment(item?.startDateTime).format('DD MMM YYYY, hh:mm A') || ''}
-                      </td>
-                      <td className="px-3 lg:px-4 py-2 lg:py-3 capitalize text-black text-sm lg:text-base font-medium font-inter ">
-                        {item?.UserId?.name}
-                      </td>
-                      <td className="px-3 lg:px-4 py-2 lg:py-3 capitalize text-black text-sm lg:text-base font-medium font-inter ">
-                        {item?.LessonId?.duration} min{" "}
-                        ({moment(item?.startDateTime).format('hh:mm A')} -{" "}
-                        {moment(item?.endDateTime).format('hh:mm A')})
-                      </td>
-                      <td className="px-3 lg:px-4 py-2 lg:py-3 capitalize text-black text-sm lg:text-base font-medium font-inter ">
-                        {formatMultiPrice(item?.teacherEarning, "USD")}
+                <tbody>
+                  {data && data.length > 0 ? (
+                    data?.map((item, index) => (
+                      <tr
+                        key={index}
+                        className="hover:bg-[rgba(204,40,40,0.1)] border-t border-[rgba(204,40,40,0.2)]"
+                      >
+                        <td className="px-3 lg:px-4 py-2 lg:py-3 capitalize text-black text-sm lg:text-base font-medium font-inter ">
+                          {item?.LessonId?.title}
+                        </td>
+                        <td className="px-3 lg:px-4 py-2 lg:py-3 capitalize text-black text-sm lg:text-base font-medium font-inter ">
+                          {moment(item?.startDateTime).format('DD MMM YYYY, hh:mm A') || ''}
+                        </td>
+                        <td className="px-3 lg:px-4 py-2 lg:py-3 capitalize text-black text-sm lg:text-base font-medium font-inter ">
+                          {item?.UserId?.name}
+                        </td>
+                        <td className="px-3 lg:px-4 py-2 lg:py-3 capitalize text-black text-sm lg:text-base font-medium font-inter ">
+                          {item?.LessonId?.duration} min{" "}
+                          ({moment(item?.startDateTime).format('hh:mm A')} -{" "}
+                          {moment(item?.endDateTime).format('hh:mm A')})
+                        </td>
+                        <td className="px-3 lg:px-4 py-2 lg:py-3 capitalize text-black text-sm lg:text-base font-medium font-inter ">
+                          {formatMultiPrice(item?.teacherEarning, "USD")}
+                        </td>
+                      </tr>
+                    ))
+                  ) : (
+                    <tr>
+                      <td colSpan={5}>
+                        <div className="mt-2">
+                          <NoData
+                            Heading={"No bookings found."}
+                            content={
+                              `Your account does not have any ${TabOpen} booking. If a booking is made it will be shown here`
+                            }
+                          />
+                        </div>
                       </td>
                     </tr>
-                  ))
-                ) : (
-                  <tr>
-                    <td colSpan={5}>
-                      <div className="mt-2">
-                          <NoData
-                              Heading={"No bookings found."}
-                              content={
-                                  `Your account does not have any ${TabOpen} booking. If a booking is made it will be shown here`
-                              }
-                          />
-                      </div>
-                    </td>
-                  </tr>
-                )}
-              </tbody>}
+                  )}
+                </tbody>}
             </table>
           </div>
         </div>

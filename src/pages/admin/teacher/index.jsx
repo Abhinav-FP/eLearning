@@ -218,7 +218,7 @@ function TeacherListing() {
               value={searchQuery}
               onChange={handleChange}
               placeholder="Search by name or email"
-              className="w-full pl-10 pr-4 py-2 border border-[#CC2828] text-[#CC2828] rounded focus:outline-none focus:ring-2 focus:ring-[#CC2828] placeholder-gray-400"
+              className="w-full pl-10 pr-4 py-2 border border-[#CC2828] text-[#CC2828] rounded-md focus:outline-none focus:ring-2 focus:ring-[#CC2828] placeholder-gray-400"
             />
           </div>
 
@@ -228,7 +228,7 @@ function TeacherListing() {
               name="filter"
               value={selectedOption}
               onChange={handleSelectChange}
-              className="border border-[#CC2828] text-[#CC2828] px-3 py-2 rounded focus:outline-none"
+              className="border border-[#CC2828] text-[#CC2828] px-3 py-2 rounded-md focus:outline-none"
             >
               <option value="">All</option>
               <option value="true">Blocked</option>
@@ -270,13 +270,14 @@ function TeacherListing() {
                   ) : (
                     <tr>
                       <td colSpan={5} className="text-center py-4 text-gray-400">
-                        <NoData heading={" No approved teachers found."} content={"Once teachers are approved, they will appear in this list."} />
+                        <NoData
+                          heading="No approved teachers found."
+                          content="Once teachers are approved, they will appear in this list."
+                        />
                       </td>
-
                     </tr>
                   )}
                 </tbody>
-
               )}
               {tabActive === "new" && (
                 <tbody>
@@ -290,16 +291,16 @@ function TeacherListing() {
                     <tr>
                       <td colSpan={5} className="text-center py-4 text-gray-400">
                         <NoData
-                          heading="No new teacher requests found."
-                          content="When teachers submit their applications, they will appear here for review."
+                          heading="No approved teachers found."
+                          content="Once teachers are approved, they will appear in this list."
                         />
                       </td>
-
-
                     </tr>
                   )}
                 </tbody>
               )}
+
+
               {tabActive === "reject" && (
                 <tbody>
                   {loading ? (
@@ -312,15 +313,15 @@ function TeacherListing() {
                     <tr>
                       <td colSpan={5} className="text-center py-4 text-gray-400">
                         <NoData
-                          heading="No rejected teachers found."
-                          content="If any teachers are rejected, they will be listed here for your reference."
+                          heading="No approved teachers found."
+                          content="Once teachers are approved, they will appear in this list."
                         />
                       </td>
                     </tr>
-
                   )}
                 </tbody>
               )}
+
             </table>
           </div>
         </div>

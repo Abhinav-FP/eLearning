@@ -57,17 +57,10 @@ export default function Index() {
     }
   };
 
-  // console.log("data",data);
   
   return (
     <AdminLayout page={"Bookings"}>
       <div className="min-h-screen p-5 lg:p-[30px]">
-        {/* <div className="flex justify-between items-center mb-4 lg:mb-5">
-          <h2 className="text-lg md:text-xl lg:text-2xl font-bold text-[#CC2828] tracking-[-0.04em] font-inter">
-            Bookings
-          </h2>
-        </div> */}
-
         <div className="flex justify-between items-center mb-4 lg:mb-5">
           <div className="flex flex-wrap gap-5">
             <button
@@ -100,7 +93,7 @@ export default function Index() {
               value={searchText}
               onChange={handleSearchChange}
               placeholder="Search using lesson or teacher name"
-              className="w-full pl-10 pr-4 py-2 border border-[#CC2828] text-[#CC2828] rounded focus:outline-none focus:ring-2 focus:ring-[#CC2828] placeholder-gray-400"
+              className="w-full pl-10 pr-4 py-2 border border-[#CC2828] text-[#CC2828] rounded-md focus:outline-none focus:ring-2 focus:ring-[#CC2828] placeholder-gray-400"
             />
           </div>
         </div>

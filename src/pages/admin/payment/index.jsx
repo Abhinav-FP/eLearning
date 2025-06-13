@@ -250,7 +250,7 @@ export default function index() {
                           <NoData
                             Heading={"No Earnings found."}
                             content={
-                              "Your earnings will appear here once you complete a booking."
+                              "Your earnings will appear here once a booking is created."
                             }
                           />
                         </div>

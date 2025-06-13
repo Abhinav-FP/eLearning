@@ -9,12 +9,13 @@ import { AiFillStar } from 'react-icons/ai';
 import moment from 'moment';
 import Link from 'next/link';
 import TeacherImg from "./../Assets/Images/teacherimg.jpg"
+import { ReviewLoader, TableLoader } from '@/components/Loader';
+import NoData from '../common/NoData';
 
 
 export default function Index() {
   const [listing, setListing] = useState(null); // Fix typo in setListing
   const [loading, setLoading] = useState(false);
-  console.log("listing", listing)
 
   useEffect(() => {
     setLoading(true);
@@ -93,7 +94,10 @@ export default function Index() {
             </div>
           </div>
         </div>
-        <div className="bg-white rounded-2xl shadow border border-[rgba(204,40,40,0.2)] overflow-auto mt-4  p-5">
+        { loading ? (
+          <TableLoader length={4} />
+        ) : (
+           <div className="bg-white rounded-2xl shadow border border-[rgba(204,40,40,0.2)] overflow-auto mt-4  p-5">
           <h2 className="text-[#CC2828] text-xl lg:text-2xl font-semibold mb-4">Teacher Management</h2>
           <table className="min-w-full text-sm text-left">
             <thead className="bg-[rgba(204,40,40,0.05)] text-[#535353]">
@@ -132,10 +136,16 @@ export default function Index() {
 
           </table>
         </div>
+        ) }
+       
         <div className="bg-white p-5 rounded-2xl shadow border border-[rgba(204,40,40,0.2)]  mt-3 ">
           <h2 className="text-[#CC2828] text-xl lg:text-2xl font-semibold mb-4">Reviews</h2>
 
-          {listing?.ReviewData?.length > 0 ? (
+          {
+            loading ? (
+              <ReviewLoader />
+            ) : (
+              listing?.ReviewData?.length > 0 ? (
             listing.ReviewData.map((review) => (
               <div key={review._id} className="border border-gray-100 rounded-xl p-4 mb-4 shadow-sm">
                 <div className="flex justify-between items-center mb-3">
@@ -172,8 +182,10 @@ export default function Index() {
               </div>
             ))
           ) : (
-            <p className="text-sm text-gray-500 italic">No reviews available</p>
-          )}
+            <NoData  Heading={"No reviews available"}/>
+          )
+            )
+          }
         </div>
       </div>
     </AdminLayout >

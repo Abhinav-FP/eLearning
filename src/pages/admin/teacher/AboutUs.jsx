@@ -1,6 +1,7 @@
 import React from 'react';
 import { IoMdEye } from 'react-icons/io';
 import QualificationMapping from "../../../Json/Qualification.json";
+import { TeacherDetailShimmer } from '@/components/Loader';
 
 
 const qualificationLookup = QualificationMapping.reduce((acc, item) => {
@@ -8,7 +9,8 @@ const qualificationLookup = QualificationMapping.reduce((acc, item) => {
   return acc;
 }, {});
 
-export default function AboutUs({ record }) {
+export default function AboutUs({ record ,loading }) {
+  console.log("record", record)
   const formatBoolean = (val) => (val === true ? 'Yes' : val === false ? 'No' : 'N/A');
   const formatGender = (val) => (val === 'M' ? 'Male' : val === 'F' ? 'Female' : val ? 'Other' : 'N/A');
   const formatQualification = (val) => qualificationLookup[val] || 'N/A';
@@ -20,7 +22,9 @@ export default function AboutUs({ record }) {
   }
 
   return (
-    <section className="mt-6 mx-auto px-4">
+    <>
+    {loading ? (<TeacherDetailShimmer/>)  :(
+       <section className="mt-6 mx-auto px-4">
 
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-x-6 gap-y-6">
 
@@ -29,15 +33,6 @@ export default function AboutUs({ record }) {
           <p className="font-medium text-sm md:text-base text-gray-600">{formatGender(record.gender)}</p>
         </div>
 
-        <div className='mb-2'>
-          <label className="block text-base font-semibold text-gray-800 mb-1">Average Time</label>
-          <p className="font-medium text-sm md:text-base text-gray-600">{formatText(record.average_time)}</p>
-        </div>
-
-        <div className='mb-2'>
-          <label className="block text-base font-semibold text-gray-800 mb-1">Average Price</label>
-          <p className="font-medium text-sm md:text-base text-gray-600">{formatText(record.average_price)}</p>
-        </div>
 
         <div className='mb-2'>
           <label className="block text-base font-semibold text-gray-800 mb-1">Japanese for Me Approved</label>
@@ -54,7 +49,7 @@ export default function AboutUs({ record }) {
         </div>
 
         <div className='mb-2'>
-          <label className="block text-base font-semibold text-gray-800 mb-1">AIS Trained</label>
+          <label className="block text-base font-semibold text-gray-800 mb-1"> Akita Inaka School (AIS) Trained</label>
           <p className={`font-medium text-sm md:text-base ${record.ais_trained ? 'text-green-600' : 'text-red-600'}`}>
             {formatBoolean(record.ais_trained)}
           </p>
@@ -70,10 +65,7 @@ export default function AboutUs({ record }) {
           <p className="font-medium text-sm md:text-base text-gray-600">{formatText(record.experience)}</p>
         </div>
 
-        <div className='mb-2'>
-          <label className="block text-base font-semibold text-gray-800 mb-1">Average Duration</label>
-          <p className="font-medium text-sm md:text-base text-gray-600">{formatText(record.average_duration)}</p>
-        </div>
+
         {record.documentlink && (
           <div className="mb-1">
             <label className="block text-base font-semibold text-gray-800 mb-1">Uploaded Document</label>
@@ -95,6 +87,11 @@ export default function AboutUs({ record }) {
           <p className="font-medium text-sm md:text-base text-gray-600">{formatArray(record.languages_spoken)}</p>
         </div>
 
+        <div className='mb-2'>
+          <label className="block text-base font-semibold text-gray-800 mb-1">Tags</label>
+          <p className="font-medium text-sm md:text-base text-gray-600">{formatArray(record.tags)}</p>
+        </div>
+
       </div>
 
 
@@ -106,5 +103,7 @@ export default function AboutUs({ record }) {
         </p>
       </div>
     </section>
+    ) }</>
+   
   );
 }

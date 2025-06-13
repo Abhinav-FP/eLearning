@@ -622,65 +622,143 @@ const SpecialSlotLoader = () => {
   );
 };
 
-const BestTeacherLoader = ({rows}) => {
+const BestTeacherLoader = ({ rows }) => {
   return (
     Array(rows || 3)
       .fill()
       .map((_, i) =>
-    <div className="w-full md:w-4/12 px-2.5" key={i}>
-      <div className="bg-white border border-[rgba(56,121,117,0.2)] rounded-[8px] lg:rounded-[13px] p-3 md:p-4 lg:p-5 animate-pulse">
-        {/* Video Placeholder */}
-        <div className="relative h-[205px] bg-gray-200 rounded-[6px]" />
+        <div className="w-full md:w-4/12 px-2.5" key={i}>
+          <div className="bg-white border border-[rgba(56,121,117,0.2)] rounded-[8px] lg:rounded-[13px] p-3 md:p-4 lg:p-5 animate-pulse">
+            {/* Video Placeholder */}
+            <div className="relative h-[205px] bg-gray-200 rounded-[6px]" />
 
-        {/* Name Placeholder */}
-        <div className="py-3 border-b border-[rgba(204,40,40,.2)] border-opacity-20 flex flex-wrap -mx-2 items-center">
-          <div className="w-8/12 px-2">
-            <div className="h-4 bg-gray-300 rounded w-3/4 mb-1" />
-          </div>
-          {/* Optional rating/lessons placeholder */}
-          {/* <div className="w-4/12 px-2 text-right">
+            {/* Name Placeholder */}
+            <div className="py-3 border-b border-[rgba(204,40,40,.2)] border-opacity-20 flex flex-wrap -mx-2 items-center">
+              <div className="w-8/12 px-2">
+                <div className="h-4 bg-gray-300 rounded w-3/4 mb-1" />
+              </div>
+              {/* Optional rating/lessons placeholder */}
+              {/* <div className="w-4/12 px-2 text-right">
             <div className="h-4 bg-gray-300 rounded w-1/2 mb-1 ml-auto" />
             <div className="h-4 bg-gray-300 rounded w-2/3 ml-auto" />
           </div> */}
-        </div>
+            </div>
 
-        {/* Lessons & Button Row */}
-        <div className="flex justify-between items-center pt-4 lg:pt-5">
-          <div className="w-6/12">
-            <div className="h-3 w-24 bg-gray-300 rounded mb-2" />
-            <div className="h-4 w-20 bg-gray-400 rounded font-bold" />
+            {/* Lessons & Button Row */}
+            <div className="flex justify-between items-center pt-4 lg:pt-5">
+              <div className="w-6/12">
+                <div className="h-3 w-24 bg-gray-300 rounded mb-2" />
+                <div className="h-4 w-20 bg-gray-400 rounded font-bold" />
+              </div>
+              <div className="w-6/12 text-right">
+                <div className="h-9 bg-gray-300 rounded-full w-28 ml-auto" />
+              </div>
+            </div>
           </div>
-          <div className="w-6/12 text-right">
-            <div className="h-9 bg-gray-300 rounded-full w-28 ml-auto" />
-          </div>
-        </div>
-      </div>
-    </div>)
+        </div>)
   );
 };
 
-const LessonListLoader = ({rows}) => {
+const LessonListLoader = ({ rows }) => {
   return (
     Array(rows || 3)
       .fill()
       .map((_, i) =>
-    <li className="bg-white rounded-[10px] lg:rounded-[20px] p-5 lg:p-6 xl:p-10 border border-white animate-pulse mb-4">
-      {/* Title */}
-      <div className="h-6 lg:h-7 xl:h-8 w-3/4 bg-gray-200 rounded mb-4"></div>
+        <li className="bg-white rounded-[10px] lg:rounded-[20px] p-5 lg:p-6 xl:p-10 border border-white animate-pulse mb-4">
+          {/* Title */}
+          <div className="h-6 lg:h-7 xl:h-8 w-3/4 bg-gray-200 rounded mb-4"></div>
 
-      <div className="flex flex-wrap">
-        {/* Description */}
-        <div className="mb-3 md:mb-0 w-full md:w-[calc(100%-170px)] md:pr-5">
-          <div className="h-10 bg-gray-200 rounded-full w-full"></div>
-        </div>
+          <div className="flex flex-wrap">
+            {/* Description */}
+            <div className="mb-3 md:mb-0 w-full md:w-[calc(100%-170px)] md:pr-5">
+              <div className="h-10 bg-gray-200 rounded-full w-full"></div>
+            </div>
 
-        {/* Price Button */}
-        <div className="w-full md:w-[170px] md:text-right mt-2 md:mt-0">
-          <div className="h-[42px] w-[120px] bg-gray-300 rounded-full ml-auto"></div>
-        </div>
-      </div>
-    </li>)
+            {/* Price Button */}
+            <div className="w-full md:w-[170px] md:text-right mt-2 md:mt-0">
+              <div className="h-[42px] w-[120px] bg-gray-300 rounded-full ml-auto"></div>
+            </div>
+          </div>
+        </li>)
   );
 };
 
-export { Loader, BookLoader, LessonLoader, TeacherLoader, TableLoader, ReviewLoader, ProfileFormLoader, MessageLoader, StudentDashboardLoader, TeacherDashboardLoader, EditProfileLoader, TeacherEarningsLoader, TeacherProfileFormLoader, ChatListShimmer, SpecialSlotLoader, BestTeacherLoader, LessonListLoader };
+const TeacherDetailShimmer = () => {
+  const shimmerBox = "animate-pulse bg-gray-200 rounded w-full h-5";
+
+  return (
+    <section className="mt-6 mx-auto px-4">
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-x-6 gap-y-6">
+        {Array(9).fill(0).map((_, i) => (
+          <div key={i} className="mb-2">
+            <div className="h-4 w-32 bg-gray-300 mb-2 rounded" />
+            <div className={shimmerBox} />
+          </div>
+        ))}
+        <div className="mb-2">
+          <div className="h-4 w-40 bg-gray-300 mb-2 rounded" />
+          <div className="flex items-center gap-2">
+            <div className="w-5 h-5 bg-gray-300 rounded-full" />
+            <div className="h-4 w-16 bg-gray-200 rounded" />
+          </div>
+        </div>
+      </div>
+      <div className="mt-8">
+        <div className="h-4 w-40 bg-gray-300 mb-2 rounded" />
+        <div className="space-y-2">
+          <div className="h-4 w-full bg-gray-200 rounded" />
+          <div className="h-4 w-3/4 bg-gray-200 rounded" />
+          <div className="h-4 w-2/3 bg-gray-200 rounded" />
+        </div>
+      </div>
+    </section>
+  )
+}
+
+const TeacherProfileHeaderShimmer = () => {
+  return (
+    <>
+      <div className="border-b border-[rgba(0,0,0,.1)] overflow-hidden">
+        <div className="bg-white pb-8">
+          <div className="flex flex-col md:flex-row items-start md:items-center gap-6 animate-pulse">
+            <div className="w-24 h-24 rounded-full bg-gray-200 border-4 border-white shadow-lg" />
+            <div className="flex-2 w-full">
+              <div className="flex items-center gap-3 mb-1">
+                <div className="h-6 w-40 bg-gray-200 rounded" />
+                <div className="h-4 w-4 bg-gray-300 rounded-full" />
+              </div>
+              <div className="h-4 w-64 bg-gray-200 mb-2 rounded" />
+              <div className="flex flex-wrap items-center gap-4 text-sm text-gray-400">
+                <div className="h-4 w-32 bg-gray-200 rounded" />
+                <div className="h-4 w-28 bg-gray-200 rounded" />
+                <div className="h-4 w-40 bg-gray-200 rounded" />
+              </div>
+            </div>
+            <div className="w-full lg:w-[200px] h-[200px] bg-gray-200 rounded-lg" />
+          </div>
+        </div>
+      </div>
+
+      <div className="pt-2.5 space-x-1 md:space-x-2 lg:space-x-5 overflow-y-auto whitespace-nowrap animate-pulse">
+        {Array(5)
+          .fill(0)
+          .map((_, index) => (
+            <div
+              key={index}
+              className="inline-block h-10 w-[100px] md:w-[120px] lg:w-[150px] rounded-xl bg-gray-200"
+            />
+          ))}
+      </div>
+    </>
+  );
+};
+
+
+export {
+  Loader, BookLoader, LessonLoader, TeacherLoader, TableLoader,
+  TeacherDetailShimmer, TeacherProfileHeaderShimmer, ReviewLoader,
+  ProfileFormLoader, MessageLoader, StudentDashboardLoader,
+  TeacherDashboardLoader, EditProfileLoader, TeacherEarningsLoader,
+  TeacherProfileFormLoader, ChatListShimmer,
+  SpecialSlotLoader, BestTeacherLoader, LessonListLoader
+};

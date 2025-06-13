@@ -105,11 +105,11 @@ export default function index() {
   return (
     <TeacherLayout page={"Earnings"}>
       <div className="min-h-screen p-5 lg:p-[30px]">
-        <div className="flex justify-between items-center mb-4 lg:mb-5">
+        <div className="flex flex-wrap justify-between items-center mb-4 lg:mb-5">
           {/* <h2 className="text-lg md:text-xl lg:text-2xl font-bold text-[#CC2828] tracking-[-0.04em] font-inter">
               Earnings
             </h2> */}
-          <div className="w-1/3 max-w-sm relative">
+          <div className="w-full mb-4 md:mb-0 md:w-1/3 md:max-w-sm relative">
             <span className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
               <FiSearch className="text-[#888]" />
             </span>
@@ -118,14 +118,14 @@ export default function index() {
               value={searchText}
               onChange={handleSearchChange}
               placeholder="Search using name or payment id"
-              className="w-full pl-10 pr-4 py-2 border border-[#ddd] text-[#000] rounded focus:outline-none focus:ring-2 focus:ring-[#CC2828] placeholder-gray-400"
+              className="w-full pl-10 pr-4 py-2 h-[44px] border border-[#ddd] text-[#000] rounded-sm focus:outline-none focus:ring-2 focus:ring-[#CC2828] placeholder-gray-400"
             />
           </div>
           <div className="flex items-center space-x-3">
             <select
               value={selectedOption}
               onChange={handleDropdownChange}
-              className="border border-[#CC2828] text-[#CC2828] px-2 sm:px-8 py-2.5 rounded-md focus:outline-none"
+              className="border border-[#ddd] h-[44px] text-[#000] px-2 sm:px-3 xl:px-4 py-2  rounded-sm focus:outline-none"
             >
               <option value="">All</option>
               <option value="last7">Last 7 Days</option>
@@ -134,29 +134,31 @@ export default function index() {
                 <option key={year} value={year}>{year}</option>
               ))}
             </select>
-            <button
-              onClick={() => {
-                setIsEarning(true);
-              }}
-              className="w-fit px-2 sm:px-8 py-2.5 hover:bg-white hover:text-[#CC2828] border border-[#CC2828] rounded-[10px] tracking-[-0.06em] text-sm font-medium bg-[#CC2828] text-white cursor-pointer"
-            >
-              Request Payout
-            </button>
-            <button
-              onClick={() => {
-                downloadExcel();
-              }}
-              className="w-fit px-2 sm:px-8 py-2.5 hover:bg-white hover:text-[#CC2828] border border-[#CC2828] rounded-[10px] tracking-[-0.06em] text-sm font-medium bg-[#CC2828] text-white cursor-pointer"
-            >
-              Export as Excel
-            </button>
+            <div className="space-x-3">
+              <button
+                onClick={() => {
+                  setIsEarning(true);
+                }}
+                className="w-fit px-2 px-4 xl:px-8 py-2 h-[44px] hover:bg-white hover:text-[#CC2828] border border-[#CC2828] rounded-sm tracking-[-0.06em] text-sm font-medium bg-[#CC2828] text-white cursor-pointer"
+              >
+                Request Payout
+              </button>
+              <button
+                onClick={() => {
+                  downloadExcel();
+                }}
+                className="w-fit px-2 px-4 xl:px-8 py-2  h-[44px] hover:bg-white hover:text-[#CC2828] border border-[#CC2828] rounded-sm tracking-[-0.06em] text-sm font-medium bg-[#CC2828] text-white cursor-pointer"
+              >
+                Export as Excel
+              </button>
+            </div>
           </div>
         </div>
         {loading ? (
           <TeacherEarningsLoader />
         ) : (
           <>
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 mb-4">
+            <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-4 mb-4">
               {stats &&
                 stats?.map((item, idx) => (
                   <Card

@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import Heading from "../common/Heading";
 import Image from "next/image";
 import LineImg from "../Assets/Images/linebar-red.png";
@@ -6,7 +6,6 @@ import TeacherImg from "../Assets/Images/teacherimg01.png";
 import Link from "next/link";
 import { BookLoader } from "@/components/Loader";
 import { formatMultiPrice } from "@/components/ValueDataHook";
-import StarRating from "../common/StarRating"
 import { useRole } from "@/context/RoleContext";
 import { useRouter } from "next/router";
 import toast from "react-hot-toast";

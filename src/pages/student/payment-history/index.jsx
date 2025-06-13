@@ -5,11 +5,9 @@ import moment from 'moment';
 import { TableLoader } from '@/components/Loader';
 import NoData from '@/pages/common/NoData';
 import { formatMultiPrice } from '@/components/ValueDataHook';
-
 export default function Index() {
-
   const [payment, setPayment] = useState([]);
-  const[loading,setLoading]=useState(false);
+  const [loading, setLoading] = useState(false);
 
   const PaymentHistory = async () => {
     try {
@@ -84,7 +82,7 @@ export default function Index() {
                 ) : (
                   <tr>
                     <td colSpan={5} className="text-center text-gray-500 py-6 font-inter">
-                      <NoData Heading={"No payment data available."}/>
+                      <NoData Heading={"No payment data available."} />
                     </td>
                   </tr>
                 )}

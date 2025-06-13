@@ -3,14 +3,12 @@ import Link from "next/link";
 import Image from "next/image";
 import Logo from "../Assets/Images/logo.png"; // Adjust the path as necessary
 import { IoIosArrowDown } from "react-icons/io";
-// import Button from "./Button";
 import { useRole } from "@/context/RoleContext";
 import { useRouter } from "next/router";
 import toast from "react-hot-toast";
 
 export default function Header() {
 
-    // mobile menu 
     const [menuOpen, setMenuOpen] = useState();
     const { user, setUser } = useRole();
     const router = useRouter();
@@ -18,7 +16,6 @@ export default function Header() {
         setMenuOpen(!menuOpen);
     }
 
-    // dropdown 
     const [DropDown, setDropDown] = useState(false);
     const ToggleDropdown = () => {
         setDropDown(!DropDown);

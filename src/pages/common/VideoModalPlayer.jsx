@@ -25,7 +25,7 @@ function getVideoPlatform(url) {
 export default function VideoModalPlayer({ video, image, name, divClass, imgClass, btnClass, iconClass }) {
     const [isOpen, setIsOpen] = useState(false);
     const platform = getVideoPlatform(video);
-    const [thumbnail, setThumbnail] = useState(image || EmilyCarter);
+    const [thumbnail, setThumbnail] = useState(EmilyCarter);
     const youTubeId = getYouTubeID(video);
     const vimeoId = getVimeoID(video);
 

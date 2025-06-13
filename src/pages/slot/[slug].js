@@ -148,8 +148,8 @@ export default function Index() {
                   <div
                     onClick={() => setPaymentStatus(false)}
                     className={`flex items-center justify-between border rounded-lg p-3 cursor-pointer ${PaymentStatus === true
-                        ? "border-red-300"
-                        : "border-red-400"
+                      ? "border-red-300"
+                      : "border-red-400"
                       }`}
                   >
                     <div className="flex items-center gap-3">
@@ -166,8 +166,8 @@ export default function Index() {
                   <div
                     onClick={() => setPaymentStatus(true)}
                     className={`flex items-center justify-between border rounded-lg p-3 cursor-pointer ${PaymentStatus === true
-                        ? "border-red-400"
-                        : "border-red-300"
+                      ? "border-red-400"
+                      : "border-red-300"
                       }`}
                   >
                     <div className="flex items-center gap-3">
@@ -260,7 +260,6 @@ export default function Index() {
                     0.1 * data?.amount,
                     "USD"
                   )}`}</p>
-                  {/* <p className="text-sm text-gray-500">Estimated ${(selectedLesson?.price + 0.1*selectedLesson?.price).toFixed(2)} USD</p> */}
                 </div>
 
                 {PaymentStatus === false ? (

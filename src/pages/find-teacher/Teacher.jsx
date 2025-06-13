@@ -9,7 +9,6 @@ import { formatMultiPrice } from "@/components/ValueDataHook";
 import { useRole } from "@/context/RoleContext";
 import { useRouter } from "next/router";
 import toast from "react-hot-toast";
-
 export default function Teacher({ teacherData, loading }) {
     const { user } = useRole();
     const router = useRouter();

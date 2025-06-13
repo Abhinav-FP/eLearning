@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import StudentLayout from "../Common/StudentLayout";
 import Image from "next/image";
 import { FaRegHeart } from "react-icons/fa";
@@ -6,19 +6,23 @@ import { FaHeart } from "react-icons/fa6";
 import Listing from "@/pages/api/Listing";
 import Link from "next/link";
 import { TeacherLoader } from "@/components/Loader";
+import { FiSearch } from "react-icons/fi";
 import { formatMultiPrice } from "@/components/ValueDataHook";
 
 export default function Index() {
   const [data, setData] = useState([]);
   const [loading, setLoading] = useState(false);
+  const [searchText, setSearchText] = useState("");
 
-  const fetchStudentTeachers = async (startLoading=true) => {
+  const timerRef = useRef(null);
+
+  const fetchStudentTeachers = async (startLoading=true, search="") => {
     try {
       if(startLoading){
         setLoading(true);
       }
       const main = new Listing();
-      const response = await main.StudentTeacher();
+      const response = await main.StudentTeacher(search);
       setData(response?.data?.data || []);
       setLoading(false);
     } catch (error) {
@@ -50,17 +54,48 @@ export default function Index() {
       console.log("error", error);
     }
   };
+
+  const handleSearchChange = (e) => {
+    const sval = e.target.value;
+    setSearchText(sval);
+    if (timerRef.current) {
+      clearTimeout(timerRef.current);
+    }
+    if (!sval || sval.trim() === "") {
+      timerRef.current = setTimeout(() => {
+        fetchStudentTeachers(true,sval);
+      }, 1500);
+    } else if (sval.length >= 2) {
+      timerRef.current = setTimeout(() => {
+        fetchStudentTeachers(true,sval);
+      }, 1500);
+    }
+  };
   // console.log("data",data);
 
   return (
     <StudentLayout page={"Find a teacher"}>
       <div className="min-h-screen p-5 lg:p-[30px]">
-        <Link
-          href="/student/favourite-teacher"
-          className="flex w-fit ml-auto mb-4 lg:mb-5 px-2 sm:px-8 py-2.5 text-[#CC2828] border border-[#CC2828] rounded-[10px] tracking-[-0.06em] text-sm font-medium hover:bg-[#CC2828] hover:text-white cursor-pointer"
-        >
-          {`View Favourite Teachers (${data?.favouriteSize || "0"})`}
-        </Link>
+        <div className="flex justify-between mb-4 lg:mb-5">
+           <div className="relative w-full sm:w-80">
+              <span className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+              <FiSearch className="text-[#CC2828]" />
+              </span>
+              <input
+              type="text"
+              value={searchText}
+              onChange={handleSearchChange}
+              placeholder="Search using teacher name"
+              className="w-full pl-10 pr-4 py-2 border border-[#CC2828] text-[#CC2828] rounded focus:outline-none focus:ring-2 focus:ring-[#CC2828] placeholder-gray-400"
+              />
+            </div>
+          <Link
+            href="/student/favourite-teacher"
+            className="w-fit ml-auto px-2 sm:px-8 py-2.5 text-[#CC2828] border border-[#CC2828] rounded-[10px] tracking-[-0.06em] text-sm font-medium hover:bg-[#CC2828] hover:text-white cursor-pointer"
+            >
+            {`View Favourite Teachers (${data?.favouriteSize || "0"})`}
+          </Link>
+        </div>
         {/* Lesson Cards */}
         <div className="space-y-4 lg:space-y-5">
           {loading ? (
@@ -86,7 +121,7 @@ export default function Index() {
                       width={104}
                     />
                     <div>
-                      <h3 className="flex font-inter gap-2 items-center text-md lg:text-xl text-[#CC2828] font-medium tracking-[-0.06em] mb-2">
+                      <h3 className="flex font-inter gap-2 items-center text-md lg:text-xl text-[#CC2828] font-medium tracking-[-0.06em] mb-2 capitalize">
                         <Link href={`/teacher/${teacher?._id}`}>
                           {teacher?.userId?.name || ""}
                         </Link>
@@ -112,12 +147,56 @@ export default function Index() {
                           </span>
                         )}
                       </h3>
-                      <p className="text-xs text-[#7A7A7A] font-inter tracking-[-0.04em] mb-1 line-clamp-2">
+                      {teacher?.tags?.length > 0 &&
+                        <div className="flex gap-1 items-center">
+                            <span className="text-[#8D929A] text-base -tracking-[0.03em] pr-2">
+                                Specialities :
+                            </span>
+                            <div className="flex flex-wrap gap-x-2 gap-y-1">
+                                {teacher.tags.map((tag, idx) => (
+                                    <span key={idx} className="flex items-center text-black text-base -tracking-[0.03em] capitalize">
+                                        <svg
+                                            xmlns="http://www.w3.org/2000/svg"
+                                            className="w-4 h-4 mr-1"
+                                            viewBox="0 0 48 48"
+                                        >
+                                            <path
+                                                fill="#4CAF50"
+                                                d="M44,24c0,11.045-8.955,20-20,20S4,35.045,4,24S12.955,4,24,4S44,12.955,44,24z"
+                                            />
+                                            <path
+                                                d="M32.172,16.172L22,26.344l-5.172-5.172c-0.781-0.781-2.047-0.781-2.828,0l-1.414,1.414
+                                        c-0.781,0.781-0.781,2.047,0,2.828l8,8c0.781,0.781,2.047,0.781,2.828,0l13-13c0.781-0.781,0.781-2.047,0-2.828L35,16.172
+                                        C34.219,15.391,32.953,15.391,32.172,16.172z"
+                                                fill="#FFF"
+                                            />
+                                        </svg>
+                                        {tag}
+                                    </span>
+                                ))}
+                            </div>
+                        </div>}
+                      <div className="flex flex-wrap  gap-x-2 md:gap-x-6 lg:gap-x-8 mb-3 lg:mb-5">
+                          <div>
+                              <span className="text-[#8D929A] text-sm -tracking-[0.03em] pr-2">Language :</span>
+                              <span className="capitalize text-black text-sm -tracking-[0.03em] ">{teacher?.languages_spoken.join(' , ') || "N/A"}</span>
+                          </div>
+                          <div>
+                              <span className="text-[#8D929A] text-sm -tracking-[0.03em] pr-2">Nationality :</span>
+                              <span className="capitalize text-black text-sm -tracking-[0.03em] ">{teacher?.userId?.nationality || "N/A"}</span>
+                          </div>
+                          {/* {item?.userId?.nationality} */}
+                          <div>
+                              <span className="text-[#8D929A] text-sm -tracking-[0.03em] pr-2">Gender :</span>
+                              <span className="capitalize text-black text-sm -tracking-[0.03em] ">{teacher?.gender === 'M' ? 'Male' : teacher?.gender === 'F' ? 'Female' : "N/A"}</span>
+                          </div>
+                          <div>
+                              <span className="text-[#8D929A] text-sm -tracking-[0.03em] pr-2">Experience :</span>
+                              <span className="text-black text-sm -tracking-[0.03em] ">{teacher?.experience || 'N/a'} Years</span>
+                          </div>
+                      </div>
+                      <p className="text-sm text-[#7A7A7A] font-inter tracking-[-0.04em] mb-1 line-clamp-2">
                         {teacher?.description || ""}
-                      </p>
-                      <p className="text-[#E4B750] text-base lg:text-lg font-inter">
-                        {teacher.average_price && teacher?.average_duration &&
-                          ` ${formatMultiPrice(teacher.average_price, "USD")}/${teacher?.average_duration} min`}
                       </p>
                     </div>
                   </div>

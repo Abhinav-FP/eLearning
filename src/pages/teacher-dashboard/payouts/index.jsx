@@ -66,7 +66,7 @@ function Index() {
               <select
                 value={selectedOption}
                 onChange={handleDropdownChange}
-                className="border border-[#CC2828] text-[#CC2828] px-3 py-2 rounded focus:outline-none"
+                className="border border-[#CC2828] text-[#CC2828]  px-1 sm:px-4 py-1.5 rounded-md focus:outline-none"
                 >
                 <option value="">All</option>
                 <option value="approved">Approved</option>

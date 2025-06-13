@@ -218,8 +218,8 @@ export default function Profile() {
             <div className="w-full lg:w-6/12 xl:w-5/12 lg:pl-3">
               <div className="flex items-center">
                 <div className="relative h-[52px] w-[52px] flex rounded-full text-sm text-white focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800 mr-4">
-                  <Image
-                    className="h-[52px] w-[52px] rounded-full"
+                  <Image 
+                    className="h-[52px] w-[52px] rounded-full object-cover object-top"
                     src={
                       file instanceof File
                         ? URL.createObjectURL(file)
@@ -477,7 +477,7 @@ export default function Profile() {
                       value="M"
                       checked={data.gender === "M"}
                       onChange={handleChange}
-                      className="text-[#CC2828] focus:ring-[#CC2828]"
+                      className=" w-4 h-4 accent-[#CC2828]"
                     />
                     <span>Male</span>
                   </label>
@@ -488,7 +488,7 @@ export default function Profile() {
                       value="F"
                       checked={data.gender === "F"}
                       onChange={handleChange}
-                      className="text-[#CC2828] focus:ring-[#CC2828]"
+                       className=" w-4 h-4 accent-[#CC2828]"
                     />
                     <span>Female</span>
                   </label>
@@ -499,7 +499,7 @@ export default function Profile() {
                       value="O"
                       checked={data.gender === "O"}
                       onChange={handleChange}
-                      className="text-[#CC2828] focus:ring-[#CC2828]"
+                       className=" w-4 h-4 accent-[#CC2828]"
                     />
                     <span>Other</span>
                   </label>
@@ -538,7 +538,7 @@ export default function Profile() {
                   <button
                     type="button"
                     onClick={handleAddSpeciality}
-                    className="bg-[#CC2828] text-white px-4 py-2 rounded-lg hover:bg-[#a81e1e] text-sm cursor-pointer"
+                    className="bg-[#CC2828] text-white px-6 h-11 lg:h-[54px] rounded-lg hover:bg-[#a81e1e] text-sm cursor-pointer"
                   >
                     Add
                   </button>
@@ -585,7 +585,7 @@ export default function Profile() {
           </div>
           <div className="flex w-full lg:w-12/12 xl:w-11/12 flex-wrap justify-center items-center pt-6 lg:pt-10 space-x-4 lg:space-x-6">
             <button
-              className="w-full max-w-[183px] cursor-pointer border border-[#CC2828] bg-[#CC2828] hover:bg-red-700  text-white py-3.5 cursor-pointer rounded-[10px] font-normal text-base xl:text-xl transition  tracking-[-0.04em]"
+              className="w-full max-w-[143px] md:max-w-[183px] cursor-pointer border border-[#CC2828] bg-[#CC2828] hover:bg-red-700  text-white py-3.5 cursor-pointer rounded-[10px] font-normal text-base xl:text-xl transition  tracking-[-0.04em]"
               type="submit"
               onClick={handleSubmit}
               disabled={processing}

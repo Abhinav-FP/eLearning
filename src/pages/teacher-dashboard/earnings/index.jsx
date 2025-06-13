@@ -54,7 +54,7 @@ export default function index() {
   }, [selectedOption, searchText]);
 
   const downloadExcel = () => {
-    if(data && data?.bookings && data?.bookings?.length == 0){
+    if (data && data?.bookings && data?.bookings?.length == 0) {
       toast.error("No data to export");
       return;
     }
@@ -62,9 +62,9 @@ export default function index() {
       LessonName: item?.LessonId?.title || "",
       LessonDate: moment(item?.startDateTime).format("DD MMM YYYY, hh:mm A") || "",
       PaymentId: moment(item?.StripepaymentId?.created_at || item?.paypalpaymentId?.created_at)
-                 .format("DD MMM YYYY, hh:mm A") || "" || "",
+        .format("DD MMM YYYY, hh:mm A") || "" || "",
       PaymentDate: moment(item?.StripepaymentId?.created_at || item?.paypalpaymentId?.created_at)
-                   .format("DD MMM YYYY, hh:mm A") || "",
+        .format("DD MMM YYYY, hh:mm A") || "",
       Amount: formatMultiPrice(item?.teacherEarning, "USD") || ""
     }));
     const worksheet = XLSX.utils.json_to_sheet(result);
@@ -109,27 +109,27 @@ export default function index() {
   return (
     <TeacherLayout page={"Earnings"}>
       <div className="min-h-screen p-5 lg:p-[30px]">
-        <div className="flex justify-between items-center mb-4 lg:mb-5">
-            {/* <h2 className="text-lg md:text-xl lg:text-2xl font-bold text-[#CC2828] tracking-[-0.04em] font-inter">
+        <div className="flex flex-wrap justify-between items-center mb-4 lg:mb-5">
+          {/* <h2 className="text-lg md:text-xl lg:text-2xl font-bold text-[#CC2828] tracking-[-0.04em] font-inter">
               Earnings
             </h2> */}
-            <div className="w-1/3 max-w-sm relative">
-              <span className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-                <FiSearch className="text-[#CC2828]" />
-              </span>
-              <input
-                type="text"
-                value={searchText}
-                onChange={handleSearchChange}
-                placeholder="Search using name or payment id"
-                className="w-full pl-10 pr-4 py-2 border border-[#CC2828] text-[#CC2828] rounded focus:outline-none focus:ring-2 focus:ring-[#CC2828] placeholder-gray-400"
-              />
-            </div>
-            <div className="flex items-center space-x-3">
+          <div className="w-full mb-4 md:mb-0 md:w-1/3 md:max-w-sm relative">
+            <span className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+              <FiSearch className="text-[#888]" />
+            </span>
+            <input
+              type="text"
+              value={searchText}
+              onChange={handleSearchChange}
+              placeholder="Search using name or payment id"
+              className="w-full pl-10 pr-4 py-2 h-[44px] border border-[#ddd] text-[#000] rounded-sm focus:outline-none focus:ring-2 focus:ring-[#CC2828] placeholder-gray-400"
+            />
+          </div>
+          <div className="flex items-center space-x-3">
             <select
               value={selectedOption}
               onChange={handleDropdownChange}
-              className="border border-[#CC2828] text-[#CC2828] px-3 py-2 rounded focus:outline-none"
+              className="border border-[#ddd] h-[44px] text-[#000] px-2 sm:px-3 xl:px-4 py-2  rounded-sm focus:outline-none"
             >
               <option value="">All</option>
               <option value="last7">Last 7 Days</option>
@@ -138,11 +138,12 @@ export default function index() {
                 <option key={year} value={year}>{year}</option>
               ))}
             </select>
-            <button
+            <div className="space-x-3">
+              <button
                 onClick={() => {
                   setIsEarning(true);
                 }}
-                className="w-fit px-2 sm:px-8 py-2.5 hover:bg-white hover:text-[#CC2828] border border-[#CC2828] rounded-[10px] tracking-[-0.06em] text-sm font-medium bg-[#CC2828] text-white cursor-pointer"
+                className="w-fit px-2 px-4 xl:px-8 py-2 h-[44px] hover:bg-white hover:text-[#CC2828] border border-[#CC2828] rounded-sm tracking-[-0.06em] text-sm font-medium bg-[#CC2828] text-white cursor-pointer"
               >
                 Request Payout
               </button>
@@ -150,106 +151,107 @@ export default function index() {
                 onClick={() => {
                   downloadExcel();
                 }}
-                className="w-fit px-2 sm:px-8 py-2.5 hover:bg-white hover:text-[#CC2828] border border-[#CC2828] rounded-[10px] tracking-[-0.06em] text-sm font-medium bg-[#CC2828] text-white cursor-pointer"
+                className="w-fit px-2 px-4 xl:px-8 py-2  h-[44px] hover:bg-white hover:text-[#CC2828] border border-[#CC2828] rounded-sm tracking-[-0.06em] text-sm font-medium bg-[#CC2828] text-white cursor-pointer"
               >
                 Export as Excel
               </button>
             </div>
           </div>
-      {loading ? (
-        <TeacherEarningsLoader />
-      ) : (
-        <>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 mb-4">
-            {stats &&
-              stats?.map((item, idx) => (
-                <Card
-                  key={idx}
-                  label={item.label}
-                  value={item.value}
-                  icon={item.icon}
-                />
-              ))}
-          </div>
-          <div className="rounded-[5px] border border-[rgba(204,40,40,0.3)] overflow-x-auto">
-            <table className="min-w-full text-sm text-center rounded-[20px]">
-              <thead className="bg-[rgba(204,40,40,0.1)] text-[#535353] tracking-[-0.04em] font-inter rounded-[20px] whitespace-nowrap">
-                <tr>
-                  <th className="font-normal text-sm lg:text-base px-3 lg:px-4 py-2 lg:py-3 border-t border-[rgba(204,40,40,0.2)] capitalize">
-                    Lesson Name
-                  </th>
-                  <th className="font-normal text-sm lg:text-base px-3 lg:px-4 py-2 lg:py-3 border-t border-[rgba(204,40,40,0.2)] capitalize">
-                    Lesson date
-                  </th>
-                  <th className="font-normal text-sm lg:text-base px-3 lg:px-4 py-2 lg:py-3 border-t border-[rgba(204,40,40,0.2)] capitalize">
-                    Payment Id
-                  </th>
-                  <th className="font-normal text-sm lg:text-base px-3 lg:px-4 py-2 lg:py-3 border-t border-[rgba(204,40,40,0.2)] capitalize">
-                    Payment date
-                  </th>
-                  <th className="font-normal text-sm lg:text-base px-3 lg:px-4 py-2 lg:py-3 border-t border-[rgba(204,40,40,0.2)] capitalize">
-                    Amount
-                  </th>
-                  {/* <th className="font-normal text-sm lg:text-base px-3 lg:px-4 py-2 lg:py-3 border-t border-[rgba(204,40,40,0.2)] capitalize">
+        </div>
+        {loading ? (
+          <TeacherEarningsLoader />
+        ) : (
+          <>
+            <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-4 mb-4">
+              {stats &&
+                stats?.map((item, idx) => (
+                  <Card
+                    key={idx}
+                    label={item.label}
+                    value={item.value}
+                    icon={item.icon}
+                  />
+                ))}
+            </div>
+            <div className="rounded-[5px] border border-[rgba(204,40,40,0.3)] overflow-x-auto">
+              <table className="min-w-full text-sm text-center rounded-[20px]">
+                <thead className="bg-[rgba(204,40,40,0.1)] text-[#535353] tracking-[-0.04em] font-inter rounded-[20px] whitespace-nowrap">
+                  <tr>
+                    <th className="font-normal text-sm lg:text-base px-3 lg:px-4 py-2 lg:py-3 border-t border-[rgba(204,40,40,0.2)] capitalize">
+                      Lesson Name
+                    </th>
+                    <th className="font-normal text-sm lg:text-base px-3 lg:px-4 py-2 lg:py-3 border-t border-[rgba(204,40,40,0.2)] capitalize">
+                      Lesson date
+                    </th>
+                    <th className="font-normal text-sm lg:text-base px-3 lg:px-4 py-2 lg:py-3 border-t border-[rgba(204,40,40,0.2)] capitalize">
+                      Payment Id
+                    </th>
+                    <th className="font-normal text-sm lg:text-base px-3 lg:px-4 py-2 lg:py-3 border-t border-[rgba(204,40,40,0.2)] capitalize">
+                      Payment date
+                    </th>
+                    <th className="font-normal text-sm lg:text-base px-3 lg:px-4 py-2 lg:py-3 border-t border-[rgba(204,40,40,0.2)] capitalize">
+                      Amount
+                    </th>
+                    {/* <th className="font-normal text-sm lg:text-base px-3 lg:px-4 py-2 lg:py-3 border-t border-[rgba(204,40,40,0.2)] capitalize">
                   Payout Status
                 </th> */}
-                </tr>
-              </thead>
+                  </tr>
+                </thead>
 
-              <tbody>
-                {data && data?.bookings && data?.bookings?.length > 0 ? (
-                  data.bookings.map((item, index) => (
-                    <tr
-                      key={index}
-                      className="hover:bg-[rgba(204,40,40,0.1)] border-t border-[rgba(204,40,40,0.2)]"
-                    >
-                      <td className="px-3 lg:px-4 py-2 lg:py-3 text-black text-sm lg:text-base font-medium font-inter capitalize">
-                        {item?.LessonId?.title || ""}
-                      </td>
-                      <td className="px-3 lg:px-4 py-2 lg:py-3 text-black text-sm lg:text-base font-medium font-inter capitalize">
-                        {moment(item?.startDateTime).format(
-                          "DD MMM YYYY, hh:mm A"
-                        ) || ""}
-                      </td>
-                      <td className="px-3 lg:px-4 py-2 lg:py-3 text-black text-sm lg:text-base font-medium font-inter">
-                        {item?.StripepaymentId?.payment_id ||
-                          item?.paypalpaymentId?.orderID ||
-                          ""}
-                      </td>
-                      <td className="px-3 lg:px-4 py-2 lg:py-3 text-black text-sm lg:text-base font-medium font-inter">
-                        {moment(
-                          item?.StripepaymentId?.created_at ||
+                <tbody>
+                  {data && data?.bookings && data?.bookings?.length > 0 ? (
+                    data.bookings.map((item, index) => (
+                      <tr
+                        key={index}
+                        className="hover:bg-[rgba(204,40,40,0.1)] border-t border-[rgba(204,40,40,0.2)]"
+                      >
+                        <td className="px-3 lg:px-4 py-2 lg:py-3 text-black text-sm lg:text-base font-medium font-inter capitalize">
+                          {item?.LessonId?.title || ""}
+                        </td>
+                        <td className="px-3 lg:px-4 py-2 lg:py-3 text-black text-sm lg:text-base font-medium font-inter capitalize">
+                          {moment(item?.startDateTime).format(
+                            "DD MMM YYYY, hh:mm A"
+                          ) || ""}
+                        </td>
+                        <td className="px-3 lg:px-4 py-2 lg:py-3 text-black text-sm lg:text-base font-medium font-inter">
+                          {item?.StripepaymentId?.payment_id ||
+                            item?.paypalpaymentId?.orderID ||
+                            ""}
+                        </td>
+                        <td className="px-3 lg:px-4 py-2 lg:py-3 text-black text-sm lg:text-base font-medium font-inter">
+                          {moment(
+                            item?.StripepaymentId?.created_at ||
                             item?.paypalpaymentId?.created_at
-                        ).format("DD MMM YYYY, hh:mm A") || ""}
-                      </td>
-                      <td className="px-3 lg:px-4 py-2 lg:py-3 text-black text-sm lg:text-base font-medium font-inter">
-                        {formatMultiPrice(item?.teacherEarning, "USD") || ""}
-                      </td>
-                      {/* <td className="px-3 lg:px-4 py-2 lg:py-3 text-black text-sm lg:text-base font-medium font-inter capitalize">
+                          ).format("DD MMM YYYY, hh:mm A") || ""}
+                        </td>
+                        <td className="px-3 lg:px-4 py-2 lg:py-3 text-black text-sm lg:text-base font-medium font-inter">
+                          {formatMultiPrice(item?.teacherEarning, "USD") || ""}
+                        </td>
+                        {/* <td className="px-3 lg:px-4 py-2 lg:py-3 text-black text-sm lg:text-base font-medium font-inter capitalize">
                                     {item?.payoutStatus}
                                   </td> */}
+                      </tr>
+                    ))
+                  ) : (
+                    <tr>
+                      <td colSpan={5}>
+                        <div className="mt-2">
+                          <NoData
+                            Heading={"No Earnings found."}
+                            content={
+                              "Your earnings will appear here once you complete a booking."
+                            }
+                          />
+                        </div>
+                      </td>
                     </tr>
-                  ))
-                ) : (
-                  <tr>
-                    <td colSpan={5}>
-                      <div className="mt-2">
-                        <NoData
-                          Heading={"No Earnings found."}
-                          content={
-                            "Your earnings will appear here once you complete a booking."
-                          }
-                        />
-                      </div>
-                    </td>
-                  </tr>
-                )}
-              </tbody>
-            </table>
-          </div>
+                  )}
+                </tbody>
+              </table>
+            </div>
           </>
-      )}
-        </div>
+        )}
+      </div>
 
       {IsEarning && (
         <Earning

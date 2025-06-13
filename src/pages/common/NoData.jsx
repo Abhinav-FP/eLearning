@@ -13,9 +13,9 @@ export default function NoData({ Heading, content }) {
         alt="Banner Icon"
         width={500}
         height={500}
-        className="mx-auto mb-4 h-[100px] w-auto"
+        className="mx-auto mt-2 mb-3 h-[80px] w-auto"
       />
-      <h1 className="my-2 text-gray-800 font-bold text-2xl capitalize">
+      <h1 className="my-2 text-gray-800 font-bold text-lg lg:text-xl xl:text-2xl capitalize">
         {Heading}
       </h1>
       <p className="my-2 text-gray-800">

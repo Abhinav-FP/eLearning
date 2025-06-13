@@ -6,7 +6,7 @@ import LessonList from "./LessonList";
 import Testimonial from "./Testimonial";
 import Heading from "../common/Heading";
 import Calendar from "../calendar/index.jsx";
-import VideoModalPlayer from "../common/VideoModalPlayer"; 
+import VideoModalPlayer from "../common/VideoModalPlayer";
 import { useRouter } from "next/router";
 import Listing from "../api/Listing";
 import BookingPopup from "./BookingPopup";
@@ -29,38 +29,7 @@ export default function Index() {
   const closePopup = () => setIsPopupOpen(false);
   const Id = data?.userId?._id;
 
-  // const QualificationMapping = {
-  //   "high_school": "High School Diploma",
-  //   "associate_degree": "Associate Degree",
-  //   "ba": "Bachelor of Arts (BA)",
-  //   "bsc": "Bachelor of Science (BSc)",
-  //   "bcom": "Bachelor of Commerce (BCom)",
-  //   "be": "Bachelor of Engineering (BE)",
-  //   "btech": "Bachelor of Technology (BTech)",
-  //   "bed": "Bachelor of Education (B.Ed)",
-  //   "ma": "Master of Arts (MA)",
-  //   "msc": "Master of Science (MSc)",
-  //   "mcom": "Master of Commerce (MCom)",
-  //   "me": "Master of Engineering (ME)",
-  //   "mtech": "Master of Technology (MTech)",
-  //   "med": "Master of Education (M.Ed)",
-  //   "mba": "Master of Business Administration (MBA)",
-  //   "phd": "Doctor of Philosophy (PhD)",
-  //   "edd": "Doctor of Education (EdD)",
-  //   "jd": "Juris Doctor (JD)",
-  //   "md": "Medical Doctor (MD)",
-  //   "ca": "Chartered Accountant (CA)",
-  //   "cs": "Company Secretary (CS)",
-  //   "cpa": "Certified Public Accountant (CPA)",
-  //   "diploma_education": "Diploma in Education",
-  //   "diploma_engineering": "Diploma in Engineering",
-  //   "pg_diploma": "Postgraduate Diploma",
-  //   "senmonshi": "Senmonshi (専門士 - Vocational School Degree)",
-  //   "kosen": "Kōtō Senmon Gakkō (高等専門学校 - College of Technology)",
-  //   "other": "Other"
-  // };
 
-  // Get timezone
   useEffect(() => {
     const timeZone = Intl.DateTimeFormat().resolvedOptions().timeZone || "";
     setStudentTimeZone(timeZone);
@@ -91,7 +60,6 @@ export default function Index() {
       const response = await main.TeachergetbyId(slug);
       if (response.data) {
         setdata(response.data.data);
-        // console.log("response", response);
       }
     } catch (error) {
       console.log("error", error);
@@ -101,7 +69,6 @@ export default function Index() {
     try {
       const main = new Listing();
       const response = await main.studentteacherAvaliability(Id);
-      console.log("response", response);
       if (response.data) {
         setContent(response.data.data);
       }
@@ -119,8 +86,6 @@ export default function Index() {
       fetchLessons(Id);
     }
   }, [slug, Id]);
-  // console.log("data", data);
-  // console.log("content" ,content)
 
   const DescriptionWithViewMore = ({ description }) => {
     const [expanded, setExpanded] = useState(false);
@@ -165,16 +130,16 @@ export default function Index() {
                 <div className="bg-[rgba(204,40,40,0.8)] rounded-[20px] py-6 lg:py-[30px] px-6 md:px-[30px] lg:px-[30px] xl:px-[45px]">
                   <div className="flex flex-wrap -mx-4 space-y-4">
                     {data?.intro_video &&
-                    <div className="mx-auto md:mx-0 w-[280px] md:w-[280px] lg:w-[308px] px-4">
-                      <VideoModalPlayer
-                        video={data?.intro_video}
-                        image={data?.userId?.profile_photo || teacherImg}
-                        name={data?.userId?.name}
-                        divClass="relative"
-                        imgClass="rounded-[10px] h-[240px] w-[276px] object-cover"
-                        btnClass="absolute top-1/2  cursor-pointer left-0 w-[81px] text-center text-white hover:text-[#CC2828] right-0 mx-auto -translate-y-1/2"
-                      />
-                    </div>}
+                      <div className="mx-auto md:mx-0 w-[280px] md:w-[280px] lg:w-[308px] px-4">
+                        <VideoModalPlayer
+                          video={data?.intro_video}
+                          image={data?.userId?.profile_photo || teacherImg}
+                          name={data?.userId?.name}
+                          divClass="relative"
+                          imgClass="rounded-[10px] h-[240px] w-[276px] object-cover"
+                          btnClass="absolute top-1/2  cursor-pointer left-0 w-[81px] text-center text-white hover:text-[#CC2828] right-0 mx-auto -translate-y-1/2"
+                        />
+                      </div>}
                     <div className="w-full md:w-[calc(100%-280px)] lg:w-[calc(100%-308px)] px-4">
                       <div className="relative after:right-0 after:top-2 after:bottom-2 after:width-[1px] after-bg-white">
                         <div className="flex items-center gap-2 mb-2 lg:mb-4">
@@ -188,12 +153,12 @@ export default function Index() {
                           </div>
                           <h3 className="text-white text-[24px] md:text-[30px] lg:text-[36px] xl:text-[45px] font-inter font-extrabold tracking-[-0.04em]">
                             {data?.userId?.name || ""}{" "}
-                            {data?.admin_approved === true ?  ( <BiSolidBadgeCheck className="inline text-[#6ABB52]" size={32} /> ) : ""}
+                            {data?.admin_approved === true ? (<BiSolidBadgeCheck className="inline text-[#6ABB52]" size={32} />) : ""}
                           </h3>
                         </div>
                         {/* Fields other than description */}
                         <div className="flex flex-wrap  gap-x-2 md:gap-x-6 lg:gap-x-8 mb-2 lg:mb-4 text-white text-base font-medium">
-                          {data?.tags && data?.tags?.length>0 &&
+                          {data?.tags && data?.tags?.length > 0 &&
                             <div>
                               <span className="-tracking-[0.03em] pr-2">Specialities :</span>
                               <span className="capitalize -tracking-[0.03em] ">{data?.tags?.join(", ") || ""}</span>
@@ -227,7 +192,7 @@ export default function Index() {
                               <span className="-tracking-[0.03em] pr-2">Experience :</span>
                               <span className="-tracking-[0.03em] ">{data?.experience}  Years</span>
                             </div>
-                          } 
+                          }
                         </div>
                         {/* Description field with view more */}
                         <DescriptionWithViewMore description={data?.description || ""} />
@@ -331,7 +296,7 @@ export default function Index() {
 
             {/* Extra fields div */}
             <div
-              style={{ backgroundImage: "url('/leasson-bg.png')"}}
+              style={{ backgroundImage: "url('/leasson-bg.png')" }}
               className="bg-[rgba(249,190,191,.5)] bg-cover bg-center rounded-[20px] py-[40px] lg:py-[60px]"
             >
               <div className="container sm:container md:container lg:container xl:max-w-[1230px]  bg-[rgba(249,190,191, .1)] px-4 mx-auto">
@@ -339,7 +304,7 @@ export default function Index() {
                   classess={"text-[#CC2828] mb-6 lg:mb-8"}
                   title={"Lessons"}
                 />
-                <LessonList lessons={lessons} showSelected={false} slug={slug}/>
+                <LessonList lessons={lessons} showSelected={false} slug={slug} />
               </div>
             </div>
             <div className="pt-[40px] md:pt-[60px] md:pt-[80px] xl:pt-[100px] pb-[40px] lg:pb-[60px] bg-[#F8F9FA]" id="calendar">

@@ -60,8 +60,6 @@ export default function Index() {
       status: false
     });
     response.then((res) => {
-      console.log("res", res);
-
       toast.success(res.data.message)
       getLessons();
     }).catch((error) => {
@@ -70,7 +68,7 @@ export default function Index() {
   }
   const [isOpen, setIsOpen] = useState(false);
   const [Lesson, setLesson] = useState(null);
-  const LessonCard = ({ item ,datalesson }) => {
+  const LessonCard = ({ item, datalesson }) => {
     return (
       <div className={`${item?.
         is_deleted === true ? "bg-gray-200" : "bg-white"} lesson_list_shadow rounded-2xl flex flex-col md:flex-row gap-8 justify-between items-start md:items-center p-4 lg:px-5 lg:py-6 mb-3 lg:mb-4 `}>
@@ -114,7 +112,6 @@ export default function Index() {
     );
   };
 
-  // console.log("data", data);
 
   return (
     <TeacherLayout page={"Profile & Lessons"}>

@@ -9,7 +9,6 @@ export default function Index() {
     const { id } = router.query;
     const [loading, setLoading] = useState(false);
     const fetch = (id) => {
-        // console.log("id", id)
         setLoading(true);
         const main = new Listing();
         main.StripeSuccess(id)
@@ -28,12 +27,12 @@ export default function Index() {
         }
     }, [id]);
 
-  const [email,setEmail] = useState("");
-  
-  useEffect(()=>{
-    const item=localStorage && localStorage.getItem("email") || "";
-    setEmail(item);
-  },[])
+    const [email, setEmail] = useState("");
+
+    useEffect(() => {
+        const item = localStorage && localStorage.getItem("email") || "";
+        setEmail(item);
+    }, [])
 
     return (
         <div className="min-h-screen flex flex-col items-center justify-center bg-gray-50 px-4">

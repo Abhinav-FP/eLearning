@@ -18,7 +18,6 @@ export default function Iindex() {
   const handleDropdownChange = (e) => {
     setSelectedOption(e.target.value);
   };
-  // console.log("payout", payout)
 
   useEffect(() => {
     setLoading(true);
@@ -26,7 +25,6 @@ export default function Iindex() {
     main
       .SpecialSlotGet(selectedOption)
       .then((r) => {
-        // console.log("r", r)
         setPayout(r?.data?.data);
         setLoading(false);
       })
@@ -37,7 +35,6 @@ export default function Iindex() {
       });
   }, [selectedOption]);
 
-  // console.log("payout",payout);
 
   return (
     <TeacherLayout page={"Slots"}>

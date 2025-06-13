@@ -48,7 +48,6 @@ function Index() {
       const response = await main.adminStudentList(search, filter);
       if (response?.data) {
         setData(response?.data?.data || []);
-        console.log(response?.data);
       }
       setLoading(false);
     } catch (error) {

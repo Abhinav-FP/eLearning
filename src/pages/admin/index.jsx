@@ -23,7 +23,6 @@ export default function Index() {
     main
       .AdminDashboard()
       .then((r) => {
-        console.log("API Response:", r);
         setListing(r?.data?.data); // ✅ Update state with data
         setLoading(false);
       })

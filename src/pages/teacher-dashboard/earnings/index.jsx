@@ -26,7 +26,6 @@ export default function index() {
 
   const handleDropdownChange = (e) => {
     setSelectedOption(e.target.value);
-    // console.log("Selected:", e.target.value);
   };
 
   // Generate years from current year down to 2025
@@ -70,12 +69,9 @@ export default function index() {
     const worksheet = XLSX.utils.json_to_sheet(result);
     const workbook = XLSX.utils.book_new();
     XLSX.utils.book_append_sheet(workbook, worksheet, 'Sheet1');
-    //let buffer = XLSX.write(workbook, { bookType: "xlsx", type: "buffer" });
-    //XLSX.write(workbook, { bookType: "xlsx", type: "binary" });
     XLSX.writeFile(workbook, 'Earnings.xlsx');
   };
 
-  // console.log("data",data);
 
   const stats = useMemo(
     () => [

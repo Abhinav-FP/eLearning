@@ -6,29 +6,29 @@ import toast from 'react-hot-toast';
 export default function Addavailablility({ isOpen, onClose, TeacherAvailabilitys, selectedSlot }) {
   const [loading, setLoading] = useState(false);
   const [formData, setFormData] = useState({
-     startDateTime: "",
-     endDateTime: "",
+    startDateTime: "",
+    endDateTime: "",
   });
 
   function toDatetimeLocal(date) {
-  const pad = (n) => n.toString().padStart(2, '0');
-  const year = date.getFullYear();
-  const month = pad(date.getMonth() + 1);
-  const day = pad(date.getDate());
-  const hours = pad(date.getHours());
-  const minutes = pad(date.getMinutes());
-  return `${year}-${month}-${day}T${hours}:${minutes}`;
+    const pad = (n) => n.toString().padStart(2, '0');
+    const year = date.getFullYear();
+    const month = pad(date.getMonth() + 1);
+    const day = pad(date.getDate());
+    const hours = pad(date.getHours());
+    const minutes = pad(date.getMinutes());
+    return `${year}-${month}-${day}T${hours}:${minutes}`;
   };
 
-  useEffect(()=>{
-    if(selectedSlot?.start && selectedSlot?.end){
-    setFormData((prev)=>({
-      ...prev,
-      startDateTime: toDatetimeLocal(new Date(selectedSlot?.start)),
-      endDateTime: toDatetimeLocal(new Date(selectedSlot?.end)),
-    }));
-  }
-  },[selectedSlot])
+  useEffect(() => {
+    if (selectedSlot?.start && selectedSlot?.end) {
+      setFormData((prev) => ({
+        ...prev,
+        startDateTime: toDatetimeLocal(new Date(selectedSlot?.start)),
+        endDateTime: toDatetimeLocal(new Date(selectedSlot?.end)),
+      }));
+    }
+  }, [selectedSlot])
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -44,7 +44,7 @@ export default function Addavailablility({ isOpen, onClose, TeacherAvailabilitys
     if (new Date(formData.endDateTime) <= new Date(formData.startDateTime)) {
       toast.error("End date/time must be after start date/time");
       return;
-  }
+    }
     setLoading(true);
     try {
       const main = new Listing();
@@ -72,10 +72,6 @@ export default function Addavailablility({ isOpen, onClose, TeacherAvailabilitys
     setLoading(false);
   };
 
-  // console.log("formData",formData);
-
-
-
   return (
     <Popup isOpen={isOpen} onClose={onClose} size={"max-w-[510px]"}>
       <form
@@ -93,7 +89,7 @@ export default function Addavailablility({ isOpen, onClose, TeacherAvailabilitys
             name="startDateTime"
             value={formData.startDateTime}
             onChange={handleChange}
-            min={new Date().toISOString().slice(0, 16)} 
+            min={new Date().toISOString().slice(0, 16)}
             placeholder="Enter start date and time"
             className="w-full p-3 rounded-md lg:rounded-lg text-base bg-[#F4F6F8] text-gray-700 focus:outline-none focus:ring-2 focus:ring-[#CC2828]"
             required
@@ -107,7 +103,7 @@ export default function Addavailablility({ isOpen, onClose, TeacherAvailabilitys
           <input
             type="datetime-local"
             name="endDateTime"
-            min={new Date().toISOString().slice(0, 16)} 
+            min={new Date().toISOString().slice(0, 16)}
             value={formData.endDateTime}
             onChange={handleChange}
             placeholder="Enter description"

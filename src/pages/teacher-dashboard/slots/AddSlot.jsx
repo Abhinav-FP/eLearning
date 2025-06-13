@@ -12,8 +12,8 @@ export default function AddSlot({ isOpen, onClose }) {
     startDateTime: "",
     endDateTime: "",
   });
-  const[filteredStudents, setfilteredStudents]=useState(null);
-  const [data, setData]=useState({});
+  const [filteredStudents, setfilteredStudents] = useState(null);
+  const [data, setData] = useState({});
   const [search, setSearch] = useState("");
   const [isFocused, setIsFocused] = useState(false);
   const wrapperRef = useRef(null);
@@ -63,39 +63,33 @@ export default function AddSlot({ isOpen, onClose }) {
   };
 
   useEffect(() => {
-    // setLoading(true);
     const main = new Listing();
     main
       .TeacherStudentLesson()
       .then((r) => {
-        // console.log("r", r?.data)
         setData(r?.data?.data);
-        // setLoading(false);
       })
       .catch((err) => {
         console.log(err);
-        // setLoading(false);
         setData({});
       });
   }, []);
-  
-  useEffect(()=>{
+
+  useEffect(() => {
     setfilteredStudents(data?.students?.filter((student) =>
-    student?.name?.toLowerCase().includes(search.toLowerCase())
-  ));
-  },[data,search])
+      student?.name?.toLowerCase().includes(search.toLowerCase())
+    ));
+  }, [data, search])
 
   const handleStudentSelect = (student) => {
-    // console.log("student",student);
     setFormData((prev) => ({
       ...prev,
       student: student._id,
     }));
-    setSearch(student?.name); 
-    setIsFocused(false); 
+    setSearch(student?.name);
+    setIsFocused(false);
   };
 
-  // console.log("formData",formData);
 
   return (
     <Popup isOpen={isOpen} onClose={onClose} size={"max-w-[540px]"}>
@@ -128,9 +122,8 @@ export default function AddSlot({ isOpen, onClose }) {
                   <div
                     key={student._id}
                     onClick={() => handleStudentSelect(student)}
-                    className={`flex items-center gap-3 p-3 cursor-pointer hover:bg-gray-100 ${
-                      formData.student === student._id ? "bg-gray-300" : ""
-                    }`}
+                    className={`flex items-center gap-3 p-3 cursor-pointer hover:bg-gray-100 ${formData.student === student._id ? "bg-gray-300" : ""
+                      }`}
                   >
                     <img
                       src={student?.profile_photo || "/profile.png"}
@@ -162,9 +155,9 @@ export default function AddSlot({ isOpen, onClose }) {
             required
           >
             <option value=""> Select a Lesson </option>
-            {data && data?.lessons && data?.lessons?.map((item,index)=>(
-             <option key={index} value={item?._id}>{item?.title}</option>
-             ))}
+            {data && data?.lessons && data?.lessons?.map((item, index) => (
+              <option key={index} value={item?._id}>{item?.title}</option>
+            ))}
           </select>
         </div>
 
@@ -212,14 +205,14 @@ export default function AddSlot({ isOpen, onClose }) {
         </div>
 
         {/* Action Buttons */}
-       <div className="flex justify-center mt-6">
-        <button
-          type="submit"
-          className="bg-red-600 text-white py-2 px-6 rounded-md hover:bg-red-700 transition duration-200 cursor-pointer"
-        >
-          {loading ? "Adding..." : "Create Slot"}
-        </button>
-      </div>
+        <div className="flex justify-center mt-6">
+          <button
+            type="submit"
+            className="bg-red-600 text-white py-2 px-6 rounded-md hover:bg-red-700 transition duration-200 cursor-pointer"
+          >
+            {loading ? "Adding..." : "Create Slot"}
+          </button>
+        </div>
       </form>
     </Popup>
   );

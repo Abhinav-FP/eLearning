@@ -5,11 +5,6 @@ import 'react-big-calendar/lib/css/react-big-calendar.css';
 import Addavailablility from './Addavailablility';
 import EditAvailablity from './EditAvailablity';
 import toast from 'react-hot-toast';
-// import { DateTime } from "luxon";
-
-// // Convert UTC to local time zone
-// const studentTimeZone = Intl.DateTimeFormat().resolvedOptions().timeZone;
-// console.log("studentTimeZone",studentTimeZone);
 
 const localizer = momentLocalizer(moment);
 
@@ -41,7 +36,6 @@ const Availablility = ({ Availability, TeacherAvailabilitys }) => {
   const closeAvailablility = () => setIsPopupOpen(false);
 
   const handleSelectSlot = (slotInfo) => {
-    // console.log("slot",slotInfo);
     setSelectedSlot(slotInfo);
     setIsPopupOpen(true);
   };
@@ -173,7 +167,6 @@ const Availablility = ({ Availability, TeacherAvailabilitys }) => {
   const closeModal = () => {
     setSelectedEvent(false);
   };
-  // console.log("selectedSlot",selectedSlot);
 
   return (
     <>
@@ -225,7 +218,6 @@ const Availablility = ({ Availability, TeacherAvailabilitys }) => {
               eventPropGetter={eventStyleGetter}
               components={{ event: Event }}
               onSelectEvent={(event) => {
-                // console.log("Clicked event", event);
                 if (!event?.id || event?.id === "undefined") {
                   toast.error("Slots having a booking are not editable");
                   return;
@@ -233,7 +225,6 @@ const Availablility = ({ Availability, TeacherAvailabilitys }) => {
                 setSelectedEvent(event)
               }}
               onSelectSlot={(slotInfo) => {
-                // console.log("sloInfo",slotInfo);
                 const overlap = events.some(event =>
                   moment(slotInfo.start).isBefore(event.end) &&
                   moment(slotInfo.end).isAfter(event.start)

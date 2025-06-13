@@ -50,7 +50,6 @@ export default function Index() {
       console.log("error", error);
     }
   };
-  // console.log("data",data);
 
   return (
     <StudentLayout page={"Find a teacher"}>

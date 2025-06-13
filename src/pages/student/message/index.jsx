@@ -34,7 +34,6 @@ export default function Index() {
   }, []);
 
 
-  // console.log("MobileOpen", MobileOpen)
   const chatContainerRef = useRef(null);
   const router = useRouter();
   const Query = router.query.query;

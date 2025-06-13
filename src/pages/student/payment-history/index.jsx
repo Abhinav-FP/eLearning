@@ -28,7 +28,6 @@ export default function Index() {
     PaymentHistory();
   }, []);
 
-  console.log("payment", payment)
   const [selectedPayment, setSelectedPayment] = useState("paypal");
 
   return (

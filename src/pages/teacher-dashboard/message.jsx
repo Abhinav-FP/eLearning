@@ -115,8 +115,6 @@ export default function Message() {
     }
   };
 
-  // console.log("messageCount",messageCount);
-
   return (
     <TeacherLayout page={"Messages"}>
       <>

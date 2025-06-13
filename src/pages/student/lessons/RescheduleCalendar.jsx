@@ -162,7 +162,6 @@ const RescheduleCalendar = ({ Availability, setSelectedSlot, selectedLesson }) =
     }
     setSelectedSlot(event);
   };
-  // console.log("availability",Availability);
 
   return (
     <>

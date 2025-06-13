@@ -232,16 +232,16 @@
       return Api.get(`/admin/studentlist?search=${data}&block=${block}`);
     }
 
-    async AdminPayoutList() {
-      return Api.get(`/admin/payout`);
+    async AdminPayoutList(data, option) {
+      return Api.get(`/admin/payout?search=${data}&status=${option}`);
     }
 
     async AdminPayoutAction(id, data) {
       return Api.post(`/admin/payoutUpdate/${id}`, data);
     }
 
-    async AdminBooking() {
-      return Api.get(`/admin/booking`);
+    async AdminBooking(data) {
+      return Api.get(`/admin/booking?search=${data}`);
     }
 
     async AdminTeacherData(id) {

@@ -1,20 +1,23 @@
-import React, { useEffect, useMemo, useState } from 'react';
+import React, { useEffect, useMemo, useRef, useState } from 'react';
 import Listing from '@/pages/api/Listing';
 import moment from 'moment';
 import { TableLoader } from '@/components/Loader';
 import NoData from '@/pages/common/NoData';
 import AdminLayout from '../common/AdminLayout';
+import { FiSearch } from "react-icons/fi";
 
 export default function Index() {
   const [TabOpen, setTabOpen] = useState('upcoming');
   const [data, setData] = useState([]);
   const [loading, setLoading] = useState(false);
-
-  const fetchEarnings = async () => {
+  const [searchText, setSearchText] = useState("");
+  const timerRef = useRef(null);
+  
+  const fetchEarnings = async (search="") => {
     try {
       setLoading(true);
       const main = new Listing();
-      const response = await main.AdminBooking();
+      const response = await main.AdminBooking(search);
       setData(response?.data?.data || []);
     } catch (error) {
       console.log('error', error);
@@ -37,19 +40,36 @@ export default function Index() {
 
   const currentList = TabOpen === 'upcoming' ? upcoming : past;
 
-  console.log("data",data);
+  const handleSearchChange = (e) => {
+    const sval = e.target.value;
+    setSearchText(sval);
+    if (timerRef.current) {
+      clearTimeout(timerRef.current);
+    }
+    if (!sval || sval.trim() === "") {
+      timerRef.current = setTimeout(() => {
+        fetchEarnings(sval);
+      }, 1500);
+    } else if (sval.length >= 2) {
+      timerRef.current = setTimeout(() => {
+        fetchEarnings(sval);
+      }, 1500);
+    }
+  };
+
+  // console.log("data",data);
   
   return (
     <AdminLayout page={"Bookings"}>
       <div className="min-h-screen p-5 lg:p-[30px]">
-        <div className="flex justify-between items-center mb-4 lg:mb-5">
+        {/* <div className="flex justify-between items-center mb-4 lg:mb-5">
           <h2 className="text-lg md:text-xl lg:text-2xl font-bold text-[#CC2828] tracking-[-0.04em] font-inter">
             Bookings
           </h2>
-        </div>
+        </div> */}
 
-        {/* <div className=""> */}
-          <div className="flex flex-wrap gap-5 mb-4">
+        <div className="flex justify-between items-center mb-4 lg:mb-5">
+          <div className="flex flex-wrap gap-5">
             <button
               onClick={() => setTabOpen('upcoming')}
               className={`text-sm lg:text-lg font-medium tracking-[-0.04em] px-6 lg:px-10 py-3 lg:py-2 rounded-[10px] cursor-pointer ${
@@ -71,6 +91,19 @@ export default function Index() {
               Past
             </button>
           </div>
+          <div className="w-1/3 max-w-sm relative">
+            <span className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+              <FiSearch className="text-[#CC2828]" />
+            </span>
+            <input
+              type="text"
+              value={searchText}
+              onChange={handleSearchChange}
+              placeholder="Search using lesson or teacher name"
+              className="w-full pl-10 pr-4 py-2 border border-[#CC2828] text-[#CC2828] rounded focus:outline-none focus:ring-2 focus:ring-[#CC2828] placeholder-gray-400"
+            />
+          </div>
+        </div>
 
           <div className="rounded-[5px] border border-[rgba(204,40,40,0.3)] overflow-x-auto">
             <table className="min-w-full text-sm text-center rounded-[20px]">
@@ -86,6 +119,9 @@ export default function Index() {
                     Teacher Name
                   </th>
                   <th className="font-normal text-sm lg:text-base px-3 lg:px-4 py-2 lg:py-3 border-t border-[rgba(204,40,40,0.2)] capitalize">
+                    Student Name
+                  </th>
+                  <th className="font-normal text-sm lg:text-base px-3 lg:px-4 py-2 lg:py-3 border-t border-[rgba(204,40,40,0.2)] capitalize">
                     Duration
                   </th>
                   <th className="font-normal text-sm lg:text-base px-3 lg:px-4 py-2 lg:py-3 border-t border-[rgba(204,40,40,0.2)] capitalize">
@@ -94,7 +130,7 @@ export default function Index() {
                 </tr>
               </thead>
                {loading ? 
-                  <TableLoader length={5} />
+                  <TableLoader length={6} />
                 :
               <tbody>
                 {currentList && currentList.length > 0 ? (
@@ -103,7 +139,7 @@ export default function Index() {
                       key={index}
                       className="hover:bg-[rgba(204,40,40,0.1)] border-t border-[rgba(204,40,40,0.2)]"
                     >
-                      <td className="px-3 lg:px-4 py-2 lg:py-3 capitalize text-black text-sm lg:text-base font-medium font-inter ">
+                      <td className="px-3 lg:px-4 py-2 lg:py-3 capitalize text-black text-sm lg:text-base font-medium font-inter">
                         {item?.LessonId?.title}
                       </td>
                       <td className="px-3 lg:px-4 py-2 lg:py-3 capitalize text-black text-sm lg:text-base font-medium font-inter ">
@@ -111,6 +147,9 @@ export default function Index() {
                       </td>
                       <td className="px-3 lg:px-4 py-2 lg:py-3 capitalize text-black text-sm lg:text-base font-medium font-inter ">
                         {item?.teacherId?.name}
+                      </td>
+                      <td className="px-3 lg:px-4 py-2 lg:py-3 capitalize text-black text-sm lg:text-base font-medium font-inter ">
+                        {item?.UserId?.name}
                       </td>
                       <td className="px-3 lg:px-4 py-2 lg:py-3 capitalize text-black text-sm lg:text-base font-medium font-inter ">
                         {item?.LessonId?.duration} minutes
@@ -122,7 +161,7 @@ export default function Index() {
                   ))
                 ) : (
                   <tr>
-                    <td colSpan={5}>
+                    <td colSpan={6}>
                       <div className="mt-2">
                           <NoData
                               Heading={"No bookings found."}

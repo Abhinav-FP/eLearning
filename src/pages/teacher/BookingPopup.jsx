@@ -69,7 +69,7 @@ export default function BookingPopup({
     <div className="fixed inset-0 top-0 bottom-0 flex  justify-center bg-[rgba(0,0,0,.3)] z-50">
       <div className='bg-white mt-28 rounded-lg w-full shadow-lg w-ful '>
         <div className="px-4 pt-4  h-full text-gray-800 relative ">
-          <div className="text-gray-800 pb-40 lg:pb-10 overflow-y-auto max-h-[80vh] ">
+          <div style={{ backgroundImage: "url('/leasson-bg.png')" }} className="text-gray-800 pb-40 lg:pb-10 overflow-y-auto max-h-[80vh] h-full ">
             <button
               onClick={onClose}
               className="cursor-pointer text-gray-600 hover:text-gray-800 focus:outline-none absolute right-6 lg:right-12 top-6 lg:top-8 z-[2]"
@@ -79,8 +79,8 @@ export default function BookingPopup({
 
             {step === 1 && (
               <div
-                style={{ backgroundImage: "url('/leasson-bg.png')" }}
-                className="h-full bg-[rgba(249,190,191,.5)] bg-cover bg-center rounded-[20px] py-[40px] lg:py-[60px] pt-10 "
+                 
+                className="h-full bg-[rgba(249,190,191,.5)] bg-cover bg-center rounded-[20px] py-[40px] lg:py-[60px] pt-10 min-h-full "
               >
                 <div className="container sm:container md:container lg:container xl:max-w-[1230px]  bg-[rgba(249,190,191, .1)] px-4 mx-auto">
                   <Heading
@@ -100,7 +100,7 @@ export default function BookingPopup({
             )}
             {step === 2 && (
               <div
-                style={{ backgroundImage: "url('/leasson-bg.png')" }}
+                
                 className="bg-[rgba(249,190,191,.5)] bg-cover bg-center rounded-[20px] py-[40px] lg:py-[60px]"
               >
                 <div className="container sm:container md:container lg:container xl:max-w-[1230px]  bg-[rgba(249,190,191, .1)] px-4 mx-auto">

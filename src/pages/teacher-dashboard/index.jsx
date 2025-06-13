@@ -64,8 +64,8 @@ export default function Index() {
 
           <div className="grid grid-cols-1 sm:grid-cols-2 2xl:grid-cols-3 gap-4">
             {/* Lesson Prices */}
-            <div className="relative bg-white rounded-xl dashboard-box p-3.5 lg:p-4 xl:p-5 border border-[rgba(204,40,40,0.2)] flex flex-col min-h-[136px]">
-              <h2 className="font-inter text-[#CC2828] font-bold text-lg lg:text-xl xl:text-2xl capitalize tracking-[-0.04em]">
+            <div className="relative bg-white rounded-xl dashboard-box p-3.5 lg:p-4 xl:p-5 border border-[rgba(204,40,40,0.2)] flex flex-col min-h-[120px] md:min-h-[136px]">
+              <h2 className="font-inter text-[#CC2828] font-bold text-base sm:text-lg lg:text-xl xl:text-2xl capitalize tracking-[-0.04em]">
                 Lesson Prices starts from
               </h2>
               <div className="absolute right-4 lg:right-5 xl:right-6 bg-[#CC28281A] border-[0.67px] border-[#CC282880] p-3 rounded">
@@ -73,11 +73,11 @@ export default function Index() {
               </div>
               <div className="flex gap-3 text-lg font-semibold mt-6 xl:mt-4 items-center">
                 {Dashboard?.TeacherData ? (
-                  <p className="flex gap-1 items-center font-inter text-base lg:text-lg xl:text-xl font-medium tracking-[-0.04em] text-black">
+                  <p className="flex gap-1 items-center font-inter text-sm sm:text-base lg:text-lg xl:text-xl font-medium tracking-[-0.04em] text-black">
                     <MdCheckCircle size={18} /> {formatMultiPrice(Dashboard?.TeacherData?.price, "USD")}/{Dashboard?.TeacherData?.duration} minutes
                   </p>
                 ) : (
-                  <p className="font-inter text-base lg:text-lg xl:text-xl font-medium tracking-[-0.04em] text-black">
+                  <p className="font-inter text-sm sm:text-base lg:text-lg xl:text-xl font-medium tracking-[-0.04em] text-black">
                     N/A
                   </p>
                 )}
@@ -85,48 +85,48 @@ export default function Index() {
             </div>
 
             {/* Total Reviews */}
-            <div className="relative bg-white rounded-xl dashboard-box p-3.5 lg:p-4 xl:p-5 border border-[rgba(204,40,40,0.2)] flex flex-col min-h-[136px]">
-              <h2 className="font-inter text-[#CC2828] font-bold text-lg lg:text-xl xl:text-2xl capitalize tracking-[-0.04em]">
+            <div className="relative bg-white rounded-xl dashboard-box p-3.5 lg:p-4 xl:p-5 border border-[rgba(204,40,40,0.2)] flex flex-col min-h-[120px] md:min-h-[136px]">
+              <h2 className="font-inter text-[#CC2828] font-bold text-base sm:text-lg lg:text-xl xl:text-2xl capitalize tracking-[-0.04em]">
                 Total Reviews
               </h2>
               <div className="absolute right-4 lg:right-5 xl:right-6 bg-[#CC28281A] border-[0.67px] border-[#CC282880] p-3 rounded">
                 <MdReviews className="text-[#CC2828]" size={24} />
               </div>
               <div className="text-sm text-[#535353] space-y-1 mt-4">
-                <p className="font-inter text-base lg:text-lg xl:text-xl font-bold tracking-[-0.04em]">{Dashboard?.ReviewesCount}</p>
+                <p className="font-inter text-sm sm:text-base lg:text-lg xl:text-xl font-bold tracking-[-0.04em]">{Dashboard?.ReviewesCount}</p>
               </div>
             </div>
 
 
-            <div className="relative bg-white rounded-xl dashboard-box p-3.5 lg:p-4 xl:p-5 border border-[rgba(204,40,40,0.2)] flex flex-col min-h-[136px]">
-              <h2 className="font-inter text-[#CC2828] font-bold text-lg lg:text-xl xl:text-2xl capitalize tracking-[-0.04em]">
+            <div className="relative bg-white rounded-xl dashboard-box p-3.5 lg:p-4 xl:p-5 border border-[rgba(204,40,40,0.2)] flex flex-col min-h-[120px] md:min-h-[136px]">
+              <h2 className="font-inter text-[#CC2828] font-bold text-base sm:text-lg lg:text-xl xl:text-2xl capitalize tracking-[-0.04em]">
                 Payment Earning
               </h2>
               <div className="absolute right-4 lg:right-5 xl:right-6 bg-[#CC28281A] border-[0.67px] border-[#CC282880] p-3 rounded">
                 <FaWallet className="w-6 h-6 text-[#CC2828]" />
               </div>
-              <div className="text-lg space-y-1.5 mt-6 xl:mt-8">
-                <p className="font-inter text-base lg:text-lg xl:text-xl font-medium tracking-[-0.04em] text-black flex justify-between">
+              <div className="text-lg space-y-1.5 mt-8 xl:mt-8">
+                <p className="font-inter text-sm sm:text-base lg:text-lg xl:text-xl font-medium tracking-[-0.04em] text-black flex justify-between">
                   Stripe Earnings: <span>{formatMultiPrice(Dashboard?.stripepay, "USD")}</span>
                 </p>
-                <p className="font-inter text-base lg:text-lg xl:text-xl font-medium tracking-[-0.04em] text-black flex justify-between">
+                <p className="font-inter text-sm sm:text-base lg:text-lg xl:text-xl font-medium tracking-[-0.04em] text-black flex justify-between">
                   Paypal Earnings <span>{formatMultiPrice(Dashboard?.paypalpay, "USD")}</span>
                 </p>
               </div>
             </div>
             {/* Upcoming Lessons */}
-            <div className="relative bg-white rounded-xl dashboard-box p-3.5 lg:p-4 xl:p-5 border border-[rgba(204,40,40,0.2)] flex flex-col min-h-[136px]">
-              <h2 className="font-inter text-[#CC2828] font-bold text-lg lg:text-xl xl:text-2xl capitalize tracking-[-0.04em]">
+            <div className="relative bg-white rounded-xl dashboard-box p-3.5 lg:p-4 xl:p-5 border border-[rgba(204,40,40,0.2)] flex flex-col min-h-[120px] md:min-h-[136px]">
+              <h2 className="font-inter text-[#CC2828] font-bold text-base sm:text-lg lg:text-xl xl:text-2xl capitalize tracking-[-0.04em]">
                 Upcoming Lessons
               </h2>
               <div className="absolute right-4 lg:right-5 xl:right-6 bg-[#CC28281A] border-[0.67px] border-[#CC282880] p-3 rounded">
                 <MdUpcoming className="text-[#CC2828]" size={24} />
               </div>
               {Dashboard?.upcomingLesson && Dashboard?.upcomingLesson?.length > 0 ?
-                <div className="text-lg space-y-1.5 mt-6 xl:mt-8">
+                <div className="text-lg space-y-1.5 mt-8 xl:mt-8">
                   {Dashboard?.upcomingLesson?.map((item, index) => (
                     <div className="" key={index}>
-                      <p className="font-inter text-base lg:text-lg xl:text-xl font-medium tracking-[-0.04em] text-black flex justify-between">
+                      <p className="font-inter text-sm sm:text-base lg:text-lg xl:text-xl font-medium tracking-[-0.04em] text-black flex justify-between">
                         {item?.LessonId?.title}
                         <span>
                           {moment(item?.startDateTime).format("DD MMM YYYY")}{" "}
@@ -147,45 +147,45 @@ export default function Index() {
 
 
             {/* Total Lessons Completed */}
-            <div className="relative bg-white rounded-xl dashboard-box p-3.5 lg:p-4 xl:p-5 border border-[rgba(204,40,40,0.2)] flex flex-col min-h-[136px]">
-              <h2 className="font-inter text-[#CC2828] font-bold text-lg lg:text-xl xl:text-2xl capitalize tracking-[-0.04em]">
+            <div className="relative bg-white rounded-xl dashboard-box p-3.5 lg:p-4 xl:p-5 border border-[rgba(204,40,40,0.2)] flex flex-col min-h-[120px] md:min-h-[136px]">
+              <h2 className="font-inter text-[#CC2828] font-bold text-base sm:text-lg lg:text-xl xl:text-2xl capitalize tracking-[-0.04em]">
                 Total lessons completed
               </h2>
               <div className="absolute right-4 lg:right-5 xl:right-6 bg-[#CC28281A] border-[0.67px] border-[#CC282880] p-3 rounded">
                 <FaFileAlt className="text-[#CC2828]" size={24} />
               </div>
-              <div className="text-lg space-y-1.5 mt-6 xl:mt-8">
-                <p className="font-inter text-base lg:text-lg xl:text-xl font-medium tracking-[-0.04em] text-black flex justify-between">
+              <div className="text-lg space-y-1.5 mt-8 xl:mt-8">
+                <p className="font-inter text-sm sm:text-base lg:text-lg xl:text-xl font-medium tracking-[-0.04em] text-black flex justify-between">
                   30 mins: <span>{resultMap.duration30}</span>
                 </p>
-                <p className="font-inter text-base lg:text-lg xl:text-xl font-medium tracking-[-0.04em] text-black flex justify-between">
+                <p className="font-inter text-sm sm:text-base lg:text-lg xl:text-xl font-medium tracking-[-0.04em] text-black flex justify-between">
                   50 mins: <span>{resultMap.duration50}</span>
                 </p>
-                <p className="font-inter text-base lg:text-lg xl:text-xl font-medium tracking-[-0.04em] text-black flex justify-between">
+                <p className="font-inter text-sm sm:text-base lg:text-lg xl:text-xl font-medium tracking-[-0.04em] text-black flex justify-between">
                   Custom: <span>{resultMap.durationOther}</span>
                 </p>
               </div>
 
             </div>
 
-            <div className="relative bg-white rounded-xl dashboard-box p-3.5 lg:p-4 xl:p-5 border border-[rgba(204,40,40,0.2)] flex flex-col min-h-[136px]">
-              <h2 className="font-inter text-[#CC2828] font-bold text-lg lg:text-xl xl:text-2xl capitalize tracking-[-0.04em]">
+            <div className="relative bg-white rounded-xl dashboard-box p-3.5 lg:p-4 xl:p-5 border border-[rgba(204,40,40,0.2)] flex flex-col min-h-[120px] md:min-h-[136px]">
+              <h2 className="font-inter text-[#CC2828] font-bold text-base sm:text-lg lg:text-xl xl:text-2xl capitalize tracking-[-0.04em]">
                 Earnings
               </h2>
               <div className="absolute right-4 lg:right-5 xl:right-6 bg-[#CC28281A] border-[0.67px] border-[#CC282880] p-3 rounded">
                 <FaWallet className="w-6 h-6 text-[#CC2828]" />
               </div>
-              <div className="text-lg space-y-1.5 mt-6 xl:mt-8">
-                <p className="font-inter text-base lg:text-lg xl:text-xl font-medium tracking-[-0.04em] text-black flex justify-between">
+              <div className="text-lg space-y-1.5 mt-8 xl:mt-8">
+                <p className="font-inter text-sm sm:text-base lg:text-lg xl:text-xl font-medium tracking-[-0.04em] text-black flex justify-between">
                   Total Earnings: <span>{formatMultiPrice(Dashboard?.earningsSummary?.totalEarnings, "USD")}</span>
                 </p>
-                 <p className="font-inter text-base lg:text-lg xl:text-xl font-medium tracking-[-0.04em] text-black flex justify-between">
+                 <p className="font-inter text-sm sm:text-base lg:text-lg xl:text-xl font-medium tracking-[-0.04em] text-black flex justify-between">
                   Available Earnings: <span>{formatMultiPrice(Dashboard?.earningsSummary?.pendingEarnings, "USD")}</span>
                 </p>
-                <p className="font-inter text-base lg:text-lg xl:text-xl font-medium tracking-[-0.04em] text-black flex justify-between">
+                <p className="font-inter text-sm sm:text-base lg:text-lg xl:text-xl font-medium tracking-[-0.04em] text-black flex justify-between">
                   Requested Earnings: <span>{formatMultiPrice(Dashboard?.earningsSummary?.requestedEarnings || 0, "USD")}</span>
                 </p>
-                <p className="font-inter text-base lg:text-lg xl:text-xl font-medium tracking-[-0.04em] text-black flex justify-between">
+                <p className="font-inter text-sm sm:text-base lg:text-lg xl:text-xl font-medium tracking-[-0.04em] text-black flex justify-between">
                   Paid Earnings: <span>{formatMultiPrice(Dashboard?.earningsSummary?.approvedEarnings, "USD")}</span>
                 </p>
               </div>

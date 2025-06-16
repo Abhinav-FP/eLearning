@@ -143,7 +143,7 @@ export default function Index() {
                     <div className="w-full md:w-[calc(100%-280px)] lg:w-[calc(100%-308px)] px-4">
                       <div className="relative after:right-0 after:top-2 after:bottom-2 after:width-[1px] after-bg-white">
                         <div className="flex items-center gap-2 mb-2 lg:mb-4">
-                          <div className="h-[15px] w-[15px] lg:h-[45px] lg:w-[45px] rounded-full overflow-hidden">
+                          <div className="h-[32px] w-[32px] lg:h-[45px] lg:w-[45px] rounded-full overflow-hidden">
                             <Image
                               src={data?.userId?.profile_photo || TeacherImg}
                               alt={data?.userId?.name}
@@ -153,7 +153,7 @@ export default function Index() {
                           </div>
                           <h3 className="text-white text-[24px] md:text-[30px] lg:text-[36px] xl:text-[45px] font-inter font-extrabold tracking-[-0.04em]">
                             {data?.userId?.name || ""}{" "}
-                            {data?.admin_approved === true ? (<BiSolidBadgeCheck className="inline text-[#6ABB52]" size={32} />) : ""}
+                            {data?.admin_approved === true ? (<BiSolidBadgeCheck className="inline text-[#6ABB52] w-[32px] h-[32x]" size={32} />) : ""}
                           </h3>
                         </div>
                         {/* Fields other than description */}
@@ -162,7 +162,7 @@ export default function Index() {
                             <div>
                               <span className="-tracking-[0.03em] pr-2">Specialities :</span>
                               <span className="capitalize -tracking-[0.03em] ">{data?.tags?.join(", ") || ""}</span>
-                            </div>}
+                            </div>} 
                           {data?.languages_spoken &&
                             <div>
                               <span className="-tracking-[0.03em] pr-2">Language :</span>

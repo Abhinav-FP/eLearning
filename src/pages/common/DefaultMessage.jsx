@@ -1,9 +1,9 @@
 import React from 'react'
 import { IoChatboxEllipsesOutline } from "react-icons/io5";
 
-export default function DefaultMessage() {
+export default function DefaultMessage({className}) {
     return (
-        <div className="w-full lg:w-8/12  xl:w-9/12 flex flex-col   lg:h-[calc(100vh-128px)]  bg-[#F1F1F1]">
+        <div className={`w-full lg:w-8/12  xl:w-9/12 flex flex-col   lg:h-[calc(100vh-128px)]  bg-[#F1F1F1] ${className}`}>
             <div className="flex-1 flex items-center justify-center  px-4 ">
                 <div className="p-6 w-full text-center">
                     <IoChatboxEllipsesOutline size={48} className="mx-auto w-full max-w-xs md:max-w-sm" />

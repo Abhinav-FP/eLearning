@@ -18,6 +18,7 @@ export default function Message() {
   const [chatListLoading, setChatListLoading] = useState(false);
   const [messageCount, SetmessageCount] = useState([]);
   const [selectedIdUser, setSelectedIdUser] = useState();
+  const [mobileOpen, setMobileOpen] = useState(false);
 
   const chatContainerRef = useRef(null);
   const router = useRouter();
@@ -49,7 +50,11 @@ export default function Message() {
 
   const handleUserSelect = (user) => {
     setTeacherId(user?.student?._id)
-    MessageGetAlls(user?.student?._id)
+    MessageGetAlls(user?.student?._id);
+    if (window.innerWidth < 1023) {
+      setMobileOpen(true);
+     }
+
   };
 
   const MessageGetAlls = async (Id) => {
@@ -120,7 +125,7 @@ export default function Message() {
       <>
         <div className="flex flex-wrap w-full">
           {/* Sidebar */}
-          <div className="w-full  mb-3 lg:mb-0  lg:w-1/4  rounded-lg ">
+          <div className={`w-full  mb-3 lg:mb-0  lg:w-4/12 xl:w-3/12  rounded-lg ${mobileOpen ? 'hidden lg:block'  : 'block lg:block'}`}>
             {chatListLoading ?
               <ChatListShimmer />
               :
@@ -151,7 +156,10 @@ export default function Message() {
                       <div className={` h-[28px] w-[28px] text-[#535353] text-xs font-bold flex items-center justify-center absolute right-[22px] rounded-full top-1/2 -translate-y-1/2 ${teacherId === chat?.tecaher?._id ? "bg-white" : "bg-[rgba(204,40,40,0.1)]"}`}>
                         {chat?.count > 5 ? '5+' : chat?.count}
                       </div>
+                      
                     )}
+                    
+
                   </div>
                 ))}
 
@@ -159,7 +167,7 @@ export default function Message() {
           </div>
 
           {teacherId ? (
-            <div className="w-full lg:w-3/4 flex flex-col  bg-[#F1F1F1]">
+            <div className={` w-full lg:w-8/12 xl:w-9/12 flex flex-col  bg-[#F1F1F1] ${mobileOpen ? "block lg:block" : "hidden lg:block"} `}>
               {/* Chat Header */}
               <div className="flex items-center gap-3 lg:gap-4 bg-[#FFFFFF] px-4 lg:px-5 py-3.5 lg:py-4">
                 <Image
@@ -173,6 +181,9 @@ export default function Message() {
                   <h2 className="font-medium text-base text-black mb-0 tracking-[-0.06em] capitalize">{selectedIdUser?.name}</h2>
                   <p className="font-normal text-sm font-inter text-[#1E1E1E] capitalize">{selectedIdUser?.role}</p>
                 </div>
+                 {mobileOpen && (
+                      <button onClick={() => setMobileOpen(false)} className=' block lg:block flex w-fit ml-auto px-6 md:px-8 lg:px-10 py-2 text-[#CC2828] border border-[#CC2828] rounded-md text-xs sm:text-sm hover:bg-[#CC2828] hover:text-white cursor-pointer'>Back</button>
+                    )}
               </div>
               {/* Chat Body */}
               <div
@@ -260,7 +271,7 @@ export default function Message() {
               </form>
             </div>
           ) : (
-            <DefaultMessage />
+            <DefaultMessage className={` ${mobileOpen ? "block lg:block" : "hidden lg:block"}`} />
           )}
           {/* Chat Panel */}
         </div>

@@ -121,11 +121,11 @@ export default function index() {
               className="w-full pl-10 pr-4 py-2 h-[44px] border border-[#ddd] text-[#000] rounded-sm focus:outline-none focus:ring-2 focus:ring-[#CC2828] placeholder-gray-400"
             />
           </div>
-          <div className="flex items-center space-x-3">
+          <div className="w-full md:w-auto flex flex-col md:flex-row items-center md:space-x-3 justify-between">
             <select
               value={selectedOption}
               onChange={handleDropdownChange}
-              className="border border-[#ddd] h-[44px] text-[#000] px-2 sm:px-3 xl:px-4 py-2  rounded-sm focus:outline-none"
+              className="w-full md:w-auto border border-[#ddd] h-[44px] text-[#000] px-2 sm:px-3 xl:px-4 py-2 mb-4 md:mb-0  rounded-sm focus:outline-none"
             >
               <option value="">All</option>
               <option value="last7">Last 7 Days</option>
@@ -134,7 +134,7 @@ export default function index() {
                 <option key={year} value={year}>{year}</option>
               ))}
             </select>
-            <div className="space-x-3">
+            <div className="space-x-3 w-full md:w-auto">
               <button
                 onClick={() => {
                   setIsEarning(true);

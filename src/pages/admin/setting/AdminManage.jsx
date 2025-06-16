@@ -42,7 +42,7 @@ export default function AdminManage() {
         HomeLists();
     }, []);
 
-     const handleSubmit = async (e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault();
         if (processing) return;
 

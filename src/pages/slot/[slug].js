@@ -8,7 +8,6 @@ import { formatMultiPrice } from "@/components/ValueDataHook";
 import Image from "next/image";
 import Heading from "../common/Heading";
 import { SpecialSlotLoader } from "@/components/Loader";
-
 export default function Index() {
   const router = useRouter();
   const { slug } = router.query;
@@ -148,11 +147,10 @@ export default function Index() {
                 <div className="space-y-4">
                   <div
                     onClick={() => setPaymentStatus(false)}
-                    className={`flex items-center justify-between border rounded-lg p-3 cursor-pointer ${
-                      PaymentStatus === true
-                        ? "border-red-300"
-                        : "border-red-400"
-                    }`}
+                    className={`flex items-center justify-between border rounded-lg p-3 cursor-pointer ${PaymentStatus === true
+                      ? "border-red-300"
+                      : "border-red-400"
+                      }`}
                   >
                     <div className="flex items-center gap-3">
                       <span className="text-xl">🅿️</span>
@@ -167,11 +165,10 @@ export default function Index() {
 
                   <div
                     onClick={() => setPaymentStatus(true)}
-                    className={`flex items-center justify-between border rounded-lg p-3 cursor-pointer ${
-                      PaymentStatus === true
-                        ? "border-red-400"
-                        : "border-red-300"
-                    }`}
+                    className={`flex items-center justify-between border rounded-lg p-3 cursor-pointer ${PaymentStatus === true
+                      ? "border-red-400"
+                      : "border-red-300"
+                      }`}
                   >
                     <div className="flex items-center gap-3">
                       <span className="text-xl">💳</span>
@@ -263,7 +260,6 @@ export default function Index() {
                     0.1 * data?.amount,
                     "USD"
                   )}`}</p>
-                  {/* <p className="text-sm text-gray-500">Estimated ${(selectedLesson?.price + 0.1*selectedLesson?.price).toFixed(2)} USD</p> */}
                 </div>
 
                 {PaymentStatus === false ? (

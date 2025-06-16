@@ -4,11 +4,6 @@ import "react-big-calendar/lib/css/react-big-calendar.css";
 import moment from "moment";
 import "react-big-calendar/lib/css/react-big-calendar.css";
 const localizer = momentLocalizer(moment);
-// moment.tz.setDefault("UTC");
-// import "../../styles/calendar.css"
-import Popup from "../common/Popup";
-import PayPalButton from "../payment/index";
-import Stripe from "../stripe/Stripe";
 import { useRole } from "@/context/RoleContext";
 import { useRouter } from "next/router";
 import toast from "react-hot-toast";

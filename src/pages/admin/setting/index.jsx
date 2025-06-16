@@ -15,8 +15,8 @@ export default function Index() {
         <button
           onClick={() => handleTabClick("Profile")}
           className={` cursor-pointer tracking-[-0.04em] font-medium  px-2 md:px-4 lg:px-8 pt-3 lg:pt-4 pb-3 lg:pb-4 text-sm sm:text-base lg:text-xl outline-none focus:outline-none ease-linear transition-all border-b duration-150 ${activeTab === "Profile"
-              ? "text-[#CC2828] border-[#CC2828]"
-              : "text-[#535353]  border-[rgba(0,0,0,.0)] "
+            ? "text-[#CC2828] border-[#CC2828]"
+            : "text-[#535353]  border-[rgba(0,0,0,.0)] "
             }`}
         >
           Profile
@@ -24,8 +24,8 @@ export default function Index() {
         <button
           onClick={() => handleTabClick("password")}
           className={` cursor-pointer tracking-[-0.04em] font-medium  px-2 md:px-4 lg:px-8 pt-3 lg:pt-4 pb-3 lg:pb-4 text-sm sm:text-base lg:text-xl outline-none focus:outline-none ease-linear transition-all border-b duration-150  ${activeTab === "password"
-              ? "text-[#CC2828] border-[#CC2828]"
-              : "text-[#535353]  border-[rgba(0,0,0,.0)] "
+            ? "text-[#CC2828] border-[#CC2828]"
+            : "text-[#535353]  border-[rgba(0,0,0,.0)] "
             }`}
         >
           Password
@@ -33,8 +33,8 @@ export default function Index() {
         <button
           onClick={() => handleTabClick("admin")}
           className={` cursor-pointer tracking-[-0.04em] font-medium  px-2 md:px-4 lg:px-8 pt-3 lg:pt-4 pb-3 lg:pb-4 text-sm sm:text-base lg:text-xl outline-none focus:outline-none ease-linear transition-all border-b duration-150  ${activeTab === "admin"
-              ? "text-[#CC2828] border-[#CC2828]"
-              : "text-[#535353]  border-[rgba(0,0,0,.0)] "
+            ? "text-[#CC2828] border-[#CC2828]"
+            : "text-[#535353]  border-[rgba(0,0,0,.0)] "
             }`}
         >
           Admin management

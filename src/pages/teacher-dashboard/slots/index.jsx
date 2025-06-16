@@ -3,7 +3,6 @@ import TeacherLayout from '../Common/TeacherLayout'
 import NoData from '@/pages/common/NoData';
 import { TableLoader } from '@/components/Loader';
 import Listing from '@/pages/api/Listing';
-import AddLesson from '../profile/AddLesson';
 import AddSlot from './AddSlot';
 import { formatMultiPrice } from '@/components/ValueDataHook';
 import moment from 'moment';

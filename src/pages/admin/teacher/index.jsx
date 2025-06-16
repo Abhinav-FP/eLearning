@@ -1,6 +1,5 @@
 import React, { useEffect, useRef, useState } from "react";
 import AdminLayout from "../common/AdminLayout";
-import Image from "next/image";
 import Listing from "../../api/Listing";
 import Link from "next/link";
 import toast from "react-hot-toast";

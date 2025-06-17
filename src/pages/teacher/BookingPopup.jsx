@@ -9,6 +9,8 @@ import { useRole } from "@/context/RoleContext";
 import { IoMdTime } from "react-icons/io";
 import { FaBookReader } from "react-icons/fa";
 import { formatMultiPrice } from "@/components/ValueDataHook";
+import Listing from "../api/Listing";
+
 export default function BookingPopup({
   isOpen,
   onClose,
@@ -22,12 +24,7 @@ export default function BookingPopup({
   const [step, setStep] = useState(1);
   const [selectedLesson, SetSelectedLesson] = useState(null);
   const [selectedSlot, setSelectedSlot] = useState(null);
-
-  useEffect(() => {
-    setStep(1);
-  }, [isOpen]);
-
-
+  const [commission, setCommission] = useState(null);
 
   function getFormattedEndTime(time, durationInMinutes) {
     const start = new Date(time);
@@ -43,11 +40,9 @@ export default function BookingPopup({
 
     return end.toLocaleString("en-US", options); // → "May 2, 7:40 PM"
   }
-  useEffect(() => {
-    setStep(1);
-  }, [isOpen]);
 
   useEffect(() => {
+    setStep(1);
     if (isOpen) {
       document.body.style.overflow = "hidden";
     } else {
@@ -59,7 +54,25 @@ export default function BookingPopup({
     };
   }, [isOpen]);
 
+  const fetchCommission = async () => {
+    try {
+      const main = new Listing();
+      const response = await main.AdminCommission();
+      if (response?.data?.status) {
+        const value = response?.data?.data || 0;
+        setCommission(value*0.01);
+      }
+    } catch (error) {
+      console.log("error", error);
+    }
+  };
+
+  useEffect(() => {
+   fetchCommission();    
+  }, []);
+
   if (!isOpen) return null;
+  
   return (
 
     <div className="fixed inset-0 top-0 bottom-0 flex  justify-center bg-[rgba(0,0,0,.3)] z-50">
@@ -166,6 +179,7 @@ export default function BookingPopup({
                   selectedSlot={selectedSlot}
                   studentTimeZone={studentTimeZone}
                   user={user}
+                  commission={commission}
                 />
               </>
             )}

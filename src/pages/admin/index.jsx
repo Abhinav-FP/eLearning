@@ -11,6 +11,7 @@ import Link from 'next/link';
 import TeacherImg from "./../Assets/Images/teacherimg.jpg"
 import { ReviewLoader, TableLoader } from '@/components/Loader';
 import NoData from '../common/NoData';
+import Image from 'next/image';
 
 
 export default function Index() {
@@ -159,7 +160,13 @@ export default function Index() {
                   <div key={review._id} className="border border-gray-100 rounded-xl p-4 mb-4 shadow-sm">
                     <div className="flex justify-between items-center mb-3">
                       <div className="flex gap-3 items-center">
-                        <img src={review.userId?.profile_photo ? review.userId?.profile_photo : TeacherImg || TeacherImg} alt="avatar" className="w-10 h-10 rounded-full object-cover border" />
+                        {/* <img src={review?.userId?.profile_photo || "/profile.png"} alt="avatar" className="w-10 h-10 rounded-full object-cover border" /> */}
+                        <Image 
+                          src={review?.userId?.profile_photo || "/profile.png"} 
+                          height={100}
+                          width={100}
+                          alt="avatar" 
+                          className="w-10 h-10 rounded-full object-cover border"/>
                         <div>
                           <p className="font-semibold text-gray-800">{review.userId?.name}</p>
                           <p className="text-xs text-gray-500">

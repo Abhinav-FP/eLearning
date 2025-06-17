@@ -27,29 +27,28 @@ export default function Teacher({ teacherData, loading }) {
                         {teacherData && teacherData?.map((item, i) => (
                             <Link href={`/teacher/${item?._id}`} key={i} className="w-full mb-6 lg:mb-8 bg-[#FFE8E8] rounded-[10px] p-5 md:p-8 lg:p-10">
                                 <div className="flex flex-wrap">
-                                    <div className="w-full md:w-[112px]">
+                                    <div className="w-full md:w-[80px] lg:w-[112px]">
                                         <div className="h-[80px] w-[80px] lg:h-[112px] lg:w-[112px] rounded-full overflow-hidden   mx-0 mb-3 lg:mb-6 ">
                                             <Image src={item?.userId?.profile_photo || TeacherImg} alt={item?.userId?.name} width={164} height={164} />
                                         </div>
                                         {/* <div className=" md:text-center">
-                                          <StarRating rating={item?.averageRating} />
+                                        <StarRating rating={item?.averageRating} />
 
-                                                {item?.totalLessons != 0 &&
+                                            {item?.totalLessons != 0 &&
 
-                                                    <div className="text-black text-sm -tracking-[0.03em] text-sm">{item?.totalLessons} LESSONS</div>
-                                                }
-                                            </div> */}
+                                                <div className="text-black text-sm -tracking-[0.03em] text-sm">{item?.totalLessons} LESSONS</div>
+                                            }
+                                        </div> */}
                                     </div>
-                                    <div className="w-full md:w-[calc(100%-112px)] mt-2 md:mt-0 md:pl-6 lg:pl-8">
+                                    <div className="w-full md:w-[calc(100%-80px)] lg:w-[calc(100%-112px)] mt-2 md:mt-0 md:pl-6 lg:pl-8">
                                         <h3 className="text-black text-xl lg:text-2xl font-bold -tracking-[0.03em] text-left mb-2.5 lg:mb-4">{item?.userId?.name}</h3>
                                         {item?.tags?.length > 0 &&
-                                            <div className="flex gap-1 items-center">
-                                                <span className="text-[#8D929A] text-base -tracking-[0.03em] pr-2">
+                                            <div className="flex gap-x-3 items-center flex-wrap">
+                                                <span className="text-[#8D929A] text-base -tracking-[0.03em] ">
                                                     Specialities :
-                                                </span>
-                                                <div className="flex flex-wrap gap-x-2 gap-y-1">
+                                                </span> 
                                                     {item.tags.map((tag, idx) => (
-                                                        <span key={idx} className="flex items-center text-black text-base -tracking-[0.03em] capitalize">
+                                                        <span key={idx} className="flex gap-1 flex-wrap items-center text-black text-base -tracking-[0.03em] capitalize">
                                                             <svg
                                                                 xmlns="http://www.w3.org/2000/svg"
                                                                 className="w-4 h-4 mr-1"
@@ -69,7 +68,7 @@ export default function Teacher({ teacherData, loading }) {
                                                             {tag}
                                                         </span>
                                                     ))}
-                                                </div>
+                                                
                                             </div>}
 
                                         <div className="flex flex-wrap  gap-x-2 md:gap-x-6 lg:gap-x-8 mb-3 lg:mb-5">

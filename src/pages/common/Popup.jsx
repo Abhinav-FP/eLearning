@@ -17,7 +17,7 @@ const Popup = ({ isOpen, onClose, children, size }) => {
   if (!isOpen) return null; // Render nothing if the popup is not open
 
   return (
-    <div className="fixed inset-0 flex items-center justify-center bg-gray-900/20 z-50">
+    <div className="fixed inset-0 flex items-center justify-center bg-gray-900/20 z-50 px-3">
       <div className={`bg-white rounded-lg w-full shadow-lg ${size}`}>
         <div className="p-4 text-gray-800 overflow-y-auto max-h-[80vh] relative">
           <button

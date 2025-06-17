@@ -18,6 +18,7 @@ class Listing extends Component {
   async Teacherprofile() {
     return Api.get("/teacher/profile");
   }
+
   async TeacherDashboard() {
     return Api.get("/teacher/dashboard");
   }
@@ -56,8 +57,13 @@ class Listing extends Component {
   async HomeTeacherVideo() {
     return Api.get("/home/teacher/video")
   }
+
   async HomePage() {
     return Api.get("/home/find")
+  }
+
+  async AdminCommission() {
+    return Api.get("/home/getCommission");
   }
 
   async TeacherBank(data) {

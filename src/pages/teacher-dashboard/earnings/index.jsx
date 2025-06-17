@@ -111,21 +111,21 @@ export default function index() {
             </h2> */}
           <div className="w-full mb-4 md:mb-0 md:w-1/3 md:max-w-sm relative">
             <span className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-              <FiSearch className="text-[#888]" />
+              <FiSearch className="text-[#888]"/>
             </span>
             <input
               type="text"
               value={searchText}
               onChange={handleSearchChange}
               placeholder="Search using name or payment id"
-              className="w-full pl-10 pr-4 py-2 h-[44px] border border-[#ddd] text-[#000] rounded-sm focus:outline-none focus:ring-2 focus:ring-[#CC2828] placeholder-gray-400"
+              className="w-full pl-10 pr-4 py-2 h-[44px] border border-[#ddd] text-[#000] rounded-md focus:outline-none focus:ring-2 focus:ring-[#CC2828] placeholder-gray-400"
             />
           </div>
-          <div className="flex items-center space-x-3">
+          <div className="w-full md:w-auto flex flex-col md:flex-row items-center md:space-x-3 justify-between">
             <select
               value={selectedOption}
               onChange={handleDropdownChange}
-              className="border border-[#ddd] h-[44px] text-[#000] px-2 sm:px-3 xl:px-4 py-2  rounded-sm focus:outline-none"
+              className="w-full md:w-auto border border-[#ddd] h-[44px] text-[#000] px-2 sm:px-3 xl:px-4 py-2 mb-4 md:mb-0  rounded-md focus:outline-none"
             >
               <option value="">All</option>
               <option value="last7">Last 7 Days</option>
@@ -134,12 +134,12 @@ export default function index() {
                 <option key={year} value={year}>{year}</option>
               ))}
             </select>
-            <div className="space-x-3">
+            <div className="space-x-3 w-full md:w-auto flex md:block justify-between">
               <button
                 onClick={() => {
                   setIsEarning(true);
                 }}
-                className="w-fit px-2 px-4 xl:px-8 py-2 h-[44px] hover:bg-white hover:text-[#CC2828] border border-[#CC2828] rounded-sm tracking-[-0.06em] text-sm font-medium bg-[#CC2828] text-white cursor-pointer"
+                className="w-fit px-2 px-4 xl:px-8 py-2 h-[44px] hover:bg-white hover:text-[#CC2828] border border-[#CC2828] rounded-md tracking-[-0.06em] text-sm font-medium bg-[#CC2828] text-white cursor-pointer"
               >
                 Request Payout
               </button>
@@ -147,7 +147,7 @@ export default function index() {
                 onClick={() => {
                   downloadExcel();
                 }}
-                className="w-fit px-2 px-4 xl:px-8 py-2  h-[44px] hover:bg-white hover:text-[#CC2828] border border-[#CC2828] rounded-sm tracking-[-0.06em] text-sm font-medium bg-[#CC2828] text-white cursor-pointer"
+                className="w-fit px-2 px-4 xl:px-8 py-2  h-[44px] hover:bg-white hover:text-[#CC2828] border border-[#CC2828] rounded-md tracking-[-0.06em] text-sm font-medium bg-[#CC2828] text-white cursor-pointer"
               >
                 Export as Excel
               </button>

@@ -181,28 +181,32 @@ const RescheduleCalendar = ({ Availability, setSelectedSlot, selectedLesson }) =
             </div>
           </div>
           <div className="p-4 relative">
-            <Calendar
-              localizer={localizer}
-              events={events}
-              startAccessor="start"
-              endAccessor="end"
-              defaultView={Views.WEEK}
-              views={[Views.WEEK]}
-              date={currentDate}
-              onNavigate={(date) => setCurrentDate(date)}
-              step={30}
-              timeslots={1}
-              style={{ height: "1000px", width: "100%" }}
-              selectable
-              eventPropGetter={eventStyleGetter}
-              onSelectEvent={(event) => {
-                if (event.title !== "Blocked") {
-                  handleClick(event);
-                }
-              }}
+            <div className="w-full overflow-x-auto  px-2 pb-4 ">
+              <div className="min-w-[768px] md:min-w-full ">
+                <Calendar
+                  localizer={localizer}
+                  events={events}
+                  startAccessor="start"
+                  endAccessor="end"
+                  defaultView={Views.WEEK}
+                  views={[Views.WEEK]}
+                  date={currentDate}
+                  onNavigate={(date) => setCurrentDate(date)}
+                  step={30}
+                  timeslots={1}
+                  style={{ height: "1000px", width: "100%" }}
+                  selectable
+                  eventPropGetter={eventStyleGetter}
+                  onSelectEvent={(event) => {
+                    if (event.title !== "Blocked") {
+                      handleClick(event);
+                    }
+                  }}
 
-              components={{ event: Event }}
-            />
+                  components={{ event: Event }}
+                />
+              </div>
+            </div>
           </div>
         </div>
       </div>

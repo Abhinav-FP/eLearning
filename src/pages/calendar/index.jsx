@@ -198,14 +198,6 @@ const Index = ({ Availability, setIsPopupOpen, usedInPopup, setSelectedSlot, sel
     }
   };
 
-  const [isMobile, setIsMobile] = useState(false);
-
-  useEffect(() => {
-    const updateView = () => setIsMobile(window.innerWidth < 768);
-    updateView();
-    window.addEventListener("resize", updateView);
-    return () => window.removeEventListener("resize", updateView);
-  }, []);
 
   return (
     <>
@@ -244,16 +236,16 @@ const Index = ({ Availability, setIsPopupOpen, usedInPopup, setSelectedSlot, sel
                   events={events}
                   startAccessor="start"
                   endAccessor="end"
-                  defaultView={isMobile ? Views.DAY : Views.WEEK}
-                  views={isMobile ? [Views.DAY] : [Views.WEEK]}
+                  defaultView={Views.WEEK}
+                  views={[Views.WEEK]}
                   date={currentDate}
                   onNavigate={(date) => setCurrentDate(date)}
                   step={30}
                   timeslots={1}
                   style={{
-                    height: isMobile ? "600px" : "1000px",
+                    height: "1000px",
                     width: "100%",
-                    fontSize: isMobile ? "12px" : "14px",
+                    fontSize: "14px",
                   }}
                   selectable
                   eventPropGetter={eventStyleGetter}

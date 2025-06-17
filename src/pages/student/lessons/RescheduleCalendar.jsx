@@ -202,16 +202,6 @@ const RescheduleCalendar = ({ Availability, setSelectedSlot, selectedLesson }) =
               }}
 
               components={{ event: Event }}
-            //   onSelectSlot={(slotInfo) => {
-            //     const overlap = events.some(
-            //       (event) =>
-            //         moment(slotInfo.start).isBefore(event.end) &&
-            //         moment(slotInfo.end).isAfter(event.start)
-            //     );
-            //     if (!overlap) {
-            //       handleClick(slotInfo);
-            //     }
-            //   }}
             />
           </div>
         </div>

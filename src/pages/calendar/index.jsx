@@ -198,6 +198,15 @@ const Index = ({ Availability, setIsPopupOpen, usedInPopup, setSelectedSlot, sel
     }
   };
 
+  const [isMobile, setIsMobile] = useState(false);
+
+  useEffect(() => {
+    const updateView = () => setIsMobile(window.innerWidth < 768);
+    updateView();
+    window.addEventListener("resize", updateView);
+    return () => window.removeEventListener("resize", updateView);
+  }, []);
+
   return (
     <>
       <div className="w-full ">
@@ -228,37 +237,46 @@ const Index = ({ Availability, setIsPopupOpen, usedInPopup, setSelectedSlot, sel
               </h3>}
           </div>
           <div className="p-4 relative">
-            <Calendar
-              localizer={localizer}
-              events={events}
-              startAccessor="start"
-              endAccessor="end"
-              defaultView={Views.WEEK}
-              views={[Views.WEEK]}
-              date={currentDate}
-              onNavigate={(date) => setCurrentDate(date)}
-              step={30}                // 4-hour slots
-              timeslots={1}
-              style={{ height: "1000px", width: "100%" }}
-              selectable
-              eventPropGetter={eventStyleGetter}
-              onSelectEvent={(event) => {
-                if (event.title !== "Blocked") {
-                  handleClick(event);
-                }
-              }}
-              components={{ event: Event }}
-              onSelectSlot={(slotInfo) => {
-                const overlap = events.some(
-                  (event) =>
-                    moment(slotInfo.start).isBefore(event.end) &&
-                    moment(slotInfo.end).isAfter(event.start)
-                );
-                if (!overlap && !usedInPopup) {
-                  handleClick(slotInfo);
-                }
-              }}
-            />
+            <div className="w-full overflow-x-auto  px-2 pb-4 ">
+              <div className="min-w-[768px] md:min-w-full ">
+                <Calendar
+                  localizer={localizer}
+                  events={events}
+                  startAccessor="start"
+                  endAccessor="end"
+                  defaultView={isMobile ? Views.DAY : Views.WEEK}
+                  views={isMobile ? [Views.DAY] : [Views.WEEK]}
+                  date={currentDate}
+                  onNavigate={(date) => setCurrentDate(date)}
+                  step={30}
+                  timeslots={1}
+                  style={{
+                    height: isMobile ? "600px" : "1000px",
+                    width: "100%",
+                    fontSize: isMobile ? "12px" : "14px",
+                  }}
+                  selectable
+                  eventPropGetter={eventStyleGetter}
+                  onSelectEvent={(event) => {
+                    if (event?.title !== "Blocked") {
+                      handleClick(event);
+                    }
+                  }}
+                  components={{ event: Event }}
+                  onSelectSlot={(slotInfo) => {
+                    const overlap = events.some(
+                      (event) =>
+                        moment(slotInfo?.start).isBefore(event?.end) &&
+                        moment(slotInfo?.end).isAfter(event?.start)
+                    );
+                    if (!overlap && !usedInPopup) {
+                      handleClick(slotInfo);
+                    }
+                  }}
+                />
+              </div>
+            </div>
+
           </div>
         </div>
       </div>

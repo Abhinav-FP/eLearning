@@ -38,15 +38,15 @@ export default function Iindex() {
   return (
     <TeacherLayout page={"Slots"}>
       <div className="min-h-screen p-5 lg:p-[30px]">
-        <div className="flex justify-between items-center mb-4 lg:mb-5">
-          <h2 className="capitalize text-lg md:text-xl lg:text-2xl font-bold text-[#CC2828] tracking-[-0.04em] font-inter">
+        <div className="flex flex-col md:flex-row justify-between md:items-center mb-4 lg:mb-5">
+          <h2 className="capitalize text-lg md:text-xl lg:text-2xl font-bold text-[#CC2828] tracking-[-0.04em] font-inter mb-3 md:mb-0">
             Special Slots
           </h2>
-          <div className="flex items-center space-x-3">
+          <div className="flex items-center justify-between space-x-3">
             <select
               value={selectedOption}
               onChange={handleDropdownChange}
-              className="border border-[#CC2828] text-[#CC2828] px-1 sm:px-4 py-1.5 rounded focus:outline-none"
+              className="border border-[#CC2828] text-[#CC2828] px-1 sm:px-4 py-1.5 rounded-md h-[42px] focus:outline-none"
             >
               <option value="">All</option>
               <option value="pending">Pending</option>
@@ -56,7 +56,7 @@ export default function Iindex() {
               onClick={() => {
                 setIsPopupOpen(true);
               }}
-              className="w-fit px-2 sm:px-8 py-2.5 hover:bg-white hover:text-[#CC2828] border border-[#CC2828] rounded-[10px] tracking-[-0.06em] text-sm font-medium bg-[#CC2828] text-white cursor-pointer"
+              className="w-fit px-2 sm:px-8 py-2.5 hover:bg-white hover:text-[#CC2828] border border-[#CC2828] rounded-md h-[42px] tracking-[-0.06em] text-sm font-medium bg-[#CC2828] text-white cursor-pointer"
             >
               Add Special Slot
             </button>

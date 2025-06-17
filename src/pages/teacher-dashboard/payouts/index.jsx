@@ -11,7 +11,7 @@ function Index() {
   const [payout, setPayout] = useState([]);
   const [loading, setLoading] = useState(false);
   const [selectedOption, setSelectedOption] = useState("");
-  
+
   const handleDropdownChange = (e) => {
     setSelectedOption(e.target.value);
   };
@@ -34,7 +34,7 @@ function Index() {
   }, [selectedOption]);
 
   const downloadExcel = () => {
-    if(payout && payout?.length == 0){
+    if (payout && payout?.length == 0) {
       toast.error("No data to export");
       return;
     }
@@ -56,16 +56,16 @@ function Index() {
     <>
       <TeacherLayout page={"Payout"}>
         <div className="min-h-screen p-5 lg:p-[30px]">
-          <div className="flex justify-between items-center mb-4 lg:mb-5">
+          <div className="flex flex-col md:flex-row justify-between md:items-center mb-4 lg:mb-5">
             <h2 className="capitalize text-lg md:text-xl lg:text-2xl font-bold text-[#CC2828] tracking-[-0.04em] font-inter">
               payout Entries
             </h2>
-            <div className="flex items-center space-x-3">
+            <div className="flex items-center space-x-3 justify-between mt-3 md:mt-0">
               <select
                 value={selectedOption}
                 onChange={handleDropdownChange}
-                className="border border-[#CC2828] text-[#CC2828]  px-1 sm:px-4 py-1.5 rounded-md focus:outline-none"
-                >
+                className="border border-[#CC2828] text-[#CC2828] h-[44px] px-1 sm:px-4 py-1.5 rounded-md focus:outline-none"
+              >
                 <option value="">All</option>
                 <option value="approved">Approved</option>
                 <option value="pending">Pending</option>
@@ -75,7 +75,7 @@ function Index() {
                 onClick={() => {
                   downloadExcel();
                 }}
-                className="w-fit px-2 sm:px-8 py-2.5 hover:bg-white hover:text-[#CC2828] border border-[#CC2828] rounded-[10px] tracking-[-0.06em] text-sm font-medium bg-[#CC2828] text-white cursor-pointer"
+                className="w-fit px-2 sm:px-8 h-[44px] py-2 hover:bg-white hover:text-[#CC2828] border border-[#CC2828] rounded-md tracking-[-0.06em] text-sm font-medium bg-[#CC2828] text-white cursor-pointer"
               >
                 Export as Excel
               </button>
@@ -133,12 +133,12 @@ function Index() {
                     <tr>
                       <td colSpan={5}>
                         <div className="mt-2">
-                            <NoData
-                                Heading={"No Payouts found."}
-                                content={
-                                    "You don't have any payout request with the above filter."
-                                }
-                            />
+                          <NoData
+                            Heading={"No Payouts found."}
+                            content={
+                              "You don't have any payout request with the above filter."
+                            }
+                          />
                         </div>
                       </td>
                     </tr>

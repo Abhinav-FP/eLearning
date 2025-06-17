@@ -43,7 +43,7 @@ export default function Earning({ isOpen, onClose, data, fetchEarnings }) {
         <Popup isOpen={isOpen} onClose={onClose} size={"max-w-[510px]"}>
             <form
                 onSubmit={handleAdd}
-                className="max-w-md mx-auto mt-10 px-3 sm:px-6 pb-3 sm:pb-6 bg-white space-y-2 sm:space-y-4"
+                className="max-w-md mx-auto mt-10 px-3 lg:px-6 pb-3 sm:pb-6 bg-white space-y-2 sm:space-y-4"
             >
                 <h2 className="text-2xl font-bold text-center text-[#CC2828]">
                     Request Payout
@@ -72,7 +72,7 @@ export default function Earning({ isOpen, onClose, data, fetchEarnings }) {
                 <div className="flex justify-between gap-4 mt-6">
                     <button
                         type="submit"
-                        className="cursor-pointer flex-1 bg-red-600 text-white py-2 rounded-md hover:bg-red-700 disabled:opacity-50"
+                        className="cursor-pointer flex-1 bg-red-600 text-white py-3 rounded-md hover:bg-red-700 disabled:opacity-50"
                         disabled={loading}
                     >
                         {loading ? "Processing..." : "Request Payout"}

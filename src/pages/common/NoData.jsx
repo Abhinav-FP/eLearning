@@ -2,12 +2,12 @@ import React from 'react'
 import { useRouter } from "next/router";
 import Image from 'next/image';
 
-export default function NoData({ Heading, content }) {
+export default function NoData({ Heading, content, className }) {
     const router=useRouter();
   return (
     // <div className="lg:px-24 lg:py-24 sm:py-20 md:px-44 px-4 py-12 items-center flex justify-center flex-col-reverse lg:flex-row md:gap-28 gap-16">
       // <div className="w-full lg:w-1/2 relative pb-12 lg:pb-0">
-          <div className="relative text-center">
+          <div className={`relative text-center ${className}`}>
       <Image
         src="/no-data.png" // replace with your actual image path
         alt="Banner Icon"

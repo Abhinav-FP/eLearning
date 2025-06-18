@@ -25,6 +25,7 @@ const FaqManager = () => {
         try {
             const main = new Listing();
             const res = await main.HomeFaqList();
+            console.log("res" ,res)
             const faqArray = res?.data?.data || [];
             const validFaqs = faqArray.filter(faq => faq.question && faq.answer);
             setFaqs(validFaqs.length ? validFaqs : [{ question: "", answer: "" }]);

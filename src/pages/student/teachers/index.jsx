@@ -76,22 +76,22 @@ export default function Index() {
   return (
     <StudentLayout page={"Find a teacher"}>
       <div className="min-h-screen p-5 lg:p-[30px]">
-        <div className="flex justify-between mb-4 lg:mb-5">
-           <div className="relative w-full sm:w-80">
+        <div className="flex flex-col md:flex-row justify-between mb-4 lg:mb-5">
+           <div className="relative w-full mb-4 md:mb-0 md:w-80">
               <span className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-              <FiSearch className="text-[#CC2828]" />
+              <FiSearch className="text-[#888]" />
               </span>
               <input
               type="text"
               value={searchText}
               onChange={handleSearchChange}
               placeholder="Search using teacher name"
-              className="w-full pl-10 pr-4 py-2 border border-[#CC2828] text-[#CC2828] rounded focus:outline-none focus:ring-2 focus:ring-[#CC2828] placeholder-gray-400"
+              className="w-full pl-10 pr-4 py-2 border border-[#ddd] text-[#000] rounded-md focus:outline-none focus:ring-1 focus:ring-[#CC2828] placeholder-gray-400"
               />
             </div>
           <Link
             href="/student/favourite-teacher"
-            className="w-fit ml-auto px-2 sm:px-8 py-2.5 text-[#CC2828] border border-[#CC2828] rounded-[10px] tracking-[-0.06em] text-sm font-medium hover:bg-[#CC2828] hover:text-white cursor-pointer"
+            className="w-fit md:ml-auto px-4 lg:px-6 py-2.5 text-[#CC2828] border border-[#CC2828] rounded-md tracking-[-0.06em] text-sm font-medium hover:bg-[#CC2828] hover:text-white cursor-pointer"
             >
             {`View Favourite Teachers (${data?.favouriteSize || "0"})`}
           </Link>
@@ -203,13 +203,13 @@ export default function Index() {
                   <div className="flex flex-row gap-2 justify-between">
                     <Link
                       href={`/teacher/${teacher?._id}`}
-                      className="tracking-[-0.06em] font-inter font-medium px-6 md:px-10 lg:px-12 py-2 lg:py-2.5 text-[#CC2828] border border-[#CC2828] rounded-[10px] text-sm hover:bg-[#CC2828] hover:text-white cursor-pointer"
+                      className="tracking-[-0.06em] font-inter font-medium px-6 md:px-10 lg:px-12 py-2 lg:py-2.5 text-[#CC2828] border border-[#CC2828] rounded-md text-sm hover:bg-[#CC2828] hover:text-white cursor-pointer"
                     >
                       Book
                     </Link>
                     <Link
                       href={`/student/message?query=${teacher?.userId?._id}`}
-                      className="tracking-[-0.06em] font-inter font-medium px-6 md:px-10 lg:px-12 py-2 lg:py-2.5 bg-[#CC2828] text-white rounded-[10px]  text-sm hover:bg-white hover:text-[#CC2828] border border-[#CC2828] cursor-pointer"
+                      className="tracking-[-0.06em] font-inter font-medium px-6 md:px-10 lg:px-12 py-2 lg:py-2.5 bg-[#CC2828] text-white rounded-md  text-sm hover:bg-white hover:text-[#CC2828] border border-[#CC2828] cursor-pointer"
                     >
                       Message
                     </Link>

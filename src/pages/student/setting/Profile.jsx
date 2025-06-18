@@ -116,7 +116,7 @@ export default function Profile() {
                 This will be displayed in your profile
               </p>
             </div>
-            <div className="w-full lg:w-6/12 xl:w-5/12 lg:pl-3">
+            <div className="w-full lg:w-6/12 xl:w-5/12 lg:pl-3 mt-3 lg:mt-0">
               <div className="flex items-center">
                 <div className="relative h-[52px] w-[52px] flex rounded-full text-sm text-white focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800 mr-4">
                   <Image

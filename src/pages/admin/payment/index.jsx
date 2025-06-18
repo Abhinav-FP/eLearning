@@ -133,7 +133,6 @@ export default function index() {
               className="w-full pl-10 pr-4 py-2 border border-[#CC2828] text-[#CC2828] rounded-md focus:outline-none focus:ring-2 focus:ring-[#CC2828] placeholder-gray-400"
             />
           </div>
-
           {/* Dropdown Filter */}
           <div className="w-full">
             <select
@@ -149,7 +148,6 @@ export default function index() {
               ))}
             </select>
           </div>
-
           {/* Export Button */}
           <div className="w-full flex justify-start md:justify-end mb-2 ">
             <button

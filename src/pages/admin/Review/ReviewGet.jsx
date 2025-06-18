@@ -5,7 +5,6 @@ import toast from 'react-hot-toast';
 import { AiFillStar } from 'react-icons/ai';
 import EditReview from './EditReview';
 import NoData from '@/pages/common/NoData';
-import UserImage from "../../Assets/Images/teacherimg.jpg"
 
 export default function ReviewGet({ reviews, Adminreview }) {
     const [processing, setProcessing] = useState(false);
@@ -37,7 +36,6 @@ export default function ReviewGet({ reviews, Adminreview }) {
         setProcessing(false);
     };
 
-    console.log("reviews", reviews)
 
     return (
         <section className="mt-6 mx-auto px-4">
@@ -49,15 +47,11 @@ export default function ReviewGet({ reviews, Adminreview }) {
                 ) : (
                     reviews &&
                     reviews?.map((review) => (
-                        <div
-                            key={review._id}
-                            className="bg-white border border-gray-200 rounded-2xl p-6 transition"
-                        >
-                            {/* Header */}
+                        <div key={review._id} className="bg-white border border-gray-200 rounded-2xl p-6 transition" >
                             <div className="flex justify-between items-center mb-4">
                                 <div className="flex items-center gap-4">
                                     <img
-                                        src={review.userId?.profile_photo ? review.userId?.profile_photo : UserImage || UserImage}
+                                        src={review.userId?.profile_photo ? review.userId?.profile_photo : "/profile.png" || "/profile.png"}
                                         alt={review.userId?.name}
                                         className="w-12 h-12 rounded-full object-cover border"
                                     />
@@ -81,7 +75,6 @@ export default function ReviewGet({ reviews, Adminreview }) {
                                     {review.review_status}
                                 </span>
                             </div>
-
                             {/* Lesson Info */}
                             <div className="mb-2">
                                 <p className="text-sm text-gray-600">
@@ -91,22 +84,18 @@ export default function ReviewGet({ reviews, Adminreview }) {
                                     </span>
                                 </p>
                             </div>
-
                             {/* Rating */}
                             <div className="flex items-center gap-1 text-yellow-500 mb-3">
                                 {Array.from({ length: review.rating }, (_, i) => (
                                     <AiFillStar key={i} className="w-5 h-5" />
                                 ))}
                             </div>
-
                             {/* Description */}
                             <p className="text-gray-700 text-sm whitespace-pre-line leading-relaxed mb-4">
                                 {review.description}
                             </p>
-
                             {/* Action Buttons */}
                             {review.review_status === 'Pending' && (
-
                                 <div className="flex gap-3">
                                     <button
                                         className="bg-[#CC2828]  hover:bg-red-600 text-white px-4 py-2 rounded-lg text-sm cursor-pointer"
@@ -128,15 +117,9 @@ export default function ReviewGet({ reviews, Adminreview }) {
                                             Reject
                                         </button>
                                     </>
-
                                 </div>
                             )}
-
-
                             {/* Edit Button */}
-
-
-                            {/* Conditionally Render EditReview for this review only */}
                             {selectedReview?._id === review._id && (
                                 <EditReview
                                     isOpen={true}

@@ -119,8 +119,9 @@ export default function index() {
   return (
     <AdminLayout page={"Earnings"}>
       <div className="min-h-screen p-5 lg:p-[30px]">
-        <div className="flex justify-between items-center mb-4 lg:mb-5">
-          <div className="w-1/3 relative">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-4 items-center">
+          {/* Search Input */}
+          <div className="relative w-full">
             <span className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
               <FiSearch className="text-[#CC2828]" />
             </span>
@@ -128,15 +129,17 @@ export default function index() {
               type="text"
               value={searchText}
               onChange={handleSearchChange}
-              placeholder="Search using payment id or lesson, teacher or student name"
+              placeholder="Search using payment ID, lesson, teacher, or student name"
               className="w-full pl-10 pr-4 py-2 border border-[#CC2828] text-[#CC2828] rounded-md focus:outline-none focus:ring-2 focus:ring-[#CC2828] placeholder-gray-400"
             />
           </div>
-          <div className="flex items-center space-x-3">
+
+          {/* Dropdown Filter */}
+          <div className="w-full">
             <select
               value={selectedOption}
               onChange={handleDropdownChange}
-              className="border border-[#CC2828] text-[#CC2828] px-3 py-2 rounded-md focus:outline-none"
+              className="w-full border border-[#CC2828] text-[#CC2828] px-3 py-2 rounded-md focus:outline-none focus:ring-2 focus:ring-[#CC2828]"
             >
               <option value="">All</option>
               <option value="last7">Last 7 Days</option>
@@ -145,16 +148,19 @@ export default function index() {
                 <option key={year} value={year}>{year}</option>
               ))}
             </select>
+          </div>
+
+          {/* Export Button */}
+          <div className="w-full flex justify-start md:justify-end mb-2 ">
             <button
-              onClick={() => {
-                downloadExcel();
-              }}
-              className="w-fit px-2 sm:px-8 py-2.5 hover:bg-white hover:text-[#CC2828] border border-[#CC2828] rounded-[10px] tracking-[-0.06em] text-sm font-medium bg-[#CC2828] text-white cursor-pointer"
+              onClick={downloadExcel}
+              className="w-full md:w-fit px-4 py-2.5 hover:bg-white hover:text-[#CC2828] border border-[#CC2828] rounded-md tracking-[-0.06em] text-sm font-medium bg-[#CC2828] text-white transition-colors duration-200"
             >
               Export as Excel
             </button>
           </div>
         </div>
+
         {loading ? (
           <TeacherEarningsLoader />
         ) : (
@@ -170,7 +176,7 @@ export default function index() {
                   />
                 ))}
             </div>
-            <div className="rounded-[5px] border border-[rgba(204,40,40,0.3)] overflow-x-auto">
+            <div className="rounded-[5px] border border-[rgba(204,40,40,0.3)] overflow-x-auto ">
               <table className="min-w-full text-sm text-center rounded-[20px]">
                 <thead className="bg-[rgba(204,40,40,0.1)] text-[#535353] tracking-[-0.04em] font-inter rounded-[20px] whitespace-nowrap">
                   <tr>

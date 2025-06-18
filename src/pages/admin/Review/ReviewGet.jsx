@@ -5,6 +5,7 @@ import toast from 'react-hot-toast';
 import { AiFillStar } from 'react-icons/ai';
 import EditReview from './EditReview';
 import NoData from '@/pages/common/NoData';
+import UserImage from "../../Assets/Images/teacherimg.jpg"
 
 export default function ReviewGet({ reviews, Adminreview }) {
     const [processing, setProcessing] = useState(false);
@@ -12,7 +13,6 @@ export default function ReviewGet({ reviews, Adminreview }) {
 
     const handleReviewAction = async (id, status) => {
         if (processing) return;
-
         setProcessing(true);
         try {
             const main = new Listing();
@@ -37,6 +37,8 @@ export default function ReviewGet({ reviews, Adminreview }) {
         setProcessing(false);
     };
 
+    console.log("reviews", reviews)
+
     return (
         <section className="mt-6 mx-auto px-4">
             <div className="grid grid-cols-1 gap-6">
@@ -55,7 +57,7 @@ export default function ReviewGet({ reviews, Adminreview }) {
                             <div className="flex justify-between items-center mb-4">
                                 <div className="flex items-center gap-4">
                                     <img
-                                        src={review.userId?.profile_photo}
+                                        src={review.userId?.profile_photo ? review.userId?.profile_photo : UserImage || UserImage}
                                         alt={review.userId?.name}
                                         className="w-12 h-12 rounded-full object-cover border"
                                     />

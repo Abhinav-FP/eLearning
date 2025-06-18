@@ -3,6 +3,8 @@ import AdminLayout from "../common/AdminLayout";
 import Profile from "@/pages/student/setting/Profile";
 import Password from "@/pages/student/setting/Password";
 import AdminManage from "./AdminManage";
+import Terms from "./Terms";
+import Privacy from "./Privacy";
 
 export default function Index() {
   const [activeTab, setActiveTab] = useState("Profile");
@@ -37,7 +39,27 @@ export default function Index() {
             : "text-[#535353]  border-[rgba(0,0,0,.0)] "
             }`}
         >
-          Admin management
+          Commision Rate (%)
+        </button>
+
+        <button
+          onClick={() => handleTabClick("term")}
+          className={` cursor-pointer tracking-[-0.04em] font-medium  px-2 md:px-4 lg:px-8 pt-3 lg:pt-4 pb-3 lg:pb-4 text-sm sm:text-base lg:text-xl outline-none focus:outline-none ease-linear transition-all border-b duration-150  ${activeTab === "term"
+            ? "text-[#CC2828] border-[#CC2828]"
+            : "text-[#535353]  border-[rgba(0,0,0,.0)] "
+            }`}
+        >
+          Term & Condition
+        </button>
+
+        <button
+          onClick={() => handleTabClick("privacy")}
+          className={` cursor-pointer tracking-[-0.04em] font-medium  px-2 md:px-4 lg:px-8 pt-3 lg:pt-4 pb-3 lg:pb-4 text-sm sm:text-base lg:text-xl outline-none focus:outline-none ease-linear transition-all border-b duration-150  ${activeTab === "privacy"
+            ? "text-[#CC2828] border-[#CC2828]"
+            : "text-[#535353]  border-[rgba(0,0,0,.0)] "
+            }`}
+        >
+          Privacy Policy
         </button>
       </div>
       <div className="px-3 md:px-8 lg:px-12 pb-6 lg:pb-[30px] min-h-[75vh]">
@@ -45,6 +67,9 @@ export default function Index() {
           {activeTab === "Profile" && <Profile />}
           {activeTab === "password" && <Password />}
           {activeTab === "admin" && <AdminManage />}
+          {activeTab === "term" && <Terms />}
+          {activeTab === "privacy" && <Privacy />}
+
 
         </div>
       </div>

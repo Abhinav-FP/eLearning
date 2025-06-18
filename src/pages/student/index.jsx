@@ -49,7 +49,7 @@ export default function Index() {
           {/* Row 1: Upcoming Lessons & Favorite Teachers */}
           <div className="flex flex-wrap -mx-4 mb-5 space-y-5 lg:space-y-0">
             <div className='w-full lg:w-1/2 px-4'>
-              <div className="bg-white p-4 lg:p-5 border border-[rgba(204,40,40,0.2)] dashboard-box rounded-[20px]">
+              <div className="bg-white h-full p-4 lg:p-5 border border-[rgba(204,40,40,0.2)] dashboard-box rounded-[20px]">
                 {dashboard && dashboard?.booking ?
                   <>
                     <h2 className="font-inter text-lg lg:text-xl tracking-[-0.04em] font-bold text-[#CC2828] mb-4">Upcoming Lessons</h2>
@@ -80,14 +80,14 @@ export default function Index() {
                       className="inline-block mt-4 md:mt-8 bg-[rgba(204,40,40,0.1)] text-[#CC2828] px-8 py-2.5
                      rounded-full text-lg hover:bg-red-200 transition cursor-pointer">
                       Reschedule
-                    </Link>
+                     </Link>
                   </>
                   :
-                  <NoData Heading={"No upcoming booking available"} />}
+                  <NoData className="mt-4" Heading={"No upcoming booking available"} />}
               </div>
             </div>
             <div className='w-full lg:w-1/2 px-4'>
-              <div className="bg-white p-4 lg:p-5 border border-[rgba(204,40,40,0.2)] dashboard-box rounded-[20px]">
+              <div className="bg-white h-full p-4 lg:p-5 border border-[rgba(204,40,40,0.2)] dashboard-box rounded-[20px]">
                 {dashboard && dashboard?.wishlistResult && dashboard?.wishlistResult?.length > 0 ?
                   <>
                     <h2 className="font-inter text-lg lg:text-xl tracking-[-0.04em] font-bold text-[#CC2828] mb-4">Favorite Teachers</h2>

@@ -31,18 +31,17 @@ export default function Home() {
             const response = await main.HomeList();
             const res = response?.data?.data;
             setData({
-                hero_heading: res.hero_heading || "",
-
-                course_heading: res.course_heading || "",
-                course_paragraph: res.course_paragraph || "",
-                learn: res.learn || "",
-                best_teacher: res.best_teacher || "",
-                _id: res?._id || ""
+                hero_heading: res.record.hero_heading || "",
+                course_heading: res.record.course_heading || "",
+                course_paragraph: res.record.course_paragraph || "",
+                learn: res.record.learn || "",
+                best_teacher: res.record.best_teacher || "",
+                _id: res.record?._id || ""
             });
             setImages({
-                hero_img_first: res.hero_img_first || null,
-                hero_img_second: res.hero_img_second || null,
-                course_img: res.course_img || null,
+                hero_img_first: res.record.hero_img_first || null,
+                hero_img_second: res.record.hero_img_second || null,
+                course_img: res.record.course_img || null,
             })
 
 

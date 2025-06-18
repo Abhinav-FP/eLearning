@@ -266,7 +266,7 @@ class Listing extends Component {
   }
 
   async HomeFaqList() {
-    return Api.get("/home/faqfind")
+    return Api.get("/home/faqFind")
   }
   async HomeFaqAdd(data) {
     return Api.post(`/home/faqAdd`, data);
@@ -285,7 +285,7 @@ class Listing extends Component {
   }
 
   async TeacherFaqList() {
-    return Api.get("/teacher/faqfind")
+    return Api.get("/home/teacher/faqfind")
   }
   async TeacherFaqUpdate(data) {
     return Api.post(`/teacher/faqUpdate`, data);

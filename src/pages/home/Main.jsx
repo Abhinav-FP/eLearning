@@ -9,15 +9,16 @@ import Lesson from './Lesson';
 import Listing from '../api/Listing';
 
 export default function Main() {
-  const [teacherData, setTeacherData] = useState([]);
+  const [homeData, setHomeData] = useState([]);
   const [loading, setLoading] = useState(false);
   const fetchData = async () => {
     try {
       setLoading(true);
       const main = new Listing();
       const response = await main.HomePage();
+      console.log("response" ,response)
       if (response.data) {
-        setTeacherData(response.data.data);
+        setHomeData(response.data.data);
       }
       setLoading(false);
     } catch (error) {
@@ -30,19 +31,24 @@ export default function Main() {
     fetchData();
   }, []);
 
+  console.log("homeData", homeData)
+
   return (
     <Layout>
-      <Hero title={"Learn from Expert Teachers Anytime, Anywhere!"} />
+      <Hero title={homeData?.record?.hero_heading || "Learn from Expert Teachers Anytime, Anywhere!"} heroimg={homeData?.record?.hero_img_first} heroimg2={homeData?.record?.hero_img_second}/>
       <div id="howitwork">
         <HowItWork classess={''} title={"How It Works"} />
       </div>
       <div id="lesson">
-        <Lesson title={"Learn from the Best: Expert English & Japanese Teachers"} />
+        <Lesson title={homeData?.record?.best_teacher || "Learn from the Best: Expert English & Japanese Teachers"} />
       </div>
-      <Ready title={"Ready to Start Learning?"} />
-      <FindCource title={"Find Your Course"} pargraph={"Our customers trust us for quality, reliability, and exceptional service. Experience the same"} />
+      <Ready title={homeData?.record?.learn || "Ready to Start Learning?"} />
+      <FindCource title={homeData?.record?.course_heading || "Find Your Course"}
+        courseimg={homeData?.record?.course_img}
+        pargraph={homeData?.record?.course_paragraph ||
+          "Our customers trust us for quality, reliability, and exceptional service. Experience the same"} />
       <div id="faq">
-        <FAQ />
+        <FAQ  Faq={homeData?.Faqrecord}/>
       </div>
     </Layout>
   )

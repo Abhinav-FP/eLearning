@@ -312,6 +312,9 @@ class Listing extends Component {
     return Api.get("/admin/dashboard")
   }
 
+   async BecomeFaq() {
+    return Api.get("/home/teacher/faqFind")
+  }
   render() {
     return (
       <div>

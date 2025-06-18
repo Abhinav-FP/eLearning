@@ -142,12 +142,12 @@ export default function Index() {
                     </div>
                   </div>
                   <div className="flex flex-row gap-2 justify-between">
-                    <button className="px-6 md:px-10 lg:px-12 xl:px-16 py-2 lg:py-2.5 text-[#CC2828] border border-[#CC2828] rounded-md text-xs sm:text-sm hover:bg-[#CC2828] hover:text-white cursor-pointer">
+                    <button className="px-6 md:px-10 lg:px-8 xl:px-10 py-2 lg:py-2.5 text-[#CC2828] border border-[#CC2828] rounded-md text-xs sm:text-sm hover:bg-[#CC2828] hover:text-white cursor-pointer">
                       Book
                     </button>
                     <Link
                       href={`/student/message?query=${teacher?.teacher?.userId}`}
-                      className="px-6 md:px-10 lg:px-12 xl:px-16 py-2 lg:py-2.5 bg-[#CC2828] text-white rounded-md text-xs sm:text-sm hover:bg-white hover:text-[#CC2828] border border-[#CC2828] cursor-pointer"
+                      className="px-6 md:px-10 lg:px-8 xl:px-10 py-2 lg:py-2.5 bg-[#CC2828] text-white rounded-md text-xs sm:text-sm hover:bg-white hover:text-[#CC2828] border border-[#CC2828] cursor-pointer"
                     >
                       Message
                     </Link>

@@ -82,6 +82,19 @@ export default function Index() {
     return diffInMs > oneHourInMs;
   };
 
+  const isLessThan5minutesFromNowAndBeforeEnd = (startDateTime, endDateTime) => {
+    const now = new Date();
+    const start = new Date(startDateTime);
+    const end = new Date(endDateTime);
+    const fiveMinutesInMs = 5 * 60 * 1000;
+    const isWithinFiveMinutes = start - now < fiveMinutesInMs && start - now >= 0;
+    const isEndInFuture = end > now;
+    return isWithinFiveMinutes && isEndInFuture;
+  };
+
+
+  // console.log("categorizedLessons",categorizedLessons);
+
   return (
     <StudentLayout page={"My Lessons"}>
       <div className="min-h-screen  py-5 lg:py-[30px]">
@@ -155,6 +168,13 @@ export default function Index() {
                           }}>
                           Reschedule
                         </button>}
+                        {isLessThan5minutesFromNowAndBeforeEnd(lesson?.startDateTime, lesson?.endDateTime) &&
+                        <a href={lesson?.zoom?.meetingLink || ""} target="blank"
+                         className="tracking-[-0.06em] font-inter px-6 md:px-10 lg:px-12 xl:px-16 py-2 lg:py-2.5 text-[#CC2828] border border-[#CC2828] rounded-[10px]  text-sm hover:bg-[#CC2828] hover:text-white cursor-pointer"
+                         >
+                          Join Lesson 
+                        </a>
+                        }
                       <Link href={`/student/message?query=${lesson?.teacherId?._id}`} className="tracking-[-0.06em] font-inter px-6 md:px-10 lg:px-12 xl:px-16 py-2 lg:py-2.5 text-white border border-[#CC2828] rounded-[10px]  text-sm bg-[#CC2828] hover:bg-white hover:text-[#CC2828] cursor-pointer">
                         Message
                       </Link>

@@ -50,6 +50,16 @@ export default function Index() {
     }
   };
 
+  const isLessThan5minutesFromNowAndBeforeEnd = (startDateTime, endDateTime) => {
+    const now = new Date();
+    const start = new Date(startDateTime);
+    const end = new Date(endDateTime);
+    const fiveMinutesInMs = 5 * 60 * 1000;
+    const isWithinFiveMinutes = start - now < fiveMinutesInMs && start - now >= 0;
+    const isEndInFuture = end > now;
+    return isWithinFiveMinutes && isEndInFuture;
+  };
+
 
   return (
     <TeacherLayout>
@@ -121,8 +131,19 @@ export default function Index() {
                         key={index}
                         className="hover:bg-[rgba(204,40,40,0.1)] border-t border-[rgba(204,40,40,0.2)]"
                       >
-                        <td className="px-3 lg:px-4 py-2 lg:py-3 capitalize text-black text-sm lg:text-base font-medium font-inter ">
-                          {item?.LessonId?.title}
+                        <td className="px-3 lg:px-4 py-2 lg:py-3 text-black text-sm lg:text-base font-medium font-inter">
+                          <div className="flex justify-center items-center gap-2">
+                            <span className="capitalize">{item?.LessonId?.title}</span>
+                            {isLessThan5minutesFromNowAndBeforeEnd(item?.startDateTime, item?.endDateTime) &&
+                              <a
+                              href={item?.zoom?.meetingLink || ""}
+                              target="blank"
+                              rel="noopener noreferrer"
+                              className="text-xs bg-[#CC2828] text-white px-2 py-[2px] rounded-md hover:bg-[#b22424] transition cursor-pointer"
+                              >
+                              Join Now
+                            </a>}
+                          </div>
                         </td>
                         <td className="px-3 lg:px-4 py-2 lg:py-3 capitalize text-black text-sm lg:text-base font-medium font-inter ">
                           {moment(item?.startDateTime).format('DD MMM YYYY, hh:mm A') || ''}

@@ -29,13 +29,8 @@ const ReactQuillEditor = ({ label, desc, handleBioChange }) => {
     "link",
     "image",
   ];
-
   return (
     <div className="mb-6">
-      {/* <label className="block text-[#CC2828] font-medium text-base xl:text-xl mb-1 tracking-[-0.04em]">
-
-        {label || "Editor"}
-      </label> */}
       <div className="bg-white border border-gray-300 rounded-md">
         <ReactQuill
           value={desc}

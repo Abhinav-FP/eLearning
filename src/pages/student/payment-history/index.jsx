@@ -68,7 +68,7 @@ export default function Index() {
               </tr>
             </thead>
             {loading ? (
-              <TableLoader length={5} />
+              <TableLoader length={7} />
             ) : (
               <tbody>
                 {displayPayments.length > 0 ? (

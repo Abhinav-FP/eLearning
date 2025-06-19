@@ -6,15 +6,19 @@ import { TableLoader } from '@/components/Loader';
 import NoData from '@/pages/common/NoData';
 import { formatMultiPrice } from '@/components/ValueDataHook';
 export default function Index() {
-  const [payment, setPayment] = useState([]);
+  const [stripePayments, setStripePayments] = useState([]);
+  const [paypalPayments, setPaypalPayments] = useState([]);
   const [loading, setLoading] = useState(false);
-
   const PaymentHistory = async () => {
     try {
       setLoading(true);
       const main = new Listing();
       const response = await main.PaymentUser();
-      setPayment(response?.data?.data);
+      const allData = response?.data?.data || [];
+      const stripe = allData.filter(item => item.StripepaymentId);
+      const paypal = allData.filter(item => item.paypalpaymentId);
+      setStripePayments(stripe);
+      setPaypalPayments(paypal);
       setLoading(false);
     } catch (error) {
       console.log("error", error);
@@ -27,11 +31,10 @@ export default function Index() {
   }, []);
 
   const [selectedPayment, setSelectedPayment] = useState("paypal");
-
+  const displayPayments = selectedPayment === "paypal" ? paypalPayments : stripePayments;
   return (
     <StudentLayout page={"Payments"}>
       <div className="min-h-screen p-5 lg:p-[30px]">
-
         <div className="flex justify-between items-center pb-4">
           <h2 className="text-base md:text-xl lg:text-2xl font-bold text-[#CC2828] tracking-[-0.04em] font-inter">Payments History</h2>
           <div>
@@ -40,7 +43,6 @@ export default function Index() {
               value={selectedPayment}
               onChange={(e) => setSelectedPayment(e.target.value)}
             >
-              {/* <option value="">Filter</option> */}
               <option value="paypal">Paypal</option>
               <option value="stripe">Stripe</option>
             </select>
@@ -52,40 +54,57 @@ export default function Index() {
               <tr>
                 <th className="font-normal text-sm lg:text-base px-3 lg:px-4 py-2 lg:py-3 border-t border-[rgba(204,40,40,0.2)] capitalize">Order Id</th>
                 <th className="font-normal text-sm lg:text-base px-3 lg:px-4 py-2 lg:py-3 border-t border-[rgba(204,40,40,0.2)] capitalize">Lesson name</th>
+                <th className="font-normal text-sm lg:text-base px-3 lg:px-4 py-2 lg:py-3 border-t border-[rgba(204,40,40,0.2)] capitalize">
+                  Lesson Start & End DateTime
+                </th>
                 <th className="font-normal text-sm lg:text-base px-3 lg:px-4 py-2 lg:py-3 border-t border-[rgba(204,40,40,0.2)] capitalize">Payment Date & time</th>
-                {/* <th className="font-normal text-sm lg:text-base px-3 lg:px-4 py-2 lg:py-3 border-t border-[rgba(204,40,40,0.2)] capitalize">duration</th> */}
                 <th className="font-normal text-sm lg:text-base px-3 lg:px-4 py-2 lg:py-3 border-t border-[rgba(204,40,40,0.2)] capitalize">Amount</th>
                 <th className="font-normal text-sm lg:text-base px-3 lg:px-4 py-2 lg:py-3 border-t border-[rgba(204,40,40,0.2)] capitalize">Payment Status</th>
+                <th className="font-normal text-sm lg:text-base px-3 lg:px-4 py-2 lg:py-3 border-t border-[rgba(204,40,40,0.2)] capitalize">
+                  Payment Name
+                </th>
+
+
               </tr>
             </thead>
             {loading ? (
               <TableLoader length={5} />
             ) : (
               <tbody>
-                {(payment?.[selectedPayment === "paypal" ? "payment" : "stripeData"] || []).length > 0 ? (
-                  (payment?.[selectedPayment === "paypal" ? "payment" : "stripeData"] || []).map((item, index) => {
+                {displayPayments.length > 0 ? (
+                  displayPayments.map((item, index) => {
                     const isPaypal = selectedPayment === "paypal";
-                    const id = isPaypal ? item?.orderID : item?.payment_id || item?.session_id;
-                    const status = isPaypal ? item?.status : item?.payment_status;
+                    const paymentInfo = isPaypal ? item.paypalpaymentId : item.StripepaymentId;
+                    const paymentId = isPaypal ? paymentInfo?.orderID : paymentInfo?.payment_id;
+                    const status = isPaypal ? paymentInfo?.status : paymentInfo?.payment_status;
+                    const amount = paymentInfo?.amount || 0;
+                    const paymentDate = isPaypal ? paymentInfo?.capturedAt : paymentInfo?.created_at;
+                    const lessonTitle = item?.LessonId?.title;
+                    const lessonstartDate = item?.startDateTime;
+                    const lessonEndDate = item?.endDateTime;
                     return (
                       <tr key={index} className="border-t hover:bg-[rgba(204,40,40,0.1)] border-[rgba(204,40,40,0.2)]">
-                        <td className="px-3 lg:px-4 py-2 lg:py-3 text-black text-sm lg:text-base font-medium font-inter">{id}</td>
-                        <td className="px-3 lg:px-4 py-2 lg:py-3 text-black text-sm lg:text-base font-medium font-inter">{item?.LessonId?.title}</td>
-                        <td className="px-3 lg:px-4 py-2 lg:py-3 text-black text-sm lg:text-base font-medium font-inter">
-                          {moment(item?.created_at).format("DD MMMM YYYY hh:mm A")}
+                        <td className="px-3 lg:px-4 py-2 lg:py-3">{paymentId}</td>
+                        <td className="px-3 lg:px-4 py-2 lg:py-3">{lessonTitle}</td>
+                        <td className="px-3 lg:px-4 py-2 lg:py-3">{moment(lessonstartDate).format("DD MMMM YYYY hh:mm A")} -{moment(lessonEndDate).format("DD MMMM YYYY hh:mm A")}</td>
+                        <td className="px-3 lg:px-4 py-2 lg:py-3">{moment(paymentDate).format("DD MMMM YYYY hh:mm A")}</td>
+                        <td className="px-3 lg:px-4 py-2 lg:py-3">{formatMultiPrice(amount, "USD")}</td>
+                        <td className="px-3 lg:px-4 py-2 lg:py-3">{status}</td>
+                        <td className="px-3 lg:px-4 py-2 lg:py-3">
+                          {selectedPayment === "paypal" ? "Paypal" : "Stripe"}
                         </td>
-                        <td className="px-3 lg:px-4 py-2 lg:py-3 text-black text-sm lg:text-base font-medium font-inter">{formatMultiPrice(item?.amount, "USD")}</td>
-                        <td className="px-3 lg:px-4 py-2 lg:py-3 text-black text-sm lg:text-base font-medium font-inter">{status}</td>
+
                       </tr>
                     );
                   })
                 ) : (
                   <tr>
-                    <td colSpan={5} className="text-center text-gray-500 py-6 font-inter">
+                    <td colSpan={6} className="text-center text-gray-500 py-6 font-inter">
                       <NoData Heading={"No payment data available."} />
                     </td>
                   </tr>
-                )}
+                )
+                }
               </tbody>
             )}
           </table>

@@ -13,7 +13,7 @@ export default function Index() {
        try {
          setLoading(true);
          const main = new Listing();
-         const response = await main.BecomeFaq();
+         const response = await main.TeacherFaqList();
          console.log("response" ,response)
          if (response.data) {
            setHomeData(response.data.data);

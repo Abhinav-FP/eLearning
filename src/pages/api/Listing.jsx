@@ -256,8 +256,6 @@ class Listing extends Component {
   async AdminEarning(date, search) {
     return Api.get(`/admin/earning?date=${date}&search=${search}`);
   }
-
-
   async HomeUpdate(data) {
     return ApiallowFile.post(`/home/update`, data);
   }
@@ -312,9 +310,7 @@ class Listing extends Component {
     return Api.get("/admin/dashboard")
   }
 
-   async BecomeFaq() {
-    return Api.get("/home/teacher/faqFind")
-  }
+
   render() {
     return (
       <div>

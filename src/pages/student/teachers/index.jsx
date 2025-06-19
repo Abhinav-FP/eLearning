@@ -8,17 +8,19 @@ import Link from "next/link";
 import { TeacherLoader } from "@/components/Loader";
 import { FiSearch } from "react-icons/fi";
 import { formatMultiPrice } from "@/components/ValueDataHook";
+import { useRouter } from "next/router";
 
 export default function Index() {
   const [data, setData] = useState([]);
   const [loading, setLoading] = useState(false);
   const [searchText, setSearchText] = useState("");
+  const router = useRouter();
 
   const timerRef = useRef(null);
 
-  const fetchStudentTeachers = async (startLoading=true, search="") => {
+  const fetchStudentTeachers = async (startLoading = true, search = "") => {
     try {
-      if(startLoading){
+      if (startLoading) {
         setLoading(true);
       }
       const main = new Listing();
@@ -63,11 +65,11 @@ export default function Index() {
     }
     if (!sval || sval.trim() === "") {
       timerRef.current = setTimeout(() => {
-        fetchStudentTeachers(true,sval);
+        fetchStudentTeachers(true, sval);
       }, 1500);
     } else if (sval.length >= 2) {
       timerRef.current = setTimeout(() => {
-        fetchStudentTeachers(true,sval);
+        fetchStudentTeachers(true, sval);
       }, 1500);
     }
   };
@@ -77,22 +79,22 @@ export default function Index() {
     <StudentLayout page={"Find a teacher"}>
       <div className="min-h-screen p-5 lg:p-[30px]">
         <div className="flex flex-col md:flex-row justify-between mb-4 lg:mb-5">
-           <div className="relative w-full mb-4 md:mb-0 md:w-80">
-              <span className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+          <div className="relative w-full mb-4 md:mb-0 md:w-80">
+            <span className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
               <FiSearch className="text-[#888]" />
-              </span>
-              <input
+            </span>
+            <input
               type="text"
               value={searchText}
               onChange={handleSearchChange}
               placeholder="Search using teacher name"
               className="w-full pl-10 pr-4 py-2 border border-[#ddd] text-[#000] rounded-md focus:outline-none focus:ring-1 focus:ring-[#CC2828] placeholder-gray-400"
-              />
-            </div>
+            />
+          </div>
           <Link
             href="/student/favourite-teacher"
             className="w-fit md:ml-auto px-4 lg:px-6 py-2.5 text-[#CC2828] border border-[#CC2828] rounded-md tracking-[-0.06em] text-sm font-medium hover:bg-[#CC2828] hover:text-white cursor-pointer"
-            >
+          >
             {`View Favourite Teachers (${data?.favouriteSize || "0"})`}
           </Link>
         </div>
@@ -110,8 +112,11 @@ export default function Index() {
             data &&
             data?.teacher &&
             data?.teacher?.map((teacher, idx) => (
-              <div key={idx}>
-                <div className="bg-white rounded-[10px] lesson_list_shadow  p-3 md:p-4 lg:p-5 flex flex-col lg:flex-row lg:items-center justify-between transition border-[rgba(204,40,40,0.2)] border-1 gap-5">
+              <Link href={`/teacher/${teacher?._id}`} className="block group">
+                <div
+                  key={idx}
+                  className="bg-white rounded-[10px] lesson_list_shadow p-3 md:p-4 lg:p-5 flex flex-col lg:flex-row lg:items-center justify-between transition border-[rgba(204,40,40,0.2)] border-1 gap-5"
+                >
                   <div className="flex flex-col sm:flex-row sm:items-center space-y-2 md:pl-24 lg:pl-[130px] mt-2 relative min-h-20 lg:min-h-[104px]">
                     <Image
                       src={teacher?.userId?.profile_photo || "/profile.png"}
@@ -122,100 +127,107 @@ export default function Index() {
                     />
                     <div>
                       <h3 className="flex font-inter gap-2 items-center text-md lg:text-xl text-[#CC2828] font-medium tracking-[-0.06em] mb-2 capitalize">
-                        <Link href={`/teacher/${teacher?._id}`}>
-                          {teacher?.userId?.name || ""}
-                        </Link>
+                        {teacher?.userId?.name || ""}
                         {teacher?.isLiked ? (
-                          //Liked teacher
                           <span
                             className="cursor-pointer"
-                            onClick={() =>
-                              handleRemoveSubmit(teacher?.userId?._id)
-                            }
+                            onClick={(e) => {
+                              e.preventDefault();
+                              e.stopPropagation();
+                              handleRemoveSubmit(teacher?.userId?._id);
+                            }}
                           >
                             <FaHeart color="#CC2828" size={18} />
                           </span>
                         ) : (
-                          //Disliked teacher
                           <span
                             className="cursor-pointer"
-                            onClick={() =>
-                              handleAddSubmit(teacher?.userId?._id)
-                            }
+                            onClick={(e) => {
+                              e.preventDefault();
+                              e.stopPropagation();
+                              handleAddSubmit(teacher?.userId?._id);
+                            }}
                           >
                             <FaRegHeart color={"#000000"} size={18} />
                           </span>
                         )}
                       </h3>
-                      {teacher?.tags?.length > 0 &&
+
+                      {/* Tags */}
+                      {teacher?.tags?.length > 0 && (
                         <div className="flex gap-1 items-center">
-                            <span className="text-[#8D929A] text-base -tracking-[0.03em] pr-2">
-                                Specialities :
-                            </span>
-                            <div className="flex flex-wrap gap-x-2 gap-y-1">
-                                {teacher.tags.map((tag, idx) => (
-                                    <span key={idx} className="flex items-center text-black text-base -tracking-[0.03em] capitalize">
-                                        <svg
-                                            xmlns="http://www.w3.org/2000/svg"
-                                            className="w-4 h-4 mr-1"
-                                            viewBox="0 0 48 48"
-                                        >
-                                            <path
-                                                fill="#4CAF50"
-                                                d="M44,24c0,11.045-8.955,20-20,20S4,35.045,4,24S12.955,4,24,4S44,12.955,44,24z"
-                                            />
-                                            <path
-                                                d="M32.172,16.172L22,26.344l-5.172-5.172c-0.781-0.781-2.047-0.781-2.828,0l-1.414,1.414
-                                        c-0.781,0.781-0.781,2.047,0,2.828l8,8c0.781,0.781,2.047,0.781,2.828,0l13-13c0.781-0.781,0.781-2.047,0-2.828L35,16.172
-                                        C34.219,15.391,32.953,15.391,32.172,16.172z"
-                                                fill="#FFF"
-                                            />
-                                        </svg>
-                                        {tag}
-                                    </span>
-                                ))}
-                            </div>
-                        </div>}
-                      <div className="flex flex-wrap  gap-x-2 md:gap-x-6 lg:gap-x-8 mb-3 lg:mb-5">
-                          <div>
-                              <span className="text-[#8D929A] text-sm -tracking-[0.03em] pr-2">Language :</span>
-                              <span className="capitalize text-black text-sm -tracking-[0.03em] ">{teacher?.languages_spoken.join(' , ') || "N/A"}</span>
+                          <span className="text-[#8D929A] text-base -tracking-[0.03em] pr-2">Specialities :</span>
+                          <div className="flex flex-wrap gap-x-2 gap-y-1">
+                            {teacher.tags.map((tag, idx) => (
+                              <span key={idx} className="flex items-center text-black text-base -tracking-[0.03em] capitalize">
+                                <svg xmlns="http://www.w3.org/2000/svg" className="w-4 h-4 mr-1" viewBox="0 0 48 48">
+                                  <path fill="#4CAF50" d="M44,24c0,11.045-8.955,20-20,20S4,35.045,4,24S12.955,4,24,4S44,12.955,44,24z" />
+                                  <path
+                                    d="M32.172,16.172L22,26.344l-5.172-5.172c-0.781-0.781-2.047-0.781-2.828,0l-1.414,1.414
+                         c-0.781,0.781-0.781,2.047,0,2.828l8,8c0.781,0.781,2.047,0.781,2.828,0l13-13c0.781-0.781,0.781-2.047,0-2.828L35,16.172
+                         C34.219,15.391,32.953,15.391,32.172,16.172z"
+                                    fill="#FFF"
+                                  />
+                                </svg>
+                                {tag}
+                              </span>
+                            ))}
                           </div>
-                          <div>
-                              <span className="text-[#8D929A] text-sm -tracking-[0.03em] pr-2">Nationality :</span>
-                              <span className="capitalize text-black text-sm -tracking-[0.03em] ">{teacher?.userId?.nationality || "N/A"}</span>
-                          </div>
-                          {/* {item?.userId?.nationality} */}
-                          <div>
-                              <span className="text-[#8D929A] text-sm -tracking-[0.03em] pr-2">Gender :</span>
-                              <span className="capitalize text-black text-sm -tracking-[0.03em] ">{teacher?.gender === 'M' ? 'Male' : teacher?.gender === 'F' ? 'Female' : "N/A"}</span>
-                          </div>
-                          <div>
-                              <span className="text-[#8D929A] text-sm -tracking-[0.03em] pr-2">Experience :</span>
-                              <span className="text-black text-sm -tracking-[0.03em] ">{teacher?.experience || 'N/a'} Years</span>
-                          </div>
+                        </div>
+                      )}
+
+                      {/* Details */}
+                      <div className="flex flex-wrap gap-x-2 md:gap-x-6 lg:gap-x-8 mb-3 lg:mb-5">
+                        <div>
+                          <span className="text-[#8D929A] text-sm -tracking-[0.03em] pr-2">Language :</span>
+                          <span className="capitalize text-black text-sm -tracking-[0.03em] ">{teacher?.languages_spoken.join(' , ') || "N/A"}</span>
+                        </div>
+                        <div>
+                          <span className="text-[#8D929A] text-sm -tracking-[0.03em] pr-2">Nationality :</span>
+                          <span className="capitalize text-black text-sm -tracking-[0.03em] ">{teacher?.userId?.nationality || "N/A"}</span>
+                        </div>
+                        <div>
+                          <span className="text-[#8D929A] text-sm -tracking-[0.03em] pr-2">Gender :</span>
+                          <span className="capitalize text-black text-sm -tracking-[0.03em] ">{teacher?.gender === 'M' ? 'Male' : teacher?.gender === 'F' ? 'Female' : "N/A"}</span>
+                        </div>
+                        <div>
+                          <span className="text-[#8D929A] text-sm -tracking-[0.03em] pr-2">Experience :</span>
+                          <span className="text-black text-sm -tracking-[0.03em] ">{teacher?.experience || 'N/A'} Years</span>
+                        </div>
                       </div>
+
+                      {/* Description */}
                       <p className="text-sm text-[#7A7A7A] font-inter tracking-[-0.04em] mb-1 line-clamp-2">
                         {teacher?.description || ""}
                       </p>
                     </div>
                   </div>
+
+                  {/* Action buttons (stop propagation) */}
                   <div className="flex flex-row gap-2 justify-between">
-                    <Link
-                      href={`/teacher/${teacher?._id}`}
+                    <button
+                      type="button"
+                      onClick={(e) => {
+                        e.stopPropagation(); // Prevents triggering parent click
+                        e.preventDefault();  // Prevents default button behavior
+                        router.push(`/teacher/${teacher?._id}?book=true`);
+                      }}
                       className="tracking-[-0.06em] font-inter font-medium px-6 md:px-10 lg:px-12 py-2 lg:py-2.5 text-[#CC2828] border border-[#CC2828] rounded-md text-sm hover:bg-[#CC2828] hover:text-white cursor-pointer"
                     >
                       Book
-                    </Link>
+                    </button>
+
                     <Link
                       href={`/student/message?query=${teacher?.userId?._id}`}
-                      className="tracking-[-0.06em] font-inter font-medium px-6 md:px-10 lg:px-12 py-2 lg:py-2.5 bg-[#CC2828] text-white rounded-md  text-sm hover:bg-white hover:text-[#CC2828] border border-[#CC2828] cursor-pointer"
+                      onClick={(e) => e.stopPropagation()}
+                      className="tracking-[-0.06em] font-inter font-medium px-6 md:px-10 lg:px-12 py-2 lg:py-2.5 bg-[#CC2828] text-white rounded-md text-sm hover:bg-white hover:text-[#CC2828] border border-[#CC2828] cursor-pointer"
                     >
                       Message
                     </Link>
                   </div>
                 </div>
-              </div>
+              </Link>
+
             ))
           )}
         </div>

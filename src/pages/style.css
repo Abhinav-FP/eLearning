@@ -130,3 +130,31 @@ html{
 .paypal-button.paypal-button-color-gold, .paypal-button-row.paypal-button-color-gold .menu-button {
   background: #ef2c0c !important;
 }
+
+.policy-page h1 {
+    color: #000000;
+    font-family: Oswald, sans-serif;
+    font-size: 38px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: 42px;
+    text-transform: uppercase;
+}
+
+
+.policy-page h2 {
+    color: #000000;
+    font-family: Oswald, sans-serif;
+    font-size: 32px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: 38px;
+    text-transform: uppercase;
+}
+
+.policy-page p {
+    color: #000000;
+    font-size: 18px;
+    font-style: normal;
+    line-height: 29px;
+}

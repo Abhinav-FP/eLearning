@@ -2,6 +2,7 @@ import ClassBanner from '../Assets/Images/online_class.jpg'
 import Image from 'next/image';
 import Heading from '../common/Heading';
 import Button from '../common/Button';
+import Link from 'next/link';
 
 export default function FindCource({pargraph ,title , courseimg}) {
     return (
@@ -16,7 +17,14 @@ export default function FindCource({pargraph ,title , courseimg}) {
                                     <p className='text-center sm:text-left text-base font-normal text-[#F8F9FA] -tracking-[0.03em] mb-6 md:mb-8 lg:mb-10'>
                                       {pargraph}
                                     </p>
-                                    <Button classes={'text-[#CC2828] text-base bg-white w-full py-3 md:py-3.5'} title={'Search Courses'} />
+                                    {/* <Button classes={'text-[#CC2828] text-base bg-white w-full py-3 md:py-3.5'} title={'Search Courses'} /> */}
+                                    <Link
+                                    href="/find-teacher"
+                                    className="block w-full text-center font-medium cursor-pointer rounded-full py-3 md:py-3.5 px-5 text-[#CC2828] text-base bg-white"
+                                    >
+                                    Search Courses
+                                    </Link>
+
                                 </div>
                             </div>
                             <div className="w-full md:w-7/12 px-4 lg:text-right">

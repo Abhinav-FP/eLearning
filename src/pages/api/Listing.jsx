@@ -309,6 +309,9 @@ class Listing extends Component {
   async AdminDashboard() {
     return Api.get("/admin/dashboard")
   }
+  async Privacy() {
+    return Api.get("/home/privacy")
+  }
 
 
   render() {

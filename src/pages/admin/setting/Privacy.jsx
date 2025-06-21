@@ -19,7 +19,8 @@ export default function Privacy() {
         try {
             setProcessing(true);
             const main = new Listing();
-            const response = await main.HomeList();
+            const response = await main.Privacy();
+            console.log("response", response)
             const res = response?.data?.data;
             setData({
                 privcay_policy: res.privcay_policy || "",

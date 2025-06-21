@@ -19,7 +19,7 @@ export default function Terms() {
         try {
             setProcessing(true);
             const main = new Listing();
-            const response = await main.HomeList();
+            const response = await main.Privacy();
             const res = response?.data?.data;
             setData({
                 term_contdition: res.term_contdition || "",

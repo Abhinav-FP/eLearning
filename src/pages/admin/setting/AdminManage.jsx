@@ -26,9 +26,8 @@ export default function AdminManage() {
         try {
             setProcessing(true);
             const main = new Listing();
-            const response = await main.HomeList();
+            const response = await main.Privacy();
             const res = response?.data?.data;
-
             setData({
                 admin_comission: res?.admin_comission || '',
                 _id: res?._id || '',

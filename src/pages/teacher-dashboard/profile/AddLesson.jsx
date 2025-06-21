@@ -189,15 +189,15 @@ export default function AddLesson({ isOpen, onClose, data, getLessons }) {
               <input
                 type="radio"
                 name="duration"
-                value="50"
-                checked={formData.duration == "50"}
+                value="60"
+                checked={formData.duration == "60"}
                 onChange={handleChange}
                 required
 
               />
-              <span>50 minutes</span>
+              <span>60 minutes</span>
             </label>
-
+{/* 
             <label className="flex items-center space-x-2">
               <input
                 type="radio"
@@ -225,7 +225,7 @@ export default function AddLesson({ isOpen, onClose, data, getLessons }) {
                 placeholder="Enter duration"
                 className="ml-2 p-2 rounded-md bg-gray-100 text-gray-700 focus:outline-none focus:ring-2 focus:ring-[#CC2828]"
               />
-            </label>
+            </label> */}
           </div>
         </div>
         {/* Action Buttons */}

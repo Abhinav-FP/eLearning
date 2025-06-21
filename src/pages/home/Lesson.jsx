@@ -10,7 +10,6 @@ import toast from "react-hot-toast";
 import { BestTeacherLoader } from "@/components/Loader";
 import { Swiper, SwiperSlide } from 'swiper/react';
 import 'swiper/css';
-
 export default function Lesson({ title }) {
     const { user } = useRole();
     const router = useRouter();

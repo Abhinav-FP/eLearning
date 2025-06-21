@@ -3,10 +3,11 @@ import React, { createContext, useContext, useState } from 'react';
 const RoleContext = createContext();
 
 export const RoleProvider = ({ children }) => {
-  const [user, setUser] = useState(null); 
+  const [user, setUser] = useState(null);
+  const [language, setLanguage] = useState("en"); 
 
   return (
-    <RoleContext.Provider value={{ user, setUser }}>
+    <RoleContext.Provider value={{ user, setUser, language, setLanguage }}>
       {children}
     </RoleContext.Provider>
   );

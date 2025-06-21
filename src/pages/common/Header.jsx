@@ -10,8 +10,10 @@ import toast from "react-hot-toast";
 export default function Header() {
 
     const [menuOpen, setMenuOpen] = useState();
-    const { user, setUser } = useRole();
+    const { user, setUser, language, setLanguage } = useRole();
     const router = useRouter();
+    console.log("router",router);
+
     const toggleMenu = () => {
         setMenuOpen(!menuOpen);
     }
@@ -20,9 +22,9 @@ export default function Header() {
     const ToggleDropdown = () => {
         setDropDown(!DropDown);
     }
-    const [selectLang, setSelectLang] = useState('English');
+    // const [selectLang, setSelectLang] = useState('English');
     const handleLanguageSelect = (lang) => {
-        setSelectLang(lang);
+        setLanguage(lang);
         setDropDown(false);
     }
 
@@ -112,15 +114,16 @@ export default function Header() {
                             }
                         </div>
                         <div className="flex flex-wrap space-x-4 items-center ml-auto lg:ml-0 mr-2 lg:mr-0">
+                            {router?.pathname == "/become-teacher" &&
                             <div className="group relative mr-0 lg:mr-4 xl:mr-5">
                                 <div onClick={ToggleDropdown} className="relative cursor-pointer border border-[#CC2828] text-base tracking-[-0.03em] rounded-[6px] text-[#CC2828] py-1.5 pl-4 pr-8 min-w-[126px] text-center">
-                                    {selectLang}  <IoIosArrowDown size="16" className="absolute right-2 top-1/2 -translate-y-1/2" />
+                                    {language == "en" ? "English" : "Japanese"} <IoIosArrowDown size="16" className="absolute right-2 top-1/2 -translate-y-1/2" />
                                 </div>
                                 <div className={`absolute border-b border-l border-r border-[#ddd] bg-white top-full left-0 rounded-b ${DropDown ? 'block' : 'hidden'}`}>
-                                    <button onClick={() => (handleLanguageSelect('English'))} className="w-full cursor-pointer bg-transparent py-.5 px-2 [&:not(:last-child)]:border-b py-2 border-[#ddd] hover:text-[#CC2828]">English</button>
-                                    <button onClick={() => (handleLanguageSelect('Japanese'))} className="w-full cursor-pointer bg-transparent py-.5 px-2 py-2 [&:not(:last-child)]:border-b hover:text-[#CC2828]">Japanese</button>
+                                    <button onClick={() => (handleLanguageSelect('en'))} className="w-full cursor-pointer bg-transparent py-.5 px-2 [&:not(:last-child)]:border-b py-2 border-[#ddd] hover:text-[#CC2828]">English</button>
+                                    <button onClick={() => (handleLanguageSelect('ja'))} className="w-full cursor-pointer bg-transparent py-.5 px-2 py-2 [&:not(:last-child)]:border-b hover:text-[#CC2828]">Japanese</button>
                                 </div>
-                            </div>
+                            </div>}
                             {user && user?.role ?
                                 <>
                                     <Link

@@ -16,9 +16,23 @@ export default function Addavailablility({ isOpen, onClose, TeacherAvailabilitys
     const month = pad(date.getMonth() + 1);
     const day = pad(date.getDate());
     const hours = pad(date.getHours());
-    const minutes = pad(date.getMinutes());
-    return `${year}-${month}-${day}T${hours}:${minutes}`;
-  };
+
+    // Round minutes to nearest 0 or 30
+    let minutes = date.getMinutes();
+    minutes = minutes < 15 ? 0 : minutes < 45 ? 30 : 0;
+
+    // If rounded to next hour (i.e., >45), increment hour
+    let roundedHours = date.getHours();
+    if (date.getMinutes() > 45) {
+      roundedHours += 1;
+    }
+
+    const finalHours = pad(roundedHours % 24); // ensure 24 → 00
+    const finalMinutes = pad(minutes);
+
+    return `${year}-${month}-${day}T${finalHours}:${finalMinutes}`;
+  }
+
 
   useEffect(() => {
     if (selectedSlot?.start && selectedSlot?.end) {
@@ -41,10 +55,25 @@ export default function Addavailablility({ isOpen, onClose, TeacherAvailabilitys
   const handleAdd = async (e) => {
     e.preventDefault();
     if (loading) return;
-    if (new Date(formData.endDateTime) <= new Date(formData.startDateTime)) {
+
+    const start = new Date(formData.startDateTime);
+    const end = new Date(formData.endDateTime);
+
+    const isValidTime = (date) => {
+      const mins = date.getMinutes();
+      return mins === 0 || mins === 30;
+    };
+
+    if (!isValidTime(start) || !isValidTime(end)) {
+      toast.error("Only times ending in :00 or :30 are allowed.");
+      return;
+    }
+
+    if (end <= start) {
       toast.error("End date/time must be after start date/time");
       return;
     }
+
     setLoading(true);
     try {
       const main = new Listing();
@@ -71,6 +100,7 @@ export default function Addavailablility({ isOpen, onClose, TeacherAvailabilitys
     }
     setLoading(false);
   };
+
 
   return (
     <Popup isOpen={isOpen} onClose={onClose} size={"max-w-[510px]"}>
@@ -111,6 +141,10 @@ export default function Addavailablility({ isOpen, onClose, TeacherAvailabilitys
             required
           />
         </div>
+        <p class="text-sm text-gray-600 italic">
+          ⏰ Please note: Only full (:00) and half-hour (:30) times are allowed.
+        </p>
+
         {/* Action Buttons */}
         <div className="flex justify-between gap-4 mt-6">
           <button

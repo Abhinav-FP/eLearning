@@ -93,7 +93,6 @@ export default function Index() {
   };
 
 
-  // console.log("categorizedLessons",categorizedLessons);
 
   return (
     <StudentLayout page={"My Lessons"}>

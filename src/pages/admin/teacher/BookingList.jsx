@@ -22,7 +22,7 @@ export default function BookingList({ book }) {
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
             <div className="flex items-center gap-4">
               <img
-                src={book?.UserId?.profile_photo}
+                src={book?.UserId?.profile_photo || "/profile.png"}
                 alt="Student"
                 className="w-12 h-12 rounded-full object-cover"
               />
@@ -34,7 +34,7 @@ export default function BookingList({ book }) {
 
             <div className="flex items-center gap-4">
               <img
-                src={book?.teacherId?.profile_photo}
+                src={book?.teacherId?.profile_photo || "/profile.png"}
                 alt="Teacher"
                 className="w-12 h-12 rounded-full object-cover"
               />

@@ -16,7 +16,6 @@ export default function Main() {
       setLoading(true);
       const main = new Listing();
       const response = await main.HomePage();
-      console.log("response" ,response)
       if (response.data) {
         setHomeData(response.data.data);
       }
@@ -31,11 +30,10 @@ export default function Main() {
     fetchData();
   }, []);
 
-  console.log("homeData", homeData)
 
   return (
     <Layout>
-      <Hero title={homeData?.record?.hero_heading || "Learn from Expert Teachers Anytime, Anywhere!"} heroimg={homeData?.record?.hero_img_first} heroimg2={homeData?.record?.hero_img_second}/>
+      <Hero title={homeData?.record?.hero_heading || "Learn from Expert Teachers Anytime, Anywhere!"} heroimg={homeData?.record?.hero_img_first} heroimg2={homeData?.record?.hero_img_second} />
       <div id="howitwork">
         <HowItWork classess={''} title={"How It Works"} />
       </div>
@@ -48,7 +46,7 @@ export default function Main() {
         pargraph={homeData?.record?.course_paragraph ||
           "Our customers trust us for quality, reliability, and exceptional service. Experience the same"} />
       <div id="faq">
-        <FAQ  Faq={homeData?.Faqrecord}/>
+        <FAQ Faq={homeData?.Faqrecord} />
       </div>
     </Layout>
   )

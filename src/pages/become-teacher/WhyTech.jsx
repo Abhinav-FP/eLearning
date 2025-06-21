@@ -6,8 +6,6 @@ import whytechBanner from "../Assets/Images/whytech-banner.png";
 import { PiGlobe } from "react-icons/pi";
 
 export default function WhyTech({title, pargraph, points, language}) {
-    // console.log("points",points);
-    // console.log("language",language);
     return (
         <div className=" whytech_bg pt-[115px] md:pt-[120px] lg:pt-[150px] pb-[40px] md:pb-[50px] lg:pb-[70px]">
             <div className="mx-auto container sm:container md:container lg:container xl:max-w-[1230px]  px-4">

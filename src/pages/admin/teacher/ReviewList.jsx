@@ -18,7 +18,7 @@ export default function ReviewList({ reviews }) {
                             <div className="flex justify-between items-center mb-4">
                                 <div className="flex items-center gap-4">
                                     <img
-                                        src={review?.userId?.profile_photo}
+                                        src={review?.userId?.profile_photo || "/profile.png"}
                                         alt={review?.userId?.name}
                                         className="w-12 h-12 rounded-full object-cover border"
                                     />
@@ -33,8 +33,8 @@ export default function ReviewList({ reviews }) {
                                 </div>
                                 <span
                                     className={`px-3 py-1 rounded-full text-xs font-semibold ${review?.review_status === 'Pending'
-                                            ? 'bg-yellow-100 text-yellow-800'
-                                            : 'bg-green-100 text-green-800'
+                                        ? 'bg-yellow-100 text-yellow-800'
+                                        : 'bg-green-100 text-green-800'
                                         }`}
                                 >
                                     {review?.review_status}

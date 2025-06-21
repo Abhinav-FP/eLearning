@@ -73,7 +73,6 @@ export default function Index() {
       }, 1500);
     }
   };
-  // console.log("data",data);
 
   return (
     <StudentLayout page={"Find a teacher"}>

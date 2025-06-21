@@ -8,28 +8,27 @@ import Listing from "../api/Listing";
 import { useRole } from "@/context/RoleContext";
 
 export default function Index() {
-    const [homeData, setHomeData] = useState([]);
-    const [loading, setLoading] = useState(false);
-    const { language } = useRole();
-    const fetchData = async () => {
-      try {
-        setLoading(true);
-        const main = new Listing();
-        const response = await main.TeacherFaqList();
-        console.log("response" ,response)
-        if (response.data) {
-          setHomeData(response.data.data);
-        }
-        setLoading(false);
-      } catch (error) {
-        console.log("error", error);
-        setLoading(false);
+  const [homeData, setHomeData] = useState([]);
+  const [loading, setLoading] = useState(false);
+  const { language } = useRole();
+  const fetchData = async () => {
+    try {
+      setLoading(true);
+      const main = new Listing();
+      const response = await main.TeacherFaqList();
+      if (response.data) {
+        setHomeData(response.data.data);
       }
-    };
-   
-    useEffect(() => {
-      fetchData();
-    }, []);
+      setLoading(false);
+    } catch (error) {
+      console.log("error", error);
+      setLoading(false);
+    }
+  };
+
+  useEffect(() => {
+    fetchData();
+  }, []);
 
   const data = {
     "benefits": {
@@ -74,12 +73,12 @@ export default function Index() {
         "en": "Ways to join the platform - NO LICENSE REQUIRED",
         "ja": "参加条件（資格の有無は問いません）"
       },
-      "points" : {
+      "points": {
         "en": [
           "Finishing the online teachers course - link here",
           "Introduction from one of the current teachers (subject to the portal approval)",
           "For anyone who is unexperienced and below 20 years old - free access after finishing the online teachers course (the course fee is waived - limited number of applicants)",
-          "Bringing over students with minimum of 80 hours teaching each month"         
+          "Bringing over students with minimum of 80 hours teaching each month"
         ],
         "ja": [
           "公式オンライン講座（模擬授業を含む）を修了していること",
@@ -88,12 +87,12 @@ export default function Index() {
         ],
       }
     },
-    "join":{
-      "heading":{
+    "join": {
+      "heading": {
         "en": "Ready to Join Our Teaching Community?",
         "ja": "オンライン日本語教師として活動してみませんか？",
       },
-      "text":{
+      "text": {
         "en": "Take the first step toward an exciting and rewarding teaching journey.",
         "ja": "",
       },
@@ -103,25 +102,23 @@ export default function Index() {
       }
     }
   };
-   
-    //  console.log("homeData", homeData)
-    // console.log("language",language);
-   return (
-      <Layout>
-         <WhyTech 
+
+  return (
+    <Layout>
+      <WhyTech
         //  title={'Why Teach with Japanese for Me?'} 
-         title={data?.benefits?.title[language] || ""}
-         pargraph={data?.benefits?.description[language] || ""} 
-         points={data?.benefits?.points || []}
-         language={language}
-         />
-         <JoinPlatform 
+        title={data?.benefits?.title[language] || ""}
+        pargraph={data?.benefits?.description[language] || ""}
+        points={data?.benefits?.points || []}
+        language={language}
+      />
+      <JoinPlatform
         //  title={'Ways to join the platform - NO LICENSE REQUIRED'}
-         title={data?.requirements?.title[language] || ""}
-         points={data?.requirements?.points[language] || []}
-         />
-         <FAQ classess={'mt-[40px] md:mt-[80px] lg:mt-[100px] md:mb-5 lg:mb-10'} Faq={homeData} />
-         <ReadyJoin data={data?.join} language={language}/>
-      </Layout>
-   )
+        title={data?.requirements?.title[language] || ""}
+        points={data?.requirements?.points[language] || []}
+      />
+      <FAQ classess={'mt-[40px] md:mt-[80px] lg:mt-[100px] md:mb-5 lg:mb-10'} Faq={homeData} />
+      <ReadyJoin data={data?.join} language={language} />
+    </Layout>
+  )
 }

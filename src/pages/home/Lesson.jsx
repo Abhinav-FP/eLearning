@@ -22,7 +22,6 @@ export default function Lesson({ title }) {
             setLoading(true);
             const main = new Listing();
             const response = await main.HomeTeacherVideo();
-            // console.log("response", response)
             setvideo(response?.data?.data);
         } catch (error) {
             console.log("error", error);
@@ -33,7 +32,6 @@ export default function Lesson({ title }) {
         TeacherVideos();
     }, []);
 
-    // console.log("video",video);
 
     return (
         <>

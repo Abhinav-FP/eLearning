@@ -45,6 +45,9 @@ class Listing extends Component {
   async ReviewUserGet(data) {
     return Api.get("/student/review", data);
   }
+  async LessonDone(data) {
+    return Api.post("/lesson/completed", data);
+  }
 
   async PaymentUser() {
     return Api.get("/student/payment",);

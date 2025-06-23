@@ -13,9 +13,9 @@ const Button = () => {
         role="status"
         className="inline-block h-4 w-4 mr-3 animate-spin rounded-full border-2 border-solid border-current border-r-transparent"
       >
-        <span className="sr-only">Verifying...</span>
+        <span className="sr-only">Confirming...</span>
       </div>
-      Verifying
+      Confirming
     </button>
   );
 };
@@ -29,15 +29,15 @@ export default function Index() {
     setLoading(true);
     try {
       const main = new Listing();
-      const response = await main.emailVerify({token : slug});
+      const response = await main.LessonDone({token : slug});
       if(response?.data?.status){
-        toast.success("Email Verified Successfully");
+        toast.success("Lesson marked as done successfully");
         router.push("/");
       }
     } catch (err) {
-      console.log("Invalid or expired token", err);
-      toast.error("Invalid or expired token");
-      router.push("/verify");
+      console.log("Invalid token", err);
+      toast.error("Invalid token");
+    //   router.push("/");
     } finally {
         setLoading(false);
     }

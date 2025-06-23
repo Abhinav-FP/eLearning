@@ -25,7 +25,6 @@ export default function ReviewsList() {
       });
   }, []);
 
-  console.log("reviews" , reviews)
 
   return (
     <StudentLayout page={"Settings"}>

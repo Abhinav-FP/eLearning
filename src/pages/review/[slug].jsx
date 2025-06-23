@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import StudentLayout from '../student/Common/StudentLayout';
 import { FaStar } from 'react-icons/fa';
 import { useRouter } from 'next/router';
 import Listing from '@/pages/api/Listing';
@@ -8,11 +7,9 @@ import Layout from '@/pages/common/Layout';
 
 export default function Index() {
   const router = useRouter();
-  console.log("router", router?.query?.slug)
   const [rating, setRating] = useState(0);
   const [description, setDescription] = useState('');
   const [processing, setProcessing] = useState('');
-
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -57,7 +54,7 @@ export default function Index() {
           </h1>
           {/* Form Container */}
           <div className=" pb-6 lg:pb-8">
-            <form onSubmit={handleSubmit} className="bg-white p-6 rounded-xl shadow-md space-y-6">
+            <form onSubmit={handleSubmit} className="bg-white  space-y-6">
               {/* Rating */}
               <div>
                 <label className="block text-[#CC2828] text-lg font-semibold mb-2">Rate Your Experience</label>
@@ -78,15 +75,23 @@ export default function Index() {
 
               {/* Description */}
               <div>
-                <label className="block text-[#CC2828] text-lg font-semibold mb-2">Your Review</label>
+                <label className="block text-[#CC2828] text-lg font-semibold mb-2">
+                  Your Review{" "}
+                  <span>({description.length}/300)</span>
+                </label>
                 <textarea
                   value={description}
-                  onChange={(e) => setDescription(e.target.value)}
+                  onChange={(e) => {
+                    if (e.target.value.length <= 300) {
+                      setDescription(e.target.value);
+                    }
+                  }}
                   rows={4}
                   placeholder="Share your thoughts about the session..."
                   className="w-full border border-gray-200 rounded-lg p-4 text-gray-700 placeholder:text-gray-400 focus:outline-none focus:ring-2 focus:ring-[#CC2828] resize-none"
                 />
               </div>
+
 
               {/* Submit Button */}
               <button

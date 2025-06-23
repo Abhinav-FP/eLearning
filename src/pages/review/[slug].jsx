@@ -10,7 +10,6 @@ export default function Index() {
   const [rating, setRating] = useState(0);
   const [description, setDescription] = useState('');
   const [processing, setProcessing] = useState('');
-
   const handleSubmit = async (e) => {
     e.preventDefault();
     if (processing) return;
@@ -23,7 +22,6 @@ export default function Index() {
         rating: rating,
         description: description
       });
-      console.log("response", response)
       if (response) {
         toast.success(response.data.message);
       }

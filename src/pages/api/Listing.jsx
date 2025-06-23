@@ -312,6 +312,9 @@ class Listing extends Component {
   async Privacy() {
     return Api.get("/home/privacy")
   }
+  async AddReview(data){
+    return  Api.post("/review/add", data)
+  }
 
 
   render() {

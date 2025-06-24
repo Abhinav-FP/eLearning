@@ -121,6 +121,10 @@ class Listing extends Component {
     return Api.post(`/payment/capture-order`, data);
   }
 
+  async PaypalTipApprove(data) {
+    return Api.post(`/payment/tip-capture-order`, data);
+  }
+
   async PaypalCancel(data) {
     return Api.post(`/payment/cancel-order`, data);
   }
@@ -169,7 +173,9 @@ class Listing extends Component {
   async TeacherLessonGetForStudent(id) {
     return Api.get(`/student/lesson/get/${id}`);
   }
-
+  async BookingId(id) {
+    return Api.get(`/booking/${id}`);
+  }
   async TeacherAvailabilityGet() {
     return Api.get(`/teacher/availability/get`);
   }
@@ -315,8 +321,8 @@ class Listing extends Component {
   async Privacy() {
     return Api.get("/home/privacy")
   }
-  async AddReview(data){
-    return  Api.post("/review/add", data)
+  async AddReview(data) {
+    return Api.post("/review/add", data)
   }
 
 

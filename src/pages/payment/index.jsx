@@ -19,9 +19,11 @@ function Index({
   email,
   isSpecialSlot = false,
   specialSlotData,
+  isbouns,
 }) {
   const clientId = process.env.NEXT_PUBLIC_PAYPAL_CLIENT_ID;
 
+  console.log("isbouns" ,isbouns)
   const router = useRouter();
 
   const [isProcessing, setIsProcessing] = useState(false);
@@ -117,6 +119,8 @@ function Index({
         totalAmount: PricePayment,
         adminCommission: adminCommission,
         isSpecialSlot: isSpecialSlot,
+        isbouns : isbouns
+
       });
 
       if (response?.data?.status === "COMPLETED") {

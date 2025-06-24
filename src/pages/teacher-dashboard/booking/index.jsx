@@ -60,6 +60,14 @@ export default function Index() {
     return isWithinFiveMinutes && isEndInFuture;
   };
 
+  const calculateDurationMinutes = (startDateTime, endDateTime) => {
+  const start = new Date(startDateTime);
+  const end = new Date(endDateTime);
+  const diffInMs = end - start;
+  const diffInMinutes = diffInMs / (1000 * 60);
+  return diffInMinutes;
+  }
+
 
   return (
     <TeacherLayout>
@@ -152,7 +160,7 @@ export default function Index() {
                           {item?.UserId?.name}
                         </td>
                         <td className="px-3 lg:px-4 py-2 lg:py-3 capitalize text-black text-sm lg:text-base font-medium font-inter ">
-                          {item?.LessonId?.duration} min{" "}
+                          {calculateDurationMinutes(item?.startDateTime,item?.endDateTime)} min{" "}
                           ({moment(item?.startDateTime).format('hh:mm A')} -{" "}
                           {moment(item?.endDateTime).format('hh:mm A')})
                         </td>

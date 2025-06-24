@@ -92,7 +92,15 @@ export default function Index() {
     return isWithinFiveMinutes && isEndInFuture;
   };
 
+  const calculateDurationMinutes = (startDateTime, endDateTime) => {
+  const start = new Date(startDateTime);
+  const end = new Date(endDateTime);
+  const diffInMs = end - start;
+  const diffInMinutes = diffInMs / (1000 * 60);
+  return diffInMinutes;
+  }
 
+  // console.log("categorizedLessons",categorizedLessons);
 
   return (
     <StudentLayout page={"My Lessons"}>
@@ -138,7 +146,7 @@ export default function Index() {
                     <p className="text-sm lg:text-base font-medium text-[#535353] font-inter ">
                       {lesson?.startDateTime ? new Date(lesson.startDateTime).toLocaleTimeString('en-US', timeOptions) : ""}
                     </p>
-                    <p className="text-sm lg:text-base font-medium text-[#535353] font-inter ">{lesson?.LessonId?.duration ? `${lesson?.LessonId?.duration} minutes` : ""}</p>
+                    <p className="text-sm lg:text-base font-medium text-[#535353] font-inter ">{`${calculateDurationMinutes(lesson?.startDateTime, lesson?.endDateTime)} mins`}</p>
                   </div>
                   <div
                     className="bg-white rounded-[10px] lesson_list_shadow p-3 md:p-4 lg:p-5 flex items-center justify-between transition border-[rgba(204,40,40,0.2)] border-1"

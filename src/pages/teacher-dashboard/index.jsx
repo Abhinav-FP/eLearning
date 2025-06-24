@@ -69,17 +69,26 @@ export default function Index() {
               <div className="absolute right-4 lg:right-5 xl:right-6 bg-[#CC28281A] border-[0.67px] border-[#CC282880] p-3 rounded">
                 <MdAttachMoney className="text-[#CC2828]" size={24} />
               </div>
-              <div className="flex gap-3 text-lg font-semibold mt-6 xl:mt-4 items-center">
-                {Dashboard?.TeacherData ? (
-                  <p className="flex gap-1 items-center font-inter text-sm sm:text-base lg:text-lg xl:text-xl font-medium tracking-[-0.04em] text-black">
-                    <MdCheckCircle size={18} /> {formatMultiPrice(Dashboard?.TeacherData?.price, "USD")}/{Dashboard?.TeacherData?.duration} minutes
-                  </p>
+              <div className="flex flex-col gap-1 mt-6 xl:mt-4">
+                {Dashboard?.TeacherData?.length > 0 ? (
+                  Dashboard.TeacherData.map((lesson, index) => (
+                    <p
+                      key={index}
+                      className="font-inter text-sm sm:text-base lg:text-lg xl:text-xl font-medium tracking-[-0.04em] text-black flex justify-between"
+                    >
+                      <span className="capitalize">{lesson.title}</span>
+                      <span>
+                        {formatMultiPrice(lesson.price, "USD")} / {lesson.duration} minutes
+                      </span>
+                    </p>
+                  ))
                 ) : (
                   <p className="font-inter text-sm sm:text-base lg:text-lg xl:text-xl font-medium tracking-[-0.04em] text-black">
                     N/A
                   </p>
                 )}
               </div>
+
             </div>
 
             {/* Total Reviews */}
@@ -98,7 +107,7 @@ export default function Index() {
 
             <div className="relative bg-white rounded-xl dashboard-box p-3.5 lg:p-4 xl:p-5 border border-[rgba(204,40,40,0.2)] flex flex-col min-h-[120px] md:min-h-[136px]">
               <h2 className="font-inter text-[#CC2828] font-bold text-base sm:text-lg lg:text-xl xl:text-2xl capitalize tracking-[-0.04em]">
-                Payment Earning
+                Payment Earnings
               </h2>
               <div className="absolute right-4 lg:right-5 xl:right-6 bg-[#CC28281A] border-[0.67px] border-[#CC282880] p-3 rounded">
                 <FaWallet className="w-6 h-6 text-[#CC2828]" />
@@ -157,11 +166,11 @@ export default function Index() {
                   30 mins: <span>{resultMap.duration30}</span>
                 </p>
                 <p className="font-inter text-sm sm:text-base lg:text-lg xl:text-xl font-medium tracking-[-0.04em] text-black flex justify-between">
-                  50 mins: <span>{resultMap.duration50}</span>
+                  60 mins: <span>{resultMap.duration60}</span>
                 </p>
-                <p className="font-inter text-sm sm:text-base lg:text-lg xl:text-xl font-medium tracking-[-0.04em] text-black flex justify-between">
+                {/* <p className="font-inter text-sm sm:text-base lg:text-lg xl:text-xl font-medium tracking-[-0.04em] text-black flex justify-between">
                   Custom: <span>{resultMap.durationOther}</span>
-                </p>
+                </p> */}
               </div>
 
             </div>

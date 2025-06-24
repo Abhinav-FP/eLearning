@@ -31,89 +31,83 @@ const Index = ({ Availability, setIsPopupOpen, usedInPopup, setSelectedSlot, sel
   useEffect(() => {
     if (!Availability) return;
 
-    const getNextQuarter = (date) => {
+    const getNextHalfHour = (date) => {
       const next = new Date(date);
       const minutes = next.getMinutes();
-      const add =
-        minutes < 15
-          ? 15 - minutes
-          : minutes < 30
-            ? 30 - minutes
-            : minutes < 45
-              ? 45 - minutes
-              : 60 - minutes;
+      const add = minutes < 30 ? 30 - minutes : 60 - minutes;
       next.setMinutes(minutes + add, 0, 0);
       return next;
     };
 
+
     const processBlocks = (blocks, title, color) => {
-      const events = [];
+  const events = [];
 
-      blocks.forEach((block) => {
-        let current = moment.utc(block.startDateTime).toDate();
-        const end = moment.utc(block.endDateTime).toDate();
+  blocks.forEach((block) => {
+    let current = moment.utc(block.startDateTime).toDate();
+    const end = moment.utc(block.endDateTime).toDate();
 
-        const firstChunkEnd = getNextQuarter(current);
-        const firstDuration = (firstChunkEnd - current) / (1000 * 60); // in minutes
+    const firstChunkEnd = getNextHalfHour(current);
+    const firstDuration = (firstChunkEnd - current) / (1000 * 60); // in minutes
 
-        if (firstChunkEnd > end) {
-          // entire block fits before the first rounded quarter
-          events.push({
-            id: `${block._id}_${block.startDateTime}`,
-            title,
-            start: moment.utc(current).toDate(),
-            end: moment.utc(end).toDate(),
-            color,
-          });
-          return;
-        }
+    if (firstChunkEnd > end) {
+      // entire block fits before the first rounded half hour
+      events.push({
+        id: `${block._id}_${block.startDateTime}`,
+        title,
+        start: moment.utc(current).toDate(),
+        end: moment.utc(end).toDate(),
+        color,
+      });
+      return;
+    }
 
-        if (firstDuration < 15) {
-          // merge first chunk with next
-          const secondChunkEnd = getNextQuarter(firstChunkEnd);
-          const mergedEnd = secondChunkEnd < end ? secondChunkEnd : end;
+    if (firstDuration < 30) {
+      // merge first chunk with next
+      const secondChunkEnd = getNextHalfHour(firstChunkEnd);
+      const mergedEnd = secondChunkEnd < end ? secondChunkEnd : end;
 
-          events.push({
-            id: `${block._id}_${block.startDateTime}`,
-            title,
-            start: moment.utc(current).toDate(),
-            end: moment.utc(mergedEnd).toDate(),
-            color,
-          });
-
-          current = new Date(mergedEnd);
-        } else {
-          // normal first chunk
-          events.push({
-            id: `${block._id}_${block.startDateTime}`,
-            title,
-            start: moment.utc(current).toDate(),
-            end: moment.utc(firstChunkEnd).toDate(),
-            color,
-          });
-
-          current = new Date(firstChunkEnd);
-        }
-
-        // rest of the chunks
-        while (current < end) {
-          const nextChunkEnd = getNextQuarter(current);
-          const chunkEnd = nextChunkEnd < end ? nextChunkEnd : end;
-
-          events.push({
-            id: `${block._id}_${moment.utc(current).toISOString()}`,
-            title,
-            start: moment.utc(current).toDate(),
-            end: moment.utc(chunkEnd).toDate(),
-            color,
-          });
-
-          current = new Date(chunkEnd);
-        }
+      events.push({
+        id: `${block._id}_${block.startDateTime}`,
+        title,
+        start: moment.utc(current).toDate(),
+        end: moment.utc(mergedEnd).toDate(),
+        color,
       });
 
-      return events;
-    };
+      current = new Date(mergedEnd);
+    } else {
+      // normal first chunk
+      events.push({
+        id: `${block._id}_${block.startDateTime}`,
+        title,
+        start: moment.utc(current).toDate(),
+        end: moment.utc(firstChunkEnd).toDate(),
+        color,
+      });
+
+      current = new Date(firstChunkEnd);
+    }
+
+    // rest of the chunks
+    while (current < end) {
+      const nextChunkEnd = getNextHalfHour(current);
+      const chunkEnd = nextChunkEnd < end ? nextChunkEnd : end;
+
+      events.push({
+        id: `${block._id}_${moment.utc(current).toISOString()}`,
+        title,
+        start: moment.utc(current).toDate(),
+        end: moment.utc(chunkEnd).toDate(),
+        color,
+      });
+
+      current = new Date(chunkEnd);
+    }
+  });
+
+  return events;
+};
     // For processing full blocks
     const processFullBlocks = (blocks, title, color) => {
       return blocks.map((block) => ({

@@ -104,7 +104,9 @@ export default function Lesson({ title }) {
 
 
                         {loading ? (
-                            <BestTeacherLoader rows={3} />
+                            <div className="flex">
+                             <BestTeacherLoader rows={3} />
+                            </div>
                         ) : (
                             <Swiper
                                 spaceBetween={10}

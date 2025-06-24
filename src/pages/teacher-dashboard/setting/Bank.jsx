@@ -152,32 +152,26 @@ export default function Bank() {
                 {/* Account Type */}
                 <div className="flex flex-wrap items-start">
                     <div className="w-full lg:w-5/12 xl:w-4/12 lg:pr-3 mb-2 lg:mb-0">
-                        <label className="block text-[#CC2828] font-medium text-base lg:text-xl mb-1">Account Type (Optional)</label>
-                        <p className="text-[#535353] text-base">Select the type of your bank account</p>
+                        <label className="block text-[#CC2828] font-medium text-base lg:text-xl mb-1">
+                        Account Type (Optional)
+                        </label>
+                        <p className="text-[#535353] text-base">Enter the type of your bank account</p>
                     </div>
                     <div className="w-full lg:w-6/12 xl:w-5/12 lg:pl-3 relative">
-                        <select
-                            name="AccountType"
-                            disabled={!showDetails}
-                            className={`w-full h-11 lg:h-[54px] font-medium bg-[#F4F6F8] text-[#46494D] 
-                                text-base border border-[#F4F6F8] rounded-lg py-3 px-6 
-                                ${!showDetails ? 'blur-sm' : ''}`}
-                            value={data.AccountType}
-                            onChange={handleChange}
-                        >
-                            <option value="">Select Account Type</option>
-                            <option value="savings">Savings Account</option>
-                            <option value="current">Current / Checking Account</option>
-                            <option value="fixed">Fixed Deposit Account</option>
-                            <option value="recurring">Recurring Deposit Account</option>
-                            <option value="nre">NRE (Non-Resident External)</option>
-                            <option value="nro">NRO (Non-Resident Ordinary)</option>
-                            <option value="business">Business Account</option>
-                            <option value="joint">Joint Account</option>
-                            <option value="salary">Salary Account</option>
-                        </select>
+                        <input
+                        type="text"
+                        name="AccountType"
+                        disabled={!showDetails}
+                        placeholder="Type account type..."
+                        className={`w-full h-11 lg:h-[54px] font-medium bg-[#F4F6F8] text-[#46494D] 
+                            text-base border border-[#F4F6F8] rounded-lg py-3 px-6 
+                            ${!showDetails ? 'blur-sm' : ''}`}
+                        value={data?.AccountType}
+                        onChange={handleChange}
+                        />
                     </div>
                 </div>
+
                 {/* Branch Name */}
                 {/* <div className="flex flex-wrap items-start">
                     <div className="w-full lg:w-5/12 xl:w-4/12 lg:pr-3 mb-2 lg:mb-0">

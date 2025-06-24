@@ -21,12 +21,12 @@ export default function Profile() {
     ais_trained: false,
     intro_video: "",
     interest: "",
-    experience: "",
+    // experience: "",
     description: "",
     // average_price: "",
     // average_time: "",
-    documentlink: "",
-    qualifications: "",
+    // documentlink: "",
+    // qualifications: "",
     specialities: [],
   });
   const [file, setFile] = useState(null);
@@ -51,10 +51,10 @@ export default function Profile() {
           languages_spoken: profiledata?.languages_spoken,
           description: profiledata?.description,
           intro_video: profiledata?.intro_video,
-          experience: profiledata?.experience,
+          // experience: profiledata?.experience,
           gender: profiledata?.gender,
-          documentlink: profiledata?.documentlink,
-          qualifications: profiledata?.qualifications,
+          // documentlink: profiledata?.documentlink,
+          // qualifications: profiledata?.qualifications,
           specialities: profiledata?.tags || [],
         });
         setFile(profiledata?.userId?.profile_photo);
@@ -119,15 +119,15 @@ export default function Profile() {
       formData.append("ais_trained", data?.ais_trained)
       formData.append("intro_video", data?.intro_video)
       formData.append("interest", data?.interest)
-      formData.append("experience", data?.experience)
+      // formData.append("experience", data?.experience)
       formData.append("description", data?.description)
       formData.append("tags", JSON.stringify(data?.specialities))
       // formData.append("average_price", data?.average_price)
       // formData.append("average_time", data?.average_time)
-      formData.append("qualifications", data?.qualifications)
-      if (data?.documentlink instanceof File) {
-        formData.append("documentlink", data?.documentlink)
-      }
+      // formData.append("qualifications", data?.qualifications)
+      // if (data?.documentlink instanceof File) {
+      //   formData.append("documentlink", data?.documentlink)
+      // }
       if (file instanceof File) {
         formData.append("profile_photo", file);
       }
@@ -373,12 +373,11 @@ export default function Profile() {
                   className="w-full h-11 lg:h-[54px] font-medium appearance-none block bg-[#F4F6F8] text-[#46494D] text-base border border-[#F4F6F8] rounded-lg py-3 px-3 lg:px-6 leading-tight focus:outline-none"
                 />
               </div>
-              <div className="w-full lg:w-6/12 px-2">
+              {/* <div className="w-full lg:w-6/12 px-2">
                 <label className="block text-[#CC2828] font-medium text-base xl:text-xl mb-1 tracking-[-0.04em]">
                   Upload any relevant certificate
                 </label>
 
-                {/* File input always visible for uploads */}
                 <input
                   type="file"
                   name="documentlink"
@@ -386,7 +385,6 @@ export default function Profile() {
                   className="w-full h-11 lg:h-[54px] font-medium appearance-none block bg-[#F4F6F8] text-[#46494D] text-base border border-[#F4F6F8] rounded-lg py-3 px-3 lg:px-6 leading-tight focus:outline-none"
                 />
 
-                {/* Show view button only if there's a valid document link */}
                 {data?.documentlink && typeof data.documentlink === 'string' && (
                   <div className="mt-2">
                     <a
@@ -399,9 +397,9 @@ export default function Profile() {
                     </a>
                   </div>
                 )}
-              </div>
+              </div> */}
 
-              <div className="w-full lg:w-6/12  px-2">
+              {/* <div className="w-full lg:w-6/12  px-2">
                 <label className="block text-[#CC2828] font-medium text-base xl:text-xl mb-1 tracking-[-0.04em]">
                   Experience (In Years)
                 </label>
@@ -413,7 +411,7 @@ export default function Profile() {
                   onChange={handleChange}
                   className="w-full h-11 lg:h-[54px] font-medium appearance-none block bg-[#F4F6F8] text-[#46494D] text-base border border-[#F4F6F8] rounded-lg py-3 px-3 lg:px-6 leading-tight focus:outline-none"
                 />
-              </div>
+              </div> */}
 
               {/* <div className="w-full lg:w-6/12  px-2">
                 <label className="block text-[#CC2828] font-medium text-base xl:text-xl mb-1 tracking-[-0.04em]">
@@ -443,7 +441,7 @@ export default function Profile() {
                 />
               </div> */}
 
-              <div className="w-full px-2">
+              {/* <div className="w-full px-2">
                 <label className="block text-[#CC2828] font-medium text-base xl:text-xl mb-1 tracking-[-0.04em]">
                   Qualification
                 </label>
@@ -462,7 +460,7 @@ export default function Profile() {
                       </option>
                     ))}
                 </select>
-              </div>
+              </div> */}
 
               <div className="w-full lg:w-6/12 px-2 mb-4">
                 <label className="text-[#CC2828] font-medium text-base xl:text-xl mb-2 block">
@@ -491,7 +489,7 @@ export default function Profile() {
                     />
                     <span>Female</span>
                   </label>
-                  <label className="flex items-center space-x-1 text-base">
+                  {/* <label className="flex items-center space-x-1 text-base">
                     <input
                       type="radio"
                       name="gender"
@@ -501,7 +499,7 @@ export default function Profile() {
                        className=" w-4 h-4 accent-[#CC2828]"
                     />
                     <span>Other</span>
-                  </label>
+                  </label> */}
                 </div>
               </div>
 

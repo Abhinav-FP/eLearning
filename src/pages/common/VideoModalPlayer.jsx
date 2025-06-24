@@ -38,7 +38,7 @@ export default function VideoModalPlayer({ video, image, name, divClass, imgClas
 
    useEffect(() => {
         if (platform === 'youtube' && youTubeId) {
-            setThumbnail(`https://img.youtube.com/vi/${youTubeId}/hqdefault.jpg`);
+            setThumbnail(`https://img.youtube.com/vi/${youTubeId}/hqdefault.jpg?cc_load_policy=0&hl=ja`);
         } else if (platform === 'vimeo' && vimeoId) {
             fetch(`https://vimeo.com/api/oembed.json?url=https://vimeo.com/${vimeoId}`)
                 .then(res => res.json())

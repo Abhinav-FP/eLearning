@@ -25,6 +25,7 @@ export default function ReviewsList() {
       });
   }, []);
 
+
   return (
     <StudentLayout page={"Settings"}>
       <div className="p-5 lg:p-[30px] ">

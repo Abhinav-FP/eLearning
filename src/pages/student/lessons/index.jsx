@@ -6,9 +6,11 @@ import Link from "next/link";
 import ReschedulePopup from "./ReschedulePopup";
 import { LessonLoader } from "@/components/Loader";
 import NoData from "@/pages/common/NoData";
+import { useRouter } from "next/router";
 
 export default function Index() {
   const [tab, setTab] = useState("upcoming");
+  const router = useRouter();
   const [selectedLesson, setSelectedLesson] = useState(null);
   const [loading, setLoading] = useState(false)
   const dateOptions = { year: 'numeric', month: 'long', day: 'numeric' };
@@ -57,6 +59,7 @@ export default function Index() {
         }
       });
       setLoading(false);
+      console.log("categorizedLessons", categorizedLessons);
       setCategorizedLessons(categorized);
     } catch (error) {
       console.log("error", error);
@@ -72,6 +75,8 @@ export default function Index() {
   useEffect(() => {
     fetchLessons();
   }, []);
+
+  console.log("categorizedLessons", categorizedLessons);
 
   const isMoreThanOneHourFromNow = (startDateTime) => {
     const now = new Date();
@@ -175,13 +180,22 @@ export default function Index() {
                           }}>
                           Reschedule
                         </button>}
-                        {isLessThan5minutesFromNowAndBeforeEnd(lesson?.startDateTime, lesson?.endDateTime) &&
+                      {tab === "past" && lesson?.ReviewId === null && (
+                        <button
+                          className="tracking-[-0.06em] font-inter px-6 md:px-10 lg:px-12 xl:px-16 py-2 lg:py-2.5 text-[#CC2828] border border-[#CC2828] rounded-[10px] text-sm hover:bg-[#CC2828] hover:text-white cursor-pointer"
+                          onClick={() => router.push(`/student/review/${lesson?._id}`)}
+                        >
+                          Add Review
+                        </button>
+                      )}
+
+                      {isLessThan5minutesFromNowAndBeforeEnd(lesson?.startDateTime, lesson?.endDateTime) &&
                         <a href={lesson?.zoom?.meetingLink || ""} target="blank"
-                         className="tracking-[-0.06em] font-inter px-6 md:px-10 lg:px-12 xl:px-16 py-2 lg:py-2.5 text-[#CC2828] border border-[#CC2828] rounded-[10px]  text-sm hover:bg-[#CC2828] hover:text-white cursor-pointer"
-                         >
-                          Join Lesson 
+                          className="tracking-[-0.06em] font-inter px-6 md:px-10 lg:px-12 xl:px-16 py-2 lg:py-2.5 text-[#CC2828] border border-[#CC2828] rounded-[10px]  text-sm hover:bg-[#CC2828] hover:text-white cursor-pointer"
+                        >
+                          Join Lesson
                         </a>
-                        }
+                      }
                       <Link href={`/student/message?query=${lesson?.teacherId?._id}`} className="tracking-[-0.06em] font-inter px-6 md:px-10 lg:px-12 xl:px-16 py-2 lg:py-2.5 text-white border border-[#CC2828] rounded-[10px]  text-sm bg-[#CC2828] hover:bg-white hover:text-[#CC2828] cursor-pointer">
                         Message
                       </Link>

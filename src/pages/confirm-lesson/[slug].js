@@ -35,7 +35,6 @@ export default function Index() {
         router.push("/");
       }
     } catch (err) {
-      console.log("Invalid token", err);
       toast.error("Invalid token");
     //   router.push("/");
     } finally {

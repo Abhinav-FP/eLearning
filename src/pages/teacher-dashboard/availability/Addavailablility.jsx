@@ -46,6 +46,14 @@ export default function Addavailablility({ isOpen, onClose, TeacherAvailabilitys
 
   const handleChange = (e) => {
     const { name, value } = e.target;
+    const minutes = new Date(value).getMinutes();
+  
+    // Check if the time is not in :00 or :30 minutes
+    if (minutes !== 0 && minutes !== 30) {
+    toast.error("Please select a time with :00 or :30 minutes.");
+    return;
+    }
+
     setFormData((prev) => ({
       ...prev,
       [name]: value,
@@ -142,7 +150,7 @@ export default function Addavailablility({ isOpen, onClose, TeacherAvailabilitys
           />
         </div>
         <p class="text-sm text-gray-600 italic">
-          ⏰ Please note: Only full (:00) and half-hour (:30) times are allowed.
+          ⏰ Please note: Only times ending in :00 or :30 are allowed. For example, 1:00 to 4:00 or 2:30 to 3:30 is valid — but 1:00 to 4:05 or 2:15 to 3:45 is not.
         </p>
 
         {/* Action Buttons */}

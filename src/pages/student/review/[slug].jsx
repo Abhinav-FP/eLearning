@@ -3,7 +3,6 @@ import { FaStar } from 'react-icons/fa';
 import { useRouter } from 'next/router';
 import Listing from '@/pages/api/Listing';
 import toast from 'react-hot-toast';
-import Layout from '@/pages/common/Layout';
 import Tippayment from "./tippaypal";
 import StudentLayout from '../Common/StudentLayout';
 import StripeTips from './StripeTips';
@@ -13,6 +12,7 @@ export default function Index() {
   const [rating, setRating] = useState(0);
   const [description, setDescription] = useState('');
   const [processing, setProcessing] = useState('');
+  const [PaymentStatus, setPaymentStatus] = useState(false)
   const [Tips, setTips] = useState(false);
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -73,10 +73,6 @@ export default function Index() {
     FecthData();
 
   }, [router?.query?.slug]);
-
-  const [PaymentStatus, setPaymentStatus] = useState(false)
-
-  console.log("BookinData", BookinData)
 
   return (
     <StudentLayout >
@@ -155,7 +151,9 @@ export default function Index() {
                       Paying Tips for Teachers
                     </h1>
                     <p className="text-lg font-semibold text-[#000000]">
-                      Teachers often pay tips for their students. In the context of this platform, you can offer tips to your students for teaching.
+                      Teachers often pay tips for their students.
+                      In the context of this platform, you can offer tips
+                      to your students for teaching.
                     </p>
                   </div>
 
@@ -213,7 +211,8 @@ export default function Index() {
                           id="number"
                           value={amount}
                           onChange={handleamountChange}
-                          className="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-[#CC2828] focus:border-[#CC2828]"
+                          className="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none
+                           focus:ring-[#CC2828] focus:border-[#CC2828]"
                           placeholder="Enter your amount"
                         />
                       </div>

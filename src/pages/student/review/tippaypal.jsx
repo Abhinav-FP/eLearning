@@ -65,7 +65,7 @@ function Index({
             });
 
             if (response?.data?.status === "COMPLETED") {
-                router.push("/success");
+                router.push("/student/review/success");
             }
         } catch (error) {
             console.error("API error:", error);
@@ -85,7 +85,7 @@ function Index({
                 LessonId: isbouns && isbouns?.LessonId,
             });
             if (response?.data?.status === "CANCELLED") {
-                router.push("/cancel");
+                router.push("/student/review/cancel");
             }
         } catch (error) {
             console.error("API error:", error);

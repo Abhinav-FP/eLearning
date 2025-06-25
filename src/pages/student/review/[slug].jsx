@@ -222,13 +222,13 @@ export default function Index() {
                         <Tippayment
                           PricePayment={amount}
                           bookingdata={BookinData}
-                          isbouns={true}
+                          IsBonus={true}
                         />
                       ) : (
                         <StripeTips
                           PricePayment={amount}
                           bookingdata={BookinData}
-                          isbouns={true}
+                          IsBonus={true}
                         />
                       )}
                     </div>

@@ -13,11 +13,11 @@ import toast from "react-hot-toast";
 function Index({
     PricePayment,
     bookingdata,
-    isbouns
+    IsBonus
 }) {
     const clientId = process.env.NEXT_PUBLIC_PAYPAL_CLIENT_ID;
 
-    console.log("isbouns", isbouns)
+    console.log("IsBonus", IsBonus)
     console.log("bookingdata", bookingdata)
     const router = useRouter();
 
@@ -61,7 +61,7 @@ function Index({
                 teacherId:  bookingdata?.teacherId,
                 BookingId:  bookingdata?._id,
                 totalAmount: PricePayment,
-                isbouns: true
+                IsBonus: true
             });
 
             if (response?.data?.status === "COMPLETED") {
@@ -82,7 +82,7 @@ function Index({
             const main = new Listing();
             const response = await main.PaypalCancel({
                 orderID: data.orderID,
-                LessonId: isbouns && isbouns?.LessonId,
+                LessonId: IsBonus && IsBonus?.LessonId,
             });
             if (response?.data?.status === "CANCELLED") {
                 router.push("/student/review/cancel");

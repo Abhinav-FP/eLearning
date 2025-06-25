@@ -15,7 +15,7 @@ const stripePromise = loadStripe(process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY)
 function StripeForm({
     PricePayment,
     bookingdata,
-    isbouns }) {
+    IsBonus }) {
     const stripe = useStripe();
     const elements = useElements();
     const [processing, setProcessing] = useState(false);
@@ -35,7 +35,7 @@ function StripeForm({
                 LessonId: bookingdata?.LessonId,
                 teacherId: bookingdata?.teacherId,
                 BookingId: bookingdata?._id,
-                isbouns: isbouns
+                IsBonus: IsBonus
             });
             const clientSecret = res?.data?.clientSecret;
             const cardElement = elements.getElement(CardElement);
@@ -48,7 +48,6 @@ function StripeForm({
             if (paymentResult.error) {
                 setMessage(paymentResult.error.message);
                 router.push("/student/review/cancel");
-
                 toast.error(paymentResult.error.message);
             } else if (paymentResult.paymentIntent.status === 'succeeded') {
                 router.push("/student/review/success");

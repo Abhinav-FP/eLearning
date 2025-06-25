@@ -115,7 +115,7 @@ export default function Index() {
 
   return (
     <div className="min-h-screen flex items-center justify-center bg-gray-100 p-4">
-      <div className="bg-white px-6 lg:px-16 pt-5 pb-10 lg:pb-20  rounded-[20px] md:rounded-[20px] lg:rounded-[40px] shadow lg:shadow-lg w-full max-w-[976px] login_custom">
+      <div className="bg-white px-4 md:px-6 lg:px-16 pt-5 pb-10 lg:pb-20  rounded-[20px] md:rounded-[20px] lg:rounded-[40px] shadow lg:shadow-lg w-full max-w-[976px] login_custom">
         {/* Logo */}
         <div className="flex justify-center mb-6">
           <Link href="/">
@@ -124,7 +124,7 @@ export default function Index() {
         </div>
 
         {/* Heading */}
-        <h2 className="text-center text-red-600 text-2xl font-semibold mb-2 uppercase">
+        <h2 className="text-center text-red-600 text-xl lg:text-2xl font-semibold mb-2 uppercase">
           REGISTER as a student
         </h2>
         <p className="text-center text-sm text-black mb-8">

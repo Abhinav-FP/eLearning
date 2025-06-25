@@ -61,11 +61,11 @@ export default function Index() {
   return (
     <AdminLayout page={"Bookings"}>
       <div className="min-h-screen p-5 lg:p-[30px]">
-        <div className="flex justify-between items-center mb-4 lg:mb-5">
-          <div className="flex flex-wrap gap-5">
+        <div className="flex flex-col md:flex-row justify-between md:items-center mb-4 lg:mb-5">
+          <div className="flex flex-wrap gap-5 mb-4 md:mb-0 justify-between">
             <button
               onClick={() => setTabOpen('upcoming')}
-              className={`text-sm lg:text-lg font-medium tracking-[-0.04em] px-6 lg:px-10 py-3 lg:py-2 rounded-[10px] cursor-pointer ${
+              className={`px-2 px-4 xl:px-8 py-2 h-[44px] rounded-md tracking-[-0.06em] text-base font-medium  cursor-pointer ${
                 TabOpen === 'upcoming'
                   ? 'bg-[#CC2828] text-[#fff]'
                   : 'bg-[#E0E0E0] text-[#727272]'
@@ -75,7 +75,7 @@ export default function Index() {
             </button>
             <button
               onClick={() => setTabOpen('past')}
-              className={`text-sm lg:text-lg font-medium tracking-[-0.04em] px-6 lg:px-10 py-3 lg:py-2 rounded-[10px] cursor-pointer ${
+              className={`px-2 px-4 xl:px-8 py-2 h-[44px] rounded-md tracking-[-0.06em] text-base font-medium  cursor-pointer ${
                 TabOpen === 'past'
                   ? 'bg-[#CC2828] text-[#fff]'
                   : 'bg-[#E0E0E0] text-[#727272]'
@@ -84,16 +84,16 @@ export default function Index() {
               Past
             </button>
           </div>
-          <div className="w-1/3 max-w-sm relative">
+          <div className="w-full md:w-1/3 md:max-w-sm relative">
             <span className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-              <FiSearch className="text-[#CC2828]" />
+              <FiSearch className="text-[#888]" />
             </span>
             <input
               type="text"
               value={searchText}
               onChange={handleSearchChange}
               placeholder="Search using lesson or teacher name"
-              className="w-full pl-10 pr-4 py-2 border border-[#CC2828] text-[#CC2828] rounded-md focus:outline-none focus:ring-2 focus:ring-[#CC2828] placeholder-gray-400"
+              className="w-full pl-10 pr-4 py-2 border border-[#ddd] text-[#000] rounded-md focus:outline-none focus:ring-1 focus:ring-[#CC2828] placeholder-gray-400"
             />
           </div>
         </div>

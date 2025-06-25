@@ -38,7 +38,7 @@ export default function Index() {
       <div className="min-h-screen p-5 lg:p-[30px]">
         <div className="grid grid-cols-1 sm:grid-cols-2 2xl:grid-cols-4 gap-4 ">
           <div className="relative bg-white rounded-xl dashboard-box p-3.5 lg:p-4 xl:p-5 border border-[rgba(204,40,40,0.2)] flex flex-col min-h-[136px]">
-            <h2 className="font-inter text-[#CC2828] font-bold text-lg lg:text-xl xl:text-2xl capitalize tracking-[-0.04em]">
+            <h2 className="font-inter text-[#CC2828] font-bold text-lg lg:text-xl xl:text-xl capitalize tracking-[-0.04em]">
               active teachers
             </h2>
             <div className="absolute right-4 lg:right-5 xl:right-6 bg-[#CC28281A] border-[0.67px] border-[#CC282880] p-3 rounded">
@@ -52,7 +52,7 @@ export default function Index() {
             </div>
           </div>
           <div className="relative bg-white rounded-xl dashboard-box p-3.5 lg:p-4 xl:p-5 border border-[rgba(204,40,40,0.2)] flex flex-col min-h-[136px]">
-            <h2 className="font-inter text-[#CC2828] font-bold text-lg lg:text-xl xl:text-2xl capitalize tracking-[-0.04em]">
+            <h2 className="font-inter text-[#CC2828] font-bold text-lg lg:text-xl xl:text-xl capitalize tracking-[-0.04em]">
               Active Students
             </h2>
             <div className="absolute right-4 lg:right-5 xl:right-6 bg-[#CC28281A] border-[0.67px] border-[#CC282880] p-3 rounded">
@@ -66,7 +66,7 @@ export default function Index() {
             </div>
           </div>
           <div className="relative bg-white rounded-xl dashboard-box p-3.5 lg:p-4 xl:p-5 border border-[rgba(204,40,40,0.2)] flex flex-col min-h-[136px]">
-            <h2 className="font-inter text-[#CC2828] font-bold text-lg lg:text-xl xl:text-2xl capitalize tracking-[-0.04em]">
+            <h2 className="font-inter text-[#CC2828] font-bold text-lg lg:text-xl xl:text-xl capitalize tracking-[-0.04em]">
               Pending Reviews
             </h2>
             <div className="absolute right-4 lg:right-5 xl:right-6 bg-[#CC28281A] border-[0.67px] border-[#CC282880] p-3 rounded">
@@ -80,8 +80,8 @@ export default function Index() {
             </div>
           </div>
           <div className="relative bg-white rounded-xl dashboard-box p-3.5 lg:p-4 xl:p-5 border border-[rgba(204,40,40,0.2)] flex flex-col min-h-[136px]">
-            <h2 className="font-inter text-[#CC2828] font-bold text-lg lg:text-xl xl:text-2xl capitalize tracking-[-0.04em]">
-              Total Completed  Booking
+            <h2 className="font-inter text-[#CC2828] font-bold text-lg lg:text-xl xl:text-xl capitalize tracking-[-0.04em]">
+              Total Completed <br></br> Booking
             </h2>
             <div className="absolute right-4 lg:right-5 xl:right-6 bg-[#CC28281A] border-[0.67px] border-[#CC282880] p-3 rounded">
               <TbBrandBooking className="text-[#CC2828]" size={24} />
@@ -95,10 +95,12 @@ export default function Index() {
           </div>
         </div>
 
-        <div className="bg-white rounded-2xl shadow border border-[rgba(204,40,40,0.2)] overflow-auto mt-4  p-5">
-          <h2 className="text-[#CC2828] text-xl lg:text-2xl font-semibold mb-4">Teacher Management</h2>
-          <table className="min-w-full text-sm text-left">
-            <thead className="bg-[rgba(204,40,40,0.05)] text-[#535353]">
+        <div className="bg-white rounded-2xl shadow border border-[rgba(204,40,40,0.2)] overflow-auto mt-4 ">
+         <div className='px-5 pt-5'>
+           <h2 className="text-[#CC2828] text-xl lg:text-2xl font-semibold mb-4">Teacher Management</h2>
+         </div>
+          <table className="min-w-full text-sm text-center rounded-[20px]">
+            <thead className="bg-[rgba(204,40,40,0.1)] text-[#535353] tracking-[-0.04em] font-inter rounded-[20px] whitespace-nowrap">
               <tr>
                 <th className="font-normal text-sm lg:text-base px-3 lg:px-4 py-2 lg:py-3 border-t border-[rgba(204,40,40,0.2)] capitalize text-left">
                   Teacher name
@@ -123,20 +125,20 @@ export default function Index() {
                   return (
                     <tr
                       key={index}
-                      className={`border-t hover:bg-[rgba(204,40,40,0.05)] ${user?.block ? "opacity-50" : ""}`}
+                      className={`border-t hover:bg-[rgba(204,40,40,0.1)] border-[rgba(204,40,40,0.2)] ${user?.block ? "opacity-50" : ""}`}
                     >
-                      <td className="py-3 px-4 font-medium text-sm lg:text-base">
+                      <td className="capitalize whitespace-nowrap px-3 lg:px-4 py-2 lg:py-3 text-black text-sm lg:text-base font-medium font-inter text-left">
                         <Link href={`/admin/teacher/${user?._id}`} className="hover:underline">
                           {user?.name || "—"}
                         </Link>
                       </td>
-                      <td className="py-3 px-4 text-sm">
+                      <td className="px-3 lg:px-4 py-2 lg:py-3 text-black text-sm lg:text-base font-medium font-inter text-left">
                         {user?.email || "—"}
                       </td>
-                      <td className="py-3 px-4 capitalize text-sm">
+                      <td className="whitespace-nowrap capitalize px-3 lg:px-4 py-2 lg:py-3 text-black text-sm lg:text-base font-medium font-inter">
                         {item?.qualifications?.replaceAll("_", " ") || "N/A"}
                       </td>
-                      <td className="py-3 px-4 text-sm">
+                      <td className="capitalize whitespace-nowrap px-3 lg:px-4 py-2 lg:py-3 text-black text-sm lg:text-base font-medium font-inter">
                         {item?.experience ? `${item.experience} years` : "N/A"}
                       </td>
                     </tr>

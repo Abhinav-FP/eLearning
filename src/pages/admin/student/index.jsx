@@ -87,41 +87,41 @@ function Index() {
   return (
     <AdminLayout page={"Students Listing"}>
       <div className="min-h-screen p-5 lg:p-[30px]">
-        <div className="flex flex-col md:flex-row items-center justify-between gap-4 mb-6 md:mb-10 w-full">
-          <div className="w-1/3 relative">
-            <span className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-              <FiSearch className="text-[#CC2828]" />
-            </span>
-            <input
-              type="text"
-              value={searchQuery}
-              onChange={handleChange}
-              placeholder="Search by name or email"
-              className="w-full pl-10 pr-4 py-2 border border-[#CC2828] text-[#CC2828] rounded-md focus:outline-none focus:ring-2 focus:ring-[#CC2828] placeholder-gray-400"
-            />
-          </div>
+        <div className=" ">
+          <div className="flex flex-col md:flex-row justify-between mb-4 lg:mb-5">
+            <div className="relative w-full mb-4 md:mb-0 md:w-80">
+              <span className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                <FiSearch className="text-[#888]" />
+              </span>
+              <input
+                type="text"
+                value={searchQuery}
+                onChange={handleChange}
+                placeholder="Search by name or email"
+                className="w-full pl-10 pr-4 py-2 border border-[#ddd] text-[#000] rounded-md focus:outline-none focus:ring-1 focus:ring-[#CC2828] placeholder-gray-400"
+              />
+            </div>
 
-          <div className="w-full md:w-auto">
-            <select
-              name="filter"
-              value={selectedOption}
-              onChange={handleSelectChange}
-              className="border border-[#CC2828] text-[#CC2828] px-3 py-2 rounded-md focus:outline-none"
-            >
-              <option value="">All</option>
-              <option value="true">Blocked</option>
-              <option value="false">Unblocked</option>
-            </select>
+            <div className="w-full md:w-fit md:ml-auto">
+              <select
+                name="filter"
+                value={selectedOption}
+                onChange={handleSelectChange}
+                className="w-full md:w-auto border border-[#ddd] h-[44px] text-[#000] px-2 sm:px-3 xl:px-4 py-2 mb-4 md:mb-0  rounded-md focus:outline-none"
+              >
+                <option value="">All</option>
+                <option value="true">Blocked</option>
+                <option value="false">Unblocked</option>
+              </select>
+            </div>
           </div>
-
         </div>
-
-        <div className="border-t border-[rgba(0,0,0,.1)] pt-3 md:pt-4 lg:pt-6 overflow-x-auto">
+        <div className="rounded-[5px] border border-[rgba(204,40,40,0.3)] overflow-x-auto">
           <table className="min-w-full text-sm text-center rounded-[20px]">
             <thead className="bg-[rgba(204,40,40,0.1)] text-[#535353] tracking-[-0.04em] font-inter rounded-[20px] whitespace-nowrap">
               <tr>
                 <th className="font-normal text-sm lg:text-base px-3 lg:px-4 py-2 lg:py-3 border-t border-[rgba(204,40,40,0.2)] capitalize text-left">Name</th>
-                <th className="font-normal text-sm lg:text-base px-3 lg:px-4 py-2 lg:py-3 border-t border-[rgba(204,40,40,0.2)] capitalize">Email</th>
+                <th className="font-normal text-sm lg:text-base px-3 lg:px-4 py-2 lg:py-3 border-t border-[rgba(204,40,40,0.2)] capitalize text-left">Email</th>
                 <th className="font-normal text-sm lg:text-base px-3 lg:px-4 py-2 lg:py-3 border-t border-[rgba(204,40,40,0.2)] capitalize">Phone</th>
                 <th className="font-normal text-sm lg:text-base px-3 lg:px-4 py-2 lg:py-3 border-t border-[rgba(204,40,40,0.2)] capitalize">Timezone</th>
                 <th className="font-normal text-sm lg:text-base px-3 lg:px-4 py-2 lg:py-3 border-t border-[rgba(204,40,40,0.2)] capitalize">Action</th>
@@ -141,16 +141,16 @@ function Index() {
                       <td className="capitalize px-3 lg:px-4 py-2 lg:py-3 text-black text-sm lg:text-base font-medium font-inter text-left">
                         {item?.name || "N/A"}
                       </td>
-                      <td className="px-3 lg:px-4 py-2 lg:py-3 text-black text-sm lg:text-base font-medium font-inter">
+                      <td className="px-3 lg:px-4 py-2 lg:py-3 text-black text-sm lg:text-base font-medium font-inter text-left">
                         {item?.email || "N/A"}
                       </td>
-                      <td className="px-3 lg:px-4 py-2 lg:py-3 text-black text-sm lg:text-base font-medium font-inter">
+                      <td className="capitalize px-3 lg:px-4 py-2 lg:py-3 text-black text-sm lg:text-base font-medium font-inter">
                         {item?.phone || "N/A"}
                       </td>
                       <td className="capitalize px-3 lg:px-4 py-2 lg:py-3 text-black text-sm lg:text-base font-medium font-inter">
                         {item?.time_zone || "N/A"}
                       </td>
-                      <td className="px-3 lg:px-4 py-2 lg:py-3 text-black text-sm lg:text-base font-medium font-inter">
+                      <td className="capitalize px-3 lg:px-4 py-2 lg:py-3 text-black text-sm lg:text-base font-medium font-inter">
                         <div className="flex gap-2 justify-center items-center">
                           <button
                             onClick={() => {

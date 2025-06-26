@@ -23,6 +23,7 @@ export default function Index() {
   const [data, setdata] = useState([]);
   const [loading, setLoading] = useState(true);
   const [content, setContent] = useState("");
+  const [mergedAvailability, setMergedAvailability] = useState("");
   const [lessons, setLessons] = useState([]);
   const [isPopupOpen, setIsPopupOpen] = useState(book ? true : false);
   const [studentTimeZone, setStudentTimeZone] = useState(null);
@@ -54,6 +55,7 @@ export default function Index() {
       setLoading(false);
     }
   };
+
   const fetchData = async (slug) => {
     try {
       const main = new Listing();
@@ -65,17 +67,42 @@ export default function Index() {
       console.log("error", error);
     }
   };
+
   const fetchAvailabilitys = async (Id) => {
-    try {
-      const main = new Listing();
-      const response = await main.studentteacherAvaliability(Id);
-      if (response.data) {
-        setContent(response.data.data);
+  try {
+    const main = new Listing();
+    const response = await main.studentteacherAvaliability(Id);
+    if (response.data) {
+      const availabilityBlocks = response.data.data.availabilityBlocks || [];
+
+      // Sort by start time
+      const sorted = [...availabilityBlocks].sort(
+        (a, b) => new Date(a.startDateTime) - new Date(b.startDateTime)
+      );
+
+      // Merge continuous slots
+      const merged = [];
+      for (let i = 0; i < sorted.length; i++) {
+        const current = sorted[i];
+        if (
+          merged.length > 0 &&
+          merged[merged.length - 1].endDateTime === current.startDateTime
+        ) {
+          // Extend the previous block
+          merged[merged.length - 1].endDateTime = current.endDateTime;
+        } else {
+          // Start a new block
+          merged.push({ ...current });
+        }
       }
-    } catch (error) {
-      console.log("error", error);
+
+      setContent(response.data.data);
+      setMergedAvailability(merged);
     }
-  };
+  } catch (error) {
+    console.log("error", error);
+  }
+};
 
   useEffect(() => {
     if (slug) {
@@ -316,7 +343,7 @@ export default function Index() {
                 <p className="text-sm text-gray-600 mb-6 lg:mb-8">
                   {`All calendar times are displayed based on your device's current time zone: ${studentTimeZone || "NA"}. Please ensure your system time is accurate to avoid any scheduling discrepancies.`}
                 </p>
-                <Calendar Availability={content} setIsPopupOpen={setIsPopupOpen} usedInPopup={false} />
+                <Calendar Availability={content} setIsPopupOpen={setIsPopupOpen} usedInPopup={false} mergedAvailability={mergedAvailability}/>
               </div>
             </div>
             <Testimonial />
@@ -328,6 +355,7 @@ export default function Index() {
           Availability={content}
           studentTimeZone={studentTimeZone}
           loading={loading}
+          mergedAvailability={mergedAvailability}
         />
       </Layout>
     </>

@@ -23,7 +23,7 @@ const Event = ({ event }) => {
 
   return <div style={eventStyle}></div>;
 };
-const Index = ({ Availability, setIsPopupOpen, usedInPopup, setSelectedSlot, selectedLesson }) => {
+const Index = ({ Availability, setIsPopupOpen, usedInPopup, setSelectedSlot, selectedLesson, mergedAvailability }) => {
   const [events, setEvents] = useState([]);
   const { user } = useRole();
   const router = useRouter();
@@ -158,6 +158,8 @@ const Index = ({ Availability, setIsPopupOpen, usedInPopup, setSelectedSlot, sel
     return isWithinSlot;
   };
 
+  console.log("availabilityBlocks",Availability);
+
 
   const handleClick = (event) => {
     if (!usedInPopup) {
@@ -177,7 +179,7 @@ const Index = ({ Availability, setIsPopupOpen, usedInPopup, setSelectedSlot, sel
       setIsPopupOpen(true);
     }
     else {
-      if (!isEventWithinAvailability(event?.start, selectedLesson?.duration, Availability?.availabilityBlocks)) {
+      if (!isEventWithinAvailability(event?.start, selectedLesson?.duration, mergedAvailability)) {
         toast.error("This time slot is too short for your selected lesson duration.");
         return;
       }

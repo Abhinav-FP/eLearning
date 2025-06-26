@@ -17,7 +17,8 @@ export default function BookingPopup({
   lessons,
   Availability,
   studentTimeZone,
-  loading
+  loading,
+  mergedAvailability
 }) {
   const { user } = useRole();
 
@@ -122,6 +123,7 @@ export default function BookingPopup({
                     usedInPopup={true}
                     setSelectedSlot={setSelectedSlot}
                     selectedLesson={selectedLesson}
+                    mergedAvailability={mergedAvailability}
                   />
                   {/* <div className="flex justify-between items-center mt-5">
                   <button

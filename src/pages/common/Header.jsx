@@ -12,7 +12,7 @@ export default function Header() {
     const [menuOpen, setMenuOpen] = useState();
     const { user, setUser, language, setLanguage } = useRole();
     const router = useRouter();
-    console.log("router",router);
+    // console.log("router",router);
 
     const toggleMenu = () => {
         setMenuOpen(!menuOpen);

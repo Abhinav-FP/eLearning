@@ -5,6 +5,7 @@ import { TableLoader } from '@/components/Loader';
 import NoData from '@/pages/common/NoData';
 import AdminLayout from '../common/AdminLayout';
 import { FiSearch } from "react-icons/fi";
+import ZoomPopup from './ZoomPopup';
 
 export default function Index() {
   const [TabOpen, setTabOpen] = useState('upcoming');
@@ -12,12 +13,13 @@ export default function Index() {
   const [loading, setLoading] = useState(false);
   const [searchText, setSearchText] = useState("");
   const timerRef = useRef(null);
-  
-  const fetchEarnings = async (search="") => {
+
+  const fetchEarnings = async (search = "") => {
     try {
       setLoading(true);
       const main = new Listing();
       const response = await main.AdminBooking(search);
+      console.log("response", response)
       setData(response?.data?.data || []);
     } catch (error) {
       console.log('error', error);
@@ -57,7 +59,8 @@ export default function Index() {
     }
   };
 
-  
+
+
   return (
     <AdminLayout page={"Bookings"}>
       <div className="min-h-screen p-5 lg:p-[30px]">
@@ -65,21 +68,19 @@ export default function Index() {
           <div className="flex flex-wrap gap-5 mb-4 md:mb-0 justify-between">
             <button
               onClick={() => setTabOpen('upcoming')}
-              className={`px-2 px-4 xl:px-8 py-2 h-[44px] rounded-md tracking-[-0.06em] text-base font-medium  cursor-pointer ${
-                TabOpen === 'upcoming'
-                  ? 'bg-[#CC2828] text-[#fff]'
-                  : 'bg-[#E0E0E0] text-[#727272]'
-              }`}
+              className={`px-2 px-4 xl:px-8 py-2 h-[44px] rounded-md tracking-[-0.06em] text-base font-medium  cursor-pointer ${TabOpen === 'upcoming'
+                ? 'bg-[#CC2828] text-[#fff]'
+                : 'bg-[#E0E0E0] text-[#727272]'
+                }`}
             >
               Upcoming
             </button>
             <button
               onClick={() => setTabOpen('past')}
-              className={`px-2 px-4 xl:px-8 py-2 h-[44px] rounded-md tracking-[-0.06em] text-base font-medium  cursor-pointer ${
-                TabOpen === 'past'
-                  ? 'bg-[#CC2828] text-[#fff]'
-                  : 'bg-[#E0E0E0] text-[#727272]'
-              }`}
+              className={`px-2 px-4 xl:px-8 py-2 h-[44px] rounded-md tracking-[-0.06em] text-base font-medium  cursor-pointer ${TabOpen === 'past'
+                ? 'bg-[#CC2828] text-[#fff]'
+                : 'bg-[#E0E0E0] text-[#727272]'
+                }`}
             >
               Past
             </button>
@@ -98,78 +99,85 @@ export default function Index() {
           </div>
         </div>
 
-          <div className="rounded-[5px] border border-[rgba(204,40,40,0.3)] overflow-x-auto">
-            <table className="min-w-full text-sm text-center rounded-[20px]">
-              <thead className="bg-[rgba(204,40,40,0.1)] text-[#535353] tracking-[-0.04em] font-inter rounded-[20px] whitespace-nowrap">
-                <tr>
-                  <th className="font-normal text-sm lg:text-base px-3 lg:px-4 py-2 lg:py-3 border-t border-[rgba(204,40,40,0.2)] capitalize">
-                    Lesson name
-                  </th>
-                  <th className="font-normal text-sm lg:text-base px-3 lg:px-4 py-2 lg:py-3 border-t border-[rgba(204,40,40,0.2)] capitalize">
-                    Lesson date and time
-                  </th>
-                  <th className="font-normal text-sm lg:text-base px-3 lg:px-4 py-2 lg:py-3 border-t border-[rgba(204,40,40,0.2)] capitalize">
-                    Teacher Name
-                  </th>
-                  <th className="font-normal text-sm lg:text-base px-3 lg:px-4 py-2 lg:py-3 border-t border-[rgba(204,40,40,0.2)] capitalize">
-                    Student Name
-                  </th>
-                  <th className="font-normal text-sm lg:text-base px-3 lg:px-4 py-2 lg:py-3 border-t border-[rgba(204,40,40,0.2)] capitalize">
-                    Duration
-                  </th>
-                  <th className="font-normal text-sm lg:text-base px-3 lg:px-4 py-2 lg:py-3 border-t border-[rgba(204,40,40,0.2)] capitalize">
-                    Amount
-                  </th>
-                </tr>
-              </thead>
-               {loading ? 
-                  <TableLoader length={6} />
-                :
+        <div className="rounded-[5px] border border-[rgba(204,40,40,0.3)] overflow-x-auto">
+          <table className="min-w-full text-sm text-center rounded-[20px]">
+            <thead className="bg-[rgba(204,40,40,0.1)] text-[#535353] tracking-[-0.04em] font-inter rounded-[20px] whitespace-nowrap">
+              <tr>
+                <th className="font-normal text-sm lg:text-base px-3 lg:px-4 py-2 lg:py-3 border-t border-[rgba(204,40,40,0.2)] capitalize">
+                  Lesson name
+                </th>
+                <th className="font-normal text-sm lg:text-base px-3 lg:px-4 py-2 lg:py-3 border-t border-[rgba(204,40,40,0.2)] capitalize">
+                  Lesson date and time
+                </th>
+                <th className="font-normal text-sm lg:text-base px-3 lg:px-4 py-2 lg:py-3 border-t border-[rgba(204,40,40,0.2)] capitalize">
+                  Teacher Name
+                </th>
+                <th className="font-normal text-sm lg:text-base px-3 lg:px-4 py-2 lg:py-3 border-t border-[rgba(204,40,40,0.2)] capitalize">
+                  Student Name
+                </th>
+                <th className="font-normal text-sm lg:text-base px-3 lg:px-4 py-2 lg:py-3 border-t border-[rgba(204,40,40,0.2)] capitalize">
+                  Duration
+                </th>
+                <th className="font-normal text-sm lg:text-base px-3 lg:px-4 py-2 lg:py-3 border-t border-[rgba(204,40,40,0.2)] capitalize">
+                  Amount
+                </th>
+                <th className="font-normal text-sm lg:text-base px-3 lg:px-4 py-2 lg:py-3 border-t border-[rgba(204,40,40,0.2)] capitalize">
+                 lecture Video 
+                </th>
+              </tr>
+            </thead>
+            {loading ?
+              <TableLoader length={6} />
+              :
               <tbody>
-                {currentList && currentList.length > 0 ? (
-                  currentList.map((item, index) => (
-                    <tr
-                      key={index}
-                      className="hover:bg-[rgba(204,40,40,0.1)] border-t border-[rgba(204,40,40,0.2)]"
-                    >
-                      <td className="px-3 lg:px-4 py-2 lg:py-3 capitalize text-black text-sm lg:text-base font-medium font-inter">
-                        {item?.LessonId?.title}
-                      </td>
-                      <td className="px-3 lg:px-4 py-2 lg:py-3 capitalize text-black text-sm lg:text-base font-medium font-inter ">
-                        {moment(item?.startDateTime).format('DD MMM YYYY, hh:mm A') || ''}
-                      </td>
-                      <td className="px-3 lg:px-4 py-2 lg:py-3 capitalize text-black text-sm lg:text-base font-medium font-inter ">
-                        {item?.teacherId?.name}
-                      </td>
-                      <td className="px-3 lg:px-4 py-2 lg:py-3 capitalize text-black text-sm lg:text-base font-medium font-inter ">
-                        {item?.UserId?.name}
-                      </td>
-                      <td className="px-3 lg:px-4 py-2 lg:py-3 capitalize text-black text-sm lg:text-base font-medium font-inter ">
-                        {item?.LessonId?.duration} minutes
-                      </td>
-                      <td className="px-3 lg:px-4 py-2 lg:py-3 capitalize text-black text-sm lg:text-base font-medium font-inter ">
-                        ${item?.totalAmount}
-                      </td>
-                    </tr>
-                  ))
+                {currentList && currentList.length > 0 ? (currentList.map((item, index) => (
+                  <tr
+                    key={index}
+                    className="hover:bg-[rgba(204,40,40,0.1)] border-t border-[rgba(204,40,40,0.2)]"
+                  >
+                    <td className="px-3 lg:px-4 py-2 lg:py-3 capitalize text-black text-sm lg:text-base font-medium font-inter">
+                      {item?.LessonId?.title}
+                    </td>
+                    <td className="px-3 lg:px-4 py-2 lg:py-3 capitalize text-black text-sm lg:text-base font-medium font-inter ">
+                      {moment(item?.startDateTime).format('DD MMM YYYY, hh:mm A') || ''}
+                    </td>
+                    <td className="px-3 lg:px-4 py-2 lg:py-3 capitalize text-black text-sm lg:text-base font-medium font-inter ">
+                      {item?.teacherId?.name}
+                    </td>
+                    <td className="px-3 lg:px-4 py-2 lg:py-3 capitalize text-black text-sm lg:text-base font-medium font-inter ">
+                      {item?.UserId?.name}
+                    </td>
+                    <td className="px-3 lg:px-4 py-2 lg:py-3 capitalize text-black text-sm lg:text-base font-medium font-inter ">
+                      {item?.LessonId?.duration} minutes
+                    </td>
+                    <td className="px-3 lg:px-4 py-2 lg:py-3 capitalize text-black text-sm lg:text-base font-medium font-inter ">
+                      ${item?.totalAmount}
+                    </td>
+                    <td className="px-3 lg:px-4 py-2 lg:py-3 capitalize text-black text-sm lg:text-base font-medium font-inter ">
+                     {item?.zoom && (
+                      <ZoomPopup zoom={item?.zoom} />
+                     )}
+                    </td>
+                  </tr>
+                ))
                 ) : (
                   <tr>
                     <td colSpan={6}>
                       <div className="mt-2">
-                          <NoData
-                              Heading={"No bookings found."}
-                              content={
-                                  `There are not any ${TabOpen} bookings on the website yet. If a booking is made it will be shown here`
-                              }
-                          />
+                        <NoData
+                          Heading={"No bookings found."}
+                          content={
+                            `There are not any ${TabOpen} bookings on the website yet. If a booking is made it will be shown here`
+                          }
+                        />
                       </div>
                     </td>
                   </tr>
                 )}
               </tbody>}
-            </table>
-          </div>
-        {/* </div> */}
+          </table>
+        </div>
+
       </div>
     </AdminLayout>
   );

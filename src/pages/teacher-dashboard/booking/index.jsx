@@ -74,7 +74,7 @@ export default function Index() {
       <div className="min-h-screen p-5 lg:p-[30px]">
         <div className="">
           <div className="flex flex-col md:flex-row justify-between md:items-center mb-4 lg:mb-5">
-            <div className="flex flex-wrap gap-5 mb-4 md:mb-0 justify-between">
+            <div className="flex flex-wrap gap-5 mb-4 md:mb-0">
               <button
                 onClick={() => setTabOpen('upcoming')}
                 className={`px-2 px-4 xl:px-8 py-2 h-[44px] rounded-md tracking-[-0.06em] text-base font-medium  cursor-pointer ${TabOpen === 'upcoming'
@@ -140,7 +140,7 @@ export default function Index() {
                         className="hover:bg-[rgba(204,40,40,0.1)] border-t border-[rgba(204,40,40,0.2)]"
                       >
                         <td className="px-3 lg:px-4 py-2 lg:py-3 text-black text-sm lg:text-base font-medium font-inter">
-                          <div className="flex justify-center items-center gap-2">
+                          <div className="flex justify-center items-center gap-2 whitespace-nowrap">
                             <span className="capitalize">{item?.LessonId?.title}</span>
                             {isLessThan5minutesFromNowAndBeforeEnd(item?.startDateTime, item?.endDateTime) &&
                               <a
@@ -153,13 +153,13 @@ export default function Index() {
                             </a>}
                           </div>
                         </td>
-                        <td className="px-3 lg:px-4 py-2 lg:py-3 capitalize text-black text-sm lg:text-base font-medium font-inter ">
+                        <td className="px-3 lg:px-4 py-2 lg:py-3 capitalize text-black text-sm lg:text-base font-medium font-inter whitespace-nowrap">
                           {moment(item?.startDateTime).format('DD MMM YYYY, hh:mm A') || ''}
                         </td>
                         <td className="px-3 lg:px-4 py-2 lg:py-3 capitalize text-black text-sm lg:text-base font-medium font-inter ">
                           {item?.UserId?.name}
                         </td>
-                        <td className="px-3 lg:px-4 py-2 lg:py-3 capitalize text-black text-sm lg:text-base font-medium font-inter ">
+                        <td className="px-3 lg:px-4 py-2 lg:py-3 capitalize min-w-[240px] text-black text-sm lg:text-base font-medium font-inter ">
                           {calculateDurationMinutes(item?.startDateTime,item?.endDateTime)} min{" "}
                           ({moment(item?.startDateTime).format('hh:mm A')} -{" "}
                           {moment(item?.endDateTime).format('hh:mm A')})

@@ -68,25 +68,25 @@ export default function Index() {
   return (
     <AdminLayout page={"Payouts"}>
       <div className="min-h-screen p-5 lg:p-[30px]">
-        <div className="flex justify-between items-center flex-wrap gap-3 mb-4 lg:mb-5">
+        <div className="md:flex flex-wrap justify-between items-center mb-4 lg:mb-5">
           {/* Heading aligned left */}
-          <h2 className="capitalize text-lg md:text-xl lg:text-2xl font-bold text-[#CC2828] tracking-[-0.04em] font-inter">
+          <h2 className="capitalize text-lg md:text-xl lg:text-2xl font-bold text-[#CC2828] tracking-[-0.04em] font-inter mb-3 md:mb-0">
             Payout Requests
           </h2>
 
           {/* Filters aligned right */}
           <div className="flex items-center gap-3 flex-wrap justify-end">
             {/* Search Input */}
-            <div className="relative w-full sm:w-80">
+            <div className="relative w-full md:w-80">
               <span className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-                <FiSearch className="text-[#CC2828]" />
+                <FiSearch className="text-[#888]" />
               </span>
               <input
                 type="text"
                 value={searchText}
                 onChange={handleSearchChange}
                 placeholder="Search using teacher name"
-                className="w-full pl-10 pr-4 py-2 border border-[#CC2828] text-[#CC2828] rounded-md focus:outline-none focus:ring-2 focus:ring-[#CC2828] placeholder-gray-400"
+                className="w-full pl-10 pr-4 py-2 h-[44px] border border-[#ddd] text-[#000] rounded-md focus:outline-none focus:ring-2 focus:ring-[#CC2828] placeholder-gray-400"
               />
             </div>
 
@@ -94,7 +94,7 @@ export default function Index() {
             <select
               value={selectedOption}
               onChange={handleDropdownChange}
-              className="border border-[#CC2828] text-[#CC2828] px-3 py-2 rounded-md focus:outline-none"
+              className="w-full md:w-auto border border-[#ddd] h-[44px] text-[#000] px-2 sm:px-3 xl:px-4 py-2 mb-4 md:mb-0  rounded-md focus:outline-none"
             >
               <option value="">All</option>
               <option value="approved">Approved</option>

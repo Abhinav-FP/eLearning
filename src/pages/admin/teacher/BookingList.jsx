@@ -1,71 +1,91 @@
-import React from 'react'
-import moment from 'moment';
+import React from "react";
+import moment from "moment";
+import NoData from "@/pages/common/NoData";
 
 export default function BookingList({ book }) {
-  if (!book || book.length === 0) return <div>No bookings available.</div>;
+  if (!book || book.length === 0) {
+    return (
+      <NoData heading={"No bookings available."} />
+    );
+  }
 
   return (
     <div className="space-y-6">
-      {book.map((book, index) =>
-      (
-        <div key={index} className=" rounded-xl p-4 bg-white shadow-sm ">
+      {book.map((book, index) => (
+        <div
+          key={index}
+          className="bg-white rounded-2xl  p-6  border-1"
+        >
           {/* Header */}
-          <div className="flex items-center justify-between mb-4">
-            <h2 className="text-xl font-bold text-gray-800">Lesson: {book?.LessonId?.title}</h2>
+          <div className="flex flex-col md:flex-row md:items-center md:justify-between mb-4 gap-2">
+            <h2 className="text-xl font-semibold text-[#CC2828]">
+              Lesson: {book?.LessonId?.title}
+            </h2>
             <span className="text-sm text-gray-500">
-              {moment(book?.startDateTime).format('MMMM D, YYYY [at] hh:mm A')}
-
+              {moment(book?.startDateTime).format("MMMM D, YYYY [at] hh:mm A")}
             </span>
           </div>
 
-          {/* Users */}
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
-            <div className="flex items-center gap-4">
-              <img
-                src={book?.UserId?.profile_photo || "/profile.png"}
-                alt="Student"
-                className="w-12 h-12 rounded-full object-cover"
-              />
-              <div>
-                <p className="font-medium text-gray-700">Student: {book?.UserId?.name}</p>
-                <p className="text-sm text-gray-500">{book?.UserId?.email}</p>
-              </div>
-            </div>
-
-            <div className="flex items-center gap-4">
-              <img
-                src={book?.teacherId?.profile_photo || "/profile.png"}
-                alt="Teacher"
-                className="w-12 h-12 rounded-full object-cover"
-              />
-              <div>
-                <p className="font-medium text-gray-700">Teacher: {book?.teacherId?.name}</p>
-                <p className="text-sm text-gray-500">{book?.teacherId?.email}</p>
-              </div>
+          {/* Student Info */}
+          <div className="flex items-center gap-4 mb-4">
+            <img
+              src={book?.UserId?.profile_photo || "/profile.png"}
+              alt="Student"
+              className="w-12 h-12 rounded-full object-cover border"
+            />
+            <div>
+              <p className="text-base font-medium text-gray-800">
+                {book?.UserId?.name}
+              </p>
+              <p className="text-sm text-gray-500">{book?.UserId?.email}</p>
             </div>
           </div>
 
-          {/* Lesson Info */}
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-4 text-sm text-gray-700 mb-4">
-            <p><strong>Lesson Duration:</strong> {book?.LessonId?.duration} mins</p>
-            <p><strong>Lesson Price:</strong> ${book?.LessonId?.price.toFixed(2)}</p>
-            <p><strong>Total Paid:</strong> ${book?.totalAmount.toFixed(2)}</p>
-            <p><strong>Teacher Earned:</strong> ${book?.teacherEarning.toFixed(2)}</p>
-            <p><strong>Admin Fee:</strong> ${book?.adminCommission.toFixed(2)}</p>
+          {/* Lesson & Payment Details */}
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3 text-sm text-gray-700 mb-4">
+            <p>
+              <strong>Duration:</strong> {book?.LessonId?.duration} mins
+            </p>
+            <p>
+              <strong>Lesson Price:</strong> ${book?.LessonId?.price.toFixed(2)}
+            </p>
+            <p>
+              <strong>Total Paid:</strong> ${book?.totalAmount.toFixed(2)}
+            </p>
+            <p>
+              <strong>Teacher Earned:</strong> $
+              {book?.teacherEarning.toFixed(2)}
+            </p>
+            <p>
+              <strong>Admin Fee:</strong> ${book?.adminCommission.toFixed(2)}
+            </p>
           </div>
 
-          {/* Status */}
-          <div className="flex flex-wrap gap-3 text-sm">
-            <span className={`px-2 py-1 rounded-full ${book?.lessonCompletedStudent && book?.lessonCompletedTeacher ? 'bg-green-100 text-green-700' : 'bg-yellow-100 text-yellow-700'}`}>
-              {book?.lessonCompletedStudent && book?.lessonCompletedTeacher ? 'Completed' : 'Pending'}
+          {/* Status Tags */}
+          <div className="flex flex-wrap gap-2 mt-2 text-sm font-medium">
+            <span
+              className={`px-3 py-1 rounded-full ${book?.lessonCompletedStudent && book?.lessonCompletedTeacher
+                  ? "bg-green-100 text-green-700"
+                  : "bg-yellow-100 text-yellow-700"
+                }`}
+            >
+              {book?.lessonCompletedStudent && book?.lessonCompletedTeacher
+                ? "Completed"
+                : "Pending"}
             </span>
-            {book?.cancelled && <span className="px-2 py-1 rounded-full bg-red-100 text-red-700">Cancelled</span>}
-            {book?.rescheduled && <span className="px-2 py-1 rounded-full bg-blue-100 text-blue-700">Rescheduled</span>}
+            {book?.cancelled && (
+              <span className="px-3 py-1 rounded-full bg-red-100 text-red-700">
+                Cancelled
+              </span>
+            )}
+            {book?.rescheduled && (
+              <span className="px-3 py-1 rounded-full bg-blue-100 text-blue-700">
+                Rescheduled
+              </span>
+            )}
           </div>
         </div>
-      )
-
-      )}
+      ))}
     </div>
   );
 }

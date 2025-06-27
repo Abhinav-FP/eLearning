@@ -31,7 +31,7 @@ export default function VideoModalPlayer({ video, image, name, divClass, imgClas
 
     let videoSrc = '';
     if (platform === 'youtube' && youTubeId) {
-        videoSrc = `https://www.youtube.com/embed/${youTubeId}?autoplay=1`;
+        videoSrc = `https://www.youtube.com/embed/${youTubeId}?autoplay=1&hl=ja`;
     } else if (platform === 'vimeo' && vimeoId) {
         videoSrc = `https://player.vimeo.com/video/${vimeoId}?autoplay=1`;
     }

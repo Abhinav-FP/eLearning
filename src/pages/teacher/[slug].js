@@ -13,8 +13,6 @@ import BookingPopup from "./BookingPopup";
 import { BookLoader } from "../../components/Loader";
 import { BiSolidBadgeCheck } from "react-icons/bi";
 import TeacherImg from "../Assets/Images/teacherimg01.png";
-import Link from "next/link";
-import { formatMultiPrice } from "@/components/ValueDataHook";
 
 export default function Index() {
   const router = useRouter();
@@ -41,7 +39,6 @@ export default function Index() {
       setLoading(true);
       const main = new Listing();
       const response = await main.TeacherLessonGetForStudent(Id);
-
       if (response.data) {
         setLessons(response.data.data);
         setLoading(false);
@@ -69,40 +66,40 @@ export default function Index() {
   };
 
   const fetchAvailabilitys = async (Id) => {
-  try {
-    const main = new Listing();
-    const response = await main.studentteacherAvaliability(Id);
-    if (response.data) {
-      const availabilityBlocks = response.data.data.availabilityBlocks || [];
+    try {
+      const main = new Listing();
+      const response = await main.studentteacherAvaliability(Id);
+      if (response.data) {
+        const availabilityBlocks = response.data.data.availabilityBlocks || [];
 
-      // Sort by start time
-      const sorted = [...availabilityBlocks].sort(
-        (a, b) => new Date(a.startDateTime) - new Date(b.startDateTime)
-      );
+        // Sort by start time
+        const sorted = [...availabilityBlocks].sort(
+          (a, b) => new Date(a.startDateTime) - new Date(b.startDateTime)
+        );
 
-      // Merge continuous slots
-      const merged = [];
-      for (let i = 0; i < sorted.length; i++) {
-        const current = sorted[i];
-        if (
-          merged.length > 0 &&
-          merged[merged.length - 1].endDateTime === current.startDateTime
-        ) {
-          // Extend the previous block
-          merged[merged.length - 1].endDateTime = current.endDateTime;
-        } else {
-          // Start a new block
-          merged.push({ ...current });
+        // Merge continuous slots
+        const merged = [];
+        for (let i = 0; i < sorted.length; i++) {
+          const current = sorted[i];
+          if (
+            merged.length > 0 &&
+            merged[merged.length - 1].endDateTime === current.startDateTime
+          ) {
+            // Extend the previous block
+            merged[merged.length - 1].endDateTime = current.endDateTime;
+          } else {
+            // Start a new block
+            merged.push({ ...current });
+          }
         }
-      }
 
-      setContent(response.data.data);
-      setMergedAvailability(merged);
+        setContent(response.data.data);
+        setMergedAvailability(merged);
+      }
+    } catch (error) {
+      console.log("error", error);
     }
-  } catch (error) {
-    console.log("error", error);
-  }
-};
+  };
 
   useEffect(() => {
     if (slug) {
@@ -189,7 +186,7 @@ export default function Index() {
                             <div>
                               <span className="-tracking-[0.03em] pr-2">Specialities :</span>
                               <span className="capitalize -tracking-[0.03em] ">{data?.tags?.join(", ") || ""}</span>
-                            </div>} 
+                            </div>}
                           {data?.languages_spoken &&
                             <div>
                               <span className="-tracking-[0.03em] pr-2">Language :</span>
@@ -214,14 +211,13 @@ export default function Index() {
                               <span className="-tracking-[0.03em] ">{data?.userId?.time_zone} </span>
                             </div>
                           }
-                          {data?.experience &&
+                          {/* {data?.experience &&
                             <div>
                               <span className="-tracking-[0.03em] pr-2">Experience :</span>
                               <span className="-tracking-[0.03em] ">{data?.experience}  Years</span>
                             </div>
-                          }
+                          } */}
                         </div>
-                        {/* Description field with view more */}
                         <DescriptionWithViewMore description={data?.description || ""} />
                       </div>
                     </div>
@@ -331,7 +327,7 @@ export default function Index() {
                   classess={"text-[#CC2828] mb-6 lg:mb-8"}
                   title={"Lessons"}
                 />
-                <LessonList lessons={lessons} showSelected={false} slug={slug} />
+                <LessonList lessons={lessons?.lessons} showSelected={false} slug={slug} />
               </div>
             </div>
             <div className="pt-[40px] md:pt-[60px] md:pt-[80px] xl:pt-[100px] pb-[40px] lg:pb-[60px] bg-[#F8F9FA]" id="calendar">
@@ -343,10 +339,10 @@ export default function Index() {
                 <p className="text-sm text-gray-600 mb-6 lg:mb-8">
                   {`All calendar times are displayed based on your device's current time zone: ${studentTimeZone || "NA"}. Please ensure your system time is accurate to avoid any scheduling discrepancies.`}
                 </p>
-                <Calendar Availability={content} setIsPopupOpen={setIsPopupOpen} usedInPopup={false} mergedAvailability={mergedAvailability}/>
+                <Calendar Availability={content} setIsPopupOpen={setIsPopupOpen} usedInPopup={false} mergedAvailability={mergedAvailability} />
               </div>
             </div>
-            <Testimonial />
+            <Testimonial reviews={lessons?.reviews} />
           </>}
         <BookingPopup
           isOpen={isPopupOpen}

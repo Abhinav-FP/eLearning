@@ -17,7 +17,7 @@ import toast from "react-hot-toast";
 export default function index() {
   const [data, setData] = useState({});
   const [loading, setLoading] = useState(false);
-  const [selectedOption, setSelectedOption] = useState("");
+  const [selectedOption, setSelectedOption] = useState("last30");
   const [searchText, setSearchText] = useState("");
 
   const handleSearchChange = (e) => {
@@ -81,7 +81,7 @@ export default function index() {
         icon: <FaMoneyBillWave className="w-6 h-6 text-[#CC2828]" />,
       },
       {
-        label: "Available Earnings",
+        label: "Available Earnings (completed lesson)",
         value: data?.earningsSummary?.pendingEarnings ?? "N/A",
         icon: <FaWallet className="w-6 h-6 text-[#CC2828]" />,
       },

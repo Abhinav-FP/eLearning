@@ -324,8 +324,9 @@ class Listing extends Component {
   async AddReview(data) {
     return Api.post("/review/add", data)
   }
-
-
+ async ReviewTeacher() {
+    return Api.get(`/teacher/review`);
+  }
   render() {
     return (
       <div>

@@ -119,26 +119,27 @@ export default function index() {
   return (
     <AdminLayout page={"Earnings"}>
       <div className="min-h-screen p-5 lg:p-[30px]">
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-4 items-center">
+        <div className="flex flex-wrap justify-between items-center mb-4 lg:mb-5">
           {/* Search Input */}
-          <div className="relative w-full">
+          <div className="w-full mb-4 md:mb-0 md:w-1/3 md:max-w-sm relative">
             <span className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-              <FiSearch className="text-[#CC2828]" />
+              <FiSearch className="text-[#888]" />
             </span>
             <input
               type="text"
               value={searchText}
               onChange={handleSearchChange}
               placeholder="Search using payment ID, lesson, teacher, or student name"
-              className="w-full pl-10 pr-4 py-2 border border-[#CC2828] text-[#CC2828] rounded-md focus:outline-none focus:ring-2 focus:ring-[#CC2828] placeholder-gray-400"
+              className="w-full pl-10 pr-4 py-2 h-[44px] border border-[#ddd] text-[#000] rounded-md focus:outline-none focus:ring-1 focus:ring-[#CC2828] placeholder-gray-400"
             />
-          </div>
-          {/* Dropdown Filter */}
-          <div className="w-full">
+          </div> 
+        
+          <div className="w-full md:w-auto flex flex-col md:flex-row items-center md:space-x-3 justify-between ">
+             {/* Dropdown Filter */}
             <select
               value={selectedOption}
               onChange={handleDropdownChange}
-              className="w-full border border-[#CC2828] text-[#CC2828] px-3 py-2 rounded-md focus:outline-none focus:ring-2 focus:ring-[#CC2828]"
+              className="w-full md:w-auto border border-[#ddd] h-[44px] text-[#000] px-2 sm:px-3 xl:px-4 py-2 mb-4 md:mb-0  rounded-md focus:outline-none"
             >
               <option value="">All</option>
               <option value="last7">Last 7 Days</option>
@@ -147,15 +148,17 @@ export default function index() {
                 <option key={year} value={year}>{year}</option>
               ))}
             </select>
-          </div>
-          {/* Export Button */}
-          <div className="w-full flex justify-start md:justify-end mb-2 ">
-            <button
-              onClick={downloadExcel}
-              className="w-full md:w-fit px-4 py-2.5 hover:bg-white hover:text-[#CC2828] border border-[#CC2828] rounded-md tracking-[-0.06em] text-sm font-medium bg-[#CC2828] text-white transition-colors duration-200"
-            >
-              Export as Excel
-            </button>
+              {/* Export Button */}
+            <div className="space-x-3 w-full md:w-auto flex md:block justify-between">
+              <button
+                onClick={downloadExcel}
+                className="w-fit px-2 px-4 xl:px-8 py-2  h-[44px] hover:bg-white hover:text-[#CC2828] border border-[#CC2828] rounded-md tracking-[-0.06em] text-sm font-medium bg-[#CC2828] text-white cursor-pointer"
+              >
+                Export as Excel
+              </button>
+
+            </div>
+
           </div>
         </div>
 
@@ -163,7 +166,7 @@ export default function index() {
           <TeacherEarningsLoader />
         ) : (
           <>
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 mb-4">
+            <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-4 mb-4">
               {stats &&
                 stats?.map((item, idx) => (
                   <Card
@@ -212,32 +215,32 @@ export default function index() {
                         key={index}
                         className="hover:bg-[rgba(204,40,40,0.1)] border-t border-[rgba(204,40,40,0.2)]"
                       >
-                        <td className="px-3 lg:px-4 py-2 lg:py-3 text-black text-sm lg:text-base font-medium font-inter capitalize">
+                        <td className="px-3 lg:px-4 py-2 lg:py-3 text-black text-sm lg:text-base font-medium font-inter capitalize whitespace-nowrap">
                           {item?.LessonId?.title || ""}
                         </td>
-                        <td className="px-3 lg:px-4 py-2 lg:py-3 text-black text-sm lg:text-base font-medium font-inter">
+                        <td className="px-3 lg:px-4 py-2 lg:py-3 text-black text-sm lg:text-base font-medium font-inter whitespace-nowrap">
                           {item?.StripepaymentId?.payment_id ||
                             item?.paypalpaymentId?.orderID ||
                             ""}
                         </td>
-                        <td className="px-3 lg:px-4 py-2 lg:py-3 text-black text-sm lg:text-base font-medium font-inter">
+                        <td className="px-3 lg:px-4 py-2 lg:py-3 text-black text-sm lg:text-base font-medium font-inter whitespace-nowrap">
                           {moment(item?.startDateTime).format(
                             "DD MMM YYYY, hh:mm A"
                           ) || ""}
                         </td>
-                        <td className="px-3 lg:px-4 py-2 lg:py-3 text-black text-sm lg:text-base font-medium font-inter capitalize">
+                        <td className="px-3 lg:px-4 py-2 lg:py-3 text-black text-sm lg:text-base font-medium font-inter capitalize whitespace-nowrap">
                           {item?.teacherId?.name || ""}
                         </td>
-                        <td className="px-3 lg:px-4 py-2 lg:py-3 text-black text-sm lg:text-base font-medium font-inter">
+                        <td className="px-3 lg:px-4 py-2 lg:py-3 text-black text-sm lg:text-base font-medium font-inter whitespace-nowrap">
                           {formatMultiPrice(item?.totalAmount, "USD") || ""}
                         </td>
-                        <td className="px-3 lg:px-4 py-2 lg:py-3 text-black text-sm lg:text-base font-medium font-inter">
+                        <td className="px-3 lg:px-4 py-2 lg:py-3 text-black text-sm lg:text-base font-medium font-inter whitespace-nowrap">
                           {formatMultiPrice(item?.adminCommission, "USD") || ""}
                         </td>
-                        <td className="px-3 lg:px-4 py-2 lg:py-3 text-black text-sm lg:text-base font-medium font-inter capitalize">
+                        <td className="px-3 lg:px-4 py-2 lg:py-3 text-black text-sm lg:text-base font-medium font-inter capitalize whitespace-nowrap">
                           {item?.UserId?.name || ""}
                         </td>
-                        <td className="px-3 lg:px-4 py-2 lg:py-3 text-black text-sm lg:text-base font-medium font-inter capitalize">
+                        <td className="px-3 lg:px-4 py-2 lg:py-3 text-black text-sm lg:text-base font-medium font-inter capitalize whitespace-nowrap">
                           {item?.LessonId?.duration || ""}{" "}mins
                         </td>
                       </tr>

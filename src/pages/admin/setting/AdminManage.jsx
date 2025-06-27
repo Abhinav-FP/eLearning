@@ -67,7 +67,7 @@ export default function AdminManage() {
     if (!mounted) return null;
 
     return (
-        <div className="mx-auto p-6 bg-white">
+        <div className="mx-auto py-6 bg-white">
             <form onSubmit={handleSubmit} className="space-y-6">
                 {/* Commission Rate */}
                 <div>

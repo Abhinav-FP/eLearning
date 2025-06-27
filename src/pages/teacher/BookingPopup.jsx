@@ -98,7 +98,7 @@ export default function BookingPopup({
                     title="Select your Lesson"
                   />
                   <LessonList
-                    lessons={lessons}
+                    lessons={lessons?.lessons}
                     showSelected={true}
                     selectedLesson={selectedLesson}
                     SetSelectedLesson={SetSelectedLesson}

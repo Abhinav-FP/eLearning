@@ -82,15 +82,6 @@ function TeacherListing() {
       </td>
       <td className="capitalize px-3 lg:px-4 py-2 lg:py-3 text-black text-sm lg:text-base font-medium font-inter">
         <div className="flex gap-2 justify-center items-center">
-          {/* <button
-            onClick={(()=>{
-              setData(item);
-              setIsPopupOpen(true);
-            })}
-            className="border border-[#CC2828] text-[#CC2828] hover:bg-[#CC2828] hover:text-white px-3 py-1 text-xs rounded cursor-pointer"
-            >
-            View 
-            </button> */}
           {category === "existing" ? (
             <button
               onClick={() => handleBlock(item?.userId?._id)}

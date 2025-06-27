@@ -62,7 +62,7 @@ export default function Index() {
             {/* Lesson Prices */}
             <div className="relative bg-white rounded-xl dashboard-box p-3.5 lg:p-4 xl:p-5 border border-[rgba(204,40,40,0.2)] flex flex-col min-h-[120px] md:min-h-[136px]">
               <h2 className="font-inter text-[#CC2828] font-bold text-base sm:text-lg lg:text-xl xl:text-2xl capitalize tracking-[-0.04em]">
-                Lesson Prices
+                Lesson Price
               </h2>
               <div className="absolute right-4 lg:right-5 xl:right-6 bg-[#CC28281A] border-[0.67px] border-[#CC282880] p-3 rounded">
                 <Link href="/teacher-dashboard/profile" >
@@ -109,7 +109,7 @@ export default function Index() {
 
             <div className="relative bg-white rounded-xl dashboard-box p-3.5 lg:p-4 xl:p-5 border border-[rgba(204,40,40,0.2)] flex flex-col min-h-[120px] md:min-h-[136px]">
               <h2 className="font-inter text-[#CC2828] font-bold text-base sm:text-lg lg:text-xl xl:text-2xl capitalize tracking-[-0.04em]">
-                Payment Earnings
+                Payment Earnings (Last 30 Days)
               </h2>
               <div className="absolute right-4 lg:right-5 xl:right-6 bg-[#CC28281A] border-[0.67px] border-[#CC282880] p-3 rounded">
                 <Link href="/teacher-dashboard/earnings">
@@ -171,10 +171,10 @@ export default function Index() {
               </div>
               <div className="text-lg space-y-1.5 mt-8 xl:mt-8">
                 <p className="font-inter text-sm sm:text-base lg:text-lg xl:text-xl font-medium tracking-[-0.04em] text-black flex justify-between">
-                  30 mins: <span>{resultMap.duration30}</span>
+                  30 mins: <span>{resultMap?.duration30}</span>
                 </p>
                 <p className="font-inter text-sm sm:text-base lg:text-lg xl:text-xl font-medium tracking-[-0.04em] text-black flex justify-between">
-                  60 mins: <span>{resultMap.duration60}</span>
+                  60 mins: <span>{resultMap?.duration60 || 0}</span>
                 </p>
                 {/* <p className="font-inter text-sm sm:text-base lg:text-lg xl:text-xl font-medium tracking-[-0.04em] text-black flex justify-between">
                   Custom: <span>{resultMap.durationOther}</span>
@@ -185,8 +185,7 @@ export default function Index() {
 
             <div className="relative bg-white rounded-xl dashboard-box p-3.5 lg:p-4 xl:p-5 border border-[rgba(204,40,40,0.2)] flex flex-col min-h-[120px] md:min-h-[136px]">
               <h2 className="font-inter text-[#CC2828] font-bold text-base sm:text-lg lg:text-xl xl:text-2xl capitalize tracking-[-0.04em]">
-
-                Earnings
+                Earnings (Last 30 Days)
               </h2>
               <div className="absolute right-4 lg:right-5 xl:right-6 bg-[#CC28281A] border-[0.67px] border-[#CC282880] p-3 rounded">
                 <Link href="/teacher-dashboard/earnings">

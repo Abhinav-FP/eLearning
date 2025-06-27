@@ -167,7 +167,7 @@ export default function Home() {
 
 
     const SectionHeading = ({ title }) => (
-        <div className="w-full lg:w-6/12 pl-6 lg:pl-0 mb-4">
+        <div className="w-full lg:w-6/12  lg:pl-0 mb-4">
             <h2 className="text-[#CC2828] text-xl lg:text-2xl font-semibold tracking-[-0.04em]">{title}</h2>
         </div>
     );

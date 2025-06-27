@@ -37,7 +37,7 @@ export default function Index() {
     <AdminLayout page={"Dashboard"}>
       <div className="min-h-screen p-5 lg:p-[30px]">
         <div className="grid grid-cols-1 sm:grid-cols-2 2xl:grid-cols-4 gap-4 ">
-          <div className="relative bg-white rounded-xl dashboard-box p-3.5 lg:p-4 xl:p-5 border border-[rgba(204,40,40,0.2)] flex flex-col min-h-[136px]">
+          <div className="relative bg-white rounded-xl dashboard-box p-3.5 lg:p-4 xl:p-5 border border-[rgba(204,40,40,0.2)] flex flex-col sm:min-h-[136px]">
             <h2 className="font-inter text-[#CC2828] font-bold text-lg lg:text-xl xl:text-xl capitalize tracking-[-0.04em]">
               active teachers
             </h2>
@@ -51,7 +51,7 @@ export default function Index() {
               </p>
             </div>
           </div>
-          <div className="relative bg-white rounded-xl dashboard-box p-3.5 lg:p-4 xl:p-5 border border-[rgba(204,40,40,0.2)] flex flex-col min-h-[136px]">
+          <div className="relative bg-white rounded-xl dashboard-box p-3.5 lg:p-4 xl:p-5 border border-[rgba(204,40,40,0.2)] flex flex-col sm:min-h-[136px]">
             <h2 className="font-inter text-[#CC2828] font-bold text-lg lg:text-xl xl:text-xl capitalize tracking-[-0.04em]">
               Active Students
             </h2>
@@ -65,7 +65,7 @@ export default function Index() {
               </p>
             </div>
           </div>
-          <div className="relative bg-white rounded-xl dashboard-box p-3.5 lg:p-4 xl:p-5 border border-[rgba(204,40,40,0.2)] flex flex-col min-h-[136px]">
+          <div className="relative bg-white rounded-xl dashboard-box p-3.5 lg:p-4 xl:p-5 border border-[rgba(204,40,40,0.2)] flex flex-col sm:min-h-[136px]">
             <h2 className="font-inter text-[#CC2828] font-bold text-lg lg:text-xl xl:text-xl capitalize tracking-[-0.04em]">
               Pending Reviews
             </h2>

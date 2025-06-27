@@ -189,10 +189,10 @@ export default function Index() {
                           <span className="text-[#8D929A] text-sm -tracking-[0.03em] pr-2">Gender :</span>
                           <span className="capitalize text-black text-sm -tracking-[0.03em] ">{teacher?.gender === 'M' ? 'Male' : teacher?.gender === 'F' ? 'Female' : "N/A"}</span>
                         </div>
-                        <div>
+                        {/* <div>
                           <span className="text-[#8D929A] text-sm -tracking-[0.03em] pr-2">Experience :</span>
                           <span className="text-black text-sm -tracking-[0.03em] ">{teacher?.experience || 'N/A'} Years</span>
-                        </div>
+                        </div> */}
                       </div>
 
                       {/* Description */}

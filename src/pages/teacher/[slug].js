@@ -211,12 +211,12 @@ export default function Index() {
                               <span className="-tracking-[0.03em] ">{data?.userId?.time_zone} </span>
                             </div>
                           }
-                          {data?.experience &&
+                          {/* {data?.experience &&
                             <div>
                               <span className="-tracking-[0.03em] pr-2">Experience :</span>
                               <span className="-tracking-[0.03em] ">{data?.experience}  Years</span>
                             </div>
-                          }
+                          } */}
                         </div>
                         <DescriptionWithViewMore description={data?.description || ""} />
                       </div>

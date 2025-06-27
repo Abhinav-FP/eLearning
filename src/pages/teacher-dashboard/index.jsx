@@ -11,8 +11,6 @@ import NoData from "../common/NoData";
 import { formatMultiPrice } from "@/components/ValueDataHook";
 
 export default function Index() {
-
-
   const [Dashboard, SetDashboard] = useState("")
   const [loading, setLoading] = useState(false);
 
@@ -99,7 +97,9 @@ export default function Index() {
                 Total Reviews
               </h2>
               <div className="absolute right-4 lg:right-5 xl:right-6 bg-[#CC28281A] border-[0.67px] border-[#CC282880] p-3 rounded">
+                <Link href="/teacher-dashboard/review">
                 <MdReviews className="text-[#CC2828]" size={24} />
+                </Link>
               </div>
               <div className="text-sm text-[#535353] space-y-1 mt-4">
                 <p className="font-inter text-sm sm:text-base lg:text-lg xl:text-xl font-bold tracking-[-0.04em]">{Dashboard?.ReviewesCount}</p>
@@ -112,7 +112,9 @@ export default function Index() {
                 Payment Earnings
               </h2>
               <div className="absolute right-4 lg:right-5 xl:right-6 bg-[#CC28281A] border-[0.67px] border-[#CC282880] p-3 rounded">
-                <FaWallet className="w-6 h-6 text-[#CC2828]" />
+                <Link href="/teacher-dashboard/earnings">
+                  <FaWallet className="w-6 h-6 text-[#CC2828]" />
+                </Link>
               </div>
               <div className="text-lg space-y-1.5 mt-8 xl:mt-8">
                 <p className="font-inter text-sm sm:text-base lg:text-lg xl:text-xl font-medium tracking-[-0.04em] text-black flex justify-between">
@@ -164,7 +166,7 @@ export default function Index() {
               </h2>
               <div className="absolute right-4 lg:right-5 xl:right-6 bg-[#CC28281A] border-[0.67px] border-[#CC282880] p-3 rounded">
                 < Link href="/teacher-dashboard/booking">
-                <FaFileAlt className="text-[#CC2828]" size={24} />
+                  <FaFileAlt className="text-[#CC2828]" size={24} />
                 </Link>
               </div>
               <div className="text-lg space-y-1.5 mt-8 xl:mt-8">
@@ -196,7 +198,7 @@ export default function Index() {
                   Total Earnings: <span>{formatMultiPrice(Dashboard?.earningsSummary?.totalEarnings, "USD")}</span>
                 </p>
                 <p className="font-inter text-sm sm:text-base lg:text-lg xl:text-xl font-medium tracking-[-0.04em] text-black flex justify-between">
-                  Available Earnings: <span>{formatMultiPrice(Dashboard?.earningsSummary?.pendingEarnings, "USD")}</span>
+                  Available Earnings (completed lesson): <span>{formatMultiPrice(Dashboard?.earningsSummary?.pendingEarnings, "USD")}</span>
                 </p>
                 <p className="font-inter text-sm sm:text-base lg:text-lg xl:text-xl font-medium tracking-[-0.04em] text-black flex justify-between">
                   Requested Earnings: <span>{formatMultiPrice(Dashboard?.earningsSummary?.requestedEarnings || 0, "USD")}</span>

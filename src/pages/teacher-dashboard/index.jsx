@@ -64,10 +64,12 @@ export default function Index() {
             {/* Lesson Prices */}
             <div className="relative bg-white rounded-xl dashboard-box p-3.5 lg:p-4 xl:p-5 border border-[rgba(204,40,40,0.2)] flex flex-col min-h-[120px] md:min-h-[136px]">
               <h2 className="font-inter text-[#CC2828] font-bold text-base sm:text-lg lg:text-xl xl:text-2xl capitalize tracking-[-0.04em]">
-                Lesson Prices starts from
+                Lesson Prices
               </h2>
               <div className="absolute right-4 lg:right-5 xl:right-6 bg-[#CC28281A] border-[0.67px] border-[#CC282880] p-3 rounded">
-                <MdAttachMoney className="text-[#CC2828]" size={24} />
+                <Link href="/teacher-dashboard/profile" >
+                  <MdAttachMoney className="text-[#CC2828]" size={24} />
+                </Link>
               </div>
               <div className="flex flex-col gap-1 mt-6 xl:mt-4">
                 {Dashboard?.TeacherData?.length > 0 ? (
@@ -127,7 +129,9 @@ export default function Index() {
                 Upcoming Lessons
               </h2>
               <div className="absolute right-4 lg:right-5 xl:right-6 bg-[#CC28281A] border-[0.67px] border-[#CC282880] p-3 rounded">
-                <MdUpcoming className="text-[#CC2828]" size={24} />
+                < Link href="/teacher-dashboard/booking">
+                  <MdUpcoming className="text-[#CC2828]" size={24} />
+                </Link>
               </div>
               {Dashboard?.upcomingLesson && Dashboard?.upcomingLesson?.length > 0 ?
                 <div className="text-lg space-y-1.5 mt-8 xl:mt-8">
@@ -159,7 +163,9 @@ export default function Index() {
                 Total lessons completed
               </h2>
               <div className="absolute right-4 lg:right-5 xl:right-6 bg-[#CC28281A] border-[0.67px] border-[#CC282880] p-3 rounded">
+                < Link href="/teacher-dashboard/booking">
                 <FaFileAlt className="text-[#CC2828]" size={24} />
+                </Link>
               </div>
               <div className="text-lg space-y-1.5 mt-8 xl:mt-8">
                 <p className="font-inter text-sm sm:text-base lg:text-lg xl:text-xl font-medium tracking-[-0.04em] text-black flex justify-between">
@@ -177,10 +183,13 @@ export default function Index() {
 
             <div className="relative bg-white rounded-xl dashboard-box p-3.5 lg:p-4 xl:p-5 border border-[rgba(204,40,40,0.2)] flex flex-col min-h-[120px] md:min-h-[136px]">
               <h2 className="font-inter text-[#CC2828] font-bold text-base sm:text-lg lg:text-xl xl:text-2xl capitalize tracking-[-0.04em]">
+
                 Earnings
               </h2>
               <div className="absolute right-4 lg:right-5 xl:right-6 bg-[#CC28281A] border-[0.67px] border-[#CC282880] p-3 rounded">
-                <FaWallet className="w-6 h-6 text-[#CC2828]" />
+                <Link href="/teacher-dashboard/earnings">
+                  <FaWallet className="w-6 h-6 text-[#CC2828]" />
+                </Link>
               </div>
               <div className="text-lg space-y-1.5 mt-8 xl:mt-8">
                 <p className="font-inter text-sm sm:text-base lg:text-lg xl:text-xl font-medium tracking-[-0.04em] text-black flex justify-between">

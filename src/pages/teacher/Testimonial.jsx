@@ -8,28 +8,8 @@ import 'swiper/css/pagination';
 import 'swiper/css/autoplay';
 import Image from "next/image";
 import TeacherImg from "../Assets/Images/teacherimg01.png";
-import { FaStar } from 'react-icons/fa';
-
-export default function Testimonial() {
-
-    const Testimonial = [
-        {
-            name: "Emily R",
-            decription: "Teaching on Japanese for Me has allowed me to connect with students worldwide while maintaining a flexible schedule. It's been an incredibly rewarding experience."
-        },
-        {
-            name: "Carlos M.",
-            decription: "I love how Japanese for Me supports teachers with resources and a vibrant community. It's more than just a platform; it's a family."
-        },
-        {
-            name: "Aisha K.",
-            decription: "Setting my own rates and working from anywhere has given me the freedom I've always wanted as an educator."
-        },
-        {
-            name: "Carlos M.",
-            decription: "I love how Japanese for Me supports teachers with resources and a vibrant community. It's more than just a platform; it's a family."
-        },
-    ]
+import StarRating from "../common/StarRating";
+export default function Testimonial({ reviews }) {
 
     return (
         <>
@@ -42,46 +22,45 @@ export default function Testimonial() {
                         spaceBetween={20}
                         slidesPerView={3}
                         autoplay={{
-                            delay: 3000,      // ✅ delay in ms
-                            disableOnInteraction: false, // optional but useful
+                            delay: 3000,     
+                            disableOnInteraction: false,
                         }}
                         navigation
                         pagination={{ clickable: true }}
                         scrollbar={{ draggable: true }}
                         breakpoints={{
                             0: {
-                              slidesPerView: 1,
+                                slidesPerView: 1,
                             },
                             640: {
-                              slidesPerView: 2,
+                                slidesPerView: 2,
                             },
                             1024: {
-                              slidesPerView: 3,
+                                slidesPerView: 3,
                             },
-                          }}
-             
+                        }}
                     >
                         {
-                            Testimonial && Testimonial?.map((item, index) => (
+                            reviews && reviews?.map((item, index) => (
                                 <SwiperSlide key={index}>
                                     <div className="border border-[rgba(56,121,117,0.2)] rounded-[20px] p-[30px] lg:p-[40px]">
                                         <div className="w-[42px] h-[60px] lg:w-[42px] lg:w-[60px] mx-auto mb-3 lg:mb-4">
-                                            <Image src={TeacherImg} alt="autor-name" />
+                                            <Image
+                                                src={item?.userId?.profile_photo || TeacherImg}
+                                                alt={item?.userId?.name || "Profile"}
+                                                width={42}
+                                                height={60}
+                                            />
                                         </div>
-                                        <h3 className="text-black text-center -tracking-[0.03em] text-base font-semibold mb-3">{item?.name}</h3>
+                                        <h3 className="text-black text-center -tracking-[0.03em] text-base font-semibold mb-3">{item?.userId?.name}</h3>
                                         <div className="flex text-[#E4B750] text-sm justify-center mb-4">
-                                            <FaStar size={16} fill="currentColor" />
-                                            <FaStar size={16} fill="currentColor" />
-                                            <FaStar size={16} fill="currentColor" /> 
+                                            <StarRating rating={item?.rating} />
                                         </div>
-                                        <p className="text-[#535353] font-medium italic text-base text-center">{item?.decription}</p>
+                                        <p className="text-[#535353] font-medium italic text-base text-center">{item?.description}</p>
                                     </div>
                                 </SwiperSlide>
                             ))
-
                         }
-
-
                     </Swiper>
                 </div>
             </div>

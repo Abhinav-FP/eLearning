@@ -1,7 +1,7 @@
-// components/ReactQuillEditor.js
 import dynamic from "next/dynamic";
 import React from "react";
-import "react-quill-new/dist/quill.snow.css";
+import 'react-quill-new/dist/quill.snow.css';
+
 
 // Dynamically import with SSR disabled
 const ReactQuill = dynamic(() => import("react-quill-new"), { ssr: false });

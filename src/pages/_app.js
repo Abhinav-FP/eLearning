@@ -4,9 +4,11 @@ import "../styles/calendar.css";
 import "../styles/Loader.css";
 import { Toaster } from "react-hot-toast";
 import { RoleProvider } from "@/context/RoleContext";
+import NextNProgress from 'nextjs-progressbar';
 
 export default function App({ Component, pageProps }) {
   return <>
+   <NextNProgress color="#CC2828" />
     <Toaster
       toastOptions={{
         position: "top-right",

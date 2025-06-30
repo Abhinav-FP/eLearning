@@ -61,6 +61,7 @@ export default function BookingPopup({
       const response = await main.AdminCommission();
       if (response?.data?.status) {
         const value = response?.data?.data || 0;
+        // Commission is processing fee only. Commission is fixed at 10%.
         setCommission(value*0.01);
       }
     } catch (error) {

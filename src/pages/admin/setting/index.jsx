@@ -43,7 +43,7 @@ export default function Index() {
               : "text-[#535353]  border-[rgba(0,0,0,.0)] "
             }`}
         >
-          Commission Rate
+          Processing fee
         </button>
         <button
           onClick={() => handleTabClick("term")}

@@ -44,7 +44,7 @@ function TeacherListing() {
       const main = new Listing();
       const response = await main.AisTrained({ id: id });
       if (response?.data) {
-       toast.success(response?.data?.message);
+        toast.success(response?.data?.message);
         fetchData("");
       }
       setprocessing(false);
@@ -83,12 +83,12 @@ function TeacherListing() {
       className={`border-t hover:bg-[rgba(204,40,40,0.1)] border-[rgba(204,40,40,0.2)] ${item?.userId?.block ? "opacity-50" : ""
         }`}
     >
-      <td className="capitalize px-3 lg:px-4 py-2 lg:py-3 text-black text-sm lg:text-base font-medium font-inter text-left">
+      <td className="capitalize px-3 lg:px-4 py-2 lg:py-3 text-black text-sm lg:text-base font-medium font-inter ">
         <Link href={`/admin/teacher/${item?.userId?._id}`}>
           {item?.userId?.name || ""}
         </Link>
       </td>
-      <td className="px-3 lg:px-4 py-2 lg:py-3 text-black text-sm lg:text-base font-medium font-inter text-left">
+      <td className="capitalize px-3 lg:px-4 py-2 lg:py-3 text-black text-sm lg:text-base font-medium font-inter">
         {item?.userId?.email || ""}
       </td>
       <td className="capitalize px-3 lg:px-4 py-2 lg:py-3 text-black text-sm lg:text-base font-medium font-inter">
@@ -272,10 +272,10 @@ function TeacherListing() {
             <table className="min-w-full text-sm text-center rounded-[20px]">
               <thead className="bg-[rgba(204,40,40,0.1)] text-[#535353] tracking-[-0.04em] font-inter rounded-[20px] whitespace-nowrap">
                 <tr>
-                  <th className="font-normal text-sm lg:text-base px-3 lg:px-4 py-2 lg:py-3 border-t border-[rgba(204,40,40,0.2)] capitalize text-left">
+                  <th className="font-normal text-sm lg:text-base px-3 lg:px-4 py-2 lg:py-3 border-t border-[rgba(204,40,40,0.2)] capitalize ">
                     Teacher name
                   </th>
-                  <th className="font-normal text-sm lg:text-base px-3 lg:px-4 py-2 lg:py-3 border-t border-[rgba(204,40,40,0.2)] capitalize text-left">
+                  <th className="font-normal text-sm lg:text-base px-3 lg:px-4 py-2 lg:py-3 border-t border-[rgba(204,40,40,0.2)] capitalize">
                     Email
                   </th>
                   <th className="font-normal text-sm lg:text-base px-3 lg:px-4 py-2 lg:py-3 border-t border-[rgba(204,40,40,0.2)] capitalize">

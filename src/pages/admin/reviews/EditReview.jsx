@@ -21,10 +21,17 @@ export default function EditReview({ isOpen, onClose, data, getLessons }) {
 
     const handleChange = (e) => {
         const { name, value } = e.target;
-        setFormData((prev) => ({
-            ...prev,
-            [name]: value,
-        }));
+
+        if (name === "rating") {
+            let newValue = parseInt(value, 10);
+            if (isNaN(newValue)) newValue = ""; // allow empty
+            else if (newValue < 1) newValue = 1;
+            else if (newValue > 3) newValue = 3;
+
+            setFormData({ ...formData, [name]: newValue });
+        } else {
+            setFormData({ ...formData, [name]: value });
+        }
     };
 
 
@@ -37,6 +44,7 @@ export default function EditReview({ isOpen, onClose, data, getLessons }) {
             const response = await main.ReviewEdit({
                 _id: formData?._id,
                 description: formData?.description,
+                rating : formData?.rating
             });
             if (response?.data?.status) {
                 toast.success(response.data.message);
@@ -70,43 +78,41 @@ export default function EditReview({ isOpen, onClose, data, getLessons }) {
                 </h2>
                 {/* Description Field */}
                 <div>
+                    <label className="block text-[#CC2828] font-medium mb-1">
+                        Rating
+                    </label>
+                    <input
+                        type="number"
+                        name="rating"
+                        value={formData.rating}
+                        onChange={handleChange}
+                        min={1}                     // 👈 Set minimum value
+                        max={3}                     // 👈 Set maximum value
+                        placeholder="Enter rating (1–3)"
+                        className="w-full p-3 rounded-md bg-gray-100 text-gray-700 focus:outline-none focus:ring-2 focus:ring-[#CC2828]"
+                        required
+                    />
 
-                    <div>
-                        <label className="block text-[#CC2828] font-medium mb-1">
-                            Rating
-                        </label>
-                        <input
-                            type="number"
-                            name="rating"
-                            value={formData.rating}
-                            onChange={handleChange}
-                            min={1}                     // 👈 Set minimum value
-                            max={3}                     // 👈 Set maximum value
-                            placeholder="Enter rating (1–3)"
-                            className="w-full p-3 rounded-md bg-gray-100 text-gray-700 focus:outline-none focus:ring-2 focus:ring-[#CC2828]"
-                            required
-                        />
+                </div>
 
-                    </div>
-
+                <div>
                     <label className="block text-[#CC2828] font-medium mb-1">
                         Description
+                        <span className="text-sm text-gray-500">({formData.description.length}/300)</span>
                     </label>
                     <textarea
-                        rows={5}
-                        cols={5}
+                        rows={10}
                         type="text"
                         name="description"
                         value={formData.description}
-                        onChange={handleChange}
+                        onChange={(e) => {
+                            if (e.target.value.length <= 300) handleChange(e);
+                        }}
                         placeholder="Enter description"
                         className="w-full p-3 rounded-md bg-gray-100 text-gray-700 focus:outline-none focus:ring-2 focus:ring-[#CC2828]"
                         required
                     />
                 </div>
-
-
-
                 {/* Action Buttons */}
                 <div className="flex justify-between gap-4 mt-6">
                     <button

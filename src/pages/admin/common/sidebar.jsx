@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { MdSpaceDashboard, MdReviews, MdPayments} from "react-icons/md"; 
+import { MdSpaceDashboard, MdReviews, MdPayments } from "react-icons/md";
 import { usePathname } from "next/navigation";
 import Link from "next/link";
 import { IoIosMenu } from "react-icons/io";
@@ -47,7 +47,7 @@ function SideBar() {
                 </div>
 
                 <div className="px-3 lg:px-4">
-                    <Link href = "/admin/setting" className="user_row p-2.5 bg-white shadow-md rounded-lg lg:rounded-xl flex items-center gap-3">
+                    <Link href="/admin/setting" className="user_row p-2.5 bg-white shadow-md rounded-lg lg:rounded-xl flex items-center gap-3">
                         <div className="w-11 h-11 rounded-full bg-green-400 flex items-center justify-center text-white text-xl font-bold">
                             {/* Replace with an actual image if needed */}
                             <img
@@ -70,7 +70,7 @@ function SideBar() {
                                 href="/admin"
                                 className={`flex items-center py-2.5 x-3 md:px-4 lg:px-6 gap-2 text-[#565F66] text-base font-medium tracking-[-0.06em] ${pathname === "/admin" ? "text-white bg-[#D6202C]" : "hover:bg-gray-100"} `}
                             >
-                                <MdSpaceDashboard  size={20} />
+                                <MdSpaceDashboard size={20} />
                                 Dashboard
                             </Link>
                             <Link
@@ -95,7 +95,7 @@ function SideBar() {
                                 Bookings
                             </Link>
                             <Link
-                                href="/admin/review"
+                                href="/admin/reviews"
                                 className={`flex items-center py-2.5 x-3 md:px-4 lg:px-6 gap-2 text-[#565F66] text-base font-medium tracking-[-0.06em] ${pathname === "/admin/review" ? "text-white bg-[#D6202C]" : "hover:bg-gray-100"} `}
                             >
                                 <MdReviews size={20} />
@@ -105,7 +105,7 @@ function SideBar() {
                                 href="/admin/home"
                                 className={`flex items-center py-2.5 x-3 md:px-4 lg:px-6 gap-2 text-[#565F66] text-base font-medium tracking-[-0.06em] ${pathname === "/admin/home" ? "text-white bg-[#D6202C]" : "hover:bg-gray-100"} `}
                             >
-                                <FaEdit size={20}/>
+                                <FaEdit size={20} />
                                 Edit Home
                             </Link>
                             <Link

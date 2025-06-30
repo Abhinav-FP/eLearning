@@ -36,7 +36,7 @@ export default function VideoModalDetail({ video, image, name, divClass, imgClas
         videoSrc = `https://player.vimeo.com/video/${vimeoId}?autoplay=1`;
     }
 
-   useEffect(() => {
+    useEffect(() => {
         if (platform === 'youtube' && youTubeId) {
             setThumbnail(`https://img.youtube.com/vi/${youTubeId}/hqdefault.jpg?cc_load_policy=0&hl=ja`);
         } else if (platform === 'vimeo' && vimeoId) {
@@ -78,7 +78,7 @@ export default function VideoModalDetail({ video, image, name, divClass, imgClas
                             onClick={() => setIsOpen(false)}
                             className="absolute top-2 right-2 text-white text-2xl z-10 cursor-pointer "
                         >
-                            <MdClose  size={24} />
+                            <MdClose size={24} />
                         </button>
                         <iframe
                             width="100%"

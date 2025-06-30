@@ -22,7 +22,7 @@ function getVideoPlatform(url) {
     return 'unknown';
 }
 
-export default function VideoModalPlayer({ video, image, name, divClass, imgClass, btnClass, iconClass }) {
+export default function VideoModalDetail({ video, image, name, divClass, imgClass, btnClass, iconClass }) {
     const [isOpen, setIsOpen] = useState(false);
     const platform = getVideoPlatform(video);
     const [thumbnail, setThumbnail] = useState(EmilyCarter);
@@ -71,7 +71,7 @@ export default function VideoModalPlayer({ video, image, name, divClass, imgClas
             </div>
 
             {/* Modal */}
-            {/* {isOpen && (
+            {isOpen && (
                 <div className="fixed inset-0  bg-opacity-70 flex items-center justify-center z-50">
                     <div className="relative w-full max-w-4xl aspect-video bg-black rounded-lg overflow-hidden">
                         <button
@@ -92,7 +92,7 @@ export default function VideoModalPlayer({ video, image, name, divClass, imgClas
                         ></iframe>
                     </div>
                 </div>
-            )} */}
+            )}
         </>
     );
 }

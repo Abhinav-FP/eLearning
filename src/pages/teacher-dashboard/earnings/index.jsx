@@ -81,7 +81,7 @@ export default function index() {
         icon: <FaMoneyBillWave className="w-6 h-6 text-[#CC2828]" />,
       },
       {
-        label: "Available Earnings (completed lesson)",
+        label: "Available Earnings (Completed Lessons)",
         value: data?.earningsSummary?.pendingEarnings ?? "N/A",
         icon: <FaWallet className="w-6 h-6 text-[#CC2828]" />,
       },

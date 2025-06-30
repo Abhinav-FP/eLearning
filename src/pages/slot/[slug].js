@@ -16,6 +16,7 @@ export default function Index() {
   const [error, setError] = useState(false);
   const [PaymentStatus, setPaymentStatus] = useState(false);
   const [studentTimeZone, setStudentTimeZone] = useState(null);
+  const [commission, setCommission] = useState(null);
 
   const fetchData = async (slug) => {
     try {
@@ -57,7 +58,21 @@ export default function Index() {
     return durationMinutes;
   }
 
+  const fetchCommission = async () => {
+    try {
+      const main = new Listing();
+      const response = await main.AdminCommission();
+      if (response?.data?.status) {
+        const value = response?.data?.data || 0;
+        setCommission(value * 0.01);
+      }
+    } catch (error) {
+      console.log("error", error);
+    }
+  };
+
   useEffect(() => {
+    fetchCommission();
     if (slug) {
       fetchData(slug);
     }
@@ -251,21 +266,22 @@ export default function Index() {
                     {/* <p className="font-medium">${selectedLesson?.price} USD</p> */}
                     <p className="font-medium">
                       {formatMultiPrice(
-                        data?.amount + 0.1 * data?.amount,
+                        data?.amount + commission * data?.amount,
                         "USD"
                       )}
                     </p>
                   </div>
                   <p className="text-sm text-gray-500">{`Included processing fee of ${formatMultiPrice(
-                    0.1 * data?.amount,
+                    commission * data?.amount,
                     "USD"
                   )}`}</p>
                 </div>
 
                 {PaymentStatus === false ? (
                   <Payment
-                    PricePayment={data?.amount + 0.1 * data?.amount}
-                    adminCommission={0.1 * data?.amount}
+                    PricePayment={data?.amount + commission * data?.amount}
+                    processingFee={data?.amount * selectedLesson?.price}
+                    adminCommission={0.10 * data?.amount}
                     selectedLesson={data?.lesson}
                     selectedSlot={data?.startDateTime}
                     studentTimeZone={studentTimeZone}
@@ -275,8 +291,9 @@ export default function Index() {
                   />
                 ) : (
                   <Stripe
-                    PricePayment={data?.amount + 0.1 * data?.amount}
-                    adminCommission={0.1 * data?.amount}
+                    PricePayment={data?.amount + commission * data?.amount}
+                    processingFee={data?.amount * selectedLesson?.price}
+                    adminCommission={0.10 * data?.amount}
                     selectedLesson={data?.lesson}
                     selectedSlot={data?.startDateTime}
                     studentTimeZone={studentTimeZone}

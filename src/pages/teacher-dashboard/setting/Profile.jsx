@@ -150,11 +150,11 @@ export default function Profile() {
       toast.error("Speciality can't be empty");
       return;
     }
-    if(data && data?.specialities && data?.specialities?.includes(trimmed)){
+    if (data && data?.specialities && data?.specialities?.includes(trimmed)) {
       toast.error("Speciality already present");
       return;
     }
-    if(data && data?.specialities && data?.specialities?.length>=5){
+    if (data && data?.specialities && data?.specialities?.length >= 5) {
       toast.error("Only 5 specialities are allowed");
       return;
     }
@@ -217,7 +217,7 @@ export default function Profile() {
             <div className="w-full lg:w-6/12 xl:w-5/12 lg:pl-3">
               <div className="flex items-center">
                 <div className="relative h-[52px] w-[52px] flex rounded-full text-sm text-white focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800 mr-4">
-                  <Image 
+                  <Image
                     className="h-[52px] w-[52px] rounded-full object-cover object-top"
                     src={
                       file instanceof File
@@ -249,7 +249,7 @@ export default function Profile() {
             <div className="flex flex-wrap -mx-2 space-y-4">
               <div className="w-full lg:w-6/12 px-2 ">
                 <label className="block text-[#CC2828] font-medium text-base xl:text-xl mb-1 tracking-[-0.04em]">
-                  Name
+                  Name <span className="text-red-500">*</span>
                 </label>
                 <input
                   type="text"
@@ -261,8 +261,9 @@ export default function Profile() {
                 />
               </div>
               <div className="w-full lg:w-6/12  px-2">
+
                 <label className="block text-[#CC2828] font-medium text-base xl:text-xl mb-1 tracking-[-0.04em]">
-                  Email
+                  Email <span className="text-red-500">*</span>
                 </label>
                 <input
                   type="email"
@@ -270,10 +271,11 @@ export default function Profile() {
                   required
                   name="email"
                   onChange={handleChange}
+                  pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$"
+                  title="Please enter a valid email address"
                   className="w-full h-11 lg:h-[54px] font-medium appearance-none block bg-[#F4F6F8] text-[#46494D] text-base border border-[#F4F6F8] rounded-lg py-3 px-3 lg:px-6 leading-tight focus:outline-none"
                 />
               </div>
-
               <div className="w-full lg:w-6/12  px-2">
                 <label className="block text-[#CC2828] font-medium text-base xl:text-xl mb-1 tracking-[-0.04em]">
                   Time Zone
@@ -485,7 +487,7 @@ export default function Profile() {
                       value="F"
                       checked={data.gender === "F"}
                       onChange={handleChange}
-                       className=" w-4 h-4 accent-[#CC2828]"
+                      className=" w-4 h-4 accent-[#CC2828]"
                     />
                     <span>Female</span>
                   </label>

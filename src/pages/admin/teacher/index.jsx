@@ -38,17 +38,13 @@ function TeacherListing() {
 
   const [processing, setprocessing] = useState(false);
 
-  const HadleAisTrained = async (id) => {
+  const handleaistrained = async (id) => {
     try {
       setprocessing(true);
       const main = new Listing();
       const response = await main.AisTrained({ id: id });
       if (response?.data) {
-        if (response?.data?.data?.block == true) {
-          toast.success("Teacher blocked successfully");
-        } else {
-          toast.success("Teacher unblocked successfully");
-        }
+       toast.success(response?.data?.message);
         fetchData("");
       }
       setprocessing(false);
@@ -105,16 +101,16 @@ function TeacherListing() {
       <td className="capitalize px-3 lg:px-4 py-2 lg:py-3 text-black text-sm lg:text-base font-medium font-inter">
         {category === "existing" ? (
           <button
-            onClick={() => HadleAisTrained(item?._id)}
-            className="border border-[#CC2828] text-[#CC2828] hover:bg-[#CC2828] hover:text-white px-3 py-1 text-xs rounded cursor-pointer"
+            onClick={() => handleaistrained(item?._id)}
+            className="cursor-pointer border border-[#CC2828] text-[#CC2828] hover:bg-[#CC2828] hover:text-white px-3 py-1 text-xs rounded cursor-pointer"
           >
             {processing
               ? item?.ais_trained
                 ? "Processing..."
                 : "Processing..."
               : item?.ais_trained
-                ? "No"
-                : "Yes"}
+                ? "Yes"
+                : "No"}
           </button>
         ) : (
           <span>

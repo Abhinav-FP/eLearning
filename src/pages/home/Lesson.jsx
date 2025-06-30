@@ -11,6 +11,8 @@ import { BestTeacherLoader } from "@/components/Loader";
 import { Swiper, SwiperSlide } from 'swiper/react';
 import 'swiper/css';
 import { MdClose, MdOutlinePlayCircle } from 'react-icons/md';
+import Image from "next/image";
+import NoVideo from "../Assets/Images/NoVideo.jpg";
 
 
 export default function Lesson({ title }) {
@@ -74,7 +76,7 @@ export default function Lesson({ title }) {
 //     }
 // }, [currentVideo]);
 
-// console.log("currentVideo",currentVideo);   
+// console.log("video",video);   
 
     return (
         <>
@@ -105,16 +107,28 @@ export default function Lesson({ title }) {
                                     <SwiperSlide key={i}>
                                         <div className="bg-white border teacher_box border-[rgba(56,121,117,0.2)] rounded-[8px] lg:rounded-[13px] p-3 md:p-4 lg:p-3 h-full">
 
-                                            <div onClick={() => {setCurrentVideo(items)}}>
-                                                <VideoModalPlayer
-                                                    video={items?.intro_video}
-                                                    image={items?.userId?.profile_photo}
-                                                    name={items?.userId?.name}
-                                                    divClass="relative md:!h-[205px]"
-                                                    imgClass="w-full !h-[205px] md:!h-[205px] rounded-[4px] md:rounded-[6px] object-cover"
-                                                    btnClass="absolute top-1/2 left-0 right-0 mx-auto -translate-y-1/2 text-white hover:text-[#CC2828] w-[85px] text-center cursor-pointer"
-                                                />
-                                            </div>
+                                            {!items?.intro_video || items?.intro_video === "" ? 
+                                                <div>
+                                                    <Image
+                                                        className="w-full !h-[205px] md:!h-[205px] rounded-[4px] md:rounded-[6px] object-cover"
+                                                        src={NoVideo}
+                                                        alt={"No Video Image"}
+                                                        width={527}
+                                                        height={311}
+                                                    />
+                                                </div>
+                                                :
+                                                <div onClick={() => {setCurrentVideo(items)}}>
+                                                    <VideoModalPlayer
+                                                        video={items?.intro_video}
+                                                        image={items?.userId?.profile_photo}
+                                                        name={items?.userId?.name}
+                                                        divClass="relative md:!h-[205px]"
+                                                        imgClass="w-full !h-[205px] md:!h-[205px] rounded-[4px] md:rounded-[6px] object-cover"
+                                                        btnClass="absolute top-1/2 left-0 right-0 mx-auto -translate-y-1/2 text-white hover:text-[#CC2828] w-[85px] text-center cursor-pointer"
+                                                    />
+                                                </div>
+                                            }
 
 
                                             <Link href={`/teacher/${items?._id}`}>

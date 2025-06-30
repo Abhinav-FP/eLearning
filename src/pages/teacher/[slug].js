@@ -12,7 +12,7 @@ import Listing from "../api/Listing";
 import BookingPopup from "./BookingPopup";
 import { BookLoader } from "../../components/Loader";
 import { BiSolidBadgeCheck } from "react-icons/bi";
-import TeacherImg from "../Assets/Images/teacherimg01.png";
+import TeacherImg from "../Assets/Images/Placeholder.png";
 import VideoModalDetail from "../common/VideoModalDetail";
 
 export default function Index() {

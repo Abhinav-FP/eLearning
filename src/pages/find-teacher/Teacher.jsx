@@ -2,13 +2,14 @@ import React from "react";
 import Heading from "../common/Heading";
 import Image from "next/image";
 import LineImg from "../Assets/Images/linebar-red.png";
-import TeacherImg from "../Assets/Images/teacherimg01.png";
+import TeacherImg from "../Assets/Images/Placeholder.png";
 import Link from "next/link";
 import { BookLoader } from "@/components/Loader";
 import { formatMultiPrice } from "@/components/ValueDataHook";
 import { useRole } from "@/context/RoleContext";
 import { useRouter } from "next/router";
 import toast from "react-hot-toast";
+
 export default function Teacher({ teacherData, loading }) {
     const { user } = useRole();
     const router = useRouter();

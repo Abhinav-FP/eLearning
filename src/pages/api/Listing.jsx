@@ -234,9 +234,12 @@ class Listing extends Component {
   async adminteacherlist(data, block) {
     return Api.get(`/admin/teachers?search=${data}&block=${block}`);
   }
-
   async userBlock(data) {
     return Api.post(`/admin/blockuser`, data);
+  }
+
+   async AisTrained(data) {
+    return Api.post(`/admin/ais-trained`, data);
   }
 
   async approveRejectTeacher(data) {

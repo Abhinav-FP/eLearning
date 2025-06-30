@@ -67,6 +67,7 @@ export default function ReschedulePopup({ isOpen, onClose, lesson, studentTimeZo
       console.log("error", error);
     }
   };
+  // console.log("availability",availability);
 
   useEffect(() => {
     if (lesson) {

@@ -12,6 +12,7 @@ import { MdRequestQuote } from "react-icons/md";
 import * as XLSX from 'xlsx';
 import toast from "react-hot-toast";
 import AdminLayout from "../common/AdminLayout";
+import Link from "next/link";
 
 export default function index() {
   const [data, setData] = useState({});
@@ -132,10 +133,10 @@ export default function index() {
               placeholder="Search using payment ID, lesson, teacher, or student name"
               className="w-full pl-10 pr-4 py-2 h-[44px] border border-[#ddd] text-[#000] rounded-md focus:outline-none focus:ring-1 focus:ring-[#CC2828] placeholder-gray-400"
             />
-          </div> 
-        
+          </div>
+
           <div className="w-full md:w-auto flex flex-col md:flex-row items-center md:space-x-3 justify-between ">
-             {/* Dropdown Filter */}
+            {/* Dropdown Filter */}
             <select
               value={selectedOption}
               onChange={handleDropdownChange}
@@ -148,7 +149,7 @@ export default function index() {
                 <option key={year} value={year}>{year}</option>
               ))}
             </select>
-              {/* Export Button */}
+            {/* Export Button */}
             <div className="space-x-3 w-full md:w-auto flex md:block justify-between">
               <button
                 onClick={downloadExcel}
@@ -156,12 +157,9 @@ export default function index() {
               >
                 Export as Excel
               </button>
-
             </div>
-
           </div>
         </div>
-
         {loading ? (
           <TeacherEarningsLoader />
         ) : (
@@ -229,7 +227,10 @@ export default function index() {
                           ) || ""}
                         </td>
                         <td className="px-3 lg:px-4 py-2 lg:py-3 text-black text-sm lg:text-base font-medium font-inter capitalize whitespace-nowrap">
-                          {item?.teacherId?.name || ""}
+                          <Link href={`/admin/teacher/${item?.teacherId?._id
+                            }`}>
+                            {item?.teacherId?.name || ""}
+                          </Link>
                         </td>
                         <td className="px-3 lg:px-4 py-2 lg:py-3 text-black text-sm lg:text-base font-medium font-inter whitespace-nowrap">
                           {formatMultiPrice(item?.totalAmount, "USD") || ""}

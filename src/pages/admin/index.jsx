@@ -8,10 +8,10 @@ import { TbBrandBooking } from "react-icons/tb";
 import { AiFillStar } from 'react-icons/ai';
 import moment from 'moment';
 import Link from 'next/link';
-import TeacherImg from "./../Assets/Images/teacherimg.jpg"
 import { ReviewLoader, TableLoader } from '@/components/Loader';
 import NoData from '../common/NoData';
 import Image from 'next/image';
+import { IoMdEye } from 'react-icons/io';
 
 
 export default function Index() {
@@ -42,7 +42,9 @@ export default function Index() {
               active teachers
             </h2>
             <div className="absolute right-4 lg:right-5 xl:right-6 bg-[#CC28281A] border-[0.67px] border-[#CC282880] p-3 rounded">
-              <GiTeacher className="text-[#CC2828]" size={24} />
+              <Link href="/admin/teacher">
+                <GiTeacher className="text-[#CC2828]" size={24} />
+              </Link>
             </div>
 
             <div className="text-sm text-[#535353] space-y-1 mt-4">
@@ -56,7 +58,9 @@ export default function Index() {
               Active Students
             </h2>
             <div className="absolute right-4 lg:right-5 xl:right-6 bg-[#CC28281A] border-[0.67px] border-[#CC282880] p-3 rounded">
-              <PiStudentBold className="text-[#CC2828]" size={24} />
+              <Link href="/admin/student">
+                <PiStudentBold className="text-[#CC2828]" size={24} />
+              </Link>
             </div>
 
             <div className="text-sm text-[#535353] space-y-1 mt-4">
@@ -70,7 +74,9 @@ export default function Index() {
               Pending Reviews
             </h2>
             <div className="absolute right-4 lg:right-5 xl:right-6 bg-[#CC28281A] border-[0.67px] border-[#CC282880] p-3 rounded">
-              <MdReviews className="text-[#CC2828]" size={24} />
+              <Link href="/admin/reviews">
+                <MdReviews className="text-[#CC2828]" size={24} />
+              </Link>
             </div>
 
             <div className="text-sm text-[#535353] space-y-1 mt-4">
@@ -84,7 +90,9 @@ export default function Index() {
               Total Completed <br></br> Booking
             </h2>
             <div className="absolute right-4 lg:right-5 xl:right-6 bg-[#CC28281A] border-[0.67px] border-[#CC282880] p-3 rounded">
-              <TbBrandBooking className="text-[#CC2828]" size={24} />
+              <Link href="/admin/booking">
+                <TbBrandBooking className="text-[#CC2828]" size={24} />
+              </Link>
             </div>
 
             <div className="text-sm text-[#535353] space-y-1 mt-4">
@@ -96,16 +104,16 @@ export default function Index() {
         </div>
 
         <div className="bg-white rounded-2xl shadow border border-[rgba(204,40,40,0.2)] overflow-auto mt-4 ">
-         <div className='px-5 pt-5'>
-           <h2 className="text-[#CC2828] text-xl lg:text-2xl font-semibold mb-4">Teacher Management</h2>
-         </div>
+          <div className='px-5 pt-5'>
+            <h2 className="text-[#CC2828] text-xl lg:text-2xl font-semibold mb-4">Teacher Management</h2>
+          </div>
           <table className="min-w-full text-sm text-center rounded-[20px]">
             <thead className="bg-[rgba(204,40,40,0.1)] text-[#535353] tracking-[-0.04em] font-inter rounded-[20px] whitespace-nowrap">
               <tr>
-                <th className="font-normal text-sm lg:text-base px-3 lg:px-4 py-2 lg:py-3 border-t border-[rgba(204,40,40,0.2)] capitalize text-left">
+                <th className="font-normal text-sm lg:text-base px-3 lg:px-4 py-2 lg:py-3 border-t border-[rgba(204,40,40,0.2)] capitalize ">
                   Teacher name
                 </th>
-                <th className="font-normal text-sm lg:text-base px-3 lg:px-4 py-2 lg:py-3 border-t border-[rgba(204,40,40,0.2)] capitalize text-left">
+                <th className="font-normal text-sm lg:text-base px-3 lg:px-4 py-2 lg:py-3 border-t border-[rgba(204,40,40,0.2)] capitalize ">
                   Email
                 </th>
                 <th className="font-normal text-sm lg:text-base px-3 lg:px-4 py-2 lg:py-3 border-t border-[rgba(204,40,40,0.2)] capitalize">
@@ -113,6 +121,9 @@ export default function Index() {
                 </th>
                 <th className="font-normal text-sm lg:text-base px-3 lg:px-4 py-2 lg:py-3 border-t border-[rgba(204,40,40,0.2)] capitalize">
                   Experience
+                </th>
+                <th className="font-normal text-sm lg:text-base px-3 lg:px-4 py-2 lg:py-3 border-t border-[rgba(204,40,40,0.2)] capitalize">
+                  View
                 </th>
               </tr>
             </thead>
@@ -127,12 +138,12 @@ export default function Index() {
                       key={index}
                       className={`border-t hover:bg-[rgba(204,40,40,0.1)] border-[rgba(204,40,40,0.2)] ${user?.block ? "opacity-50" : ""}`}
                     >
-                      <td className="capitalize whitespace-nowrap px-3 lg:px-4 py-2 lg:py-3 text-black text-sm lg:text-base font-medium font-inter text-left">
-                        <Link href={`/admin/teacher/${user?._id}`} className="hover:underline">
+                      <td className="capitalize whitespace-nowrap px-3 lg:px-4 py-2 lg:py-3 text-black text-sm lg:text-base font-medium font-inter ">
+                        <Link href={`/admin/teacher/${user?._id}`} >
                           {user?.name || "—"}
                         </Link>
                       </td>
-                      <td className="px-3 lg:px-4 py-2 lg:py-3 text-black text-sm lg:text-base font-medium font-inter text-left">
+                      <td className="px-3 lg:px-4 py-2 lg:py-3 text-black text-sm lg:text-base font-medium font-inter ">
                         {user?.email || "—"}
                       </td>
                       <td className="whitespace-nowrap capitalize px-3 lg:px-4 py-2 lg:py-3 text-black text-sm lg:text-base font-medium font-inter">
@@ -141,18 +152,19 @@ export default function Index() {
                       <td className="capitalize whitespace-nowrap px-3 lg:px-4 py-2 lg:py-3 text-black text-sm lg:text-base font-medium font-inter">
                         {item?.experience ? `${item.experience} years` : "N/A"}
                       </td>
+                      <td className="capitalize whitespace-nowrap px-3 lg:px-4 py-2 lg:py-3 text-black text-sm lg:text-base font-medium font-inter">
+                        <Link href={`/admin/teacher/${user?._id}`} className='text-center'>
+                          <IoMdEye size={22} />
+                        </Link>
+                      </td>
                     </tr>
                   );
                 })}
               </tbody>)}
-
-
           </table>
         </div>
-
         <div className="bg-white p-5 rounded-2xl shadow border border-[rgba(204,40,40,0.2)]  mt-3 ">
           <h2 className="text-[#CC2828] text-xl lg:text-2xl font-semibold mb-4">Reviews</h2>
-
           {
             loading ? (
               <ReviewLoader />
@@ -162,13 +174,12 @@ export default function Index() {
                   <div key={review._id} className="border border-gray-100 rounded-xl p-4 mb-4 shadow-sm">
                     <div className="flex justify-between items-center mb-3">
                       <div className="flex gap-3 items-center">
-                        {/* <img src={review?.userId?.profile_photo || "/profile.png"} alt="avatar" className="w-10 h-10 rounded-full object-cover border" /> */}
-                        <Image 
-                          src={review?.userId?.profile_photo || "/profile.png"} 
+                        <Image
+                          src={review?.userId?.profile_photo || "/profile.png"}
                           height={100}
                           width={100}
-                          alt="avatar" 
-                          className="w-10 h-10 rounded-full object-cover border"/>
+                          alt="avatar"
+                          className="w-10 h-10 rounded-full object-cover border" />
                         <div>
                           <p className="font-semibold text-gray-800">{review.userId?.name}</p>
                           <p className="text-xs text-gray-500">

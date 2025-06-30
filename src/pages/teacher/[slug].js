@@ -26,7 +26,10 @@ export default function Index() {
   const [lessons, setLessons] = useState([]);
   const [isPopupOpen, setIsPopupOpen] = useState(book ? true : false);
   const [studentTimeZone, setStudentTimeZone] = useState(null);
-  const closePopup = () => setIsPopupOpen(false);
+  const closePopup = () => {
+    setIsPopupOpen(false);
+    
+  };
   const Id = data?.userId?._id;
 
 

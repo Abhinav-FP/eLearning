@@ -7,7 +7,6 @@ import Listing from "@/pages/api/Listing";
 import Link from "next/link";
 import { TeacherLoader } from "@/components/Loader";
 import { FiSearch } from "react-icons/fi";
-import { formatMultiPrice } from "@/components/ValueDataHook";
 import { useRouter } from "next/router";
 
 export default function Index() {

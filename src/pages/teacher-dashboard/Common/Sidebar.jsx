@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { MdSpaceDashboard } from "react-icons/md";
+import { MdReviews, MdSpaceDashboard } from "react-icons/md";
 import { usePathname } from "next/navigation";
 import Link from "next/link";
 import { IoIosMenu } from "react-icons/io";
@@ -19,8 +19,6 @@ function SideBar() {
     const pathname = usePathname();
     const [isOpen, setIsOpen] = useState(false);
     const { user } = useRole();
-
-    // console.log("user",user);
 
     return (
         <>
@@ -51,7 +49,7 @@ function SideBar() {
                 </div>
 
                 <div className="px-3 lg:px-4">
-                    <Link href = "/teacher-dashboard/setting" className="user_row p-2.5 bg-white shadow-md rounded-lg lg:rounded-xl flex items-center gap-3">
+                    <Link href="/teacher-dashboard/setting" className="user_row p-2.5 bg-white shadow-md rounded-lg lg:rounded-xl flex items-center gap-3">
                         <div className="w-11 h-11 rounded-full bg-green-400 flex items-center justify-center text-white text-xl font-bold">
                             {/* Replace with an actual image if needed */}
                             <img
@@ -74,7 +72,7 @@ function SideBar() {
                                 href="/teacher-dashboard"
                                 className={`flex items-center py-2.5 x-3 md:px-4 lg:px-6 gap-2 text-[#565F66] text-base font-medium tracking-[-0.06em] ${pathname === "/teacher-dashboard" ? "text-white bg-[#D6202C]" : "hover:bg-gray-100"} `}
                             >
-                                <MdSpaceDashboard  size={20} />
+                                <MdSpaceDashboard size={20} />
                                 Dashboard
                             </Link>
                             <Link
@@ -120,6 +118,13 @@ function SideBar() {
                                 Bookings
                             </Link>
                             <Link
+                                href="/teacher-dashboard/review"
+                                className={`flex items-center py-2.5 x-3 md:px-4 lg:px-6 gap-2 text-[#565F66] text-base font-medium tracking-[-0.06em] ${pathname === "/teacher-dashboard/earnings" ? "text-white bg-[#D6202C]" : "hover:bg-gray-100"}`}
+                            >
+                                <MdReviews size={20} />
+                                Reviews
+                            </Link>
+                            <Link
                                 href="/teacher-dashboard/slots"
                                 className={`flex items-center py-2.5 x-3 md:px-4 lg:px-6 gap-2 text-[#565F66] text-base font-medium tracking-[-0.06em] ${pathname === "/teacher-dashboard/slots" ? "text-white bg-[#D6202C]" : "hover:bg-gray-100"}`}
                             >
@@ -133,7 +138,6 @@ function SideBar() {
                                 <IoSettingsOutline size={20} />
                                 Settings
                             </Link>
-
                         </ul>
                     </div>
                 </div>

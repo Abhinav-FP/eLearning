@@ -88,7 +88,7 @@ function TeacherListing() {
           {item?.userId?.name || ""}
         </Link>
       </td>
-      <td className="capitalize px-3 lg:px-4 py-2 lg:py-3 text-black text-sm lg:text-base font-medium font-inter">
+      <td className=" px-3 lg:px-4 py-2 lg:py-3 text-black text-sm lg:text-base font-medium font-inter">
         {item?.userId?.email || ""}
       </td>
       <td className="capitalize px-3 lg:px-4 py-2 lg:py-3 text-black text-sm lg:text-base font-medium font-inter">

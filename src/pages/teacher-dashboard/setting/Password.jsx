@@ -45,7 +45,7 @@ export default function Password() {
                 toast.error(response.data.message);
             }
         } catch (error) {
-            console.error("API error:", error);           
+            console.error("API error:", error);
             toast.error(error?.response?.data?.message || "Something went wrong!");
         }
         setProcessing(false);
@@ -61,7 +61,7 @@ export default function Password() {
                                 Current Password
                             </label>
                             <p className="block text-[#535353] font-medium text-base tracking-[-0.04em] mb-0">
-                                Edit your Current Password here
+                                Enter  your Current Password here
                             </p>
                         </div>
                         <div className="w-full lg:w-6/12 xl:w-5/12 lg:pl-3 relative">
@@ -84,7 +84,7 @@ export default function Password() {
                                 New Password
                             </label>
                             <p className="block text-[#535353] font-medium text-base tracking-[-0.04em] mb-0">
-                                Edit your New Password here
+                                Enter  your New Password here
                             </p>
                         </div>
                         <div className="w-full lg:w-6/12 xl:w-5/12 lg:pl-3 relative">
@@ -108,7 +108,7 @@ export default function Password() {
                                 Confirm Password
                             </label>
                             <p className="block text-[#535353] font-medium text-base tracking-[-0.04em] mb-0">
-                                Edit your Confirm Password here
+                                Enter  your Confirm Password here
                             </p>
                         </div>
                         <div className="w-full lg:w-6/12 xl:w-5/12 lg:pl-3 relative">

@@ -142,7 +142,7 @@ export default function Index() {
           <div className="flex flex-wrap -mx-2.5 justify-center">
             <div className="w-full md:w-6/12 px-2.5 mb-5">
               <label className="block text-base font-medium text-[#727272] tracking-[-0.06em] mb-1">
-                Name
+                Name <span className="text-red-500">*</span>
               </label>
               <input
                 value={data?.name}
@@ -156,7 +156,8 @@ export default function Index() {
             </div>
             <div className="w-full md:w-6/12 px-2.5 mb-5">
               <label className="block text-base font-medium text-[#727272] tracking-[-0.06em] mb-1">
-                Time-Zone
+
+                Time-Zone <span className="text-red-500">*</span>
               </label>
               {/* Time-Zone */}
               <select
@@ -177,7 +178,8 @@ export default function Index() {
             </div>
             <div className="w-full md:w-6/12 px-2.5 mb-5">
               <label className="block text-base font-medium text-[#727272] tracking-[-0.06em] mb-1">
-                Email
+                Email <span className="text-red-500">*</span>
+
               </label>
               <input
                 value={data?.email}
@@ -191,7 +193,8 @@ export default function Index() {
             </div>
             <div className="w-full md:w-6/12 px-2.5 mb-5">
               <label className="block text-base font-medium text-[#727272] tracking-[-0.06em] mb-1">
-                Confirm Email
+                Confirm Email <span className="text-red-500">*</span>
+
               </label>
               <input
                 value={data?.confirm_email}
@@ -205,7 +208,8 @@ export default function Index() {
             </div>
             <div className="w-full md:w-6/12 px-2.5 mb-5 relative">
               <label className="block text-base font-semibold text-[#727272] tracking-[-0.06em] mb-1">
-                Password
+                Password  <span className="text-red-500">*</span>
+
               </label>
               <div className="relative">
                 <input
@@ -280,7 +284,8 @@ export default function Index() {
             </div>
             <div className="w-full md:w-6/12 px-2.5 mb-5 relative">
               <label className="block text-base font-semibold text-[#727272] tracking-[-0.06em] mb-1">
-                Confirm Password
+                Confirm Password <span className="text-red-500">*</span>
+
               </label>
               <div className="relative">
                 <input

@@ -6,7 +6,7 @@ import { TeacherEarningsLoader } from "@/components/Loader";
 import NoData from "@/pages/common/NoData";
 import { formatMultiPrice } from "@/components/ValueDataHook";
 import { FaWallet, FaMoneyBillWave } from "react-icons/fa";
-import { MdPaid } from "react-icons/md";
+import { MdPaid, MdWallet } from "react-icons/md";
 import { FiSearch } from "react-icons/fi";
 import { MdRequestQuote } from "react-icons/md";
 import * as XLSX from 'xlsx';
@@ -100,7 +100,7 @@ export default function index() {
       {
         label: "Teachers Earnings",
         value: data?.count?.teacherEarning ?? "N/A",
-        icon: <FaWallet className="w-6 h-6 text-[#CC2828]" />,
+        icon: <MdWallet className="w-6 h-6 text-[#CC2828]" />,
       },
       {
         label: "My Earnings",
@@ -115,7 +115,6 @@ export default function index() {
     ],
     [data]
   );
-
 
   return (
     <AdminLayout page={"Earnings"}>

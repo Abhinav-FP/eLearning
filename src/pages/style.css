@@ -68,7 +68,7 @@ body {
 }
 
 .arrowimg:not(:last-child)::after{
-   background-image: url('../pages/Assets/Images/arrow-png.png');
+   background-image: url('/arrow-png.png');
 }
 
 .ready-bg{background: linear-gradient(90deg, #CC2828 4.38%, #661414 151.98%);}
@@ -89,7 +89,7 @@ body {
 
 @media (max-width: 767px) {
   .arrowimg:not(:last-child)::after{
-    background-image: url('../pages/Assets/Images/arrow-down.png');
+    background-image: url('/arrow-down.png');
   }
   
 }

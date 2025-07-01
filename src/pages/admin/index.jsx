@@ -62,7 +62,6 @@ export default function Index() {
                 <PiStudentBold className="text-[#CC2828]" size={24} />
               </Link>
             </div>
-
             <div className="text-sm text-[#535353] space-y-1 mt-4">
               <p className="font-inter text-base lg:text-lg xl:text-xl font-bold tracking-[-0.04em]">
                 {listing?.countstudent} {/* Safely access ReviewesCount */}
@@ -94,7 +93,6 @@ export default function Index() {
                 <TbBrandBooking className="text-[#CC2828]" size={24} />
               </Link>
             </div>
-
             <div className="text-sm text-[#535353] space-y-1 mt-4">
               <p className="font-inter text-base lg:text-lg xl:text-xl font-bold tracking-[-0.04em]">
                 {listing?.totalbooking} {/* Safely access ReviewesCount */}

@@ -28,103 +28,101 @@ const RescheduleCalendar = ({ Availability, setSelectedSlot, selectedLesson }) =
   const { user } = useRole();
   const router = useRouter();
 
-  useEffect(() => {
-    if (!Availability) return;
+useEffect(() => {
+  if (!Availability) return;
 
-    const getNextQuarter = (date) => {
-      const next = new Date(date);
-      const minutes = next.getMinutes();
-      const add =
-        minutes < 15
-          ? 15 - minutes
-          : minutes < 30
-            ? 30 - minutes
-            : minutes < 45
-              ? 45 - minutes
-              : 60 - minutes;
-      next.setMinutes(minutes + add, 0, 0);
-      return next;
-    };
+  // 🟢 Rename to reflect 30-minute logic
+  const getNextHalfHour = (date) => {
+    const next = new Date(date);
+    const minutes = next.getMinutes();
+    const add =
+      minutes < 30
+        ? 30 - minutes
+        : 60 - minutes;
+    next.setMinutes(minutes + add, 0, 0);
+    return next;
+  };
 
-    const processBlocks = (blocks, title, color) => {
-      const events = [];
+  const processBlocks = (blocks, title, color) => {
+    const events = [];
 
-      blocks.forEach((block) => {
-        let current = moment.utc(block.startDateTime).toDate();
-        const end = moment.utc(block.endDateTime).toDate();
+    blocks.forEach((block) => {
+      let current = moment.utc(block.startDateTime).toDate();
+      const end = moment.utc(block.endDateTime).toDate();
 
-        const firstChunkEnd = getNextQuarter(current);
-        const firstDuration = (firstChunkEnd - current) / (1000 * 60); // in minutes
+      const firstChunkEnd = getNextHalfHour(current);
+      const firstDuration = (firstChunkEnd - current) / (1000 * 60); // in minutes
 
-        if (firstChunkEnd > end) {
-          // entire block fits before the first rounded quarter
-          events.push({
-            id: `${block._id}_${block.startDateTime}`,
-            title,
-            start: moment.utc(current).toDate(),
-            end: moment.utc(end).toDate(),
-            color,
-          });
-          return;
-        }
+      if (firstChunkEnd > end) {
+        // entire block fits before the first rounded 30-minute mark
+        events.push({
+          id: `${block._id}_${block.startDateTime}`,
+          title,
+          start: moment.utc(current).toDate(),
+          end: moment.utc(end).toDate(),
+          color,
+        });
+        return;
+      }
 
-        if (firstDuration < 15) {
-          // merge first chunk with next
-          const secondChunkEnd = getNextQuarter(firstChunkEnd);
-          const mergedEnd = secondChunkEnd < end ? secondChunkEnd : end;
+      if (firstDuration < 30) {
+        // merge first chunk with next
+        const secondChunkEnd = getNextHalfHour(firstChunkEnd);
+        const mergedEnd = secondChunkEnd < end ? secondChunkEnd : end;
 
-          events.push({
-            id: `${block._id}_${block.startDateTime}`,
-            title,
-            start: moment.utc(current).toDate(),
-            end: moment.utc(mergedEnd).toDate(),
-            color,
-          });
+        events.push({
+          id: `${block._id}_${block.startDateTime}`,
+          title,
+          start: moment.utc(current).toDate(),
+          end: moment.utc(mergedEnd).toDate(),
+          color,
+        });
 
-          current = new Date(mergedEnd);
-        } else {
-          // normal first chunk
-          events.push({
-            id: `${block._id}_${block.startDateTime}`,
-            title,
-            start: moment.utc(current).toDate(),
-            end: moment.utc(firstChunkEnd).toDate(),
-            color,
-          });
+        current = new Date(mergedEnd);
+      } else {
+        // normal first chunk
+        events.push({
+          id: `${block._id}_${block.startDateTime}`,
+          title,
+          start: moment.utc(current).toDate(),
+          end: moment.utc(firstChunkEnd).toDate(),
+          color,
+        });
 
-          current = new Date(firstChunkEnd);
-        }
+        current = new Date(firstChunkEnd);
+      }
 
-        // rest of the chunks
-        while (current < end) {
-          const nextChunkEnd = getNextQuarter(current);
-          const chunkEnd = nextChunkEnd < end ? nextChunkEnd : end;
+      // rest of the chunks
+      while (current < end) {
+        const nextChunkEnd = getNextHalfHour(current);
+        const chunkEnd = nextChunkEnd < end ? nextChunkEnd : end;
 
-          events.push({
-            id: `${block._id}_${moment.utc(current).toISOString()}`,
-            title,
-            start: moment.utc(current).toDate(),
-            end: moment.utc(chunkEnd).toDate(),
-            color,
-          });
+        events.push({
+          id: `${block._id}_${moment.utc(current).toISOString()}`,
+          title,
+          start: moment.utc(current).toDate(),
+          end: moment.utc(chunkEnd).toDate(),
+          color,
+        });
 
-          current = new Date(chunkEnd);
-        }
-      });
+        current = new Date(chunkEnd);
+      }
+    });
 
-      return events;
-    };
+    return events;
+  };
 
-    const availabilityEvents = Availability.availabilityBlocks?.length
-      ? processBlocks(Availability.availabilityBlocks, "Available", "#6ABB52")
-      : [];
+  const availabilityEvents = Availability.availabilityBlocks?.length
+    ? processBlocks(Availability.availabilityBlocks, "Available", "#6ABB52")
+    : [];
 
-    const bookedEvents = Availability.bookedSlots?.length
-      ? processBlocks(Availability.bookedSlots, "Blocked", "#8f97a3")
-      : [];
+  const bookedEvents = Availability.bookedSlots?.length
+    ? processBlocks(Availability.bookedSlots, "Blocked", "#8f97a3")
+    : [];
 
-    setEvents([...availabilityEvents, ...bookedEvents]);
-  }, [Availability]);
+  setEvents([...availabilityEvents, ...bookedEvents]);
+}, [Availability]);
+
 
   const eventStyleGetter = (event) => {
     return {

@@ -30,7 +30,7 @@ export default function Teacher({ teacherData, loading }) {
                                 <div className="flex flex-wrap">
                                     <div className="w-full md:w-[80px] lg:w-[112px]">
                                         <div className="h-[80px] w-[80px] lg:h-[112px] lg:w-[112px] rounded-full overflow-hidden   mx-0 mb-3 lg:mb-6 ">
-                                            <Image src={item?.userId?.profile_photo || TeacherImg} alt={item?.userId?.name} width={164} height={164} />
+                                            <Image className="h-[80px] w-[80px] lg:h-[112px] lg:w-[112px] rounded-full object-cover" src={item?.userId?.profile_photo || TeacherImg} alt={item?.userId?.name} width={164} height={164} />
                                         </div>
                                         {/* <div className=" md:text-center">
                                         <StarRating rating={item?.averageRating} />

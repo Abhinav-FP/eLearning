@@ -61,7 +61,7 @@ export default function Index() {
           <div className="grid grid-cols-1 sm:grid-cols-2 2xl:grid-cols-3 gap-4">
             {/* Lesson Prices */}
             <div className="relative bg-white rounded-xl dashboard-box p-3.5 lg:p-4 xl:p-5 border border-[rgba(204,40,40,0.2)] flex flex-col min-h-[120px] md:min-h-[136px]">
-              <h2 className="font-inter text-[#CC2828] font-bold text-base sm:text-lg lg:text-xl xl:text-2xl capitalize tracking-[-0.04em]">
+              <h2 className="font-inter text-[#CC2828] font-bold text-base sm:text-lg lg:text-xl xl:text-2xl capitalize tracking-[-0.04em] pr-16">
                 Lesson Price
               </h2>
               <div className="absolute right-4 lg:right-5 xl:right-6 bg-[#CC28281A] border-[0.67px] border-[#CC282880] p-3 rounded">
@@ -93,7 +93,7 @@ export default function Index() {
 
             {/* Total Reviews */}
             <div className="relative bg-white rounded-xl dashboard-box p-3.5 lg:p-4 xl:p-5 border border-[rgba(204,40,40,0.2)] flex flex-col min-h-[120px] md:min-h-[136px]">
-              <h2 className="font-inter text-[#CC2828] font-bold text-base sm:text-lg lg:text-xl xl:text-2xl capitalize tracking-[-0.04em]">
+              <h2 className="font-inter text-[#CC2828] font-bold text-base sm:text-lg lg:text-xl xl:text-2xl capitalize tracking-[-0.04em] pr-16">
                 Total Reviews
               </h2>
               <div className="absolute right-4 lg:right-5 xl:right-6 bg-[#CC28281A] border-[0.67px] border-[#CC282880] p-3 rounded">
@@ -108,7 +108,7 @@ export default function Index() {
 
 
             <div className="relative bg-white rounded-xl dashboard-box p-3.5 lg:p-4 xl:p-5 border border-[rgba(204,40,40,0.2)] flex flex-col min-h-[120px] md:min-h-[136px]">
-              <h2 className="font-inter text-[#CC2828] font-bold text-base sm:text-lg lg:text-xl xl:text-2xl capitalize tracking-[-0.04em]">
+              <h2 className="font-inter text-[#CC2828] font-bold text-base sm:text-lg lg:text-xl xl:text-2xl capitalize tracking-[-0.04em] pr-16">
                 Payment Earnings (Last 30 Days)
               </h2>
               <div className="absolute right-4 lg:right-5 xl:right-6 bg-[#CC28281A] border-[0.67px] border-[#CC282880] p-3 rounded">
@@ -121,13 +121,13 @@ export default function Index() {
                   Stripe Earnings: <span>{formatMultiPrice(Dashboard?.stripepay, "USD")}</span>
                 </p>
                 <p className="font-inter text-sm sm:text-base lg:text-lg xl:text-xl font-medium tracking-[-0.04em] text-black flex justify-between">
-                  Paypal Earnings <span>{formatMultiPrice(Dashboard?.paypalpay, "USD")}</span>
+                  Paypal Earnings: <span>{formatMultiPrice(Dashboard?.paypalpay, "USD")}</span>
                 </p>
               </div>
             </div>
             {/* Upcoming Lessons */}
             <div className="relative bg-white rounded-xl dashboard-box p-3.5 lg:p-4 xl:p-5 border border-[rgba(204,40,40,0.2)] flex flex-col min-h-[120px] md:min-h-[136px]">
-              <h2 className="font-inter text-[#CC2828] font-bold text-base sm:text-lg lg:text-xl xl:text-2xl capitalize tracking-[-0.04em]">
+              <h2 className="font-inter text-[#CC2828] font-bold text-base sm:text-lg lg:text-xl xl:text-2xl capitalize tracking-[-0.04em] pr-16">
                 Upcoming Lessons
               </h2>
               <div className="absolute right-4 lg:right-5 xl:right-6 bg-[#CC28281A] border-[0.67px] border-[#CC282880] p-3 rounded">
@@ -161,7 +161,7 @@ export default function Index() {
 
             {/* Total Lessons Completed */}
             <div className="relative bg-white rounded-xl dashboard-box p-3.5 lg:p-4 xl:p-5 border border-[rgba(204,40,40,0.2)] flex flex-col min-h-[120px] md:min-h-[136px]">
-              <h2 className="font-inter text-[#CC2828] font-bold text-base sm:text-lg lg:text-xl xl:text-2xl capitalize tracking-[-0.04em]">
+              <h2 className="font-inter text-[#CC2828] font-bold text-base sm:text-lg lg:text-xl xl:text-2xl capitalize tracking-[-0.04em] pr-16">
                 Total lessons completed
               </h2>
               <div className="absolute right-4 lg:right-5 xl:right-6 bg-[#CC28281A] border-[0.67px] border-[#CC282880] p-3 rounded">
@@ -184,7 +184,7 @@ export default function Index() {
             </div>
 
             <div className="relative bg-white rounded-xl dashboard-box p-3.5 lg:p-4 xl:p-5 border border-[rgba(204,40,40,0.2)] flex flex-col min-h-[120px] md:min-h-[136px]">
-              <h2 className="font-inter text-[#CC2828] font-bold text-base sm:text-lg lg:text-xl xl:text-2xl capitalize tracking-[-0.04em]">
+              <h2 className="font-inter text-[#CC2828] font-bold text-base sm:text-lg lg:text-xl xl:text-2xl capitalize tracking-[-0.04em] pr-16">
                 Earnings (Last 30 Days)
               </h2>
               <div className="absolute right-4 lg:right-5 xl:right-6 bg-[#CC28281A] border-[0.67px] border-[#CC282880] p-3 rounded">

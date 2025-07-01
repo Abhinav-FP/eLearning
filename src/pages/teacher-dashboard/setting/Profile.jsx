@@ -21,12 +21,7 @@ export default function Profile() {
     ais_trained: false,
     intro_video: "",
     interest: "",
-    // experience: "",
     description: "",
-    // average_price: "",
-    // average_time: "",
-    // documentlink: "",
-    // qualifications: "",
     specialities: [],
   });
   const [file, setFile] = useState(null);
@@ -178,7 +173,6 @@ export default function Profile() {
   const handlefileChange = (e) => {
     const { name, type, files, value } = e.target;
     const newValue = type === "file" ? files[0] : value;
-
     setData((prev) => ({
       ...prev,
       [name]: newValue,

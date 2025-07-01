@@ -70,7 +70,7 @@ export default function Index() {
 
               return (
                 <Link
-                  href={!isBlocked ? `/teacher/${teacher?._id}` :""}
+                  href={!isBlocked ? `/teacher/${teacher?.teacher?._id}` :""}
                   className="block group"
                   key={idx}
                 >

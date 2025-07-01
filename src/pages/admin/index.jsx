@@ -58,7 +58,6 @@ export default function Index() {
             <div className="absolute right-4 lg:right-5 xl:right-6 bg-[#CC28281A] border-[0.67px] border-[#CC282880] p-3 rounded">
               <PiStudentBold className="text-[#CC2828]" size={24} />
             </div>
-
             <div className="text-sm text-[#535353] space-y-1 mt-4">
               <p className="font-inter text-base lg:text-lg xl:text-xl font-bold tracking-[-0.04em]">
                 {listing?.countstudent} {/* Safely access ReviewesCount */}

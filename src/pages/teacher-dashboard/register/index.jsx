@@ -18,12 +18,12 @@ export default function Index() {
   const [showPassword, setShowPassword] = useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
   const [passwordCriteria, setPasswordCriteria] = useState({
-      hasUpper: false,
-      hasLower: false,
-      hasNumber: false,
-      hasSymbol: false,
-      hasMinLength: false,
-    });
+    hasUpper: false,
+    hasLower: false,
+    hasNumber: false,
+    hasSymbol: false,
+    hasMinLength: false,
+  });
 
   const [data, setData] = useState({
     name: "",
@@ -117,7 +117,8 @@ export default function Index() {
 
   return (
     <div className="min-h-screen flex items-center justify-center bg-gray-100 p-4">
-      <div className="bg-white px-6 lg:px-16 pt-5 pb-10 lg:pb-20  rounded-[20px] md:rounded-[20px] lg:rounded-[40px] shadow lg:shadow-lg w-full max-w-[976px] login_custom">
+      <div className="bg-white px-4 md:px-6 lg:px-16 pt-5 pb-10 lg:pb-20  rounded-[20px] md:rounded-[20px] 
+      lg:rounded-[40px] shadow lg:shadow-lg w-full max-w-[976px] login_custom">
         {/* Logo */}
         <div className="flex justify-center mb-6">
           <Link href="/">
@@ -126,7 +127,7 @@ export default function Index() {
         </div>
 
         {/* Heading */}
-        <h2 className="text-center text-red-600 text-2xl font-semibold mb-2 uppercase">
+        <h2 className="text-center text-red-600 text-xl lg:text-2xl font-semibold mb-2 uppercase">
           REGISTER as a Teacher
         </h2>
         <p className="text-center text-sm text-black mb-8">
@@ -144,7 +145,8 @@ export default function Index() {
           <div className="flex flex-wrap -mx-2.5 justify-center">
             <div className="w-full md:w-6/12 px-2.5 mb-5">
               <label className="block text-base font-semibold text-[#727272] tracking-[-0.06em] mb-1">
-                Name
+                Name  <span className="text-red-500">*</span>
+
               </label>
               <input
                 value={data?.name}
@@ -158,7 +160,8 @@ export default function Index() {
             </div>
             <div className="w-full md:w-6/12 px-2.5 mb-5">
               <label className="block text-base font-semibold text-[#727272] tracking-[-0.06em] mb-1">
-                Time-Zone
+                Time-Zone  <span className="text-red-500">*</span>
+
               </label>
               {/* Time-Zone */}
               <select
@@ -179,7 +182,8 @@ export default function Index() {
             </div>
             <div className="w-full md:w-6/12 px-2.5 mb-5">
               <label className="block text-base font-semibold text-[#727272] tracking-[-0.06em] mb-1">
-                Email
+                Email  <span className="text-red-500">*</span>
+
               </label>
               <input
                 value={data?.email}
@@ -193,7 +197,8 @@ export default function Index() {
             </div>
             <div className="w-full md:w-6/12 px-2.5 mb-5">
               <label className="block text-base font-semibold text-[#727272] tracking-[-0.06em] mb-1">
-                Confirm Email
+                Confirm Email  <span className="text-red-500">*</span>
+
               </label>
               <input
                 value={data?.confirm_email}
@@ -207,7 +212,8 @@ export default function Index() {
             </div>
             <div className="w-full md:w-6/12 px-2.5 mb-5 relative">
               <label className="block text-base font-semibold text-[#727272] tracking-[-0.06em] mb-1">
-                Password
+                Password  <span className="text-red-500">*</span>
+
               </label>
               <div className="relative">
                 <input
@@ -234,54 +240,55 @@ export default function Index() {
                   )}
                 </button>
               </div>
-             {passwordFocused && (
-                             <div className="text-gray-700 text-sm mt-2 space-y-1">
-                               <p className="flex items-center gap-2">
-                                 {passwordCriteria.hasLower ? (
-                                   <FaCheckCircle className="text-green-600" />
-                                 ) : (
-                                   <FaTimesCircle className="text-red-600" />
-                                 )}
-                                 Contains lowercase letter
-                               </p>
-                               <p className="flex items-center gap-2">
-                                 {passwordCriteria.hasUpper ? (
-                                   <FaCheckCircle className="text-green-600" />
-                                 ) : (
-                                   <FaTimesCircle className="text-red-600" />
-                                 )}
-                                 Contains uppercase letter
-                               </p>
-                               <p className="flex items-center gap-2">
-                                 {passwordCriteria.hasNumber ? (
-                                   <FaCheckCircle className="text-green-600" />
-                                 ) : (
-                                   <FaTimesCircle className="text-red-600" />
-                                 )}
-                                 Contains number
-                               </p>
-                               <p className="flex items-center gap-2">
-                                 {passwordCriteria.hasSymbol ? (
-                                   <FaCheckCircle className="text-green-600" />
-                                 ) : (
-                                   <FaTimesCircle className="text-red-600" />
-                                 )}
-                                 Contains special character
-                               </p>
-                               <p className="flex items-center gap-2">
-                                 {passwordCriteria.hasMinLength ? (
-                                   <FaCheckCircle className="text-green-600" />
-                                 ) : (
-                                   <FaTimesCircle className="text-red-600" />
-                                 )}
-                                 At least 8 characters long
-                               </p>
-                             </div>
-                           )}
+              {passwordFocused && (
+                <div className="text-gray-700 text-sm mt-2 space-y-1">
+                  <p className="flex items-center gap-2">
+                    {passwordCriteria.hasLower ? (
+                      <FaCheckCircle className="text-green-600" />
+                    ) : (
+                      <FaTimesCircle className="text-red-600" />
+                    )}
+                    Contains lowercase letter
+                  </p>
+                  <p className="flex items-center gap-2">
+                    {passwordCriteria.hasUpper ? (
+                      <FaCheckCircle className="text-green-600" />
+                    ) : (
+                      <FaTimesCircle className="text-red-600" />
+                    )}
+                    Contains uppercase letter
+                  </p>
+                  <p className="flex items-center gap-2">
+                    {passwordCriteria.hasNumber ? (
+                      <FaCheckCircle className="text-green-600" />
+                    ) : (
+                      <FaTimesCircle className="text-red-600" />
+                    )}
+                    Contains number
+                  </p>
+                  <p className="flex items-center gap-2">
+                    {passwordCriteria.hasSymbol ? (
+                      <FaCheckCircle className="text-green-600" />
+                    ) : (
+                      <FaTimesCircle className="text-red-600" />
+                    )}
+                    Contains special character
+                  </p>
+                  <p className="flex items-center gap-2">
+                    {passwordCriteria.hasMinLength ? (
+                      <FaCheckCircle className="text-green-600" />
+                    ) : (
+                      <FaTimesCircle className="text-red-600" />
+                    )}
+                    At least 8 characters long
+                  </p>
+                </div>
+              )}
             </div>
             <div className="w-full md:w-6/12 px-2.5 mb-5 relative">
               <label className="block text-base font-semibold text-[#727272] tracking-[-0.06em] mb-1">
-                Confirm Password
+                Confirm Password  <span className="text-red-500">*</span>
+
               </label>
               <div className="relative">
                 <input

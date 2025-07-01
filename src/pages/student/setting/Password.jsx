@@ -73,7 +73,7 @@ export default function Password() {
                                 Current Password
                             </label>
                             <p className="block text-[#535353] font-medium text-base tracking-[-0.04em] mb-0">
-                                Edit your Current Password here
+                                Enter  your Current Password here
                             </p>
                         </div>
                         <div className="w-full lg:w-6/12 xl:w-5/12 lg:pl-3 relative">
@@ -96,7 +96,7 @@ export default function Password() {
                                 New Password
                             </label>
                             <p className="block text-[#535353] font-medium text-base tracking-[-0.04em] mb-0">
-                                Edit your New Password here
+                                Enter  your New Password here
                             </p>
                         </div>
                         <div className="w-full lg:w-6/12 xl:w-5/12 lg:pl-3 relative">
@@ -120,7 +120,7 @@ export default function Password() {
                                 Confirm Password
                             </label>
                             <p className="block text-[#535353] font-medium text-base tracking-[-0.04em] mb-0">
-                                Edit your Confirm Password here
+                                Enter  your Confirm Password here
                             </p>
                         </div>
                         <div className="w-full lg:w-6/12 xl:w-5/12 lg:pl-3 relative">
@@ -137,8 +137,8 @@ export default function Password() {
                     </div>
                 </div>
                 <div className="flex w-full lg:w-12/12 xl:w-11/12 flex-wrap justify-center items-center pt-6 lg:pt-10 space-x-4 lg:space-x-6">
-                    <button 
-                    className="w-full max-w-[183px] cursor-pointer border border-[#CC2828] bg-[#CC2828] hover:bg-red-700  text-white py-2.5 lg:py-3.5 cursor-pointer rounded-[10px] font-normal text-base xl:text-xl transition  tracking-[-0.04em]"
+                    <button
+                        className="w-full max-w-[183px] cursor-pointer border border-[#CC2828] bg-[#CC2828] hover:bg-red-700  text-white py-2.5 lg:py-3.5 cursor-pointer rounded-[10px] font-normal text-base xl:text-xl transition  tracking-[-0.04em]"
                         type='submit'
                         disabled={processing}
                     >

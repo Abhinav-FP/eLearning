@@ -280,7 +280,7 @@ export default function Index() {
                 {PaymentStatus === false ? (
                   <Payment
                     PricePayment={data?.amount + commission * data?.amount}
-                    processingFee={data?.amount * selectedLesson?.price}
+                    processingFee={data?.amount * data?.amount?.price}
                     adminCommission={0.10 * data?.amount}
                     selectedLesson={data?.lesson}
                     selectedSlot={data?.startDateTime}
@@ -292,7 +292,7 @@ export default function Index() {
                 ) : (
                   <Stripe
                     PricePayment={data?.amount + commission * data?.amount}
-                    processingFee={data?.amount * selectedLesson?.price}
+                    processingFee={data?.amount * data?.amount?.price}
                     adminCommission={0.10 * data?.amount}
                     selectedLesson={data?.lesson}
                     selectedSlot={data?.startDateTime}

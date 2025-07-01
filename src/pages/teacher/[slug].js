@@ -12,7 +12,8 @@ import Listing from "../api/Listing";
 import BookingPopup from "./BookingPopup";
 import { BookLoader } from "../../components/Loader";
 import { BiSolidBadgeCheck } from "react-icons/bi";
-import TeacherImg from "../Assets/Images/teacherimg01.png";
+import TeacherImg from "../Assets/Images/Placeholder.png";
+import VideoModalDetail from "../common/VideoModalDetail";
 
 export default function Index() {
   const router = useRouter();
@@ -25,7 +26,10 @@ export default function Index() {
   const [lessons, setLessons] = useState([]);
   const [isPopupOpen, setIsPopupOpen] = useState(book ? true : false);
   const [studentTimeZone, setStudentTimeZone] = useState(null);
-  const closePopup = () => setIsPopupOpen(false);
+  const closePopup = () => {
+    setIsPopupOpen(false);
+    
+  };
   const Id = data?.userId?._id;
 
 
@@ -155,7 +159,7 @@ export default function Index() {
                   <div className="flex flex-wrap -mx-4 space-y-4">
                     {data?.intro_video &&
                       <div className="mx-auto md:mx-0 w-[280px] md:w-[280px] lg:w-[308px] px-4">
-                        <VideoModalPlayer
+                        <VideoModalDetail
                           video={data?.intro_video}
                           image={data?.userId?.profile_photo || teacherImg}
                           name={data?.userId?.name}
@@ -282,7 +286,7 @@ export default function Index() {
                   <div className="w-full md:w-4/12 px-4">
                     <div className="teacherBox rounded-[20px] p-4 lg:p-5">
                       {data?.intro_video &&
-                        <VideoModalPlayer
+                        <VideoModalDetail
                           video={data?.intro_video}
                           image={data?.userId?.profile_photo || teacherImg}
                           name={data?.userId?.name}

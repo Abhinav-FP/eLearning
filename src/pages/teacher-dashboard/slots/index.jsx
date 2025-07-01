@@ -118,7 +118,7 @@ export default function Iindex() {
                   ))
                 ) : (
                   <tr>
-                    <td colSpan={5}>
+                    <td colSpan={6}>
                       <div className="mt-2">
                         <NoData
                           Heading={"No special slots found."}

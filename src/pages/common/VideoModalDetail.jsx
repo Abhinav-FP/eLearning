@@ -22,7 +22,7 @@ function getVideoPlatform(url) {
     return 'unknown';
 }
 
-export default function VideoModalPlayer({ video, image, name, divClass, imgClass, btnClass, iconClass }) {
+export default function VideoModalDetail({ video, image, name, divClass, imgClass, btnClass, iconClass }) {
     const [isOpen, setIsOpen] = useState(false);
     const platform = getVideoPlatform(video);
     const [thumbnail, setThumbnail] = useState(EmilyCarter);
@@ -36,7 +36,7 @@ export default function VideoModalPlayer({ video, image, name, divClass, imgClas
         videoSrc = `https://player.vimeo.com/video/${vimeoId}?autoplay=1`;
     }
 
-   useEffect(() => {
+    useEffect(() => {
         if (platform === 'youtube' && youTubeId) {
             setThumbnail(`https://img.youtube.com/vi/${youTubeId}/hqdefault.jpg?cc_load_policy=0&hl=ja`);
         } else if (platform === 'vimeo' && vimeoId) {
@@ -71,14 +71,14 @@ export default function VideoModalPlayer({ video, image, name, divClass, imgClas
             </div>
 
             {/* Modal */}
-            {/* {isOpen && (
+            {isOpen && (
                 <div className="fixed inset-0  bg-opacity-70 flex items-center justify-center z-50">
                     <div className="relative w-full max-w-4xl aspect-video bg-black rounded-lg overflow-hidden">
                         <button
                             onClick={() => setIsOpen(false)}
                             className="absolute top-2 right-2 text-white text-2xl z-10 cursor-pointer "
                         >
-                            <MdClose  size={24} />
+                            <MdClose size={24} />
                         </button>
                         <iframe
                             width="100%"
@@ -92,7 +92,7 @@ export default function VideoModalPlayer({ video, image, name, divClass, imgClas
                         ></iframe>
                     </div>
                 </div>
-            )} */}
+            )}
         </>
     );
 }

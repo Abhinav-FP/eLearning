@@ -20,10 +20,11 @@ function Index({
   isSpecialSlot = false,
   specialSlotData,
   IsBonus,
+  processingFee,
 }) {
   const clientId = process.env.NEXT_PUBLIC_PAYPAL_CLIENT_ID;
 
-  console.log("IsBonus" ,IsBonus)
+  // console.log("IsBonus" ,IsBonus)
   const router = useRouter();
 
   const [isProcessing, setIsProcessing] = useState(false);
@@ -119,8 +120,8 @@ function Index({
         totalAmount: PricePayment,
         adminCommission: adminCommission,
         isSpecialSlot: isSpecialSlot,
-        IsBonus : IsBonus
-
+        IsBonus : IsBonus,
+        processingFee
       });
 
       if (response?.data?.status === "COMPLETED") {

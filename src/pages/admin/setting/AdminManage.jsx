@@ -21,7 +21,6 @@ export default function AdminManage() {
         setData((prev) => ({ ...prev, [name]: value }));
     };
 
-
     const HomeLists = async () => {
         try {
             setProcessing(true);
@@ -69,17 +68,16 @@ export default function AdminManage() {
     return (
         <div className="mx-auto py-6 bg-white">
             <form onSubmit={handleSubmit} className="space-y-6">
-                {/* Commission Rate */}
                 <div>
                     <label className="block text-[#CC2828] font-medium text-base xl:text-xl mb-1 tracking-[-0.04em]">
-                        Commission Rate (%)
+                       Processing fee (%)
                     </label>
                     <input
                         type="number"
                         name="admin_comission"
                         value={data.admin_comission}
                         onChange={handleChange}
-                        placeholder="Enter commission rate"
+                        placeholder="Enter  Processing fee"
                         className="w-full h-11 lg:h-[54px] bg-[#F4F6F8] text-[#46494D] text-base border border-[#F4F6F8] rounded-lg py-3 px-3 lg:px-6"
                     />
                 </div>

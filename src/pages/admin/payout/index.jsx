@@ -8,6 +8,7 @@ import moment from 'moment';
 import ApproveRejectPopup from './ApproveRejectPopup';
 import BankDetailPopup from './BankDetailPopup';
 import { FiSearch } from "react-icons/fi";
+import Link from 'next/link';
 
 export default function Index() {
   const [payout, setPayout] = useState([]);
@@ -123,9 +124,6 @@ export default function Index() {
                 <th className="font-normal text-sm lg:text-base px-3 lg:px-4 py-2 lg:py-3 border-t border-[rgba(204,40,40,0.2)] capitalize">
                   Request Time
                 </th>
-                {/* <th className="font-normal text-sm lg:text-base px-3 lg:px-4 py-2 lg:py-3 border-t border-[rgba(204,40,40,0.2)] capitalize">
-                    transaction ID / payment Reasons
-                  </th> */}
                 <th className="font-normal text-sm lg:text-base px-3 lg:px-4 py-2 lg:py-3 border-t border-[rgba(204,40,40,0.2)] capitalize">
                   Action
                 </th>
@@ -137,15 +135,12 @@ export default function Index() {
               <tbody>
                 {payout && payout?.length > 0 ? (
                   payout?.map((item, index) => (
-                    <tr
-                      key={index}
-                      className="hover:bg-[rgba(204,40,40,0.1)] border-t border-[rgba(204,40,40,0.2)]"
-                    >
+                    <tr key={index} className="hover:bg-[rgba(204,40,40,0.1)] border-t border-[rgba(204,40,40,0.2)]" >
                       <td className="px-3 lg:px-4 py-2 lg:py-3 text-black text-sm lg:text-base font-medium font-inter ">
                         {index + 1}
                       </td>
                       <td className="px-3 lg:px-4 py-2 lg:py-3 text-black text-sm lg:text-base font-medium font-inter whitespace-nowrap ">
-                        {item?.userId?.name}
+                        <Link href={`/admin/teacher/${item?.userId?._id}`}>{item?.userId?.name}</Link>
                       </td>
                       <td className="capitalize px-3 lg:px-4 py-2 lg:py-3 text-black text-sm lg:text-base font-medium font-inter ">
                         ${item?.amount}

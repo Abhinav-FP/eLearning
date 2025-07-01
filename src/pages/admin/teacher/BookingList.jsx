@@ -14,7 +14,7 @@ export default function BookingList({ book }) {
       {book.map((book, index) => (
         <div
           key={index}
-          className="bg-white rounded-2xl  p-6  border-1"
+          className="bg-white   rounded-xl lg:rounded-2xl p-4 md:p-6 lg:p-8 shadow-sm transition-shadow duration-200 "
         >
           {/* Header */}
           <div className="flex flex-col md:flex-row md:items-center md:justify-between mb-4 gap-2">
@@ -65,8 +65,8 @@ export default function BookingList({ book }) {
           <div className="flex flex-wrap gap-2 mt-2 text-sm font-medium">
             <span
               className={`px-3 py-1 rounded-full ${book?.lessonCompletedStudent && book?.lessonCompletedTeacher
-                  ? "bg-green-100 text-green-700"
-                  : "bg-yellow-100 text-yellow-700"
+                ? "bg-green-100 text-green-700"
+                : "bg-yellow-100 text-yellow-700"
                 }`}
             >
               {book?.lessonCompletedStudent && book?.lessonCompletedTeacher

@@ -30,7 +30,6 @@ export default function BookingPopup({
   function getFormattedEndTime(time, durationInMinutes) {
     const start = new Date(time);
     const end = new Date(start.getTime() + durationInMinutes * 60000);
-
     const options = {
       month: "short", // e.g. "May"
       day: "numeric", // e.g. "2"
@@ -61,7 +60,7 @@ export default function BookingPopup({
       const response = await main.AdminCommission();
       if (response?.data?.status) {
         const value = response?.data?.data || 0;
-        setCommission(value*0.01);
+        setCommission(value * 0.01);
       }
     } catch (error) {
       console.log("error", error);
@@ -69,11 +68,11 @@ export default function BookingPopup({
   };
 
   useEffect(() => {
-   fetchCommission();    
+    fetchCommission();
   }, []);
 
   if (!isOpen) return null;
-  
+
   return (
 
     <div className="fixed inset-0 top-0 bottom-0 flex  justify-center bg-[rgba(0,0,0,.3)] z-50">
@@ -125,45 +124,6 @@ export default function BookingPopup({
                     selectedLesson={selectedLesson}
                     mergedAvailability={mergedAvailability}
                   />
-                  {/* <div className="flex justify-between items-center mt-5">
-                  <button
-                    onClick={() => {
-                      setStep(step - 1);
-                    }}
-                    className="font-medium cursor-pointer rounded-full py-2 px-5 text-[#ffffff] bg-[#CC2828] hover:bg-[#ad0e0e] text-base w-fit"
-                  >
-                    Previous
-                  </button>
-                  <div>
-                    {selectedSlot && (
-                      <p className="text-[#CC2828] capitalize text-base xl:text-lg font-semibold font-inter inline-block tracking-[-0.04em]">
-                        Selected Time Slot -{" "}
-                        {new Date(selectedSlot.start).toLocaleString("en-US", {
-                          month: "short",
-                          day: "numeric",
-                          hour: "numeric",
-                          minute: "2-digit",
-                          hour12: true,
-                        })}{" "}
-                        -
-                        {getFormattedEndTime(
-                          selectedSlot?.start,
-                          selectedLesson?.duration
-                        )}{" "}
-                      </p>
-                    )}
-                  </div>
-                  <button
-                    onClick={() => {
-                      setStep(step + 1);
-                    }}
-                    disabled={!selectedSlot}
-                    className={`font-medium rounded-full py-2 px-5 text-white text-base w-fit bg-[#CC2828] hover:bg-[#ad0e0e] 
-                  ${!selectedSlot ? "cursor-not-allowed" : "cursor-pointer"}`}
-                  >
-                    Next
-                  </button>
-                </div> */}
                 </div>
               </div>
             )}
@@ -189,7 +149,6 @@ export default function BookingPopup({
           <div className="flex fixed px-4 bg-white py-4 bottom-0 w-full left-0 justify-between items-center mt-5 border-t border-gray-300 flex-col lg:flex-row space-y-3 lg:space-y-0 z-10">
             <div className=" justify-between items-center hidden lg:flex">
               <div className="w-11 h-11 rounded-full bg-green-400 flex items-center justify-center text-white text-xl font-bold">
-                {/* Replace with an actual image if needed */}
                 <img
                   src={user?.profile_photo || "https://www.svgrepo.com/show/384674/account-avatar-profile-user-11.svg"}
                   alt="User Avatar"
@@ -235,15 +194,18 @@ export default function BookingPopup({
               {step !== 1 && (
                 <button
                   onClick={() => {
+                    if (step === 2) {
+                      setSelectedSlot("");
+                    }
                     setStep(step - 1);
                   }}
+
                   className="font-medium cursor-pointer rounded-full py-2 px-5 text-[#ffffff] bg-[#CC2828] hover:bg-[#ad0e0e] text-base  "
                 >
                   Previous
                 </button>
               )
               }
-
               {
                 step !== 3 && (
                   <button

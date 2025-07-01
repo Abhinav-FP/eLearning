@@ -14,6 +14,7 @@ import LessonList from "./LessonList";
 import BookingList from "./BookingList";
 import ReviewList from "./ReviewList";
 import { TeacherProfileHeaderShimmer } from "@/components/Loader";
+import VideoModalDetail from "@/pages/common/VideoModalDetail";
 
 const Index = ({ }) => {
     const router = useRouter();
@@ -85,7 +86,7 @@ const Index = ({ }) => {
                                         </div>
                                     </div>
                                     <div className="flex flex-col gap-3">
-                                        <VideoModalPlayer video={record?.record?.intro_video}
+                                        <VideoModalDetail video={record?.record?.intro_video}
                                             image={record?.record?.userId?.profile_photo}
                                             name={record?.record?.userId?.name}
                                             divClass="relative lg:h-[200px]"

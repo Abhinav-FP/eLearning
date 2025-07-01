@@ -36,6 +36,24 @@ function TeacherListing() {
     }
   };
 
+  const [processing, setprocessing] = useState(false);
+
+  const handleaistrained = async (id) => {
+    try {
+      setprocessing(true);
+      const main = new Listing();
+      const response = await main.AisTrained({ id: id });
+      if (response?.data) {
+        toast.success(response?.data?.message);
+        fetchData("");
+      }
+      setprocessing(false);
+    } catch (error) {
+      console.log("error", error);
+      setprocessing(false);
+    }
+  };
+
   const handleApproveReject = async (id, approve) => {
     try {
       setBlockloading(true);
@@ -62,16 +80,15 @@ function TeacherListing() {
 
   const TeacherRow = ({ item, category }) => (
     <tr
-      className={`border-t hover:bg-[rgba(204,40,40,0.1)] border-[rgba(204,40,40,0.2)] ${
-        item?.userId?.block ? "opacity-50" : ""
-      }`}
+      className={`border-t hover:bg-[rgba(204,40,40,0.1)] border-[rgba(204,40,40,0.2)] ${item?.userId?.block ? "opacity-50" : ""
+        }`}
     >
-      <td className="capitalize px-3 lg:px-4 py-2 lg:py-3 text-black text-sm lg:text-base font-medium font-inter text-left">
+      <td className="capitalize px-3 lg:px-4 py-2 lg:py-3 text-black text-sm lg:text-base font-medium font-inter ">
         <Link href={`/admin/teacher/${item?.userId?._id}`}>
           {item?.userId?.name || ""}
         </Link>
       </td>
-      <td className="px-3 lg:px-4 py-2 lg:py-3 text-black text-sm lg:text-base font-medium font-inter text-left">
+      <td className="capitalize px-3 lg:px-4 py-2 lg:py-3 text-black text-sm lg:text-base font-medium font-inter">
         {item?.userId?.email || ""}
       </td>
       <td className="capitalize px-3 lg:px-4 py-2 lg:py-3 text-black text-sm lg:text-base font-medium font-inter">
@@ -80,6 +97,29 @@ function TeacherListing() {
       <td className="capitalize px-3 lg:px-4 py-2 lg:py-3 text-black text-sm lg:text-base font-medium font-inter">
         {item?.experience ? `${item?.experience} years` : "N/A"}
       </td>
+
+      <td className="capitalize px-3 lg:px-4 py-2 lg:py-3 text-black text-sm lg:text-base font-medium font-inter">
+        {category === "existing" ? (
+          <button
+            onClick={() => handleaistrained(item?._id)}
+            className="cursor-pointer border border-[#CC2828] text-[#CC2828] hover:bg-[#CC2828] hover:text-white px-3 py-1 text-xs rounded cursor-pointer"
+          >
+            {processing
+              ? item?.ais_trained
+                ? "Processing..."
+                : "Processing..."
+              : item?.ais_trained
+                ? "Yes"
+                : "No"}
+          </button>
+        ) : (
+          <span>
+
+          </span>
+        )}
+      </td>
+
+
       <td className="capitalize px-3 lg:px-4 py-2 lg:py-3 text-black text-sm lg:text-base font-medium font-inter">
         <div className="flex gap-2 justify-center items-center">
           {category === "existing" ? (
@@ -92,8 +132,8 @@ function TeacherListing() {
                   ? "Unblocking"
                   : "Blocking"
                 : item?.userId?.block
-                ? "Unblock"
-                : "Block"}
+                  ? "Unblock"
+                  : "Block"}
             </button>
           ) : category === "reject" ? (
             <button
@@ -190,11 +230,10 @@ function TeacherListing() {
               <button
                 key={index}
                 onClick={() => setTabActive(item?.value)}
-                className={`text-sm lg:text-lg capitalize font-medium tracking-[-0.04em] md:px-2 py-3 lg:py-2  cursor-pointer border-b-2 ${
-                  tabActive === item?.value
-                    ? "text-[#CC2828] border-[#CC2828]"
-                    : "text-[#727272] border-transparent"
-                }`}
+                className={`text-sm lg:text-lg capitalize font-medium tracking-[-0.04em] md:px-2 py-3 lg:py-2  cursor-pointer border-b-2 ${tabActive === item?.value
+                  ? "text-[#CC2828] border-[#CC2828]"
+                  : "text-[#727272] border-transparent"
+                  }`}
               >
                 {item?.name}
               </button>
@@ -233,10 +272,10 @@ function TeacherListing() {
             <table className="min-w-full text-sm text-center rounded-[20px]">
               <thead className="bg-[rgba(204,40,40,0.1)] text-[#535353] tracking-[-0.04em] font-inter rounded-[20px] whitespace-nowrap">
                 <tr>
-                  <th className="font-normal text-sm lg:text-base px-3 lg:px-4 py-2 lg:py-3 border-t border-[rgba(204,40,40,0.2)] capitalize text-left">
+                  <th className="font-normal text-sm lg:text-base px-3 lg:px-4 py-2 lg:py-3 border-t border-[rgba(204,40,40,0.2)] capitalize ">
                     Teacher name
                   </th>
-                  <th className="font-normal text-sm lg:text-base px-3 lg:px-4 py-2 lg:py-3 border-t border-[rgba(204,40,40,0.2)] capitalize text-left">
+                  <th className="font-normal text-sm lg:text-base px-3 lg:px-4 py-2 lg:py-3 border-t border-[rgba(204,40,40,0.2)] capitalize">
                     Email
                   </th>
                   <th className="font-normal text-sm lg:text-base px-3 lg:px-4 py-2 lg:py-3 border-t border-[rgba(204,40,40,0.2)] capitalize">
@@ -244,6 +283,9 @@ function TeacherListing() {
                   </th>
                   <th className="font-normal text-sm lg:text-base px-3 lg:px-4 py-2 lg:py-3 border-t border-[rgba(204,40,40,0.2)] capitalize">
                     Experience
+                  </th>
+                  <th className="font-normal text-sm lg:text-base px-3 lg:px-4 py-2 lg:py-3 border-t border-[rgba(204,40,40,0.2)] capitalize">
+                    Ais Trained
                   </th>
                   <th className="font-normal text-sm lg:text-base px-3 lg:px-4 py-2 lg:py-3 border-t border-[rgba(204,40,40,0.2)] capitalize">
                     Action

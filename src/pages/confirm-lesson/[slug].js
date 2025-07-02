@@ -31,7 +31,11 @@ export default function Index() {
       const main = new Listing();
       const response = await main.LessonDone({token : slug});
       if(response?.data?.status){
-        toast.success("Lesson marked as done successfully");
+        toast.success(response?.data?.msg);
+        router.push("/");
+      }
+      else{
+        toast.success(response?.data?.msg);
         router.push("/");
       }
     } catch (err) {

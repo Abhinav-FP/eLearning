@@ -8,9 +8,11 @@ import langauage from "../../../Json/langauage.json";
 import Listing from "@/pages/api/Listing";
 import toast from "react-hot-toast";
 import { TeacherProfileFormLoader } from "@/components/Loader";
+import { useRole } from "@/context/RoleContext";
 
 export default function Profile() {
   const [processing, setProcessing] = useState(false);
+  const { setUser } = useRole();
   const [data, setData] = useState({
     name: "",
     email: "",
@@ -134,6 +136,8 @@ export default function Profile() {
       const response = await main.TeacherprofileUpdate(formData);
       if (response?.data) {
         toast.success(response.data.message);
+        // console.log("response?.data?.user",response?.data);
+        setUser(response?.data?.data?.user);
       } else {
         toast.error(response.data.message);
       }
@@ -204,7 +208,7 @@ export default function Profile() {
       {loading ?
         <TeacherProfileFormLoader />
         :
-        <>
+        <form onSubmit={handleSubmit}>
           <div className="border-b  border-[rgba(0,0,0,.1)] flex flex-wrap py-6 lg:py-8">
             <div className="w-full lg:w-5/12  lg:pr-3 mb-2 sm:mb-0">
               <label className="block text-[#CC2828] tracking-[-0.04em] font-medium text-base xl:text-xl mb-1">
@@ -278,7 +282,7 @@ export default function Profile() {
               </div>
               <div className="w-full lg:w-6/12  px-2">
                 <label className="block text-[#CC2828] font-medium text-base xl:text-xl mb-1 tracking-[-0.04em]">
-                  Time Zone
+                  Time Zone<span className="text-red-500">*</span>
                 </label>
                 <select
                   className="w-full h-11 lg:h-[54px] font-medium appearance-none block bg-[#F4F6F8] text-[#46494D] text-base border border-[#F4F6F8] rounded-lg py-3 px-3 lg:px-6 leading-tight focus:outline-none tracking-[-0.04em]"
@@ -287,7 +291,7 @@ export default function Profile() {
                   name="timezone"
                   required
                 >
-                  <option value="">Please select Time-Zone</option>
+                  <option value="" disabled>Please select Time-Zone</option>
                   {timeZones &&
                     timeZones.map((zone, index) => (
                       <option key={index} value={zone.value}>
@@ -310,9 +314,8 @@ export default function Profile() {
                   onChange={handleChange}
                   value={data?.nationality}
                   name="nationality"
-                  required
                 >
-                  <option value="">Please select Nationality</option>
+                  <option value="" disabled>Please select Nationality</option>
                   {Nationality &&
                     Nationality.map((zone, index) => (
                       <option key={index} value={zone.value}>
@@ -369,7 +372,6 @@ export default function Profile() {
                 <input
                   type="text"
                   value={data?.intro_video}
-                  required
                   name="intro_video"
                   onChange={handleChange}
                   className="w-full h-11 lg:h-[54px] font-medium appearance-none block bg-[#F4F6F8] text-[#46494D] text-base border border-[#F4F6F8] rounded-lg py-3 px-3 lg:px-6 leading-tight focus:outline-none"
@@ -517,13 +519,20 @@ export default function Profile() {
 
               {/* Speciality Tags */}
               <div className="w-full px-2 mb-4">
-                <label className="text-[#CC2828] font-medium text-base xl:text-xl mb-2 block">
-                  Specialities (Upto 5 allowed)
-                </label>
+                <div className="flex justify-between items-center mb-2 ">
+                  <label className="text-[#CC2828] font-medium text-base xl:text-xl block">
+                    Specialities (Upto 5 allowed)
+                  </label>
+                  {/* Character Counter */}
+                  <p className="text-[#CC2828] text-sm">
+                    {newSpeciality.length}/20 characters
+                  </p>
+                </div>
                 <div className="flex items-center space-x-2">
                   <input
                     type="text"
                     className="w-full h-11 lg:h-[54px] font-medium appearance-none block bg-[#F4F6F8] text-[#46494D] text-base border border-[#F4F6F8] rounded-lg py-3 px-3 lg:px-6 leading-tight focus:outline-none"
+                    maxLength={20} // prevent input over 30 characters
                     value={newSpeciality}
                     placeholder="Enter a speciality"
                     onChange={(e) => setNewSpeciality(e.target.value)}
@@ -574,7 +583,6 @@ export default function Profile() {
                 <textarea
                   rows={5}
                   value={data?.description}
-                  required
                   name="description"
                   onChange={handleChange}
                   className="w-full font-medium text-base appearance-none block bg-[#F4F6F8] text-[#46494D] text-base border border-[#F4F6F8] rounded-lg py-3 px-3 lg:px-6 leading-tight focus:outline-none"
@@ -586,13 +594,13 @@ export default function Profile() {
             <button
               className="w-full max-w-[143px] md:max-w-[183px] cursor-pointer border border-[#CC2828] bg-[#CC2828] hover:bg-red-700  text-white py-2.5 lg:py-3.5 cursor-pointer rounded-[10px] font-normal text-base xl:text-xl transition  tracking-[-0.04em]"
               type="submit"
-              onClick={handleSubmit}
+              // onClick={handleSubmit}
               disabled={processing}
             >
               {processing ? "Submitting..." : "Submit"}
             </button>
           </div>
-        </>}
+        </form>}
     </>
   );
 }

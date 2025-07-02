@@ -6,6 +6,7 @@ import toast from "react-hot-toast";
 import { FiSearch } from "react-icons/fi";
 import { TableLoader } from "@/components/Loader";
 import NoData from "@/pages/common/NoData";
+import Switch from "@/components/Switch";
 
 function TeacherListing() {
   const [tabActive, setTabActive] = useState("existing");
@@ -92,33 +93,32 @@ function TeacherListing() {
         {item?.userId?.email || ""}
       </td>
       <td className="capitalize px-3 lg:px-4 py-2 lg:py-3 text-black text-sm lg:text-base font-medium font-inter">
-        {item?.qualifications?.replaceAll("_", " ") || "N/A"}
+        {item?.userId?.nationality || "N/A"}
       </td>
-      <td className="capitalize px-3 lg:px-4 py-2 lg:py-3 text-black text-sm lg:text-base font-medium font-inter">
+      {/* <td className="capitalize px-3 lg:px-4 py-2 lg:py-3 text-black text-sm lg:text-base font-medium font-inter">
         {item?.experience ? `${item?.experience} years` : "N/A"}
-      </td>
+      </td> */}
 
-      <td className="capitalize px-3 lg:px-4 py-2 lg:py-3 text-black text-sm lg:text-base font-medium font-inter">
-        {category === "existing" ? (
-          <button
-            onClick={() => handleaistrained(item?._id)}
-            className="cursor-pointer border border-[#CC2828] text-[#CC2828] hover:bg-[#CC2828] hover:text-white px-3 py-1 text-xs rounded cursor-pointer"
-          >
-            {processing
-              ? item?.ais_trained
-                ? "Processing..."
-                : "Processing..."
-              : item?.ais_trained
-                ? "Yes"
-                : "No"}
-          </button>
-        ) : (
-          <span>
-
-          </span>
-        )}
-      </td>
-
+        {category === "existing" &&
+          <td className="capitalize px-3 lg:px-4 py-2 lg:py-3 text-black text-sm lg:text-base font-medium font-inter">
+              {/* <button
+                onClick={() => handleaistrained(item?._id)}
+                className="cursor-pointer border border-[#CC2828] text-[#CC2828] hover:bg-[#CC2828] hover:text-white px-3 py-1 text-xs rounded cursor-pointer"
+              >
+                {processing
+                  ? item?.ais_trained
+                    ? "Processing..."
+                    : "Processing..."
+                  : item?.ais_trained
+                    ? "Yes"
+                    : "No"}
+              </button> */}
+              <Switch 
+              checkedValue={item?.ais_trained}
+              handleChange={() => handleaistrained(item?._id)}
+              />
+          </td>
+        }
 
       <td className="capitalize px-3 lg:px-4 py-2 lg:py-3 text-black text-sm lg:text-base font-medium font-inter">
         <div className="flex gap-2 justify-center items-center">
@@ -229,7 +229,11 @@ function TeacherListing() {
             tabs?.map((item, index) => (
               <button
                 key={index}
-                onClick={() => setTabActive(item?.value)}
+                onClick={() => {
+                  setSelectedOption("");
+                  setTabActive(item?.value);
+                  fetchData(searchQuery, "");
+                }}
                 className={`text-sm lg:text-lg capitalize font-medium tracking-[-0.04em] md:px-2 py-3 lg:py-2  cursor-pointer border-b-2 ${tabActive === item?.value
                   ? "text-[#CC2828] border-[#CC2828]"
                   : "text-[#727272] border-transparent"
@@ -254,6 +258,7 @@ function TeacherListing() {
           </div>
 
           {/* Select Dropdown */}
+          {tabActive === "existing" &&
           <div className="w-full md:w-fit md:ml-auto ">
             <select
               name="filter"
@@ -265,7 +270,7 @@ function TeacherListing() {
               <option value="true">Blocked</option>
               <option value="false">Unblocked</option>
             </select>
-          </div>
+          </div>}
         </div>
         <div>
           <div className="rounded-[5px] border border-[rgba(204,40,40,0.3)] overflow-x-auto">
@@ -273,20 +278,21 @@ function TeacherListing() {
               <thead className="bg-[rgba(204,40,40,0.1)] text-[#535353] tracking-[-0.04em] font-inter rounded-[20px] whitespace-nowrap">
                 <tr>
                   <th className="font-normal text-sm lg:text-base px-3 lg:px-4 py-2 lg:py-3 border-t border-[rgba(204,40,40,0.2)] capitalize ">
-                    Teacher name
+                    name
                   </th>
                   <th className="font-normal text-sm lg:text-base px-3 lg:px-4 py-2 lg:py-3 border-t border-[rgba(204,40,40,0.2)] capitalize">
                     Email
                   </th>
                   <th className="font-normal text-sm lg:text-base px-3 lg:px-4 py-2 lg:py-3 border-t border-[rgba(204,40,40,0.2)] capitalize">
-                    Qualification
+                    Nationality
                   </th>
-                  <th className="font-normal text-sm lg:text-base px-3 lg:px-4 py-2 lg:py-3 border-t border-[rgba(204,40,40,0.2)] capitalize">
+                  {/* <th className="font-normal text-sm lg:text-base px-3 lg:px-4 py-2 lg:py-3 border-t border-[rgba(204,40,40,0.2)] capitalize">
                     Experience
-                  </th>
+                  </th> */}
+                  {tabActive === "existing" &&
                   <th className="font-normal text-sm lg:text-base px-3 lg:px-4 py-2 lg:py-3 border-t border-[rgba(204,40,40,0.2)] capitalize">
-                    Ais Trained
-                  </th>
+                    AIS Trained
+                  </th>}
                   <th className="font-normal text-sm lg:text-base px-3 lg:px-4 py-2 lg:py-3 border-t border-[rgba(204,40,40,0.2)] capitalize">
                     Action
                   </th>

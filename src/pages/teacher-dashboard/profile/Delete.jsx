@@ -29,10 +29,10 @@ export default function Delete({ isOpen, onClose, Id, getLessons }) {
     <Popup isOpen={isOpen} onClose={onClose} size={"max-w-[510px]"}>
         <div className="relative bg-[#FFFFFF] rounded-lg p-[15px] lg:p-[20px] w-[96%] max-w-[500px]">
           <p className="text-black mb-[6px] text-[12px] sm:text-[14px] md:text-[17px] font-[400] text-left">
-            Are you sure you want to delete this lesson ?
+           Are you sure you want to disable this lesson?
           </p>
-          <p className="mb-[40px] text-[12px] sm:text-[12px] md:text-[15px] font-[400] text-left text-[#f00000]">
-            (This action cannot be undone.)
+          <p className="mb-[20px] text-[12px] sm:text-[12px] md:text-[15px] font-[400] text-left text-[#f00000]">
+            (Don’t worry, you can enable it back on anytime)
           </p>
           <div className="flex justify-end gap-[8px]">
             <button

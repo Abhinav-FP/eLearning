@@ -77,7 +77,7 @@ export default function Index() {
             <h3 className="text-base font-semibold text-[#CC2828] tracking-[-0.04em] capitalize">{item?.title || ""}</h3>
             {item?.
               is_deleted === true ? (
-              <FaUndo size={18} className="text-[#CC2828] cursor-pointer" onClick={() => { handleIsDelete(item) }} />
+              <FaUndo size={18} title="Enable" className="text-[#CC2828] cursor-pointer" onClick={() => { handleIsDelete(item) }} />
             ) : (
               <>
                 <MdEditSquare size={18} className="text-[#CC2828] cursor-pointer" onClick={() => { handleEdit(item) }} />

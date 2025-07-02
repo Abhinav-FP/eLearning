@@ -25,8 +25,11 @@ function Index({
     const [OrderId, setOrderId] = useState("");
 
     const handleCreateOrder = async () => {
+        if(PricePayment == 0){
+            toast.error("Amount caan't be 0");
+            return;
+        }
         if (isProcessing) return;
-
         setIsProcessing(true);
         try {
             const main = new Listing();
@@ -51,6 +54,10 @@ function Index({
     };
 
     const handleApprove = async (data, actions) => {
+        if(PricePayment == 0){
+            toast.error("Amount caan't be 0");
+            return;
+        }
         if (isProcessing) return;
         setIsProcessing(true);
         try {
@@ -76,6 +83,10 @@ function Index({
     };
 
     const handleCancel = async (data, actions) => {
+        if(PricePayment == 0){
+            toast.error("Amount caan't be 0");
+            return;
+        }
         if (isProcessing) return;
         setIsProcessing(true);
         try {

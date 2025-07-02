@@ -75,7 +75,7 @@ export default function Login() {
 
   return (
     <div className="min-h-screen flex items-center justify-center bg-gray-100 p-4">
-      <div className="bg-white px-4 lg:px-10 pt-5 pb-10 lg:pb-20 rounded-[20px] md:rounded-[20px] lg:rounded-[40px] shadow lg:shadow-lg w-full max-w-[653px] login_custom">
+      <div className="sm:bg-white px-4 lg:px-10 pt-5 pb-10 lg:pb-20 sm:rounded-[20px] md:rounded-[20px] lg:rounded-[40px] sm:shadow lg:shadow-lg w-full max-w-[653px] sm:login_custom">
         {/* Logo */}
         <div className="flex justify-center mb-6 lg:mb-10">
           <Link href="/">

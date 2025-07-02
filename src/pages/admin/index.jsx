@@ -115,14 +115,14 @@ export default function Index() {
                   Email
                 </th>
                 <th className="font-normal text-sm lg:text-base px-3 lg:px-4 py-2 lg:py-3 border-t border-[rgba(204,40,40,0.2)] capitalize">
-                  Qualification
+                  Nationality
                 </th>
                 <th className="font-normal text-sm lg:text-base px-3 lg:px-4 py-2 lg:py-3 border-t border-[rgba(204,40,40,0.2)] capitalize">
-                  Experience
+                  Gender
                 </th>
-                <th className="font-normal text-sm lg:text-base px-3 lg:px-4 py-2 lg:py-3 border-t border-[rgba(204,40,40,0.2)] capitalize">
+                {/* <th className="font-normal text-sm lg:text-base px-3 lg:px-4 py-2 lg:py-3 border-t border-[rgba(204,40,40,0.2)] capitalize">
                   View
-                </th>
+                </th> */}
               </tr>
             </thead>
             {loading ? (
@@ -145,16 +145,17 @@ export default function Index() {
                         {user?.email || "—"}
                       </td>
                       <td className="whitespace-nowrap capitalize px-3 lg:px-4 py-2 lg:py-3 text-black text-sm lg:text-base font-medium font-inter">
-                        {item?.qualifications?.replaceAll("_", " ") || "N/A"}
+                        {/* {item?.qualifications?.replaceAll("_", " ") || "N/A"} */}
+                        {user?.nationality || "N/A"}
                       </td>
                       <td className="capitalize whitespace-nowrap px-3 lg:px-4 py-2 lg:py-3 text-black text-sm lg:text-base font-medium font-inter">
-                        {item?.experience ? `${item.experience} years` : "N/A"}
+                        {item?.gender || "N/A"}
                       </td>
-                      <td className="capitalize whitespace-nowrap px-3 lg:px-4 py-2 lg:py-3 text-black text-sm lg:text-base font-medium font-inter">
+                      {/* <td className="capitalize whitespace-nowrap px-3 lg:px-4 py-2 lg:py-3 text-black text-sm lg:text-base font-medium font-inter">
                         <Link href={`/admin/teacher/${user?._id}`} className='text-center'>
                           <IoMdEye size={22} />
                         </Link>
-                      </td>
+                      </td> */}
                     </tr>
                   );
                 })}

@@ -24,8 +24,11 @@ function StripeForm({
 
 
     const handlePayment = async () => {
+        if(PricePayment == 0){
+            toast.error("Amount caan't be 0");
+            return;
+        }
         if (processing || !stripe || !elements) return;
-
         try {
             setProcessing(true);
             const payment = new Listing();
@@ -67,11 +70,11 @@ function StripeForm({
         <div className="p-4 space-y-4 border rounded-lg">
             <CardElement className="p-2 border rounded-md" />
             <button
-                className="w-full bg-red-600 hover:bg-red-700 text-white font-medium py-2 rounded-full"
+                className="w-full bg-red-600 hover:bg-red-700 text-white font-medium py-2 rounded-full cursor-pointer"
                 onClick={handlePayment}
                 disabled={processing || !stripe || !elements}
             >
-                {processing ? "Processing..." : `Pay $${PricePayment} USD`}
+                {processing ? "Processing..." : `Pay ${PricePayment ? `$${PricePayment}` : ""} USD`}
             </button>
             {message && <p className="text-sm text-gray-700">{message}</p>}
         </div>

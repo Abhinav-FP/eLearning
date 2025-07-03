@@ -125,11 +125,11 @@ export default function Message() {
       <>
         <div className="flex flex-wrap w-full">
           {/* Sidebar */}
-          <div className={`w-full  mb-3 lg:mb-0  lg:w-4/12 xl:w-3/12  rounded-lg ${mobileOpen ? 'hidden lg:block'  : 'block lg:block'}`}>
+          <div className={`w-full lg:w-4/12 xl:w-3/12 rounded-lg pt-2 ${mobileOpen ? 'hidden lg:block'  : 'block lg:block'}`}>
             {chatListLoading ?
               <ChatListShimmer />
               :
-              <div className="mt-0 space-y-1 max-h-[calc(100vh-128px)] md:h-[calc(100vh-128px)] min-h-[300px] overflow-y-auto customscroll pb-5 pt-2">
+              <div className="mt-0 space-y-1 lg:h-[calc(100vh-136px)] overflow-y-auto customscroll min-h-[300px] ">
                 {messageCount && messageCount?.map((chat, index) => (
                   <div
                     key={index}
@@ -188,7 +188,7 @@ export default function Message() {
               {/* Chat Body */}
               <div
                 ref={chatContainerRef}
-                className="px-4 lg:px-5 pt-5 lg:pt-[30px] pb-[10px] min-h-[300px] h-[calc(100%-159px)] overflow-y-auto"
+                className="px-4 lg:px-5 pt-5 lg:pt-[30px] pb-[10px] min-h-[300px] lg:h-[calc(100vh-311px)] overflow-y-auto"
               >
                 <div className="bg-[#FEECDC] rounded-[14px] relative pl-[50px] lg:pl-[60px] pr-[20px] lg:pr-[30px] py-[12px] mb-[30px] text-sm text-[#1E1E1E] max-w-[570px] mx-auto">
                   <div className="absolute top-1/2 left-[20px] lg:left-[20px] -translate-y-1/2">
@@ -248,7 +248,7 @@ export default function Message() {
               {/* Chat Input */}
               <form onSubmit={handleSendMessage}>
                 <div className="px-4 lg:px-5 py-3.5 lg:py-4 flex items-center gap-2 bg-[#e5e5e5]">
-                  <input
+                  <textarea
                     type="text"
                     value={message}
                     onChange={(e) => setMessage(e.target.value)}
@@ -259,7 +259,7 @@ export default function Message() {
                       }
                     }}
                     placeholder="Type a message..."
-                    className="w-full px-5 py-3 h-[50px] rounded-full border border-gray-200 focus:outline-none focus:ring-1 focus:ring-gray-400 bg-white"
+                    className="w-full px-5 py-3 resize-none overflow-hidden min-h-[50px] max-h-[200px] rounded-lg border border-gray-200 focus:outline-none focus:ring-1 focus:ring-gray-400 bg-white"
                   />
                   <button
                     type="submit"

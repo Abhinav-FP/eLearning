@@ -21,6 +21,30 @@ const Index = ({ }) => {
     const Id = router?.query?.slug
     const [record, setRecord] = useState("")
     const [Loading, setLoading] = useState(false);
+
+    const timezoneMappings = {
+        "Asia/Tokyo": "Japan (JST) (GMT+9)",
+        "America/New_York": "New York (Eastern Time) (GMT-4)",
+        "America/Denver": "Denver (Mountain Time) (GMT-6)",
+        "America/Chicago": "Chicago (Central Time) (GMT-5)",
+        "America/Los_Angeles": "Los Angeles (Pacific Time) (GMT-7)",
+        "Europe/London": "London (GMT) (GMT+1)",
+        "Europe/Berlin": "Berlin (CET) (GMT+2)",
+        "Europe/Kyiv": "Kyiv (EET) (GMT+3)",
+        "Asia/Kolkata": "India (IST) (GMT+5.5)",
+        "Asia/Shanghai": "China (CST) (GMT+8)",
+        "Asia/Seoul": "Korea (KST) (GMT+9)",
+        "Australia/Sydney": "Sydney (AEST) (GMT+10)",
+        "Pacific/Auckland": "New Zealand (NZST) (GMT+12)",
+        "Asia/Singapore": "Singapore (SGT) (GMT+8)",
+        "America/Sao_Paulo": "Brazil (BRT) (GMT-3)",
+        "America/Argentina/Buenos_Aires": "Argentina (ART) (GMT-3)",
+        "America/Anchorage": "Alaska (AKST) (GMT-8)",
+        "Pacific/Honolulu": "Hawaii (HAST) (GMT-10)",
+        "Europe/Moscow": "Moscow (MSK) (GMT+3)",
+        "America/Halifax": "Atlantic (AST) (GMT-3)"
+    };
+
     const AdminTteacher = async () => {
         try {
             setLoading(true);
@@ -58,7 +82,7 @@ const Index = ({ }) => {
                                 <div className="flex flex-col md:flex-row items-start md:items-center gap-6">
                                     <div className="relative flex shrink-0 overflow-hidden rounded-full w-24 h-24 border-4 border-white shadow-lg">
                                         <Image width={100}
-                                            height={100} className="aspect-square rounded-full object-cover" src={record?.record?.userId?.profile_photo || teacherImg} alt="teacher profile" />
+                                            height={100} className="aspect-square rounded-full object-cover" src={record?.record?.userId?.profile_photo || "/Placeholder.png"} alt="teacher profile" />
                                     </div>
                                     <div className="flex-2">
                                         <div className="flex items-center gap-3 mb-1">
@@ -73,19 +97,20 @@ const Index = ({ }) => {
                                         <div className="flex flex-wrap items-center gap-4 text-sm text-gray-400">
                                             <div className="flex items-center gap-1">
                                                 <FiMapPin className="w-4 h-4" />
-                                                <span>{record?.record?.city} </span><span>{record?.record?.userId?.nationality || 'Na'}</span>
+                                                <span>{record?.record?.city} </span><span>{record?.record?.userId?.nationality || 'N/A'}</span>
                                             </div>
                                             <div className="flex items-center gap-1">
                                                 <FaGlobe className="w-4 h-4" />
-                                                <span> {record?.record?.userId?.time_zone || 'Na'}</span>
+                                                <span> {timezoneMappings[record?.record?.userId?.time_zone] || 'N/A'}</span>
                                             </div>
-                                            <div className="flex items-center gap-1">
+                                            {/* <div className="flex items-center gap-1">
                                                 <FaRegCalendarAlt className="w-4 h-4" />
                                                 <span>{record?.record?.experience} years experience</span>
-                                            </div>
+                                            </div> */}
                                         </div>
                                     </div>
                                     <div className="flex flex-col gap-3">
+                                        {record?.record?.intro_video &&
                                         <VideoModalDetail video={record?.record?.intro_video}
                                             image={record?.record?.userId?.profile_photo}
                                             name={record?.record?.userId?.name}
@@ -93,8 +118,7 @@ const Index = ({ }) => {
                                             imgClass="w-full h-[150px] sm:h-[150px]  md:h-[170px] lg:h-[200px] rounded-[6px] md:rounded-[10px]"
                                             btnClass="absolute top-1/2 left-0 right-0 mx-auto -translate-y-1/2 text-white hover:text-[#CC2828] w-[65px] text-center cursor-pointer"
                                             iconClass="h-16 w-16"
-                                        />
-
+                                        />}
                                     </div>
                                 </div>
 

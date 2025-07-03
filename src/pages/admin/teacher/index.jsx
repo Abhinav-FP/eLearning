@@ -319,10 +319,9 @@ function TeacherListing() {
                               colSpan={5}
                               className="text-center py-4 text-gray-400"
                             >
-                              <NoData
-                                heading="No approved teachers found."
-                                content="Once teachers are approved, they will appear in this list."
-                              />
+                               <NoData
+                                  Heading={`No techers found with the selected filters`}
+                                />
                             </td>
                           </tr>
                         )}
@@ -345,8 +344,7 @@ function TeacherListing() {
                               className="text-center py-4 text-gray-400"
                             >
                               <NoData
-                                heading="No approved teachers found."
-                                content="Once teachers are approved, they will appear in this list."
+                                Heading={`No techers found with the selected filters`}
                               />
                             </td>
                           </tr>
@@ -370,8 +368,7 @@ function TeacherListing() {
                               className="text-center py-4 text-gray-400"
                             >
                               <NoData
-                                heading="No approved teachers found."
-                                content="Once teachers are approved, they will appear in this list."
+                                Heading={`No techers found with the selected filters`}
                               />
                             </td>
                           </tr>

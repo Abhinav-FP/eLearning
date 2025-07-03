@@ -20,7 +20,7 @@ export default function Payout({ payout, }) {
                             Request Time
                         </th>
                         <th className="font-normal text-sm lg:text-base px-3 lg:px-4 py-2 lg:py-3 border-t border-[rgba(204,40,40,0.2)] capitalize">
-                            Action
+                            Status
                         </th>
                     </tr>
                 </thead>
@@ -53,7 +53,7 @@ export default function Payout({ payout, }) {
                                     <NoData
                                         Heading={"No Payouts found."}
                                         content={
-                                            "Your have not created any payout requests yet."
+                                            "There are no payout requests created on this account."
                                         }
                                     />
                                 </div>

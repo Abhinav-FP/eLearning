@@ -1,3 +1,4 @@
+import NoData from '@/pages/common/NoData';
 import moment from 'moment';
 import React from 'react';
 import { AiFillStar } from 'react-icons/ai';
@@ -7,7 +8,7 @@ export default function ReviewList({ reviews }) {
         <section className="mt-6 mx-auto px-4 ">
             <div className="grid grid-cols-1 gap-6">
                 {reviews?.length === 0 ? (
-                    <p className="text-gray-500">No reviews found.</p>
+                    <NoData Heading={"No reviews available."} />
                 ) : (
                     reviews && reviews?.map((review) => (
                         <div
@@ -18,16 +19,16 @@ export default function ReviewList({ reviews }) {
                             <div className="flex justify-between items-center mb-4">
                                 <div className="flex items-center gap-4">
                                     <img
-                                        src={review?.userId?.profile_photo || "/profile.png"}
+                                        src={review?.userId?.profile_photo || "/Placeholder.png"}
                                         alt={review?.userId?.name}
-                                        className="w-12 h-12 rounded-full object-cover border"
+                                        className="w-12 h-12 rounded-full object-cover"
                                     />
                                     <div>
-                                        <h4 className="font-semibold text-gray-800 text-base">
+                                        <h4 className="font-semibold text-gray-800 text-base capitalize">
                                             {review?.userId?.name}
                                         </h4>
                                         <p className="text-sm text-gray-500">
-                                            {moment(review?.updatedAt).format('MMMM D, YYYY [at] hh:mm A')}
+                                            {moment(review?.createdAt || review?.updatedAt).format('MMMM D, YYYY [at] hh:mm A')}
                                         </p>
                                     </div>
                                 </div>

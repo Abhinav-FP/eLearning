@@ -5,13 +5,13 @@ import NoData from "@/pages/common/NoData";
 export default function BookingList({ book }) {
   if (!book || book.length === 0) {
     return (
-      <NoData heading={"No bookings available."} />
+      <NoData Heading={"No bookings available."} />
     );
   }
 
   return (
     <div className="space-y-6">
-      {book.map((book, index) => (
+      {book && book?.map((book, index) => (
         <div
           key={index}
           className="bg-white   rounded-xl lg:rounded-2xl p-4 md:p-6 lg:p-8 shadow-sm transition-shadow duration-200 "

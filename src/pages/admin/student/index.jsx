@@ -19,6 +19,29 @@ function Index() {
   const timerRef = useRef(null);
   const [searchQuery, setSearchQuery] = useState("");
 
+  const timezoneMappings = {
+    "Asia/Tokyo": "Japan (JST) (GMT+9)",
+    "America/New_York": "New York (Eastern Time) (GMT-4)",
+    "America/Denver": "Denver (Mountain Time) (GMT-6)",
+    "America/Chicago": "Chicago (Central Time) (GMT-5)",
+    "America/Los_Angeles": "Los Angeles (Pacific Time) (GMT-7)",
+    "Europe/London": "London (GMT) (GMT+1)",
+    "Europe/Berlin": "Berlin (CET) (GMT+2)",
+    "Europe/Kyiv": "Kyiv (EET) (GMT+3)",
+    "Asia/Kolkata": "India (IST) (GMT+5.5)",
+    "Asia/Shanghai": "China (CST) (GMT+8)",
+    "Asia/Seoul": "Korea (KST) (GMT+9)",
+    "Australia/Sydney": "Sydney (AEST) (GMT+10)",
+    "Pacific/Auckland": "New Zealand (NZST) (GMT+12)",
+    "Asia/Singapore": "Singapore (SGT) (GMT+8)",
+    "America/Sao_Paulo": "Brazil (BRT) (GMT-3)",
+    "America/Argentina/Buenos_Aires": "Argentina (ART) (GMT-3)",
+    "America/Anchorage": "Alaska (AKST) (GMT-8)",
+    "Pacific/Honolulu": "Hawaii (HAST) (GMT-10)",
+    "Europe/Moscow": "Moscow (MSK) (GMT+3)",
+    "America/Halifax": "Atlantic (AST) (GMT-3)"
+  };
+
   const handleBlock = async (id) => {
     try {
       setBlockloading(true);
@@ -81,9 +104,6 @@ function Index() {
     fetchData(searchQuery, e.target.value);
   };
 
-
-
-
   return (
     <AdminLayout page={"Students Listing"}>
       <div className="min-h-screen p-5 lg:p-[30px]">
@@ -122,14 +142,14 @@ function Index() {
               <tr>
                 <th className="font-normal text-sm lg:text-base px-3 lg:px-4 py-2 lg:py-3 border-t border-[rgba(204,40,40,0.2)] capitalize text-left">Name</th>
                 <th className="font-normal text-sm lg:text-base px-3 lg:px-4 py-2 lg:py-3 border-t border-[rgba(204,40,40,0.2)] capitalize text-left">Email</th>
-                <th className="font-normal text-sm lg:text-base px-3 lg:px-4 py-2 lg:py-3 border-t border-[rgba(204,40,40,0.2)] capitalize">Phone</th>
+                {/* <th className="font-normal text-sm lg:text-base px-3 lg:px-4 py-2 lg:py-3 border-t border-[rgba(204,40,40,0.2)] capitalize">Phone</th> */}
                 <th className="font-normal text-sm lg:text-base px-3 lg:px-4 py-2 lg:py-3 border-t border-[rgba(204,40,40,0.2)] capitalize">Timezone</th>
                 <th className="font-normal text-sm lg:text-base px-3 lg:px-4 py-2 lg:py-3 border-t border-[rgba(204,40,40,0.2)] capitalize">Action</th>
               </tr>
             </thead>
 
             {loading ? (
-              <TableLoader length={5} />
+              <TableLoader length={4} />
             ) : (
               <tbody>
                 {data?.length > 0 ? (
@@ -144,11 +164,11 @@ function Index() {
                       <td className="px-3 lg:px-4 py-2 lg:py-3 text-black text-sm lg:text-base font-medium font-inter text-left">
                         {item?.email || "N/A"}
                       </td>
-                      <td className="capitalize px-3 lg:px-4 py-2 lg:py-3 text-black text-sm lg:text-base font-medium font-inter">
+                      {/* <td className="capitalize px-3 lg:px-4 py-2 lg:py-3 text-black text-sm lg:text-base font-medium font-inter">
                         {item?.phone || "N/A"}
-                      </td>
+                      </td> */}
                       <td className="capitalize px-3 lg:px-4 py-2 lg:py-3 text-black text-sm lg:text-base font-medium font-inter">
-                        {item?.time_zone || "N/A"}
+                        {timezoneMappings[item?.time_zone] || "N/A"}
                       </td>
                       <td className="capitalize px-3 lg:px-4 py-2 lg:py-3 text-black text-sm lg:text-base font-medium font-inter">
                         <div className="flex gap-2 justify-center items-center">
@@ -179,10 +199,9 @@ function Index() {
                   ))
                 ) : (
                   <tr>
-                    <td colSpan={5} className="text-center py-4 text-gray-400">
+                    <td colSpan={4} className="text-center py-4 text-gray-400">
                       <NoData
-                        heading="No rejected teachers found."
-                        content="If any teachers are rejected, they will be listed here for your reference."
+                        Heading={`No student found with the selected filters`}
                       />
                     </td>
                   </tr>
@@ -196,6 +215,7 @@ function Index() {
 
       </div>
       <ViewPopup
+        timezoneMappings={timezoneMappings}
         isOpen={isPopupOpen}
         onClose={closePopup}
         data={item}

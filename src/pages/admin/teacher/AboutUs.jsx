@@ -9,7 +9,7 @@ const qualificationLookup = QualificationMapping.reduce((acc, item) => {
 
 export default function AboutUs({ record, loading }) {
   const formatBoolean = (val) => (val === true ? 'Yes' : val === false ? 'No' : 'N/A');
-  const formatGender = (val) => (val === 'M' ? 'Male' : val === 'F' ? 'Female' : val ? 'Other' : 'N/A');
+  const formatGender = (val) => (val === 'M' ? 'Male' : val === 'F' ? 'Female' : 'N/A');
   const formatQualification = (val) => qualificationLookup[val] || 'N/A';
   const formatArray = (val) => (Array.isArray(val) && val.length ? val.join(', ') : 'N/A');
   const formatText = (val) => (val !== undefined && val !== null && val !== '' ? val.toString() : 'N/A');
@@ -17,6 +17,7 @@ export default function AboutUs({ record, loading }) {
   if (!record) {
     return <p className="text-gray-500">No information available.</p>;
   }
+  // console.log("record",record);
 
   return (
     <>
@@ -25,45 +26,54 @@ export default function AboutUs({ record, loading }) {
 
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-x-6 gap-y-6">
 
+            {/* <div className='mb-2'>
+              <label className="block text-base font-semibold text-gray-800 mb-1">Time Zone</label>
+              <p className="font-medium text-sm md:text-base text-gray-600">{timezoneMappings[record?.userId?.time_zone] || "N/A"}</p>
+            </div> */}
+
             <div className='mb-2'>
-              <label className="block text-base font-semibold text-gray-800 mb-1">Gender</label>
-              <p className="font-medium text-sm md:text-base text-gray-600">{formatGender(record.gender)}</p>
+              <label className="block text-base font-semibold text-gray-800 mb-1">Nationality</label>
+              <p className="font-medium text-sm md:text-base text-gray-600">{record?.userId?.nationality || "N/A"}</p>
             </div>
 
-
             <div className='mb-2'>
+              <label className="block text-base font-semibold text-gray-800 mb-1">Gender</label>
+              <p className="font-medium text-sm md:text-base text-gray-600">{formatGender(record?.gender) || "N/A"}</p>
+            </div>
+
+            {/* <div className='mb-2'>
               <label className="block text-base font-semibold text-gray-800 mb-1">Japanese for Me Approved</label>
               <p className={`font-medium text-sm md:text-base ${record.japanese_for_me_approved ? 'text-green-600' : 'text-red-600'}`}>
                 {formatBoolean(record.japanese_for_me_approved)}
               </p>
-            </div>
+            </div> */}
 
             <div className='mb-2'>
               <label className="block text-base font-semibold text-gray-800 mb-1">Admin Approved</label>
-              <p className={`font-medium text-sm md:text-base ${record.admin_approved ? 'text-green-600' : 'text-red-600'}`}>
-                {formatBoolean(record.admin_approved)}
+              <p className={`font-medium text-sm md:text-base ${record?.admin_approved ? 'text-green-600' : 'text-red-600'}`}>
+                {formatBoolean(record?.admin_approved)}
               </p>
             </div>
 
             <div className='mb-2'>
               <label className="block text-base font-semibold text-gray-800 mb-1"> Akita Inaka School (AIS) Trained</label>
-              <p className={`font-medium text-sm md:text-base ${record.ais_trained ? 'text-green-600' : 'text-red-600'}`}>
-                {formatBoolean(record.ais_trained)}
+              <p className={`font-medium text-sm md:text-base ${record?.ais_trained ? 'text-green-600' : 'text-red-600'}`}>
+                {formatBoolean(record?.ais_trained)}
               </p>
             </div>
 
-            <div className='mb-2'>
+            {/* <div className='mb-2'>
               <label className="block text-base font-semibold text-gray-800 mb-1">Qualifications</label>
-              <p className="font-medium text-sm md:text-base text-gray-600">{formatQualification(record.qualifications)}</p>
+              <p className="font-medium text-sm md:text-base text-gray-600">{formatQualification(record?.qualifications)}</p>
             </div>
 
             <div className='mb-2'>
               <label className="block text-base font-semibold text-gray-800 mb-1">Experience</label>
-              <p className="font-medium text-sm md:text-base text-gray-600">{formatText(record.experience)}</p>
-            </div>
+              <p className="font-medium text-sm md:text-base text-gray-600">{formatText(record?.experience)}</p>
+            </div> */}
 
 
-            {record.documentlink && (
+            {/* {record.documentlink && (
               <div className="mb-1">
                 <label className="block text-base font-semibold text-gray-800 mb-1">Uploaded Document</label>
                 <a
@@ -77,16 +87,16 @@ export default function AboutUs({ record, loading }) {
                   <span className="text-sm">View</span>
                 </a>
               </div>
-            )}
+            )} */}
 
             <div className='mb-2'>
               <label className="block text-base font-semibold text-gray-800 mb-1">Languages Spoken</label>
-              <p className="font-medium text-sm md:text-base text-gray-600">{formatArray(record.languages_spoken)}</p>
+              <p className="font-medium text-sm md:text-base text-gray-600">{formatArray(record?.languages_spoken) || "N/A"}</p>
             </div>
 
             <div className='mb-2'>
-              <label className="block text-base font-semibold text-gray-800 mb-1">Tags</label>
-              <p className="font-medium text-sm md:text-base text-gray-600">{formatArray(record.tags)}</p>
+              <label className="block text-base font-semibold text-gray-800 mb-1">Specialities</label>
+              <p className="font-medium text-sm md:text-base text-gray-600 capitalize">{formatArray(record?.tags)}</p>
             </div>
 
           </div>
@@ -96,7 +106,7 @@ export default function AboutUs({ record, loading }) {
           <div className="mt-8">
             <label className="block text-base font-semibold text-gray-800 mb-1">Description</label>
             <p className="font-medium text-sm md:text-base text-gray-600 whitespace-pre-line">
-              {record.description || 'N/A'}
+              {record?.description && record?.description?.trim() ? record?.description : "N/A"}
             </p>
           </div>
         </section>

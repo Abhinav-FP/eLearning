@@ -19,6 +19,7 @@ export default function index() {
   const [loading, setLoading] = useState(false);
   const [selectedOption, setSelectedOption] = useState("last30");
   const [searchText, setSearchText] = useState("");
+  const[tabOpen,setTabOpen] = useState("bookings")
 
   const handleSearchChange = (e) => {
     setSearchText(e.target.value);
@@ -102,6 +103,8 @@ export default function index() {
   const [IsEarning, setIsEarning] = useState(false);
   const close = () => setIsEarning(false);
 
+  console.log("data",data);
+
   return (
     <TeacherLayout page={"Earnings"}>
       <div className="min-h-screen p-5 lg:p-[30px]">
@@ -137,6 +140,11 @@ export default function index() {
             <div className="space-x-3 w-full md:w-auto flex md:block justify-between">
               <button
                 onClick={() => {
+                  if(selectedOption !== "")
+                    {
+                      toast.error("Please select time duration as All before requesting payout");
+                      return;
+                    }
                   setIsEarning(true);
                 }}
                 className="w-fit px-2 px-4 xl:px-8 py-2 h-[44px] hover:bg-white hover:text-[#CC2828] border border-[#CC2828] rounded-md tracking-[-0.06em] text-sm font-medium bg-[#CC2828] text-white cursor-pointer"
@@ -169,7 +177,28 @@ export default function index() {
                   />
                 ))}
             </div>
+            <div className="flex flex-wrap gap-5 mb-4">
+              <button
+                onClick={() => setTabOpen('bookings')}
+                className={`px-2 px-4 xl:px-8 py-2 h-[44px] rounded-md tracking-[-0.06em] text-base font-medium  cursor-pointer ${tabOpen === 'bookings'
+                  ? 'bg-[#CC2828] text-[#fff]'
+                  : 'bg-[#E0E0E0] text-[#727272]'
+                  }`}
+              >
+                Bookings
+              </button>
+              <button
+                onClick={() => setTabOpen('bonus')}
+                className={`px-2 px-8 xl:px-12 py-2 h-[44px] rounded-md tracking-[-0.06em] text-base font-medium  cursor-pointer ${tabOpen === 'bonus'
+                  ? 'bg-[#CC2828] text-[#fff]'
+                  : 'bg-[#E0E0E0] text-[#727272]'
+                  }`}
+              >
+                Bonus
+              </button>
+            </div>
             <div className="rounded-[5px] border border-[rgba(204,40,40,0.3)] overflow-x-auto">
+              {tabOpen === 'bookings' &&
               <table className="min-w-full text-sm text-center rounded-[20px]">
                 <thead className="bg-[rgba(204,40,40,0.1)] text-[#535353] tracking-[-0.04em] font-inter rounded-[20px] whitespace-nowrap">
                   <tr>
@@ -233,9 +262,9 @@ export default function index() {
                       <td colSpan={5}>
                         <div className="mt-2">
                           <NoData
-                            Heading={"No Earnings found."}
+                            Heading={"No data found"}
                             content={
-                              "Your earnings will appear here once you complete a booking."
+                              "No booking data found with the selected filters."
                             }
                           />
                         </div>
@@ -243,7 +272,82 @@ export default function index() {
                     </tr>
                   )}
                 </tbody>
-              </table>
+              </table>}
+              {tabOpen === 'bonus' &&
+              <table className="min-w-full text-sm text-center rounded-[20px]">
+                <thead className="bg-[rgba(204,40,40,0.1)] text-[#535353] tracking-[-0.04em] font-inter rounded-[20px] whitespace-nowrap">
+                  <tr>
+                    <th className="font-normal text-sm lg:text-base px-3 lg:px-4 py-2 lg:py-3 border-t border-[rgba(204,40,40,0.2)] capitalize">
+                      Lesson Name
+                    </th>
+                    <th className="font-normal text-sm lg:text-base px-3 lg:px-4 py-2 lg:py-3 border-t border-[rgba(204,40,40,0.2)] capitalize">
+                      Lesson date
+                    </th>
+                    <th className="font-normal text-sm lg:text-base px-3 lg:px-4 py-2 lg:py-3 border-t border-[rgba(204,40,40,0.2)] capitalize">
+                      Payment Id
+                    </th>
+                    <th className="font-normal text-sm lg:text-base px-3 lg:px-4 py-2 lg:py-3 border-t border-[rgba(204,40,40,0.2)] capitalize">
+                      Payment date
+                    </th>
+                    <th className="font-normal text-sm lg:text-base px-3 lg:px-4 py-2 lg:py-3 border-t border-[rgba(204,40,40,0.2)] capitalize">
+                      Amount
+                    </th>
+                    {/* <th className="font-normal text-sm lg:text-base px-3 lg:px-4 py-2 lg:py-3 border-t border-[rgba(204,40,40,0.2)] capitalize">
+                  Payout Status
+                </th> */}
+                  </tr>
+                </thead>
+
+                <tbody>
+                  {data && data?.bonusData && data?.bonusData?.length > 0 ? (
+                    data.bonusData.map((item, index) => (
+                      <tr
+                        key={index}
+                        className="hover:bg-[rgba(204,40,40,0.1)] border-t border-[rgba(204,40,40,0.2)]"
+                      >
+                        <td className="px-3 lg:px-4 py-2 lg:py-3 text-black text-sm lg:text-base font-medium font-inter capitalize">
+                          {item?.LessonId?.title || ""}
+                        </td>
+                        <td className="px-3 lg:px-4 py-2 lg:py-3 text-black text-sm lg:text-base font-medium font-inter capitalize">
+                          {moment(item?.bookingId?.startDateTime).format(
+                            "DD MMM YYYY, hh:mm A"
+                          ) || ""}
+                        </td>
+                        <td className="px-3 lg:px-4 py-2 lg:py-3 text-black text-sm lg:text-base font-medium font-inter">
+                          {item?.StripepaymentId?.payment_id ||
+                            item?.paypalpaymentId?.orderID ||
+                            ""}
+                        </td>
+                        <td className="px-3 lg:px-4 py-2 lg:py-3 text-black text-sm lg:text-base font-medium font-inter">
+                          {moment(
+                            item?.StripepaymentId?.created_at ||
+                            item?.paypalpaymentId?.created_at
+                          ).format("DD MMM YYYY, hh:mm A") || ""}
+                        </td>
+                        <td className="px-3 lg:px-4 py-2 lg:py-3 text-black text-sm lg:text-base font-medium font-inter">
+                          {formatMultiPrice(item?.amount, "USD") || ""}
+                        </td>
+                        {/* <td className="px-3 lg:px-4 py-2 lg:py-3 text-black text-sm lg:text-base font-medium font-inter capitalize">
+                                    {item?.payoutStatus}
+                                  </td> */}
+                      </tr>
+                    ))
+                  ) : (
+                    <tr>
+                      <td colSpan={5}>
+                        <div className="mt-2">
+                          <NoData
+                            Heading={"No data found"}
+                            content={
+                              "No bonus data found with the selected filters."
+                            }
+                          />
+                        </div>
+                      </td>
+                    </tr>
+                  )}
+                </tbody>
+              </table>}
             </div>
           </>
         )}

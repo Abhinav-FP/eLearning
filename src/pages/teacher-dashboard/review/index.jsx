@@ -48,7 +48,7 @@ export default function Index() {
                                                     className="w-12 h-12 rounded-full object-cover border"
                                                 />
                                                 <div>
-                                                    <h4 className="font-semibold text-gray-800 text-base">
+                                                    <h4 className="font-semibold text-gray-800 text-base capitalize">
                                                         {review.userId?.name}
                                                     </h4>
                                                     <p className="text-sm text-gray-500">

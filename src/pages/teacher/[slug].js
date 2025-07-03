@@ -177,9 +177,10 @@ export default function Index() {
                               alt={data?.userId?.name}
                               width={164}
                               height={164}
+                              className="h-[32px] w-[32px] lg:h-[45px] lg:w-[45px] rounded-full object-cover"
                             />
                           </div>
-                          <h3 className="text-white text-[24px] md:text-[30px] lg:text-[36px] xl:text-[45px] font-inter font-extrabold tracking-[-0.04em]">
+                          <h3 className="text-white text-[24px] md:text-[30px] lg:text-[36px] xl:text-[45px] font-inter font-extrabold tracking-[-0.04em] capitalize">
                             {data?.userId?.name || ""}{" "}
                             {data?.admin_approved === true ? (<BiSolidBadgeCheck className="inline text-[#6ABB52] w-[32px] h-[32x]" size={32} />) : ""}
                           </h3>

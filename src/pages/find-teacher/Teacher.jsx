@@ -30,7 +30,7 @@ export default function Teacher({ teacherData, loading }) {
                                 <div className="flex flex-wrap">
                                     <div className="w-full md:w-[80px] lg:w-[112px]">
                                         <div className="h-[80px] w-[80px] lg:h-[112px] lg:w-[112px] rounded-full overflow-hidden   mx-0 mb-3 lg:mb-6 ">
-                                            <Image className="h-[80px] w-[80px] lg:h-[112px] lg:w-[112px] rounded-full object-cover" src={item?.userId?.profile_photo || TeacherImg} alt={item?.userId?.name} width={164} height={164} />
+                                            <Image className="h-[80px] w-[80px] lg:h-[112px] lg:w-[112px] rounded-full object-cover" src={item?.userId?.profile_photo || "/Placeholder.png"} alt={item?.userId?.name} width={164} height={164} />
                                         </div>
                                         {/* <div className=" md:text-center">
                                         <StarRating rating={item?.averageRating} />
@@ -42,7 +42,7 @@ export default function Teacher({ teacherData, loading }) {
                                         </div> */}
                                     </div>
                                     <div className="w-full md:w-[calc(100%-80px)] lg:w-[calc(100%-112px)] mt-2 md:mt-0 md:pl-6 lg:pl-8">
-                                        <h3 className="text-black text-xl lg:text-2xl font-bold -tracking-[0.03em] text-left mb-2.5 lg:mb-4">{item?.userId?.name}</h3>
+                                        <h3 className="text-black text-xl lg:text-2xl font-bold -tracking-[0.03em] text-left mb-2.5 lg:mb-4 capitalize">{item?.userId?.name}</h3>
                                         {item?.tags?.length > 0 &&
                                             <div className="flex gap-x-3 items-center flex-wrap">
                                                 <span className="text-[#8D929A] text-base -tracking-[0.03em] ">

@@ -42,7 +42,7 @@ export default function ReviewGet({ reviews, Adminreview }) {
             <div className="grid grid-cols-1 gap-6">
                 {!Array.isArray(reviews) ? (
                     <div className=' p-6'>
-                        <NoData Heading={"No reviews found."} />
+                        <NoData Heading={"No reviews found"} />
                     </div>
                 ) : (
                     reviews &&

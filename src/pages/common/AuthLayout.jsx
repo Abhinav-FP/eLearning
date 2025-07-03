@@ -13,12 +13,14 @@ export default function AuthLayout({ children, page, sidebar }) {
   const [dropdownOpen, setDropdownOpen] = useState(false);
   const { user, setUser } = useRole();
   const router = useRouter();
+
   const handleLogout = () => {
     localStorage && localStorage.removeItem("token");
     router.push("/login");
     toast.success("Logout Successfully");
     setUser(null);
   };
+
   const fetchData = async (signal) => {
     try {
       const main = new Listing();
@@ -38,12 +40,44 @@ export default function AuthLayout({ children, page, sidebar }) {
     }
   };
 
+  // 🔒 New function to check role-based access
+  const checkRoleAccess = (user) => {
+    if (!user) return;
+
+    const { pathname } = router;
+
+    const restrictedRoutes = {
+      student: ["/teacher-dashboard", "/admin"],
+      teacher: ["/admin", "/student"],
+      admin: ["/student", "/teacher-dashboard"],
+    };
+
+    const role = user.role;
+    const forbiddenPaths = restrictedRoutes[role] || [];
+
+    const isRestricted = forbiddenPaths.some((path) =>
+      pathname.startsWith(path)
+    );
+
+    if (isRestricted) {
+      router.push("/forbidden");
+    }
+  };
+
   useEffect(() => {
     const controller = new AbortController();
     const { signal } = controller;
     fetchData(signal);
     return () => controller.abort();
   }, []);
+
+  // Check role-based access after user is set
+  useEffect(() => {
+    if (user) {
+      checkRoleAccess(user);
+    }
+  }, [user]);
+
   return (
     <div className="md:flex flex-wrap bg-black items-start">
       {sidebar}

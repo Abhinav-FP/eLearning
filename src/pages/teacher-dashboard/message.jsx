@@ -188,7 +188,7 @@ export default function Message() {
               {/* Chat Body */}
               <div
                 ref={chatContainerRef}
-                className="px-4 lg:px-5 pt-5 lg:pt-[30px] pb-[10px] min-h-[300px] lg:h-[calc(100vh-311px)] overflow-y-auto"
+                className="px-4 lg:px-5 pt-5 lg:pt-[30px] pb-[10px] min-h-[300px] h-[calc(100vh-287px)] lg:h-[calc(100vh-311px)] overflow-y-auto"
               >
                 <div className="bg-[#FEECDC] rounded-[14px] relative pl-[50px] lg:pl-[60px] pr-[20px] lg:pr-[30px] py-[12px] mb-[30px] text-sm text-[#1E1E1E] max-w-[570px] mx-auto">
                   <div className="absolute top-1/2 left-[20px] lg:left-[20px] -translate-y-1/2">

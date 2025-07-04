@@ -1,6 +1,7 @@
 import React from "react";
 import moment from "moment";
 import NoData from "@/pages/common/NoData";
+import ZoomPopup from "../booking/ZoomPopup";
 
 export default function BookingList({ book }) {
   if (!book || book.length === 0) {
@@ -8,6 +9,8 @@ export default function BookingList({ book }) {
       <NoData Heading={"No bookings available."} />
     );
   }
+
+  console.log("Booking List:", book);
 
   return (
     <div className="space-y-6">
@@ -59,6 +62,11 @@ export default function BookingList({ book }) {
             <p>
               <strong>Admin Fee:</strong> ${book?.adminCommission.toFixed(2)}
             </p>
+            <p>
+              <strong>Tip :</strong>
+              {book?.BonusId?.amount ? `$${book.BonusId.amount}` : "N/A"}
+
+            </p>
           </div>
 
           {/* Status Tags */}
@@ -82,6 +90,9 @@ export default function BookingList({ book }) {
               <span className="px-3 py-1 rounded-full bg-blue-100 text-blue-700">
                 Rescheduled
               </span>
+            )}
+            {book?.zoom && (
+              <ZoomPopup zoom={book?.zoom} />
             )}
           </div>
         </div>

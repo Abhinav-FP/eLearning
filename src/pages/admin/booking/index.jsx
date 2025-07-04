@@ -7,6 +7,7 @@ import AdminLayout from '../common/AdminLayout';
 import { FiSearch } from "react-icons/fi";
 import Link from 'next/link';
 import ZoomPopup from './ZoomPopup';
+import BookingPopup from '../common/BookingPopup';
 
 export default function Index() {
   const [TabOpen, setTabOpen] = useState('upcoming');
@@ -14,7 +15,6 @@ export default function Index() {
   const [loading, setLoading] = useState(false);
   const [searchText, setSearchText] = useState("");
   const timerRef = useRef(null);
-
   const fetchEarnings = async (search = "") => {
     try {
       setLoading(true);
@@ -99,7 +99,6 @@ export default function Index() {
             />
           </div>
         </div>
-
         <div className="rounded-[5px] border border-[rgba(204,40,40,0.3)] overflow-x-auto">
           <table className="min-w-full text-sm text-center rounded-[20px]">
             <thead className="bg-[rgba(204,40,40,0.1)] text-[#535353] tracking-[-0.04em] font-inter rounded-[20px] whitespace-nowrap">
@@ -122,9 +121,16 @@ export default function Index() {
                 <th className="font-normal text-sm lg:text-base px-3 lg:px-4 py-2 lg:py-3 border-t border-[rgba(204,40,40,0.2)] capitalize">
                   Amount
                 </th>
+                {TabOpen === "past" && (
+                 <>
+                  <th className="font-normal text-sm lg:text-base px-3 lg:px-4 py-2 lg:py-3 border-t border-[rgba(204,40,40,0.2)] capitalize">
+                    Record Video
+                  </th>
                 <th className="font-normal text-sm lg:text-base px-3 lg:px-4 py-2 lg:py-3 border-t border-[rgba(204,40,40,0.2)] capitalize">
-                  Record Video
-                </th>
+                  View 
+                  </th>
+                 </>
+                )}
               </tr>
             </thead>
             {loading ?
@@ -157,19 +163,23 @@ export default function Index() {
                       <td className="px-3 lg:px-4 py-2 lg:py-3 capitalize text-black text-sm lg:text-base font-medium font-inter ">
                         ${item?.totalAmount}
                       </td>
-                      <td className="px-3 lg:px-4 py-2 lg:py-3 capitalize text-black text-sm lg:text-base font-medium font-inter ">
-                        {item?.zoom ? (
-                          <ZoomPopup zoom={item?.zoom} />
-                        ) : (
-                          <span>No video</span>
-                        )}
-                      </td>
-
+                      {TabOpen === "past" && (
+                        <td className="px-3 lg:px-4 py-2 lg:py-3 capitalize text-black text-sm lg:text-base font-medium font-inter ">
+                          {item?.zoom ? (
+                            <>
+                            <ZoomPopup zoom={item?.zoom} />
+                            <BookingPopup data={item}/>
+                            </>
+                          ) : (
+                            <span>N/A</span>
+                          )}
+                        </td>
+                      )}
                     </tr>
                   ))
                 ) : (
                   <tr>
-                    <td colSpan={6}>
+                    <td colSpan={TabOpen === "past" ? 7 : 6}>
                       <div className="mt-2">
                         <NoData
                           Heading={"No bookings found."}

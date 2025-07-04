@@ -15,7 +15,6 @@ export default function ZoomPopup({ zoom, onClose }) {
         onClick={() => setShowPopup(true)}
         role="button"
         tabIndex={0}
-        onKeyPress={(e) => { if (e.key === 'Enter' || e.key === ' ') setShowPopup(true); }}
       >
         <FaVideo className="text-blue-600 w-5 h-5" />
         <span className="text-blue-700 font-semibold text-sm select-none">Zoom</span>

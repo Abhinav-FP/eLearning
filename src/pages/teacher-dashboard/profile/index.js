@@ -11,8 +11,7 @@ import NoData from "@/pages/common/NoData";
 import { formatMultiPrice } from "@/components/ValueDataHook";
 import ViewLesson from "@/pages/common/ViewLesson";
 import toast from "react-hot-toast";
-import { FaUndo } from 'react-icons/fa'; // Delete and Restore icons
-
+import { FaUndo, FaEdit } from 'react-icons/fa'; // Delete and Restore icons
 
 export default function Index() {
   const [data, setData] = useState([]);
@@ -68,6 +67,17 @@ export default function Index() {
   }
   const [isOpen, setIsOpen] = useState(false);
   const [Lesson, setLesson] = useState(null);
+
+  const [isMobile, setIsMobile] = useState(false);
+  useEffect( () => {
+     const handleReSize = () => {
+      setIsMobile(window.innerWidth < 767)
+     };
+     handleReSize();
+     window.addEventListener('resize', handleReSize);
+     return () => window.removeEventListener('resize', handleReSize);
+  }, []);
+
   const LessonCard = ({ item, datalesson }) => {
     return (
       <div className={`${item?.
@@ -121,7 +131,7 @@ export default function Index() {
         <div className="min-h-screen p-5 lg:p-[30px]">
           <h1 className="ont-inter text-lg lg:text-2xl font-bold text-[#CC2828] tracking-[-0.04em] mb-6">Edit Profile</h1>
           <div className="bg-red-100 p-4 md:p-6 lg:p-8 rounded-2xl  items-start relative">
-            <div className="flex items-center flex-col gap-3 md:flex-row justify-between ">
+            <div className="flex w-full pr-8 md:pr-0 relative md:items-center flex-col gap-3 md:flex-row justify-between ">
               {/* Profile Section */}
               <div className="flex flex-row items-center gap-3 lg:gap-4">
                 <img
@@ -135,13 +145,25 @@ export default function Index() {
                 </div>
               </div>
               {/* Edit Button */}
-              <Link href="/teacher-dashboard/setting" className="bg-[#CC2828] hover:bg-[#941111fd] tracking-[-0.03em] text-white text-sm px-3 md:px-4  py-1.5 md:py-2.5 rounded-[6px] cursor-pointer">
-                Edit Profile
+              {isMobile ? (
+                <Link href="/teacher-dashboard/setting" className="text-[#CC2828] cursor-pointer absolute right-0 top-1">
+                  <FaEdit size={18} />
               </Link>
+              )
+              :
+              (
+                
+               <Link href="/teacher-dashboard/setting" className="bg-[#CC2828] hover:bg-[#941111fd] tracking-[-0.03em] text-white text-sm px-3 md:px-4  py-1.5 md:py-2.5 rounded-[6px] cursor-pointer ">
+                Edit Profile
+                </Link>
+              )
+
+              }
+              
             </div>
 
             {/* Info Grid */}
-            <div className="w-full mt-6 md:mt-8 lg:mt-10 mb-2 flex flex-wrap gap-x-4 lg:gap-x-10 gap-y-2 text-sm">
+            <div className="w-full mt-4 md:mt-8 lg:mt-10 mb-2 flex flex-wrap gap-x-4 lg:gap-x-10 gap-y-2 text-sm">
               <p className="text-sm lg:text-base text-black tracking-[-0.04em]">
                 <span className="font-normal text-[#CC2828]">Nationality:</span>{" "}
                 {data?.profile?.userId?.nationality || "N/A"}

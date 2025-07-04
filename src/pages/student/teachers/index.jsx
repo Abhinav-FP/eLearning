@@ -135,7 +135,7 @@ export default function Index() {
                               handleRemoveSubmit(teacher?.userId?._id);
                             }}
                           >
-                            <FaHeart color="#CC2828" size={18} />
+                            <FaHeart color="#CC2828" className="w-[24px] h-[24px] lg:w-[18px] lg:h-[18px]" size={18} />
                           </span>
                         ) : (
                           <span
@@ -146,16 +146,16 @@ export default function Index() {
                               handleAddSubmit(teacher?.userId?._id);
                             }}
                           >
-                            <FaRegHeart color={"#000000"} size={18} />
+                            <FaRegHeart color={"#000000"} size={18} className="w-[24px] h-[24px] lg:w-[18px] lg:h-[18px]" />
                           </span>
                         )}
                       </h3>
 
                       {/* Tags */}
                       {teacher?.tags?.length > 0 && (
-                        <div className="flex gap-1 items-center">
-                          <span className="text-[#8D929A] text-base -tracking-[0.03em] pr-2">Specialities :</span>
-                          <div className="flex flex-wrap gap-x-2 gap-y-1">
+                        <div className="flex gap-1 md:items-center">
+                          <span className="text-[#8D929A] text-base -tracking-[0.03em] pr-2  min-w-[100px]">Specialities :</span>
+                          <div className="flex flex-wrap gap-x-2 gap-y-0">
                             {teacher.tags.map((tag, idx) => (
                               <span key={idx} className="flex items-center text-black text-base -tracking-[0.03em] capitalize">
                                 <svg xmlns="http://www.w3.org/2000/svg" className="w-4 h-4 mr-1" viewBox="0 0 48 48">
@@ -175,18 +175,18 @@ export default function Index() {
                       )}
 
                       {/* Details */}
-                      <div className="flex flex-wrap gap-x-2 md:gap-x-6 lg:gap-x-8 mb-3 lg:mb-5">
-                        <div>
-                          <span className="text-[#8D929A] text-sm -tracking-[0.03em] pr-2">Language :</span>
-                          <span className="capitalize text-black text-sm -tracking-[0.03em] ">{teacher?.languages_spoken.join(' , ') || "N/A"}</span>
+                      <div className="flex flex-col md:flex-row flex-wrap gap-x-2 md:gap-x-6 lg:gap-x-8 mb-3 lg:mb-5">
+                        <div className="flex md:block">
+                          <span className="text-[#8D929A] text-sm -tracking-[0.03em] pr-2 min-w-[102px]">Language :</span>
+                          <span className="capitalize text-black text-sm -tracking-[0.03em] flex flex-wrap md:block">{teacher?.languages_spoken.join(' , ') || "N/A"}</span>
                         </div>
-                        <div>
-                          <span className="text-[#8D929A] text-sm -tracking-[0.03em] pr-2">Nationality :</span>
-                          <span className="capitalize text-black text-sm -tracking-[0.03em] ">{teacher?.userId?.nationality || "N/A"}</span>
+                        <div className="flex  md:block">
+                          <span className="text-[#8D929A] text-sm -tracking-[0.03em] pr-2 min-w-[103px]">Nationality :</span>
+                          <span className="capitalize text-black text-sm -tracking-[0.03em] flex flex-wrap md:block">{teacher?.userId?.nationality || "N/A"}</span>
                         </div>
-                        <div>
-                          <span className="text-[#8D929A] text-sm -tracking-[0.03em] pr-2">Gender :</span>
-                          <span className="capitalize text-black text-sm -tracking-[0.03em] ">{teacher?.gender === 'M' ? 'Male' : teacher?.gender === 'F' ? 'Female' : "N/A"}</span>
+                        <div className="flex md:block">
+                          <span className="text-[#8D929A] text-sm -tracking-[0.03em] pr-2 min-w-[104px]">Gender :</span>
+                          <span className="capitalize text-black text-sm -tracking-[0.03em] flex flex-wrap md:block ">{teacher?.gender === 'M' ? 'Male' : teacher?.gender === 'F' ? 'Female' : "N/A"}</span>
                         </div>
                         {/* <div>
                           <span className="text-[#8D929A] text-sm -tracking-[0.03em] pr-2">Experience :</span>

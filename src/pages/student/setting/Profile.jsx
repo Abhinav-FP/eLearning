@@ -5,10 +5,12 @@ import timeZones from "../../../Json/TimeZone";
 import Listing from "@/pages/api/Listing";
 import toast from "react-hot-toast";
 import { ProfileFormLoader } from "@/components/Loader";
+import { useRole } from "@/context/RoleContext";
 
 export default function Profile() {
   const [processing, setProcessing] = useState(false);
   const [loading, setLoading] = useState(false);
+  const { setUser } = useRole();
   const [data, setData] = useState({
     name: "",
     email: "",
@@ -78,7 +80,9 @@ export default function Profile() {
       }
       const response = await main.ProfileUpdate(formData);
       if (response?.data) {
+        console.log("response?.data",response?.data);
         toast.success(response.data.message);
+        setUser(response?.data?.data?.user);
       } else {
         toast.error(response.data.message);
       }

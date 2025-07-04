@@ -50,15 +50,9 @@ export default function Index() {
     }
   };
 
-  const isLessThan5minutesFromNowAndBeforeEnd = (startDateTime, endDateTime) => {
-    const now = new Date();
-    const start = new Date(startDateTime);
-    const end = new Date(endDateTime);
-    const fiveMinutesInMs = 5 * 60 * 1000;
-    const isWithinFiveMinutes = start - now < fiveMinutesInMs && start - now >= 0;
-    const isEndInFuture = end > now;
-    return isWithinFiveMinutes && isEndInFuture;
-  };
+  function isBeforeEndTime(endDateTime) {
+  return Date.now() < new Date(endDateTime).getTime();
+  }
 
   const calculateDurationMinutes = (startDateTime, endDateTime) => {
   const start = new Date(startDateTime);
@@ -82,7 +76,7 @@ export default function Index() {
                   : 'bg-[#E0E0E0] text-[#727272]'
                   }`}
               >
-                Upcoming
+                Upcoming & Ongoing
               </button>
               <button
                 onClick={() => setTabOpen('past')}
@@ -142,7 +136,7 @@ export default function Index() {
                         <td className="px-3 lg:px-4 py-2 lg:py-3 text-black text-sm lg:text-base font-medium font-inter">
                           <div className="flex justify-center items-center gap-2 whitespace-nowrap">
                             <span className="capitalize">{item?.LessonId?.title}</span>
-                            {isLessThan5minutesFromNowAndBeforeEnd(item?.startDateTime, item?.endDateTime) &&
+                            {item?.zoom && item?.zoom?.meetingLink && isBeforeEndTime(item?.endDateTime) &&
                               <a
                               href={item?.zoom?.meetingLink || ""}
                               target="blank"

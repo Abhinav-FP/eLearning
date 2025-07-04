@@ -94,7 +94,7 @@ export default function Index() {
                     <div className="space-y-4">
                       {dashboard?.wishlistResult?.map((wish, idx) => (
                         <Link
-                          href={`/teacher/${wish?._id}`}
+                          href={`/teacher/${wish?.extra?._id}`}
                           key={idx}
                           className="flex items-center justify-between
                            border border-[rgba(204,40,40,0.3)]

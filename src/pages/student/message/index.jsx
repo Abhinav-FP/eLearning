@@ -60,7 +60,7 @@ export default function Index() {
   const handleUserSelect = (user) => {
     setTeacherId(user?.teacher?._id);
     MessageGetAlls(user?.teacher?._id);
-    if (window.innerWidth < 768) {
+    if (window.innerWidth < 1024) {
       setMobileOpen(true);
     }
   };

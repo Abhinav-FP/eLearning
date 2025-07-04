@@ -6,6 +6,7 @@ import NoData from '@/pages/common/NoData';
 import AdminLayout from '../common/AdminLayout';
 import { FiSearch } from "react-icons/fi";
 import Link from 'next/link';
+import ZoomPopup from './ZoomPopup';
 
 export default function Index() {
   const [TabOpen, setTabOpen] = useState('upcoming');
@@ -30,6 +31,8 @@ export default function Index() {
   useEffect(() => {
     fetchEarnings();
   }, []);
+
+  console.log("data", data)
 
   // Categorize data
   const { upcoming, past } = useMemo(() => {
@@ -67,8 +70,8 @@ export default function Index() {
             <button
               onClick={() => setTabOpen('upcoming')}
               className={`px-2 px-4 xl:px-8 py-2 h-[44px] rounded-md tracking-[-0.06em] text-base font-medium  cursor-pointer ${TabOpen === 'upcoming'
-                  ? 'bg-[#CC2828] text-[#fff]'
-                  : 'bg-[#E0E0E0] text-[#727272]'
+                ? 'bg-[#CC2828] text-[#fff]'
+                : 'bg-[#E0E0E0] text-[#727272]'
                 }`}
             >
               Upcoming
@@ -76,8 +79,8 @@ export default function Index() {
             <button
               onClick={() => setTabOpen('past')}
               className={`px-2 px-4 xl:px-8 py-2 h-[44px] rounded-md tracking-[-0.06em] text-base font-medium  cursor-pointer ${TabOpen === 'past'
-                  ? 'bg-[#CC2828] text-[#fff]'
-                  : 'bg-[#E0E0E0] text-[#727272]'
+                ? 'bg-[#CC2828] text-[#fff]'
+                : 'bg-[#E0E0E0] text-[#727272]'
                 }`}
             >
               Past
@@ -119,6 +122,9 @@ export default function Index() {
                 <th className="font-normal text-sm lg:text-base px-3 lg:px-4 py-2 lg:py-3 border-t border-[rgba(204,40,40,0.2)] capitalize">
                   Amount
                 </th>
+                <th className="font-normal text-sm lg:text-base px-3 lg:px-4 py-2 lg:py-3 border-t border-[rgba(204,40,40,0.2)] capitalize">
+                  Record Video
+                </th>
               </tr>
             </thead>
             {loading ?
@@ -139,7 +145,7 @@ export default function Index() {
                       </td>
                       <td className="px-3 lg:px-4 py-2 lg:py-3 capitalize text-black text-sm lg:text-base font-medium font-inter whitespace-nowrap">
                         <Link href={`/admin/teacher/${item?.teacherId?._id}`}>
-                        {item?.teacherId?.name}
+                          {item?.teacherId?.name}
                         </Link>
                       </td>
                       <td className="px-3 lg:px-4 py-2 lg:py-3 capitalize text-black text-sm lg:text-base font-medium font-inter whitespace-nowrap">
@@ -151,6 +157,14 @@ export default function Index() {
                       <td className="px-3 lg:px-4 py-2 lg:py-3 capitalize text-black text-sm lg:text-base font-medium font-inter ">
                         ${item?.totalAmount}
                       </td>
+                      <td className="px-3 lg:px-4 py-2 lg:py-3 capitalize text-black text-sm lg:text-base font-medium font-inter ">
+                        {item?.zoom ? (
+                          <ZoomPopup zoom={item?.zoom} />
+                        ) : (
+                          <span>No video</span>
+                        )}
+                      </td>
+
                     </tr>
                   ))
                 ) : (

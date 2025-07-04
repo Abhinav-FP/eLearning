@@ -59,7 +59,7 @@ export default function Message() {
   const handleUserSelect = (user) => {
     setTeacherId(user?.student?._id);
     MessageGetAlls(user?.student?._id);
-    if (window.innerWidth < 1023) {
+    if (window.innerWidth < 1024) {
       setMobileOpen(true);
     }
   };

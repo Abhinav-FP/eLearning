@@ -61,11 +61,11 @@ export default function Index() {
   };
 
   const calculateDurationMinutes = (startDateTime, endDateTime) => {
-  const start = new Date(startDateTime);
-  const end = new Date(endDateTime);
-  const diffInMs = end - start;
-  const diffInMinutes = diffInMs / (1000 * 60);
-  return diffInMinutes;
+    const start = new Date(startDateTime);
+    const end = new Date(endDateTime);
+    const diffInMs = end - start;
+    const diffInMinutes = diffInMs / (1000 * 60);
+    return diffInMinutes;
   }
 
 
@@ -127,10 +127,13 @@ export default function Index() {
                   <th className="font-normal text-sm lg:text-base px-3 lg:px-4 py-2 lg:py-3 border-t border-[rgba(204,40,40,0.2)] capitalize">
                     Amount
                   </th>
+                  <th className="font-normal text-sm lg:text-base px-3 lg:px-4 py-2 lg:py-3 border-t border-[rgba(204,40,40,0.2)] capitalize">
+                    Record Video
+                  </th>
                 </tr>
               </thead>
               {loading ?
-                <TableLoader length={5} />
+                <TableLoader length={6} />
                 :
                 <tbody>
                   {data && data.length > 0 ? (
@@ -144,13 +147,13 @@ export default function Index() {
                             <span className="capitalize">{item?.LessonId?.title}</span>
                             {isLessThan5minutesFromNowAndBeforeEnd(item?.startDateTime, item?.endDateTime) &&
                               <a
-                              href={item?.zoom?.meetingLink || ""}
-                              target="blank"
-                              rel="noopener noreferrer"
-                              className="text-xs bg-[#CC2828] text-white px-2 py-[2px] rounded-md hover:bg-[#b22424] transition cursor-pointer"
+                                href={item?.zoom?.meetingLink || ""}
+                                target="blank"
+                                rel="noopener noreferrer"
+                                className="text-xs bg-[#CC2828] text-white px-2 py-[2px] rounded-md hover:bg-[#b22424] transition cursor-pointer"
                               >
-                              Join Now
-                            </a>}
+                                Join Now
+                              </a>}
                           </div>
                         </td>
                         <td className="px-3 lg:px-4 py-2 lg:py-3 capitalize text-black text-sm lg:text-base font-medium font-inter whitespace-nowrap">
@@ -160,18 +163,25 @@ export default function Index() {
                           {item?.UserId?.name}
                         </td>
                         <td className="px-3 lg:px-4 py-2 lg:py-3 capitalize min-w-[240px] text-black text-sm lg:text-base font-medium font-inter ">
-                          {calculateDurationMinutes(item?.startDateTime,item?.endDateTime)} min{" "}
+                          {calculateDurationMinutes(item?.startDateTime, item?.endDateTime)} min{" "}
                           ({moment(item?.startDateTime).format('hh:mm A')} -{" "}
                           {moment(item?.endDateTime).format('hh:mm A')})
                         </td>
                         <td className="px-3 lg:px-4 py-2 lg:py-3 capitalize text-black text-sm lg:text-base font-medium font-inter ">
                           {formatMultiPrice(item?.teacherEarning, "USD")}
                         </td>
+                        <td className="px-3 lg:px-4 py-2 lg:py-3 capitalize text-black text-sm lg:text-base font-medium font-inter ">
+                          {item?.zoom ? (
+                            <ZoomPopup zoom={item?.zoom} />
+                          ) : (
+                            <span>No video</span>
+                          )}
+                        </td>
                       </tr>
                     ))
                   ) : (
                     <tr>
-                      <td colSpan={5}>
+                      <td colSpan={6}>
                         <div className="mt-2">
                           <NoData
                             Heading={"No bookings found."}

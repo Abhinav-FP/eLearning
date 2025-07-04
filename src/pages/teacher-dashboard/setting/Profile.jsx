@@ -558,7 +558,7 @@ export default function Profile() {
                         <button
                           type="button"
                           onClick={() => handleRemoveSpeciality(spec)}
-                          className="text-red-500 hover:text-red-800 text-xs"
+                          className="text-red-500 hover:text-red-800 text-xs cursor-pointer"
                         >
                           ✕
                         </button>

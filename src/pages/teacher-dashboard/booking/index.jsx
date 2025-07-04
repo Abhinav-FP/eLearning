@@ -6,6 +6,7 @@ import { TableLoader } from '@/components/Loader';
 import NoData from '@/pages/common/NoData';
 import { formatMultiPrice } from '@/components/ValueDataHook';
 import { FiSearch } from 'react-icons/fi';
+import ZoomPopup from '@/pages/admin/booking/ZoomPopup';
 
 export default function Index() {
   const [TabOpen, setTabOpen] = useState('upcoming');
@@ -121,13 +122,14 @@ export default function Index() {
                   <th className="font-normal text-sm lg:text-base px-3 lg:px-4 py-2 lg:py-3 border-t border-[rgba(204,40,40,0.2)] capitalize">
                     Amount
                   </th>
-                  <th className="font-normal text-sm lg:text-base px-3 lg:px-4 py-2 lg:py-3 border-t border-[rgba(204,40,40,0.2)] capitalize">
+                  {TabOpen === "past" &&
+                    <th className="font-normal text-sm lg:text-base px-3 lg:px-4 py-2 lg:py-3 border-t border-[rgba(204,40,40,0.2)] capitalize">
                     Record Video
-                  </th>
+                  </th>}
                 </tr>
               </thead>
               {loading ?
-                <TableLoader length={6} />
+                <TableLoader length={TabOpen === "past" ? 6 : 5} />
                 :
                 <tbody>
                   {data && data.length > 0 ? (
@@ -164,18 +166,19 @@ export default function Index() {
                         <td className="px-3 lg:px-4 py-2 lg:py-3 capitalize text-black text-sm lg:text-base font-medium font-inter ">
                           {formatMultiPrice(item?.teacherEarning, "USD")}
                         </td>
+                        {TabOpen === "past" &&
                         <td className="px-3 lg:px-4 py-2 lg:py-3 capitalize text-black text-sm lg:text-base font-medium font-inter ">
                           {item?.zoom ? (
                             <ZoomPopup zoom={item?.zoom} />
                           ) : (
-                            <span>No video</span>
+                            <span>N/A</span>
                           )}
-                        </td>
+                        </td>}
                       </tr>
                     ))
                   ) : (
                     <tr>
-                      <td colSpan={6}>
+                      <td colSpan={TabOpen === "past" ? 6 : 5}>
                         <div className="mt-2">
                           <NoData
                             Heading={"No bookings found."}

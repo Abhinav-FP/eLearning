@@ -136,7 +136,7 @@ export default function Index() {
                       key={index}
                       className={`border-t hover:bg-[rgba(204,40,40,0.1)] border-[rgba(204,40,40,0.2)] ${user?.block ? "opacity-50" : ""}`}
                     >
-                      <td className="capitalize whitespace-nowrap px-3 lg:px-4 py-2 lg:py-3 text-black text-sm lg:text-base font-medium font-inter ">
+                      <td className="capitalize whitespace-nowrap px-3 lg:px-4 py-2 lg:py-3 text-black text-sm lg:text-base font-medium font-inter">
                         <Link href={`/admin/teacher/${user?._id}`} >
                           {user?.name || "—"}
                         </Link>
@@ -180,9 +180,9 @@ export default function Index() {
                           alt="avatar"
                           className="w-10 h-10 rounded-full object-cover border" />
                         <div>
-                          <p className="font-semibold text-gray-800">{review.userId?.name}</p>
+                          <p className="font-semibold text-gray-800 capitalize">{review.userId?.name}</p>
                           <p className="text-xs text-gray-500">
-                            {moment(review.updatedAt).format("MMMM D, YYYY [at] hh:mm A")}
+                            {moment(review.createdAt).format("MMMM D, YYYY [at] hh:mm A") || ""}
                           </p>
                         </div>
                       </div>

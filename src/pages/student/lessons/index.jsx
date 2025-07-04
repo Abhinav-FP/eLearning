@@ -18,7 +18,7 @@ export default function Index() {
   const [categorizedLessons, setCategorizedLessons] = useState({
     upcoming: [],
     past: [],
-    cancelled: [],
+    // cancelled: [],
   });
   const [isPopupOpen, setIsPopupOpen] = useState(false);
   const closePopup = () => setIsPopupOpen(false);
@@ -30,47 +30,44 @@ export default function Index() {
     setStudentTimeZone(timeZone);
   }, []);
 
-  const fetchLessons = async () => {
-    try {
-      setLoading(true);
-      const main = new Listing();
-      const response = await main.GetBooking();
-      const allLessons = response?.data?.data || [];
+const fetchLessons = async () => {
+  try {
+    setLoading(true);
+    const main = new Listing();
+    const response = await main.GetBooking();
+    const allLessons = response?.data?.data || [];
 
-      const now = new Date();
-      const nowDateOnly = new Date(now.getFullYear(), now.getMonth(), now.getDate());
+    const now = Date.now(); // current time in ms
 
-      const categorized = {
-        upcoming: [],
-        past: [],
-        cancelled: [],
-      };
+    const categorized = {
+      upcoming: [],
+      past: []
+    };
 
-      allLessons.forEach(lesson => {
-        const start = new Date(lesson.startDateTime);
-        const startDateOnly = new Date(start.getFullYear(), start.getMonth(), start.getDate());
+    allLessons.forEach(lesson => {
+      if (lesson.cancelled) return; // Skip cancelled lessons
 
-        if (lesson.cancelled) {
-          categorized.cancelled.push(lesson);
-        } else if (startDateOnly >= nowDateOnly) {
-          categorized.upcoming.push(lesson);
-        } else {
-          categorized.past.push(lesson);
-        }
-      });
-      setLoading(false);
-      console.log("categorizedLessons", categorizedLessons);
-      setCategorizedLessons(categorized);
-    } catch (error) {
-      console.log("error", error);
-      setLoading(false);
-      setCategorizedLessons({
-        upcoming: [],
-        past: [],
-        cancelled: [],
-      });
-    }
-  };
+      const endTime = new Date(lesson.endDateTime).getTime();
+
+      if (endTime > now) {
+        categorized.upcoming.push(lesson);
+      } else {
+        categorized.past.push(lesson);
+      }
+    });
+
+    setCategorizedLessons(categorized);
+    setLoading(false);
+    console.log("categorizedLessons", categorized);
+  } catch (error) {
+    console.log("error", error);
+    setCategorizedLessons({
+      upcoming: [],
+      past: []
+    });
+    setLoading(false);
+  }
+};
 
   useEffect(() => {
     fetchLessons();
@@ -87,15 +84,9 @@ export default function Index() {
     return diffInMs > oneHourInMs;
   };
 
-  const isLessThan5minutesFromNowAndBeforeEnd = (startDateTime, endDateTime) => {
-    const now = new Date();
-    const start = new Date(startDateTime);
-    const end = new Date(endDateTime);
-    const fiveMinutesInMs = 5 * 60 * 1000;
-    const isWithinFiveMinutes = start - now < fiveMinutesInMs && start - now >= 0;
-    const isEndInFuture = end > now;
-    return isWithinFiveMinutes && isEndInFuture;
-  };
+  function isBeforeEndTime(endDateTime) {
+  return Date.now() < new Date(endDateTime).getTime();
+}
 
   const calculateDurationMinutes = (startDateTime, endDateTime) => {
   const start = new Date(startDateTime);
@@ -118,7 +109,7 @@ export default function Index() {
 
         {/* Tabs */}
         <div className="flex px-5 lg:px-[30px] flex-wrap gap-6 sm:gap-16 lg:gap-12 xl:gap-28 border-b border-[rgba(0,0,0,0.2)] mb-6">
-          {["Upcoming", "Past", "Cancelled"].map((item) => (
+          {["Upcoming", "Past"].map((item) => (
             <button
               key={item}
               onClick={() => setTab(item.toLowerCase())}
@@ -127,7 +118,7 @@ export default function Index() {
                 : "text-[#535353]  hover:text-[#CC2828] hover:after:bg-[#CC2828]"
                 }`}
             >
-              {item}
+              {item === "Upcoming" ? "Upcoming & Ongoing" : item}
             </button>
           ))}
         </div>
@@ -180,7 +171,7 @@ export default function Index() {
                           }}>
                           Reschedule
                         </button>}
-                      {tab === "past" && lesson?.ReviewId === null && (
+                      {tab === "past" && lesson?.ReviewId === null && lesson?.lessonCompletedTeacher && (
                         <button
                           className="tracking-[-0.06em] font-inter px-6 md:px-10 lg:px-12 xl:px-16 py-2 lg:py-2.5 text-[#CC2828] border border-[#CC2828] rounded-[10px] text-sm hover:bg-[#CC2828] hover:text-white cursor-pointer"
                           onClick={() => router.push(`/student/review/${lesson?._id}`)}
@@ -189,13 +180,14 @@ export default function Index() {
                         </button>
                       )}
 
-                      {isLessThan5minutesFromNowAndBeforeEnd(lesson?.startDateTime, lesson?.endDateTime) &&
+                       {/* {isBeforeEndTime("2025-07-04T11:00:00.000Z") && */}
+                      {lesson?.zoom && lesson?.zoom?.meetingLink && isBeforeEndTime(lesson?.endDateTime) &&
                         <a href={lesson?.zoom?.meetingLink || ""} target="blank"
-                          className="tracking-[-0.06em] font-inter px-6 md:px-10 lg:px-12 xl:px-16 py-2 lg:py-2.5 text-[#CC2828] border border-[#CC2828] rounded-[10px]  text-sm hover:bg-[#CC2828] hover:text-white cursor-pointer"
+                          className="animate-pulse tracking-[-0.06em] font-inter px-6 md:px-10 lg:px-12 xl:px-16 py-2 lg:py-2.5 text-white border border-[#CC2828] rounded-[10px]  text-sm bg-[#CC2828] hover:bg-white hover:text-[#CC2828] cursor-pointer"
                         >
                           Join Lesson
                         </a>
-                      }
+                       }
                       <Link href={`/student/message?query=${lesson?.teacherId?._id}`} className="tracking-[-0.06em] font-inter px-6 md:px-10 lg:px-12 xl:px-16 py-2 lg:py-2.5 text-white border border-[#CC2828] rounded-[10px]  text-sm bg-[#CC2828] hover:bg-white hover:text-[#CC2828] cursor-pointer">
                         Message
                       </Link>

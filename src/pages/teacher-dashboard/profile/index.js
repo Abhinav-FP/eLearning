@@ -90,8 +90,8 @@ export default function Index() {
               <FaUndo size={18} title="Enable" className="text-[#CC2828] cursor-pointer" onClick={() => { handleIsDelete(item) }} />
             ) : (
               <>
-                <MdEditSquare size={18} className="text-[#CC2828] cursor-pointer" onClick={() => { handleEdit(item) }} />
-                <RiDeleteBin6Line size={17} className="text-red-600 hover:text-red-700 cursor-pointer"
+                <MdEditSquare size={18} title="Edit" className="text-[#CC2828] cursor-pointer" onClick={() => { handleEdit(item) }} />
+                <RiDeleteBin6Line size={17} title="Disable" className="text-red-600 hover:text-red-700 cursor-pointer"
                   onClick={() => {
                     setId(item?._id);
                     setIsDeleteOpen(true);
@@ -135,7 +135,7 @@ export default function Index() {
               {/* Profile Section */}
               <div className="flex flex-row items-center gap-3 lg:gap-4">
                 <img
-                  src={data?.profile?.userId?.profile_photo || "/profile.png"}
+                  src={data?.profile?.userId?.profile_photo || "/Placeholder.png"}
                   alt="Profile"
                   className="w-16 h-16 lg:w-[94px] lg:h-[94px] rounded-full object-cover"
                 />

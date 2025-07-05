@@ -22,35 +22,32 @@ export default function ViewPopup({ isOpen, onClose, data, timezoneMappings }) {
         </div>
 
         <div className="grid grid-cols-1 gap-3 text-sm">
-          <div className="flex justify-between">
+          <div className="flex flex-col sm:flex-row sm:justify-between gap-1">
             <span className="font-medium text-gray-700">Email:</span>
-            <span>{data?.email}</span>
+            <span className="break-all">{data?.email}</span>
           </div>
-          {/* <div className="flex justify-between">
-            <span className="font-medium text-gray-700">Phone:</span>
-            <span>{data.phone || "N/A"}</span>
-          </div> */}
-          {/* <div className="flex justify-between capitalize">
-            <span className="font-medium text-gray-700 ">Nationality:</span>
-            <span>{data?.nationality || "N/A"}</span>
-          </div> */}
-          <div className="flex justify-between capitalize">
-            <span className="font-medium text-gray-700 ">Time Zone:</span>
+
+          <div className="flex flex-col sm:flex-row sm:justify-between capitalize gap-1">
+            <span className="font-medium text-gray-700">Time Zone:</span>
             <span>{timezoneMappings[data?.time_zone] || "N/A"}</span>
           </div>
-          <div className="flex justify-between capitalize">
+
+          <div className="flex flex-col sm:flex-row sm:justify-between capitalize gap-1">
             <span className="font-medium text-gray-700">Email Verified:</span>
             <span>{data?.email_verify ? "Yes" : "No"}</span>
           </div>
-          <div className="flex justify-between capitalize">
+
+          <div className="flex flex-col sm:flex-row sm:justify-between capitalize gap-1">
             <span className="font-medium text-gray-700">Blocked:</span>
             <span>{data?.block ? "Yes" : "No"}</span>
           </div>
-          <div className="flex justify-between">
+
+          <div className="flex flex-col sm:flex-row sm:justify-between gap-1">
             <span className="font-medium text-gray-700">Created At:</span>
             <span>{new Date(data?.createdAt).toLocaleString()}</span>
           </div>
-          <div className="flex justify-between">
+
+          <div className="flex flex-col sm:flex-row sm:justify-between gap-1">
             <span className="font-medium text-gray-700">Updated At:</span>
             <span>{new Date(data?.updatedAt).toLocaleString()}</span>
           </div>

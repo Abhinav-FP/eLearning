@@ -40,7 +40,7 @@ export default function BookingList({ book }) {
               <p className="text-base font-medium text-gray-800">
                 {book?.UserId?.name}
               </p>
-              <p className="text-sm text-gray-500">{book?.UserId?.email}</p>
+              <p className="text-sm text-gray-500 break-all">{book?.UserId?.email}</p>
             </div>
           </div>
 

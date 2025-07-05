@@ -132,8 +132,6 @@ const FaqManager = () => {
             <div className="w-full lg:w-6/12  lg:pl-0 mb-4">
                 <h2 className="text-[#CC2828] text-xl lg:text-2xl font-semibold tracking-[-0.04em]">Home Page FAQ</h2>
             </div>
-
-
             {faqs.map((faq, index) => (
                 <div key={index} className="grid grid-cols-1 md:grid-cols-2 gap-4 items-center">
                     <div>

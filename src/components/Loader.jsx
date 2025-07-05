@@ -624,38 +624,39 @@ const SpecialSlotLoader = () => {
 
 const BestTeacherLoader = ({ rows }) => {
   return (
-    Array(rows || 3)
-      .fill()
-      .map((_, i) =>
-        <div className="w-full md:w-4/12 px-2.5" key={i}>
-          <div className="bg-white border border-[rgba(56,121,117,0.2)] rounded-[8px] lg:rounded-[13px] p-3 md:p-4 lg:p-5 animate-pulse">
-            {/* Video Placeholder */}
-            <div className="relative h-[205px] bg-gray-200 rounded-[6px]" />
+    <div className="flex flex-wrap -mx-2.5 w-full">
+      {Array(rows || 3)
+        .fill()
+        .map((_, i) => (
+          <div
+            key={i}
+            className="w-full sm:w-1/2 lg:w-1/3 px-2.5 mb-5"
+          >
+            <div className="bg-white border border-[rgba(56,121,117,0.2)] rounded-[8px] lg:rounded-[13px] p-3 md:p-4 lg:p-5 animate-pulse">
+              {/* Video Placeholder */}
+              <div className="relative h-[205px] bg-gray-200 rounded-[6px]" />
 
-            {/* Name Placeholder */}
-            <div className="py-3 border-b border-[rgba(204,40,40,.2)] border-opacity-20 flex flex-wrap -mx-2 items-center">
-              <div className="w-8/12 px-2">
-                <div className="h-4 bg-gray-300 rounded w-3/4 mb-1" />
+              {/* Name Placeholder */}
+              <div className="py-3 border-b border-[rgba(204,40,40,.2)] border-opacity-20 flex flex-wrap -mx-2 items-center">
+                <div className="w-8/12 px-2">
+                  <div className="h-4 bg-gray-300 rounded w-3/4 mb-1" />
+                </div>
               </div>
-              {/* Optional rating/lessons placeholder */}
-              {/* <div className="w-4/12 px-2 text-right">
-            <div className="h-4 bg-gray-300 rounded w-1/2 mb-1 ml-auto" />
-            <div className="h-4 bg-gray-300 rounded w-2/3 ml-auto" />
-          </div> */}
-            </div>
 
-            {/* Lessons & Button Row */}
-            <div className="flex justify-between items-center pt-4 lg:pt-5">
-              <div className="w-6/12">
-                <div className="h-3 w-24 bg-gray-300 rounded mb-2" />
-                <div className="h-4 w-20 bg-gray-400 rounded font-bold" />
-              </div>
-              <div className="w-6/12 text-right">
-                <div className="h-9 bg-gray-300 rounded-full w-28 ml-auto" />
+              {/* Lessons & Button Row */}
+              <div className="flex justify-between items-center pt-4 lg:pt-5">
+                <div className="w-6/12">
+                  <div className="h-3 w-24 bg-gray-300 rounded mb-2" />
+                  <div className="h-4 w-20 bg-gray-400 rounded font-bold" />
+                </div>
+                <div className="w-6/12 text-right">
+                  <div className="h-9 bg-gray-300 rounded-full w-28 ml-auto" />
+                </div>
               </div>
             </div>
           </div>
-        </div>)
+        ))}
+    </div>
   );
 };
 

@@ -43,8 +43,8 @@ const BookingView = ({ data, status }) => {
                 tabIndex={0}
             >
                 <span className="flex gap-1  items-center">
-                    <IoMdEye  size={24}/>
-                     </span>
+                    <IoMdEye size={24} />
+                </span>
             </div>
 
             {showPopup && (
@@ -66,7 +66,11 @@ const BookingView = ({ data, status }) => {
                                     />
                                     <div className="space-y-1 text-left">
                                         <p><span className="font-semibold">Name:</span> {data?.UserId?.name}</p>
-                                        <p><span className="font-semibold">Email:</span> {data?.UserId?.email}</p>
+                                        <p><span className="font-semibold break-all">Email:</span>
+                                            <span className="break-all"> {data?.teacherId?.email}</span>
+                                        </p>
+
+
                                         <p><span className="font-semibold">Phone:</span> {data?.UserId?.phone}</p>
                                         <p><span className="font-semibold">Time Zone:</span> {data?.UserId?.time_zone}</p>
                                     </div>
@@ -81,11 +85,21 @@ const BookingView = ({ data, status }) => {
                                         className="w-16 h-16 rounded-full object-cover border-2 border-gray-300 shadow"
                                     />
                                     <div className="space-y-1 text-left">
-                                        <p><span className="font-semibold">Name:</span> {data?.teacherId?.name}</p>
-                                        <p><span className="font-semibold">Email:</span> {data?.teacherId?.email}</p>
-                                        <p><span className="font-semibold">Phone:</span> {data?.teacherId?.phone}</p>
-                                        <p><span className="font-semibold">Time Zone:</span> {data?.teacherId?.time_zone}</p>
+                                        <p>
+                                            <span className="font-semibold">Name:</span> {data?.teacherId?.name}
+                                        </p>
+                                        <p>
+                                            <span className="font-semibold">Email:</span>
+                                            <span className="break-all"> {data?.teacherId?.email}</span>
+                                        </p>
+                                        <p>
+                                            <span className="font-semibold">Phone:</span> {data?.teacherId?.phone}
+                                        </p>
+                                        <p>
+                                            <span className="font-semibold">Time Zone:</span> {data?.teacherId?.time_zone}
+                                        </p>
                                     </div>
+
                                 </div>
                             </InfoCard>
                         </div>

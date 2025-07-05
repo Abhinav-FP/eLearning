@@ -91,7 +91,7 @@ export default function ReviewGet({ reviews, Adminreview }) {
                                 ))}
                             </div>
                             {/* Description */}
-                            <p className="text-gray-700 text-sm whitespace-pre-line leading-relaxed mb-4">
+                            <p className="text-gray-700 text-sm whitespace-pre-line leading-relaxed mb-4 break-all">
                                 {review.description}
                             </p>
                             {/* Action Buttons */}

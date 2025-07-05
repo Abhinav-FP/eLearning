@@ -220,7 +220,7 @@ export default function Profile() {
                     src={
                       file instanceof File
                         ? URL.createObjectURL(file)
-                        : file || Profile_img
+                        : file || "/Placeholder.png"
                     }
                     height={100}
                     width={100}
@@ -238,7 +238,7 @@ export default function Profile() {
                   htmlFor="profileImageInput"
                   className="text-[#CC2828] font-medium text-base xl:text-xl border-none tracking-[-0.04em] cursor-pointer"
                 >
-                  Update Profile
+                  Update Avatar
                 </label>
               </div>
             </div>
@@ -350,7 +350,7 @@ export default function Profile() {
                       <button
                         type="button"
                         onClick={() => handleRemoveLanguage(lang)}
-                        className="text-red-500 hover:text-red-800 text-xs"
+                        className="text-red-500 hover:text-red-800 text-xs cursor-pointer"
                       >
                         ✕
                       </button>

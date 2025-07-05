@@ -265,7 +265,6 @@ export default function Home() {
 
             </form>
             <FaqManager />
-
             <TeacherFaq />
         </AdminLayout>
     );

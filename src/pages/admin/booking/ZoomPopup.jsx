@@ -21,7 +21,6 @@ export default function ZoomPopup({ zoom, onClose }) {
       </div>
 
 
-
       {showPopup &&
         <Popup isOpen={showPopup} onClose={() => setShowPopup(false)} size={"max-w-[700px]"}>
 

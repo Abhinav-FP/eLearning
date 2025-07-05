@@ -7,7 +7,7 @@ import AdminLayout from '../common/AdminLayout';
 import { FiSearch } from "react-icons/fi";
 import Link from 'next/link';
 import ZoomPopup from './ZoomPopup';
-import BookingPopup from '../common/BookingPopup';
+import BookingView from '../common/BookingView';
 
 export default function Index() {
   const [TabOpen, setTabOpen] = useState('upcoming');
@@ -122,14 +122,9 @@ export default function Index() {
                   Amount
                 </th>
                 {TabOpen === "past" && (
-                 <>
                   <th className="font-normal text-sm lg:text-base px-3 lg:px-4 py-2 lg:py-3 border-t border-[rgba(204,40,40,0.2)] capitalize">
-                    Record Video
+                    View Details
                   </th>
-                <th className="font-normal text-sm lg:text-base px-3 lg:px-4 py-2 lg:py-3 border-t border-[rgba(204,40,40,0.2)] capitalize">
-                  View 
-                  </th>
-                 </>
                 )}
               </tr>
             </thead>
@@ -164,12 +159,9 @@ export default function Index() {
                         ${item?.totalAmount}
                       </td>
                       {TabOpen === "past" && (
-                        <td className="px-3 lg:px-4 py-2 lg:py-3 capitalize text-black text-sm lg:text-base font-medium font-inter ">
+                        <td >
                           {item?.zoom ? (
-                            <>
-                            <ZoomPopup zoom={item?.zoom} />
-                            <BookingPopup data={item}/>
-                            </>
+                            <BookingView data={item} />
                           ) : (
                             <span>N/A</span>
                           )}

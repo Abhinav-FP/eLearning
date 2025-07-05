@@ -10,6 +10,7 @@ import Listing from '../api/Listing';
 
 export default function Main() {
   const [homeData, setHomeData] = useState([]);
+  console.log("homeData", homeData);
   const [loading, setLoading] = useState(false);
   const fetchData = async () => {
     try {
@@ -33,7 +34,10 @@ export default function Main() {
 
   return (
     <Layout>
-      <Hero title={homeData?.record?.hero_heading || "Learn from Expert Teachers Anytime, Anywhere!"} heroimg={homeData?.record?.hero_img_first} heroimg2={homeData?.record?.hero_img_second} />
+      <Hero
+        title={homeData?.record?.hero_heading || "Learn from Expert Teachers Anytime, Anywhere!"}
+        heroimg={homeData?.record?.hero_img_first}
+        heroimg2={homeData?.record?.hero_img_second} />
       <div id="howitwork">
         <HowItWork classess={''} title={"How It Works"} />
       </div>

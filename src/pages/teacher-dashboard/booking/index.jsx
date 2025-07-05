@@ -7,6 +7,7 @@ import NoData from '@/pages/common/NoData';
 import { formatMultiPrice } from '@/components/ValueDataHook';
 import { FiSearch } from 'react-icons/fi';
 import ZoomPopup from '@/pages/admin/booking/ZoomPopup';
+import BookingView from '@/pages/admin/common/BookingView';
 
 export default function Index() {
   const [TabOpen, setTabOpen] = useState('upcoming');
@@ -122,10 +123,12 @@ export default function Index() {
                   <th className="font-normal text-sm lg:text-base px-3 lg:px-4 py-2 lg:py-3 border-t border-[rgba(204,40,40,0.2)] capitalize">
                     Amount
                   </th>
-                  {TabOpen === "past" &&
-                    <th className="font-normal text-sm lg:text-base px-3 lg:px-4 py-2 lg:py-3 border-t border-[rgba(204,40,40,0.2)] capitalize">
-                    Record Video
-                  </th>}
+                 {TabOpen === "past" && (
+  <th className="font-normal text-xs sm:text-sm lg:text-base px-3 lg:px-4 py-2 lg:py-3 border-t border-[rgba(204,40,40,0.2)] capitalize text-gray-700">
+    View Details
+  </th>
+)}
+
                 </tr>
               </thead>
               {loading ?
@@ -167,9 +170,9 @@ export default function Index() {
                           {formatMultiPrice(item?.teacherEarning, "USD")}
                         </td>
                         {TabOpen === "past" &&
-                        <td className="px-3 lg:px-4 py-2 lg:py-3 capitalize text-black text-sm lg:text-base font-medium font-inter ">
+                        <td>
                           {item?.zoom ? (
-                            <ZoomPopup zoom={item?.zoom} />
+                            <BookingView data={item} status= {"teacher"} />
                           ) : (
                             <span>N/A</span>
                           )}

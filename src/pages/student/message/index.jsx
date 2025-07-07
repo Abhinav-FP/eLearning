@@ -8,7 +8,7 @@ import Listing from '@/pages/api/Listing';
 import toast from 'react-hot-toast';
 import { useRouter } from 'next/router';
 import DefaultMessage from '@/pages/common/DefaultMessage';
-import { ChatListShimmer, MessageLoader } from '@/components/Loader';
+import { ChatListShimmer, MessageContentLoader, MessageLoader } from '@/components/Loader';
 
 export default function Index() {
 
@@ -196,94 +196,101 @@ export default function Index() {
 
         {/* Chat area */}
         {teacherId ? (
-          <div className={`w-full lg:w-8/12 xl:w-9/12 flex flex-col bg-[#F1F1F1] ${MobileOpen ? "block lg:block" : "hidden lg:block"}`}>
-            {/* Header */}
-            <div className="flex items-center gap-3 lg:gap-4 bg-[#FFFFFF] px-4 lg:px-5 py-3.5 lg:py-4">
-              <Image
-                src={selectedIdUser?.profile_photo || "/profile.png"}
-                width={45}
-                height={45}
-                alt={"chat.name"}
-                className="w-[32px] xl:w-[45px] h-[32px] xl:h-[45px] rounded-full object-cover"
-              />
-              <div>
-                <h2 className="font-medium text-base text-black mb-0 tracking-[-0.06em]">{selectedIdUser?.name}</h2>
-                <p className="font-normal text-sm font-inter text-[#1E1E1E] capitalize">{selectedIdUser?.role}</p>
-              </div>
-              {MobileOpen && (
-                <button onClick={() => setMobileOpen(false)} className='ml-auto px-6 md:px-8 lg:px-10 py-2 text-[#CC2828] border border-[#CC2828] rounded-md text-xs sm:text-sm hover:bg-[#CC2828] hover:text-white'>
-                  Back
-                </button>
-              )}
-            </div>
-
-            {/* Chat body */}
-            <div ref={chatContainerRef} className="px-4 lg:px-5 pt-5 lg:pt-[30px] pb-[10px] lg:h-[calc(100vh-400px)] customscroll overflow-y-auto">
-              <div className="bg-[#FEECDC] rounded-[14px] relative pl-[50px] lg:pl-[60px] pr-[20px] lg:pr-[30px] py-[12px] mb-[30px] text-sm text-[#1E1E1E] max-w-[570px] mx-auto">
-                <div className="absolute top-1/2 left-[20px] -translate-y-1/2">
-                  <CiLock color="#312E40" size={20} />
+          <>
+            {processing ? (
+              <MessageContentLoader />
+            ) : (
+              <div className={`w-full lg:w-8/12 xl:w-9/12 flex flex-col bg-[#F1F1F1] ${MobileOpen ? "block lg:block" : "hidden lg:block"}`}>
+                {/* Header */}
+                <div className="flex items-center gap-3 lg:gap-4 bg-[#FFFFFF] px-4 lg:px-5 py-3.5 lg:py-4">
+                  <Image
+                    src={selectedIdUser?.profile_photo || "/profile.png"}
+                    width={45}
+                    height={45}
+                    alt={"chat.name"}
+                    className="w-[32px] xl:w-[45px] h-[32px] xl:h-[45px] rounded-full object-cover"
+                  />
+                  <div>
+                    <h2 className="font-medium text-base text-black mb-0 tracking-[-0.06em]">{selectedIdUser?.name}</h2>
+                    <p className="font-normal text-sm font-inter text-[#1E1E1E] capitalize">{selectedIdUser?.role}</p>
+                  </div>
+                  {MobileOpen && (
+                    <button onClick={() => setMobileOpen(false)} className='ml-auto px-6 md:px-8 lg:px-10 py-2 text-[#CC2828] border border-[#CC2828] rounded-md text-xs sm:text-sm hover:bg-[#CC2828] hover:text-white'>
+                      Back
+                    </button>
+                  )}
                 </div>
-                <span>Messages are end-to-end encrypted. No one outside of this chat can read or listen to them.</span>
-              </div>
 
-              {processing ? (
-                <MessageLoader />
-              ) : usermessage && usermessage.map((item, index) => {
-                const isIncoming = item.sent_by !== selectedIdUser?.role;
-                return (
-                  <div className="mt-4 space-y-1" key={index}>
-                    {(index === 0 || formatDate(item.createdAt) !== formatDate(usermessage[index - 1]?.createdAt)) && (
-                      <div className="text-center my-3">
-                        <span className="py-1 tracking-[-0.06em] font-inter text-base text-[#7A7A7A]">
-                          {formatDate(item.createdAt)}
+                {/* Chat body */}
+                <div ref={chatContainerRef} className="px-4 lg:px-5 pt-5 lg:pt-[30px] pb-[10px] lg:h-[calc(100vh-400px)] customscroll overflow-y-auto">
+                  <div className="bg-[#FEECDC] rounded-[14px] relative pl-[50px] lg:pl-[60px] pr-[20px] lg:pr-[30px] py-[12px] mb-[30px] text-sm text-[#1E1E1E] max-w-[570px] mx-auto">
+                    <div className="absolute top-1/2 left-[20px] -translate-y-1/2">
+                      <CiLock color="#312E40" size={20} />
+                    </div>
+                    <span>Messages are end-to-end encrypted. No one outside of this chat can read or listen to them.</span>
+                  </div>
+
+                  {processing ? (
+                    <MessageLoader />
+                  ) : usermessage && usermessage.map((item, index) => {
+                    const isIncoming = item.sent_by !== selectedIdUser?.role;
+                    return (
+                      <div className="mt-4 space-y-1" key={index}>
+                        {(index === 0 || formatDate(item.createdAt) !== formatDate(usermessage[index - 1]?.createdAt)) && (
+                          <div className="text-center my-3">
+                            <span className="py-1 tracking-[-0.06em] font-inter text-base text-[#7A7A7A]">
+                              {formatDate(item.createdAt)}
+                            </span>
+                          </div>
+                        )}
+                        {isIncoming ? (
+                          <div className="flex justify-end">
+                            <div className="bg-[rgba(204,40,40,0.1)] px-4 py-[12px] rounded-bl-[10px] rounded-t-[10px] max-w-[60%]">
+                              <p className="break-words text-sm tracking-[-0.04em] text-[#535353]">{linkify(item?.content)}</p>
+                            </div>
+                          </div>
+                        ) : (
+                          <div className="flex justify-start">
+                            <div className="bg-white px-4 py-[12px] rounded-br-[10px] rounded-t-[10px] max-w-[60%]">
+                              <p className="break-words text-sm tracking-[-0.04em] text-[#535353]">{linkify(item?.content)}</p>
+                            </div>
+                          </div>
+                        )}
+                        <span className={`block text-[#535353] text-sm mt-2 ${isIncoming ? 'text-right' : 'text-left'}`}>
+                          {moment(item.createdAt).format("hh:mm A")}
                         </span>
                       </div>
-                    )}
-                    {isIncoming ? (
-                      <div className="flex justify-end">
-                        <div className="bg-[rgba(204,40,40,0.1)] px-4 py-[12px] rounded-bl-[10px] rounded-t-[10px] max-w-[60%]">
-                          <p className="break-words text-sm tracking-[-0.04em] text-[#535353]">{linkify(item?.content)}</p>
-                        </div>
-                      </div>
-                    ) : (
-                      <div className="flex justify-start">
-                        <div className="bg-white px-4 py-[12px] rounded-br-[10px] rounded-t-[10px] max-w-[60%]">
-                          <p className="break-words text-sm tracking-[-0.04em] text-[#535353]">{linkify(item?.content)}</p>
-                        </div>
-                      </div>
-                    )}
-                    <span className={`block text-[#535353] text-sm mt-2 ${isIncoming ? 'text-right' : 'text-left'}`}>
-                      {moment(item.createdAt).format("hh:mm A")}
-                    </span>
-                  </div>
-                );
-              })}
-            </div>
+                    );
+                  })}
+                </div>
 
-            {/* Input */}
-            <form onSubmit={handleSendMessage}>
-              <div className="px-4 lg:px-5 py-3.5 flex items-center gap-2 bg-[#e5e5e5]">
-                <textarea
-                  value={message}
-                  onChange={(e) => setMessage(e.target.value)}
-                  onKeyDown={(e) => {
-                    if (e.key === 'Enter' && !e.shiftKey) {
-                      e.preventDefault();
-                      handleSendMessage(e);
-                    }
-                  }}
-                  placeholder="Type a message..."
-                  className="w-full px-5 py-3 resize-none overflow-hidden min-h-[50px] max-h-[200px] rounded-lg border border-gray-200 focus:outline-none focus:ring-1 focus:ring-gray-400 bg-white"
-                />
-                <button
-                  type="submit"
-                  className="bg-[#CC2828] h-[50px] w-[50px] cursor-pointer text-white px-4 py-2 rounded-full hover:bg-[#ad0e0e] transition duration-200"
-                >
-                  <IoSend size={22} />
-                </button>
+                {/* Input */}
+                <form onSubmit={handleSendMessage}>
+                  <div className="px-4 lg:px-5 py-3.5 flex items-center gap-2 bg-[#e5e5e5]">
+                    <textarea
+                      value={message}
+                      onChange={(e) => setMessage(e.target.value)}
+                      onKeyDown={(e) => {
+                        if (e.key === 'Enter' && !e.shiftKey) {
+                          e.preventDefault();
+                          handleSendMessage(e);
+                        }
+                      }}
+                      placeholder="Type a message..."
+                      className="w-full px-5 py-3 resize-none overflow-hidden min-h-[50px] max-h-[200px] rounded-lg border border-gray-200 focus:outline-none focus:ring-1 focus:ring-gray-400 bg-white"
+                    />
+                    <button
+                      type="submit"
+                      className="bg-[#CC2828] h-[50px] w-[50px] cursor-pointer text-white px-4 py-2 rounded-full hover:bg-[#ad0e0e] transition duration-200"
+                    >
+                      <IoSend size={22} />
+                    </button>
+                  </div>
+                </form>
               </div>
-            </form>
-          </div>
+            )}
+          </>
+
         ) : (
           <DefaultMessage />
         )}

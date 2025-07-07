@@ -561,6 +561,57 @@ const MessageLoader = () => {
   );
 };
 
+const MessageContentLoader = () => {
+  return (
+    <div className="w-full lg:w-8/12 xl:w-9/12 flex flex-col bg-[#F1F1F1] ">
+      <div className="flex items-center gap-3 lg:gap-4 bg-[#FFFFFF] px-4 lg:px-5 py-3.5 lg:py-4 animate-pulse">
+        {/* Profile shimmer */}
+        <div className="w-[45px] h-[45px] rounded-full bg-gray-300"></div>
+
+        <div className="flex flex-col gap-2">
+          {/* Name shimmer */}
+          <div className="h-4 w-32 bg-gray-300 rounded"></div>
+          {/* Role shimmer */}
+          <div className="h-3 w-20 bg-gray-300 rounded"></div>
+        </div>
+      </div>
+      <div className=" px-4 lg:px-5 pt-5 lg:pt-[30px] pb-[10px] lg:h-[calc(100vh-400px)] customscroll overflow-y-auto animate-pulse">
+        {/* Encrypted message shimmer */}
+        <div className="bg-[#FEECDC] rounded-[14px] relative pl-[50px] pr-[20px] py-[12px] mb-[30px] text-sm text-[#1E1E1E] max-w-[570px] mx-auto">
+          <div className="absolute top-1/2 left-[20px] -translate-y-1/2">
+            <div className="w-5 h-5 bg-gray-300 rounded-full"></div>
+          </div>
+          <div className="h-4 bg-gray-300 rounded w-3/4"></div>
+        </div>
+
+        {/* Simulate 5 shimmer messages */}
+        {[...Array(11)].map((_, i) => (
+          <div key={i} className="mt-4 space-y-1">
+            {/* Date shimmer */}
+            {i === 0 && (
+              <div className="text-center my-3">
+                <div className="h-4 bg-gray-300 rounded w-1/4 mx-auto"></div>
+              </div>
+            )}
+            <div className={`flex ${i % 2 === 0 ? 'justify-start' : 'justify-end'}`}>
+              <div className={`${i % 2 === 0 ? 'bg-white' : 'bg-[rgba(204,40,40,0.1)]'} px-4 py-[12px] rounded-t-[15px] ${i % 2 === 0 ? 'rounded-br-[15px]' : 'rounded-bl-[15px]'} max-w-[60%]`}>
+                <div className="h-3 bg-gray-300 rounded w-full mb-1"></div>
+                <div className="h-3 bg-gray-300 rounded w-3/4"></div>
+              </div>
+            </div>
+            <div className={`h-3 bg-gray-300 rounded w-12 mt-2 ${i % 2 === 0 ? 'ml-2' : 'ml-auto'}`}></div>
+          </div>
+        ))}
+      </div>
+      <div className="px-4 lg:px-5 py-3.5 flex items-center gap-2 bg-[#e5e5e5] animate-pulse">
+        <div className="w-full min-h-[50px] h-[50px] rounded-lg bg-gray-300"></div>
+        <div className="h-[50px] w-[50px] rounded-full bg-gray-300"></div>
+      </div>
+    </div>
+  );
+};
+
+
 const SpecialSlotLoader = () => {
   return (
     <div className="h-[50vh] mt-28 animate-pulse">
@@ -761,5 +812,5 @@ export {
   ProfileFormLoader, MessageLoader, StudentDashboardLoader,
   TeacherDashboardLoader, EditProfileLoader, TeacherEarningsLoader,
   TeacherProfileFormLoader, ChatListShimmer,
-  SpecialSlotLoader, BestTeacherLoader, LessonListLoader
+  SpecialSlotLoader, BestTeacherLoader, LessonListLoader, MessageContentLoader
 };

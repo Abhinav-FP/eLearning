@@ -8,7 +8,7 @@ import toast from 'react-hot-toast';
 import { useRouter } from 'next/router';
 import TeacherLayout from './Common/TeacherLayout';
 import DefaultMessage from '../common/DefaultMessage';
-import { ChatListShimmer, MessageLoader } from '@/components/Loader';
+import { ChatListShimmer, MessageContentLoader, MessageLoader } from '@/components/Loader';
 
 export default function Message() {
   const [teacherId, setTeacherId] = useState("");
@@ -194,76 +194,81 @@ export default function Message() {
             </div>
           )}
         </div>
-
         {/* Chat panel */}
         {teacherId ? (
-          <div className={`w-full lg:w-8/12 xl:w-9/12 flex flex-col bg-[#F1F1F1] ${mobileOpen ? "block lg:block" : "hidden lg:block"}`}>
-            <div className="flex items-center gap-3 bg-[#FFFFFF] px-4 py-3.5">
-              <Image
-                src={selectedIdUser?.profile_photo || "/profile.png"}
-                width={45}
-                height={45}
-                alt={selectedIdUser?.name}
-                className="w-[45px] h-[45px] rounded-full !object-cover"
-              />
-              <div>
-                <h2 className="font-medium text-base text-black mb-0 tracking-[-0.06em] capitalize">{selectedIdUser?.name}</h2>
-                <p className="font-normal text-sm text-[#1E1E1E] capitalize">{selectedIdUser?.role}</p>
-              </div>
-              {mobileOpen && (
-                <button onClick={() => setMobileOpen(false)} className='ml-auto px-6 py-2 text-[#CC2828] border border-[#CC2828] rounded-md text-xs hover:bg-[#CC2828] hover:text-white'>Back</button>
-              )}
-            </div>
-
-            <div ref={chatContainerRef} className="px-4 pt-5 pb-[10px] h-[calc(100vh-287px)] overflow-y-auto">
-              <div className="bg-[#FEECDC] rounded-[14px] relative pl-[50px] pr-[20px] py-[12px] mb-[30px] text-sm text-[#1E1E1E] max-w-[570px] mx-auto">
-                <div className="absolute top-1/2 left-[20px] -translate-y-1/2">
-                  <CiLock color="#312E40" size={20} />
-                </div>
-                <span>Messages are end-to-end encrypted. No one outside of this chat can read or listen to them.</span>
-              </div>
-              {processing ? <MessageLoader /> : usermessage?.map((item, index) => {
-                const isIncoming = item.sent_by !== selectedIdUser?.role;
-                return (
-                  <div key={index} className="mt-4 space-y-1">
-                    {(index === 0 || formatDate(item.createdAt) !== formatDate(usermessage[index - 1]?.createdAt)) && (
-                      <div className="text-center my-3">
-                        <span className="py-1 text-base text-[#7A7A7A]">{formatDate(item.createdAt)}</span>
-                      </div>
-                    )}
-                    <div className={`flex ${isIncoming ? 'justify-end' : 'justify-start'}`}>
-                      <div className={`${isIncoming ? 'bg-[rgba(204,40,40,0.1)]' : 'bg-white'} px-4 py-[12px] rounded-t-[15px] ${isIncoming ? 'rounded-bl-[15px]' : 'rounded-br-[15px]'} max-w-[60%]`}>
-                        <p className="break-words text-sm text-[#535353]">{linkify(item?.content)}</p>
-                      </div>
-                    </div>
-                    <span className={`block text-[#535353] text-sm mt-2 ${isIncoming ? 'text-right' : 'text-left'}`}>
-                      {moment(item.createdAt).format("hh:mm A")}
-                    </span>
+          <>
+            {processing ? (
+              <MessageContentLoader />
+            ) : (
+              <div className={`w-full lg:w-8/12 xl:w-9/12 flex flex-col bg-[#F1F1F1] ${mobileOpen ? "block lg:block" : "hidden lg:block"}`}>
+                <div className="flex items-center gap-3 bg-[#FFFFFF] px-4 py-3.5">
+                  <Image
+                    src={selectedIdUser?.profile_photo || "/profile.png"}
+                    width={45}
+                    height={45}
+                    alt={selectedIdUser?.name}
+                    className="w-[45px] h-[45px] rounded-full !object-cover"
+                  />
+                  <div>
+                    <h2 className="font-medium text-base text-black mb-0 tracking-[-0.06em] capitalize">{selectedIdUser?.name}</h2>
+                    <p className="font-normal text-sm text-[#1E1E1E] capitalize">{selectedIdUser?.role}</p>
                   </div>
-                );
-              })}
-            </div>
+                  {mobileOpen && (
+                    <button onClick={() => setMobileOpen(false)} className='ml-auto px-6 py-2 text-[#CC2828] border border-[#CC2828] rounded-md text-xs hover:bg-[#CC2828] hover:text-white'>Back</button>
+                  )}
+                </div>
 
-            <form onSubmit={handleSendMessage} className="px-4 py-3.5 flex items-center gap-2 bg-[#e5e5e5]">
-              <textarea
-                value={message}
-                onChange={(e) => setMessage(e.target.value)}
-                onKeyDown={(e) => {
-                  if (e.key === 'Enter' && !e.shiftKey) {
-                    e.preventDefault();
-                    handleSendMessage(e);
-                  }
-                }}
-                placeholder="Type a message..."
-                className="w-full px-5 py-3 resize-none min-h-[50px] max-h-[200px] rounded-lg border border-gray-200 focus:ring-1 focus:ring-gray-400 bg-white"
-              />
-              <button type="submit"
-                className="bg-[#CC2828] h-[50px] w-[50px] cursor-pointer text-white px-4 py-2 rounded-full hover:bg-[#ad0e0e] transition duration-200"
-              >
-                <IoSend size={22} />
-              </button>
-            </form>
-          </div>
+                <div ref={chatContainerRef} className="px-4 pt-5 pb-[10px] h-[calc(100vh-287px)] overflow-y-auto">
+                  <div className="bg-[#FEECDC] rounded-[14px] relative pl-[50px] pr-[20px] py-[12px] mb-[30px] text-sm text-[#1E1E1E] max-w-[570px] mx-auto">
+                    <div className="absolute top-1/2 left-[20px] -translate-y-1/2">
+                      <CiLock color="#312E40" size={20} />
+                    </div>
+                    <span>Messages are end-to-end encrypted. No one outside of this chat can read or listen to them.</span>
+                  </div>
+                  {processing ? <MessageLoader /> : usermessage?.map((item, index) => {
+                    const isIncoming = item.sent_by !== selectedIdUser?.role;
+                    return (
+                      <div key={index} className="mt-4 space-y-1">
+                        {(index === 0 || formatDate(item.createdAt) !== formatDate(usermessage[index - 1]?.createdAt)) && (
+                          <div className="text-center my-3">
+                            <span className="py-1 text-base text-[#7A7A7A]">{formatDate(item.createdAt)}</span>
+                          </div>
+                        )}
+                        <div className={`flex ${isIncoming ? 'justify-end' : 'justify-start'}`}>
+                          <div className={`${isIncoming ? 'bg-[rgba(204,40,40,0.1)]' : 'bg-white'} px-4 py-[12px] rounded-t-[15px] ${isIncoming ? 'rounded-bl-[15px]' : 'rounded-br-[15px]'} max-w-[60%]`}>
+                            <p className="break-words text-sm text-[#535353]">{linkify(item?.content)}</p>
+                          </div>
+                        </div>
+                        <span className={`block text-[#535353] text-sm mt-2 ${isIncoming ? 'text-right' : 'text-left'}`}>
+                          {moment(item.createdAt).format("hh:mm A")}
+                        </span>
+                      </div>
+                    );
+                  })}
+                </div>
+
+                <form onSubmit={handleSendMessage} className="px-4 py-3.5 flex items-center gap-2 bg-[#e5e5e5]">
+                  <textarea
+                    value={message}
+                    onChange={(e) => setMessage(e.target.value)}
+                    onKeyDown={(e) => {
+                      if (e.key === 'Enter' && !e.shiftKey) {
+                        e.preventDefault();
+                        handleSendMessage(e);
+                      }
+                    }}
+                    placeholder="Type a message..."
+                    className="w-full px-5 py-3 resize-none min-h-[50px] max-h-[200px] rounded-lg border border-gray-200 focus:ring-1 focus:ring-gray-400 bg-white"
+                  />
+                  <button type="submit"
+                    className="bg-[#CC2828] h-[50px] w-[50px] cursor-pointer text-white px-4 py-2 rounded-full hover:bg-[#ad0e0e] transition duration-200"
+                  >
+                    <IoSend size={22} />
+                  </button>
+                </form>
+              </div>
+            )}
+          </>
         ) : (
           <DefaultMessage className={`${mobileOpen ? "block lg:block" : "hidden lg:block"}`} />
         )}

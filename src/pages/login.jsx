@@ -78,7 +78,8 @@ export default function Login() {
       <div className="sm:bg-white px-4 lg:px-10 pt-5 pb-10 lg:pb-20 sm:rounded-[20px] md:rounded-[20px] lg:rounded-[40px] sm:shadow lg:shadow-lg w-full max-w-[653px] sm:login_custom">
         {/* Logo */}
         <div className="flex justify-center mb-6 lg:mb-10">
-          <Link href="/">
+          <Link href="/" className="h-[85px] w-[100px]">
+            {/* <Image src={"/Logo.png"} width={600} height={479} layout="fixed" alt={"Login"}/> */}
             <Image src={Logo} height={75} width={94} alt={"Login"} />
           </Link>
         </div>

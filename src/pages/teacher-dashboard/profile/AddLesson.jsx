@@ -148,23 +148,26 @@ export default function AddLesson({ isOpen, onClose, data, getLessons }) {
           <label className="block text-[#CC2828] font-medium mb-1">
             Price (In USD)
           </label>
-          <input
-            type="text"
-            name="price"
-            value={formData.price}
-            onChange={(e) => {
-              if (
-                /^[0-9]*$/.test(e.target.value)
-              ) {
-                handleChange(e);
-              }
-            }}
-            maxLength="7"
-            placeholder="Enter price"
-            required
-
-            className="w-full p-3 rounded-md bg-gray-100 text-gray-700 focus:outline-none focus:ring-2 focus:ring-[#CC2828]"
-          />
+          <div className="relative">
+            {/* Fixed "USD" label inside input */}
+            <span className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-500 text-sm pointer-events-none">
+              USD
+            </span>
+            <input
+              type="text"
+              name="price"
+              value={formData.price}
+              onChange={(e) => {
+                if (/^[0-9]*$/.test(e.target.value)) {
+                  handleChange(e);
+                }
+              }}
+              maxLength="7"
+              placeholder="Enter price"
+              required
+              className="w-full pl-14 p-3 rounded-md bg-gray-100 text-gray-700 focus:outline-none focus:ring-2 focus:ring-[#CC2828]"
+            />
+          </div>
         </div>
         {/* Duration Field */}
         <div>

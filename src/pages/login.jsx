@@ -1,6 +1,5 @@
 import Image from "next/image";
 import React, { useState } from "react";
-import Logo from "./Assets/Images/Logo2.png";
 import Link from "next/link";
 import { IoEye, IoEyeOff } from "react-icons/io5";
 import { useRouter } from "next/router";
@@ -84,7 +83,7 @@ export default function Login() {
               height={1000}
               width={1000}
               layout="fixed"
-              src={"/Logo1.png"}
+              src={"/Logo.png"}
               alt="japanese for me logo"
             />
           </Link>

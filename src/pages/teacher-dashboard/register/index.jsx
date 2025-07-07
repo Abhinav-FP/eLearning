@@ -126,7 +126,7 @@ export default function Index() {
               height={1000}
               width={1000}
               layout="fixed"
-              src={"/Logo1.png"}
+              src={"/Logo.png"}
               alt="japanese for me logo"
             />
           </Link>

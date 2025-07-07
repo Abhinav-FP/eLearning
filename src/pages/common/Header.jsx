@@ -58,7 +58,7 @@ export default function Header() {
                                     height={1000}
                                     width={1000}
                                     layout="fixed"
-                                    src={"/Logo1.png"}
+                                    src={"/Logo.png"}
                                     alt="japanese for me logo"
                                 />
                                  

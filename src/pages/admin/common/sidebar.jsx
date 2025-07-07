@@ -12,6 +12,7 @@ import { IoSettingsOutline } from "react-icons/io5";
 import { MdOutlineRateReview } from "react-icons/md";
 import { FaEdit } from "react-icons/fa";
 import { useRole } from "@/context/RoleContext";
+import { MdOutlineReviews } from "react-icons/md";
 
 function SideBar() {
     const pathname = usePathname();
@@ -98,7 +99,7 @@ function SideBar() {
                                 href="/admin/reviews"
                                 className={`flex items-center py-2.5 px-3 md:px-4 lg:px-6 gap-2 text-[#565F66] text-base font-medium tracking-[-0.06em] ${pathname === "/admin/reviews" ? "text-white bg-[#D6202C]" : "hover:bg-gray-100"} `}
                             >
-                                <MdReviews size={20} />
+                                <MdOutlineReviews size={20} />
                                 Reviews
                             </Link>
                             <Link

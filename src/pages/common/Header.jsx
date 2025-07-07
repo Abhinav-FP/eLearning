@@ -92,7 +92,7 @@ export default function Header() {
                                 <div className="flex flex-col lg:hidden">
                                     <Link
                                         href={`${user && user?.role === "student" ? "/student" : user?.role === "teacher" ? "/teacher-dashboard" : "/admin"}`}
-                                        className="text-[#CC2828] hover:text-[#ad0e0e] border-t border-[#ddd] text-base py-3 px-4 font-medium cursor-pointer" >
+                                        className="text-[#CC2828] hover:text-[#ad0e0e] border-t border-b border-[#ddd] text-base py-3 px-4 font-medium cursor-pointer" >
                                         View dashboard
                                     </Link>
                                     <button

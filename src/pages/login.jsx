@@ -1,6 +1,6 @@
 import Image from "next/image";
 import React, { useState } from "react";
-import Logo from "./Assets/Images/logo.png";
+import Logo from "./Assets/Images/Logo2.png";
 import Link from "next/link";
 import { IoEye, IoEyeOff } from "react-icons/io5";
 import { useRouter } from "next/router";
@@ -54,11 +54,11 @@ export default function Login() {
         } else if (response?.data?.role === "teacher") {
           router.push("/teacher-dashboard");
         }
-       else if (response?.data?.role === "admin") {
-        router.push("/admin");
+        else if (response?.data?.role === "admin") {
+          router.push("/admin");
+        }
       }
-    }
-      else{
+      else {
         toast.error(response.data.message);
       }
       setData({
@@ -79,8 +79,14 @@ export default function Login() {
         {/* Logo */}
         <div className="flex justify-center mb-6 lg:mb-10">
           <Link href="/" className="h-[85px] w-[100px]">
-            {/* <Image src={"/Logo.png"} width={600} height={479} layout="fixed" alt={"Login"}/> */}
-            <Image src={Logo} height={75} width={94} alt={"Login"} />
+            <Image
+              className="max-w-fit h-[100px]"
+              height={1000}
+              width={1000}
+              layout="fixed"
+              src={"/Logo1.png"}
+              alt="japanese for me logo"
+            />
           </Link>
         </div>
 
@@ -138,7 +144,7 @@ export default function Login() {
 
             {/* Forgot Password */}
             <div className="flex justify-end mb-4 cursor-pointer">
-             <Forgot />
+              <Forgot />
             </div>
 
             {/* Login Button */}

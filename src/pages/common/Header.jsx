@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
-import Logo from "../Assets/Images/logo.png"; // Adjust the path as necessary
+import Logo from "../Assets/Images/Logo3.png"; // Adjust the path as necessary
 import { IoIosArrowDown } from "react-icons/io";
 import { useRole } from "@/context/RoleContext";
 import { useRouter } from "next/router";
@@ -53,14 +53,15 @@ export default function Header() {
                     <div className="relative flex items-center justify-between">
                         <div className="flex-shrink-0">
                             <Link href="/">
-                                <Image
-                                    className="max-w-fit h-[69px]"
-                                    height={75}
-                                    width={94}
+                                   <Image
+                                    className="max-w-fit h-[85px]"
+                                    height={1000}
+                                    width={1000}
                                     layout="fixed"
-                                    src={Logo}
-                                    alt="Japanese Logo"
+                                    src={"/Logo1.png"}
+                                    alt="japanese for me logo"
                                 />
+                                 
                             </Link>
                         </div>
                         <div className={`rounded lg:rounded-[0] absolute top-full lg:top-auto lg:relative left-0 right-0 bg-white lg:bg-transparent lg:ml-2 lg:block ${menuOpen ? 'block' : 'hidden'}`}>

@@ -4,7 +4,6 @@ import { usePathname } from "next/navigation";
 import Link from "next/link";
 import { IoIosMenu } from "react-icons/io";
 import { IoMdArrowRoundBack } from "react-icons/io";
-import Logo from "../../Assets/Images/logo.png";
 import Image from "next/image";
 import { PiChalkboardTeacherFill } from "react-icons/pi";
 import { PiStudentFill } from "react-icons/pi";
@@ -43,7 +42,7 @@ function SideBar() {
 
                 <div className="px-3 md:px-4 lg:px-6 text-center py-6 lg:py-8">
                     <Link href="/">
-                        <Image src={Logo} alt="avatar" className="h-[85px] w-[105px] mx-2 inline-block" />
+                        <Image src={"/Logo1.png"} alt="avatar" className="h-[85px] w-[105px] mx-2 inline-block" />
                     </Link>
                 </div>
 

@@ -2,7 +2,6 @@ import Link from "next/link";
 import React, { useState } from "react";
 import timeZones from "../../../Json/TimeZone";
 import nationalities from "../../../Json/Nationality";
-import Logo from "../../Assets/Images/logo.png";
 import Image from "next/image";
 import Listing from "@/pages/api/Listing";
 import { IoEye, IoEyeOff } from "react-icons/io5";
@@ -122,7 +121,14 @@ export default function Index() {
         {/* Logo */}
         <div className="flex justify-center mb-6">
           <Link href="/">
-            <Image src={Logo} alt="Japanese for me" />
+            <Image
+              className="max-w-fit h-[100px]"
+              height={1000}
+              width={1000}
+              layout="fixed"
+              src={"/Logo1.png"}
+              alt="japanese for me logo"
+            />
           </Link>
         </div>
 

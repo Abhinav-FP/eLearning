@@ -162,7 +162,7 @@ export default function Message() {
         {/* Sidebar */}
         <div className={`w-full lg:w-4/12 xl:w-3/12 rounded-lg pt-2 ${mobileOpen ? 'hidden lg:block' : 'block lg:block'}`}>
           {chatListLoading ? <ChatListShimmer /> : (
-            <div className="mt-0 space-y-1 lg:h-[calc(100vh-136px)] overflow-y-auto customscroll min-h-[300px] ">
+            <div className="mt-0 space-y-1 h-[calc(100vh-120px)] lg:h-[calc(100vh-136px)] overflow-y-auto customscroll min-h-[300px] ">
               {messageCount?.map((chat, index) => (
                 <div
                   key={index}

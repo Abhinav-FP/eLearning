@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
-import Logo from "../Assets/Images/Logo3.png"; // Adjust the path as necessary
+
 import { IoIosArrowDown } from "react-icons/io";
 import { useRole } from "@/context/RoleContext";
 import { useRouter } from "next/router";
@@ -20,7 +20,7 @@ export default function Header() {
 
     const [DropDown, setDropDown] = useState(false);
     const ToggleDropdown = () => {
-        setDropDown(!DropDown);
+            setDropDown(!DropDown);
     }
     // const [selectLang, setSelectLang] = useState('English');
     const handleLanguageSelect = (lang) => {

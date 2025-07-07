@@ -22,3 +22,5 @@ body {
   color: var(--foreground);
 }
 .teacher_box{box-shadow: 0px 2.65px 15.89px 0px rgba(0, 0, 0, 0.14);}
+
+.review .swiper-slide{height: auto;}

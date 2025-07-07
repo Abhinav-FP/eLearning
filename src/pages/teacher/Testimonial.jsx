@@ -13,7 +13,7 @@ import NoData from "../common/NoData";
 export default function Testimonial({ reviews }) {
 
     return (
-        <div className="pt-[20px] lg:pt-[40px] xl:pt-[60px] pb-[40px] lg:pb-[60px] bg-[#F8F9FA]">
+        <div className="pt-[20px] lg:pt-[40px] xl:pt-[60px] pb-[40px] lg:pb-[60px] bg-[#F8F9FA] review">
                   <div className="container sm:container md:container lg:container xl:max-w-[1230px] bg-[rgba(249,190,191, .1)] px-4 mx-auto">
                 <Heading classess={'text-[#1E1E1E] mb-3 lg:mb-4 text-center'} title={'Reviews'} />
 
@@ -55,7 +55,7 @@ export default function Testimonial({ reviews }) {
                     >
                         {reviews.map((item, index) => (
                             <SwiperSlide key={index}>
-                                <div className="border border-[rgba(56,121,117,0.2)] rounded-[20px] p-[30px] lg:p-[40px]">
+                                <div className="border h-full border-[rgba(56,121,117,0.2)] rounded-[20px] p-[30px] lg:p-[40px]">
                                     <div className="w-[42px] h-[60px] mx-auto mb-3 lg:mb-4">
                                         <Image
                                             src={item?.userId?.profile_photo || TeacherImg}

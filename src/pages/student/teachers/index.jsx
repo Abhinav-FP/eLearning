@@ -117,7 +117,7 @@ export default function Index() {
                 >
                   <div className="flex flex-col sm:flex-row sm:items-center space-y-2 md:pl-24 lg:pl-[130px] mt-2 relative min-h-20 lg:min-h-[104px]">
                     <Image
-                      src={teacher?.userId?.profile_photo || "/profile.png"}
+                      src={teacher?.userId?.profile_photo || "/Placeholder.png"}
                       alt="Profile"
                       className="w-16 h-16 md:w-20 md:h-20 lg:w-[104px] lg:h-[104px] rounded-full object-cover left-0 md:absolute top-0"
                       height={104}

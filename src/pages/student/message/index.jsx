@@ -173,7 +173,7 @@ export default function Index() {
                   className={`flex items-center text-[#ffffff] min-h-[56px] pr-[66px] pl-[89px] py-[8px] hover:bg-[#CC28281A] relative cursor-pointer min-h-[72px] ${teacherId === chat?.teacher?._id ? "bg-[#CC28281A]" : "bg-[#fff]"}`}
                 >
                   <Image
-                    src={chat?.teacher?.profile_photo || "/profile.png"}
+                    src={chat?.teacher?.profile_photo || "/Placeholder.png"}
                     width={50}
                     height={50}
                     alt={chat?.teacher?.name}
@@ -204,7 +204,7 @@ export default function Index() {
                 {/* Header */}
                 <div className="flex items-center gap-3 lg:gap-4 bg-[#FFFFFF] px-4 lg:px-5 py-3.5 lg:py-4">
                   <Image
-                    src={selectedIdUser?.profile_photo || "/profile.png"}
+                    src={selectedIdUser?.profile_photo || "/Placeholder.png"}
                     width={45}
                     height={45}
                     alt={"chat.name"}

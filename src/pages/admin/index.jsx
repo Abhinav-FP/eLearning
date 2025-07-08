@@ -174,7 +174,7 @@ export default function Index() {
                     <div className="flex justify-between items-center mb-3">
                       <div className="flex gap-3 items-center">
                         <Image
-                          src={review?.userId?.profile_photo || "/profile.png"}
+                          src={review?.userId?.profile_photo || "/Placeholder.png"}
                           height={100}
                           width={100}
                           alt="avatar"

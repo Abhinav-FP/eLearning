@@ -47,7 +47,7 @@ export default function Delete({ isOpen, onClose, Id, getLessons }) {
               onClick={deleteshipment}
               className="bg-red-600 hover:bg-red-500 font-manrope font-[700] text-[14px] px-[20px] py-[10px] text-white rounded-[5px] text-center cursor-pointer"
             >
-              {loading ? "Deleting..." : "Delete"}
+              {loading ? "Disabling..." : "Disable"}
             </button>
           </div>
         </div>

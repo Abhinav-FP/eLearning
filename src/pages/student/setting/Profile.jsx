@@ -128,7 +128,7 @@ export default function Profile() {
                     src={
                       file instanceof File
                         ? URL.createObjectURL(file)
-                        : file || "/profile.png"
+                        : file || "/Placeholder.png"
                     }
                     width={164} height={164}
                     alt={data?.name || "Profile Image"}

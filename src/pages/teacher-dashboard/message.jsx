@@ -170,7 +170,7 @@ export default function Message() {
                   className={`flex items-center text-[#ffffff] min-h-[56px] pr-[66px] pl-[89px] py-[8px] hover:bg-[#CC28281A] relative cursor-pointer min-h-[72px] ${teacherId === chat?.teacher?._id ? "bg-[#CC28281A]" : "bg-[#fff]"}`}
                 >
                   <Image
-                    src={chat?.student?.profile_photo || "/profile.png"}
+                    src={chat?.student?.profile_photo || "/Placeholder.png"}
                     width={50}
                     height={50}
                     alt={chat?.student?.name}
@@ -203,7 +203,7 @@ export default function Message() {
               <div className={`w-full lg:w-8/12 xl:w-9/12 flex flex-col bg-[#F1F1F1] ${mobileOpen ? "block lg:block" : "hidden lg:block"}`}>
                 <div className="flex items-center gap-3 bg-[#FFFFFF] px-4 py-3.5">
                   <Image
-                    src={selectedIdUser?.profile_photo || "/profile.png"}
+                    src={selectedIdUser?.profile_photo || "/Placeholder.png"}
                     width={45}
                     height={45}
                     alt={selectedIdUser?.name}

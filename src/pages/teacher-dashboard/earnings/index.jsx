@@ -103,7 +103,7 @@ export default function index() {
   const [IsEarning, setIsEarning] = useState(false);
   const close = () => setIsEarning(false);
 
-  console.log("data",data);
+  // console.log("data",data);
 
   return (
     <TeacherLayout page={"Earnings"}>
@@ -140,11 +140,11 @@ export default function index() {
             <div className="space-x-3 w-full md:w-auto flex md:block justify-between">
               <button
                 onClick={() => {
-                  if(selectedOption !== "")
-                    {
-                      toast.error("Please select time duration as All before requesting payout");
-                      return;
-                    }
+                  // if(selectedOption !== "")
+                  //   {
+                  //     toast.error("Please select time duration as All before requesting payout");
+                  //     return;
+                  //   }
                   setIsEarning(true);
                 }}
                 className="w-fit px-2 px-4 xl:px-8 py-2 h-[44px] hover:bg-white hover:text-[#CC2828] border border-[#CC2828] rounded-md tracking-[-0.06em] text-sm font-medium bg-[#CC2828] text-white cursor-pointer"
@@ -225,7 +225,7 @@ export default function index() {
 
                 <tbody>
                   {data && data?.bookings && data?.bookings?.length > 0 ? (
-                    data.bookings.map((item, index) => (
+                    data?.bookings?.map((item, index) => (
                       <tr
                         key={index}
                         className="hover:bg-[rgba(204,40,40,0.1)] border-t border-[rgba(204,40,40,0.2)]"
@@ -300,7 +300,7 @@ export default function index() {
 
                 <tbody>
                   {data && data?.bonusData && data?.bonusData?.length > 0 ? (
-                    data.bonusData.map((item, index) => (
+                    data?.bonusData?.map((item, index) => (
                       <tr
                         key={index}
                         className="hover:bg-[rgba(204,40,40,0.1)] border-t border-[rgba(204,40,40,0.2)]"
@@ -357,7 +357,7 @@ export default function index() {
         <Earning
           isOpen={IsEarning}
           onClose={close}
-          data={data?.earningsSummary?.pendingEarnings}
+          data={data?.totalPendingEarning}
           fetchEarnings={fetchEarnings}
         />
       )}

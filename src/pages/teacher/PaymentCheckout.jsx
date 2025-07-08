@@ -78,7 +78,7 @@ const PaymentCheckout = ({ selectedLesson, selectedSlot, studentTimeZone, user, 
             className="w-12 h-12 rounded-full object-cover"
           /> */}
           <Image
-            src={selectedLesson?.teacher?.profile_photo || "/profile.png"}
+            src={selectedLesson?.teacher?.profile_photo || "/Placeholder.png"}
             alt="Profile"
             className="w-12 h-12 rounded-full object-cover"
             height={44}

@@ -103,7 +103,7 @@ export default function Index() {
                           <div className="flex items-center space-x-3">
                             <div>
                               <Image
-                                src={wish?.teacher?.profile_photo || "/profile.png"}
+                                src={wish?.teacher?.profile_photo || "/Placeholder.png"}
                                 alt="Profile"
                                 className="w-11 h-11 rounded-full object-cover"
                                 height={40}

@@ -202,7 +202,7 @@ export default function Index() {
               <div className="border border-[#CC2828] rounded-xl p-4 w-full md:w-1/2 space-y-4">
                 <div className="flex items-center gap-4">
                   <Image
-                    src={data?.teacher?.profile_photo || "/profile.png"}
+                    src={data?.teacher?.profile_photo || "/Placeholder.png"}
                     alt="Profile"
                     className="w-12 h-12 rounded-full object-cover"
                     height={44}

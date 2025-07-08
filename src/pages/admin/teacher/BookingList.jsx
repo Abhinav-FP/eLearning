@@ -32,7 +32,7 @@ export default function BookingList({ book }) {
           {/* Student Info */}
           <div className="flex items-center gap-4 mb-4">
             <img
-              src={book?.UserId?.profile_photo || "/profile.png"}
+              src={book?.UserId?.profile_photo || "/Placeholder.png"}
               alt="Student"
               className="w-12 h-12 rounded-full object-cover border"
             />

@@ -43,7 +43,7 @@ export default function Index() {
                                         <div className="flex justify-between items-center mb-4">
                                             <div className="flex items-center gap-4">
                                                 <img
-                                                    src={review.userId?.profile_photo ? review.userId?.profile_photo : "/profile.png" || "/profile.png"}
+                                                    src={review.userId?.profile_photo ? review.userId?.profile_photo : "/Placeholder.png"}
                                                     alt={review.userId?.name}
                                                     className="w-12 h-12 rounded-full object-cover border"
                                                 />

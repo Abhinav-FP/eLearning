@@ -126,7 +126,7 @@ export default function AddSlot({ isOpen, onClose }) {
                       }`}
                   >
                     <img
-                      src={student?.profile_photo || "/profile.png"}
+                      src={student?.profile_photo || "/Placeholder.png"}
                       alt={student?.name}
                       className="w-10 h-10 rounded-full object-cover"
                     />

@@ -90,7 +90,7 @@ function StripeForm({ PricePayment, selectedLesson, adminCommission, selectedSlo
 
     } catch (err) {
       console.error("Payment error:", err);
-      toast.error("Error during payment");
+      toast.error(err?.response?.data?.message || "Error during payment");
     } finally {
       setProcessing(false);
     }

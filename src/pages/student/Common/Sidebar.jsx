@@ -50,7 +50,7 @@ function SideBar() {
 
                 <div className="px-3 lg:px-4">
                     <Link href = "/student/setting" className="user_row p-2.5 bg-white shadow-md rounded-lg lg:rounded-xl flex items-center gap-3">
-                        <div className="w-11 h-11 rounded-full bg-green-400 flex items-center justify-center text-white text-xl font-bold">
+                        <div className="w-11 h-11 rounded-full flex items-center justify-center text-white text-xl font-bold">
                             {/* Replace with an actual image if needed */}
                             <img
                                 src={user?.profile_photo || "/Placeholder.png"}

@@ -41,9 +41,9 @@ export default function Index() {
     }
   }, [Query]);
 
-  const MessageCount = async () => {
+  const MessageCount = async (isLoading=true) => {
     try {
-      setChatListLoading(true);
+      if(isLoading){setChatListLoading(true);}
       const main = new Listing();
       const response = await main.getCountmessage();
       SetmessageCount(response.data.data);
@@ -72,6 +72,7 @@ export default function Index() {
       const response = await main.MessageGetAll(Id);
       setUserMessage(response.data.messages);
       setSelectedIdUser(response.data.ReciverUser);
+      MessageCount(false);
       if (!silent) setProcessing(false);
     } catch (error) {
       if (!silent) setProcessing(false);
@@ -105,6 +106,7 @@ export default function Index() {
       if (response?.data?.status) {
         skipNextRefresh.current = true;
         MessageGetAlls(teacherId);
+        MessageCount(false);
         setMessage("");
       } else {
         toast.error(response.data.message);

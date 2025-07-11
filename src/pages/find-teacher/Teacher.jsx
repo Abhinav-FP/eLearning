@@ -23,7 +23,11 @@ export default function Teacher({ teacherData, loading }) {
                 </div>
                 {loading ?
                     <BookLoader />
-                    :
+                    : teacherData && teacherData?.length === 0 ? (
+                    <div className="w-full text-center py-8 text-gray-500 text-lg">
+                        No teachers found
+                    </div>
+                    ) :
                     <div className="flex flex-wrap justify-center ">
                         {teacherData && teacherData?.map((item, i) => (
                             <Link href={`/teacher/${item?._id}`} key={i} className="w-full mb-6 lg:mb-8 bg-[#FFE8E8] rounded-[10px] p-5 md:p-8 lg:p-10">

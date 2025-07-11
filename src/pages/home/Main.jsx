@@ -10,7 +10,7 @@ import FindCourse from './FindCourse';
 
 export default function Main() {
   const [homeData, setHomeData] = useState([]);
-  console.log("homeData", homeData);
+  // console.log("homeData", homeData);
   const [loading, setLoading] = useState(false);
   const fetchData = async () => {
     try {
@@ -37,7 +37,8 @@ export default function Main() {
       <Hero
         title={homeData?.record?.hero_heading || "Learn from Expert Teachers Anytime, Anywhere!"}
         heroimg={homeData?.record?.hero_img_first}
-        heroimg2={homeData?.record?.hero_img_second} />
+        heroimg2={homeData?.record?.hero_img_second} 
+        loading={loading} />
       <div id="howitwork">
         <HowItWork classess={''} title={"How It Works"} />
       </div>
@@ -48,7 +49,8 @@ export default function Main() {
       <FindCourse title={homeData?.record?.course_heading || "Find Your Course"}
         courseimg={homeData?.record?.course_img}
         pargraph={homeData?.record?.course_paragraph ||
-          "Our customers trust us for quality, reliability, and exceptional service. Experience the same"} />
+          "Our customers trust us for quality, reliability, and exceptional service. Experience the same"} 
+        loading={loading} />
       <div id="faq">
         <FAQ Faq={homeData?.Faqrecord} />
       </div>

@@ -4,7 +4,7 @@ import Heading from '../common/Heading';
 import Button from '../common/Button';
 import Link from 'next/link';
 
-export default function FindCourse({pargraph ,title , courseimg}) {
+export default function FindCourse({pargraph ,title , courseimg, loading}) {
     return (
         <>
             <div className="pt-[40px] md:pt-[60px] lg:pt-[100px] pb-[40px] md:pb-[40px] lg:pb-[60px]">
@@ -27,7 +27,11 @@ export default function FindCourse({pargraph ,title , courseimg}) {
                                 </div>
                             </div>
                             <div className="w-full md:w-7/12 px-4 lg:text-right">
+                                {loading ?
+                                <div className="w-[565px] h-[288px] bg-gray-200 animate-pulse inline-block rounded-[10px]" />  
+                                :
                                 <Image className='inline-block rounded-[10px]' src={courseimg } alt="banner" height={288} width={565} />
+                                 }
                             </div>
                         </div>
                     </div>

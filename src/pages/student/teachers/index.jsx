@@ -8,6 +8,7 @@ import Link from "next/link";
 import { TeacherLoader } from "@/components/Loader";
 import { FiSearch } from "react-icons/fi";
 import { useRouter } from "next/router";
+import NoData from "@/pages/common/NoData";
 
 export default function Index() {
   const [data, setData] = useState([]);
@@ -106,7 +107,10 @@ export default function Index() {
                 </div>
               ))}
             </>
-          ) : (
+          ) : data && data?.teacher && data?.teacher?.length === 0 ? (
+            // <div className="text-center text-gray-500 py-8 text-lg">No teachers found.</div>
+            <NoData Heading={"No Teachers Found"} content={"Oops looks like there is no teacher matching your search at this moment."}/>
+          ): (
             data &&
             data?.teacher &&
             data?.teacher?.map((teacher, idx) => (

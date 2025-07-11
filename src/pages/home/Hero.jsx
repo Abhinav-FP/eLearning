@@ -4,7 +4,7 @@ import HeroImg1 from '../Assets/Images/hero_top_img.png';
 import HeroImg2 from '../Assets/Images/hero_bottom_img.png';
 import Link from "next/link";
 
-export default function Hero({ title ,heroimg ,  heroimg2 }) {
+export default function Hero({ title, heroimg, heroimg2, loading }) {
     return (
         <>
             <div className="hero_bg pt-[118px] lg:pt-[128px] pb-[50px] lg:pb-[98px]">
@@ -13,11 +13,19 @@ export default function Hero({ title ,heroimg ,  heroimg2 }) {
                         <div className="w-full lg:w-7/12 px-4 ">
                             <div className="flex flex-col gap-[44px] lg:pr-[50px] ">
                                 <div className="w-fulk flex justify-start relative">
+                                    {loading ?
+                                    <div className="w-[480px] h-[264px] bg-gray-200 animate-pulse rounded-lg" /> 
+                                    :
                                     <Image src={heroimg ?  heroimg : HeroImg1} width={500} height={256} alt="hero banner" />
+                                    }
                                     <div className="border-[10px] border-[#16C7F8] w-[76px] h-[76px] absolute right-56 bottom-1 rounded-full"></div>
                                 </div>
                                 <div className="w-fulk flex justify-end relative">
+                                    {loading ?
+                                    <div className="w-[480px] h-[264px] bg-gray-200 animate-pulse rounded-lg" /> 
+                                    :
                                     <Image src={heroimg2 ? heroimg2  :HeroImg2} width={480} height={264} alt="hero banner" />
+                                    }
                                     <div className="border-[10px] border-[#CC2828] w-[66px] h-[66px] absolute left-5 -top-5 rounded-full"></div>
                                     <div className="border-[10px] border-[#FF5816] w-[48px] h-[48px] absolute left-56 -bottom-6  lg:-bottom-15 rounded-full"></div>
                                 </div>

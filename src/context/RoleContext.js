@@ -4,7 +4,7 @@ const RoleContext = createContext();
 
 export const RoleProvider = ({ children }) => {
   const [user, setUser] = useState(null);
-  const [language, setLanguage] = useState("en"); 
+  const [language, setLanguage] = useState("ja"); 
 
   return (
     <RoleContext.Provider value={{ user, setUser, language, setLanguage }}>

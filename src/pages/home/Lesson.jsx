@@ -89,6 +89,10 @@ export default function Lesson({ title }) {
                             <div className="flex">
                                 <BestTeacherLoader rows={3} />
                             </div>
+                        ) : video && video?.length === 0 ?(
+                            <div className="w-full text-center py-8 text-gray-500 text-lg">
+                                No teachers found
+                            </div>
                         ) : (
                             <Swiper
                                 modules={[Autoplay]}
@@ -109,7 +113,7 @@ export default function Lesson({ title }) {
                                     },
                                 }}
                             >
-                                {video?.map((items, i) => (
+                                {video && video?.map((items, i) => (
                                     <SwiperSlide key={i}>
                                         <div className="bg-white border teacher_box border-[rgba(56,121,117,0.2)] rounded-[8px] lg:rounded-[13px] p-3 md:p-4 lg:p-3 h-full">
 

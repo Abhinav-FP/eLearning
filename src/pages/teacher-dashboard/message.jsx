@@ -6,20 +6,22 @@ import Image from 'next/image';
 import Listing from '@/pages/api/Listing';
 import toast from 'react-hot-toast';
 import { useRouter } from 'next/router';
-import TeacherLayout from './Common/TeacherLayout';
-import DefaultMessage from '../common/DefaultMessage';
+import DefaultMessage from '@/pages/common/DefaultMessage';
 import { ChatListShimmer, MessageContentLoader, MessageLoader } from '@/components/Loader';
-
-export default function Message() {
+import TeacherLayout from './Common/TeacherLayout';
+export default function Index() {
   const [teacherId, setTeacherId] = useState("");
   const [message, setMessage] = useState('');
-  const [usermessage, setUserMessage] = useState();
-  const [Loading, setLoading] = useState();
+  const [usermessage, setUserMessage] = useState([]);
+  const [Loading, setLoading] = useState(false);
   const [chatListLoading, setChatListLoading] = useState(false);
   const [processing, setProcessing] = useState(false);
   const [messageCount, SetmessageCount] = useState([]);
   const [selectedIdUser, setSelectedIdUser] = useState();
-  const [mobileOpen, setMobileOpen] = useState(false);
+  const [MobileOpen, setMobileOpen] = useState(false);
+  const [firstTimeLoad, setFirstTimeLoad] = useState(false);
+
+  console.log("firstTimeLoad", firstTimeLoad)
 
   const chatContainerRef = useRef(null);
   const router = useRouter();
@@ -27,11 +29,15 @@ export default function Message() {
 
   const skipNextRefresh = useRef(false);
 
-  useEffect(() => {
-    const handleResize = () => { };
-    window.addEventListener("resize", handleResize);
-    return () => window.removeEventListener("resize", handleResize);
-  }, []);
+  const scrollToBottom = () => {
+    const container = chatContainerRef.current;
+    if (container) {
+      container.scrollTo({
+        top: container.scrollHeight,
+        behavior: 'smooth',
+      });
+    }
+  };
 
   useEffect(() => {
     if (Query) {
@@ -40,9 +46,9 @@ export default function Message() {
     }
   }, [Query]);
 
-  const MessageCount = async (isLoading=true) => {
+  const MessageCount = async (isLoading = true) => {
     try {
-      if(isLoading){setChatListLoading(true);}
+      if (isLoading) setChatListLoading(true);
       const main = new Listing();
       const response = await main.getCountmessage();
       SetmessageCount(response.data.data);
@@ -57,8 +63,12 @@ export default function Message() {
   }, []);
 
   const handleUserSelect = (user) => {
-    setTeacherId(user?.student?._id);
+    console.log("user" ,user)
+      setTeacherId(user?.student?._id);
     MessageGetAlls(user?.student?._id);
+    setTimeout(() => {
+      scrollToBottom();
+    }, 1000);
     if (window.innerWidth < 1024) {
       setMobileOpen(true);
     }
@@ -69,28 +79,48 @@ export default function Message() {
       if (!silent) setProcessing(true);
       const main = new Listing();
       const response = await main.MessageGetAll(Id);
-      setUserMessage(response.data.messages);
+      if (response.data.messages) {
+        const lastNewMsg = response.data.messages[response.data.messages.length - 1]?._id;
+        const lastOldMsg = usermessage?.[usermessage.length - 1]?._id;
+        if (lastNewMsg !== lastOldMsg) {
+          setUserMessage(response.data.messages);
+        }
+      }
       setSelectedIdUser(response.data.ReciverUser);
       MessageCount(false);
-      if (!silent) setProcessing(false);
     } catch (error) {
-      if (!silent) setProcessing(false);
-      console.log("error", error);
+      console.error("error", error);
     }
+    if (!silent) setProcessing(false);
   };
 
   useEffect(() => {
+    if (!teacherId) return;
     const interval = setInterval(() => {
-      if (teacherId) {
-        if (skipNextRefresh.current) {
-          skipNextRefresh.current = false;
-          return;
-        }
-        MessageGetAlls(teacherId, true);
+      if (skipNextRefresh.current) {
+        skipNextRefresh.current = false;
+        return;
       }
+      MessageGetAlls(teacherId, true);
     }, 5000);
     return () => clearInterval(interval);
   }, [teacherId]);
+
+  useEffect(() => {
+    const container = chatContainerRef.current;
+    if (!container) return;
+
+    const isNearBottom = container.scrollHeight - container.scrollTop - container.clientHeight < 100;
+    if (isNearBottom) {
+      container.scrollTo({
+        top: container.scrollHeight,
+        behavior: 'smooth',
+      });
+    }
+  }, [usermessage]);
+
+
+
 
   const handleSendMessage = async (e) => {
     e.preventDefault();
@@ -104,7 +134,8 @@ export default function Message() {
       });
       if (response?.data?.status) {
         skipNextRefresh.current = true;
-        MessageGetAlls(teacherId);
+        await MessageGetAlls(teacherId, true); // old
+        scrollToBottom();
         MessageCount(false);
         setMessage("");
       } else {
@@ -116,16 +147,6 @@ export default function Message() {
     setLoading(false);
   };
 
-  // === FIXED SCROLL TO BOTTOM ON NEW MESSAGE ===
-  useEffect(() => {
-    const container = chatContainerRef.current;
-    if (!container) return;
-
-    container.scrollTo({
-      top: container.scrollHeight,
-      behavior: 'smooth',
-    });
-  }, [usermessage]);
 
   const formatDate = (date) => {
     const today = moment().startOf("day");
@@ -162,7 +183,7 @@ export default function Message() {
     <TeacherLayout page={"Messages"}>
       <div className="flex flex-wrap w-full">
         {/* Sidebar */}
-        <div className={`w-full lg:w-4/12 xl:w-3/12 rounded-lg pt-2 ${mobileOpen ? 'hidden lg:block' : 'block lg:block'}`}>
+        <div className={`w-full lg:w-4/12 xl:w-3/12 rounded-lg pt-2 ${MobileOpen ? 'hidden lg:block' : 'block lg:block'}`}>
           {chatListLoading ? <ChatListShimmer /> : (
             <div className="mt-0 space-y-1 h-[calc(100vh-120px)] lg:h-[calc(100vh-136px)] overflow-y-auto customscroll min-h-[300px] ">
               {messageCount?.map((chat, index) => (
@@ -202,7 +223,7 @@ export default function Message() {
             {processing ? (
               <MessageContentLoader />
             ) : (
-              <div className={`w-full lg:w-8/12 xl:w-9/12 flex flex-col bg-[#F1F1F1] ${mobileOpen ? "block lg:block" : "hidden lg:block"}`}>
+              <div className={`w-full lg:w-8/12 xl:w-9/12 flex flex-col bg-[#F1F1F1] ${MobileOpen ? "block lg:block" : "hidden lg:block"}`}>
                 <div className="flex items-center gap-3 bg-[#FFFFFF] px-4 py-3.5">
                   <Image
                     src={selectedIdUser?.profile_photo || "/Placeholder.png"}
@@ -215,7 +236,7 @@ export default function Message() {
                     <h2 className="font-medium text-base text-black mb-0 tracking-[-0.06em] capitalize">{selectedIdUser?.name}</h2>
                     <p className="font-normal text-sm text-[#1E1E1E] capitalize">{selectedIdUser?.role}</p>
                   </div>
-                  {mobileOpen && (
+                  {MobileOpen && (
                     <button onClick={() => setMobileOpen(false)} className='ml-auto px-6 py-2 text-[#CC2828] border border-[#CC2828] rounded-md text-xs hover:bg-[#CC2828] hover:text-white'>Back</button>
                   )}
                 </div>
@@ -272,7 +293,7 @@ export default function Message() {
             )}
           </>
         ) : (
-          <DefaultMessage className={`${mobileOpen ? "block lg:block" : "hidden lg:block"}`} />
+          <DefaultMessage className={`${MobileOpen ? "block lg:block" : "hidden lg:block"}`} />
         )}
       </div>
     </TeacherLayout>

@@ -9,18 +9,19 @@ import toast from 'react-hot-toast';
 import { useRouter } from 'next/router';
 import DefaultMessage from '@/pages/common/DefaultMessage';
 import { ChatListShimmer, MessageContentLoader, MessageLoader } from '@/components/Loader';
-
 export default function Index() {
-
   const [teacherId, setTeacherId] = useState("");
   const [message, setMessage] = useState('');
-  const [usermessage, setUserMessage] = useState();
-  const [Loading, setLoading] = useState();
+  const [usermessage, setUserMessage] = useState([]);
+  const [Loading, setLoading] = useState(false);
   const [chatListLoading, setChatListLoading] = useState(false);
   const [processing, setProcessing] = useState(false);
   const [messageCount, SetmessageCount] = useState([]);
   const [selectedIdUser, setSelectedIdUser] = useState();
   const [MobileOpen, setMobileOpen] = useState(false);
+  const [firstTimeLoad, setFirstTimeLoad] = useState(false);
+
+  console.log("firstTimeLoad", firstTimeLoad)
 
   const chatContainerRef = useRef(null);
   const router = useRouter();
@@ -28,11 +29,15 @@ export default function Index() {
 
   const skipNextRefresh = useRef(false);
 
-  useEffect(() => {
-    const handleResize = () => { };
-    window.addEventListener("resize", handleResize);
-    return () => window.removeEventListener("resize", handleResize);
-  }, []);
+  const scrollToBottom = () => {
+    const container = chatContainerRef.current;
+    if (container) {
+      container.scrollTo({
+        top: container.scrollHeight,
+        behavior: 'smooth',
+      });
+    }
+  };
 
   useEffect(() => {
     if (Query) {
@@ -41,9 +46,9 @@ export default function Index() {
     }
   }, [Query]);
 
-  const MessageCount = async (isLoading=true) => {
+  const MessageCount = async (isLoading = true) => {
     try {
-      if(isLoading){setChatListLoading(true);}
+      if (isLoading) setChatListLoading(true);
       const main = new Listing();
       const response = await main.getCountmessage();
       SetmessageCount(response.data.data);
@@ -60,6 +65,9 @@ export default function Index() {
   const handleUserSelect = (user) => {
     setTeacherId(user?.teacher?._id);
     MessageGetAlls(user?.teacher?._id);
+    setTimeout(() => {
+      scrollToBottom();
+    }, 1000);
     if (window.innerWidth < 1024) {
       setMobileOpen(true);
     }
@@ -70,28 +78,48 @@ export default function Index() {
       if (!silent) setProcessing(true);
       const main = new Listing();
       const response = await main.MessageGetAll(Id);
-      setUserMessage(response.data.messages);
+      if (response.data.messages) {
+        const lastNewMsg = response.data.messages[response.data.messages.length - 1]?._id;
+        const lastOldMsg = usermessage?.[usermessage.length - 1]?._id;
+        if (lastNewMsg !== lastOldMsg) {
+          setUserMessage(response.data.messages);
+        }
+      }
       setSelectedIdUser(response.data.ReciverUser);
       MessageCount(false);
-      if (!silent) setProcessing(false);
     } catch (error) {
-      if (!silent) setProcessing(false);
-      console.log("error", error);
+      console.error("error", error);
     }
+    if (!silent) setProcessing(false);
   };
 
   useEffect(() => {
+    if (!teacherId) return;
     const interval = setInterval(() => {
-      if (teacherId) {
-        if (skipNextRefresh.current) {
-          skipNextRefresh.current = false;
-          return;
-        }
-        MessageGetAlls(teacherId, true);
+      if (skipNextRefresh.current) {
+        skipNextRefresh.current = false;
+        return;
       }
+      MessageGetAlls(teacherId, true);
     }, 5000);
     return () => clearInterval(interval);
   }, [teacherId]);
+
+  useEffect(() => {
+    const container = chatContainerRef.current;
+    if (!container) return;
+
+    const isNearBottom = container.scrollHeight - container.scrollTop - container.clientHeight < 100;
+    if (isNearBottom) {
+      container.scrollTo({
+        top: container.scrollHeight,
+        behavior: 'smooth',
+      });
+    }
+  }, [usermessage]);
+
+
+
 
   const handleSendMessage = async (e) => {
     e.preventDefault();
@@ -105,7 +133,8 @@ export default function Index() {
       });
       if (response?.data?.status) {
         skipNextRefresh.current = true;
-        MessageGetAlls(teacherId);
+        await MessageGetAlls(teacherId, true); // old
+        scrollToBottom();
         MessageCount(false);
         setMessage("");
       } else {
@@ -117,16 +146,6 @@ export default function Index() {
     setLoading(false);
   };
 
-  // === FIXED SCROLL TO BOTTOM ON NEW MESSAGE ===
-  useEffect(() => {
-    const container = chatContainerRef.current;
-    if (!container) return;
-
-    container.scrollTo({
-      top: container.scrollHeight,
-      behavior: 'smooth',
-    });
-  }, [usermessage]);
 
   const formatDate = (date) => {
     const today = moment().startOf("day");
@@ -213,7 +232,7 @@ export default function Index() {
                     className="w-[32px] xl:w-[45px] h-[32px] xl:h-[45px] rounded-full object-cover"
                   />
                   <div>
-                    <h2 className="font-medium text-base text-black mb-0 tracking-[-0.06em]">{selectedIdUser?.name}</h2>
+                    <h2 className="font-medium text-base text-black mb-0 tracking-[-0.06em] capitalize">{selectedIdUser?.name}</h2>
                     <p className="font-normal text-sm font-inter text-[#1E1E1E] capitalize">{selectedIdUser?.role}</p>
                   </div>
                   {MobileOpen && (
@@ -292,7 +311,6 @@ export default function Index() {
               </div>
             )}
           </>
-
         ) : (
           <DefaultMessage />
         )}

@@ -243,8 +243,8 @@ export default function Index() {
                 </div>
 
                 {/* Chat body */}
-                <div ref={chatContainerRef} className="px-4 lg:px-5 pt-5 lg:pt-[30px] pb-[10px] lg:h-[calc(100vh-400px)] customscroll overflow-y-auto">
-                  <div className="bg-[#FEECDC] rounded-[14px] relative pl-[50px] lg:pl-[60px] pr-[20px] lg:pr-[30px] py-[12px] mb-[30px] text-sm text-[#1E1E1E] max-w-[570px] mx-auto">
+                <div ref={chatContainerRef} className="px-4 pt-5 pb-[10px] h-[calc(100vh-287px)] overflow-y-auto">
+                  <div className="bg-[#FEECDC] rounded-[14px] relative pl-[50px] pr-[20px] py-[12px] mb-[30px] text-sm text-[#1E1E1E] max-w-[570px] mx-auto">
                     <div className="absolute top-1/2 left-[20px] -translate-y-1/2">
                       <CiLock color="#312E40" size={20} />
                     </div>

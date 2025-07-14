@@ -79,7 +79,7 @@ export default function Index() {
     setLoading(true);
     try {
       const main = new Listing();
-      const response = await main.Register({
+      const response = await main.TeacherRegister({
         email: data?.email,
         password: data?.password,
         name: data?.name,

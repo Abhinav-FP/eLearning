@@ -28,9 +28,9 @@ export default function FindCourse({pargraph ,title , courseimg, loading}) {
                             </div>
                             <div className="w-full md:w-7/12 px-4 lg:text-right">
                                 {loading ?
-                                <div className="w-[565px] h-[288px] bg-gray-200 animate-pulse inline-block rounded-[10px]" />  
+                                <div className="w-full max-w-[565px] h-[288px] bg-gray-200 animate-pulse inline-block rounded-[10px]" />  
                                 :
-                                <Image className='inline-block rounded-[10px]' src={courseimg } alt="banner" height={288} width={565} />
+                                <Image className='w-full max-w-[565px] h-[288px] inline-block rounded-[10px] object-cover' src={courseimg } alt="banner" height={288} width={565} />
                                  }
                             </div>
                         </div>

@@ -9,6 +9,8 @@ import toast from 'react-hot-toast';
 import { useRouter } from 'next/router';
 import DefaultMessage from '@/pages/common/DefaultMessage';
 import { ChatListShimmer, MessageContentLoader, MessageLoader } from '@/components/Loader';
+import { LuPlus } from "react-icons/lu";
+
 export default function Index() {
   const [teacherId, setTeacherId] = useState("");
   const [message, setMessage] = useState('');
@@ -21,7 +23,7 @@ export default function Index() {
   const [MobileOpen, setMobileOpen] = useState(false);
   const [firstTimeLoad, setFirstTimeLoad] = useState(false);
 
-  console.log("firstTimeLoad", firstTimeLoad)
+  // console.log("firstTimeLoad", firstTimeLoad)
 
   const chatContainerRef = useRef(null);
   const router = useRouter();
@@ -118,25 +120,52 @@ export default function Index() {
     }
   }, [usermessage]);
 
+  const [file, setFile] = useState(null);
+  const fileInputRef = useRef(null);
 
+  const handleFileClick = () => {
+    fileInputRef.current.click();
+  };
 
+  const handleFileChange = (e) => {
+    const selectedFile = e.target.files[0];
+    if (selectedFile) {
+      const allowedTypes = [
+        "application/pdf",
+        "application/msword", // .doc
+        "application/vnd.openxmlformats-officedocument.wordprocessingml.document", // .docx
+        "image/jpeg",
+        "image/png",
+        "image/gif",
+        "image/webp"
+      ];
+      if (!allowedTypes.includes(selectedFile.type)) {
+        toast.error("Only PDF, Word documents, and image files are allowed");
+        e.target.value = ""; 
+        return;
+      }
+      setFile(selectedFile);
+    }
+  };
 
   const handleSendMessage = async (e) => {
     e.preventDefault();
-    if (!message.trim() || Loading) return;
+    if ((!message.trim() && !file) || Loading) return;
     setLoading(true);
     try {
       const main = new Listing();
-      const response = await main.SendMessage({
-        content: message,
-        receiver: teacherId,
-      });
+      const formData = new FormData();
+      formData.append("content", message);
+      formData.append("receiver", teacherId);
+      formData.append("file", file);
+      const response = await main.SendMessage(formData);
       if (response?.data?.status) {
         skipNextRefresh.current = true;
         await MessageGetAlls(teacherId, true); // old
         scrollToBottom();
         MessageCount(false);
         setMessage("");
+        setFile(null);
       } else {
         toast.error(response.data.message);
       }
@@ -145,7 +174,6 @@ export default function Index() {
     }
     setLoading(false);
   };
-
 
   const formatDate = (date) => {
     const today = moment().startOf("day");
@@ -178,8 +206,21 @@ export default function Index() {
     });
   };
 
+  // console.log("file",file);
+
   return (
     <StudentLayout page={"Messages"}>
+      <>
+        {/* Hidden input at top level to avoid re-creation */}
+        <input
+          type="file"
+          ref={fileInputRef}
+          className="hidden"
+          onChange={handleFileChange}
+        />
+
+        {/* ... rest of your layout ... */}
+      </>
       <div className="flex flex-wrap w-full">
         {/* Sidebar */}
         <div className={`w-full lg:w-4/12 xl:w-3/12 rounded-lg pb-5 pt-2 ${MobileOpen ? "hidden lg:block" : "block lg:block"}`}>
@@ -266,14 +307,64 @@ export default function Index() {
                         )}
                         {isIncoming ? (
                           <div className="flex justify-end">
-                            <div className="bg-[rgba(204,40,40,0.1)] px-4 py-[12px] rounded-bl-[10px] rounded-t-[10px] max-w-[60%]">
-                              <p className="break-words text-sm tracking-[-0.04em] text-[#535353]">{linkify(item?.content)}</p>
+                            <div className="bg-[rgba(204,40,40,0.1)] px-4 py-[12px] rounded-bl-[10px] rounded-t-[10px] max-w-[60%] space-y-2">
+
+                              {/* File preview if present */}
+                              {item?.file_url && (
+                                <>
+                                  {item.file_type?.includes("image") ? (
+                                    <img
+                                      src={item.file_url}
+                                      alt={item.file_name || "attachment"}
+                                      className="w-full max-w-[200px] rounded-lg border border-gray-200"
+                                    />
+                                  ) : (
+                                    <div
+                                      onClick={() => window.open(item.file_url, "_blank")}
+                                      className="cursor-pointer bg-white text-[#CC2828] text-sm font-medium border border-[#CC2828] px-3 py-2 rounded-lg hover:bg-[#f8d7da] transition duration-200"
+                                    >
+                                      📄 {item.file_name || "Download file"}
+                                    </div>
+                                  )}
+                                </>
+                              )}
+
+                              {/* Text content */}
+                              {item?.content && (
+                                <p className="break-words text-sm tracking-[-0.04em] text-[#535353]">
+                                  {linkify(item.content)}
+                                </p>
+                              )}
                             </div>
                           </div>
                         ) : (
                           <div className="flex justify-start">
-                            <div className="bg-white px-4 py-[12px] rounded-br-[10px] rounded-t-[10px] max-w-[60%]">
-                              <p className="break-words text-sm tracking-[-0.04em] text-[#535353]">{linkify(item?.content)}</p>
+                            <div className="bg-[rgba(204,40,40,0.1)] px-4 py-[12px] rounded-bl-[10px] rounded-t-[10px] max-w-[60%] space-y-2">
+                              {/* File preview if present */}
+                              {item?.file_url && (
+                                <>
+                                  {item.file_type?.includes("image") ? (
+                                    <img
+                                      src={item.file_url}
+                                      alt={item.file_name || "attachment"}
+                                      className="w-full max-w-[200px] rounded-lg border border-gray-200"
+                                    />
+                                  ) : (
+                                    <div
+                                      onClick={() => window.open(item.file_url, "_blank")}
+                                      className="cursor-pointer bg-white text-[#CC2828] text-sm font-medium border border-[#CC2828] px-3 py-2 rounded-lg hover:bg-[#f8d7da] transition duration-200"
+                                    >
+                                      📄 {item.file_name || "Download file"}
+                                    </div>
+                                  )}
+                                </>
+                              )}
+                              {/* Text content */}
+                              {item?.content && (
+                                <p className="break-words text-sm tracking-[-0.04em] text-[#535353]">
+                                  {linkify(item.content)}
+                                </p>
+                              )}
                             </div>
                           </div>
                         )}
@@ -284,9 +375,23 @@ export default function Index() {
                     );
                   })}
                 </div>
-
-                {/* Input */}
                 <form onSubmit={handleSendMessage}>
+                  {/* Show attached file name with remove icon */}
+                  {file && (
+                    <div className="relative px-5 py-2 text-sm text-gray-700 bg-white border border-gray-300 rounded-b-md flex items-center justify-between">
+                      <div>
+                        📎 Attached: <strong>{file.name}</strong>
+                      </div>
+                      <button
+                        type="button"
+                        onClick={() => setFile(null)}
+                        className="text-red-500 hover:text-red-700 text-lg ml-2 cursor-pointer"
+                        title="Remove file"
+                      >
+                        &times;
+                      </button>
+                    </div>
+                  )}
                   <div className="px-4 lg:px-5 py-3.5 flex items-center gap-2 bg-[#e5e5e5]">
                     <textarea
                       value={message}
@@ -301,10 +406,19 @@ export default function Index() {
                       className="w-full px-5 py-3 resize-none overflow-hidden min-h-[50px] max-h-[200px] rounded-lg border border-gray-200 focus:outline-none focus:ring-1 focus:ring-gray-400 bg-white"
                     />
                     <button
-                      type="submit"
-                      className="bg-[#CC2828] h-[50px] w-[50px] cursor-pointer text-white px-4 py-2 rounded-full hover:bg-[#ad0e0e] transition duration-200"
+                      onClick={handleFileClick}
+                      className="bg-white h-[30px] sm:h-[50px] w-[30px] sm:w-[50px] text-[16px] sm:text-[22px] cursor-pointer text-[#CC2828] pl-[7px] sm:pl-[14px] pr-[16px] sm:py-2 rounded-full transition duration-200 border border-[#CC2828]"
+                      title='Attach a file'
                     >
-                      <IoSend size={22} />
+                      <LuPlus className="w-auto h-auto"/>
+                    </button>
+                    {/* Send Icon Button */}
+                    <button
+                      type="submit"
+                      className="bg-[#CC2828] h-[30px] sm:h-[50px] w-[30px] sm:w-[50px] text-[16px] sm:text-[22px] cursor-pointer text-white pl-[7px] sm:pl-[14px] pr-[16px] sm:py-2 rounded-full transition duration-200"
+                      title='Send Message'
+                    >
+                      <IoSend className="w-auto h-auto" />
                     </button>
                   </div>
                 </form>

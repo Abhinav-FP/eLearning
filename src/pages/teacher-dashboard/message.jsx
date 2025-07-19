@@ -135,7 +135,7 @@ export default function Index() {
     fileInputRef.current.click();
   };
 
-  const handleFileChange = (e) => {
+   const handleFileChange = (e) => {
     const selectedFile = e.target.files[0];
     if (selectedFile) {
       const allowedTypes = [
@@ -145,13 +145,23 @@ export default function Index() {
         "image/jpeg",
         "image/png",
         "image/gif",
-        "image/webp",
+        "image/webp"
       ];
+
+      const maxSizeInBytes = 2 * 1024 * 1024; // 2MB
+
       if (!allowedTypes.includes(selectedFile.type)) {
         toast.error("Only PDF, Word documents, and image files are allowed");
         e.target.value = "";
         return;
       }
+
+      if (selectedFile.size > maxSizeInBytes) {
+        toast.error("File size should not exceed 2MB");
+        e.target.value = "";
+        return;
+      }
+
       setFile(selectedFile);
     }
   };

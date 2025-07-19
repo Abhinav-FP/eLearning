@@ -50,6 +50,16 @@ export default function Profile() {
   const handleImageChange = (e) => {
     const selectedFile = e.target.files[0];
     if (selectedFile) {
+      const allowedTypes = [
+        "image/jpeg",
+        "image/png",
+        "image/webp"
+      ];
+      if (!allowedTypes.includes(selectedFile.type)) {
+        toast.error("Only jpeg, png, webp image files are allowed");
+        e.target.value = "";
+        return;
+      }
       const maxSizeInMB = 5;
       const maxSizeInBytes = maxSizeInMB * 1024 * 1024;
       if (selectedFile.size > maxSizeInBytes) {
@@ -145,7 +155,7 @@ export default function Profile() {
                   htmlFor="profileImageInput"
                   className="text-[#CC2828] font-medium text-base xl:text-xl border-none tracking-[-0.04em] cursor-pointer"
                 >
-                  Update Profile
+                  Update Avatar
                 </label>
               </div>
             </div>

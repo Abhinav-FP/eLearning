@@ -323,11 +323,17 @@ export default function Index() {
                               {item?.file_url && (
                                 <>
                                   {item.file_type?.includes("image") ? (
+                                    <div
+                                      onClick={() =>
+                                        window.open(item.file_url, "_blank")}
+                                      className="cursor-pointer"
+                                      >
                                     <img
                                       src={item.file_url}
                                       alt={item.file_name || "attachment"}
                                       className="w-full max-w-[200px] rounded-lg border border-gray-200"
                                     />
+                                    </div>
                                   ) : (
                                     <div
                                       onClick={() => window.open(item.file_url, "_blank")}
@@ -354,11 +360,17 @@ export default function Index() {
                               {item?.file_url && (
                                 <>
                                   {item.file_type?.includes("image") ? (
+                                    <div
+                                      onClick={() =>
+                                        window.open(item.file_url, "_blank")}
+                                      className="cursor-pointer"
+                                      >
                                     <img
                                       src={item.file_url}
                                       alt={item.file_name || "attachment"}
                                       className="w-full max-w-[200px] rounded-lg border border-gray-200"
                                     />
+                                    </div>
                                   ) : (
                                     <div
                                       onClick={() => window.open(item.file_url, "_blank")}

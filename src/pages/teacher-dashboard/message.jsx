@@ -248,7 +248,9 @@ export default function Index() {
             <ChatListShimmer />
           ) : (
             <div className="mt-0 space-y-1 h-[calc(100vh-120px)] lg:h-[calc(100vh-136px)] overflow-y-auto customscroll min-h-[300px] ">
-              {messageCount?.map((chat, index) => (
+              {messageCount?.length === 0 ? (
+                <p className="text-center text-gray-500 mt-4">No data available</p>
+              ) : (messageCount?.map((chat, index) => (
                 <div
                   key={index}
                   onClick={() => handleUserSelect(chat)}
@@ -291,7 +293,7 @@ export default function Index() {
                     </div>
                   )}
                 </div>
-              ))}
+              )))}
             </div>
           )}
         </div>
@@ -373,11 +375,17 @@ export default function Index() {
                               {item?.file_url && (
                                 <>
                                   {item.file_type?.includes("image") ? (
+                                    <div
+                                      onClick={() =>
+                                        window.open(item.file_url, "_blank")}
+                                      className="cursor-pointer"
+                                      >
                                     <img
                                       src={item.file_url}
                                       alt={item.file_name || "attachment"}
                                       className="w-full max-w-[200px] rounded-lg border border-gray-200"
                                     />
+                                    </div>
                                   ) : (
                                     <div
                                       onClick={() =>

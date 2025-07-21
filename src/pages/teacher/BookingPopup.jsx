@@ -150,7 +150,7 @@ export default function BookingPopup({
             <div className=" justify-between items-center hidden lg:flex">
               <div className="w-11 h-11 rounded-full flex items-center justify-center text-white text-xl font-bold">
                 <img
-                  src={user?.profile_photo || "Placeholder.png"}
+                  src={user?.profile_photo || "/Placeholder.png"}
                   alt="User Avatar"
                   className="w-11 h-11 rounded-full object-cover"
                 />

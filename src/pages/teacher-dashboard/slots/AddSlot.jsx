@@ -20,6 +20,33 @@ export default function AddSlot({ isOpen, onClose }) {
 
   const handleChange = (e) => {
     const { name, value } = e.target;
+
+    const now = new Date();
+    const threeHoursFromNow = new Date(now.getTime() + 3 * 60 * 60 * 1000);
+
+    if (name === "startDateTime") {
+      const start = new Date(value);
+      if (start < threeHoursFromNow) {
+        toast.error("Start time must be at least 3 hours from now.");
+        return;
+      }
+    }
+
+    if (name === "endDateTime") {
+      const start = new Date(formData.startDateTime);
+      const end = new Date(value);
+
+      if (end <= start) {
+        toast.error("End time must be after start time.");
+        return;
+      }
+
+      if (end < threeHoursFromNow) {
+        toast.error("End time must be at least 3 hours from now.");
+        return;
+      }
+    }
+
     setFormData((prev) => ({
       ...prev,
       [name]: value,

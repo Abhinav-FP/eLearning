@@ -53,9 +53,18 @@ export default function Lesson({ title }) {
     }
 
     function getVimeoID(url) {
-        const regExp = /vimeo\.com\/(\d+)/;
-        const match = url && url?.match(regExp);
-        return match && match[1] ? match[1] : null;
+        if (!url || !url.includes('vimeo.com')) return null;
+        const cleanUrl = url.split('vimeo.com/')[1]?.split('?')[0];
+        if (!cleanUrl) return null;
+        const parts = cleanUrl.split('/');
+        if (parts.length === 1) {
+            // Public video
+            return parts[0]; 
+        } else if (parts.length >= 2) {
+            // Private/unlisted video
+            return `${parts[0]}/${parts[1]}`;
+        }
+        return null;
     }
 
     const platform = getVideoPlatform(currentVideo?.intro_video);
@@ -63,10 +72,22 @@ export default function Lesson({ title }) {
     const vimeoId = getVimeoID(currentVideo?.intro_video);
 
     let videoSrc = '';
+
     if (platform === 'youtube' && youTubeId) {
         videoSrc = `https://www.youtube.com/embed/${youTubeId}?autoplay=1&hl=ja`;
-    } else if (platform === 'vimeo' && vimeoId) {
-        videoSrc = `https://player.vimeo.com/video/${vimeoId}?autoplay=1`;
+    } else if (platform === 'vimeo' && currentVideo?.intro_video) {
+        const path = currentVideo?.intro_video.split('vimeo.com/')[1]?.split('?')[0] || '';
+        const parts = path.split('/');
+
+        if (parts.length === 1) {
+            // Public video
+            const videoId = parts[0];
+            videoSrc = `https://player.vimeo.com/video/${videoId}?autoplay=1`;
+        } else if (parts.length >= 2) {
+            // Private/unlisted video
+            const [videoId, hash] = parts;
+            videoSrc = `https://player.vimeo.com/video/${videoId}?h=${hash}&autoplay=1`;
+        }
     }
 
     //     useEffect(() => {

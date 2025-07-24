@@ -11,9 +11,18 @@ function getYouTubeID(url) {
 }
 
 function getVimeoID(url) {
-    const regExp = /vimeo\.com\/(\d+)/;
-    const match = url && url?.match(regExp);
-    return match && match[1] ? match[1] : null;
+    if (!url || !url.includes('vimeo.com')) return null;
+    const cleanUrl = url.split('vimeo.com/')[1]?.split('?')[0];
+    if (!cleanUrl) return null;
+    const parts = cleanUrl.split('/');
+    if (parts.length === 1) {
+        // Public video
+        return parts[0]; 
+    } else if (parts.length >= 2) {
+        // Private/unlisted video
+        return `${parts[0]}/${parts[1]}`;
+    }
+    return null;
 }
 
 function getVideoPlatform(url) {

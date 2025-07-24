@@ -2,7 +2,7 @@
 import { useEffect, useState } from 'react';
 import Image from 'next/image';
 import { MdClose, MdOutlinePlayCircle } from 'react-icons/md';
-import EmilyCarter from "../Assets/Images/emily-carter.png";
+import EmilyCarter from "../Assets/Images/NoVideo.jpg";
 
 function getYouTubeID(url) {
     const regExp = /(?:youtube\.com.*(?:\?|&)v=|youtu\.be\/)([^&\n?#]+)/;
@@ -11,9 +11,18 @@ function getYouTubeID(url) {
 }
 
 function getVimeoID(url) {
-    const regExp = /vimeo\.com\/(\d+)/;
-    const match = url && url?.match(regExp);
-    return match && match[1] ? match[1] : null;
+    if (!url || !url.includes('vimeo.com')) return null;
+    const cleanUrl = url.split('vimeo.com/')[1]?.split('?')[0];
+    if (!cleanUrl) return null;
+    const parts = cleanUrl.split('/');
+    if (parts.length === 1) {
+        // Public video
+        return parts[0]; 
+    } else if (parts.length >= 2) {
+        // Private/unlisted video
+        return `${parts[0]}/${parts[1]}`;
+    }
+    return null;
 }
 
 function getVideoPlatform(url) {
@@ -28,13 +37,27 @@ export default function VideoModalDetail({ video, image, name, divClass, imgClas
     const [thumbnail, setThumbnail] = useState(EmilyCarter);
     const youTubeId = getYouTubeID(video);
     const vimeoId = getVimeoID(video);
+    console.log("vineoId", vimeoId);
 
     let videoSrc = '';
+
     if (platform === 'youtube' && youTubeId) {
         videoSrc = `https://www.youtube.com/embed/${youTubeId}?autoplay=1&hl=ja`;
-    } else if (platform === 'vimeo' && vimeoId) {
-        videoSrc = `https://player.vimeo.com/video/${vimeoId}?autoplay=1`;
+    } else if (platform === 'vimeo' && video) {
+        const path = video.split('vimeo.com/')[1]?.split('?')[0] || '';
+        const parts = path.split('/');
+
+        if (parts.length === 1) {
+            // Public video
+            const videoId = parts[0];
+            videoSrc = `https://player.vimeo.com/video/${videoId}?autoplay=1`;
+        } else if (parts.length >= 2) {
+            // Private/unlisted video
+            const [videoId, hash] = parts;
+            videoSrc = `https://player.vimeo.com/video/${videoId}?h=${hash}&autoplay=1`;
+        }
     }
+
 
     useEffect(() => {
         if (platform === 'youtube' && youTubeId) {
@@ -51,6 +74,7 @@ export default function VideoModalDetail({ video, image, name, divClass, imgClas
                 });
         }
     }, [platform, youTubeId, vimeoId]);
+    console.log("videoSrc",videoSrc);
 
     return (
         <>

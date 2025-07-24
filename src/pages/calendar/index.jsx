@@ -185,9 +185,9 @@ const Index = ({ Availability, setIsPopupOpen, usedInPopup, setSelectedSlot, sel
       }
       const startTime = moment(event.start);
       const now = moment();
-      // Check if start is today or in the past
-      if (startTime.isSameOrBefore(now, "minute")) {
-        toast.error("Cannot select a slot from today or the past.");
+      const diffInMinutes = startTime.diff(now, "minutes");
+      if (diffInMinutes < 10) {
+        toast.error("Cannot select a slot that starts in less than 10 minutes or is in the past.");
         return;
       }
       setSelectedSlot(event);

@@ -31,6 +31,7 @@ export default function Index() {
       setProcessing(false);
       setRating(0);
       setDescription('');
+      FecthData();
     } catch (error) {
       const status = error?.response?.status;
       const message = error?.response?.data?.message || "Something went wrong.";

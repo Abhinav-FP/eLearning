@@ -98,14 +98,16 @@ export default function Teacher({ teacherData, loading }) {
                                         <p className="text-black text-base font-normal -tracking-[0.03em] mb-3 lg:mb-6 line-clamp-2">{item?.description}</p>
                                         <div className="flex flex-wrap">
                                             <div className="w-6/12">
+                                              {item?.lowestLesson && item?.lowestLesson && item?.lowestLesson?.price &&(
+                                                <>
                                                 <span className="text-black text-sm -tracking-[0.03em] text-sm">
-                                                    Lessons starts from
+                                                    Lesson from
                                                 </span>
                                                 <div className="text-black font-bold text-base -tracking-[0.03em]">
-                                                    {item?.lowestLesson && item?.lowestLesson && (
                                                         `${formatMultiPrice(item?.lowestLesson?.price, "USD")}`
-                                                    )}
                                                 </div>
+                                                </>
+                                              )}
                                             </div>
                                             <div className="w-6/12 text-right">
                                                 <button className='inline-block font-medium cursor-pointer rounded-full py-2 px-5 bg-[#CC2828] hover:bg-[#ad0e0e] text-white text-sm lg:text-base py-2.5 px-3 lg:px-4 lg:px-6'

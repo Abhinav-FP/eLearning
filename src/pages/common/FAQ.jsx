@@ -1,7 +1,7 @@
 import { useState } from "react";
 import Heading from "./Heading";
 
-export default function FAQ({ classess, Faq }) {
+export default function FAQ({ classess, Faq, heading }) {
   const [openIndex, setOpenIndex] = useState(null);
 
   const ToggleFaq = (index) => {
@@ -14,7 +14,7 @@ export default function FAQ({ classess, Faq }) {
         <div className="mx-auto container sm:container md:container lg:container xl:max-w-[1230px] px-4">
           <Heading
             classess="text-[#1E1E1E] mb-3"
-            title="Frequently Asked Questions"
+            title= {heading || "Frequently Asked Questions"}
           />
 
           {Faq && Faq?.map((items, index) => (

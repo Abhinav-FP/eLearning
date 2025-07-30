@@ -42,27 +42,27 @@ export default function Index() {
       },
       "points": [
         {
-          "en": "Lowest commission from all online portals (10%)",
+          "en": "Specializing in Japanese language education",
           "ja": "日本語教育に特化＆100%日本国内運営"
         },
         {
-          "en": "Minimum hourly rates of $30",
+          "en": "100% domestic operation with peace of mind",
           "ja": "教研第一の運営方針で、手数料も最小限"
         },
         {
-          "en": "Free seminars from like-minded teachers every month",
+          "en": "Teacher-first management policy, minimal fees, environment where you can value the value of your lessons",
           "ja": "時給30ドル以下なし！価格競争に巻き込まれない"
         },
         {
-          "en": "Free legal support for online harassment and access to blacklisted students",
+          "en": "Peace of mind in case of emergency. Legal support system and friends!",
           "ja": "トラブル時も心強い法的サポート付き"
         },
         {
-          "en": "Fully Japanese company focused on supporting the teachers over students",
+          "en": "Teacher community – You can interact with others at any time and learn while teaching!",
           "ja": "仲間がいる！教師コミュニティで孤独を感じない"
         },
         {
-          "en": "No license or teaching experience required",
+          "en": "Plenty of opportunities to improve your skills",
           "ja": "教えながら学べる！スキルアップのチャンスも豊富"
         }
       ]
@@ -83,7 +83,7 @@ export default function Index() {
         "ja": [
           "公式オンライン講座（模擬授業を含む）を修了していること",
           "直近3ヶ月間において、毎月80時間以上のオンライン指導実績があること",
-          "コース開始時に18歳以下で、コースを修了していること（コースは無料で提供いたします)",
+          "コース開始時に18歳以下で、コースを修了していること（コースは半額で提供いたします)",
         ],
       }
     },
@@ -117,7 +117,7 @@ export default function Index() {
         title={data?.requirements?.title[language] || ""}
         points={data?.requirements?.points[language] || []}
       />
-      <FAQ classess={'mt-[40px] md:mt-[80px] lg:mt-[100px] md:mb-5 lg:mb-10'} Faq={homeData} />
+      <FAQ classess={'mt-[40px] md:mt-[80px] lg:mt-[100px] md:mb-5 lg:mb-10'} Faq={homeData} heading={"FAQ - よくあるご質問 -"}/>
       <ReadyJoin data={data?.join} language={language} />
     </Layout>
   )

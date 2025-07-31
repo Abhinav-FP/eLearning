@@ -131,30 +131,104 @@ html{
   background: #ef2c0c !important;
 }
 
+
+
+
 .policy-page h1 {
-    color: #000000;
-    font-family: Oswald, sans-serif;
-    font-size: 38px;
-    font-style: normal;
-    font-weight: 600;
-    line-height: 42px;
-    text-transform: uppercase;
+  color: #000;
+  font-family: "Inter", sans-serif;;
+  font-size: 38px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: 42px;
+  text-transform: uppercase;
+  margin: 0 0 15px;
 }
 
-
 .policy-page h2 {
-    color: #000000;
-    font-family: Oswald, sans-serif;
-    font-size: 32px;
-    font-style: normal;
-    font-weight: 600;
-    line-height: 38px;
-    text-transform: uppercase;
+  color: #000;
+  font-family: "Inter", sans-serif;;
+  font-size: 32px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: 38px;
+  text-transform: uppercase;
+}
+
+.policy-page h3 {
+  color: #000;
+  font-family: "Inter", sans-serif;;
+  font-size: 22px;
+  font-style: normal;
+  font-weight: 600;
+  text-transform: uppercase;
+  /* margin: 30px 0 3px; */
+  padding-top: 20px;
+}
+
+.policy-page h4 {
+  color: #000;
+  font-size: 19px;
+  font-style: normal;
+  font-weight: 600;
+  /* margin: 24px 0 3px; */
 }
 
 .policy-page p {
-    color: #000000;
-    font-size: 18px;
-    font-style: normal;
-    line-height: 29px;
+  color: #000;
+  font-size: 18px;
+  font-family: "Poppins", sans-serif;
+  font-style: normal;
+  line-height: 29px;
+}
+
+.policy-page p a {
+  color: #000;
+  font-weight: 300;
+  line-height: normal;
+  text-decoration: underline;
+  margin: 0 0 5px;
+  word-break: break-word;
+}
+
+.policy-page ul {
+  list-style-type: disc;
+  padding-left: 20px;
+  padding-top: 10px;
+  padding-bottom: 20px;
+}
+
+.policy-page ul li {
+  color: #000;
+  margin-bottom: 10px;
+}
+
+
+/* Tablet styles */
+@media (max-width: 991px) {
+  .policy-page h1 {
+    font-size: 34px;
+    line-height: 38px;
+    /* margin: 0 0 10px; */
+  }
+  .policy-page h2 {
+    font-size: 32px;
+    line-height: 38px;
+    /* margin: 40px 0 10px; */
+  }
+}
+
+
+/* Mobile styles */
+@media (max-width: 767px) {
+  .policy-page h1 {
+    font-size: 24px;
+  }
+  .policy-page h2 {
+    font-size: 22px;
+    /* margin: 20px 0 5px; */
+  }
+  .policy-page p {
+    font-size: 14px;
+  }
 }

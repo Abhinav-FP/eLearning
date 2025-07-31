@@ -143,7 +143,7 @@ export default function Index() {
               )}
 
               {/* ✅ TIP SECTION */}
-              {!BookinData?.BonusId && !Tips && (
+              {/* {!BookinData?.BonusId && !Tips && (
                 <p
                   className="text-center text-[#CC2828] font-semibold cursor-pointer hover:text-black"
                   onClick={() => setTips(true)}
@@ -156,9 +156,9 @@ export default function Index() {
                 <p className="text-center text-green-600 font-medium text-lg mb-8">
                   ✅ You’ve already sent a tip.
                 </p>
-              )}
+              )} */}
 
-              {Tips && !BookinData?.BonusId && (
+              {/* {Tips && !BookinData?.BonusId && (
                 <div className="pt-[89px] md:pt-[95px] lg:pt-[110px] pb-[20px] md:pb-[40px] lg:pb-[60px]">
                   <div className="flex flex-col items-center justify-center w-full max-w-2xl text-center mx-auto">
                     <h1 className="font-inter text-2xl lg:text-3xl font-bold text-[#CC2828] tracking-[-0.04em] mb-3">
@@ -171,7 +171,6 @@ export default function Index() {
                   </div>
 
                   <div className="flex flex-col md:flex-row gap-6 p-6">
-                    {/* Left: Payment Method */}
                     <div className="border border-[#CC2828] h-fit rounded-xl p-4 w-full md:w-1/2">
                       <h2 className="text-[#CC2828] font-semibold mb-4">Payment Method</h2>
                       <div className="space-y-4">
@@ -209,9 +208,7 @@ export default function Index() {
                       </div>
                     </div>
 
-                    {/* Right: Summary */}
                     <div className="border border-[#CC2828] rounded-xl p-4 w-full md:w-1/2 space-y-4">
-                      {/* Amount Input field */}
                       <div className="space-y-2">
                         <label htmlFor="amount" className="text-sm font-medium text-gray-700">
                           Amount
@@ -242,7 +239,7 @@ export default function Index() {
                     </div>
                   </div>
                 </div>
-              )}
+              )} */}
             </div>
           )}
         </>

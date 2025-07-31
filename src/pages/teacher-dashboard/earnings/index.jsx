@@ -187,7 +187,7 @@ export default function index() {
               >
                 Bookings
               </button>
-              <button
+              {/* <button
                 onClick={() => setTabOpen('bonus')}
                 className={`px-2 px-8 xl:px-12 py-2 h-[44px] rounded-md tracking-[-0.06em] text-base font-medium  cursor-pointer ${tabOpen === 'bonus'
                   ? 'bg-[#CC2828] text-[#fff]'
@@ -195,7 +195,7 @@ export default function index() {
                   }`}
               >
                 Bonus
-              </button>
+              </button> */}
             </div>
             <div className="rounded-[5px] border border-[rgba(204,40,40,0.3)] overflow-x-auto">
               {tabOpen === 'bookings' &&

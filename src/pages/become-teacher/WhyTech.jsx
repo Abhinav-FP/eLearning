@@ -30,7 +30,8 @@ export default function WhyTech({title, pargraph, points, language}) {
                     </div>
                     <div className="w-full lg:w-1/2 px-2.5">
                         <div className="text-center">
-                            <Image className="max-w-xs lg:max-w-full block mx-auto " src={whytechBanner} alt="banner" />
+                            {/* <Image className="max-w-xs lg:max-w-full block mx-auto " src={whytechBanner} alt="banner" /> */}
+                            <Image className="max-w-xs lg:max-w-full block mx-auto " src={"/become.jpg"} width={2489} height={659} alt="banner" />
                         </div>
                     </div>
                 </div>

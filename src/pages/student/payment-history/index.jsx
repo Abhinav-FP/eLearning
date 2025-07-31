@@ -29,6 +29,8 @@ export default function Index() {
   useEffect(() => {
     PaymentHistory();
   }, []);
+  console.log("stripePayments", stripePayments);
+  console.log("paypalPayments", paypalPayments);
 
   const [selectedPayment, setSelectedPayment] = useState("paypal");
   const displayPayments = selectedPayment === "paypal" ? paypalPayments : stripePayments;
@@ -57,12 +59,12 @@ export default function Index() {
                 <th className="font-normal text-sm lg:text-base px-3 lg:px-4 py-2 lg:py-3 border-t border-[rgba(204,40,40,0.2)] capitalize">
                   Lesson Start & End DateTime
                 </th>
+                <th className="font-normal text-sm lg:text-base px-3 lg:px-4 py-2 lg:py-3 border-t border-[rgba(204,40,40,0.2)] capitalize">
+                  Teacher Name
+                </th>
                 <th className="font-normal text-sm lg:text-base px-3 lg:px-4 py-2 lg:py-3 border-t border-[rgba(204,40,40,0.2)] capitalize">Payment Date & time</th>
                 <th className="font-normal text-sm lg:text-base px-3 lg:px-4 py-2 lg:py-3 border-t border-[rgba(204,40,40,0.2)] capitalize">Amount</th>
                 <th className="font-normal text-sm lg:text-base px-3 lg:px-4 py-2 lg:py-3 border-t border-[rgba(204,40,40,0.2)] capitalize">Payment Status</th>
-                <th className="font-normal text-sm lg:text-base px-3 lg:px-4 py-2 lg:py-3 border-t border-[rgba(204,40,40,0.2)] capitalize">
-                  Payment Name
-                </th>
 
 
               </tr>
@@ -79,6 +81,7 @@ export default function Index() {
                     const status = isPaypal ? paymentInfo?.status : paymentInfo?.payment_status;
                     const amount = paymentInfo?.amount || 0;
                     const paymentDate = isPaypal ? paymentInfo?.capturedAt : paymentInfo?.created_at;
+                    const teacherName = item?.teacherId?.name;
                     const lessonTitle = item?.LessonId?.title;
                     const lessonstartDate = item?.startDateTime;
                     const lessonEndDate = item?.endDateTime;
@@ -87,12 +90,10 @@ export default function Index() {
                         <td className="px-3 lg:px-4 py-2 lg:py-3 text-black text-sm lg:text-base font-medium font-inter">{paymentId}</td>
                         <td className="px-3 lg:px-4 py-2 lg:py-3 text-black text-sm lg:text-base font-medium font-inter">{lessonTitle}</td>
                         <td className="px-3 lg:px-4 py-2 lg:py-3 text-black text-sm lg:text-base font-medium font-inter">{moment(lessonstartDate).format("DD MMMM YYYY hh:mm A")} -{moment(lessonEndDate).format("DD MMMM YYYY hh:mm A")}</td>
+                        <td className="px-3 lg:px-4 py-2 lg:py-3 text-black text-sm lg:text-base font-medium font-inter">{teacherName}</td>
                         <td className="px-3 lg:px-4 py-2 lg:py-3 text-black text-sm lg:text-base font-medium font-inter">{moment(paymentDate).format("DD MMMM YYYY hh:mm A")}</td>
                         <td className="px-3 lg:px-4 py-2 lg:py-3 text-black text-sm lg:text-base font-medium font-inter">{formatMultiPrice(amount, "USD")}</td>
                         <td className="px-3 lg:px-4 py-2 lg:py-3 text-black text-sm lg:text-base font-medium font-inter">{status}</td>
-                        <td className="px-3 lg:px-4 py-2 lg:py-3 text-black text-sm lg:text-base font-medium font-inter">
-                          {selectedPayment === "paypal" ? "Paypal" : "Stripe"}
-                        </td>
 
                       </tr>
                     );

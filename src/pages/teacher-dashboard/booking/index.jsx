@@ -8,6 +8,7 @@ import { formatMultiPrice } from '@/components/ValueDataHook';
 import { FiSearch } from 'react-icons/fi';
 import ZoomPopup from '@/pages/admin/booking/ZoomPopup';
 import BookingView from '@/pages/admin/common/BookingView';
+import CancelPopup from './CancelPopup';
 
 export default function Index() {
   const [TabOpen, setTabOpen] = useState('upcoming');
@@ -15,7 +16,6 @@ export default function Index() {
   const [loading, setLoading] = useState(false);
   const [searchText, setSearchText] = useState("");
   const timerRef = useRef(null);
-
 
   const fetchEarnings = async (search = "") => {
     try {
@@ -50,6 +50,15 @@ export default function Index() {
         fetchEarnings(sval);
       }, 1500);
     }
+  };
+
+  const isMoreThanTwoHourFromNow = (startDateTime) => {
+    const now = new Date();
+    const start = new Date(startDateTime);
+    const diffInMs = start - now;
+    const oneHourInMs = 2 * 60 * 60 * 1000;
+
+    return diffInMs > oneHourInMs;
   };
 
   function isBeforeEndTime(endDateTime) {
@@ -89,6 +98,15 @@ export default function Index() {
               >
                 Past
               </button>
+              <button
+                onClick={() => setTabOpen('cancelled')}
+                className={`px-2 px-8 xl:px-12 py-2 h-[44px] rounded-md tracking-[-0.06em] text-base font-medium  cursor-pointer ${TabOpen === 'cancelled'
+                  ? 'bg-[#CC2828] text-[#fff]'
+                  : 'bg-[#E0E0E0] text-[#727272]'
+                  }`}
+              >
+                Cancelled
+              </button>
             </div>
             <div className="w-full md:w-1/3 md:max-w-sm relative">
               <span className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
@@ -124,10 +142,15 @@ export default function Index() {
                     Amount
                   </th>
                  {TabOpen === "past" && (
-  <th className="font-normal text-xs sm:text-sm lg:text-base px-3 lg:px-4 py-2 lg:py-3 border-t border-[rgba(204,40,40,0.2)] capitalize text-gray-700">
-    View Details
-  </th>
-)}
+                    <th className="font-normal text-xs sm:text-sm lg:text-base px-3 lg:px-4 py-2 lg:py-3 border-t border-[rgba(204,40,40,0.2)] capitalize text-gray-700">
+                      View Details
+                    </th>
+                  )}
+                  {TabOpen === "upcoming" && (
+                    <th className="font-normal text-xs sm:text-sm lg:text-base px-3 lg:px-4 py-2 lg:py-3 border-t border-[rgba(204,40,40,0.2)] capitalize text-gray-700">
+                      Action
+                    </th>
+                  )}
 
                 </tr>
               </thead>
@@ -171,11 +194,19 @@ export default function Index() {
                         </td>
                         {TabOpen === "past" &&
                         <td>
-                          {item?.zoom ? (
+                          {/* {item?.zoom ? ( */}
                             <BookingView data={item} status= {"teacher"} />
-                          ) : (
-                            <span>N/A</span>
-                          )}
+                          {/* // ) : (
+                          //   <span>N/A</span>
+                          // )} */}
+                        </td>}
+                        {TabOpen === "upcoming" &&
+                        <td>
+                          {isMoreThanTwoHourFromNow(item?.startDateTime) ?
+                          <CancelPopup data={item} fetchEarnings={fetchEarnings}/>
+                          :
+                          "N/A"
+                          }
                         </td>}
                       </tr>
                     ))
@@ -184,7 +215,7 @@ export default function Index() {
                       <td colSpan={TabOpen === "past" ? 6 : 5}>
                         <div className="mt-2">
                           <NoData
-                            Heading={"No bookings found."}
+                            Heading={"No bookings found"}
                             content={
                               `Your account does not have any ${TabOpen} booking. If a booking is made it will be shown here`
                             }

@@ -31,12 +31,12 @@ export default function Main() {
     fetchData();
   }, []);
 
-  const connectZoom = () => {
-    const clientId = "Wbn0TMEnSmij1M7cYMG11w";
-    const redirectUri = encodeURIComponent("https://elearning-backend-nbhf.onrender.com/api/v1/zoom/oauth-callback");
-    const zoomURL = `https://zoom.us/oauth/authorize?response_type=code&client_id=${clientId}&redirect_uri=${redirectUri}`;
-    window.location.href = zoomURL;
-  };
+  // const connectZoom = () => {
+  //   const clientId = "Wbn0TMEnSmij1M7cYMG11w";
+  //   const redirectUri = encodeURIComponent("https://elearning-backend-nbhf.onrender.com/api/v1/zoom/oauth-callback");
+  //   const zoomURL = `https://zoom.us/oauth/authorize?response_type=code&client_id=${clientId}&redirect_uri=${redirectUri}`;
+  //   window.location.href = zoomURL;
+  // };
 
 
   return (
@@ -60,9 +60,9 @@ export default function Main() {
         loading={loading} />
       <div id="faq">
         <FAQ Faq={homeData?.Faqrecord} />
-        <button onClick={connectZoom} className="bg-blue-600 text-white px-4 py-2 rounded">
+        {/* <button onClick={connectZoom} className="bg-blue-600 text-white px-4 py-2 rounded">
           Connect Zoom Account
-        </button>
+        </button> */}
       </div>
     </Layout>
   )

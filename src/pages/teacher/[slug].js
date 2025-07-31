@@ -145,6 +145,8 @@ export default function Index() {
     );
   };
 
+  console.log("data", data);
+
   return (
     <>
       <Layout>
@@ -184,6 +186,10 @@ export default function Index() {
                             {data?.userId?.name || ""}{" "}
                             {data?.admin_approved === true ? (<BiSolidBadgeCheck className="inline text-[#6ABB52] w-[32px] h-[32x]" size={32} />) : ""}
                           </h3>
+                           {data?.ais_trained && (
+                            <span className="bg-white text-red-500 text-xs font-semibold px-2 py-0.5 rounded-full ml-2">
+                              AIS Trained
+                            </span>)}
                         </div>
                         {/* Fields other than description */}
                         <div className="flex flex-wrap  gap-x-2 md:gap-x-6 lg:gap-x-8 mb-2 lg:mb-4 text-white text-base font-medium">

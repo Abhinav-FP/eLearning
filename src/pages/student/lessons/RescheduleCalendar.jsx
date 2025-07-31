@@ -158,7 +158,14 @@ useEffect(() => {
       toast.error("This time slot is too short for your selected lesson duration.");
       return;
     }
-    setSelectedSlot(event);
+    const startTime = moment(event.start);
+      const now = moment();
+      const diffInMinutes = startTime.diff(now, "minutes");
+      if (diffInMinutes < 10) {
+        toast.error("Cannot select a slot that starts in less than 10 minutes or is in the past.");
+        return;
+      }
+      setSelectedSlot(event);
   };
 
   return (

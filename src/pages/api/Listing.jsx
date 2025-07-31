@@ -176,9 +176,15 @@ class Listing extends Component {
   async TeacherLessonGetForStudent(id) {
     return Api.get(`/student/lesson/get/${id}`);
   }
+
   async BookingId(id) {
     return Api.get(`/booking/${id}`);
   }
+
+  async BookingCancel(id) {
+    return Api.get(`/booking/cancel/${id}`);
+  }
+
   async TeacherAvailabilityGet() {
     return Api.get(`/teacher/availability/get`);
   }

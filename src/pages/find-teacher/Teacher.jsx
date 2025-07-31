@@ -104,7 +104,7 @@ export default function Teacher({ teacherData, loading }) {
                                                     Lesson from
                                                 </span>
                                                 <div className="text-black font-bold text-base -tracking-[0.03em]">
-                                                        `${formatMultiPrice(item?.lowestLesson?.price, "USD")}`
+                                                        {formatMultiPrice(item?.lowestLesson?.price, "USD")}
                                                 </div>
                                                 </>
                                               )}

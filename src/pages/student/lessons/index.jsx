@@ -18,7 +18,7 @@ export default function Index() {
   const [categorizedLessons, setCategorizedLessons] = useState({
     upcoming: [],
     past: [],
-    // cancelled: [],
+    cancelled: [],
   });
   const [isPopupOpen, setIsPopupOpen] = useState(false);
   const closePopup = () => setIsPopupOpen(false);
@@ -30,50 +30,53 @@ export default function Index() {
     setStudentTimeZone(timeZone);
   }, []);
 
-const fetchLessons = async () => {
-  try {
-    setLoading(true);
-    const main = new Listing();
-    const response = await main.GetBooking();
-    const allLessons = response?.data?.data || [];
+  const fetchLessons = async () => {
+    try {
+      setLoading(true);
+      const main = new Listing();
+      const response = await main.GetBooking();
+      const allLessons = response?.data?.data || [];
 
-    const now = Date.now(); // current time in ms
+      const now = Date.now();
 
-    const categorized = {
-      upcoming: [],
-      past: []
-    };
+      const categorized = {
+        upcoming: [],
+        past: [],
+        cancelled: [],
+      };
 
-    allLessons.forEach(lesson => {
-      if (lesson.cancelled) return; // Skip cancelled lessons
+      allLessons.forEach((lesson) => {
+        if (lesson.cancelled) {
+          categorized.cancelled.push(lesson);
+        } else {
+          const endTime = new Date(lesson.endDateTime).getTime();
+          if (endTime > now) {
+            categorized.upcoming.push(lesson);
+          } else {
+            categorized.past.push(lesson);
+          }
+        }
+      });
 
-      const endTime = new Date(lesson.endDateTime).getTime();
-
-      if (endTime > now) {
-        categorized.upcoming.push(lesson);
-      } else {
-        categorized.past.push(lesson);
-      }
-    });
-
-    setCategorizedLessons(categorized);
-    setLoading(false);
-    console.log("categorizedLessons", categorized);
-  } catch (error) {
-    console.log("error", error);
-    setCategorizedLessons({
-      upcoming: [],
-      past: []
-    });
-    setLoading(false);
-  }
-};
+      setCategorizedLessons(categorized);
+      setLoading(false);
+      console.log("categorizedLessons", categorized);
+    } catch (error) {
+      console.log("error", error);
+      setCategorizedLessons({
+        upcoming: [],
+        past: [],
+        cancelled: [],
+      });
+      setLoading(false);
+    }
+  };
 
   useEffect(() => {
     fetchLessons();
   }, []);
 
-  console.log("categorizedLessons", categorizedLessons);
+  // console.log("categorizedLessons", categorizedLessons);
 
   const isMoreThanOneHourFromNow = (startDateTime) => {
     const now = new Date();
@@ -96,7 +99,7 @@ const fetchLessons = async () => {
   return diffInMinutes;
   }
 
-  // console.log("categorizedLessons",categorizedLessons);
+  console.log("categorizedLessons",categorizedLessons);
 
   return (
     <StudentLayout page={"My Lessons"}>
@@ -109,7 +112,7 @@ const fetchLessons = async () => {
 
         {/* Tabs */}
         <div className="flex px-5 lg:px-[30px] flex-wrap gap-6 sm:gap-16 lg:gap-12 xl:gap-28 border-b border-[rgba(0,0,0,0.2)] mb-6">
-          {["Upcoming", "Past"].map((item) => (
+          {["Upcoming", "Past", "Cancelled"].map((item) => (
             <button
               key={item}
               onClick={() => setTab(item.toLowerCase())}
@@ -159,7 +162,7 @@ const fetchLessons = async () => {
                         <p className="text-sm font-inter font-medium text-black tracking-[-0.06em]">
                           {lesson?.teacherId?.name || ""}
                         </p>
-                        <p className="text-xs font-inter text-[#7A7A7A] tracking-[-0.04em]">Teacher</p>
+                        <p className="text-xs font-inter text-[#7A7A7A] tracking-[-0.04em]">{lesson?.LessonId?.title}</p>
                       </div>
                     </div>
                     <div className="flex flex-col sm:flex-row gap-2 md:gap-3 xl:gap-5">

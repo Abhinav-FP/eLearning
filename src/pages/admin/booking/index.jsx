@@ -35,14 +35,20 @@ export default function Index() {
   console.log("data", data)
 
   // Categorize data
-  const { upcoming, past } = useMemo(() => {
+  const { upcoming, past, cancelled } = useMemo(() => {
     const now = moment();
-    const upcoming = data.filter(item => moment(item.startDateTime).isAfter(now));
-    const past = data.filter(item => moment(item.startDateTime).isBefore(now));
-    return { upcoming, past };
+    const upcoming = data.filter(item => !item.cancelled && moment(item.startDateTime).isAfter(now));
+    const past = data.filter(item => !item.cancelled && moment(item.startDateTime).isBefore(now));
+    const cancelled = data.filter(item => item.cancelled);
+    return { upcoming, past, cancelled };
   }, [data]);
 
-  const currentList = TabOpen === 'upcoming' ? upcoming : past;
+  const currentList = TabOpen === 'upcoming' 
+  ? upcoming 
+  : TabOpen === 'past' 
+    ? past 
+    : cancelled;
+
 
   const handleSearchChange = (e) => {
     const sval = e.target.value;
@@ -84,6 +90,15 @@ export default function Index() {
                 }`}
             >
               Past
+            </button>
+             <button
+              onClick={() => setTabOpen('cancelled')}
+              className={`px-2 px-4 xl:px-8 py-2 h-[44px] rounded-md tracking-[-0.06em] text-base font-medium  cursor-pointer ${TabOpen === 'cancelled'
+                ? 'bg-[#CC2828] text-[#fff]'
+                : 'bg-[#E0E0E0] text-[#727272]'
+                }`}
+            >
+              Cancelled
             </button>
           </div>
           <div className="w-full md:w-1/3 md:max-w-sm relative">
@@ -176,7 +191,7 @@ export default function Index() {
                         <NoData
                           Heading={"No bookings found."}
                           content={
-                            `There are not any ${TabOpen} bookings on the website yet. If a booking is made it will be shown here`
+                            `There are not any ${TabOpen} bookings on the website yet matching your filters.`
                           }
                         />
                       </div>

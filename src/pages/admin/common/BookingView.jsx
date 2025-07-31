@@ -60,7 +60,7 @@ const BookingView = ({ data, status }) => {
                             <InfoCard icon={<FaUser className="text-red-500" />} title="User">
                                 <div className="flex items-center gap-4">
                                     <img
-                                        src={data.UserId?.profile_photo}
+                                        src={data.UserId?.profile_photo || "/Placeholder.png"}
                                         alt={data.UserId?.name}
                                         className="w-16 h-16 rounded-full object-cover border-2 border-gray-300 shadow"
                                     />
@@ -80,7 +80,7 @@ const BookingView = ({ data, status }) => {
                             <InfoCard icon={<FaChalkboardTeacher className="text-red-500" />} title="Teacher">
                                 <div className="flex items-center gap-4">
                                     <img
-                                        src={data.teacherId?.profile_photo}
+                                        src={data.teacherId?.profile_photo || "/Placeholder.png"}
                                         alt={data.teacherId?.name}
                                         className="w-16 h-16 rounded-full object-cover border-2 border-gray-300 shadow"
                                     />
@@ -247,7 +247,7 @@ const BookingView = ({ data, status }) => {
                         </InfoCard>
 
 
-                        {data.zoom && (
+                        {data.zoom ? (
                             <InfoCard icon={<FaVideoSlash className="text-red-600" />} title="Zoom Meeting">
                                 <div className="text-left">
                                     <span className="font-semibold text-gray-700 block mb-1">Meeting ID: {data.zoom.meetingId}</span>
@@ -317,7 +317,11 @@ const BookingView = ({ data, status }) => {
                                     </div>
                                 </div>
                             </InfoCard>
-                        )}
+                        ):
+                        <p className='text-gray-500'>
+                            No Zoom link was generated for this meeting
+                        </p>
+                    }
                     </div>
                 </Popup>
             )}

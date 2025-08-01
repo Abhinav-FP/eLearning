@@ -43,23 +43,23 @@ export default function Index() {
       "points": [
         {
           "en": "Specializing in Japanese language education",
-          "ja": "日本語教育に特化＆100%日本国内運営"
+          "ja": "日本語教育に特化、安心の国内100％運営"
         },
         {
           "en": "100% domestic operation with peace of mind",
-          "ja": "教研第一の運営方針で、手数料も最小限"
+          "ja": "教師第一の運営方針で、手数料も最小限"
         },
         {
           "en": "Teacher-first management policy, minimal fees, environment where you can value the value of your lessons",
-          "ja": "時給30ドル以下なし！価格競争に巻き込まれない"
+          "ja": "自分のレッスン価値を大切にできる環境"
         },
         {
           "en": "Peace of mind in case of emergency. Legal support system and friends!",
-          "ja": "トラブル時も心強い法的サポート付き"
+          "ja": "もしもの時も安心。法的サポート体制あり"
         },
         {
           "en": "Teacher community – You can interact with others at any time and learn while teaching!",
-          "ja": "仲間がいる！教師コミュニティで孤独を感じない"
+          "ja": "仲間がいる！教師コミュニティいつでも交流"
         },
         {
           "en": "Plenty of opportunities to improve your skills",

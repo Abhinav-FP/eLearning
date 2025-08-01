@@ -218,8 +218,7 @@ export default function Lesson({ title }) {
                                     <MdClose size={24} />
                                 </button>
                                 <div className="relative !z-10 max-h-[80vh]   w-full flex items-center justify-center">
-                                    <div className="relative w-full max-w-4xl saspect-video h-full  ">
-                                        {currentVideo.intro_video}
+                                    <div className="relative w-full max-w-4xl aspect-video h-full  ">
                                         <iframe
                                             width="100%"
                                             // src={`https://www.youtube.com/embed/IC_2jSsWpZk?si=Di41pFm5yXaadeHv`}

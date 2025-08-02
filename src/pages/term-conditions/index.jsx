@@ -27,15 +27,18 @@ export default function PrivacyPage() {
 
     return (
         <Layout>
-            <div className=" pt-[118px] lg:pt-[128px] pb-[50px] lg:pb-[98px]">
-                {loading ? (
-                    <Loader />
-                ) : (
-                    <div
-                        className="container max-w-3xl mx-auto text-left policy-page"
-                        dangerouslySetInnerHTML={{ __html: privacyContent }}
-                    />
-                )}
+            <div className="pt-[132px] md:pt-[140px] lg:pt-[160px] pb-[20px] md:pb-[40px] lg:pb-[60px]">
+                <div className='mx-auto container sm:container md:container lg:container xl:max-w-[1230px]  px-4'>
+
+                    {loading ? (
+                        <Loader />
+                    ) : (
+                        <div
+                            className=" text-left policy-page"
+                            dangerouslySetInnerHTML={{ __html: privacyContent }}
+                        />
+                    )}
+                </div>
             </div>
         </Layout>
     );

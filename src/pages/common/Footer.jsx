@@ -39,14 +39,14 @@ export default function Footer() {
                      </div>
 
                      <div className="w-full md:w-[324px] px-4 ">
-                        {/* <ul className="space-y-1">
+                        <ul className="space-y-1">
                            <li>
-                              <Link href="/" className="-tracking-[0.03em] text-base text-[#CC2828] hover:underline " >Terms & condition</Link>
+                              <Link href="/term-conditions" className="-tracking-[0.03em] text-base text-[#CC2828] hover:underline " >Terms & condition</Link>
                            </li>
                            <li>
-                              <Link href="/" className="-tracking-[0.03em] text-base text-[#CC2828] hover:underline" >Privacy Policy</Link>
+                              <Link href="/privacy-policy" className="-tracking-[0.03em] text-base text-[#CC2828] hover:underline" >Privacy Policy</Link>
                            </li> 
-                        </ul> */}
+                        </ul>
                      </div>
                   </div>
               </div>

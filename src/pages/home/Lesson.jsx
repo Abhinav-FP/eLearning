@@ -174,7 +174,7 @@ export default function Lesson({ title }) {
                                                 <div className="flex justify-between items-center pt-4 lg:pt-5">
                                                     <div className="w-6/12 text-black lg:w-6/12">
                                                         <span className="text-black text-xs xl:text-sm -tracking-[0.03em] text-sm">
-                                                            Lessons starts from
+                                                            Lesson from
                                                         </span>
                                                         <div className="text-black font-bold text-base -tracking-[0.03em]">
                                                             {items?.lowestLesson.price &&

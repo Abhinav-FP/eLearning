@@ -16,7 +16,7 @@ export default function Hero({ title, heroimg, heroimg2, loading }) {
                                     {loading ?
                                     <div className="w-full h-full bg-gray-200 animate-pulse rounded-lg" /> 
                                     :
-                                    <Image layout="responsive" src={heroimg || HeroImg1} width={762} height={676} alt="hero banner"/>
+                                    <Image layout="responsive" src={heroimg || HeroImg1} width={762} height={676} alt="hero banner" className="object-cover"/>
                                     }
                                     <div className="border-[10px] border-[#16C7F8] w-[76px] h-[76px] absolute right-56 bottom-1 rounded-full"></div>
                                 </div>

@@ -15,11 +15,11 @@ export default function contact() {
       </div>
 
       <div className="bg-white py-16 px-6 md:px-20">
-        <h2 className="text-3xl font-semibold text-gray-800 mb-4">
+        <h2 className="text-3xl font-semibold text-gray-800 mb-2">
           Media and Business Inquiries
         </h2>
         <p className="text-gray-700">
-          Email us at{' '}
+          For any technical support, account help, booking issue, or Zoom-related issues, please contact us at {" "}
           <a
             href="mailto:office@japaneseforme.com"
             className="text-blue-600 hover:underline"
@@ -27,6 +27,18 @@ export default function contact() {
             office@japaneseforme.com
           </a>
           .
+        </p>
+        <h2 className="text-3xl font-semibold text-gray-800 mt-4 mb-2">
+          Support Hours:
+        </h2>
+        <p className="text-gray-700">
+          Monday to Friday, 9 AM – 6 PM JST.
+        </p>
+        <p className="text-gray-700">
+          Live support is currently unavailable.  
+        </p>
+        <p className="text-gray-700">
+          We aim to resolve all issues within 1 business day.
         </p>
       </div>
     </div>

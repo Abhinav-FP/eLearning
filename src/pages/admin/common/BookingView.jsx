@@ -67,7 +67,7 @@ const BookingView = ({ data, status }) => {
                                     <div className="space-y-1 text-left">
                                         <p><span className="font-semibold">Name:</span> {data?.UserId?.name}</p>
                                         <p><span className="font-semibold break-all">Email:</span>
-                                            <span className="break-all"> {data?.teacherId?.email}</span>
+                                            <span className="break-all"> {data?.UserId?.email}</span>
                                         </p>
 
 

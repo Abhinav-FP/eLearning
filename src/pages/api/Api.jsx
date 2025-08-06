@@ -1,9 +1,9 @@
 import axios from 'axios';
 
-const API_URL =  process.env.NEXT_PUBLIC_BASE_URL || "http://localhost:5000/api";
+// const API_URL =  process.env.NEXT_PUBLIC_BASE_URL || "http://localhost:5000/api";
 
 
-// const API_URL = "https://elearning-backend-nbhf.onrender.com/api/"
+const API_URL = "https://api.japaneseforme.com/api"
 function getToken() {
   if (typeof window !== 'undefined') {
     const data = localStorage.getItem('token');

@@ -339,6 +339,11 @@ class Listing extends Component {
  async ReviewTeacher() {
     return Api.get(`/teacher/review`);
   }
+
+  async checkZoomConnection() {
+    return Api.get(`/teacher/zoom/test`);
+  }
+
   render() {
     return (
       <div>

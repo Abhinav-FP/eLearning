@@ -28,7 +28,7 @@ export default function connectZoom() {
   }, []);
 
   const connectZoom = () => {
-    const clientId = "Wbn0TMEnSmij1M7cYMG11w";
+    const clientId = "HcOaR_0QJawBhl4GIXG7g";
     const redirectUri = encodeURIComponent("https://api.japaneseforme.com/");
     const zoomURL = `https://zoom.us/oauth/authorize?response_type=code&client_id=${clientId}&redirect_uri=${redirectUri}`;
     window.location.href = zoomURL;

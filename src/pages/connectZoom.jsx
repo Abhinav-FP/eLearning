@@ -1,9 +1,28 @@
 import React, { useEffect, useState } from "react";
 import Listing from "./api/Listing";
+import { useRouter } from "next/router";
+import toast from "react-hot-toast";
 
 export default function connectZoom() {
   const [data, setData] = useState(null);
   const [loading, setLoading] = useState(false);
+  const router = useRouter();
+
+  const checkLogin = async (signal) => {
+    try {
+      const main = new Listing();
+      const response = await main.profileVerify(signal);
+      if (response.data) {
+        // setUser(response.data.data.user);
+      }
+    } catch (error) {
+      console.log("error", error);
+      localStorage?.removeItem("token");
+      // setUser(null);
+      router.push("/login?redirect=/connectZoom");
+      toast.error("Please log in first.");
+    }
+  };
 
   const fetchData = async () => {
     try {
@@ -24,6 +43,7 @@ export default function connectZoom() {
   };
 
   useEffect(() => {
+    checkLogin();
     fetchData();
   }, []);
 

@@ -30,6 +30,10 @@ class Listing extends Component {
     return Api.post("/teacher/profile", data);
   }
 
+  async TeacherZoomDisconnect() {
+    return Api.get("/teacher/disconnectZoom");
+  }
+
   async ForgetPasswordLink(data) {
     return Api.post("/user/forget-link", data)
   }

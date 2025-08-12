@@ -27,8 +27,10 @@ export default function Profile() {
     specialities: [],
   });
   const [file, setFile] = useState(null);
+  const [isZoomConnected, setIsZoomConnected] = useState(false);
   const [newSpeciality, setNewSpeciality] = useState("");
   const [loading, setLoading] = useState(false);
+  const [zoomLoading, setZoomLoading] = useState(false);
 
   useEffect(() => {
     setLoading(true);
@@ -37,6 +39,7 @@ export default function Profile() {
       .Teacherprofile()
       .then((r) => {
         const profiledata = r?.data?.data?.user;
+        console.log("profiledata", profiledata);
         setData({
           name: profiledata?.userId?.name,
           email: profiledata?.userId?.email,
@@ -55,6 +58,9 @@ export default function Profile() {
           specialities: profiledata?.tags || [],
         });
         setFile(profiledata?.userId?.profile_photo);
+        if (profiledata?.access_token && profiledata?.refresh_token) {
+          setIsZoomConnected(true);
+        }
         setLoading(false);
       })
       .catch((err) => {
@@ -95,10 +101,10 @@ export default function Profile() {
     e.preventDefault();
     if (data?.intro_video) {
       const url = data.intro_video;
-      const isYouTube = url.includes('youtube.com') || url.includes('youtu.be');
-      const isVimeo = url.includes('vimeo.com');
+      const isYouTube = url.includes("youtube.com") || url.includes("youtu.be");
+      const isVimeo = url.includes("vimeo.com");
       if (!isYouTube && !isVimeo) {
-        toast.error('Only YouTube and Vimeo links are allowed in intro video.');
+        toast.error("Only YouTube and Vimeo links are allowed in intro video.");
         return;
       }
     }
@@ -107,18 +113,21 @@ export default function Profile() {
     try {
       const main = new Listing();
       const formData = new FormData();
-      formData.append("name", data?.name)
-      formData.append("email", data?.email)
-      formData.append("timezone", data?.timezone)
-      formData.append("nationality", data?.nationality)
-      formData.append("languages_spoken", JSON.stringify(data.languages_spoken))
-      formData.append("gender", data?.gender)
-      formData.append("ais_trained", data?.ais_trained)
-      formData.append("intro_video", data?.intro_video)
-      formData.append("interest", data?.interest)
+      formData.append("name", data?.name);
+      formData.append("email", data?.email);
+      formData.append("timezone", data?.timezone);
+      formData.append("nationality", data?.nationality);
+      formData.append(
+        "languages_spoken",
+        JSON.stringify(data.languages_spoken)
+      );
+      formData.append("gender", data?.gender);
+      formData.append("ais_trained", data?.ais_trained);
+      formData.append("intro_video", data?.intro_video);
+      formData.append("interest", data?.interest);
       // formData.append("experience", data?.experience)
-      formData.append("description", data?.description)
-      formData.append("tags", JSON.stringify(data?.specialities))
+      formData.append("description", data?.description);
+      formData.append("tags", JSON.stringify(data?.specialities));
       // formData.append("average_price", data?.average_price)
       // formData.append("average_time", data?.average_time)
       // formData.append("qualifications", data?.qualifications)
@@ -173,7 +182,6 @@ export default function Profile() {
     }));
   };
 
-
   const handlefileChange = (e) => {
     const { name, type, files, value } = e.target;
     const newValue = type === "file" ? files[0] : value;
@@ -186,11 +194,7 @@ export default function Profile() {
   const handleImageChange = (e) => {
     const selectedFile = e.target.files[0];
     if (selectedFile) {
-      const allowedTypes = [
-        "image/jpeg",
-        "image/png",
-        "image/webp"
-      ];
+      const allowedTypes = ["image/jpeg", "image/png", "image/webp"];
       if (!allowedTypes.includes(selectedFile.type)) {
         toast.error("Only jpeg, png, webp image files are allowed");
         e.target.value = "";
@@ -206,12 +210,43 @@ export default function Profile() {
     }
   };
 
+  const connectZoom = () => {
+    const clientId = "HcOaR_0QJawBhl4GIXG7g";
+    // const redirectUri = encodeURIComponent("https://api.japaneseforme.com/");
+    const redirectUri = encodeURIComponent(
+      "https://api.japaneseforme.com/api/v1/zoom/oauth-callback"
+    );
+    const zoomURL = `https://zoom.us/oauth/authorize?response_type=code&client_id=${clientId}&redirect_uri=${redirectUri}`;
+    window.location.href = zoomURL;
+  };
+
+  const disconnectZoom = async () => {
+    if (zoomLoading) {return;}
+    try {
+      setZoomLoading(true);
+      const main = new Listing();
+      const response = await main.TeacherZoomDisconnect();
+      // console.log("response?.data",response?.data);
+      if (response?.data?.status) {
+        toast.success(response?.data?.message);
+        setIsZoomConnected(false);
+      }
+      else{
+        toast.error("Unable to disconnect zoom");
+      }
+      setZoomLoading(false);
+    } catch (error) {
+      console.log("error", error);
+      toast.error(error?.response?.data?.message);;
+      setZoomLoading(false);
+    }
+  };
 
   return (
     <>
-      {loading ?
+      {loading ? (
         <TeacherProfileFormLoader />
-        :
+      ) : (
         <form onSubmit={handleSubmit}>
           <div className="border-b  border-[rgba(0,0,0,.1)] flex flex-wrap py-6 lg:py-8">
             <div className="w-full lg:w-5/12  lg:pr-3 mb-2 sm:mb-0">
@@ -252,6 +287,23 @@ export default function Profile() {
                 </label>
               </div>
             </div>
+            {isZoomConnected ? (
+              <button
+                type="button"
+                onClick={disconnectZoom}
+                className="bg-blue-600 text-white px-4 py-2 rounded cursor-pointer"
+              >
+                {zoomLoading ? "Disconnecting..." : "Disconnect Zoom"}
+              </button>
+            ) : (
+              <button
+                type="button"
+                onClick={connectZoom}
+                className="bg-blue-600 text-white px-4 py-2 rounded cursor-pointer"
+              >
+                Connect Zoom Account
+              </button>
+            )}
           </div>
           <div className="border-b border-[rgba(0,0,0,.1)] py-6 lg:py-8 space-y-4 lg:space-y-6">
             <div className="flex flex-wrap -mx-2 space-y-4">
@@ -269,7 +321,6 @@ export default function Profile() {
                 />
               </div>
               <div className="w-full lg:w-6/12  px-2">
-
                 <label className="block text-[#CC2828] font-medium text-base xl:text-xl mb-1 tracking-[-0.04em]">
                   Email <span className="text-red-500">*</span>
                 </label>
@@ -295,7 +346,9 @@ export default function Profile() {
                   name="timezone"
                   required
                 >
-                  <option value="" disabled>Please select Time-Zone</option>
+                  <option value="" disabled>
+                    Please select Time-Zone
+                  </option>
                   {timeZones &&
                     timeZones.map((zone, index) => (
                       <option key={index} value={zone.value}>
@@ -319,7 +372,9 @@ export default function Profile() {
                   value={data?.nationality}
                   name="nationality"
                 >
-                  <option value="" disabled>Please select Nationality</option>
+                  <option value="" disabled>
+                    Please select Nationality
+                  </option>
                   {Nationality &&
                     Nationality.map((zone, index) => (
                       <option key={index} value={zone.value}>
@@ -351,21 +406,22 @@ export default function Profile() {
 
                 {/* Display selected languages */}
                 <div className="mt-3 flex flex-wrap gap-2">
-                  {data?.languages_spoken && data?.languages_spoken?.map((lang, idx) => (
-                    <div
-                      key={idx}
-                      className="bg-red-100 text-red-700 px-3 py-1 rounded-full text-sm flex items-center gap-2"
-                    >
-                      {lang}
-                      <button
-                        type="button"
-                        onClick={() => handleRemoveLanguage(lang)}
-                        className="text-red-500 hover:text-red-800 text-xs cursor-pointer"
+                  {data?.languages_spoken &&
+                    data?.languages_spoken?.map((lang, idx) => (
+                      <div
+                        key={idx}
+                        className="bg-red-100 text-red-700 px-3 py-1 rounded-full text-sm flex items-center gap-2"
                       >
-                        ✕
-                      </button>
-                    </div>
-                  ))}
+                        {lang}
+                        <button
+                          type="button"
+                          onClick={() => handleRemoveLanguage(lang)}
+                          className="text-red-500 hover:text-red-800 text-xs cursor-pointer"
+                        >
+                          ✕
+                        </button>
+                      </div>
+                    ))}
                 </div>
               </div>
 
@@ -517,7 +573,8 @@ export default function Profile() {
                   Akita Inaka School Trained(AIS)
                 </label>
                 <div className="flex items-center space-x-4">
-                  {data?.ais_trained ? "True" : "False"} (Can be changed by the Admin only)
+                  {data?.ais_trained ? "True" : "False"} (Can be changed by the
+                  Admin only)
                 </div>
               </div>
 
@@ -578,7 +635,6 @@ export default function Profile() {
                 )}
               </div>
 
-
               {/* Description */}
               <div className="w-full px-2">
                 <label className="block text-[#CC2828] font-medium text-base xl:text-xl mb-1 tracking-[-0.04em]">
@@ -604,7 +660,8 @@ export default function Profile() {
               {processing ? "Submitting..." : "Submit"}
             </button>
           </div>
-        </form>}
+        </form>
+      )}
     </>
   );
 }

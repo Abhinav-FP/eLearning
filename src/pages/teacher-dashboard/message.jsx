@@ -25,7 +25,6 @@ export default function Index() {
   const [messageCount, SetmessageCount] = useState([]);
   const [selectedIdUser, setSelectedIdUser] = useState();
   const [MobileOpen, setMobileOpen] = useState(false);
-  const [firstTimeLoad, setFirstTimeLoad] = useState(false);
 
   // console.log("firstTimeLoad", firstTimeLoad)
 
@@ -49,6 +48,9 @@ export default function Index() {
     if (Query) {
       setTeacherId(Query);
       MessageGetAlls(Query);
+      if (window.innerWidth < 1024) {
+      setMobileOpen(true);
+    }
     }
   }, [Query]);
 
@@ -135,7 +137,7 @@ export default function Index() {
     fileInputRef.current.click();
   };
 
-   const handleFileChange = (e) => {
+  const handleFileChange = (e) => {
     const selectedFile = e.target.files[0];
     if (selectedFile) {
       const allowedTypes = [
@@ -145,7 +147,7 @@ export default function Index() {
         "image/jpeg",
         "image/png",
         "image/gif",
-        "image/webp"
+        "image/webp",
       ];
 
       const maxSizeInBytes = 2 * 1024 * 1024; // 2MB
@@ -249,51 +251,55 @@ export default function Index() {
           ) : (
             <div className="mt-0 space-y-1 h-[calc(100vh-120px)] lg:h-[calc(100vh-136px)] overflow-y-auto customscroll min-h-[300px] ">
               {messageCount?.length === 0 ? (
-                <p className="text-center text-gray-500 mt-4">No data available</p>
-              ) : (messageCount?.map((chat, index) => (
-                <div
-                  key={index}
-                  onClick={() => handleUserSelect(chat)}
-                  className={`flex items-center text-[#ffffff] min-h-[56px] pr-[66px] pl-[89px] py-[8px] hover:bg-[#CC28281A] relative cursor-pointer min-h-[72px] ${
-                    teacherId === chat?.teacher?._id
-                      ? "bg-[#CC28281A]"
-                      : "bg-[#fff]"
-                  }`}
-                >
-                  <Image
-                    src={chat?.student?.profile_photo || "/Placeholder.png"}
-                    width={50}
-                    height={50}
-                    alt={chat?.student?.name}
-                    className="w-[50px] h-[50px] lg:w-[56px] lg:h-[56px] rounded-full !object-cover absolute left-[22px] top-1/2 -translate-y-1/2"
-                  />
-                  <div className="flex-1">
-                    <h3 className="font-medium font-inter text-base mb-0 text-black capitalize">
-                      {chat?.student?.name}
-                    </h3>
-                    {chat?.count ? (
-                      <p className="text-sm text-[#CC2828] font-inter tracking-[-0.04em] ">
-                        {chat?.count > 5 ? "5+" : chat?.count} unread messages
-                      </p>
-                    ) : (
-                      <p className="text-sm text-[#7A7A7A] font-inter tracking-[-0.04em]">
-                        Student
-                      </p>
+                <p className="text-center text-gray-500 mt-4">
+                  No data available
+                </p>
+              ) : (
+                messageCount?.map((chat, index) => (
+                  <div
+                    key={index}
+                    onClick={() => handleUserSelect(chat)}
+                    className={`flex items-center text-[#ffffff] min-h-[56px] pr-[66px] pl-[89px] py-[8px] hover:bg-[#CC28281A] relative cursor-pointer min-h-[72px] ${
+                      teacherId === chat?.teacher?._id
+                        ? "bg-[#CC28281A]"
+                        : "bg-[#fff]"
+                    }`}
+                  >
+                    <Image
+                      src={chat?.student?.profile_photo || "/Placeholder.png"}
+                      width={50}
+                      height={50}
+                      alt={chat?.student?.name}
+                      className="w-[50px] h-[50px] lg:w-[56px] lg:h-[56px] rounded-full !object-cover absolute left-[22px] top-1/2 -translate-y-1/2"
+                    />
+                    <div className="flex-1">
+                      <h3 className="font-medium font-inter text-base mb-0 text-black capitalize">
+                        {chat?.student?.name}
+                      </h3>
+                      {chat?.count ? (
+                        <p className="text-sm text-[#CC2828] font-inter tracking-[-0.04em] ">
+                          {chat?.count > 5 ? "5+" : chat?.count} unread messages
+                        </p>
+                      ) : (
+                        <p className="text-sm text-[#7A7A7A] font-inter tracking-[-0.04em]">
+                          Student
+                        </p>
+                      )}
+                    </div>
+                    {chat?.count > 0 && (
+                      <div
+                        className={`h-[28px] w-[28px] text-[#535353] text-xs font-bold flex items-center justify-center absolute right-[22px] rounded-full top-1/2 -translate-y-1/2 ${
+                          teacherId === chat?.teacher?._id
+                            ? "bg-white"
+                            : "bg-[rgba(204,40,40,0.1)]"
+                        }`}
+                      >
+                        {chat?.count > 5 ? "5+" : chat?.count}
+                      </div>
                     )}
                   </div>
-                  {chat?.count > 0 && (
-                    <div
-                      className={`h-[28px] w-[28px] text-[#535353] text-xs font-bold flex items-center justify-center absolute right-[22px] rounded-full top-1/2 -translate-y-1/2 ${
-                        teacherId === chat?.teacher?._id
-                          ? "bg-white"
-                          : "bg-[rgba(204,40,40,0.1)]"
-                      }`}
-                    >
-                      {chat?.count > 5 ? "5+" : chat?.count}
-                    </div>
-                  )}
-                </div>
-              )))}
+                ))
+              )}
             </div>
           )}
         </div>
@@ -327,7 +333,7 @@ export default function Index() {
                   {MobileOpen && (
                     <button
                       onClick={() => setMobileOpen(false)}
-                      className="ml-auto px-6 py-2 text-[#CC2828] border border-[#CC2828] rounded-md text-xs hover:bg-[#CC2828] hover:text-white"
+                      className="block md:hidden ml-auto px-6 py-2 text-[#CC2828] border border-[#CC2828] rounded-md text-xs hover:bg-[#CC2828] hover:text-white"
                     >
                       Back
                     </button>
@@ -377,14 +383,15 @@ export default function Index() {
                                   {item.file_type?.includes("image") ? (
                                     <div
                                       onClick={() =>
-                                        window.open(item.file_url, "_blank")}
+                                        window.open(item.file_url, "_blank")
+                                      }
                                       className="cursor-pointer"
-                                      >
-                                    <img
-                                      src={item.file_url}
-                                      alt={item.file_name || "attachment"}
-                                      className="w-full max-w-[200px] rounded-lg border border-gray-200"
-                                    />
+                                    >
+                                      <img
+                                        src={item.file_url}
+                                        alt={item.file_name || "attachment"}
+                                        className="w-full max-w-[200px] rounded-lg border border-gray-200"
+                                      />
                                     </div>
                                   ) : (
                                     <div

@@ -1,19 +1,23 @@
-import React, { useEffect, useRef, useState } from 'react';
-import StudentLayout from '../Common/StudentLayout';
-import { CiLock } from 'react-icons/ci';
-import { IoSend } from 'react-icons/io5';
-import moment from 'moment';
-import Image from 'next/image';
-import Listing from '@/pages/api/Listing';
-import toast from 'react-hot-toast';
-import { useRouter } from 'next/router';
-import DefaultMessage from '@/pages/common/DefaultMessage';
-import { ChatListShimmer, MessageContentLoader, MessageLoader } from '@/components/Loader';
+import React, { useEffect, useRef, useState } from "react";
+import StudentLayout from "../Common/StudentLayout";
+import { CiLock } from "react-icons/ci";
+import { IoSend } from "react-icons/io5";
+import moment from "moment";
+import Image from "next/image";
+import Listing from "@/pages/api/Listing";
+import toast from "react-hot-toast";
+import { useRouter } from "next/router";
+import DefaultMessage from "@/pages/common/DefaultMessage";
+import {
+  ChatListShimmer,
+  MessageContentLoader,
+  MessageLoader,
+} from "@/components/Loader";
 import { LuPlus } from "react-icons/lu";
 
 export default function Index() {
   const [teacherId, setTeacherId] = useState("");
-  const [message, setMessage] = useState('');
+  const [message, setMessage] = useState("");
   const [usermessage, setUserMessage] = useState([]);
   const [Loading, setLoading] = useState(false);
   const [chatListLoading, setChatListLoading] = useState(false);
@@ -21,7 +25,6 @@ export default function Index() {
   const [messageCount, SetmessageCount] = useState([]);
   const [selectedIdUser, setSelectedIdUser] = useState();
   const [MobileOpen, setMobileOpen] = useState(false);
-  const [firstTimeLoad, setFirstTimeLoad] = useState(false);
 
   // console.log("firstTimeLoad", firstTimeLoad)
 
@@ -36,7 +39,7 @@ export default function Index() {
     if (container) {
       container.scrollTo({
         top: container.scrollHeight,
-        behavior: 'smooth',
+        behavior: "smooth",
       });
     }
   };
@@ -45,6 +48,9 @@ export default function Index() {
     if (Query) {
       setTeacherId(Query);
       MessageGetAlls(Query);
+      if (window.innerWidth < 1024) {
+        setMobileOpen(true);
+      }
     }
   }, [Query]);
 
@@ -81,7 +87,8 @@ export default function Index() {
       const main = new Listing();
       const response = await main.MessageGetAll(Id);
       if (response.data.messages) {
-        const lastNewMsg = response.data.messages[response.data.messages.length - 1]?._id;
+        const lastNewMsg =
+          response.data.messages[response.data.messages.length - 1]?._id;
         const lastOldMsg = usermessage?.[usermessage.length - 1]?._id;
         if (lastNewMsg !== lastOldMsg) {
           setUserMessage(response.data.messages);
@@ -111,11 +118,13 @@ export default function Index() {
     const container = chatContainerRef.current;
     if (!container) return;
 
-    const isNearBottom = container.scrollHeight - container.scrollTop - container.clientHeight < 100;
+    const isNearBottom =
+      container.scrollHeight - container.scrollTop - container.clientHeight <
+      100;
     if (isNearBottom) {
       container.scrollTo({
         top: container.scrollHeight,
-        behavior: 'smooth',
+        behavior: "smooth",
       });
     }
   }, [usermessage]);
@@ -127,7 +136,7 @@ export default function Index() {
     fileInputRef.current.click();
   };
 
- const handleFileChange = (e) => {
+  const handleFileChange = (e) => {
     const selectedFile = e.target.files[0];
     if (selectedFile) {
       const allowedTypes = [
@@ -137,7 +146,7 @@ export default function Index() {
         "image/jpeg",
         "image/png",
         "image/gif",
-        "image/webp"
+        "image/webp",
       ];
 
       const maxSizeInBytes = 2 * 1024 * 1024; // 2MB
@@ -212,7 +221,7 @@ export default function Index() {
           </a>
         );
       }
-      return part.replace(/https:\/\//g, '');
+      return part.replace(/https:\/\//g, "");
     });
   };
 
@@ -233,35 +242,54 @@ export default function Index() {
       </>
       <div className="flex flex-wrap w-full">
         {/* Sidebar */}
-        <div className={`w-full lg:w-4/12 xl:w-3/12 rounded-lg pb-5 pt-2 ${MobileOpen ? "hidden lg:block" : "block lg:block"}`}>
+        <div
+          className={`w-full lg:w-4/12 xl:w-3/12 rounded-lg pb-5 pt-2 ${
+            MobileOpen ? "hidden lg:block" : "block lg:block"
+          }`}
+        >
           {chatListLoading ? (
             <ChatListShimmer />
           ) : (
             <div className="mt-0 space-y-1 lg:h-[calc(100vh-250px)] overflow-y-auto customscroll">
-              {messageCount && messageCount.map((chat, index) => (
-                <div
-                  key={index}
-                  onClick={() => handleUserSelect(chat)}
-                  className={`flex items-center text-[#ffffff] min-h-[56px] pr-[66px] pl-[89px] py-[8px] hover:bg-[#CC28281A] relative cursor-pointer min-h-[72px] ${teacherId === chat?.teacher?._id ? "bg-[#CC28281A]" : "bg-[#fff]"}`}
-                >
-                  <Image
-                    src={chat?.teacher?.profile_photo || "/Placeholder.png"}
-                    width={50}
-                    height={50}
-                    alt={chat?.teacher?.name}
-                    className="!w-[50px] !h-[50px] !lg:w-[56px] !lg:h-[56px] rounded-full !object-cover absolute left-[22px] top-1/2 -translate-y-1/2"
-                  />
-                  <div className="flex-1">
-                    <h3 className="font-medium font-inter text-base mb-0 text-black capitalize">{chat?.teacher?.name}</h3>
-                    <p className="text-sm text-[#7A7A7A] font-inter tracking-[-0.04em]">Teacher</p>
-                  </div>
-                  {chat?.count > 0 && (
-                    <div className={`h-[28px] w-[28px] text-[#535353] text-xs font-bold flex items-center justify-center absolute right-[22px] rounded-full top-1/2 -translate-y-1/2 ${teacherId === chat?.tecaher?._id ? "bg-white" : "bg-[rgba(204,40,40,0.1)]"}`}>
-                      {chat?.count > 5 ? '5+' : chat?.count}
+              {messageCount &&
+                messageCount.map((chat, index) => (
+                  <div
+                    key={index}
+                    onClick={() => handleUserSelect(chat)}
+                    className={`flex items-center text-[#ffffff] pr-[66px] pl-[89px] py-[8px] hover:bg-[#CC28281A] relative cursor-pointer min-h-[72px] ${
+                      teacherId === chat?.teacher?._id
+                        ? "bg-[#CC28281A]"
+                        : "bg-[#fff]"
+                    }`}
+                  >
+                    <Image
+                      src={chat?.teacher?.profile_photo || "/Placeholder.png"}
+                      width={50}
+                      height={50}
+                      alt={chat?.teacher?.name}
+                      className="!w-[50px] !h-[50px] !lg:w-[56px] !lg:h-[56px] rounded-full !object-cover absolute left-[22px] top-1/2 -translate-y-1/2"
+                    />
+                    <div className="flex-1">
+                      <h3 className="font-medium font-inter text-base mb-0 text-black capitalize">
+                        {chat?.teacher?.name}
+                      </h3>
+                      <p className="text-sm text-[#7A7A7A] font-inter tracking-[-0.04em]">
+                        Teacher
+                      </p>
                     </div>
-                  )}
-                </div>
-              ))}
+                    {chat?.count > 0 && (
+                      <div
+                        className={`h-[28px] w-[28px] text-[#535353] text-xs font-bold flex items-center justify-center absolute right-[22px] rounded-full top-1/2 -translate-y-1/2 ${
+                          teacherId === chat?.tecaher?._id
+                            ? "bg-white"
+                            : "bg-[rgba(204,40,40,0.1)]"
+                        }`}
+                      >
+                        {chat?.count > 5 ? "5+" : chat?.count}
+                      </div>
+                    )}
+                  </div>
+                ))}
             </div>
           )}
         </div>
@@ -272,7 +300,11 @@ export default function Index() {
             {processing ? (
               <MessageContentLoader />
             ) : (
-              <div className={`w-full lg:w-8/12 xl:w-9/12 flex flex-col bg-[#F1F1F1] ${MobileOpen ? "block lg:block" : "hidden lg:block"}`}>
+              <div
+                className={`w-full lg:w-8/12 xl:w-9/12 flex flex-col bg-[#F1F1F1] ${
+                  MobileOpen ? "block lg:block" : "hidden lg:block"
+                }`}
+              >
                 {/* Header */}
                 <div className="flex items-center gap-3 lg:gap-4 bg-[#FFFFFF] px-4 lg:px-5 py-3.5 lg:py-4">
                   <Image
@@ -283,119 +315,148 @@ export default function Index() {
                     className="w-[32px] xl:w-[45px] h-[32px] xl:h-[45px] rounded-full object-cover"
                   />
                   <div>
-                    <h2 className="font-medium text-base text-black mb-0 tracking-[-0.06em] capitalize">{selectedIdUser?.name}</h2>
-                    <p className="font-normal text-sm font-inter text-[#1E1E1E] capitalize">{selectedIdUser?.role}</p>
+                    <h2 className="font-medium text-base text-black mb-0 tracking-[-0.06em] capitalize">
+                      {selectedIdUser?.name}
+                    </h2>
+                    <p className="font-normal text-sm font-inter text-[#1E1E1E] capitalize">
+                      {selectedIdUser?.role}
+                    </p>
                   </div>
                   {MobileOpen && (
-                    <button onClick={() => setMobileOpen(false)} className='ml-auto px-6 md:px-8 lg:px-10 py-2 text-[#CC2828] border border-[#CC2828] rounded-md text-xs sm:text-sm hover:bg-[#CC2828] hover:text-white'>
+                    <button
+                      onClick={() => setMobileOpen(false)}
+                      className="block md:hidden ml-auto px-6 md:px-8 lg:px-10 py-2 text-[#CC2828] border border-[#CC2828] rounded-md text-xs sm:text-sm hover:bg-[#CC2828] hover:text-white"
+                    >
                       Back
                     </button>
                   )}
                 </div>
 
                 {/* Chat body */}
-                <div ref={chatContainerRef} className="px-4 pt-5 pb-[10px] h-[calc(100vh-287px)] overflow-y-auto">
+                <div
+                  ref={chatContainerRef}
+                  className="px-4 pt-5 pb-[10px] h-[calc(100vh-287px)] overflow-y-auto"
+                >
                   <div className="bg-[#FEECDC] rounded-[14px] relative pl-[50px] pr-[20px] py-[12px] mb-[30px] text-sm text-[#1E1E1E] max-w-[570px] mx-auto">
                     <div className="absolute top-1/2 left-[20px] -translate-y-1/2">
                       <CiLock color="#312E40" size={20} />
                     </div>
-                    <span>Messages are end-to-end encrypted. No one outside of this chat can read or listen to them.</span>
+                    <span>
+                      Messages are end-to-end encrypted. No one outside of this
+                      chat can read or listen to them.
+                    </span>
                   </div>
 
                   {processing ? (
                     <MessageLoader />
-                  ) : usermessage && usermessage.map((item, index) => {
-                    const isIncoming = item.sent_by !== selectedIdUser?.role;
-                    return (
-                      <div className="mt-4 space-y-1" key={index}>
-                        {(index === 0 || formatDate(item.createdAt) !== formatDate(usermessage[index - 1]?.createdAt)) && (
-                          <div className="text-center my-3">
-                            <span className="py-1 tracking-[-0.06em] font-inter text-base text-[#7A7A7A]">
-                              {formatDate(item.createdAt)}
-                            </span>
-                          </div>
-                        )}
-                        {isIncoming ? (
-                          <div className="flex justify-end">
-                            <div className="bg-[rgba(204,40,40,0.1)] px-4 py-[12px] rounded-bl-[10px] rounded-t-[10px] max-w-[60%] space-y-2">
-
-                              {/* File preview if present */}
-                              {item?.file_url && (
-                                <>
-                                  {item.file_type?.includes("image") ? (
-                                    <div
-                                      onClick={() =>
-                                        window.open(item.file_url, "_blank")}
-                                      className="cursor-pointer"
-                                      >
-                                    <img
-                                      src={item.file_url}
-                                      alt={item.file_name || "attachment"}
-                                      className="w-full max-w-[200px] rounded-lg border border-gray-200"
-                                    />
-                                    </div>
-                                  ) : (
-                                    <div
-                                      onClick={() => window.open(item.file_url, "_blank")}
-                                      className="cursor-pointer bg-white text-[#CC2828] text-sm font-medium border border-[#CC2828] px-3 py-2 rounded-lg hover:bg-[#f8d7da] transition duration-200"
-                                    >
-                                      📄 {item.file_name || "Download file"}
-                                    </div>
-                                  )}
-                                </>
-                              )}
-
-                              {/* Text content */}
-                              {item?.content && (
-                                <p className="break-words text-sm tracking-[-0.04em] text-[#535353]">
-                                  {linkify(item.content)}
-                                </p>
-                              )}
+                  ) : (
+                    usermessage &&
+                    usermessage.map((item, index) => {
+                      const isIncoming = item.sent_by !== selectedIdUser?.role;
+                      return (
+                        <div className="mt-4 space-y-1" key={index}>
+                          {(index === 0 ||
+                            formatDate(item.createdAt) !==
+                              formatDate(
+                                usermessage[index - 1]?.createdAt
+                              )) && (
+                            <div className="text-center my-3">
+                              <span className="py-1 tracking-[-0.06em] font-inter text-base text-[#7A7A7A]">
+                                {formatDate(item.createdAt)}
+                              </span>
                             </div>
-                          </div>
-                        ) : (
-                          <div className="flex justify-start">
-                            <div className="bg-[rgba(204,40,40,0.1)] px-4 py-[12px] rounded-bl-[10px] rounded-t-[10px] max-w-[60%] space-y-2">
-                              {/* File preview if present */}
-                              {item?.file_url && (
-                                <>
-                                  {item.file_type?.includes("image") ? (
-                                    <div
-                                      onClick={() =>
-                                        window.open(item.file_url, "_blank")}
-                                      className="cursor-pointer"
+                          )}
+                          {isIncoming ? (
+                            <div className="flex justify-end">
+                              <div className="bg-[rgba(204,40,40,0.1)] px-4 py-[12px] rounded-bl-[10px] rounded-t-[10px] max-w-[60%] space-y-2">
+                                {/* File preview if present */}
+                                {item?.file_url && (
+                                  <>
+                                    {item.file_type?.includes("image") ? (
+                                      <div
+                                        onClick={() =>
+                                          window.open(item.file_url, "_blank")
+                                        }
+                                        className="cursor-pointer"
                                       >
-                                    <img
-                                      src={item.file_url}
-                                      alt={item.file_name || "attachment"}
-                                      className="w-full max-w-[200px] rounded-lg border border-gray-200"
-                                    />
-                                    </div>
-                                  ) : (
-                                    <div
-                                      onClick={() => window.open(item.file_url, "_blank")}
-                                      className="cursor-pointer bg-white text-[#CC2828] text-sm font-medium border border-[#CC2828] px-3 py-2 rounded-lg hover:bg-[#f8d7da] transition duration-200"
-                                    >
-                                      📄 {item.file_name || "Download file"}
-                                    </div>
-                                  )}
-                                </>
-                              )}
-                              {/* Text content */}
-                              {item?.content && (
-                                <p className="break-words text-sm tracking-[-0.04em] text-[#535353]">
-                                  {linkify(item.content)}
-                                </p>
-                              )}
+                                        <img
+                                          src={item.file_url}
+                                          alt={item.file_name || "attachment"}
+                                          className="w-full max-w-[200px] rounded-lg border border-gray-200"
+                                        />
+                                      </div>
+                                    ) : (
+                                      <div
+                                        onClick={() =>
+                                          window.open(item.file_url, "_blank")
+                                        }
+                                        className="cursor-pointer bg-white text-[#CC2828] text-sm font-medium border border-[#CC2828] px-3 py-2 rounded-lg hover:bg-[#f8d7da] transition duration-200"
+                                      >
+                                        📄 {item.file_name || "Download file"}
+                                      </div>
+                                    )}
+                                  </>
+                                )}
+
+                                {/* Text content */}
+                                {item?.content && (
+                                  <p className="break-words text-sm tracking-[-0.04em] text-[#535353]">
+                                    {linkify(item.content)}
+                                  </p>
+                                )}
+                              </div>
                             </div>
-                          </div>
-                        )}
-                        <span className={`block text-[#535353] text-sm mt-2 ${isIncoming ? 'text-right' : 'text-left'}`}>
-                          {moment(item.createdAt).format("hh:mm A")}
-                        </span>
-                      </div>
-                    );
-                  })}
+                          ) : (
+                            <div className="flex justify-start">
+                              <div className="bg-[rgba(204,40,40,0.1)] px-4 py-[12px] rounded-bl-[10px] rounded-t-[10px] max-w-[60%] space-y-2">
+                                {/* File preview if present */}
+                                {item?.file_url && (
+                                  <>
+                                    {item.file_type?.includes("image") ? (
+                                      <div
+                                        onClick={() =>
+                                          window.open(item.file_url, "_blank")
+                                        }
+                                        className="cursor-pointer"
+                                      >
+                                        <img
+                                          src={item.file_url}
+                                          alt={item.file_name || "attachment"}
+                                          className="w-full max-w-[200px] rounded-lg border border-gray-200"
+                                        />
+                                      </div>
+                                    ) : (
+                                      <div
+                                        onClick={() =>
+                                          window.open(item.file_url, "_blank")
+                                        }
+                                        className="cursor-pointer bg-white text-[#CC2828] text-sm font-medium border border-[#CC2828] px-3 py-2 rounded-lg hover:bg-[#f8d7da] transition duration-200"
+                                      >
+                                        📄 {item.file_name || "Download file"}
+                                      </div>
+                                    )}
+                                  </>
+                                )}
+                                {/* Text content */}
+                                {item?.content && (
+                                  <p className="break-words text-sm tracking-[-0.04em] text-[#535353]">
+                                    {linkify(item.content)}
+                                  </p>
+                                )}
+                              </div>
+                            </div>
+                          )}
+                          <span
+                            className={`block text-[#535353] text-sm mt-2 ${
+                              isIncoming ? "text-right" : "text-left"
+                            }`}
+                          >
+                            {moment(item.createdAt).format("hh:mm A")}
+                          </span>
+                        </div>
+                      );
+                    })
+                  )}
                 </div>
                 <form onSubmit={handleSendMessage}>
                   {/* Show attached file name with remove icon */}
@@ -419,7 +480,7 @@ export default function Index() {
                       value={message}
                       onChange={(e) => setMessage(e.target.value)}
                       onKeyDown={(e) => {
-                        if (e.key === 'Enter' && !e.shiftKey) {
+                        if (e.key === "Enter" && !e.shiftKey) {
                           e.preventDefault();
                           handleSendMessage(e);
                         }
@@ -430,15 +491,15 @@ export default function Index() {
                     <button
                       onClick={handleFileClick}
                       className="bg-white h-[30px] sm:h-[50px] w-[30px] sm:w-[50px] text-[16px] sm:text-[22px] cursor-pointer text-[#CC2828] pl-[7px] sm:pl-[14px] pr-[16px] sm:py-2 rounded-full transition duration-200 border border-[#CC2828]"
-                      title='Attach a file'
+                      title="Attach a file"
                     >
-                      <LuPlus className="w-auto h-auto"/>
+                      <LuPlus className="w-auto h-auto" />
                     </button>
                     {/* Send Icon Button */}
                     <button
                       type="submit"
                       className="bg-[#CC2828] h-[30px] sm:h-[50px] w-[30px] sm:w-[50px] text-[16px] sm:text-[22px] cursor-pointer text-white pl-[7px] sm:pl-[14px] pr-[16px] sm:py-2 rounded-full transition duration-200"
-                      title='Send Message'
+                      title="Send Message"
                     >
                       <IoSend className="w-auto h-auto" />
                     </button>

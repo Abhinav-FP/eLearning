@@ -2,8 +2,6 @@
 const nextConfig = {
   reactStrictMode: true,
   images: {
-    // domains: ['student-teacher-platform.sgp1.digitaloceanspaces.com'],
-    // remotePatterns: [new URL('https://student-teacher-platform.sgp1.digitaloceanspaces.com/**')],
     remotePatterns: [
       {
         protocol: 'https',
@@ -24,7 +22,24 @@ const nextConfig = {
   },
   env:{
     NEXT_PUBLIC_PAYPAL_CLIENT_ID: process.env.NEXT_PUBLIC_PAYPAL_CLIENT_ID,
-  }
+  },
+  async headers() {
+    return [
+      {
+        source: '/:path*', // apply to all routes
+        headers: [
+          {
+            key: 'X-Frame-Options',
+            value: 'SAMEORIGIN', // or "DENY" if you don't want even your own site to embed
+          },
+          {
+            key: 'Content-Security-Policy',
+            value: "frame-ancestors 'self';",
+          },
+        ],
+      },
+    ];
+  },
 };
 
 export default nextConfig;

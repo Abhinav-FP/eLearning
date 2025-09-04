@@ -348,6 +348,13 @@ class Listing extends Component {
     return Api.get(`/teacher/zoom/test`);
   }
 
+  async TeacherZoomRecordingDownload(url, index) {
+    return Api.get(`/teacher/download/recording`, {
+      params: { url, index },
+      responseType: "blob",
+    });
+}
+
   render() {
     return (
       <div>

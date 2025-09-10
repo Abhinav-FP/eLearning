@@ -350,13 +350,13 @@ const BookingView = ({ data, status }) => {
                             </p>
                           </div>
 
-                          <video
+                          {/* <video
                             controls
                             src={link}
                             className="w-full max-h-48 rounded-md border border-gray-300"
                           >
                             Your browser does not support the video tag.
-                          </video>
+                          </video> */}
                         </div>
                       ))}
                     </div>

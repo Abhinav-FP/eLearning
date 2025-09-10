@@ -26,15 +26,15 @@ const nextConfig = {
   async headers() {
     return [
       {
-        source: '/:path*', // apply to all routes
+        source: "/(.*)", // apply to all routes
         headers: [
           {
-            key: 'X-Frame-Options',
-            value: 'SAMEORIGIN', // or "DENY" if you don't want even your own site to embed
+            key: "Content-Security-Policy",
+            value: "frame-ancestors 'none';",
           },
           {
-            key: 'Content-Security-Policy',
-            value: "frame-ancestors 'self';",
+            key: "X-Frame-Options",
+            value: "DENY",
           },
         ],
       },

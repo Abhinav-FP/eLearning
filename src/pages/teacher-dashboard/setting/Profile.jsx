@@ -221,7 +221,9 @@ export default function Profile() {
   };
 
   const disconnectZoom = async () => {
-    if (zoomLoading) {return;}
+    if (zoomLoading) {
+      return;
+    }
     try {
       setZoomLoading(true);
       const main = new Listing();
@@ -230,14 +232,13 @@ export default function Profile() {
       if (response?.data?.status) {
         toast.success(response?.data?.message);
         setIsZoomConnected(false);
-      }
-      else{
+      } else {
         toast.error("Unable to disconnect zoom");
       }
       setZoomLoading(false);
     } catch (error) {
       console.log("error", error);
-      toast.error(error?.response?.data?.message);;
+      toast.error(error?.response?.data?.message);
       setZoomLoading(false);
     }
   };
@@ -287,6 +288,8 @@ export default function Profile() {
                 </label>
               </div>
             </div>
+
+            {/* Zoom connection buttons */}
             {isZoomConnected ? (
               <button
                 type="button"
@@ -304,6 +307,24 @@ export default function Profile() {
                 Connect Zoom Account
               </button>
             )}
+
+            {/* Guidance paragraph */}
+            <div className="mt-4 w-full text-sm xl:text-base text-[#535353] leading-relaxed">
+              <p className="font-medium mb-1">
+                Before connecting your Zoom account:
+              </p>
+              <ul className="list-disc list-inside space-y-1">
+                <li>
+                  Ensure the email address of your Zoom account matches the
+                  email used for your website account.
+                </li>
+                <li>
+                  Use a <strong>Zoom Pro (or higher)</strong> plan so meetings
+                  longer than 60 minutes can be scheduled without limitations
+                  and their recordings can also be stored.
+                </li>
+              </ul>
+            </div>
           </div>
           <div className="border-b border-[rgba(0,0,0,.1)] py-6 lg:py-8 space-y-4 lg:space-y-6">
             <div className="flex flex-wrap -mx-2 space-y-4">

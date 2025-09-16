@@ -29,8 +29,8 @@ export default function Index() {
   useEffect(() => {
     PaymentHistory();
   }, []);
-  console.log("stripePayments", stripePayments);
-  console.log("paypalPayments", paypalPayments);
+  // console.log("stripePayments", stripePayments);
+  // console.log("paypalPayments", paypalPayments);
 
   const [selectedPayment, setSelectedPayment] = useState("paypal");
   const displayPayments = selectedPayment === "paypal" ? paypalPayments : stripePayments;

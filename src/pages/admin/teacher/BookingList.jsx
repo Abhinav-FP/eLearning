@@ -10,7 +10,7 @@ export default function BookingList({ book }) {
     );
   }
 
-  console.log("Booking List:", book);
+  // console.log("Booking List:", book);
 
   return (
     <div className="space-y-6">

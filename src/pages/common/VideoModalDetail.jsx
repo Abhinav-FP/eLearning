@@ -37,7 +37,7 @@ export default function VideoModalDetail({ video, image, name, divClass, imgClas
     const [thumbnail, setThumbnail] = useState(EmilyCarter);
     const youTubeId = getYouTubeID(video);
     const vimeoId = getVimeoID(video);
-    console.log("vineoId", vimeoId);
+    // console.log("vineoId", vimeoId);
 
     let videoSrc = '';
 
@@ -74,7 +74,7 @@ export default function VideoModalDetail({ video, image, name, divClass, imgClas
                 });
         }
     }, [platform, youTubeId, vimeoId]);
-    console.log("videoSrc",videoSrc);
+    // console.log("videoSrc",videoSrc);
 
     return (
         <>

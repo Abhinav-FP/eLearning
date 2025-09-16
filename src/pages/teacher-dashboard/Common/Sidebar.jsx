@@ -94,6 +94,15 @@ function SideBar() {
                             >
                                 <LuMessagesSquare size={20} />
                                 Messages
+                                {user?.unreadCount > 0 && (
+                                    <div
+                                        className={`h-[28px] w-[28px] text-white bg-[#D6202C] text-xs font-bold flex items-center justify-center absolute right-[22px] rounded-full top-1/2 -translate-y-1/2 ${
+                                        pathname === "/student/message" ? "hidden" : "block"
+                                        }`}
+                                    >
+                                        {user?.unreadCount > 5 ? "5+" : user?.unreadCount}
+                                    </div>
+                                    )}
                             </Link>
                             <Link
                                 href="/teacher-dashboard/earnings"

@@ -158,7 +158,7 @@ const Index = ({ Availability, setIsPopupOpen, usedInPopup, setSelectedSlot, sel
     return isWithinSlot;
   };
 
-  console.log("availabilityBlocks",Availability);
+  // console.log("availabilityBlocks",Availability);
 
 
   const handleClick = (event) => {

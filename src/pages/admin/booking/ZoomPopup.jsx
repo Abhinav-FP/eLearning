@@ -4,7 +4,7 @@ import { BiVideo } from "react-icons/bi";
 import { FaVideo } from "react-icons/fa";
 
 export default function ZoomPopup({ zoom, onClose }) {
-  console.log("zoom data:", zoom);
+  // console.log("zoom data:", zoom);
   const chatMessages = JSON.parse(zoom?.chat || "[]");
   const [showPopup, setShowPopup] = useState(false);
 

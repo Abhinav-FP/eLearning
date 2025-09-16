@@ -9,7 +9,7 @@ import StripeTips from './StripeTips';
 
 export default function Index() {
   const router = useRouter();
-  const [rating, setRating] = useState(1);
+  const [rating, setRating] = useState(3);
   const [description, setDescription] = useState('');
   const [processing, setProcessing] = useState('');
   const [PaymentStatus, setPaymentStatus] = useState(false)

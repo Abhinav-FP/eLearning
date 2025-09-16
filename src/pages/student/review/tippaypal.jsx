@@ -17,8 +17,8 @@ function Index({
 }) {
     const clientId = process.env.NEXT_PUBLIC_PAYPAL_CLIENT_ID;
 
-    console.log("IsBonus", IsBonus)
-    console.log("bookingdata", bookingdata)
+    // console.log("IsBonus", IsBonus)
+    // console.log("bookingdata", bookingdata)
     const router = useRouter();
 
     const [isProcessing, setIsProcessing] = useState(false);

@@ -57,10 +57,15 @@ export default function Index() {
           }
         }
       });
-
+      // sort past lessons by startDateTime (descending)
+      categorized.past.sort(
+        (a, b) =>
+          new Date(b.startDateTime).getTime() -
+          new Date(a.startDateTime).getTime()
+      );
       setCategorizedLessons(categorized);
       setLoading(false);
-      console.log("categorizedLessons", categorized);
+      // console.log("categorizedLessons", categorized);
     } catch (error) {
       console.log("error", error);
       setCategorizedLessons({
@@ -99,7 +104,7 @@ export default function Index() {
   return diffInMinutes;
   }
 
-  console.log("categorizedLessons",categorizedLessons);
+  // console.log("categorizedLessons",categorizedLessons);
 
   return (
     <StudentLayout page={"My Lessons"}>
@@ -174,7 +179,7 @@ export default function Index() {
                           }}>
                           Reschedule
                         </button>}
-                      {tab === "past" && lesson?.ReviewId === null && lesson?.lessonCompletedTeacher && (
+                      {tab === "past" && lesson?.ReviewId === null && (
                         <button
                           className="tracking-[-0.06em] font-inter px-6 md:px-10 lg:px-12 xl:px-16 py-2 lg:py-2.5 text-[#CC2828] border border-[#CC2828] rounded-[10px] text-sm hover:bg-[#CC2828] hover:text-white cursor-pointer"
                           onClick={() => router.push(`/student/review/${lesson?._id}`)}

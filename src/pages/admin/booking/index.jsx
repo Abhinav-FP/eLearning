@@ -32,7 +32,7 @@ export default function Index() {
     fetchEarnings();
   }, []);
 
-  console.log("data", data)
+  // console.log("data", data)
 
   // Categorize data
   const { upcoming, past, cancelled } = useMemo(() => {

@@ -97,7 +97,7 @@ function SideBar() {
                                 {user?.unreadCount > 0 && (
                                     <div
                                         className={`h-[28px] w-[28px] text-white bg-[#D6202C] text-xs font-bold flex items-center justify-center absolute right-[22px] rounded-full top-1/2 -translate-y-1/2 ${
-                                        pathname === "/student/message" ? "hidden" : "block"
+                                        pathname === "/teacher-dashboard/message" ? "hidden" : "block"
                                         }`}
                                     >
                                         {user?.unreadCount > 5 ? "5+" : user?.unreadCount}

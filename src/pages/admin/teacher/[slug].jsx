@@ -70,6 +70,8 @@ const Index = ({ }) => {
         setActiveTab(tab);
     };
 
+    console.log("record", record);
+
     return (
         <AdminLayout page={"Teacher Listing"}>
             <div className="p-5 lg:p-[30px]">
@@ -110,7 +112,7 @@ const Index = ({ }) => {
                                         </div>
                                     </div>
                                     <div className="flex flex-col gap-3">
-                                        {record?.record?.intro_video &&
+                                        {/* {record?.record?.intro_video && */}
                                             <VideoModalDetail video={record?.record?.intro_video}
                                                 image={record?.record?.userId?.profile_photo}
                                                 name={record?.record?.userId?.name}
@@ -118,7 +120,11 @@ const Index = ({ }) => {
                                                 imgClass="w-full h-[150px] sm:h-[150px]  md:h-[170px] lg:h-[200px] rounded-[6px] md:rounded-[10px]"
                                                 btnClass="absolute top-1/2 left-0 right-0 mx-auto -translate-y-1/2 text-white hover:text-[#CC2828] w-[65px] text-center cursor-pointer"
                                                 iconClass="h-16 w-16"
-                                            />}
+                                                isAdmin={true}
+                                                teacherId={record?.record?._id}
+                                                AdminTteacher={AdminTteacher}
+                                            />
+                                            {/* } */}
                                     </div>
                                 </div>
 

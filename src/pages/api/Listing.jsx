@@ -259,6 +259,10 @@ class Listing extends Component {
     return Api.post(`/admin/approveteacher`, data);
   }
 
+  async AdminTeacherVideoChange(data) {
+    return Api.post(`/admin/teacher-video`, data);
+  }
+
   async adminStudentList(data, block) {
     return Api.get(`/admin/studentlist?search=${data}&block=${block}`);
   }

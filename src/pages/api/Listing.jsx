@@ -282,8 +282,8 @@ class Listing extends Component {
     return Api.get(`/admin/teacher/${id}`,);
   }
 
-  async AdminEarning(date, search) {
-    return Api.get(`/admin/earning?date=${date}&search=${search}`);
+  async AdminEarning(date, search, page) {
+    return Api.get(`/admin/earning?date=${date}&search=${search}&page=${page}`);
   }
   async HomeUpdate(data) {
     return ApiallowFile.post(`/home/update`, data);

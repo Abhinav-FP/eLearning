@@ -58,7 +58,7 @@ export default function Index() {
             </Link>
           </div>
 
-          <div className="grid grid-cols-1 sm:grid-cols-2 2xl:grid-cols-3 gap-4">
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
             {/* Lesson Prices */}
             <div className="relative bg-white rounded-xl dashboard-box p-3.5 lg:p-4 xl:p-5 border border-[rgba(204,40,40,0.2)] flex flex-col min-h-[120px] md:min-h-[136px]">
               <h2 className="font-inter text-[#CC2828] font-bold text-base sm:text-lg lg:text-xl xl:text-2xl capitalize tracking-[-0.04em] pr-16">
@@ -106,8 +106,8 @@ export default function Index() {
               </div>
             </div>
 
-
-            <div className="relative bg-white rounded-xl dashboard-box p-3.5 lg:p-4 xl:p-5 border border-[rgba(204,40,40,0.2)] flex flex-col min-h-[120px] md:min-h-[136px]">
+            {/* Payment Earnings */}    
+            {/* <div className="relative bg-white rounded-xl dashboard-box p-3.5 lg:p-4 xl:p-5 border border-[rgba(204,40,40,0.2)] flex flex-col min-h-[120px] md:min-h-[136px]">
               <h2 className="font-inter text-[#CC2828] font-bold text-base sm:text-lg lg:text-xl xl:text-2xl capitalize tracking-[-0.04em] pr-16">
                 Payment Earnings (Last 30 Days)
               </h2>
@@ -124,7 +124,8 @@ export default function Index() {
                   Paypal Earnings: <span>{formatMultiPrice(Dashboard?.paypalpay, "USD")}</span>
                 </p>
               </div>
-            </div>
+            </div> */}
+
             {/* Upcoming Lessons */}
             <div className="relative bg-white rounded-xl dashboard-box p-3.5 lg:p-4 xl:p-5 border border-[rgba(204,40,40,0.2)] flex flex-col min-h-[120px] md:min-h-[136px]">
               <h2 className="font-inter text-[#CC2828] font-bold text-base sm:text-lg lg:text-xl xl:text-2xl capitalize tracking-[-0.04em] pr-16">
@@ -157,8 +158,6 @@ export default function Index() {
               }
             </div>
 
-
-
             {/* Total Lessons Completed */}
             <div className="relative bg-white rounded-xl dashboard-box p-3.5 lg:p-4 xl:p-5 border border-[rgba(204,40,40,0.2)] flex flex-col min-h-[120px] md:min-h-[136px]">
               <h2 className="font-inter text-[#CC2828] font-bold text-base sm:text-lg lg:text-xl xl:text-2xl capitalize tracking-[-0.04em] pr-16">
@@ -183,7 +182,8 @@ export default function Index() {
 
             </div>
 
-            <div className="relative bg-white rounded-xl dashboard-box p-3.5 lg:p-4 xl:p-5 border border-[rgba(204,40,40,0.2)] flex flex-col min-h-[120px] md:min-h-[136px]">
+            {/* Earnings */}    
+            {/* <div className="relative bg-white rounded-xl dashboard-box p-3.5 lg:p-4 xl:p-5 border border-[rgba(204,40,40,0.2)] flex flex-col min-h-[120px] md:min-h-[136px]">
               <h2 className="font-inter text-[#CC2828] font-bold text-base sm:text-lg lg:text-xl xl:text-2xl capitalize tracking-[-0.04em] pr-16">
                 Earnings (Last 30 Days)
               </h2>
@@ -206,7 +206,7 @@ export default function Index() {
                   Paid Earnings: <span>{formatMultiPrice(Dashboard?.earningsSummary?.approvedEarnings, "USD")}</span>
                 </p>
               </div>
-            </div>
+            </div> */}
 
           </div>
         </div>}

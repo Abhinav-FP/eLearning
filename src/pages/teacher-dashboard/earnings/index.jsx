@@ -78,22 +78,22 @@ export default function index() {
     () => [
       {
         label: "Total Earnings",
-        value: data?.earningsSummary?.totalEarnings ?? "N/A",
+        value: data?.earningsSummary?.totalEarnings.toFixed(2) ?? "N/A",
         icon: <FaMoneyBillWave className="w-6 h-6 text-[#CC2828]" />,
       },
       {
         label: "Available Earnings (Completed Lessons)",
-        value: data?.earningsSummary?.pendingEarnings ?? "N/A",
+        value: data?.earningsSummary?.pendingEarnings.toFixed(2) ?? "N/A",
         icon: <FaWallet className="w-6 h-6 text-[#CC2828]" />,
       },
       {
         label: "Requested Earnings",
-        value: data?.earningsSummary?.requestedEarnings ?? "N/A",
+        value: data?.earningsSummary?.requestedEarnings.toFixed(2) ?? "N/A",
         icon: <MdRequestQuote className="w-6 h-6 text-[#CC2828]" />,
       },
       {
         label: "Paid Earnings",
-        value: data?.earningsSummary?.approvedEarnings ?? "N/A",
+        value: data?.earningsSummary?.approvedEarnings.toFixed(2) ?? "N/A",
         icon: <MdPaid className="w-6 h-6 text-[#CC2828]" />,
       },
     ],
@@ -217,6 +217,9 @@ export default function index() {
                     <th className="font-normal text-sm lg:text-base px-3 lg:px-4 py-2 lg:py-3 border-t border-[rgba(204,40,40,0.2)] capitalize">
                       Amount
                     </th>
+                    <th className="font-normal text-sm lg:text-base px-3 lg:px-4 py-2 lg:py-3 border-t border-[rgba(204,40,40,0.2)] capitalize">
+                      Status
+                    </th>
                     {/* <th className="font-normal text-sm lg:text-base px-3 lg:px-4 py-2 lg:py-3 border-t border-[rgba(204,40,40,0.2)] capitalize">
                   Payout Status
                 </th> */}
@@ -251,6 +254,11 @@ export default function index() {
                         </td>
                         <td className="px-3 lg:px-4 py-2 lg:py-3 text-black text-sm lg:text-base font-medium font-inter">
                           {formatMultiPrice(item?.teacherEarning, "USD") || ""}
+                        </td>
+                        <td className="px-3 lg:px-4 py-2 lg:py-3 text-black text-sm lg:text-base font-medium font-inter">
+                          {item?.lessonCompletedStudent && item?.lessonCompletedTeacher
+                            ? "Completed"
+                            : "Pending"}
                         </td>
                         {/* <td className="px-3 lg:px-4 py-2 lg:py-3 text-black text-sm lg:text-base font-medium font-inter capitalize">
                                     {item?.payoutStatus}

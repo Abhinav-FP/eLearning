@@ -8,9 +8,13 @@ import { formatMultiPrice } from "@/components/ValueDataHook";
 import Image from "next/image";
 import Heading from "../common/Heading";
 import { SpecialSlotLoader } from "@/components/Loader";
+import { useRole } from "@/context/RoleContext";
+import toast from "react-hot-toast";
+
 export default function Index() {
   const router = useRouter();
   const { slug } = router.query;
+  const { user } = useRole();
   const [data, setData] = useState(null);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(false);
@@ -72,6 +76,11 @@ export default function Index() {
   };
 
   useEffect(() => {
+    if (!user) {
+        toast.error("Please login first");
+        router.push(`/login?redirect=${router.asPath}`);
+        return;
+      }
     fetchCommission();
     if (slug) {
       fetchData(slug);
@@ -80,7 +89,7 @@ export default function Index() {
 
   return (
     <Layout>
-      <div className="h-[50vh] mt-28">
+      <div className="min-h-[50vh] mt-28">
         {loading ? (
           <SpecialSlotLoader />
         ) : error ? (

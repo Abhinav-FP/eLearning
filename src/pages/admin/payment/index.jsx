@@ -16,7 +16,10 @@ import Link from "next/link";
 
 export default function index() {
   const [data, setData] = useState({});
+  const [bookings, setBookings] = useState([]);
+  const [page, setPage] =useState(1);
   const [loading, setLoading] = useState(false);
+  const [buttonLoading, setButtonLoading] = useState(false);
   const [selectedOption, setSelectedOption] = useState("");
   const [searchText, setSearchText] = useState("");
   const timerRef = useRef(null);
@@ -30,7 +33,7 @@ export default function index() {
     }
     if (!sval || sval.trim() === "") {
       timerRef.current = setTimeout(() => {
-        fetchEarnings(sval);
+        fetchEarnings("");
       }, 1500);
     } else if (sval.length >= 2) {
       timerRef.current = setTimeout(() => {
@@ -50,22 +53,31 @@ export default function index() {
     yearOptions.push(year);
   }
 
-  const fetchEarnings = async (search) => {
+  const fetchEarnings = async (search, page=1) => {
     try {
-      setLoading(true);
+      if(page===1){setLoading(true);}
+      else{setButtonLoading(true);}
       const main = new Listing();
-      const response = await main.AdminEarning(selectedOption, search || searchText);
+      const response = await main.AdminEarning(selectedOption, search || searchText, page);
       setData(response?.data?.data || []);
+      setBookings((prev) => page === 1 ? response?.data?.data?.bookings || [] : [...prev, ...(response?.data?.data?.bookings || [])]);
     } catch (error) {
       console.log("error", error);
       setData({});
     }
     setLoading(false);
+    setButtonLoading(false);
   };
 
   useEffect(() => {
     fetchEarnings();
   }, [selectedOption]);
+
+  const LoadMore=()=>{
+    const nextPage= page+1;
+    setPage(nextPage);
+    fetchEarnings(searchText,nextPage);    
+  }
 
   const downloadExcel = () => {
     if (!data?.bookings || data.bookings.length === 0) {
@@ -94,24 +106,24 @@ export default function index() {
     () => [
       {
         label: "Total Earnings",
-        value: data?.count?.totalAmount ?? "N/A",
+        value: data?.count?.totalAmount?.toFixed(2) ?? "N/A",
         icon: <FaMoneyBillWave className="w-6 h-6 text-[#CC2828]" />,
       },
       {
         label: "Teachers Earnings",
-        value: data?.count?.teacherEarning ?? "N/A",
+        value: data?.count?.teacherEarning?.toFixed(2) ?? "N/A",
         icon: <MdWallet className="w-6 h-6 text-[#CC2828]" />,
       },
       {
         label: "My Earnings",
-        value: data?.count?.adminCommission ?? "N/A",
+        value: data?.count?.adminCommission?.toFixed(2) ?? "N/A",
         icon: <MdRequestQuote className="w-6 h-6 text-[#CC2828]" />,
       },
-      {
-        label: "Total Bonus/Tips",
-        value: data?.count?.bonus ?? "N/A",
-        icon: <MdPaid className="w-6 h-6 text-[#CC2828]" />,
-      },
+      // {
+      //   label: "Total Bonus/Tips",
+      //   value: data?.count?.bonus?.toFixed(2) ?? "N/A",
+      //   icon: <MdPaid className="w-6 h-6 text-[#CC2828]" />,
+      // },
     ],
     [data]
   );
@@ -163,7 +175,7 @@ export default function index() {
           <TeacherEarningsLoader />
         ) : (
           <>
-            <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-4 mb-4">
+            <div className="grid grid-cols-1 md:grid-cols-3 xl:grid-cols-3 gap-4 mb-4">
               {stats &&
                 stats?.map((item, idx) => (
                   <Card
@@ -185,7 +197,7 @@ export default function index() {
                       Payment ID
                     </th>
                     <th className="font-normal text-sm lg:text-base px-3 lg:px-4 py-2 lg:py-3 border-t border-[rgba(204,40,40,0.2)] capitalize">
-                      Start Time
+                      Booking Creation Time
                     </th>
                     <th className="font-normal text-sm lg:text-base px-3 lg:px-4 py-2 lg:py-3 border-t border-[rgba(204,40,40,0.2)] capitalize">
                       Teacher Name
@@ -206,8 +218,8 @@ export default function index() {
                 </thead>
 
                 <tbody>
-                  {data && data?.bookings && data?.bookings?.length > 0 ? (
-                    data?.bookings?.map((item, index) => (
+                  {bookings && bookings?.length > 0 ? (
+                    bookings?.map((item, index) => (
                       <tr
                         key={index}
                         className="hover:bg-[rgba(204,40,40,0.1)] border-t border-[rgba(204,40,40,0.2)]"
@@ -221,7 +233,7 @@ export default function index() {
                             ""}
                         </td>
                         <td className="px-3 lg:px-4 py-2 lg:py-3 text-black text-sm lg:text-base font-medium font-inter whitespace-nowrap">
-                          {moment(item?.startDateTime).format(
+                          {moment(item?.createdAt).format(
                             "DD MMM YYYY, hh:mm A"
                           ) || ""}
                         </td>
@@ -262,6 +274,18 @@ export default function index() {
                 </tbody>
               </table>
             </div>
+            {searchText==="" && data?.pagination?.currentPage < data?.pagination?.totalPages ? 
+            <div className="flex justify-center mt-4">
+              <button
+                onClick={LoadMore}
+                className="w-fit px-2 px-4 xl:px-8 py-2  h-[44px] hover:bg-white hover:text-[#CC2828] border border-[#CC2828] rounded-full tracking-[-0.06em] text-sm font-medium bg-[#CC2828] text-white cursor-pointer"
+              >
+                {buttonLoading ? "Loading" : "See More"}
+              </button>
+            </div>
+            :
+            <></>
+            }
           </>
         )}
       </div>

@@ -78,6 +78,11 @@ export default function Index() {
   useEffect(() => {
     fetchCommission();
     if (slug) {
+      if (!user) {
+        toast.error("Please login first");
+        router.push(`/login?redirect=${router.asPath}`);
+        return;
+      }
       fetchData(slug);
     }
   }, [slug]);
@@ -166,10 +171,11 @@ export default function Index() {
                 <div className="space-y-4">
                   <div
                     onClick={() => setPaymentStatus(false)}
-                    className={`flex items-center justify-between border rounded-lg p-3 cursor-pointer ${PaymentStatus === true
-                      ? "border-red-300"
-                      : "border-red-400"
-                      }`}
+                    className={`flex items-center justify-between border rounded-lg p-3 cursor-pointer ${
+                      PaymentStatus === true
+                        ? "border-red-300"
+                        : "border-red-400"
+                    }`}
                   >
                     <div className="flex items-center gap-3">
                       <span className="text-xl">🅿️</span>
@@ -184,10 +190,11 @@ export default function Index() {
 
                   <div
                     onClick={() => setPaymentStatus(true)}
-                    className={`flex items-center justify-between border rounded-lg p-3 cursor-pointer ${PaymentStatus === true
-                      ? "border-red-400"
-                      : "border-red-300"
-                      }`}
+                    className={`flex items-center justify-between border rounded-lg p-3 cursor-pointer ${
+                      PaymentStatus === true
+                        ? "border-red-400"
+                        : "border-red-300"
+                    }`}
                   >
                     <div className="flex items-center gap-3">
                       <span className="text-xl">💳</span>
@@ -285,7 +292,7 @@ export default function Index() {
                   <Payment
                     PricePayment={data?.amount + commission * data?.amount}
                     processingFee={data?.amount * data?.amount?.price}
-                    adminCommission={0.10 * data?.amount}
+                    adminCommission={0.1 * data?.amount}
                     selectedLesson={data?.lesson}
                     selectedSlot={data?.startDateTime}
                     studentTimeZone={studentTimeZone}
@@ -297,7 +304,7 @@ export default function Index() {
                   <Stripe
                     PricePayment={data?.amount + commission * data?.amount}
                     processingFee={data?.amount * data?.amount?.price}
-                    adminCommission={0.10 * data?.amount}
+                    adminCommission={0.1 * data?.amount}
                     selectedLesson={data?.lesson}
                     selectedSlot={data?.startDateTime}
                     studentTimeZone={studentTimeZone}

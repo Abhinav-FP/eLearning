@@ -155,7 +155,7 @@ export default function AddSlot({ isOpen, onClose }) {
                     <img
                       src={student?.profile_photo || "/Placeholder.png"}
                       alt={student?.name}
-                      className="w-10 h-10 rounded-full object-cover"
+                      className="min-w-10 w-10 min-h-10 h-10 rounded-full object-cover"
                     />
                     <div className="text-gray-800">
                       <div className="capitalize">{student?.name}</div>

@@ -76,11 +76,6 @@ export default function Index() {
   };
 
   useEffect(() => {
-    if (!user) {
-        toast.error("Please login first");
-        router.push(`/login?redirect=${router.asPath}`);
-        return;
-      }
     fetchCommission();
     if (slug) {
       fetchData(slug);

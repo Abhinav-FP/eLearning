@@ -11,6 +11,7 @@ import Forgot from "./forget-password/forgot";
 export default function Login() {
   const router = useRouter();
   const [showConfirPassword, setShowConfirPassword] = useState(false);
+  const { setUser } = useRole();
   const [loading, setLoading] = useState(false);
   const searchParams = useSearchParams();
   const redirect = searchParams.get("redirect");
@@ -44,6 +45,7 @@ export default function Login() {
       if (response?.data?.status) {
         toast.success(response.data.message);
         localStorage && localStorage.setItem("token", response?.data?.token);
+        setUser(response?.data);
         if (redirect) {
           router.push(`${redirect}`);
           return;

@@ -203,7 +203,7 @@ export default function index() {
                       Teacher Name
                     </th>
                     <th className="font-normal text-sm lg:text-base px-3 lg:px-4 py-2 lg:py-3 border-t border-[rgba(204,40,40,0.2)] capitalize">
-                      Total Payment
+                      Total Payment<br/>(excl. processing fee)
                     </th>
                     <th className="font-normal text-sm lg:text-base px-3 lg:px-4 py-2 lg:py-3 border-t border-[rgba(204,40,40,0.2)] capitalize">
                       My Earning
@@ -244,7 +244,7 @@ export default function index() {
                           </Link>
                         </td>
                         <td className="px-3 lg:px-4 py-2 lg:py-3 text-black text-sm lg:text-base font-medium font-inter whitespace-nowrap">
-                          {formatMultiPrice(item?.totalAmount, "USD") || ""}
+                          {formatMultiPrice(item?.totalAmount-item?.processingFee, "USD") || ""}
                         </td>
                         <td className="px-3 lg:px-4 py-2 lg:py-3 text-black text-sm lg:text-base font-medium font-inter whitespace-nowrap">
                           {formatMultiPrice(item?.adminCommission, "USD") || ""}

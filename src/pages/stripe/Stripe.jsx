@@ -13,6 +13,7 @@ import {
 const stripePromise = loadStripe(process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY);
 
 function StripeForm({ PricePayment, selectedLesson, adminCommission, selectedSlot, studentTimeZone, email, isSpecialSlot=false, specialSlotData, processingFee }) {
+  // console.log("processingFee",processingFee);
   const stripe = useStripe();
   const elements = useElements();
   const [processing, setProcessing] = useState(false);

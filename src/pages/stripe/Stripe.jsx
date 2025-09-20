@@ -58,8 +58,8 @@ function StripeForm({ PricePayment, selectedLesson, adminCommission, selectedSlo
 
       const payment = new Listing();
       const res = await payment.Stripe_payment({
-        adminCommission,
-        amount: PricePayment,
+        adminCommission : adminCommission.toFixed(2),
+        amount: PricePayment.toFixed(2),
         currency: "USD",
         email,
         LessonId: isSpecialSlot ? specialSlotData?.lesson?._id : selectedLesson?._id,
@@ -68,7 +68,7 @@ function StripeForm({ PricePayment, selectedLesson, adminCommission, selectedSlo
         endDateTime: endTime,
         timezone: studentTimeZone || "UTC",
         isSpecial: isSpecialSlot,
-        processingFee,
+        processingFee: processingFee.toFixed(2),
       });
       const clientSecret = res?.data?.clientSecret;
       const cardElement = elements.getElement(CardElement);

@@ -79,7 +79,7 @@ function Index({
     try {
       const main = new Listing();
       const response = await main.PaypalCreate({
-        amount: PricePayment,
+        amount: PricePayment.toFixed(2),
         currency: "USD",
       });
 
@@ -117,11 +117,11 @@ function Index({
         endDateTime: isSpecialSlot ? specialSlotData?.startDateTime : endTime,
         email: email,
         timezone: studentTimeZone || "UTC",
-        totalAmount: PricePayment,
-        adminCommission: adminCommission,
+        totalAmount: PricePayment.toFixed(2),
+        adminCommission: adminCommission.toFixed(2),
         isSpecialSlot: isSpecialSlot,
         IsBonus : IsBonus,
-        processingFee
+        processingFee : processingFee.toFixed(2)
       });
 
       if (response?.data?.status === "COMPLETED") {

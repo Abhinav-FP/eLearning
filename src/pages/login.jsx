@@ -7,6 +7,7 @@ import toast from "react-hot-toast";
 import Listing from "@/pages/api/Listing";
 import { useSearchParams } from "next/navigation";
 import Forgot from "./forget-password/forgot";
+import { useRole } from "@/context/RoleContext";
 
 export default function Login() {
   const router = useRouter();

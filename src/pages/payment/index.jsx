@@ -113,7 +113,7 @@ function Index({
         teacherId: isSpecialSlot
           ? specialSlotData?.teacher?._id
           : selectedLesson?.teacher?._id,
-        startDateTime: selectedSlot?.start,
+        startDateTime: isSpecialSlot ? specialSlotData?.startDateTime : selectedSlot?.start,
         endDateTime: isSpecialSlot ? specialSlotData?.startDateTime : endTime,
         email: email,
         timezone: studentTimeZone || "UTC",

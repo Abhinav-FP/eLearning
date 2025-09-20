@@ -114,7 +114,7 @@ function Index({
           ? specialSlotData?.teacher?._id
           : selectedLesson?.teacher?._id,
         startDateTime: isSpecialSlot ? specialSlotData?.startDateTime : selectedSlot?.start,
-        endDateTime: isSpecialSlot ? specialSlotData?.startDateTime : endTime,
+        endDateTime: isSpecialSlot ? specialSlotData?.endDateTime : endTime,
         email: email,
         timezone: studentTimeZone || "UTC",
         totalAmount: PricePayment.toFixed(2),

@@ -65,7 +65,7 @@ function StripeForm({ PricePayment, selectedLesson, adminCommission, selectedSlo
         LessonId: isSpecialSlot ? specialSlotData?.lesson?._id : selectedLesson?._id,
         teacherId: isSpecialSlot ? specialSlotData?.teacher?._id : selectedLesson?.teacher?._id,
         startDateTime: isSpecialSlot ? specialSlotData?.startDateTime : selectedSlot?.start,
-        endDateTime:  isSpecialSlot ? specialSlotData?.startDateTime : endTime,
+        endDateTime:  isSpecialSlot ? specialSlotData?.endDateTime : endTime,
         timezone: studentTimeZone || "UTC",
         isSpecial: isSpecialSlot,
         processingFee: processingFee.toFixed(2),

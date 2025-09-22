@@ -133,7 +133,7 @@ function StripeForm({ PricePayment, selectedLesson, adminCommission, selectedSlo
         onClick={handlePayment}
         disabled={processing || !stripe || !elements}
       >
-        {processing ? "Processing..." : `Pay $${PricePayment.toFixed(2)} USD`}
+        {processing ? "Processing..." : `Pay $${PricePayment && PricePayment.toFixed(2)} USD`}
       </button>
       {message && <p className="text-sm text-gray-700">{message}</p>}
     </div>

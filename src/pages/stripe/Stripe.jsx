@@ -49,7 +49,35 @@ function StripeForm({ PricePayment, selectedLesson, adminCommission, selectedSlo
     }
   }, [selectedSlot, selectedLesson]);
 
+  const [cardComplete, setCardComplete] = useState(false);
+
+  useEffect(() => {
+  if (!elements) return; // <--- bail out if elements is not ready yet
+
+  const cardElement = elements.getElement(CardElement);
+  if (!cardElement) return;
+
+  const handleChange = (event) => {
+    setCardComplete(event.complete); // true when card details are valid
+  };
+
+  cardElement.on('change', handleChange);
+
+  // cleanup listener on unmount
+  return () => {
+    cardElement.off('change', handleChange);
+  };
+}, [elements]); 
+
   const handlePayment = async () => {
+    if(!email || email.trim == ""){
+      toast.error("Please enter a valid email address");
+      return;
+    }
+    if (!cardComplete) {
+      toast.error("Please enter valid card details");
+      return; 
+    }
     if (processing || !stripe || !elements) return;
 
     try {
@@ -105,7 +133,7 @@ function StripeForm({ PricePayment, selectedLesson, adminCommission, selectedSlo
         onClick={handlePayment}
         disabled={processing || !stripe || !elements}
       >
-        {processing ? "Processing..." : `Pay $${PricePayment} USD`}
+        {processing ? "Processing..." : `Pay $${PricePayment.toFixed(2)} USD`}
       </button>
       {message && <p className="text-sm text-gray-700">{message}</p>}
     </div>

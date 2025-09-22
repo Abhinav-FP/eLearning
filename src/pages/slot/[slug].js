@@ -14,7 +14,7 @@ import toast from "react-hot-toast";
 export default function Index() {
   const router = useRouter();
   const { slug } = router.query;
-  const { user } = useRole();
+  const { user, setUser } = useRole();
   const [data, setData] = useState(null);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(false);
@@ -29,6 +29,7 @@ export default function Index() {
       const response = await main.SpecialSlotdata(slug);
       if (response.data) {
         setData(response.data.data);
+        setEmail(response.data.data?.student?.email || "");
         setLoading(false);
         setError(false);
       }
@@ -45,6 +46,7 @@ export default function Index() {
     const timeZone = Intl.DateTimeFormat().resolvedOptions().timeZone || "";
     setStudentTimeZone(timeZone);
   }, []);
+  console.log("data", data);
 
   const [email, setEmail] = useState(data?.student?.email || "");
 
@@ -78,14 +80,42 @@ export default function Index() {
   useEffect(() => {
     fetchCommission();
     if (slug) {
-      if (!user) {
-        toast.error("Please login first");
-        router.push(`/login?redirect=${router.asPath}`);
-        return;
-      }
+      // if (!user) {
+      //   toast.error("Please login first");
+      //   router.push(`/login?redirect=${router.asPath}`);
+      //   return;
+      // }
       fetchData(slug);
     }
   }, [slug]);
+
+  const CheckLogin = async (signal) => {
+      try {
+        const main = new Listing();
+        const response = await main.profileVerify(signal);
+        console.log("response", response);
+        if (response.data?.data?.user) {
+          setUser(response.data.data.user);
+        }
+        else{
+        toast.error("Please login first");
+        router.push(`/login?redirect=${router.asPath}`);
+
+        }
+      } catch (error) {
+        console.log("error", error);
+        toast.error("Please login first");
+        router.push(`/login?redirect=${router.asPath}`);        
+      }
+    };
+  
+    useEffect(() => {
+      const controller = new AbortController();
+      const { signal } = controller;
+      if(slug){
+      CheckLogin(signal);}  
+      return () => controller.abort();
+    }, [slug]);
 
   return (
     <Layout>

@@ -73,6 +73,10 @@ function Index({
   }, [selectedSlot, selectedLesson]);
 
   const handleCreateOrder = async () => {
+    if(!email || email.trim == ""){
+      toast.error("Please enter a valid email address");
+      return;
+    }
     if (isProcessing) return;
 
     setIsProcessing(true);

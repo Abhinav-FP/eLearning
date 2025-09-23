@@ -131,20 +131,19 @@ export default function Index() {
             <div className="w-20 h-20 bg-red-100 text-red-500 flex items-center justify-center rounded-full mb-6">
               <MdErrorOutline className="w-10 h-10" />
             </div>
-
             <h2 className="text-2xl font-semibold text-[#CC2828] mb-2">
               Access not allowed
             </h2>
-
             <p className="text-gray-600 mb-2 max-w-md">
               You are not authorized to view this special slot.
             </p>
-
-            <p className="text-gray-600 mb-4 max-w-md">
+            <p className="text-gray-600 mb-2 max-w-md">
               You’re currently logged in with&nbsp;
               <span className="font-medium text-black">{user?.email}</span>.
             </p>
-
+            <p className="text-gray-600 mb-4 max-w-md">
+              Contact support if you think this is a mistake.
+            </p>
             <button
               onClick={() => router.push("/")}
               className="cursor-pointer mt-2 px-6 py-2 bg-[#CC2828] text-white rounded-md hover:bg-[#b82323] transition"

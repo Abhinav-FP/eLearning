@@ -5,6 +5,7 @@ import Listing from "../api/Listing";
 import Stripe from "../stripe/Stripe";
 import Payment from "../payment/index";
 import { formatMultiPrice } from "@/components/ValueDataHook";
+import { MdErrorOutline } from "react-icons/md";
 import Image from "next/image";
 import Heading from "../common/Heading";
 import { SpecialSlotLoader } from "@/components/Loader";
@@ -21,6 +22,7 @@ export default function Index() {
   const [PaymentStatus, setPaymentStatus] = useState(false);
   const [studentTimeZone, setStudentTimeZone] = useState(null);
   const [commission, setCommission] = useState(null);
+  const [unauthorized, setUnauthorized] = useState(false);
 
   const fetchData = async (slug) => {
     try {
@@ -46,7 +48,8 @@ export default function Index() {
     const timeZone = Intl.DateTimeFormat().resolvedOptions().timeZone || "";
     setStudentTimeZone(timeZone);
   }, []);
-  console.log("data", data);
+  // console.log("data", data);
+  // console.log("user", user);
 
   const [email, setEmail] = useState(data?.student?.email || "");
 
@@ -80,48 +83,75 @@ export default function Index() {
   useEffect(() => {
     fetchCommission();
     if (slug) {
-      // if (!user) {
-      //   toast.error("Please login first");
-      //   router.push(`/login?redirect=${router.asPath}`);
-      //   return;
-      // }
       fetchData(slug);
     }
   }, [slug]);
 
   const CheckLogin = async (signal) => {
-      try {
-        const main = new Listing();
-        const response = await main.profileVerify(signal);
-        console.log("response", response);
-        if (response.data?.data?.user) {
-          setUser(response.data.data.user);
-        }
-        else{
+    try {
+      const main = new Listing();
+      const response = await main.profileVerify(signal);
+      // console.log("response", response);
+      if (response.data?.data?.user) {
+        setUser(response.data.data.user);
+      } else {
         toast.error("Please login first");
         router.push(`/login?redirect=${router.asPath}`);
-
-        }
-      } catch (error) {
-        console.log("error", error);
-        toast.error("Please login first");
-        router.push(`/login?redirect=${router.asPath}`);        
       }
-    };
-  
-    useEffect(() => {
-      const controller = new AbortController();
-      const { signal } = controller;
-      if(slug){
-      CheckLogin(signal);}  
-      return () => controller.abort();
-    }, [slug]);
+    } catch (error) {
+      console.log("error", error);
+      toast.error("Please login first");
+      router.push(`/login?redirect=${router.asPath}`);
+    }
+  };
+
+  useEffect(() => {
+    const controller = new AbortController();
+    const { signal } = controller;
+    if (slug) {
+      CheckLogin(signal);
+    }
+    return () => controller.abort();
+  }, [slug]);
+
+  useEffect(() => {
+    if (!user || !data) return;
+    if (user._id?.toString() !== data.student?._id?.toString()) {
+      setUnauthorized(true);
+    }
+  }, [user, data]);
 
   return (
     <Layout>
       <div className="min-h-[50vh] mt-28">
         {loading ? (
           <SpecialSlotLoader />
+        ) : unauthorized ? (
+          <div className="min-h-[60vh] flex flex-col items-center justify-center text-center px-4">
+            <div className="w-20 h-20 bg-red-100 text-red-500 flex items-center justify-center rounded-full mb-6">
+              <MdErrorOutline className="w-10 h-10" />
+            </div>
+
+            <h2 className="text-2xl font-semibold text-[#CC2828] mb-2">
+              Access not allowed
+            </h2>
+
+            <p className="text-gray-600 mb-2 max-w-md">
+              You are not authorized to view this special slot.
+            </p>
+
+            <p className="text-gray-600 mb-4 max-w-md">
+              You’re currently logged in with&nbsp;
+              <span className="font-medium text-black">{user?.email}</span>.
+            </p>
+
+            <button
+              onClick={() => router.push("/")}
+              className="cursor-pointer mt-2 px-6 py-2 bg-[#CC2828] text-white rounded-md hover:bg-[#b82323] transition"
+            >
+              Go to Homepage
+            </button>
+          </div>
         ) : error ? (
           <div className="min-h-[60vh] flex flex-col items-center justify-center text-center px-4">
             <div className="w-20 h-20 bg-red-100 text-red-500 flex items-center justify-center rounded-full mb-6">

@@ -76,10 +76,10 @@ export default function Iindex() {
                   Student Name
                 </th>
                 <th className="font-normal text-sm lg:text-base px-3 lg:px-4 py-2 lg:py-3 border-t border-[rgba(204,40,40,0.2)] capitalize">
-                  Amount
+                  Start Time
                 </th>
                 <th className="font-normal text-sm lg:text-base px-3 lg:px-4 py-2 lg:py-3 border-t border-[rgba(204,40,40,0.2)] capitalize">
-                  Start Time
+                  Amount
                 </th>
                 <th className="font-normal text-sm lg:text-base px-3 lg:px-4 py-2 lg:py-3 border-t border-[rgba(204,40,40,0.2)] capitalize">
                   Payment status

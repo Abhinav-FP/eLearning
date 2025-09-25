@@ -96,9 +96,10 @@ function Index({
       } else {
         throw new Error("No order ID returned from backend");
       }
-    } catch (error) {
-      console.error("API error:", error);
-      toast.error(error?.response?.data?.message || "Something went wrong!");
+    } catch (err) {
+      console.error("API error:", err);
+      const errorMessage = err?.response?.data?.error || err?.message || "Error during payment";
+      toast.error(errorMessage);
     } finally {
       setIsProcessing(false);
     }

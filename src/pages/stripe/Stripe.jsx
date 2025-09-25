@@ -121,7 +121,8 @@ function StripeForm({ PricePayment, selectedLesson, adminCommission, selectedSlo
 
     } catch (err) {
       console.error("Payment error:", err);
-      toast.error(err?.response?.data?.message || "Error during payment");
+      const errorMessage = err?.response?.data?.error || err?.message || "Error during payment";
+      toast.error(errorMessage);
     } finally {
       setProcessing(false);
     }

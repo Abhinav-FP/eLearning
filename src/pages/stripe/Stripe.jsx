@@ -70,7 +70,7 @@ function StripeForm({ PricePayment, selectedLesson, adminCommission, selectedSlo
 }, [elements]); 
 
   const handlePayment = async () => {
-    if(!email || email.trim == ""){
+    if(!email || email.trim === ""){
       toast.error("Please enter a valid email address");
       return;
     }

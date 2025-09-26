@@ -116,6 +116,10 @@ export default function Index() {
 
   useEffect(() => {
     if (!user || !data) return;
+    console.log("user", user);
+    console.log("data", data);
+    console.log("user._id?.toString", user._id?.toString);
+    console.log("data.student?._id?.toString()", data.student?._id?.toString());
     if (user._id?.toString() !== data.student?._id?.toString()) {
       setUnauthorized(true);
     }
@@ -135,7 +139,7 @@ export default function Index() {
               Access not allowed
             </h2>
             <p className="text-gray-600 mb-2 max-w-md">
-              You are not authorized to view this special slot.
+              You are not authorized to view this special slot
             </p>
             <p className="text-gray-600 mb-2 max-w-md">
               You’re currently logged in with&nbsp;

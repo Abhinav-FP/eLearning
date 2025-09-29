@@ -102,6 +102,14 @@ class Listing extends Component {
     return Api.post("/favourite/add", data);
   }
 
+  async StudentSpecialSlotGet(data) {
+    return Api.get(`/student/specialSlot?status=${data}`);
+  }
+
+  async StudentSpecialSlotPaymentLink(data) {
+    return Api.get(`/student/specialSlot/payment/${data}`);
+  }
+
   async RemoveWishlist(data) {
     return Api.post("/favourite/delete", data);
   }
@@ -209,6 +217,10 @@ class Listing extends Component {
     return Api.get(`/teacher/payout?status=${status}`);
   }
 
+  async TeacherLessonDone(data) {
+    return Api.get(`/teacher/lessonDone/${data}`);
+  }
+
   async TeacherEarning(date, search) {
     return Api.get(`/teacher/earning?date=${date}&search=${search}`);
   }
@@ -228,8 +240,8 @@ class Listing extends Component {
     return Api.post(`/teacher/specialSlot`, data);
   }
 
-  async SpecialSlotGet(data) {
-    return Api.get(`/teacher/specialSlot?status=${data}`);
+  async SpecialSlotGet(data, search) {
+    return Api.get(`/teacher/specialSlot?status=${data}&search=${search}`);
   }
 
   async SpecialSlotdata(data) {

@@ -53,14 +53,14 @@ export default function Testimonial({ reviews }) {
                             },
                         }}
                     >
-                        {reviews.map((item, index) => (
+                        {reviews && reviews?.map((item, index) => (
                             <SwiperSlide key={index}>
                                 <div className="border h-full border-[rgba(56,121,117,0.2)] rounded-[20px] p-[30px] lg:p-[40px]">
                                     <div className="w-[42px] h-[60px] mx-auto mb-3 lg:mb-4">
                                         <Image
-                                            src={item?.userId?.profile_photo || TeacherImg}
+                                            src={item?.userId?.profile_photo || "/placeholder.png"}
                                             alt={item?.userId?.name || "Profile"}
-                                            width={42}
+                                            width={60}
                                             height={60}
                                         />
                                     </div>

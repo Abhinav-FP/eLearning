@@ -1,34 +1,32 @@
 import React, { useEffect, useRef, useState } from 'react'
-import TeacherLayout from '../Common/TeacherLayout'
 import NoData from '@/pages/common/NoData';
 import { TableLoader } from '@/components/Loader';
 import Listing from '@/pages/api/Listing';
-import AddSlot from './AddSlot';
 import { formatMultiPrice } from '@/components/ValueDataHook';
 import moment from 'moment';
 import { FaArrowUp, FaArrowDown } from "react-icons/fa";
 import { FiSearch } from "react-icons/fi";
+import StudentLayout from './Common/StudentLayout';
+import { useRouter } from 'next/router';
+import toast from 'react-hot-toast';
 
 export default function Iindex() {
   const [payout, setPayout] = useState([]);
+  const router  = useRouter();
   const [loading, setLoading] = useState(false);
+  const [paymentLoading, setPaymentLoading] = useState(false);
   const [selectedOption, setSelectedOption] = useState("");
-  const [isPopupOpen, setIsPopupOpen] = useState(false);
   const [sortOrder, setSortOrder] = useState("desc");
-  const [searchText, setSearchText] = useState("");
-  const timerRef = useRef(null);
-
-  const closePopup = () => setIsPopupOpen(false);
 
   const handleDropdownChange = (e) => {
     setSelectedOption(e.target.value);
   };
 
-  const SpecialSlotData = async(search="") => {
+  const SpecialSlotData = async() => {
     setLoading(true);
     const main = new Listing();
     main
-      .SpecialSlotGet(selectedOption, search)
+      .StudentSpecialSlotGet(selectedOption)
       .then((r) => {
         setPayout(r?.data?.data);
         setLoading(false);
@@ -39,6 +37,10 @@ export default function Iindex() {
         setLoading(false);
         setPayout([]);
       });
+  }
+
+  function isBeforeStartTime(startDateTime) {
+  return Date.now() < new Date(startDateTime).getTime();
   }
 
   useEffect(() => {
@@ -56,42 +58,31 @@ export default function Iindex() {
     setPayout(sortedData);    
   };
 
-  const handleSearchChange = (e) => {
-    const sval = e.target.value;
-    setSearchText(sval);
-    if (timerRef.current) {
-      clearTimeout(timerRef.current);
+  const handlePaymentLink = async(id) => {
+    try {
+      setPaymentLoading(true);
+      const main = new Listing();
+      const response = await main.StudentSpecialSlotPaymentLink(id);
+      if(response?.data?.status){
+        router.push(response?.data?.data?.link);
+      }
+      else{
+        toast.error(response?.data?.message || "Something went wrong!");
+      }
+    } catch (error) {
+      console.log('error', error);
+        toast.error(error?.response?.data?.message || "Something went wrong!");
     }
-    if (!sval || sval.trim() === "") {
-      timerRef.current = setTimeout(() => {
-        SpecialSlotData(sval);
-      }, 1500);
-    } else if (sval.length >= 2) {
-      timerRef.current = setTimeout(() => {
-        SpecialSlotData(sval);
-      }, 1500);
-    }
+    setPaymentLoading(false);
   };
 
   return (
-    <TeacherLayout page={"Special Slots"}>
+    <StudentLayout page={"Special Slots"}>
       <div className="min-h-screen p-5 lg:p-[30px]">
         <div className="flex flex-col md:flex-row justify-between md:items-center mb-4 lg:mb-5">
-          {/* <h2 className="capitalize text-lg md:text-xl lg:text-2xl font-bold text-[#CC2828] tracking-[-0.04em] font-inter mb-3 md:mb-0">
+          <h2 className="capitalize text-lg md:text-xl lg:text-2xl font-bold text-[#CC2828] tracking-[-0.04em] font-inter mb-3 md:mb-0">
             Special Slots
-          </h2> */}
-          <div className="w-full mb-4 md:mb-0 md:w-1/3 md:max-w-sm relative">
-            <span className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-              <FiSearch className="text-[#888]"/>
-            </span>
-            <input
-              type="text"
-              value={searchText}
-              onChange={handleSearchChange}
-              placeholder="Search by student name"
-              className="w-full pl-10 pr-4 py-2 h-[44px] border border-[#ddd] text-[#000] rounded-md focus:outline-none focus:ring-2 focus:ring-[#CC2828] placeholder-gray-400"
-            />
-          </div>
+          </h2>
           <div className="flex items-center justify-between space-x-3">
             <select
               value={selectedOption}
@@ -102,14 +93,6 @@ export default function Iindex() {
               <option value="pending">Pending</option>
               <option value="paid">Paid</option>
             </select>
-            <button
-              onClick={() => {
-                setIsPopupOpen(true);
-              }}
-              className="w-fit px-2 sm:px-8 py-2.5 hover:bg-white hover:text-[#CC2828] border border-[#CC2828] rounded-md h-[42px] tracking-[-0.06em] text-sm font-medium bg-[#CC2828] text-white cursor-pointer"
-            >
-              Add Special Slot
-            </button>
           </div>
         </div>
         <div className="rounded-[5px] border border-[rgba(204,40,40,0.3)] overflow-x-auto">
@@ -123,7 +106,7 @@ export default function Iindex() {
                   Lesson Name
                 </th>
                 <th className="font-normal text-sm lg:text-base px-3 lg:px-4 py-2 lg:py-3 border-t border-[rgba(204,40,40,0.2)] capitalize">
-                  Student Name
+                  Teacher Name
                 </th>
                 <th className="font-normal text-sm lg:text-base px-3 lg:px-4 py-2 lg:py-3 border-t border-[rgba(204,40,40,0.2)] capitalize">
                   <button className="w-full flex items-center justify-center gap-2 cursor-pointer"
@@ -168,7 +151,7 @@ export default function Iindex() {
                         {item?.lesson?.title}
                       </td>
                       <td className="capitalize px-3 lg:px-4 py-2 lg:py-3 text-black text-sm lg:text-base font-medium font-inter ">
-                        {item?.student?.name}
+                        {item?.teacher?.name}
                       </td>
                       <td className="capitalize px-3 lg:px-4 py-2 lg:py-3 text-black text-sm lg:text-base font-medium font-inter ">
                         {moment(item?.startDateTime).format('DD MMM YYYY, hh:mm A') || ''}
@@ -177,7 +160,18 @@ export default function Iindex() {
                         {formatMultiPrice(item?.amount, "USD")}
                       </td>
                       <td className="capitalize px-3 lg:px-4 py-2 lg:py-3 text-black text-sm lg:text-base font-medium font-inter ">
-                        {item?.paymentStatus}
+                        <div className="flex justify-center items-center gap-2 whitespace-nowrap">
+                            <span className="capitalize">{item?.paymentStatus}</span>
+                            {item?.paymentStatus && item?.paymentStatus === "pending" && isBeforeStartTime(item?.startDateTime) &&
+                              <button
+                                onClick={()=>{
+                                  handlePaymentLink(item?._id);
+                                }}
+                                className="text-xs bg-[#CC2828] text-white px-2 py-[2px] rounded-md hover:bg-[#b22424] transition cursor-pointer"
+                              >
+                                {paymentLoading ? "Processing..." :"Pay"}
+                              </button>}
+                          </div>
                       </td>
                       <td className="capitalize px-3 lg:px-4 py-2 lg:py-3 text-black text-sm lg:text-base font-medium font-inter ">
                         {moment(item?.createdAt).format('DD MMM YYYY, hh:mm A') || ''}
@@ -203,10 +197,6 @@ export default function Iindex() {
           </table>
         </div>
       </div>
-      <AddSlot
-        isOpen={isPopupOpen}
-        onClose={closePopup}
-      />
-    </TeacherLayout>
+    </StudentLayout>
   );
 }

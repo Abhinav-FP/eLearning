@@ -9,11 +9,15 @@ import { FiSearch } from 'react-icons/fi';
 import ZoomPopup from '@/pages/admin/booking/ZoomPopup';
 import BookingView from '@/pages/admin/common/BookingView';
 import CancelPopup from './CancelPopup';
+import Link from 'next/link';
+import toast from 'react-hot-toast';
 
 export default function Index() {
   const [TabOpen, setTabOpen] = useState('upcoming');
   const [data, setData] = useState([]);
   const [loading, setLoading] = useState(false);
+  const [doneLoading, setDoneLoading] = useState(false);
+  const [doneId, setDoneId] = useState(null);
   const [searchText, setSearchText] = useState("");
   const timerRef = useRef(null);
 
@@ -71,6 +75,30 @@ export default function Index() {
     const diffInMs = end - start;
     const diffInMinutes = diffInMs / (1000 * 60);
     return diffInMinutes;
+  }
+
+  const handleMarkAsDone = async(id) => {
+    try {
+      if(doneLoading) return;
+      setDoneId(id);
+      setDoneLoading(true);
+      const main = new Listing();
+      const response = await main.TeacherLessonDone(id);
+      if(response?.data?.status){
+        toast.success(response?.data?.message || "Lesson marked as done successfully!");
+        fetchEarnings();
+        setDoneId(null);
+      }
+      else{
+        toast.error(response?.data?.message || "Something went wrong!");
+        setDoneId(null);
+      }
+    } catch (error) {
+      console.log('error', error);
+      toast.error(error?.response?.data?.message || "Something went wrong!");
+      setDoneId(null);
+    }
+    setDoneLoading(false);
   }
 
 
@@ -141,24 +169,28 @@ export default function Index() {
                   <th className="font-normal text-sm lg:text-base px-3 lg:px-4 py-2 lg:py-3 border-t border-[rgba(204,40,40,0.2)] capitalize">
                     Amount
                   </th>
-                 {TabOpen === "past" && (
+                  {TabOpen === "past" && (
+                    <th className="font-normal text-xs sm:text-sm lg:text-base px-3 lg:px-4 py-2 lg:py-3 border-t border-[rgba(204,40,40,0.2)] capitalize text-gray-700">
+                      Status
+                    </th>
+                  )}
+                  {TabOpen === "past" && (
                     <th className="font-normal text-xs sm:text-sm lg:text-base px-3 lg:px-4 py-2 lg:py-3 border-t border-[rgba(204,40,40,0.2)] capitalize text-gray-700">
                       View Details
                     </th>
-                  )}
+                   )}
                   {TabOpen === "upcoming" && (
                     <th className="font-normal text-xs sm:text-sm lg:text-base px-3 lg:px-4 py-2 lg:py-3 border-t border-[rgba(204,40,40,0.2)] capitalize text-gray-700">
                       Action
                     </th>
                   )}
-
                 </tr>
               </thead>
               {loading ?
                 <TableLoader length={TabOpen === "past" ? 6 : 5} />
                 :
                 <tbody>
-                  {data && data.length > 0 ? (
+                  {data && data?.length > 0 ? (
                     data?.map((item, index) => (
                       <tr
                         key={index}
@@ -182,7 +214,15 @@ export default function Index() {
                           {moment(item?.startDateTime).format('DD MMM YYYY, hh:mm A') || ''}
                         </td>
                         <td className="px-3 lg:px-4 py-2 lg:py-3 capitalize text-black text-sm lg:text-base font-medium font-inter ">
-                          {item?.UserId?.name}
+                          <div className="flex justify-center items-center gap-2 whitespace-nowrap">
+                            <span className="capitalize">{item?.UserId?.name}</span>
+                              <Link
+                                href={`/teacher-dashboard/message?query=${item?.UserId?._id}`}
+                                className="text-xs bg-[#CC2828] text-white px-2 py-[2px] rounded-md hover:bg-[#b22424] transition cursor-pointer"
+                              >
+                                Message
+                              </Link>
+                          </div>
                         </td>
                         <td className="px-3 lg:px-4 py-2 lg:py-3 capitalize min-w-[240px] text-black text-sm lg:text-base font-medium font-inter ">
                           {calculateDurationMinutes(item?.startDateTime, item?.endDateTime)} min{" "}
@@ -192,6 +232,20 @@ export default function Index() {
                         <td className="px-3 lg:px-4 py-2 lg:py-3 capitalize text-black text-sm lg:text-base font-medium font-inter ">
                           {formatMultiPrice(item?.teacherEarning, "USD")}
                         </td>
+                        {TabOpen === "past" && (
+                          <td>
+                            {item?.lessonCompletedTeacher ? (
+                              <span className="text-green-600 text-sm font-medium">Done</span>
+                            ) : (
+                              <button
+                                onClick={() => handleMarkAsDone(item._id)}
+                                className="text-xs bg-white border-1 border-[#CC2828] text-[#CC2828] px-3 py-1 rounded-md hover:bg-[#CC2828] hover:text-white transition cursor-pointer"
+                              >
+                                {doneId === item?._id ? "Processing..." : "Mark as Done"}
+                              </button>
+                            )}
+                          </td>
+                        )}
                         {TabOpen === "past" &&
                         <td>
                           {/* {item?.zoom ? ( */}
@@ -212,7 +266,7 @@ export default function Index() {
                     ))
                   ) : (
                     <tr>
-                      <td colSpan={TabOpen === "past" ? 6 : 5}>
+                      <td colSpan={TabOpen === "past" ? 7 : 5}>
                         <div className="mt-2">
                           <NoData
                             Heading={"No bookings found"}

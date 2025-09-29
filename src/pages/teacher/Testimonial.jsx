@@ -58,7 +58,7 @@ export default function Testimonial({ reviews }) {
                                 <div className="border h-full border-[rgba(56,121,117,0.2)] rounded-[20px] p-[30px] lg:p-[40px]">
                                     <div className="w-[42px] h-[60px] mx-auto mb-3 lg:mb-4">
                                         <Image
-                                            src={item?.userId?.profile_photo || "/placeholder.png"}
+                                            src={item?.userId?.profile_photo || "/Placeholder.png"}
                                             alt={item?.userId?.name || "Profile"}
                                             width={60}
                                             height={60}

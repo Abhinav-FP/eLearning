@@ -65,7 +65,7 @@ export default function Earning({ isOpen, onClose, data, fetchEarnings }) {
                     <div
                         className="w-full p-3 rounded-md bg-gray-100 text-gray-700 focus:outline-none focus:ring-2 focus:ring-[#CC2828] text-base"
                     >
-                        {amount ?? "—"}
+                        {amount?.toFixed(2) ?? "—"}
                     </div>
                 </div>
                 {/* Action Buttons */}

@@ -6,6 +6,7 @@ import NoData from "@/pages/common/NoData";
 import { formatMultiPrice } from "@/components/ValueDataHook";
 import * as XLSX from 'xlsx';
 import toast from "react-hot-toast";
+import moment from "moment";
 
 function Index() {
   const [payout, setPayout] = useState([]);
@@ -100,6 +101,9 @@ function Index() {
                   <th className="font-normal text-sm lg:text-base px-3 lg:px-4 py-2 lg:py-3 border-t border-[rgba(204,40,40,0.2)] capitalize">
                     Bank Name
                   </th>
+                  <th className="font-normal text-sm lg:text-base px-3 lg:px-4 py-2 lg:py-3 border-t border-[rgba(204,40,40,0.2)] capitalize">
+                    Requested On
+                  </th>
                 </tr>
               </thead>
               {loading ? (
@@ -127,11 +131,14 @@ function Index() {
                         <td className="capitalize px-3 lg:px-4 py-2 lg:py-3 text-black text-sm lg:text-base font-medium font-inter ">
                           {item?.BankId?.BankName}
                         </td>
+                        <td className="capitalize px-3 lg:px-4 py-2 lg:py-3 text-black text-sm lg:text-base font-medium font-inter ">
+                          {moment(item?.createdAt).format("DD MMM YYYY, hh:mm A") || ""}
+                        </td>
                       </tr>
                     ))
                   ) : (
                     <tr>
-                      <td colSpan={5}>
+                      <td colSpan={6}>
                         <div className="mt-2">
                           <NoData
                             Heading={"No Payouts found."}

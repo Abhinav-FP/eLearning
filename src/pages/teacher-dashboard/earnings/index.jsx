@@ -92,7 +92,7 @@ export default function index() {
         icon: <MdRequestQuote className="w-6 h-6 text-[#CC2828]" />,
       },
       {
-        label: "Paid Earnings",
+        label: "Last Paid Earnings",
         value: data?.earningsSummary?.approvedEarnings.toFixed(2) ?? "N/A",
         icon: <MdPaid className="w-6 h-6 text-[#CC2828]" />,
       },

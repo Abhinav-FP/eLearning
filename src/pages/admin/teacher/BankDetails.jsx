@@ -7,15 +7,15 @@ export default function BankDetails({ data }) {
       <div className="grid grid-cols-2 gap-y-3 gap-x-6 text-sm">
         <div>
           <span className="font-medium">Bank Name:</span>{" "}
-          {data.BankName || "N/A"}
+          {data?.BankName || "N/A"}
         </div>
         <div>
           <span className="font-medium">Account Holder:</span>{" "}
-          {data.AccountHolderName || "N/A"}
+          {data?.AccountHolderName || "N/A"}
         </div>
         <div>
           <span className="font-medium">Bank Account Number:</span>{" "}
-          {data.BankNumber || "N/A"}
+          {data?.BankNumber || "N/A"}
         </div>
         {/* <div>
           <span className="font-medium">Branch Name:</span>{" "}
@@ -26,15 +26,15 @@ export default function BankDetails({ data }) {
         </div>*/}
         <div> 
           <span className="font-medium">Account Type:</span>{" "}
-          {data.AccountType || "N/A"}
+          {data?.AccountType || "N/A"}
         </div>
         <div>
           <span className="font-medium">Overseas Details:</span>{" "}
-          {data.OverseasDetails || "N/A"}
+          {data?.OverseasDetails || "N/A"}
         </div>
         <div>
           <span className="font-medium">Branch Code:</span>{" "}
-          {data.BranchCode || "N/A"}
+          {data?.BranchCode || "N/A"}
         </div>
       </div>
     </div>

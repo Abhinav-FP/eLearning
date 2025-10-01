@@ -6,6 +6,7 @@ import TeacherLayout from '../Common/TeacherLayout';
 
 export default function Index() {
     const [activeTab, setActiveTab] = useState('Profile');
+     const [bankProcessing, setBankProcessing] = useState(false);
     const handleTabClick = (tab) => {
         setActiveTab(tab);
     };
@@ -42,7 +43,7 @@ export default function Index() {
                             <Password />
                         }
                         {activeTab === 'bank' &&
-                          <Bank/>
+                          <Bank processing={bankProcessing} setProcessing={setBankProcessing}/>
                         }
                     </div>
                 </div>

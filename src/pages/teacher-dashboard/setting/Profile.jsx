@@ -39,7 +39,7 @@ export default function Profile() {
       .Teacherprofile()
       .then((r) => {
         const profiledata = r?.data?.data?.user;
-        console.log("profiledata", profiledata);
+        // console.log("profiledata", profiledata);
         setData({
           name: profiledata?.userId?.name,
           email: profiledata?.userId?.email,

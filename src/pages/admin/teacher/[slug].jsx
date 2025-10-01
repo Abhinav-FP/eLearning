@@ -15,6 +15,7 @@ import BookingList from "./BookingList";
 import ReviewList from "./ReviewList";
 import { TeacherProfileHeaderShimmer } from "@/components/Loader";
 import VideoModalDetail from "@/pages/common/VideoModalDetail";
+import BankDetails from "./BankDetails";
 
 const Index = ({ }) => {
     const router = useRouter();
@@ -70,7 +71,7 @@ const Index = ({ }) => {
         setActiveTab(tab);
     };
 
-    console.log("record", record);
+    // console.log("record", record);
 
     return (
         <AdminLayout page={"Teacher Listing"}>
@@ -137,7 +138,7 @@ const Index = ({ }) => {
                             <button
                                 onClick={() => handleTabClick('about')}
                                 className={`tracking-[-0.03em] font-medium cursor-pointer text-xs sm:text-sm md:text-base uppercase outline-none focus:outline-none ease-linear transition-all border duration-150 rounded-xl py-2 px-4 md:px-8 lg:px-12
-      ${activeTab === 'about'
+                                    ${activeTab === 'about'
                                         ? 'text-[#CC2828] bg-[#F2F2F2] bg-opacity-10 border-[#CC2828] border-opacity-40'
                                         : 'border-black border-opacity-10 text-[#CC2828]'}`}
                             >
@@ -146,7 +147,7 @@ const Index = ({ }) => {
                             <button
                                 onClick={() => handleTabClick('booking')}
                                 className={`tracking-[-0.03em] font-medium cursor-pointer text-xs sm:text-sm md:text-base uppercase outline-none focus:outline-none ease-linear transition-all border duration-150 rounded-xl py-2 px-4 md:px-8 lg:px-12
-      ${activeTab === 'booking'
+                                    ${activeTab === 'booking'
                                         ? 'text-[#CC2828] bg-[#F2F2F2] bg-opacity-10 border-[#CC2828] border-opacity-40'
                                         : 'border-black border-opacity-10 text-[#CC2828]'}`}
                             >
@@ -155,7 +156,7 @@ const Index = ({ }) => {
                             <button
                                 onClick={() => handleTabClick('lesson')}
                                 className={`tracking-[-0.03em] font-medium cursor-pointer text-xs sm:text-sm md:text-base uppercase outline-none focus:outline-none ease-linear transition-all border duration-150 rounded-xl py-2 px-4 md:px-8 lg:px-12
-      ${activeTab === 'lesson'
+                                    ${activeTab === 'lesson'
                                         ? 'text-[#CC2828] bg-[#F2F2F2] bg-opacity-10 border-[#CC2828] border-opacity-40'
                                         : 'border-black border-opacity-10 text-[#CC2828]'}`}
                             >
@@ -164,7 +165,7 @@ const Index = ({ }) => {
                             <button
                                 onClick={() => handleTabClick('payout')}
                                 className={`tracking-[-0.03em] font-medium cursor-pointer text-xs sm:text-sm md:text-base uppercase outline-none focus:outline-none ease-linear transition-all border duration-150 rounded-xl py-2 px-4 md:px-8 lg:px-12
-      ${activeTab === 'payout'
+                                    ${activeTab === 'payout'
                                         ? 'text-[#CC2828] bg-[#F2F2F2] bg-opacity-10 border-[#CC2828] border-opacity-40'
                                         : 'border-black border-opacity-10 text-[#CC2828]'}`}
                             >
@@ -173,11 +174,20 @@ const Index = ({ }) => {
                             <button
                                 onClick={() => handleTabClick('review')}
                                 className={`tracking-[-0.03em] font-medium cursor-pointer text-xs sm:text-sm md:text-base uppercase outline-none focus:outline-none ease-linear transition-all border duration-150 rounded-xl py-2 px-4 md:px-8 lg:px-12
-      ${activeTab === 'review'
+                                    ${activeTab === 'review'
                                         ? 'text-[#CC2828] bg-[#F2F2F2] bg-opacity-10 border-[#CC2828] border-opacity-40'
                                         : 'border-black border-opacity-10 text-[#CC2828]'}`}
                             >
                                 Review
+                            </button>
+                            <button
+                                onClick={() => handleTabClick('bank')}
+                                className={`tracking-[-0.03em] font-medium cursor-pointer text-xs sm:text-sm md:text-base uppercase outline-none focus:outline-none ease-linear transition-all border duration-150 rounded-xl py-2 px-4 md:px-8 lg:px-12
+                                    ${activeTab === 'bank'
+                                        ? 'text-[#CC2828] bg-[#F2F2F2] bg-opacity-10 border-[#CC2828] border-opacity-40'
+                                        : 'border-black border-opacity-10 text-[#CC2828]'}`}
+                            >
+                                Bank Details
                             </button>
                         </div>
 
@@ -200,6 +210,9 @@ const Index = ({ }) => {
                         }
                         {activeTab === 'review' &&
                             <ReviewList reviews={record?.filteredReviews} />
+                        }
+                        {activeTab === 'bank' &&
+                            <BankDetails data={record?.bankdata} />
                         }
                     </div>
                 </div>

@@ -1,10 +1,11 @@
+import React, { useEffect, useRef, useState } from 'react';
 import Listing from '@/pages/api/Listing';
-import React, { useEffect, useState } from 'react';
 import toast from "react-hot-toast";
 
-export default function Bank() {
-    const [processing, setProcessing] = useState(false);
+export default function Bank({processing, setProcessing}) {
+   
     const [showDetails, setShowDetails] = useState(false);
+    const lastSubmitTimeRef = useRef(0);
 
     useEffect(() => {
         const main = new Listing();
@@ -50,8 +51,14 @@ export default function Bank() {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
+        const now = Date.now();
         if (processing) return;
+        if (now - lastSubmitTimeRef.current < 5000) {
+            toast.error("Please wait 5 seconds before submitting again.");
+            return;
+        }
         setProcessing(true);
+        lastSubmitTimeRef.current = now;
         try {
             const main = new Listing();
             const response = await main.TeacherBank(data);
@@ -63,8 +70,9 @@ export default function Bank() {
         } catch (error) {
             console.error("API error:", error);
             toast.error(error?.response?.data?.message || "Something went wrong!");
+        }finally {
+            setProcessing(false);
         }
-        setProcessing(false);
     };
 
     return (
@@ -243,7 +251,7 @@ export default function Bank() {
                 </button>
                 <button
                     type="submit"
-                    className={`w-full max-w-[183px] ${!showDetails ? "cursor-not-allowed" : "Cursor-pointer"} 
+                    className={`w-full max-w-[183px] ${!showDetails ? "cursor-not-allowed" : "cursor-pointer"} 
                         bg-[#CC2828] hover:bg-red-700 text-white py-2.5 lg:py-3.5 rounded-[10px] text-base xl:text-xl`}
                     disabled={processing || !showDetails}
                 >

@@ -206,6 +206,7 @@ export default function Iindex() {
       <AddSlot
         isOpen={isPopupOpen}
         onClose={closePopup}
+        SpecialSlotData={SpecialSlotData}
       />
     </TeacherLayout>
   );

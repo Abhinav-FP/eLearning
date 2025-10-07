@@ -3,7 +3,7 @@ import Popup from "@/pages/common/Popup";
 import Listing from "@/pages/api/Listing";
 import toast from "react-hot-toast";
 
-export default function AddSlot({ isOpen, onClose }) {
+export default function AddSlot({ isOpen, onClose, SpecialSlotData }) {
   const [loading, setLoading] = useState(false);
   const [formData, setFormData] = useState({
     student: "",
@@ -55,6 +55,10 @@ export default function AddSlot({ isOpen, onClose }) {
 
   const handleAdd = async (e) => {
     e.preventDefault();
+    if(!formData?.amount || formData?.amount === "0"){
+      toast.error("Price cannot be zero");
+      return;
+    }
     if (loading) return;
     setLoading(true);
     try {
@@ -76,7 +80,7 @@ export default function AddSlot({ isOpen, onClose }) {
           startDateTime: "",
           endDateTime: "",
         });
-        // getLessons();
+        SpecialSlotData();
         onClose();
       } else {
         toast.error(response.data.message);

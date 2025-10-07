@@ -22,6 +22,10 @@ export default function AddLesson({ isOpen, onClose, data, getLessons }) {
 
   const handleAdd = async (e) => {
     e.preventDefault();
+    if(!formData?.price || formData?.price === "0"){
+      toast.error("Price cannot be zero");
+      return;
+    }
     if (loading) return;
     setLoading(true);
     try {
@@ -56,6 +60,10 @@ export default function AddLesson({ isOpen, onClose, data, getLessons }) {
 
   const handleUpdate = async (e) => {
     e.preventDefault();
+    if(!formData?.price || formData?.price === "0"){
+      toast.error("Price cannot be zero");
+      return;
+    }
     if (loading) return;
     setLoading(true);
     try {

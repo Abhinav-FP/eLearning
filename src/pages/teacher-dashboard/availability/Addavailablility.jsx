@@ -33,13 +33,39 @@ export default function Addavailablility({ isOpen, onClose, TeacherAvailabilitys
     return `${year}-${month}-${day}T${finalHours}:${finalMinutes}`;
   }
 
+  function adjustDateTime(input) {
+  const [datePart, timePart] = input.split('T');
+
+  if (timePart === '00:00') {
+    const [year, month, day] = datePart.split('-').map(Number);
+    const date = new Date(year, month - 1, day);
+    console.log("Old date", date);
+
+    date.setDate(date.getDate() + 1);
+
+    // Get local date components
+    const yyyy = date.getFullYear();
+    const mm = String(date.getMonth() + 1).padStart(2, '0');
+    const dd = String(date.getDate()).padStart(2, '0');
+
+    const newDatePart = `${yyyy}-${mm}-${dd}`;
+    console.log("New date", newDatePart);
+
+    return `${newDatePart}T${timePart}`;
+  }
+  return input;
+}
+
 
   useEffect(() => {
     if (selectedSlot?.start && selectedSlot?.end) {
+      let endTime = toDatetimeLocal(new Date(selectedSlot?.end));
+      endTime=adjustDateTime(endTime);
+      console.log("endTime",endTime);
       setFormData((prev) => ({
         ...prev,
         startDateTime: toDatetimeLocal(new Date(selectedSlot?.start)),
-        endDateTime: toDatetimeLocal(new Date(selectedSlot?.end)),
+        endDateTime: endTime,
       }));
     }
   }, [selectedSlot])
@@ -66,6 +92,8 @@ export default function Addavailablility({ isOpen, onClose, TeacherAvailabilitys
 
     const start = new Date(formData.startDateTime);
     const end = new Date(formData.endDateTime);
+    console.log("start", start);
+    console.log("end", end);
 
     const isValidTime = (date) => {
       const mins = date.getMinutes();
@@ -108,6 +136,8 @@ export default function Addavailablility({ isOpen, onClose, TeacherAvailabilitys
     }
     setLoading(false);
   };
+
+  console.log("formData", formData);
 
 
   return (

@@ -37,9 +37,12 @@ export default function EditAvailablity({
         return `${yyyy}-${MM}-${dd}T${hh}:${mm}`;
       };
 
+      const endWithExtraMinute = new Date(selectedEvent.end);
+    endWithExtraMinute.setMinutes(endWithExtraMinute.getMinutes() + 1);
+
       setFormData({
         startDateTime: formatForInput(new Date(selectedEvent.start)),
-        endDateTime: formatForInput(new Date(selectedEvent.end)),
+        endDateTime: formatForInput(endWithExtraMinute),
       });
     }
   }, [selectedEvent]);

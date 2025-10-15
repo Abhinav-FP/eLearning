@@ -21,8 +21,8 @@ export default function Teacher({ teacherData, loading }) {
                 {/* <p className="text-center text-[#535353] font-medium text-base -tracking-[0.03em] mb-4 lg:mb-5">
                     If you are not sure what teacher to choose, where to start, what to focus on - contact us.
                 </p> */}
-                <h2 className="text-center text-2xl md:text-3xl lg:text-4xl font-bold -tracking-[0.03em] mb-4 lg:mb-5">
-                    Not sure which teacher to choose or where to start?
+                <h2 className="text-center text-xl md:text-2xl lg:text-4xl font-bold -tracking-[0.03em] mb-4 lg:mb-5">
+                    If you are not sure what teacher to choose, where to start, what to focus on - contact us
                     </h2>
                     <div className="flex justify-center mb-8 lg:mb-10">
                         <a

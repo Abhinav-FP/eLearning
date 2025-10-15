@@ -7,6 +7,7 @@ import FAQ from '../common/FAQ';
 import Lesson from './Lesson';
 import Listing from '../api/Listing';
 import FindCourse from './FindCourse';
+import NotSure from './NotSure';
 
 export default function Main() {
   const [homeData, setHomeData] = useState([]);
@@ -49,6 +50,7 @@ export default function Main() {
       <div id="howitwork">
         <HowItWork classess={''} title={"How It Works"} />
       </div>
+      <NotSure/>
       <div id="lesson">
         <Lesson title={homeData?.record?.best_teacher || "Learn from the Best: Expert English & Japanese Teachers"} />
       </div>

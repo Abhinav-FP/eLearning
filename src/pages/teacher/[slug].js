@@ -14,11 +14,14 @@ import { BookLoader } from "../../components/Loader";
 import { BiSolidBadgeCheck } from "react-icons/bi";
 import TeacherImg from "../Assets/Images/Placeholder.png";
 import VideoModalDetail from "../common/VideoModalDetail";
+import toast from "react-hot-toast";
+import { useRole } from "@/context/RoleContext";
 
 export default function Index() {
   const router = useRouter();
   const { slug } = router.query;
   const { book } = router.query;
+  const { user } = useRole();
   const [data, setdata] = useState([]);
   const [loading, setLoading] = useState(true);
   const [content, setContent] = useState("");
@@ -145,7 +148,7 @@ export default function Index() {
     );
   };
 
-  console.log("data", data);
+  // console.log("data", data);
 
   return (
     <>
@@ -172,7 +175,8 @@ export default function Index() {
                       </div>}
                     <div className="w-full md:w-[calc(100%-280px)] lg:w-[calc(100%-308px)] px-4">
                       <div className="relative after:right-0 after:top-2 after:bottom-2 after:width-[1px] after-bg-white">
-                        <div className="flex items-center gap-2 mb-2 lg:mb-4">
+                        <div className="flex flex-wrap items-center justify-between gap-4 sm:gap-2 mb-2 lg:mb-4">
+                        <div className="flex items-center gap-2">
                           <div className="h-[32px] w-[32px] lg:h-[45px] lg:w-[45px] rounded-full overflow-hidden">
                             <Image
                               src={data?.userId?.profile_photo || TeacherImg}
@@ -191,6 +195,23 @@ export default function Index() {
                               AIS Trained
                             </span>)}
                         </div>
+                            <button className="font-medium cursor-pointer rounded-full py-2 px-5 bg-white hover:bg-gray-100 text-[#CC2828] text-sm lg:text-base transition-all"
+                            onClick={()=>{
+                              if (!user) {
+                                  toast.error("Please login first");
+                                  router.push(`/login?redirect=${router.asPath}`);
+                                  return;
+                              }
+                              if (user?.role != "student") {
+                                  toast.error("Only students can message teachers");
+                                  return;
+                              } 
+                              router.push(`/student/message?query=${data?.userId?._id}`);
+                            }}
+                            >
+                              Message Now
+                            </button>
+                          </div>
                         {/* Fields other than description */}
                         <div className="flex flex-wrap  gap-x-2 md:gap-x-6 lg:gap-x-8 mb-2 lg:mb-4 text-white text-base font-medium">
                           {data?.tags && data?.tags?.length > 0 &&
@@ -350,7 +371,7 @@ export default function Index() {
                 <p className="text-sm text-gray-600 mb-6 lg:mb-8">
                   {`All calendar times are displayed based on your device's current time zone: ${studentTimeZone || "NA"}. Please ensure your system time is accurate to avoid any scheduling discrepancies.`}
                 </p>
-                <Calendar Availability={content} setIsPopupOpen={setIsPopupOpen} usedInPopup={false} mergedAvailability={mergedAvailability} />
+                <Calendar Availability={content} setIsPopupOpen={setIsPopupOpen} usedInPopup={false} mergedAvailability={mergedAvailability} teacherData={data}/>
               </div>
             </div>
             <Testimonial reviews={lessons?.reviews} />

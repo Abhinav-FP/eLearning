@@ -13,14 +13,29 @@ import toast from "react-hot-toast";
 export default function Teacher({ teacherData, loading }) {
     const { user } = useRole();
     const router = useRouter();
+    // console.log("TeacherData", teacherData);
     return (
         <div className="pt-[115px] md:pt-[120px] lg:pt-[150px] pb-[20px] md:pb-[40px] lg:pb-[60px]">
             <div className="mx-auto container sm:container md:container lg:container xl:max-w-[1230px]  px-4">
-                <Heading classess={'text-center mb-2 lg:mb-3'} title={'Meet Our Top-Rated Teachers'} />
-                <p className="text-center text-[#535353] font-medium text-base -tracking-[0.03em] mb-4 lg:mb-5">Browse profiles of our most experienced and highest-rated educators.</p>
-                <div className="text-center mb-8 lg:mb-10">
+                {/* <Heading classess={'text-center mb-2 lg:mb-3'} title={'Not sure which teacher to choose or where to start?'} /> */}
+                {/* <p className="text-center text-[#535353] font-medium text-base -tracking-[0.03em] mb-4 lg:mb-5">
+                    If you are not sure what teacher to choose, where to start, what to focus on - contact us.
+                </p> */}
+                <h2 className="text-center text-2xl md:text-3xl lg:text-4xl font-bold -tracking-[0.03em] mb-4 lg:mb-5">
+                    Not sure which teacher to choose or where to start?
+                    </h2>
+                    <div className="flex justify-center mb-8 lg:mb-10">
+                        <a
+                            className="font-semibold bg-[#CC2828] hover:bg-[#ad0e0e] text-white transition-all duration-300 rounded-full py-2.5 px-6 md:py-3 md:px-8 text-sm md:text-base"
+                            target="_blank"
+                            href="https://www.takemetojapan.com/contact"
+                        >
+                            Let’s Work Together
+                        </a>
+                    </div>
+                {/* <div className="text-center mb-8 lg:mb-10">
                     <Image className="inline-block" src={LineImg} alt="icon" />
-                </div>
+                </div> */}
                 {loading ?
                     <BookLoader />
                     : teacherData && teacherData?.length === 0 ? (
@@ -96,8 +111,8 @@ export default function Teacher({ teacherData, loading }) {
                                             </div> */}
                                         </div>
                                         <p className="text-black text-base font-normal -tracking-[0.03em] mb-3 lg:mb-6 line-clamp-2">{item?.description}</p>
-                                        <div className="flex flex-wrap">
-                                            <div className="w-6/12">
+                                        <div className="flex flex-wrap md:items-center md:justify-between">
+                                            <div className="w-full md:w-6/12 order-1 md:order-none mb-3 md:mb-0">
                                               {item?.lowestLesson && item?.lowestLesson && item?.lowestLesson?.price &&(
                                                 <>
                                                 <span className="text-black text-sm -tracking-[0.03em] text-sm">
@@ -109,21 +124,38 @@ export default function Teacher({ teacherData, loading }) {
                                                 </>
                                               )}
                                             </div>
-                                            <div className="w-6/12 text-right">
-                                                <button className='inline-block font-medium cursor-pointer rounded-full py-2 px-5 bg-[#CC2828] hover:bg-[#ad0e0e] text-white text-sm lg:text-base py-2.5 px-3 lg:px-4 lg:px-6'
+                                            <div className="w-full md:w-6/12 flex justify-between md:justify-end gap-3 md:gap-4 lg:gap-5 order-2 md:order-none">
+                                                <button
+                                                    className="font-medium cursor-pointer rounded-full py-2 px-5 bg-[#CC2828] hover:bg-[#ad0e0e] text-white text-sm lg:text-base transition-all"
                                                     onClick={(e) => {
-                                                        e.stopPropagation();
-                                                        e.preventDefault();
-                                                        if (!user) {
-                                                            toast.error("Please login first");
-                                                            router.push("/login?redirect=/find-teacher");
-                                                        }
-                                                        else if (user?.role != "student") {
-                                                            toast.error("Only students can book lessons");
-                                                        }
-                                                        else {
-                                                            router.push(`/teacher/${item?._id}?book=true`);
-                                                        }
+                                                    e.stopPropagation();
+                                                    e.preventDefault();
+                                                    if (!user) {
+                                                        toast.error("Please login first");
+                                                        router.push("/login?redirect=/find-teacher");
+                                                    } else if (user?.role != "student") {
+                                                        toast.error("Only students can message teachers");
+                                                    } else {
+                                                        router.push(`/student/message?query=${item?.userId?._id}`);
+                                                    }
+                                                    }}
+                                                >
+                                                    Message
+                                                </button>
+
+                                                <button
+                                                    className="font-medium cursor-pointer rounded-full py-2 px-5 bg-[#CC2828] hover:bg-[#ad0e0e] text-white text-sm lg:text-base transition-all"
+                                                    onClick={(e) => {
+                                                    e.stopPropagation();
+                                                    e.preventDefault();
+                                                    if (!user) {
+                                                        toast.error("Please login first");
+                                                        router.push("/login?redirect=/find-teacher");
+                                                    } else if (user?.role != "student") {
+                                                        toast.error("Only students can book lessons");
+                                                    } else {
+                                                        router.push(`/teacher/${item?._id}?book=true`);
+                                                    }
                                                     }}
                                                 >
                                                     Book a Lesson

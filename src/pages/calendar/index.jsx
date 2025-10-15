@@ -23,10 +23,11 @@ const Event = ({ event }) => {
 
   return <div style={eventStyle}></div>;
 };
-const Index = ({ Availability, setIsPopupOpen, usedInPopup, setSelectedSlot, selectedLesson, mergedAvailability }) => {
+const Index = ({ Availability, setIsPopupOpen, usedInPopup, setSelectedSlot, selectedLesson, mergedAvailability, teacherData }) => {
   const [events, setEvents] = useState([]);
   const { user } = useRole();
   const router = useRouter();
+  // console.log("teacherData", teacherData);
 
   useEffect(() => {
     if (!Availability) return;
@@ -145,13 +146,32 @@ const Index = ({ Availability, setIsPopupOpen, usedInPopup, setSelectedSlot, sel
               </div>
             </div>
             {!usedInPopup &&
-              <h3 className="text-base lg:text-lg font-semibold text-[#1E1E1E] m-0 tracking-[-0.03em]">
+              <h3 className="flex gap-2 text-base lg:text-lg font-semibold text-[#1E1E1E] m-0 tracking-[-0.03em]">
+                <button
+                  onClick={() => {
+                    if (!user) {
+                      toast.error("Please login first");
+                      router.push(`/login?redirect=${router.asPath}`);
+                      return;
+                    }
+                    if (user?.role != "student") {
+                      toast.error("Only students can message teachers");
+                      return;
+                    }
+                    router.push(`/student/message?query=${teacherData?.userId?._id}`);
+                  }}
+                  className={
+                    "font-medium cursor-pointer rounded-full py-3.5 px-2 sm:px-5 text-[#ffffff] bg-[#CC2828] hover:bg-[#ad0e0e] text-sm sm:text-base w-full"
+                  }
+                >
+                  Message
+                </button>
                 <button
                   onClick={() => {
                     handleClick();
                   }}
                   className={
-                    "font-medium cursor-pointer rounded-full py-2 px-5 text-[#ffffff] bg-[#CC2828] hover:bg-[#ad0e0e] text-base w-full py-3.5"
+                    "font-medium cursor-pointer rounded-full py-3.5 px-2 sm:px-5 text-[#ffffff] bg-[#CC2828] hover:bg-[#ad0e0e] text-sm sm:text-base w-full"
                   }
                 >
                   Book Slot

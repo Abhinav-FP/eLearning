@@ -5,18 +5,7 @@ export default function Document() {
     <Html lang="en">
       <Head>
         {/* Standard favicon */}
-        <link rel="icon" href="/favicon.ico" />
-
-        {/* PNG favicons for browsers */}
-        <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png" />
-        <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
-        
-        {/* Android Chrome icons */}
-        <link rel="icon" type="image/png" sizes="192x192" href="/android-chrome-192x192.png" />
-        <link rel="icon" type="image/png" sizes="512x512" href="/android-chrome-512x512.png" />
-
-        {/* Apple touch icon */}
-        <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+        <link rel="icon" href="/favicon.png" />
         
         <style id="antiClickjack">{`body { display: none !important; }`}</style>
         <script

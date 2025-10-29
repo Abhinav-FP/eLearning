@@ -9,6 +9,7 @@ import { formatMultiPrice } from "@/components/ValueDataHook";
 import { useRole } from "@/context/RoleContext";
 import { useRouter } from "next/router";
 import toast from "react-hot-toast";
+import VideoModalDetail from "../common/VideoModalDetail";
 
 export default function Teacher({ teacherData, loading }) {
     const { user } = useRole();
@@ -47,10 +48,26 @@ export default function Teacher({ teacherData, loading }) {
                         {teacherData && teacherData?.map((item, i) => (
                             <Link href={`/teacher/${item?._id}`} key={i} className="w-full mb-6 lg:mb-8 bg-[#FFE8E8] rounded-[10px] p-5 md:p-8 lg:p-10">
                                 <div className="flex flex-wrap">
-                                    <div className="w-full md:w-[80px] lg:w-[112px]">
-                                        <div className="h-[80px] w-[80px] lg:h-[112px] lg:w-[112px] rounded-full overflow-hidden   mx-0 mb-3 lg:mb-6 ">
-                                            <Image className="h-[80px] w-[80px] lg:h-[112px] lg:w-[112px] rounded-full object-cover" src={item?.userId?.profile_photo || "/Placeholder.png"} alt={item?.userId?.name} width={164} height={164} />
-                                        </div>
+                                    <div className="w-full md:w-[80px] lg:w-[276px]">
+                                        {/* <div className="h-[80px] w-[80px] lg:h-[112px] lg:w-[112px] rounded-full overflow-hidden   mx-0 mb-3 lg:mb-6 "> */}
+                                            {/* <Image className="h-[80px] w-[80px] lg:h-[112px] lg:w-[112px] rounded-full object-cover" src={item?.userId?.profile_photo || "/Placeholder.png"} alt={item?.userId?.name} width={164} height={164} /> */}
+                                            <div
+                                                onClick={(e) => {
+                                                    e.stopPropagation()
+                                                    e.preventDefault();
+                                                }}
+                                                onMouseDown={(e) => e.stopPropagation()}
+                                            >
+                                            <VideoModalDetail
+                                                video={item?.intro_video}
+                                                image={item?.userId?.profile_photo || ""}
+                                                name={item?.userId?.name}
+                                                divClass="relative"
+                                                imgClass="rounded-[10px] h-[240px] w-[276px] object-cover"
+                                                btnClass="absolute top-1/2  cursor-pointer left-0 w-[81px] text-center text-white hover:text-[#CC2828] right-0 mx-auto -translate-y-1/2"
+                                            />
+                                            </div>
+                                        {/* </div> */}
                                         {/* <div className=" md:text-center">
                                         <StarRating rating={item?.averageRating} />
 
@@ -60,7 +77,7 @@ export default function Teacher({ teacherData, loading }) {
                                             }
                                         </div> */}
                                     </div>
-                                    <div className="w-full md:w-[calc(100%-80px)] lg:w-[calc(100%-112px)] mt-2 md:mt-0 md:pl-6 lg:pl-8">
+                                    <div className="w-full md:w-[calc(100%-80px)] lg:w-[calc(100%-276px)] mt-2 md:mt-0 md:pl-6 lg:pl-8">
                                         <h3 className="text-black text-xl lg:text-2xl font-bold -tracking-[0.03em] text-left mb-2.5 lg:mb-4 capitalize">{item?.userId?.name}</h3>
                                         {item?.tags?.length > 0 &&
                                             <div className="flex gap-x-3 items-center flex-wrap">

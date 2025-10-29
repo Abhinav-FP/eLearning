@@ -165,9 +165,8 @@ export default function Lesson({ title }) {
                                             <Link href={`/teacher/${items?._id}`}>
                                                 <div className="py-3 border-b border-[rgba(204,40,40,.2)] border-opacity-20 flex flex-wrap -mx-2 items-center">
                                                     <div className="w-8/12 px-2">
-                                                        <h3 className="font-bold text-base lg:text-lg -tracking-[0.03em] m-0 text-[#000000]">
+                                                        <h3 className="font-bold text-base lg:text-lg -tracking-[0.03em] m-0 text-[#000000] capitalize">
                                                             {items.userId.name}
-
                                                         </h3>
                                                     </div>
                                                 </div>

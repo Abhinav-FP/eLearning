@@ -8,6 +8,7 @@ import { IoMdEye } from 'react-icons/io';
 import Link from 'next/link';
 import FaqManager from './FaqManager';
 import TeacherFaq from './TeacherFaq';
+import Featured from './Featured';
 
 export default function Home() {
     const [processing, setProcessing] = useState(false);
@@ -266,6 +267,7 @@ export default function Home() {
             </form>
             <FaqManager />
             <TeacherFaq />
+            <Featured />
         </AdminLayout>
     );
 }

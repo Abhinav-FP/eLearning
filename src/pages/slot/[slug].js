@@ -116,10 +116,10 @@ export default function Index() {
 
   useEffect(() => {
     if (!user || !data) return;
-    console.log("user", user);
-    console.log("data", data);
-    console.log("user._id?.toString", user._id?.toString);
-    console.log("data.student?._id?.toString()", data.student?._id?.toString());
+    // console.log("user", user);
+    // console.log("data", data);
+    // console.log("user._id?.toString", user._id?.toString);
+    // console.log("data.student?._id?.toString()", data.student?._id?.toString());
     if (user._id?.toString() !== data.student?._id?.toString()) {
       setUnauthorized(true);
     }

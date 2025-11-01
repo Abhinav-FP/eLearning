@@ -90,7 +90,7 @@ export default function Profile() {
       }
       const response = await main.ProfileUpdate(formData);
       if (response?.data) {
-        console.log("response?.data",response?.data);
+        // console.log("response?.data",response?.data);
         toast.success(response.data.message);
         setUser(response?.data?.data?.user);
       } else {

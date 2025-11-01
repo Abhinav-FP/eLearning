@@ -263,6 +263,10 @@ class Listing extends Component {
     return Api.post(`/admin/blockuser`, data);
   }
 
+  async updateFeaturedTeachers(data) {
+    return Api.post(`/admin/teacher/featured`, data);
+  }
+
    async AisTrained(data) {
     return Api.post(`/admin/ais-trained`, data);
   }

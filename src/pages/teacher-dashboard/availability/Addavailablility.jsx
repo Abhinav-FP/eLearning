@@ -39,7 +39,7 @@ export default function Addavailablility({ isOpen, onClose, TeacherAvailabilitys
   if (timePart === '00:00') {
     const [year, month, day] = datePart.split('-').map(Number);
     const date = new Date(year, month - 1, day);
-    console.log("Old date", date);
+    // console.log("Old date", date);
 
     date.setDate(date.getDate() + 1);
 
@@ -49,7 +49,7 @@ export default function Addavailablility({ isOpen, onClose, TeacherAvailabilitys
     const dd = String(date.getDate()).padStart(2, '0');
 
     const newDatePart = `${yyyy}-${mm}-${dd}`;
-    console.log("New date", newDatePart);
+    // console.log("New date", newDatePart);
 
     return `${newDatePart}T${timePart}`;
   }
@@ -61,7 +61,7 @@ export default function Addavailablility({ isOpen, onClose, TeacherAvailabilitys
     if (selectedSlot?.start && selectedSlot?.end) {
       let endTime = toDatetimeLocal(new Date(selectedSlot?.end));
       endTime=adjustDateTime(endTime);
-      console.log("endTime",endTime);
+      // console.log("endTime",endTime);
       setFormData((prev) => ({
         ...prev,
         startDateTime: toDatetimeLocal(new Date(selectedSlot?.start)),
@@ -92,8 +92,8 @@ export default function Addavailablility({ isOpen, onClose, TeacherAvailabilitys
 
     const start = new Date(formData.startDateTime);
     const end = new Date(formData.endDateTime);
-    console.log("start", start);
-    console.log("end", end);
+    // console.log("start", start);
+    // console.log("end", end);
 
     const isValidTime = (date) => {
       const mins = date.getMinutes();
@@ -137,7 +137,7 @@ export default function Addavailablility({ isOpen, onClose, TeacherAvailabilitys
     setLoading(false);
   };
 
-  console.log("formData", formData);
+  // console.log("formData", formData);
 
 
   return (

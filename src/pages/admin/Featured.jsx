@@ -10,6 +10,31 @@ export default function Featured() {
   const [featured, setFeatured] = useState([]);
   const [openDropdown, setOpenDropdown] = useState(null);
   const dropdownRefs = useRef({});
+  
+  const TeacherVideos = async () => {
+    try {
+      const main = new Listing();
+      const response = await main.HomeTeacherVideo();
+      // console.log("API response:", response?.data?.data);
+      const data = Array.isArray(response?.data?.data) ? response.data.data : [];
+      const formatted = data.map((item) => ({
+        _id: item._id,
+        number: item.featured,
+      }));
+      // console.log("Formatted featured:", formatted);
+      setFeatured(formatted);
+    } catch (error) {
+      console.log("error", error);
+      setFeatured([]); // ensure it’s always reset on error
+    }
+  };
+
+  useEffect(() => {
+      TeacherVideos();
+  }, []);
+
+  // console.log("featured", featured);
+
 
   const fetchData = async () => {
     try {

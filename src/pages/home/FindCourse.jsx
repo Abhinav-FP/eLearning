@@ -18,7 +18,7 @@ export default function FindCourse({pargraph ,title , courseimg, loading}) {
                                       {pargraph}
                                     </p>
                                     <Link
-                                    href="/find-teacher"
+                                    href="/course"
                                     className="block w-full text-center font-medium cursor-pointer rounded-full py-3 md:py-3.5 px-5 text-[#CC2828] text-base bg-white"
                                     >
                                     Search Courses

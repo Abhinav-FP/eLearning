@@ -64,6 +64,10 @@ class Listing extends Component {
     return Api.get("/home/teacher",);
   }
 
+  async homeCourse() {
+    return Api.get("/home/getCourse");
+  }
+
   async HomeTeacherVideo() {
     return Api.get("/home/teacher/video")
   }
@@ -296,6 +300,22 @@ class Listing extends Component {
 
   async AdminTeacherData(id) {
     return Api.get(`/admin/teacher/${id}`,);
+  }
+
+  async AdminCourseAdd(data) {
+    return Api.post(`/admin/course/add`, data);
+  }
+
+  async AdminCourseUpdate(id,data) {
+    return Api.post(`/admin/course/edit/${id}`, data);
+  }
+
+  async AdminCourseDelete(id) {
+    return Api.post(`/admin/course/delete/${id}`);
+  }
+
+  async AdminCourseGet() {
+    return Api.get(`/admin/course/get`);
   }
 
   async AdminEarning(date, search, page) {

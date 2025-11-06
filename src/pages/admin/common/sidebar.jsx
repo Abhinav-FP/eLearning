@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { MdSpaceDashboard, MdReviews, MdPayments } from "react-icons/md";
+import { MdSpaceDashboard, MdReviews, MdPayments, MdPlayLesson  } from "react-icons/md";
 import { usePathname } from "next/navigation";
 import Link from "next/link";
 import { IoIosMenu } from "react-icons/io";
@@ -108,13 +108,13 @@ function SideBar() {
                                 <FaEdit size={20} />
                                 Edit Home
                             </Link>
-                            {/* <Link
-                                href="/admin/featured"
-                                className={`flex items-center py-2.5 px-3 md:px-4 lg:px-6 gap-2 text-[#565F66] text-base font-medium tracking-[-0.06em] ${pathname === "/admin/featured" ? "text-white bg-[#D6202C]" : "hover:bg-gray-100"} `}
+                            <Link
+                                href="/admin/courses"
+                                className={`flex items-center py-2.5 px-3 md:px-4 lg:px-6 gap-2 text-[#565F66] text-base font-medium tracking-[-0.06em] ${pathname === "/admin/courses" ? "text-white bg-[#D6202C]" : "hover:bg-gray-100"} `}
                             >
-                                <FaEdit size={20} />
-                                Featured Teachers
-                            </Link> */}
+                                <MdPlayLesson size={20}/>
+                                Manage Courses
+                            </Link>
                             <Link
                                 href="/admin/payment"
                                 className={`flex items-center py-2.5 px-3 md:px-4 lg:px-6 gap-2 text-[#565F66] text-base font-medium tracking-[-0.06em] ${pathname === "/admin/payment" ? "text-white bg-[#D6202C]" : "hover:bg-gray-100"}`}

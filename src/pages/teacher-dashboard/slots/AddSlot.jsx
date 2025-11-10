@@ -147,13 +147,13 @@ export default function AddSlot({ isOpen, onClose, SpecialSlotData }) {
           />
 
           {isFocused && (
-            <div className="absolute top-full left-0 right-0 mt-1 bg-white shadow-md rounded-md max-h-60 overflow-y-auto border border-gray-200">
-              {filteredStudents?.length > 0 ? (
-                filteredStudents.map((student) => (
+            <div className="absolute top-full left-0 right-0 mt-1 bg-white shadow-md rounded-md max-h-60 overflow-y-auto border border-gray-200 z-50">
+              {filteredStudents && filteredStudents?.length > 0 ? (
+                filteredStudents?.map((student) => (
                   <div
-                    key={student._id}
+                    key={student?._id}
                     onClick={() => handleStudentSelect(student)}
-                    className={`flex items-center gap-3 p-3 cursor-pointer hover:bg-gray-100 ${formData.student === student._id ? "bg-gray-300" : ""
+                    className={`flex items-center gap-3 p-3 cursor-pointer hover:bg-gray-100 ${formData?.student === student?._id ? "bg-gray-300" : ""
                       }`}
                   >
                     <img

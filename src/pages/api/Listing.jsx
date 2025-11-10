@@ -271,6 +271,14 @@ class Listing extends Component {
     return Api.post(`/admin/teacher/featured`, data);
   }
 
+  async updateTeachersRank(data) {
+    return Api.post(`/admin/teacher/rank`, data);
+  }
+
+  async getRankedTeachers(data) {
+    return Api.get(`/admin/get-rank-teachers`, data);
+  }
+
    async AisTrained(data) {
     return Api.post(`/admin/ais-trained`, data);
   }

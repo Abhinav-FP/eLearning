@@ -58,6 +58,7 @@ export default function Index() {
           </h1>
           <button
             onClick={() => {
+              setSelectedCourse(null);
               setIsOpen(true);
             }}
             className="w-fit px-2 sm:px-8 h-[44px] py-2 hover:bg-white hover:text-[#CC2828] border border-[#CC2828] rounded-md tracking-[-0.06em] text-sm font-medium bg-[#CC2828] text-white cursor-pointer"
@@ -69,10 +70,10 @@ export default function Index() {
           {data &&
             data?.map((item, index) => (
               <div
+                key={index}
                 className={`bg-white rounded-xl shadow-md overflow-hidden hover:shadow-lg transition-shadow duration-300 
           ${item?.is_deleted ? "opacity-80" : ""}
-          border border-gray-100 max-w-sm`}
-                key={index}
+          border border-gray-100 max-w-sm flex flex-col`}
               >
                 <div className="relative">
                   <Image
@@ -93,9 +94,7 @@ export default function Index() {
                   </button>
                   {item?.is_deleted ? (
                     <button
-                      onClick={() => {
-                        enableCourse(item?._id);
-                      }}
+                      onClick={() => enableCourse(item?._id)}
                       className="absolute top-2 right-2 bg-white bg-opacity-80 hover:bg-[#CC2828] hover:text-white text-[#CC2828] p-2 rounded-full shadow-sm transition-all cursor-pointer"
                     >
                       <FaUndo className="w-4 h-4" />
@@ -112,17 +111,21 @@ export default function Index() {
                     </button>
                   )}
                 </div>
-                <div className="p-4">
+
+                {/* Make the inner content stretch to push the button down */}
+                <div className="p-4 flex flex-col flex-grow">
                   <h3 className="text-black text-lg font-semibold">
                     {item?.title}
                   </h3>
-                  <p className="text-gray-500 text-sm mb-2">
+                  <p className="text-gray-500 text-sm mb-4 flex-grow">
                     {item?.description}
                   </p>
+
+                  {/* Keep the button fixed at the bottom */}
                   <a
                     href={item?.link}
-                    target="blank"
-                    className="block text-center w-full py-2.5 rounded-full bg-[#CC2828] hover:bg-[#ad0e0e] text-white font-semibold transition-all"
+                    target="_blank"
+                    className="mt-auto block text-center w-full py-2.5 rounded-full bg-[#CC2828] hover:bg-[#ad0e0e] text-white font-semibold transition-all"
                   >
                     View
                   </a>

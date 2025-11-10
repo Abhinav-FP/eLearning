@@ -4,35 +4,34 @@ import toast from "react-hot-toast";
 import { MdKeyboardArrowDown } from "react-icons/md";
 import Image from "next/image";
 
-export default function Featured({ teacherData }) {
+export default function TeacherRank({ teacherData }) {
   const [loading, setLoading] = useState(false);
-  const [featured, setFeatured] = useState([]);
+  const [rank, setRank] = useState([]);
   const [openDropdown, setOpenDropdown] = useState(null);
   const dropdownRefs = useRef({});
-  
-  const TeacherVideos = async () => {
+
+  const fetchData = async () => {
     try {
       const main = new Listing();
-      const response = await main.HomeTeacherVideo();
-      // console.log("API response:", response?.data?.data);
+      const response = await main.getRankedTeachers();
       const data = Array.isArray(response?.data?.data) ? response.data.data : [];
       const formatted = data.map((item) => ({
         _id: item._id,
-        number: item.featured,
+        number: item.rank,
       }));
-      // console.log("Formatted featured:", formatted);
-      setFeatured(formatted);
+      setRank(formatted);
     } catch (error) {
       console.log("error", error);
-      setFeatured([]); // ensure it’s always reset on error
+      setFeatured([]); 
     }
   };
 
   useEffect(() => {
-      TeacherVideos();
+      fetchData();
   }, []);
 
-  // console.log("featured", featured);
+//   console.log("rank", rank);
+
 
   useEffect(() => {
     const handleClickOutside = (event) => {
@@ -49,53 +48,53 @@ export default function Featured({ teacherData }) {
   }, [openDropdown]);
 
   const handleSelect = (number, id) => {
-    const alreadySelected = featured.some(
+    const alreadySelected = rank.some(
       (f) => f._id === id && f.number !== number
     );
     if (alreadySelected) {
-      toast.error("This teacher is already selected in another featured slot.");
+      toast.error("This teacher is already selected in another rank slot.");
       return;
     }
     const updated = [
-      ...featured.filter((f) => f.number !== number),
+      ...rank.filter((f) => f.number !== number),
       { _id: id, number },
     ];
-    setFeatured(updated);
+    setRank(updated);
   };
 
   const handleSubmit = async () => {
-    if (featured.length !== 3) {
-      toast.error("Please select 3 teachers before submitting.");
+    if (rank.length !== 5) {
+      toast.error("Please select 5 teachers before submitting.");
       return;
     }
     try {
       setLoading(true);
       const main = new Listing();
-      const response = await main.updateFeaturedTeachers({ featured });
+      const response = await main.updateTeachersRank({ rank });
       if (response?.data?.status) {
         toast.success(response.data.message);
       } else {
         toast.error(response.data.message);
       }
     } catch (error) {
-      console.error("Error submitting featured teachers:", error);
+      console.error("Error submitting rank teachers:", error);
       toast.error("Something went wrong. Please try again.");
     } finally {
       setLoading(false);
     }
   };
 
-  // console.log("featured", featured);
+  // console.log("rank", featured);
 
   return (
     <div className={`py-5 px-5 md:px-10`} >
       <h1 className="text-2xl md:text-3xl font-semibold text-[#D6202C] mb-8">
-        Choose Featured Teachers
+        Choose Teachers Rank
       </h1>
 
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-3 w-full">
-        {[1, 2, 3].map((num) => {
-          const selected = featured.find((f) => f.number === num)?._id;
+        {[1, 2, 3, 4, 5].map((num) => {
+          const selected = rank.find((f) => f.number === num)?._id;
           const selectedTeacher = teacherData.find((t) => t._id === selected);
 
           return (
@@ -105,7 +104,7 @@ export default function Featured({ teacherData }) {
               ref={(el) => (dropdownRefs.current[num] = el)} // attach ref
             >
               <label className="block text-[#D6202C] text-sm font-semibold mb-2">
-                Featured Teacher #{num}
+                Teacher #{num}
               </label>
 
               {/* Dropdown Button */}
@@ -144,7 +143,7 @@ export default function Featured({ teacherData }) {
                 {openDropdown === num && (
                   <div className="absolute left-0 right-0 mt-1 bg-white border border-[#D6202C] rounded-lg shadow-lg max-h-60 overflow-y-auto z-2">
                     {teacherData.map((teacher) => {
-                      const isSelected = featured.some(
+                      const isSelected = rank.some(
                         (f) => f._id === teacher._id && f.number !== num
                       );
                       return (

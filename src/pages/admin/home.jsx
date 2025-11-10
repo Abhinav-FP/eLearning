@@ -9,10 +9,12 @@ import Link from 'next/link';
 import FaqManager from './FaqManager';
 import TeacherFaq from './TeacherFaq';
 import Featured from './Featured';
+import TeacherRank from './TeacherRank';
 
 export default function Home() {
     const [processing, setProcessing] = useState(false);
     const [images, setImages] = useState({ hero_img_first: null, hero_img_second: null, course_img: null });
+    const [teacherData, setTeacherData] = useState([]);
     const [data, setData] = useState({
         hero_heading: "",
         hero_img_first: null,
@@ -24,6 +26,25 @@ export default function Home() {
         best_teacher: "",
         _id: "",
     });
+
+    const fetchData = async () => {
+        try {
+          // setLoading(true);
+          const main = new Listing();
+          const response = await main.homeTeacher();
+          if (response.data) {
+            setTeacherData(response.data.data);
+          }
+          // setLoading(false);
+        } catch (error) {
+          console.log("error", error);
+          // setLoading(false);
+        }
+      };
+    
+      useEffect(() => {
+        fetchData();
+      }, []);
 
     const HomeLists = async () => {
         try {
@@ -265,7 +286,8 @@ export default function Home() {
                 </div>
 
             </form>
-            <Featured />
+            <Featured teacherData={teacherData} />
+            <TeacherRank teacherData={teacherData} />
             <FaqManager />
             <TeacherFaq />
         </AdminLayout>

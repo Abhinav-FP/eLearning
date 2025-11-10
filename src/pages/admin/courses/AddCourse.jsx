@@ -158,7 +158,7 @@ export default function AddCourse({ isOpen, onClose, data = null, fetchData }) {
           <label className="flex justify-between text-[#CC2828] font-medium mb-1">
             <span>Description</span>
             <span className="text-sm text-gray-500">
-              ({formData.description.length}/300)
+              ({formData.description.length}/500)
             </span>
           </label>
           <textarea

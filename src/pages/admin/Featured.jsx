@@ -1,3 +1,4 @@
+export const dynamic = "force-dynamic";
 import React, { useEffect, useRef, useState } from "react";
 import Listing from "@/pages/api/Listing";
 import toast from "react-hot-toast";
@@ -96,7 +97,7 @@ export default function Featured({ teacherData }) {
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-3 w-full">
         {[1, 2, 3].map((num) => {
           const selected = featured.find((f) => f.number === num)?._id;
-          const selectedTeacher = teacherData.find((t) => t._id === selected);
+          const selectedTeacher = teacherData?.find((t) => t._id === selected);
 
           return (
             <div
@@ -143,7 +144,7 @@ export default function Featured({ teacherData }) {
                 {/* Dropdown Options */}
                 {openDropdown === num && (
                   <div className="absolute left-0 right-0 mt-1 bg-white border border-[#D6202C] rounded-lg shadow-lg max-h-60 overflow-y-auto z-2">
-                    {teacherData.map((teacher) => {
+                    {teacherData && teacherData?.map((teacher) => {
                       const isSelected = featured.some(
                         (f) => f._id === teacher._id && f.number !== num
                       );

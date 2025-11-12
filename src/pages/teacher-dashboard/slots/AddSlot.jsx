@@ -2,6 +2,7 @@ import React, { useEffect, useRef, useState } from "react";
 import Popup from "@/pages/common/Popup";
 import Listing from "@/pages/api/Listing";
 import toast from "react-hot-toast";
+import { MdInfoOutline } from "react-icons/md";
 
 export default function AddSlot({ isOpen, onClose, SpecialSlotData }) {
   const [loading, setLoading] = useState(false);
@@ -55,10 +56,47 @@ export default function AddSlot({ isOpen, onClose, SpecialSlotData }) {
 
   const handleAdd = async (e) => {
     e.preventDefault();
-    if(!formData?.amount || formData?.amount === "0"){
+    if (!formData?.amount || Number(formData.amount) <= 0) {
       toast.error("Price cannot be zero");
       return;
     }
+    const amountNum = Number(formData.amount);
+    if (loading) return;
+    setLoading(true);
+    try {
+      const main = new Listing();
+      const response = await main.SpecialSlot({
+        student: formData.student,
+        lesson: formData.lesson,
+        amount: amountNum || formData.amount,
+        startDateTime: formData.startDateTime,
+        endDateTime: formData.endDateTime,
+      });
+
+      if (response?.data?.status) {
+        toast.success(response.data.message);
+        setFormData({
+          student: "",
+          lesson: "",
+          amount: "",
+          startDateTime: "",
+          endDateTime: "",
+        });
+        SpecialSlotData();
+        onClose();
+      } else {
+        toast.error(response.data.message);
+      }
+    } catch (error) {
+      console.error("API error:", error);
+      toast.error(error?.response?.data?.message || "Something went wrong!");
+      setLoading(false);
+    }
+    setLoading(false);
+  };
+
+  const handleZeroAmountSlot = async (e) => {
+    e.preventDefault();
     if (loading) return;
     setLoading(true);
     try {
@@ -107,10 +145,12 @@ export default function AddSlot({ isOpen, onClose, SpecialSlotData }) {
   }, []);
 
   useEffect(() => {
-    setfilteredStudents(data?.students?.filter((student) =>
-      student?.name?.toLowerCase().includes(search.toLowerCase())
-    ));
-  }, [data, search])
+    setfilteredStudents(
+      data?.students?.filter((student) =>
+        student?.name?.toLowerCase().includes(search.toLowerCase())
+      )
+    );
+  }, [data, search]);
 
   const handleStudentSelect = (student) => {
     setFormData((prev) => ({
@@ -121,11 +161,10 @@ export default function AddSlot({ isOpen, onClose, SpecialSlotData }) {
     setIsFocused(false);
   };
 
-
   return (
     <Popup isOpen={isOpen} onClose={onClose} size={"max-w-[540px]"}>
       <form
-        onSubmit={handleAdd}
+        onSubmit={formData?.amount && Number(formData?.amount) <= 0 ? handleZeroAmountSlot : handleAdd}
         className="max-w-md mx-auto mt-10 px-3 sm:px-6 pb-3 sm:pb-6 bg-white space-y-4"
       >
         <h2 className="text-2xl font-bold text-center text-[#CC2828]">
@@ -134,14 +173,16 @@ export default function AddSlot({ isOpen, onClose, SpecialSlotData }) {
 
         {/* Student Field */}
         <div className="mb-6 relative z-10">
-          <label className="block text-[#CC2828] font-medium mb-2">Select Student</label>
+          <label className="block text-[#CC2828] font-medium mb-2">
+            Select Student
+          </label>
           <input
             type="text"
             placeholder="Search student..."
             value={search}
             onChange={(e) => setSearch(e.target.value)}
             onFocus={() => setIsFocused(true)}
-            // onBlur={()=>{setIsFocused(false)}} 
+            // onBlur={()=>{setIsFocused(false)}}
             onBlur={() => setTimeout(() => setIsFocused(false), 200)}
             className="w-full p-3 rounded-md bg-gray-100 text-gray-700 focus:outline-none focus:ring-2 focus:ring-[#CC2828]"
           />
@@ -153,8 +194,9 @@ export default function AddSlot({ isOpen, onClose, SpecialSlotData }) {
                   <div
                     key={student?._id}
                     onClick={() => handleStudentSelect(student)}
-                    className={`flex items-center gap-3 p-3 cursor-pointer hover:bg-gray-100 ${formData?.student === student?._id ? "bg-gray-300" : ""
-                      }`}
+                    className={`flex items-center gap-3 p-3 cursor-pointer hover:bg-gray-100 ${
+                      formData?.student === student?._id ? "bg-gray-300" : ""
+                    }`}
                   >
                     <img
                       src={student?.profile_photo || "/Placeholder.png"}
@@ -163,9 +205,10 @@ export default function AddSlot({ isOpen, onClose, SpecialSlotData }) {
                     />
                     <div className="text-gray-800">
                       <div className="capitalize">{student?.name}</div>
-                      <div className="text-sm text-gray-500">{student?.email}</div>
+                      <div className="text-sm text-gray-500">
+                        {student?.email}
+                      </div>
                     </div>
-
                   </div>
                 ))
               ) : (
@@ -177,7 +220,9 @@ export default function AddSlot({ isOpen, onClose, SpecialSlotData }) {
 
         {/* Lesson Field */}
         <div>
-          <label className="block text-[#CC2828] font-medium mb-1">Select Lesson</label>
+          <label className="block text-[#CC2828] font-medium mb-1">
+            Select Lesson
+          </label>
           <select
             name="lesson"
             value={formData.lesson}
@@ -186,15 +231,21 @@ export default function AddSlot({ isOpen, onClose, SpecialSlotData }) {
             required
           >
             <option value=""> Select a Lesson </option>
-            {data && data?.lessons && data?.lessons?.map((item, index) => (
-              <option key={index} value={item?._id}>{item?.title}</option>
-            ))}
+            {data &&
+              data?.lessons &&
+              data?.lessons?.map((item, index) => (
+                <option key={index} value={item?._id}>
+                  {item?.title}
+                </option>
+              ))}
           </select>
         </div>
 
         {/* Amount Field */}
         <div>
-          <label className="block text-[#CC2828] font-medium mb-1">Amount (USD)</label>
+          <label className="block text-[#CC2828] font-medium mb-1">
+            Amount (USD)
+          </label>
           <input
             type="text"
             name="amount"
@@ -211,7 +262,9 @@ export default function AddSlot({ isOpen, onClose, SpecialSlotData }) {
 
         {/* Start Time Field */}
         <div>
-          <label className="block text-[#CC2828] font-medium mb-1">Start Date & Time</label>
+          <label className="block text-[#CC2828] font-medium mb-1">
+            Start Date & Time
+          </label>
           <input
             type="datetime-local"
             name="startDateTime"
@@ -224,7 +277,9 @@ export default function AddSlot({ isOpen, onClose, SpecialSlotData }) {
 
         {/* End Time Field */}
         <div>
-          <label className="block text-[#CC2828] font-medium mb-1">End Date & Time</label>
+          <label className="block text-[#CC2828] font-medium mb-1">
+            End Date & Time
+          </label>
           <input
             type="datetime-local"
             name="endDateTime"
@@ -236,13 +291,35 @@ export default function AddSlot({ isOpen, onClose, SpecialSlotData }) {
         </div>
 
         {/* Action Buttons */}
-        <div className="flex justify-center mt-6">
-          <button
-            type="submit"
-            className="bg-red-600 text-white py-2 px-6 rounded-md hover:bg-red-700 transition duration-200 cursor-pointer"
-          >
-            {loading ? "Adding..." : "Create Slot"}
-          </button>
+        <div className="flex flex-col justify-center mt-6 space-y-2">
+          {formData?.amount && Number(formData?.amount) <= 0 ? (
+            <>
+              <button
+                type="submit"
+                className="flex items-center justify-center gap-2 bg-[#FFE8E8] text-[#C62828] font-medium py-2 px-6 rounded-md border border-[#F5B7B1] hover:bg-[#FFDADA] transition duration-200 cursor-pointer shadow-sm"
+              >
+                {loading ? (
+                  "Creating..."
+                ) : (
+                  <>
+                    <MdInfoOutline className="text-[#C62828] text-lg" />
+                    Create Slot with 0 Amount
+                  </>
+                )}
+              </button>
+              <p className="text-sm text-[#B71C1C] text-center max-w-md leading-relaxed">
+                You're about to create a <strong>free slot</strong> for which the student
+                will not be required to pay. No payment history will be generated for this slot.
+              </p>
+            </>
+          ) : (
+            <button
+              type="submit"
+              className="bg-red-600 text-white py-2 px-6 rounded-md hover:bg-red-700 transition duration-200 cursor-pointer"
+            >
+              {loading ? "Creating..." : "Create Slot"}
+            </button>
+          )}
         </div>
       </form>
     </Popup>

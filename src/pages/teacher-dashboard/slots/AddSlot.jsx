@@ -101,10 +101,10 @@ export default function AddSlot({ isOpen, onClose, SpecialSlotData }) {
     setLoading(true);
     try {
       const main = new Listing();
-      const response = await main.SpecialSlot({
+      const response = await main.FreeSpecialSlot({
         student: formData.student,
         lesson: formData.lesson,
-        amount: formData.amount,
+        amount: 0,
         startDateTime: formData.startDateTime,
         endDateTime: formData.endDateTime,
       });

@@ -10,6 +10,8 @@ import { IoMdTime } from "react-icons/io";
 import { FaBookReader } from "react-icons/fa";
 import { formatMultiPrice } from "@/components/ValueDataHook";
 import Listing from "../api/Listing";
+import LessonType from "./LessonType";
+import MultipleLessonPayment from "./MultipleLessonPayment";
 
 export default function BookingPopup({
   isOpen,
@@ -26,6 +28,8 @@ export default function BookingPopup({
   const [selectedLesson, SetSelectedLesson] = useState(null);
   const [selectedSlot, setSelectedSlot] = useState(null);
   const [commission, setCommission] = useState(null);
+  const [multipleLessons, setMultipleLessons] = useState("");
+  const [lessonType, setLessonType] = useState("single");
 
   function getFormattedEndTime(time, durationInMinutes) {
     const start = new Date(time);
@@ -89,7 +93,7 @@ export default function BookingPopup({
             {step === 1 && (
               <div
 
-                className="h-full bg-[rgba(249,190,191,.5)] bg-cover bg-center rounded-[20px] py-[40px] lg:py-[60px] pt-10 min-h-full "
+                className="h-full bg-[rgba(249,190,191,.5)] bg-cover bg-center rounded-[20px] py-[40px] lg:py-[60px] pt-10 min-h-full"
               >
                 <div className="container sm:container md:container lg:container xl:max-w-[1230px]  bg-[rgba(249,190,191, .1)] px-4 mx-auto">
                   <Heading
@@ -103,11 +107,27 @@ export default function BookingPopup({
                     SetSelectedLesson={SetSelectedLesson}
                     loading={loading}
                   />
-
                 </div>
               </div>
             )}
             {step === 2 && (
+              <div className="h-full bg-[rgba(249,190,191,.5)] bg-cover bg-center rounded-[20px] py-[40px] lg:py-[60px] pt-10 min-h-full">
+                <div className="container sm:container md:container lg:container xl:max-w-[1230px]  bg-[rgba(249,190,191, .1)] px-4 mx-auto">
+                  <Heading
+                    classess="text-[#CC2828] !text-3xl !mb-3 text-center"
+                    title="Choose Your Lesson Option"
+                  />
+                  <LessonType 
+                   selectedLesson={selectedLesson}
+                   multipleLessons={multipleLessons}
+                   setMultipleLessons={setMultipleLessons}
+                   lessonType={lessonType}
+                   setLessonType={setLessonType}
+                  />
+                </div>
+              </div>
+            )}
+            {step === 3 && (
               <div
 
                 className="bg-[rgba(249,190,191,.5)] bg-cover bg-center rounded-[20px] py-[40px] lg:py-[60px]"
@@ -127,7 +147,7 @@ export default function BookingPopup({
                 </div>
               </div>
             )}
-            {step === 3 && (
+            {step === 4 && (
               <>
                 {selectedLesson && (
                   <Heading
@@ -135,14 +155,24 @@ export default function BookingPopup({
                     title={selectedLesson?.title}
                   />
                 )}
-
-                <PaymentCheckout
-                  selectedLesson={selectedLesson}
-                  selectedSlot={selectedSlot}
-                  studentTimeZone={studentTimeZone}
-                  user={user}
-                  commission={commission}
-                />
+                {lessonType === "single" ? 
+                  <PaymentCheckout
+                    selectedLesson={selectedLesson}
+                    selectedSlot={selectedSlot}
+                    studentTimeZone={studentTimeZone}
+                    user={user}
+                    commission={commission}
+                  />
+                  :
+                  <MultipleLessonPayment
+                    selectedLesson={selectedLesson}
+                    selectedSlot={selectedSlot}
+                    studentTimeZone={studentTimeZone}
+                    user={user}
+                    commission={commission}
+                    multipleLessons={multipleLessons}
+                  />
+                }
               </>
             )}
           </div>
@@ -194,7 +224,11 @@ export default function BookingPopup({
               {step !== 1 && (
                 <button
                   onClick={() => {
-                    if (step === 2) {
+                    if(step == 4 && lessonType === "multiple"){
+                        setStep(2);
+                        return;
+                      }
+                    if (step === 3) {
                       setSelectedSlot("");
                     }
                     setStep(step - 1);
@@ -206,25 +240,28 @@ export default function BookingPopup({
                 </button>
               )
               }
-              {
-                step !== 3 && (
+              {step !== 4 && (
                   <button
                     onClick={() => {
+                      if(step == 2 && lessonType === "multiple"){
+                        setStep(4);
+                        return;
+                      }
                       setStep(step + 1);
                     }}
-                    disabled={(step == 1 && !selectedLesson) || (step == 2 && !selectedSlot)}
+                    disabled={(step == 1 && !selectedLesson) || (step == 2 && lessonType === "multiple" && multipleLessons < 2) || (step == 3 && !selectedSlot)}
                     className={`ml-auto font-medium rounded-full py-2 px-5 text-white text-base w-fit bg-[#CC2828] hover:bg-[#ad0e0e] 
-                  ${(step == 1 && !selectedLesson) || (step == 2 && !selectedSlot) ? "cursor-not-allowed" : "cursor-pointer"}`}
+                  ${(step == 1 && !selectedLesson) || (step == 2 && lessonType === "multiple" && multipleLessons < 2) || (step == 3 && !selectedSlot) 
+                    ? "cursor-not-allowed" 
+                    : "cursor-pointer"}`}
                   >
                     Next
                   </button>
-                )
-              }
+                )}
             </div>
           </div>
         </div>
       </div>
     </div>
-
   );
 }

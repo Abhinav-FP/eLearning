@@ -139,9 +139,29 @@ const MultipleLessonPayment = ({ selectedLesson, selectedSlot, studentTimeZone, 
         </div>
 
         {PaymentStatus === false ? (
-          <Payment PricePayment={selectedLesson?.price + commission * selectedLesson?.price} processingFee={commission * selectedLesson?.price} adminCommission={0.10 * selectedLesson?.price} selectedLesson={selectedLesson} selectedSlot={selectedSlot} studentTimeZone={studentTimeZone} email={email} />
+          <Payment 
+            PricePayment={(selectedLesson?.price*multipleLessons) + (commission * selectedLesson?.price * multipleLessons)} 
+            processingFee={commission * selectedLesson?.price * multipleLessons} 
+            adminCommission={0.10 * selectedLesson?.price * multipleLessons} 
+            selectedLesson={selectedLesson} 
+            selectedSlot={selectedSlot} 
+            studentTimeZone={studentTimeZone} 
+            email={email} 
+            isBulk={true}
+            multipleLessons={multipleLessons}
+          />
         ) : (
-          <Stripe PricePayment={selectedLesson?.price + commission * selectedLesson?.price} processingFee={commission * selectedLesson?.price} adminCommission={0.10 * selectedLesson?.price} selectedLesson={selectedLesson} selectedSlot={selectedSlot} studentTimeZone={studentTimeZone} email={email} />
+          <Stripe 
+            PricePayment={(selectedLesson?.price*multipleLessons) + (commission * selectedLesson?.price * multipleLessons)} 
+            processingFee={commission * selectedLesson?.price * multipleLessons} 
+            adminCommission={0.10 * selectedLesson?.price * multipleLessons}  
+            selectedLesson={selectedLesson} 
+            selectedSlot={selectedSlot} 
+            studentTimeZone={studentTimeZone} 
+            email={email}
+            isBulk={true}
+            multipleLessons={multipleLessons} 
+          />
         )}
       </div>
     </div>

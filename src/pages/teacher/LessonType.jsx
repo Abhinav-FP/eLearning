@@ -42,7 +42,7 @@ export default function LessonType({selectedLesson, multipleLessons, setMultiple
           </p>
           <div className="mb-5">
             <label className="block text-sm font-medium text-[#CC2828] mb-2">
-              Number of Lessons
+              Number of Lessons (minimum 2)
             </label>
             <input
               type="text"

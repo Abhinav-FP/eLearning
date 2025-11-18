@@ -10,18 +10,8 @@ import { useEffect, useState } from "react";
 import Listing from "../api/Listing";
 import toast from "react-hot-toast";
 
-function Index({
-  PricePayment,
-  adminCommission,
-  selectedLesson,
-  selectedSlot,
-  studentTimeZone,
-  email,
-  isSpecialSlot = false,
-  specialSlotData,
-  IsBonus,
-  processingFee,
-}) {
+function Index({ PricePayment, adminCommission, selectedLesson, selectedSlot, studentTimeZone, email, isSpecialSlot = false,
+                 specialSlotData, IsBonus, processingFee, isBulk = false, multipleLessons = 1 }) {
   const clientId = process.env.NEXT_PUBLIC_PAYPAL_CLIENT_ID;
 
   // console.log("IsBonus" ,IsBonus)
@@ -128,7 +118,9 @@ function Index({
         adminCommission: adminCommission.toFixed(2),
         isSpecialSlot: isSpecialSlot,
         IsBonus : IsBonus,
-        processingFee : processingFee.toFixed(2)
+        processingFee : processingFee.toFixed(2),
+        isBulk: isBulk,
+        multipleLessons: multipleLessons
       });
 
       if (response?.data?.status === "COMPLETED") {
@@ -163,6 +155,20 @@ function Index({
       setIsProcessing(false);
     }
   };
+
+    // console.log("LessonId:", isSpecialSlot ? specialSlotData?.lesson?._id : selectedLesson?._id);
+    // console.log("teacherId:", isSpecialSlot ? specialSlotData?.teacher?._id : selectedLesson?.teacher?._id);
+    // console.log("startDateTime:", isSpecialSlot ? specialSlotData?.startDateTime : selectedSlot?.start);
+    // console.log("endDateTime:", isSpecialSlot ? specialSlotData?.endDateTime : endTime);
+    // console.log("email:", email);
+    // console.log("timezone:", studentTimeZone || "UTC");
+    // console.log("totalAmount:", PricePayment.toFixed(2));
+    // console.log("adminCommission:", adminCommission.toFixed(2));
+    // console.log("isSpecialSlot:", isSpecialSlot);
+    // console.log("IsBonus:", IsBonus);
+    // console.log("processingFee:", processingFee.toFixed(2));
+    // console.log("isBulk:", isBulk);
+    // console.log("multipleLessons:", multipleLessons);
 
   return (
     <PayPalScriptProvider options={{ "client-id": clientId }}>

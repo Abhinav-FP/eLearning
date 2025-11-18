@@ -12,7 +12,8 @@ import {
 
 const stripePromise = loadStripe(process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY);
 
-function StripeForm({ PricePayment, selectedLesson, adminCommission, selectedSlot, studentTimeZone, email, isSpecialSlot=false, specialSlotData, processingFee }) {
+function StripeForm({ PricePayment, selectedLesson, adminCommission, selectedSlot, studentTimeZone, email, 
+                      isSpecialSlot=false, specialSlotData, processingFee, isBulk = false, multipleLessons = 1 }) {
   // console.log("processingFee",processingFee);
   const stripe = useStripe();
   const elements = useElements();
@@ -99,6 +100,8 @@ function StripeForm({ PricePayment, selectedLesson, adminCommission, selectedSlo
         timezone: studentTimeZone || "UTC",
         isSpecial: isSpecialSlot,
         processingFee: processingFee.toFixed(2),
+        isBulk: isBulk,
+        multipleLessons: multipleLessons
       });
       const clientSecret = res?.data?.clientSecret;
       const cardElement = elements.getElement(CardElement);

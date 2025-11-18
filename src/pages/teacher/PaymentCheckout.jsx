@@ -139,9 +139,25 @@ const PaymentCheckout = ({ selectedLesson, selectedSlot, studentTimeZone, user, 
         </div>
 
         {PaymentStatus === false ? (
-          <Payment PricePayment={selectedLesson?.price + commission * selectedLesson?.price} processingFee={commission * selectedLesson?.price} adminCommission={0.10 * selectedLesson?.price} selectedLesson={selectedLesson} selectedSlot={selectedSlot} studentTimeZone={studentTimeZone} email={email} />
+          <Payment 
+            PricePayment={selectedLesson?.price + commission * selectedLesson?.price} 
+            processingFee={commission * selectedLesson?.price} 
+            adminCommission={0.10 * selectedLesson?.price} 
+            selectedLesson={selectedLesson} 
+            selectedSlot={selectedSlot} 
+            studentTimeZone={studentTimeZone} 
+            email={email} 
+          />
         ) : (
-          <Stripe PricePayment={selectedLesson?.price + commission * selectedLesson?.price} processingFee={commission * selectedLesson?.price} adminCommission={0.10 * selectedLesson?.price} selectedLesson={selectedLesson} selectedSlot={selectedSlot} studentTimeZone={studentTimeZone} email={email} />
+          <Stripe 
+            PricePayment={selectedLesson?.price + commission * selectedLesson?.price} 
+            processingFee={commission * selectedLesson?.price} 
+            adminCommission={0.10 * selectedLesson?.price} 
+            selectedLesson={selectedLesson} 
+            selectedSlot={selectedSlot} 
+            studentTimeZone={studentTimeZone} 
+            email={email} 
+          />
         )}
       </div>
     </div>

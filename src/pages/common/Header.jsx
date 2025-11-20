@@ -59,7 +59,7 @@ export default function Header() {
                                     width={1000}
                                     layout="fixed"
                                     src={"/Logo.png"}
-                                    alt="japanese for me logo"
+                                    alt="Japanese For Me"
                                 />
                             </Link>
                         </div>

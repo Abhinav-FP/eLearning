@@ -89,9 +89,9 @@ export default function Index() {
                       <tr key={index} className="border-t hover:bg-[rgba(204,40,40,0.1)] border-[rgba(204,40,40,0.2)]">
                         <td className="px-3 lg:px-4 py-2 lg:py-3 text-black text-sm lg:text-base font-medium font-inter">{paymentId}</td>
                         <td className="px-3 lg:px-4 py-2 lg:py-3 text-black text-sm lg:text-base font-medium font-inter">{lessonTitle}</td>
-                        <td className="px-3 lg:px-4 py-2 lg:py-3 text-black text-sm lg:text-base font-medium font-inter">{moment(lessonstartDate).format("DD MMMM YYYY hh:mm A")} -{moment(lessonEndDate).format("DD MMMM YYYY hh:mm A")}</td>
+                        <td className="px-3 lg:px-4 py-2 lg:py-3 text-black text-sm lg:text-base font-medium font-inter">{moment(lessonstartDate).format("DD MMM YYYY hh:mm A")} -{moment(lessonEndDate).format("DD MMM YYYY hh:mm A")}</td>
                         <td className="px-3 lg:px-4 py-2 lg:py-3 text-black text-sm lg:text-base font-medium font-inter">{teacherName}</td>
-                        <td className="px-3 lg:px-4 py-2 lg:py-3 text-black text-sm lg:text-base font-medium font-inter">{moment(paymentDate).format("DD MMMM YYYY hh:mm A")}</td>
+                        <td className="px-3 lg:px-4 py-2 lg:py-3 text-black text-sm lg:text-base font-medium font-inter">{moment(paymentDate).format("DD MMM YYYY hh:mm A")}</td>
                         <td className="px-3 lg:px-4 py-2 lg:py-3 text-black text-sm lg:text-base font-medium font-inter">{formatMultiPrice(amount, "USD")}</td>
                         <td className="px-3 lg:px-4 py-2 lg:py-3 text-black text-sm lg:text-base font-medium font-inter">{status}</td>
 

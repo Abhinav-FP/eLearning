@@ -11,6 +11,8 @@ import { LuMessagesSquare } from "react-icons/lu";
 import { MdPayment } from "react-icons/md";
 import { IoSettingsOutline } from "react-icons/io5";
 import { MdOutlineRateReview } from "react-icons/md";
+import { MdOutlineCreditScore } from "react-icons/md";
+import { MdPayments } from "react-icons/md";
 import { useRole } from "@/context/RoleContext";
 
 function SideBar() {
@@ -47,7 +49,7 @@ function SideBar() {
           <Link href="/">
             <Image
               src={"/Logo.png"}
-              alt="Japanese for me Logo"
+              alt="Japanese For Me"
               height={1000}
               width={1000}
               className="h-[85px] w-[100px] mx-2 inline-block"
@@ -145,8 +147,19 @@ function SideBar() {
                     : "hover:bg-gray-100"
                 }`}
               >
-                <MdPayment size={20} />
+                <MdPayments size={20} />
                 Payments
+              </Link>
+              <Link
+                href="/student/credits"
+                className={`flex items-center py-2.5 px-3 md:px-4 lg:px-6 gap-2 text-[#565F66] text-base font-medium tracking-[-0.06em] ${
+                  pathname === "/student/credits"
+                    ? "text-white bg-[#D6202C]"
+                    : "hover:bg-gray-100"
+                }`}
+              >
+                <MdOutlineCreditScore size={20} />
+                Lesson Credits
               </Link>
               <Link
                 href="/student/review"
@@ -168,7 +181,7 @@ function SideBar() {
                 }`}
               >
                 <MdOutlineRateReview size={20} />
-                Special Slot
+                Special Slots
               </Link>
               <Link
                 href="/student/setting"

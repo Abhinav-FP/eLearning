@@ -2,31 +2,28 @@ import React, { useEffect, useState } from "react";
 import Popup from "@/pages/common/Popup";
 import Heading from "@/pages/common/Heading";
 import Listing from "@/pages/api/Listing";
-import RescheduleCalendar from "./RescheduleCalendar";
+import RescheduleCalendar from "../lessons/RescheduleCalendar";
 import toast from "react-hot-toast";
 
-export default function ReschedulePopup({ isOpen, onClose, lesson, studentTimeZone, fetchLessons }) {
+export default function BookLesson({ isOpen, onClose, selectedItem, studentTimeZone, fetchdata }) {
+  // console.log("selectedItem", selectedItem);
+
   const [selectedSlot, setSelectedSlot] = useState(null);
   const [availability, setAvailability] = useState(null);
   const [mergedAvailability, setMergedAvailability] = useState("");
   const [loading, setLoading] = useState(false);
   const [endTime, setEndTime] = useState(null);
+  
   const addDurationToDate = (start, durationInMinutes) => {
     const originalDate = new Date(start);
     const finalDate = new Date(originalDate.getTime() + durationInMinutes * 60000);
     const isStringInput = typeof start === 'string';
-
-    // If it was a Date object, return Date object
     if (!isStringInput) return finalDate;
-
-    // Match the original locale and timezone style using toLocaleString
     const localeString = originalDate.toLocaleString(undefined, {
       timeZoneName: 'short',
       hour12: false
     });
-
     const timezoneAbbreviation = localeString.split(' ').pop();
-
     const formatted = finalDate.toLocaleString(undefined, {
       timeZoneName: 'short',
       hour12: false
@@ -37,7 +34,7 @@ export default function ReschedulePopup({ isOpen, onClose, lesson, studentTimeZo
 
   useEffect(() => {
     if (selectedSlot) {
-      const time = addDurationToDate(selectedSlot?.start, lesson?.LessonId?.duration);
+      const time = addDurationToDate(selectedSlot?.start, selectedItem?.LessonId?.duration);
       setEndTime(time);
     }
   }, [selectedSlot])
@@ -57,10 +54,10 @@ export default function ReschedulePopup({ isOpen, onClose, lesson, studentTimeZo
     return end.toLocaleString("en-US", options); // → "May 2, 7:40 PM"
   }
 
-  const fetchAvailabilitys = async (lesson) => {
+  const fetchAvailabilitys = async (selectedItem) => {
     try {
       const main = new Listing();
-      const response = await main.studentteacherAvaliability(lesson?.teacherId?._id);
+      const response = await main.studentteacherAvaliability(selectedItem?.teacherId?._id);
       if (response.data) {
         const availabilityBlocks = response.data.data.availabilityBlocks || [];
 
@@ -95,24 +92,27 @@ export default function ReschedulePopup({ isOpen, onClose, lesson, studentTimeZo
   // console.log("availability",availability);
 
   useEffect(() => {
-    if (lesson) {
-      fetchAvailabilitys(lesson);
+    if (selectedItem) {
+      fetchAvailabilitys(selectedItem);
     }
-  }, [lesson]);
+  }, [selectedItem]);
 
   const handleSubmit = async (e) => {
     if (loading) return;
     setLoading(true);
     try {
       const main = new Listing();
-      const response = await main.BookingUpdate(lesson?._id, {
+      console.log("selectedSlot?.start", selectedSlot?.start);
+      console.log("endTime", endTime);
+      const response = await main.BulkLessonRedeem({
+        id: selectedItem?._id,
         startDateTime: selectedSlot?.start,
         endDateTime: endTime,
         timezone: studentTimeZone || "UTC",
       });
       if (response?.data?.status) {
         toast.success(response.data.message);
-        fetchLessons();
+        fetchdata();
         onClose();
       } else {
         toast.error(response.data.message);
@@ -139,7 +139,7 @@ export default function ReschedulePopup({ isOpen, onClose, lesson, studentTimeZo
           <RescheduleCalendar
             Availability={availability}
             setSelectedSlot={setSelectedSlot}
-            selectedLesson={lesson?.LessonId}
+            selectedLesson={selectedItem?.LessonId}
             mergedAvailability={mergedAvailability}
           />
           <div className="flex justify-between items-center mt-5">
@@ -158,7 +158,7 @@ export default function ReschedulePopup({ isOpen, onClose, lesson, studentTimeZo
                   -
                   {getFormattedEndTime(
                     selectedSlot?.start,
-                    lesson?.LessonId?.duration
+                    selectedItem?.LessonId?.duration
                   )}{" "}
                 </p>
               )}

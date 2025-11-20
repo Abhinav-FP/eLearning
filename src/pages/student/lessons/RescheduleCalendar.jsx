@@ -23,7 +23,7 @@ const Event = ({ event }) => {
 
   return <div style={eventStyle}></div>;
 };
-const RescheduleCalendar = ({ Availability, setSelectedSlot, selectedLesson }) => {
+const RescheduleCalendar = ({ Availability, setSelectedSlot, selectedLesson, mergedAvailability }) => {
   const [events, setEvents] = useState([]);
   const { user } = useRole();
   const router = useRouter();
@@ -44,73 +44,18 @@ useEffect(() => {
   };
 
   const processBlocks = (blocks, title, color) => {
-    const events = [];
-
-    blocks.forEach((block) => {
-      let current = moment.utc(block.startDateTime).toDate();
-      const end = moment.utc(block.endDateTime).toDate();
-
-      const firstChunkEnd = getNextHalfHour(current);
-      const firstDuration = (firstChunkEnd - current) / (1000 * 60); // in minutes
-
-      if (firstChunkEnd > end) {
-        // entire block fits before the first rounded 30-minute mark
-        events.push({
-          id: `${block._id}_${block.startDateTime}`,
+      return blocks.map((block) => {
+        let end = moment.utc(block.endDateTime);
+        end = end.subtract(1, "seconds");
+        return {
+          id: `${block._id}`,
           title,
-          start: moment.utc(current).toDate(),
-          end: moment.utc(end).toDate(),
+          start: moment.utc(block.startDateTime).toDate(),
+          end: end.toDate(),
           color,
-        });
-        return;
-      }
-
-      if (firstDuration < 30) {
-        // merge first chunk with next
-        const secondChunkEnd = getNextHalfHour(firstChunkEnd);
-        const mergedEnd = secondChunkEnd < end ? secondChunkEnd : end;
-
-        events.push({
-          id: `${block._id}_${block.startDateTime}`,
-          title,
-          start: moment.utc(current).toDate(),
-          end: moment.utc(mergedEnd).toDate(),
-          color,
-        });
-
-        current = new Date(mergedEnd);
-      } else {
-        // normal first chunk
-        events.push({
-          id: `${block._id}_${block.startDateTime}`,
-          title,
-          start: moment.utc(current).toDate(),
-          end: moment.utc(firstChunkEnd).toDate(),
-          color,
-        });
-
-        current = new Date(firstChunkEnd);
-      }
-
-      // rest of the chunks
-      while (current < end) {
-        const nextChunkEnd = getNextHalfHour(current);
-        const chunkEnd = nextChunkEnd < end ? nextChunkEnd : end;
-
-        events.push({
-          id: `${block._id}_${moment.utc(current).toISOString()}`,
-          title,
-          start: moment.utc(current).toDate(),
-          end: moment.utc(chunkEnd).toDate(),
-          color,
-        });
-
-        current = new Date(chunkEnd);
-      }
-    });
-
-    return events;
-  };
+        };
+      });
+    };
 
   const availabilityEvents = Availability.availabilityBlocks?.length
     ? processBlocks(Availability.availabilityBlocks, "Available", "#6ABB52")
@@ -154,7 +99,7 @@ useEffect(() => {
 
 
   const handleClick = (event) => {
-    if (!isEventWithinAvailability(event?.start, selectedLesson?.duration, Availability?.availabilityBlocks)) {
+    if (!isEventWithinAvailability(event?.start, selectedLesson?.duration, mergedAvailability)) {
       toast.error("This time slot is too short for your selected lesson duration.");
       return;
     }

@@ -384,6 +384,7 @@ export default function Index() {
           studentTimeZone={studentTimeZone}
           loading={loading}
           mergedAvailability={mergedAvailability}
+          slug={slug}
         />
       </Layout>
     </>

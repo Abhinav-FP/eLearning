@@ -12,6 +12,7 @@ import { formatMultiPrice } from "@/components/ValueDataHook";
 import Listing from "../api/Listing";
 import LessonType from "./LessonType";
 import MultipleLessonPayment from "./MultipleLessonPayment";
+import toast from "react-hot-toast";
 
 export default function BookingPopup({
   isOpen,
@@ -20,7 +21,8 @@ export default function BookingPopup({
   Availability,
   studentTimeZone,
   loading,
-  mergedAvailability
+  mergedAvailability,
+  slug,
 }) {
   const { user } = useRole();
 
@@ -28,6 +30,7 @@ export default function BookingPopup({
   const [selectedLesson, SetSelectedLesson] = useState(null);
   const [selectedSlot, setSelectedSlot] = useState(null);
   const [commission, setCommission] = useState(null);
+  const [hasBulkLesson, setHasBulkLesson] = useState(false);
   const [multipleLessons, setMultipleLessons] = useState("");
   const [lessonType, setLessonType] = useState("single");
 
@@ -71,11 +74,38 @@ export default function BookingPopup({
     }
   };
 
+  const fetchExistingSlots = async() => {
+   try {
+      const main = new Listing();
+      const response = await main.BulkLessonCheck({
+        teacher: slug,
+        student: user?._id,
+      });
+      if (response?.data?.status) {
+        setHasBulkLesson(true);
+      }
+      else{
+        setHasBulkLesson(false);
+      }
+    } catch (error) {
+      console.log("error", error);
+      setHasBulkLesson(false);
+    }
+  }
   useEffect(() => {
     fetchCommission();
   }, []);
 
+  useEffect(() => {
+    if(slug && user){
+      fetchExistingSlots();
+    }
+  }, [user, slug]);
+
   if (!isOpen) return null;
+
+  // console.log("user", user);
+  // console.log("slug", slug);
 
   return (
 
@@ -243,6 +273,10 @@ export default function BookingPopup({
               {step !== 4 && (
                   <button
                     onClick={() => {
+                    //   if(step == 2 && hasBulkLesson){
+                    //   toast.error("You have already purchased multiple lessons with this teacher. Please utilize those first.");
+                    //   return;
+                    // }
                       if(step == 2 && lessonType === "multiple"){
                         setStep(4);
                         return;

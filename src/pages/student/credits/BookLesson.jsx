@@ -172,7 +172,7 @@ export default function BookLesson({ isOpen, onClose, selectedItem, studentTimeZ
                       ${!selectedSlot ? "cursor-not-allowed" : "cursor-pointer"
                 }`}
             >
-              Save
+              {loading ? "Saving" : "Save"}
             </button>
           </div>
         </div>

@@ -193,7 +193,8 @@ export default function AddSlot({ isOpen, onClose, SpecialSlotData }) {
                 filteredStudents?.map((student) => (
                   <div
                     key={student?._id}
-                    onClick={() => handleStudentSelect(student)}
+                    // onClick={() => handleStudentSelect(student)}
+                    onMouseDown={() => handleStudentSelect(student)}
                     className={`flex items-center gap-3 p-3 cursor-pointer hover:bg-gray-100 ${
                       formData?.student === student?._id ? "bg-gray-300" : ""
                     }`}

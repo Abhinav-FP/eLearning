@@ -13,6 +13,7 @@ import * as XLSX from 'xlsx';
 import toast from "react-hot-toast";
 import AdminLayout from "../common/AdminLayout";
 import Link from "next/link";
+import Bulk from "./Bulk";
 
 export default function index() {
   const [data, setData] = useState({});
@@ -21,6 +22,7 @@ export default function index() {
   const [loading, setLoading] = useState(false);
   const [buttonLoading, setButtonLoading] = useState(false);
   const [selectedOption, setSelectedOption] = useState("");
+  const[tabOpen, setTabOpen] = useState("bookings");
   const [searchText, setSearchText] = useState("");
   const timerRef = useRef(null);
 
@@ -186,6 +188,28 @@ export default function index() {
                   />
                 ))}
             </div>
+            <div className="flex flex-wrap gap-5 my-4">
+              <button
+                onClick={() => setTabOpen('bookings')}
+                className={`px-2 px-4 xl:px-8 py-2 h-[44px] rounded-md tracking-[-0.06em] text-base font-medium  cursor-pointer ${tabOpen === 'bookings'
+                  ? 'bg-[#CC2828] text-[#fff]'
+                  : 'bg-[#E0E0E0] text-[#727272]'
+                  }`}
+              >
+                Bookings
+              </button>
+              <button
+                onClick={() => setTabOpen('bulk')}
+                className={`px-2 px-8 xl:px-12 py-2 h-[44px] rounded-md tracking-[-0.06em] text-base font-medium  cursor-pointer ${tabOpen === 'bulk'
+                  ? 'bg-[#CC2828] text-[#fff]'
+                  : 'bg-[#E0E0E0] text-[#727272]'
+                  }`}
+              >
+                Bulk Purchases
+              </button>
+            </div>
+            {tabOpen==="bookings" &&
+            <>
             <div className="rounded-[5px] border border-[rgba(204,40,40,0.3)] overflow-x-auto ">
               <table className="min-w-full text-sm text-center rounded-[20px]">
                 <thead className="bg-[rgba(204,40,40,0.1)] text-[#535353] tracking-[-0.04em] font-inter rounded-[20px] whitespace-nowrap">
@@ -285,6 +309,11 @@ export default function index() {
             </div>
             :
             <></>
+          }
+          </>
+            }
+            {tabOpen==="bulk" &&
+            <Bulk loading={loading} data={data?.bulkPurchases || []} />
             }
           </>
         )}

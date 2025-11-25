@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import Layout from '../common/Layout';
 import Listing from '../api/Listing';
 import { Loader } from '@/components/Loader';
+import Head from 'next/head';
 
 export default function PrivacyPage() {
     const [privacyContent, setPrivacyContent] = useState('');
@@ -26,6 +27,14 @@ export default function PrivacyPage() {
     }, []);
 
     return (
+        <>
+        <Head>
+          <title>Terms & Conditions | Japanese For Me</title>
+          <meta
+            name="description"
+            content="Read the official Terms & Conditions for Japanese For Me. Understand our policies on usage, privacy, teacher–student interactions, payments, and platform responsibilities."
+          />
+        </Head>
         <Layout>
             <div className="pt-[132px] md:pt-[140px] lg:pt-[160px] pb-[20px] md:pb-[40px] lg:pb-[60px]">
                 <div className='mx-auto container sm:container md:container lg:container xl:max-w-[1230px]  px-4'>
@@ -41,5 +50,6 @@ export default function PrivacyPage() {
                 </div>
             </div>
         </Layout>
+        </>
     );
 }

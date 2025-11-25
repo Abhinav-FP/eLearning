@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import Layout from '../common/Layout';
 import Listing from '../api/Listing';
 import { Loader } from '@/components/Loader';
+import Head from 'next/head';
 
 export default function PrivacyPage() {
     const [privacyContent, setPrivacyContent] = useState('');
@@ -26,6 +27,14 @@ export default function PrivacyPage() {
     }, []);
 
     return (
+        <>
+        <Head>
+          <title>Privacy Policy | JapaneseFor.Me – How We Collect & Protect Your Data</title>
+          <meta
+            name="description"
+            content="Read the Privacy Policy of JapaneseForMe to understand how we collect, store, and protect your personal information. Learn about data usage, cookies, user rights, and platform security practices."
+          />
+        </Head>
         <Layout>
             <div className="pt-[132px] md:pt-[140px] lg:pt-[160px] pb-[20px] md:pb-[40px] lg:pb-[60px]">
 
@@ -42,5 +51,6 @@ export default function PrivacyPage() {
                 </div>
             </div>
         </Layout>
+        </>
     );
 }

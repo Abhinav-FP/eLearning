@@ -8,6 +8,7 @@ import Lesson from './Lesson';
 import Listing from '../api/Listing';
 import FindCourse from './FindCourse';
 import NotSure from './NotSure';
+import Head from 'next/head';
 
 export default function Main() {
   const [homeData, setHomeData] = useState([]);
@@ -41,6 +42,14 @@ export default function Main() {
 
 
   return (
+    <>
+    <Head>
+      <title>Japanese For Me – Book Live Japanese Lessons with Certified Teachers</title>
+      <meta
+        name="description"
+        content="Learn Japanese through live Zoom lessons with certified and friendly teachers. Book sessions, manage schedules, and study at your own pace with a simple, student-friendly platform. Perfect for beginners, travelers, and professionals."
+      />
+    </Head>
     <Layout>
       <Hero
         title={homeData?.record?.hero_heading || "Learn from Expert Teachers Anytime, Anywhere!"}
@@ -67,5 +76,6 @@ export default function Main() {
         </button> */}
       </div>
     </Layout>
+    </>
   )
 }

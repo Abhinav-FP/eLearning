@@ -3,6 +3,7 @@ import Layout from "../common/Layout";
 import HowItWork from "../common/HowItWork";
 import Teacher from "./Teacher";
 import Listing from "../api/Listing";
+import Head from "next/head";
 
 export default function Index() {
   const [teacherData, setTeacherData] = useState([]);
@@ -27,9 +28,18 @@ export default function Index() {
   }, []);
 
   return (
+    <>
+    <Head>
+      <title>Find a Japanese Teacher | Japanese For Me</title>
+      <meta
+        name="description"
+        content="Search and book certified Japanese teachers for live Zoom lessons. Compare profiles, availability, experience, and pricing."
+      />
+    </Head>
     <Layout>
       <Teacher teacherData={teacherData} loading={loading} />
       <HowItWork classess={"mb-[40px] md:mb-[60px] lg:mb-[100px] !mt-0"} />
     </Layout>
+    </>
   );
 }

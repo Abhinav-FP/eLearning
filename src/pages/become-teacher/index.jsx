@@ -6,6 +6,7 @@ import FAQ from "../common/FAQ";
 import ReadyJoin from "./ReadyJoin";
 import Listing from "../api/Listing";
 import { useRole } from "@/context/RoleContext";
+import Head from "next/head";
 
 export default function Index() {
   const [homeData, setHomeData] = useState([]);
@@ -104,6 +105,14 @@ export default function Index() {
   };
 
   return (
+    <>
+    <Head>
+      <title>Become a Japanese Tutor | Teach Online & Earn with JapaneseForMe</title>
+      <meta
+        name="description"
+        content="Teach Japanese online with JapaneseForMe. Enjoy flexible hours, reliable earnings, dedicated support, and access to thousands of students. See benefits, FAQs, and register today."
+      />
+    </Head>
     <Layout>
       <WhyTech
         //  title={'Why Teach with Japanese for Me?'} 
@@ -120,5 +129,6 @@ export default function Index() {
       <FAQ classess={'mt-[40px] md:mt-[80px] lg:mt-[100px] md:mb-5 lg:mb-10'} Faq={homeData} heading={"FAQ - よくあるご質問 -"}/>
       <ReadyJoin data={data?.join} language={language} />
     </Layout>
+    </>
   )
 }

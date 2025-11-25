@@ -8,6 +8,8 @@ import { formatMultiPrice } from '@/components/ValueDataHook';
 import moment from 'moment';
 import { FaArrowUp, FaArrowDown } from "react-icons/fa";
 import { FiSearch } from "react-icons/fi";
+import CancelPopup from '../booking/CancelPopup';
+import SpecialSlotCancel from './SpecialSlotCancel';
 
 export default function Iindex() {
   const [payout, setPayout] = useState([]);
@@ -72,6 +74,10 @@ export default function Iindex() {
       }, 1500);
     }
   };
+
+  function isBeforeStartTime(startDateTime) {
+   return Date.now() < new Date(startDateTime).getTime();
+  }
 
   return (
     <TeacherLayout page={"Special Slots"}>
@@ -149,10 +155,13 @@ export default function Iindex() {
                 <th className="font-normal text-sm lg:text-base px-3 lg:px-4 py-2 lg:py-3 border-t border-[rgba(204,40,40,0.2)] capitalize">
                   Created At
                 </th>
+                <th className="font-normal text-sm lg:text-base px-3 lg:px-4 py-2 lg:py-3 border-t border-[rgba(204,40,40,0.2)] capitalize">
+                  Action
+                </th>
               </tr>
             </thead>
             {loading ? (
-              <TableLoader length={5} />
+              <TableLoader length={8} />
             ) : (
               <tbody>
                 {payout && payout?.length > 0 ? (
@@ -182,11 +191,18 @@ export default function Iindex() {
                       <td className="capitalize px-3 lg:px-4 py-2 lg:py-3 text-black text-sm lg:text-base font-medium font-inter ">
                         {moment(item?.createdAt).format('DD MMM YYYY, hh:mm A') || ''}
                       </td>
+                      <td className="capitalize px-3 lg:px-4 py-2 lg:py-3 text-black text-sm lg:text-base font-medium font-inter ">
+                        {item?.cancelled
+                          ? "Cancelled"
+                          : item?.paymentStatus === "paid" || item?.amount == 0 || !isBeforeStartTime(item?.startDateTime)
+                          ? "N/A"
+                          : <SpecialSlotCancel data={item} fetchEarnings={SpecialSlotData} />}
+                      </td>
                     </tr>
                   ))
                 ) : (
                   <tr>
-                    <td colSpan={6}>
+                    <td colSpan={8}>
                       <div className="mt-2">
                         <NoData
                           Heading={"No special slots found."}

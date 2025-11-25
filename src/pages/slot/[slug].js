@@ -219,7 +219,27 @@ export default function Index() {
               Go to Homepage
             </button>
           </div>
-        ) : (
+        ) : data?.cancelled  ?(
+          <div className="min-h-[60vh] flex flex-col items-center justify-center text-center px-4">
+            <div className="w-20 h-20 bg-red-100 text-red-500 flex items-center justify-center rounded-full mb-6">
+              <MdErrorOutline className="w-10 h-10" />
+            </div>
+            <h2 className="text-2xl font-semibold text-[#CC2828] mb-2">
+              This Slot Has Been Cancelled
+            </h2>
+            <p className="text-gray-600 mb-4 max-w-md">
+              This special slot has been cancelled by the teacher.  
+              Please contact the teacher if you think it is a mistake.
+            </p>
+            <button
+              onClick={() => router.push("/")}
+              className="cursor-pointer mt-2 px-6 py-2 bg-[#CC2828] text-white rounded-md hover:bg-[#b82323] transition"
+            >
+              Go to Homepage
+            </button>
+          </div>
+        )
+         : (
           <>
             <Heading
               classess="text-[#CC2828] !text-3xl !mb-0 text-center"

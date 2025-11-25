@@ -160,18 +160,30 @@ export default function Iindex() {
                         {formatMultiPrice(item?.amount, "USD")}
                       </td>
                       <td className="capitalize px-3 lg:px-4 py-2 lg:py-3 text-black text-sm lg:text-base font-medium font-inter ">
-                        <div className="flex justify-center items-center gap-2 whitespace-nowrap">
+                        <div className="flex justify-center items-center gap-1 whitespace-nowrap">
+
+                          {/* Payment Status */}
+                          <div className="flex justify-center items-center gap-2">
                             <span className="capitalize">{item?.paymentStatus}</span>
-                            {item?.paymentStatus && item?.paymentStatus === "pending" && isBeforeStartTime(item?.startDateTime) &&
-                              <button
-                                onClick={()=>{
-                                  handlePaymentLink(item?._id);
-                                }}
-                                className="text-xs bg-[#CC2828] text-white px-2 py-[2px] rounded-md hover:bg-[#b22424] transition cursor-pointer"
-                              >
-                                {paymentLoading ? "Processing..." :"Pay"}
-                              </button>}
+
+                            {/* Show Pay button only if pending, before start time, and not cancelled */}
+                            {item?.paymentStatus === "pending" &&
+                              isBeforeStartTime(item?.startDateTime) &&
+                              !item?.cancelled && (
+                                <button
+                                  onClick={() => handlePaymentLink(item?._id)}
+                                  className="text-xs bg-[#CC2828] text-white px-2 py-[2px] rounded-md hover:bg-[#b22424] transition cursor-pointer"
+                                >
+                                  {paymentLoading ? "Processing..." : "Pay"}
+                                </button>
+                              )}
                           </div>
+
+                          {/* Show Cancelled (in red) */}
+                          {item?.cancelled && (
+                            <span className="text-red-600 text-xs font-semibold">Cancelled</span>
+                          )}
+                        </div>
                       </td>
                       <td className="capitalize px-3 lg:px-4 py-2 lg:py-3 text-black text-sm lg:text-base font-medium font-inter ">
                         {moment(item?.createdAt).format('DD MMM YYYY, hh:mm A') || ''}

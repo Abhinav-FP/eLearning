@@ -213,6 +213,10 @@ class Listing extends Component {
     return Api.get(`/booking/cancel/${id}`);
   }
 
+   async SpecialSlotCancel(id) {
+    return Api.get(`/teacher/specialSlot/cancel/${id}`);
+  }
+
   async TeacherAvailabilityGet() {
     return Api.get(`/teacher/availability/get`);
   }

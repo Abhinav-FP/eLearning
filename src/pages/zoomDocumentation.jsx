@@ -6,10 +6,10 @@ export default function ZoomDocumentation() {
   return (
     <Layout>
       <Head>
-        <title>Zoom App Integration Guide | Your eLearning Platform</title>
+        <title>Zoom App Integration Guide | Japanese For Me Platform</title>
         <meta
           name="description"
-          content="Guide to connect, use, and remove your Zoom account with our eLearning platform."
+          content="Guide to connect, use, and remove your Zoom account with our Japanese For Me platform."
         />
       </Head>
       <div className="pt-[132px] md:pt-[140px] lg:pt-[160px] pb-[20px] md:pb-[40px] lg:pb-[60px]">

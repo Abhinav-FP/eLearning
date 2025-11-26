@@ -44,10 +44,10 @@ export default function Main() {
   return (
     <>
     <Head>
-      <title>Japanese For Me – Book Live Japanese Lessons with Certified Teachers</title>
+      <title>Japanese For Me – Book Live Personalized, online Japanese lessons</title>
       <meta
         name="description"
-        content="Learn Japanese through live Zoom lessons with certified and friendly teachers. Book sessions, manage schedules, and study at your own pace with a simple, student-friendly platform. Perfect for beginners, travelers, and professionals."
+        content="Japanese for Me | Online Japanese Learning Platform Focused on Conversation, No Textbook Needed"
       />
     </Head>
     <Layout>

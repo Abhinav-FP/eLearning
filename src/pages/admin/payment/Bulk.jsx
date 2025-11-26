@@ -55,7 +55,7 @@ export default function Bulk({loading, data}) {
                 Loading...
               </td>
             </tr>
-          ) : data.length === 0 ? (
+          ) : data && data?.length === 0 ? (
             <tr>
               <td colSpan={10} className="py-6 text-gray-500">
                 No lesson credits available.

@@ -1,3 +1,4 @@
+import { formatMultiPrice } from "@/components/ValueDataHook";
 import moment from "moment";
 import React, { useState } from "react";
 import { FaChevronDown } from "react-icons/fa";
@@ -21,10 +22,19 @@ export default function Bulk({loading, data}) {
               Lesson Name
             </th>
             <th className="px-4 py-3 border-t border-[rgba(204,40,40,0.2)]">
+              Student
+            </th>
+            <th className="px-4 py-3 border-t border-[rgba(204,40,40,0.2)]">
               Total Lessons
             </th>
             <th className="px-4 py-3 border-t border-[rgba(204,40,40,0.2)]">
               Remaining
+            </th>
+            <th className="px-4 py-3 border-t border-[rgba(204,40,40,0.2)]">
+              Total Payment<br/>(excl. processing fee)
+            </th>
+            <th className="px-4 py-3 border-t border-[rgba(204,40,40,0.2)]">
+              My Earning
             </th>
             <th className="px-4 py-3 border-t border-[rgba(204,40,40,0.2)]">
               Payment ID
@@ -41,13 +51,13 @@ export default function Bulk({loading, data}) {
         <tbody>
           {loading ? (
             <tr>
-              <td colSpan={5} className="py-6 text-gray-500">
+              <td colSpan={10} className="py-6 text-gray-500">
                 Loading...
               </td>
             </tr>
           ) : data.length === 0 ? (
             <tr>
-              <td colSpan={5} className="py-6 text-gray-500">
+              <td colSpan={10} className="py-6 text-gray-500">
                 No lesson credits available.
               </td>
             </tr>
@@ -71,6 +81,10 @@ export default function Bulk({loading, data}) {
                     </td>
 
                     <td className="px-4 py-3 font-medium">
+                      {item?.UserId?.name}
+                    </td>
+
+                    <td className="px-4 py-3 font-medium">
                       {item?.totalLessons}
                     </td>
 
@@ -82,6 +96,14 @@ export default function Bulk({loading, data}) {
                       }`}
                     >
                         {item?.lessonsRemaining}
+                    </td>
+
+                    <td className="px-4 py-3 font-medium">
+                       {formatMultiPrice(item?.totalAmount-item?.processingFee, "USD") || ""}
+                    </td>
+
+                    <td className="px-4 py-3 font-medium">
+                      {formatMultiPrice(item?.adminCommission, "USD") || ""}
                     </td>
 
                     <td className="px-4 py-3 font-medium">
@@ -106,7 +128,7 @@ export default function Bulk({loading, data}) {
                   {isOpen && (
                     <tr className="border-t border-[rgba(204,40,40,0.2)]">
                       <td
-                        colSpan={8}
+                        colSpan={10}
                         className="bg-[rgba(204,40,40,0.03)] px-6 py-5"
                       >
                         <div>

@@ -4,6 +4,7 @@ import { usePathname } from "next/navigation";
 import Link from "next/link";
 import { IoIosMenu } from "react-icons/io";
 import { IoMdArrowRoundBack } from "react-icons/io";
+import { MdOutlineCreditScore } from "react-icons/md";
 import Image from "next/image";
 import { LuMessagesSquare } from "react-icons/lu";
 import { IoSettingsOutline } from "react-icons/io5";
@@ -124,6 +125,13 @@ function SideBar() {
                             >
                                 <MdOutlineRateReview size={20} />
                                 Bookings
+                            </Link>
+                            <Link
+                                href="/teacher-dashboard/bulk"
+                                className={`flex items-center py-2.5 px-3 md:px-4 lg:px-6 gap-2 text-[#565F66] text-base font-medium tracking-[-0.06em] ${pathname === "/teacher-dashboard/bulk" ? "text-white bg-[#D6202C]" : "hover:bg-gray-100"}`}
+                            >
+                                <MdOutlineCreditScore size={20} />
+                                Bulk Bookings
                             </Link>
                             <Link
                                 href="/teacher-dashboard/review"

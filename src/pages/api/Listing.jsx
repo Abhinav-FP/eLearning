@@ -64,6 +64,10 @@ class Listing extends Component {
     return Api.get("/student/bulkLessons");
   }
 
+  async TeacherBulkLessonget() {
+    return Api.get("/teacher/bulkLesson");
+  }
+
   async BulkLessonRedeem(data) {
     return Api.post("/student/bulkLessons/redeem", data);
   }

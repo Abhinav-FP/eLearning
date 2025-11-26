@@ -29,7 +29,7 @@ export default function LessonCredits() {
   useEffect(() => {
     fetchdata();
   }, []);
-  console.log("data", data);
+  // console.log("data", data);
 
   const toggleRow = (i) => {
     setOpenIndex(openIndex === i ? null : i);

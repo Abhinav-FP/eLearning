@@ -9,6 +9,7 @@ import { TeacherLoader } from "@/components/Loader";
 import { FiSearch } from "react-icons/fi";
 import { useRouter } from "next/router";
 import NoData from "@/pages/common/NoData";
+import VideoModalDetail from "@/pages/common/VideoModalDetail";
 
 export default function Index() {
   const [data, setData] = useState([]);
@@ -109,28 +110,49 @@ export default function Index() {
             </>
           ) : data && data?.teacher && data?.teacher?.length === 0 ? (
             // <div className="text-center text-gray-500 py-8 text-lg">No teachers found.</div>
-            <NoData Heading={"No Teachers Found"} content={"Oops looks like there is no teacher matching your search at this moment."}/>
-          ): (
+            <NoData
+              Heading={"No Teachers Found"}
+              content={
+                "Oops looks like there is no teacher matching your search at this moment."
+              }
+            />
+          ) : (
             data &&
             data?.teacher &&
             data?.teacher?.map((teacher, idx) => (
               <Link href={`/teacher/${teacher?._id}`} className="block group">
                 <div
                   key={idx}
-                  className="bg-white rounded-[10px] lesson_list_shadow p-3 md:p-4 lg:p-5 flex flex-col lg:flex-row lg:items-center justify-between transition border-[rgba(204,40,40,0.2)] border-1 gap-5"
+                  className="bg-white rounded-[10px] lesson_list_shadow p-4 lg:p-6 flex flex-col lg:flex-row gap-6 lg:gap-10 border border-[#CC2828]/20"
                 >
-                  <div className="flex flex-col sm:flex-row sm:items-center space-y-2 md:pl-24 lg:pl-[130px] mt-2 relative min-h-20 lg:min-h-[104px]">
-                    <Image
-                      src={teacher?.userId?.profile_photo || "/Placeholder.png"}
-                      alt="Profile"
-                      className="w-16 h-16 md:w-20 md:h-20 lg:w-[104px] lg:h-[104px] rounded-full object-cover left-0 md:absolute top-0"
-                      height={104}
-                      width={104}
-                    />
+                  {/* {teacher?.intro_video && ( */}
+                    <div className="w-full sm:max-w-[300px] shrink-0" 
+                      onClick={(e) => {
+                          e.stopPropagation()
+                          e.preventDefault();
+                      }}
+                      onMouseDown={(e) => e.stopPropagation()}
+                    >
+                      <VideoModalDetail
+                        video={teacher?.intro_video}
+                        image={
+                          teacher?.userId?.profile_photo || "/Placeholder.png"
+                        }
+                        name={teacher?.userId?.name}
+                        divClass="relative"
+                        imgClass="rounded-[10px] h-[160px] sm:h-[200px] w-full object-cover"
+                        btnClass="absolute inset-0 flex justify-center items-center text-white hover:text-[#CC2828]"
+                      />
+                    </div>
+                  {/* )} */}
+                  <div className="flex flex-col justify-between flex-1">
                     <div>
-                      <h3 className="flex font-inter gap-2 items-center text-md lg:text-xl text-[#CC2828] font-medium tracking-[-0.06em] mb-2 capitalize">
-                        {teacher?.userId?.name || ""}
-                        {teacher?.isLiked ? (
+                      <h3
+                        className="flex gap-2 items-center font-inter text-lg lg:text-2xl
+                       text-[#CC2828] font-semibold capitalize mb-2"
+                      >
+                        {teacher?.userId?.name}
+                      {teacher?.isLiked ? (
                           <span
                             className="cursor-pointer"
                             onClick={(e) => {
@@ -157,17 +179,22 @@ export default function Index() {
 
                       {/* Tags */}
                       {teacher?.tags?.length > 0 && (
-                        <div className="flex gap-1 md:items-center">
-                          <span className="text-[#8D929A] text-base -tracking-[0.03em] pr-2  min-w-[100px]">Specialities :</span>
-                          <div className="flex flex-wrap gap-x-2 gap-y-0">
-                            {teacher.tags.map((tag, idx) => (
-                              <span key={idx} className="flex items-center text-black text-base -tracking-[0.03em] capitalize">
+                        <div className="flex gap-2 items-start mb-3">
+                          <span className="text-[#8D929A] text-base min-w-[90px]">
+                            Specialities:
+                          </span>
+                          <div className="flex flex-wrap gap-2">
+                            {teacher && teacher?.tags && teacher?.tags?.map((tag, i) => (
+                              <span
+                                key={i}
+                                className="flex items-center text-black text-base -tracking-[0.03em] capitalize"
+                              >
                                 <svg xmlns="http://www.w3.org/2000/svg" className="w-4 h-4 mr-1" viewBox="0 0 48 48">
                                   <path fill="#4CAF50" d="M44,24c0,11.045-8.955,20-20,20S4,35.045,4,24S12.955,4,24,4S44,12.955,44,24z" />
                                   <path
                                     d="M32.172,16.172L22,26.344l-5.172-5.172c-0.781-0.781-2.047-0.781-2.828,0l-1.414,1.414
-                         c-0.781,0.781-0.781,2.047,0,2.828l8,8c0.781,0.781,2.047,0.781,2.828,0l13-13c0.781-0.781,0.781-2.047,0-2.828L35,16.172
-                         C34.219,15.391,32.953,15.391,32.172,16.172z"
+                                      c-0.781,0.781-0.781,2.047,0,2.828l8,8c0.781,0.781,2.047,0.781,2.828,0l13-13c0.781-0.781,0.781-2.047,0-2.828L35,16.172
+                                      C34.219,15.391,32.953,15.391,32.172,16.172z"
                                     fill="#FFF"
                                   />
                                 </svg>
@@ -178,58 +205,54 @@ export default function Index() {
                         </div>
                       )}
 
-                      {/* Details */}
-                      <div className="flex flex-col md:flex-row flex-wrap gap-x-2 md:gap-x-6 lg:gap-x-8 mb-3 lg:mb-5">
-                        <div className="flex md:block">
-                          <span className="text-[#8D929A] text-sm -tracking-[0.03em] pr-2 min-w-[102px]">Language :</span>
-                          <span className="capitalize text-black text-sm -tracking-[0.03em] flex flex-wrap md:block">{teacher?.languages_spoken.join(' , ') || "N/A"}</span>
-                        </div>
-                        <div className="flex  md:block">
-                          <span className="text-[#8D929A] text-sm -tracking-[0.03em] pr-2 min-w-[103px]">Nationality :</span>
-                          <span className="capitalize text-black text-sm -tracking-[0.03em] flex flex-wrap md:block">{teacher?.userId?.nationality || "N/A"}</span>
-                        </div>
-                        <div className="flex md:block">
-                          <span className="text-[#8D929A] text-sm -tracking-[0.03em] pr-2 min-w-[104px]">Gender :</span>
-                          <span className="capitalize text-black text-sm -tracking-[0.03em] flex flex-wrap md:block ">{teacher?.gender === 'M' ? 'Male' : teacher?.gender === 'F' ? 'Female' : "N/A"}</span>
-                        </div>
-                        {/* <div>
-                          <span className="text-[#8D929A] text-sm -tracking-[0.03em] pr-2">Experience :</span>
-                          <span className="text-black text-sm -tracking-[0.03em] ">{teacher?.experience || 'N/A'} Years</span>
-                        </div> */}
+                      {/* Language / Nationality / Gender */}
+                      <div className="grid grid-cols-1 sm:grid-cols-3 gap-y-2 mb-4">
+                        <p className="text-base capitalize text-black -tracking-[0.03em]">
+                          <span className="text-[#8D929A] mr-1">Language:</span>
+                          {teacher && teacher?.languages && teacher?.languages_spoken?.join(", ") || "N/A"}
+                        </p>
+                        <p className="text-base capitalize text-black -tracking-[0.03em]">
+                          <span className="text-[#8D929A] mr-1">
+                            Nationality:
+                          </span>
+                          {teacher?.userId?.nationality || "N/A"}
+                        </p>
+                        <p className="text-base capitalize text-black -tracking-[0.03em]">
+                          <span className="text-[#8D929A] mr-1">Gender:</span>
+                          {teacher?.gender === "M" ? "Male" : "Female"}
+                        </p>
                       </div>
 
                       {/* Description */}
-                      <p className="text-sm text-[#7A7A7A] font-inter tracking-[-0.04em] mb-1 line-clamp-2">
-                        {teacher?.description || ""}
+                      <p className="text-sm text-[#7A7A7A] line-clamp-2">
+                        {teacher?.description}
                       </p>
                     </div>
-                  </div>
 
-                  {/* Action buttons (stop propagation) */}
-                  <div className="flex flex-row gap-2 justify-between">
-                    <button
-                      type="button"
-                      onClick={(e) => {
-                        e.stopPropagation(); // Prevents triggering parent click
-                        e.preventDefault();  // Prevents default button behavior
-                        router.push(`/teacher/${teacher?._id}?book=true`);
-                      }}
-                      className="tracking-[-0.06em] font-inter font-medium px-6 md:px-10 lg:px-12 py-2 lg:py-2.5 text-[#CC2828] border border-[#CC2828] rounded-md text-sm hover:bg-[#CC2828] hover:text-white cursor-pointer"
-                    >
-                      Book
-                    </button>
+                    {/* Action Buttons */}
+                    <div className="flex gap-2 mt-4">
+                      <button
+                        onClick={(e) => {
+                          e.preventDefault();
+                          e.stopPropagation();
+                          router.push(`/teacher/${teacher?._id}?book=true`);
+                        }}
+                        className="font-medium cursor-pointer rounded-full py-2 px-5 bg-[#CC2828] hover:bg-[#ad0e0e] text-white text-sm lg:text-base transition-all"
+                      >
+                        Book
+                      </button>
 
-                    <Link
-                      href={`/student/message?query=${teacher?.userId?._id}`}
-                      onClick={(e) => e.stopPropagation()}
-                      className="tracking-[-0.06em] font-inter font-medium px-6 md:px-10 lg:px-12 py-2 lg:py-2.5 bg-[#CC2828] text-white rounded-md text-sm hover:bg-white hover:text-[#CC2828] border border-[#CC2828] cursor-pointer"
-                    >
-                      Message
-                    </Link>
+                      <Link
+                        href={`/student/message?query=${teacher?.userId?._id}`}
+                        onClick={(e) => e.stopPropagation()}
+                        className="font-medium cursor-pointer rounded-full py-2 px-5 bg-[#CC2828] hover:bg-[#ad0e0e] text-white text-sm lg:text-base transition-all"
+                      >
+                        Message
+                      </Link>
+                    </div>
                   </div>
                 </div>
               </Link>
-
             ))
           )}
         </div>

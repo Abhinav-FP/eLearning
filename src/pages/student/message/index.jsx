@@ -479,12 +479,12 @@ export default function Index() {
                     <textarea
                       value={message}
                       onChange={(e) => setMessage(e.target.value)}
-                      onKeyDown={(e) => {
-                        if (e.key === "Enter" && !e.shiftKey) {
-                          e.preventDefault();
-                          handleSendMessage(e);
-                        }
-                      }}
+                      // onKeyDown={(e) => {
+                      //   if (e.key === "Enter" && !e.shiftKey) {
+                      //     e.preventDefault();
+                      //     handleSendMessage(e);
+                      //   }
+                      // }}
                       placeholder="Type a message..."
                       className="w-full px-5 py-3 resize-none overflow-hidden min-h-[50px] max-h-[200px] rounded-lg border border-gray-200 focus:outline-none focus:ring-1 focus:ring-gray-400 bg-white"
                     />

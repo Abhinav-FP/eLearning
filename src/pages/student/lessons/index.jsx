@@ -7,6 +7,7 @@ import ReschedulePopup from "./ReschedulePopup";
 import { LessonLoader } from "@/components/Loader";
 import NoData from "@/pages/common/NoData";
 import { useRouter } from "next/router";
+import moment from 'moment';
 
 export default function Index() {
   const [tab, setTab] = useState("upcoming");
@@ -145,10 +146,10 @@ export default function Index() {
                 <div key={idx}>
                   <div className="flex items-center gap-3 xl:gap-4 flex-wrap mb-3 lg:mb-4 xl:mb-5">
                     <p className="text-[#CC2828] font-bold text-lg xl:text-xl font-inter">
-                      {lesson?.startDateTime ? new Date(lesson.startDateTime).toLocaleDateString('en-US', dateOptions) : ""}
+                      {lesson?.startDateTime ? moment(lesson.startDateTime).format("DD MMMM, YYYY") : ""}
                     </p>
-                    <p className="text-sm lg:text-base font-medium text-[#535353] font-inter ">
-                      {lesson?.startDateTime ? new Date(lesson.startDateTime).toLocaleTimeString('en-US', timeOptions) : ""}
+                    <p className="text-sm lg:text-base font-medium text-[#535353] font-inter">
+                      {lesson?.startDateTime ? moment(lesson.startDateTime).format("hh:mm A") : ""}
                     </p>
                     <p className="text-sm lg:text-base font-medium text-[#535353] font-inter ">{`${calculateDurationMinutes(lesson?.startDateTime, lesson?.endDateTime)} mins`}</p>
                   </div>

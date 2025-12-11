@@ -8,11 +8,13 @@ import { IoSettingsOutline } from "react-icons/io5";
 import Listing from "@/pages/api/Listing";
 import { FaRegUser } from "react-icons/fa6";
 import { useRole } from "@/context/RoleContext";
+import moment from "moment-timezone";
 
 export default function AuthLayout({ children, page, sidebar }) {
   const [dropdownOpen, setDropdownOpen] = useState(false);
   const { user, setUser } = useRole();
   const router = useRouter();
+  // console.log("user", user);
 
   const handleLogout = () => {
     localStorage && localStorage.removeItem("token");
@@ -71,12 +73,19 @@ export default function AuthLayout({ children, page, sidebar }) {
     return () => controller.abort();
   }, []);
 
-  // Check role-based access after user is set
+
   useEffect(() => {
     if (user) {
       checkRoleAccess(user);
     }
   }, [user]);
+
+  useEffect(() => {
+    if (user?.time_zone) {
+      moment.tz.setDefault(user.time_zone);
+      // console.log("Timezone updated to:", user.time_zone);
+    }
+  }, [user?.time_zone]);
 
   return (
     <div className="md:flex flex-wrap bg-black items-start">

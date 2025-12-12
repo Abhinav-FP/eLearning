@@ -149,7 +149,7 @@ export default function Index() {
         "image/webp",
       ];
 
-      const maxSizeInBytes = 2 * 1024 * 1024; // 2MB
+      const maxSizeInBytes = 20 * 1024 * 1024; // 20MB
 
       if (!allowedTypes.includes(selectedFile.type)) {
         toast.error("Only PDF, Word documents, and image files are allowed");

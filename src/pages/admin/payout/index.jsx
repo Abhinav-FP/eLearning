@@ -9,6 +9,7 @@ import ApproveRejectPopup from './ApproveRejectPopup';
 import BankDetailPopup from './BankDetailPopup';
 import { FiSearch } from "react-icons/fi";
 import Link from 'next/link';
+import { formatMultiPrice } from '@/components/ValueDataHook';
 
 export default function Index() {
   const [payout, setPayout] = useState([]);
@@ -143,7 +144,7 @@ export default function Index() {
                         <Link href={`/admin/teacher/${item?.userId?._id}`}>{item?.userId?.name}</Link>
                       </td>
                       <td className="capitalize px-3 lg:px-4 py-2 lg:py-3 text-black text-sm lg:text-base font-medium font-inter ">
-                        ${item?.amount}
+                        {formatMultiPrice(item?.amount, "USD") || ""}
                       </td>
                       <td className="px-3 lg:px-4 py-2 lg:py-3 text-black text-sm lg:text-base font-medium font-inter text-center whitespace-nowrap">
                         <button className="flex items-center justify-center gap-1 mx-auto cursor-pointer"

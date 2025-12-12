@@ -44,29 +44,29 @@ export default function Index() {
                                             <div className="flex items-center gap-4">
                                                 <img
                                                     src={review.userId?.profile_photo ? review.userId?.profile_photo : "/Placeholder.png"}
-                                                    alt={review.userId?.name}
+                                                    alt={review?.userId?.name}
                                                     className="w-12 h-12 rounded-full object-cover border"
                                                 />
                                                 <div>
                                                     <h4 className="font-semibold text-gray-800 text-base capitalize">
-                                                        {review.userId?.name}
+                                                        {review?.userId?.name}
                                                     </h4>
                                                     <p className="text-sm text-gray-500">
-                                                        {moment(review.updatedAt).format('MMMM D, YYYY [at] hh:mm A')}
+                                                        {moment(review?.updatedAt).format('MMMM D, YYYY [at] hh:mm A')}
                                                     </p>
                                                 </div>
                                             </div>
 
                                             
                                             <span
-                                                className={`px-3 py-1 rounded-full text-xs font-semibold ${review.review_status === 'Pending'
+                                                className={`px-3 py-1 rounded-full text-xs font-semibold ${review?.review_status === 'Pending'
                                                     ? 'bg-yellow-100 text-yellow-800'
-                                                    : review.review_status === 'Reject'
+                                                    : review?.review_status === 'Reject'
                                                         ? 'bg-red-100 text-red-800'
                                                         : 'bg-green-100 text-green-800'
                                                     }`}
                                             >
-                                                {review.review_status}
+                                                {review?.review_status}
                                             </span>
                                         </div>
                                         {/* Lesson Info */}
@@ -74,19 +74,19 @@ export default function Index() {
                                             <p className="text-sm text-gray-600">
                                                 Lesson:{' '}
                                                 <span className="font-medium text-gray-800">
-                                                    {review.lessonId?.title}
+                                                    {review?.lessonId?.title}
                                                 </span>
                                             </p>
                                         </div>
                                         {/* Rating */}
                                         <div className="flex items-center gap-1 text-yellow-500 mb-3">
-                                            {Array.from({ length: review.rating }, (_, i) => (
+                                            {Array.from({ length: review?.rating }, (_, i) => (
                                                 <AiFillStar key={i} className="w-5 h-5" />
                                             ))}
                                         </div>
                                         {/* Description */}
                                         <p className="text-gray-700 text-sm whitespace-pre-line leading-relaxed mb-4">
-                                            {review.description}
+                                            {review?.description}
                                         </p>
                                     </div>
                                 ))

@@ -1,5 +1,6 @@
 import React from "react";
 import Popup from "@/pages/common/Popup";
+import moment from "moment";
 
 export default function ViewPopup({ isOpen, onClose, data, timezoneMappings }) {
   if (!data) return null;
@@ -44,12 +45,12 @@ export default function ViewPopup({ isOpen, onClose, data, timezoneMappings }) {
 
           <div className="flex flex-col sm:flex-row sm:justify-between gap-1">
             <span className="font-medium text-gray-700">Created At:</span>
-            <span>{new Date(data?.createdAt).toLocaleString()}</span>
+            <span>{moment(data?.createdAt).format("DD MMM YYYY, hh:mm A")}</span>
           </div>
 
           <div className="flex flex-col sm:flex-row sm:justify-between gap-1">
             <span className="font-medium text-gray-700">Updated At:</span>
-            <span>{new Date(data?.updatedAt).toLocaleString()}</span>
+            <span>{moment(data?.updatedAt).format("DD MMM YYYY, hh:mm A")}</span>
           </div>
         </div>
       </div>

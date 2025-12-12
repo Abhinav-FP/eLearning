@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import Listing from "@/pages/api/Listing";
 import toast from "react-hot-toast";
 import Popup from "@/pages/common/Popup";
+import moment from "moment";
 
 export default function EditAvailablity({
   isOpen,
@@ -26,26 +27,19 @@ export default function EditAvailablity({
 
 
   useEffect(() => {
-    if (selectedEvent?.start && selectedEvent?.end) {
-      const formatForInput = (date) => {
-        const pad = (n) => n.toString().padStart(2, "0");
-        const yyyy = date.getFullYear();
-        const MM = pad(date.getMonth() + 1);
-        const dd = pad(date.getDate());
-        const hh = pad(date.getHours());
-        const mm = pad(date.getMinutes());
-        return `${yyyy}-${MM}-${dd}T${hh}:${mm}`;
-      };
+  if (selectedEvent?.start && selectedEvent?.end) {
+    const formatForInput = (dateStr) => {
+      return moment(dateStr).format("YYYY-MM-DDTHH:mm");
+    };
 
-      const endWithExtraMinute = new Date(selectedEvent.end);
-    endWithExtraMinute.setMinutes(endWithExtraMinute.getMinutes() + 1);
+    const endWithExtraMinute = moment(selectedEvent.end).add(1, "minute");
 
-      setFormData({
-        startDateTime: formatForInput(new Date(selectedEvent.start)),
-        endDateTime: formatForInput(endWithExtraMinute),
-      });
-    }
-  }, [selectedEvent]);
+    setFormData({
+      startDateTime: formatForInput(selectedEvent.start),
+      endDateTime: formatForInput(endWithExtraMinute),
+    });
+  }
+}, [selectedEvent]);
 
 //   const handleUpdate = async (e) => {
 //     e.preventDefault();
@@ -111,8 +105,8 @@ export default function EditAvailablity({
             <span className="text-gray-500 font-medium">Start Time</span>
             <span className="text-gray-800">
               {formData.startDateTime
-                ? new Date(formData.startDateTime).toLocaleString()
-                : "Not selected"}
+                ? moment(formData.startDateTime).format("DD MMM YYYY, hh:mm A")
+                : "N/A"}
             </span>
           </div>
 
@@ -120,8 +114,8 @@ export default function EditAvailablity({
           <div className="flex justify-between items-center">
             <span className="text-gray-500 font-medium">End Time</span>
             <span className="text-gray-800">
-              {formData.endDateTime
-                ? new Date(formData.endDateTime).toLocaleString()
+               {formData.endDateTime
+                ? moment(formData.endDateTime).format("DD MMM YYYY, hh:mm A")
                 : "Not selected"}
             </span>
           </div>

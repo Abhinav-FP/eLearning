@@ -13,6 +13,7 @@ import Listing from "../api/Listing";
 import LessonType from "./LessonType";
 import MultipleLessonPayment from "./MultipleLessonPayment";
 import toast from "react-hot-toast";
+import moment from "moment";
 
 export default function BookingPopup({
   isOpen,
@@ -35,17 +36,11 @@ export default function BookingPopup({
   const [lessonType, setLessonType] = useState("single");
 
   function getFormattedEndTime(time, durationInMinutes) {
-    const start = new Date(time);
-    const end = new Date(start.getTime() + durationInMinutes * 60000);
-    const options = {
-      month: "short", // e.g. "May"
-      day: "numeric", // e.g. "2"
-      hour: "numeric",
-      minute: "2-digit",
-      hour12: true,
-    };
+    if (!time) return "";
 
-    return end.toLocaleString("en-US", options); // → "May 2, 7:40 PM"
+    return moment(time)
+      .add(durationInMinutes, "minutes")
+      .format("MMM D, h:mm A"); // Example: "May 2, 7:40 PM"
   }
 
   useEffect(() => {
@@ -234,18 +229,8 @@ export default function BookingPopup({
                 <div className=" w-full lg:w-auto border border-gray-300 rounded-full px-4 py-2">
                   <p className="flex gap-2 items-center justify-center text-[#CC2828] capitalize text-sm lg:text-base font-semibold font-inter tracking-[-0.04em]">
                     <IoMdTime size={20} />
-                    {new Date(selectedSlot.start).toLocaleString("en-US", {
-                      month: "short",
-                      day: "numeric",
-                      hour: "numeric",
-                      minute: "2-digit",
-                      hour12: true,
-                    })}{" "}
-                    -{" "}
-                    {getFormattedEndTime(
-                      selectedSlot?.start,
-                      selectedLesson?.duration
-                    )}{" "}
+                    {moment(selectedSlot.start).format("MMM D, h:mm A")}{" - "}
+                    {getFormattedEndTime(selectedSlot?.start, selectedLesson?.duration)}
                   </p>
                 </div>
               )}

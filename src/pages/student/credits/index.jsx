@@ -39,8 +39,8 @@ export default function LessonCredits() {
 
   // Get timezone
   useEffect(() => {
-    const timeZone = Intl.DateTimeFormat().resolvedOptions().timeZone || "";
-    setStudentTimeZone(timeZone);
+    const detectedZone = moment.tz.guess();  // ✅ moment-based detection
+    setStudentTimeZone(detectedZone || "");
   }, []);
 
   return (

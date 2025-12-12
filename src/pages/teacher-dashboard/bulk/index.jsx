@@ -176,9 +176,9 @@ export default function Index() {
                                 Bookings Overview
                               </h3>
 
-                              {item?.bookings?.length > 0 ? (
+                              {item?.bookings && item?.bookings?.length > 0 ? (
                                 <div className="grid gap-4 md:grid-cols-2">
-                                  {item.bookings.map((b) => {
+                                  {item?.bookings?.map((b) => {
                                     const booking = b?.id;
 
                                     return (

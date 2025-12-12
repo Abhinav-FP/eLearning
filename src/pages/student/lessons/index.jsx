@@ -27,8 +27,8 @@ export default function Index() {
 
   // Get timezone
   useEffect(() => {
-    const timeZone = Intl.DateTimeFormat().resolvedOptions().timeZone || "";
-    setStudentTimeZone(timeZone);
+    const detectedZone = moment.tz.guess();  // ✅ moment-based detection
+    setStudentTimeZone(detectedZone || "");
   }, []);
 
   const fetchLessons = async () => {

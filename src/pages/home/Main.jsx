@@ -9,6 +9,7 @@ import Listing from '../api/Listing';
 import FindCourse from './FindCourse';
 import NotSure from './NotSure';
 import Head from 'next/head';
+import Certificate from './Certificate';
 
 export default function Main() {
   const [homeData, setHomeData] = useState([]);
@@ -56,6 +57,7 @@ export default function Main() {
         heroimg={homeData?.record?.hero_img_first}
         heroimg2={homeData?.record?.hero_img_second} 
         loading={loading} />
+        <Certificate />
       <div id="howitwork">
         <HowItWork classess={''} title={"How It Works"} />
       </div>

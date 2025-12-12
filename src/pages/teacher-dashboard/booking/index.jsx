@@ -70,12 +70,10 @@ export default function Index() {
   }
 
   const calculateDurationMinutes = (startDateTime, endDateTime) => {
-    const start = new Date(startDateTime);
-    const end = new Date(endDateTime);
-    const diffInMs = end - start;
-    const diffInMinutes = diffInMs / (1000 * 60);
-    return diffInMinutes;
-  }
+    const start = moment(startDateTime);
+    const end = moment(endDateTime);
+    return end.diff(start, "minutes");
+  };
 
   const handleMarkAsDone = async(id) => {
     try {

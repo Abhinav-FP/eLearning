@@ -28,7 +28,7 @@ export default function HowItWork({ classess, title }) {
     ]
     return (
         <>
-            <div className={`bg-[rgba(204,40,40,0.6)] py-[40px] md:py-[60px] lg:py-[80px] mt-[30px] md:mt-[40px] lg:mt-[60px] ${classess}`}>
+            <div className={`bg-[rgba(204,40,40,0.6)] py-[40px] md:py-[60px] lg:py-[80px] ${classess}`}>
                 <div className="mx-auto container sm:container md:container lg:container xl:max-w-[1230px] px-4">
                     <Heading classess={'text-center mb-[20px] md:mb-[30px] lg:mb-[40px] text-white'} title={title || "How It Works"} />
                     <div className="flex flex-wrap -mx-4 md:-mx-[20px] lg:-mx-[28px] xl:-mx-[34px]">

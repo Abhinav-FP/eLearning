@@ -16,6 +16,7 @@ import TeacherImg from "../Assets/Images/Placeholder.png";
 import VideoModalDetail from "../common/VideoModalDetail";
 import toast from "react-hot-toast";
 import { useRole } from "@/context/RoleContext";
+import moment from "moment";
 
 export default function Index() {
   const router = useRouter();
@@ -37,8 +38,8 @@ export default function Index() {
 
 
   useEffect(() => {
-    const timeZone = Intl.DateTimeFormat().resolvedOptions().timeZone || "";
-    setStudentTimeZone(timeZone);
+    const detectedZone = moment.tz.guess();  // ✅ moment-based detection
+    setStudentTimeZone(detectedZone || "");
   }, []);
 
   const fetchLessons = async (Id) => {

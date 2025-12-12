@@ -168,9 +168,9 @@ export default function Index() {
             loading ? (
               <ReviewLoader />
             ) : (
-              listing?.ReviewData?.length > 0 ? (
-                listing.ReviewData.map((review) => (
-                  <div key={review._id} className="border border-gray-100 rounded-xl p-4 mb-4 shadow-sm">
+              listing?.ReviewData && listing?.ReviewData?.length > 0 ? (
+                listing?.ReviewData?.map((review) => (
+                  <div key={review?._id} className="border border-gray-100 rounded-xl p-4 mb-4 shadow-sm">
                     <div className="flex justify-between items-center mb-3">
                       <div className="flex gap-3 items-center">
                         <Image
@@ -180,31 +180,31 @@ export default function Index() {
                           alt="avatar"
                           className="w-10 h-10 rounded-full object-cover border" />
                         <div>
-                          <p className="font-semibold text-gray-800 capitalize">{review.userId?.name}</p>
+                          <p className="font-semibold text-gray-800 capitalize">{review?.userId?.name}</p>
                           <p className="text-xs text-gray-500">
-                            {moment(review.createdAt).format("MMMM D, YYYY [at] hh:mm A") || ""}
+                            {moment(review?.createdAt).format("MMMM D, YYYY [at] hh:mm A") || ""}
                           </p>
                         </div>
                       </div>
                       <span className={`text-xs font-semibold px-3 py-1 rounded-full 
-                    ${review.review_status === 'Pending' ? 'bg-yellow-100 text-yellow-700'
-                          : review.review_status === 'Reject' ? 'bg-red-100 text-red-700'
+                    ${review?.review_status === 'Pending' ? 'bg-yellow-100 text-yellow-700'
+                          : review?.review_status === 'Reject' ? 'bg-red-100 text-red-700'
                             : 'bg-green-100 text-green-700'}`}>
-                        {review.review_status}
+                        {review?.review_status}
                       </span>
                     </div>
 
                     <p className="text-sm text-gray-600 mb-1">
-                      Lesson: <span className="font-medium text-gray-800">{review.lessonId?.title}</span>
+                      Lesson: <span className="font-medium text-gray-800">{review?.lessonId?.title}</span>
                     </p>
 
                     <div className="flex items-center gap-1 text-yellow-500 mb-2">
-                      {Array.from({ length: review.rating }, (_, i) => (
+                      {Array.from({ length: review?.rating }, (_, i) => (
                         <AiFillStar key={i} className="w-4 h-4" />
                       ))}
                     </div>
                     <p className="text-gray-700 text-sm leading-relaxed">
-                      {review.description}
+                      {review?.description}
                     </p>
                   </div>
                 ))

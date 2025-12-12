@@ -4,6 +4,7 @@ import Heading from "@/pages/common/Heading";
 import Listing from "@/pages/api/Listing";
 import RescheduleCalendar from "../lessons/RescheduleCalendar";
 import toast from "react-hot-toast";
+import moment from "moment";
 
 export default function BookLesson({ isOpen, onClose, selectedItem, studentTimeZone, fetchdata }) {
   // console.log("selectedItem", selectedItem);
@@ -15,21 +16,8 @@ export default function BookLesson({ isOpen, onClose, selectedItem, studentTimeZ
   const [endTime, setEndTime] = useState(null);
   
   const addDurationToDate = (start, durationInMinutes) => {
-    const originalDate = new Date(start);
-    const finalDate = new Date(originalDate.getTime() + durationInMinutes * 60000);
-    const isStringInput = typeof start === 'string';
-    if (!isStringInput) return finalDate;
-    const localeString = originalDate.toLocaleString(undefined, {
-      timeZoneName: 'short',
-      hour12: false
-    });
-    const timezoneAbbreviation = localeString.split(' ').pop();
-    const formatted = finalDate.toLocaleString(undefined, {
-      timeZoneName: 'short',
-      hour12: false
-    });
-
-    return formatted.replace(/GMT[^\s]+|[A-Z]{2,5}$/, timezoneAbbreviation);
+    if (!start) return null;
+    return moment(start).add(durationInMinutes, "minutes").toISOString();
   };
 
   useEffect(() => {
@@ -39,45 +27,45 @@ export default function BookLesson({ isOpen, onClose, selectedItem, studentTimeZ
     }
   }, [selectedSlot])
 
-  function getFormattedEndTime(time, durationInMinutes) {
-    const start = new Date(time);
-    const end = new Date(start.getTime() + durationInMinutes * 60000);
+ function getFormattedEndTime(time, durationInMinutes) {
+    if (!time) return "";
+    const end = moment(time).add(durationInMinutes, "minutes");
 
-    const options = {
-      month: "short", // e.g. "May"
-      day: "numeric", // e.g. "2"
-      hour: "numeric",
-      minute: "2-digit",
-      hour12: true,
-    };
-
-    return end.toLocaleString("en-US", options); // → "May 2, 7:40 PM"
+    return end.format("MMM D, h:mm A"); // Example: "May 2, 7:40 PM"
   }
 
-  const fetchAvailabilitys = async (selectedItem) => {
+  // Fetch availability
+  const fetchAvailabilitys = async (lesson) => {
     try {
       const main = new Listing();
-      const response = await main.studentteacherAvaliability(selectedItem?.teacherId?._id);
-      if (response.data) {
-        const availabilityBlocks = response.data.data.availabilityBlocks || [];
+      const response = await main.studentteacherAvaliability(
+        lesson?.teacherId?._id
+      );
 
-        // Sort by start time
+      if (response.data) {
+        const availabilityBlocks =
+          response.data.data.availabilityBlocks || [];
+
+        // Sort using moment
         const sorted = [...availabilityBlocks].sort(
-          (a, b) => new Date(a.startDateTime) - new Date(b.startDateTime)
+          (a, b) =>
+            moment(a.startDateTime).valueOf() -
+            moment(b.startDateTime).valueOf()
         );
 
-        // Merge continuous slots
+        // Merge continuous blocks
         const merged = [];
         for (let i = 0; i < sorted.length; i++) {
           const current = sorted[i];
+
           if (
             merged.length > 0 &&
-            merged[merged.length - 1].endDateTime === current.startDateTime
+            moment(merged[merged.length - 1].endDateTime).isSame(
+              moment(current.startDateTime)
+            )
           ) {
-            // Extend the previous block
             merged[merged.length - 1].endDateTime = current.endDateTime;
           } else {
-            // Start a new block
             merged.push({ ...current });
           }
         }
@@ -102,8 +90,8 @@ export default function BookLesson({ isOpen, onClose, selectedItem, studentTimeZ
     setLoading(true);
     try {
       const main = new Listing();
-      console.log("selectedSlot?.start", selectedSlot?.start);
-      console.log("endTime", endTime);
+      // console.log("selectedSlot?.start", selectedSlot?.start);
+      // console.log("endTime", endTime);
       const response = await main.BulkLessonRedeem({
         id: selectedItem?._id,
         startDateTime: selectedSlot?.start,
@@ -147,19 +135,12 @@ export default function BookLesson({ isOpen, onClose, selectedItem, studentTimeZ
             <div>
               {selectedSlot && (
                 <p className="text-[#CC2828] capitalize text-base xl:text-lg font-semibold font-inter inline-block tracking-[-0.04em]">
-                  Selected Time Slot -{" "}
-                  {new Date(selectedSlot.start).toLocaleString("en-US", {
-                    month: "short",
-                    day: "numeric",
-                    hour: "numeric",
-                    minute: "2-digit",
-                    hour12: true,
-                  })}{" "}
-                  -
+                 Selected Time Slot –{" "}
+                  {moment(selectedSlot.start).format("MMM D, h:mm A")} –{" "}
                   {getFormattedEndTime(
                     selectedSlot?.start,
                     selectedItem?.LessonId?.duration
-                  )}{" "}
+                  )}
                 </p>
               )}
             </div>

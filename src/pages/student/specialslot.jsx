@@ -10,7 +10,7 @@ import StudentLayout from './Common/StudentLayout';
 import { useRouter } from 'next/router';
 import toast from 'react-hot-toast';
 
-export default function Iindex() {
+export default function Index() {
   const [payout, setPayout] = useState([]);
   const router  = useRouter();
   const [loading, setLoading] = useState(false);

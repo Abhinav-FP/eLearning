@@ -3,6 +3,7 @@ import Popup from "@/pages/common/Popup";
 import Listing from "@/pages/api/Listing";
 import toast from "react-hot-toast";
 import { MdInfoOutline } from "react-icons/md";
+import moment from "moment";
 
 export default function AddSlot({ isOpen, onClose, SpecialSlotData }) {
   const [loading, setLoading] = useState(false);
@@ -19,31 +20,85 @@ export default function AddSlot({ isOpen, onClose, SpecialSlotData }) {
   const [isFocused, setIsFocused] = useState(false);
   const wrapperRef = useRef(null);
 
+  // const handleChange = (e) => {
+  //   const { name, value } = e.target;
+
+  //   const now = new Date();
+  //   const threeHoursFromNow = new Date(now.getTime() + 3 * 60 * 60 * 1000);
+
+  //   if (name === "startDateTime") {
+  //     const start = new Date(value);
+  //     if (start < threeHoursFromNow) {
+  //       toast.error("Start time must be at least 3 hours from now.");
+  //       return;
+  //     }
+  //   }
+
+  //   if (name === "endDateTime") {
+  //     const start = new Date(formData.startDateTime);
+  //     const end = new Date(value);
+
+  //     if (end <= start) {
+  //       toast.error("End time must be after start time.");
+  //       return;
+  //     }
+
+  //     if (end < threeHoursFromNow) {
+  //       toast.error("End time must be at least 3 hours from now.");
+  //       return;
+  //     }
+  //   }
+
+  //   setFormData((prev) => ({
+  //     ...prev,
+  //     [name]: value,
+  //   }));
+  // };
+
   const handleChange = (e) => {
     const { name, value } = e.target;
 
-    const now = new Date();
-    const threeHoursFromNow = new Date(now.getTime() + 3 * 60 * 60 * 1000);
+    const now = moment();
+    const threeHoursFromNow = moment().add(3, "hours");
 
     if (name === "startDateTime") {
-      const start = new Date(value);
-      if (start < threeHoursFromNow) {
-        toast.error("Start time must be at least 3 hours from now.");
+      const start = moment(value);
+
+      if (!start.isValid()) {
+        toast.error("Invalid start date/time.");
+        return;
+      }
+
+      if (start.isBefore(threeHoursFromNow)) {
+        toast.error(
+          `Start time must be at least 3 hours from now (${threeHoursFromNow.format(
+            "DD/MM/YYYY hh:mm A"
+          )}).`
+        );
         return;
       }
     }
 
     if (name === "endDateTime") {
-      const start = new Date(formData.startDateTime);
-      const end = new Date(value);
+      const start = moment(formData.startDateTime);
+      const end = moment(value);
 
-      if (end <= start) {
+      if (!end.isValid()) {
+        toast.error("Invalid end date/time.");
+        return;
+      }
+
+      if (start.isValid() && end.isSameOrBefore(start)) {
         toast.error("End time must be after start time.");
         return;
       }
 
-      if (end < threeHoursFromNow) {
-        toast.error("End time must be at least 3 hours from now.");
+      if (end.isBefore(threeHoursFromNow)) {
+        toast.error(
+          `End time must be at least 3 hours from now (${threeHoursFromNow.format(
+            "DD/MM/YYYY hh:mm A"
+          )}).`
+        );
         return;
       }
     }

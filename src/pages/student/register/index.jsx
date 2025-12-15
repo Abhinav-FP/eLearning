@@ -75,10 +75,10 @@ export default function Index() {
       toast.error("Password and Confirm Password do not match");
       return;
     }
-    if (!cfToken) {
-      toast.error("Please verify that you are human");
-      return;
-    }
+    // if (!cfToken) {
+    //   toast.error("Please verify that you are human");
+    //   return;
+    // }
     setLoading(true);
     try {
       const main = new Listing();
@@ -90,7 +90,7 @@ export default function Index() {
         nationality: data?.nationalities,
         time_zone: data?.timezone,
         gender: data?.gender,
-        cf_turnstile_token: cfToken,
+        // cf_turnstile_token: cfToken,
       });
       if (response?.data?.status) {
         router.push("/login");
@@ -117,11 +117,11 @@ export default function Index() {
     setLoading(false);
   };
 
-  useEffect(() => {
-  window.onTurnstileSuccess = function (token) {
-    setCfToken(token);
-  };
- }, []);
+//   useEffect(() => {
+//   window.onTurnstileSuccess = function (token) {
+//     setCfToken(token);
+//   };
+//  }, []);
 
 
   return (

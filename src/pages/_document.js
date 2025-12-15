@@ -8,11 +8,11 @@ export default function Document() {
         <link rel="icon" href="/favicon.png" />
         
         <style id="antiClickjack">{`body { display: none !important; }`}</style>
-        <script
+        {/* <script
           src="https://challenges.cloudflare.com/turnstile/v0/api.js"
           async
           defer
-        />
+        /> */}
         <script
           dangerouslySetInnerHTML={{
             __html: `

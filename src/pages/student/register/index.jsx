@@ -11,6 +11,7 @@ import { FaCheckCircle, FaTimesCircle } from "react-icons/fa";
 export default function Index() {
   const router = useRouter();
   const [loading, setLoading] = useState(false);
+  const [cfToken, setCfToken] = useState(null);
   const [passwordFocused, setPasswordFocused] = useState(false);
   const [showPassword, setShowPassword] = useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
@@ -74,6 +75,10 @@ export default function Index() {
       toast.error("Password and Confirm Password do not match");
       return;
     }
+    if (!cfToken) {
+      toast.error("Please verify that you are human");
+      return;
+    }
     setLoading(true);
     try {
       const main = new Listing();
@@ -85,6 +90,7 @@ export default function Index() {
         nationality: data?.nationalities,
         time_zone: data?.timezone,
         gender: data?.gender,
+        cf_turnstile_token: cfToken,
       });
       if (response?.data?.status) {
         router.push("/login");
@@ -347,6 +353,17 @@ export default function Index() {
                             </select> */}
 
             {/* Register Button */}
+
+          {/* Cloudflare Turnstile */}
+          <div className="w-full md:w-12/12 px-2.5 mb-5 flex justify-center">
+            <div
+              className="cf-turnstile"
+              data-sitekey={process.env.NEXT_PUBLIC_CF_TURNSTILE_SITE_KEY}
+              data-callback={(token) => {
+                setCfToken(token);
+              }}
+            ></div>
+          </div>
 
             <div className="w-full md:w-12/12 px-2.5 mb-5 flex flex-wrap justify-center">
               <div className="w-full md:w-6/12">

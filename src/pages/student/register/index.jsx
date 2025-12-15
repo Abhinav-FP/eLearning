@@ -1,5 +1,5 @@
 import Link from "next/link";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import timeZones from "../../../Json/TimeZone";
 import Image from "next/image";
 import Listing from "@/pages/api/Listing";
@@ -116,6 +116,13 @@ export default function Index() {
     }
     setLoading(false);
   };
+
+  useEffect(() => {
+  window.onTurnstileSuccess = function (token) {
+    setCfToken(token);
+  };
+ }, []);
+
 
   return (
     <div className="min-h-screen flex items-center justify-center bg-gray-100 p-4">
@@ -357,12 +364,10 @@ export default function Index() {
           {/* Cloudflare Turnstile */}
           <div className="w-full md:w-12/12 px-2.5 mb-5 flex justify-center">
             <div
-              className="cf-turnstile"
-              data-sitekey={"0x4AAAAAACGwGP65iX0v0KQt"}
-              data-callback={(token) => {
-                setCfToken(token);
-              }}
-            ></div>
+            className="cf-turnstile"
+            data-sitekey="0x4AAAAAACGwGP65iX0v0KQt"
+            data-callback="onTurnstileSuccess"
+          />
           </div>
 
             <div className="w-full md:w-12/12 px-2.5 mb-5 flex flex-wrap justify-center">

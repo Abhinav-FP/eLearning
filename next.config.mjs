@@ -28,12 +28,16 @@ const nextConfig = {
       {
         source: "/(.*)", // apply to all routes
         headers: [
-          {
-            key: "Content-Security-Policy",
+          { key: "Content-Security-Policy",
             value: `
-              frame-ancestors 'self';
-              frame-src https://challenges.cloudflare.com;
+              default-src 'self';
               script-src 'self' https://challenges.cloudflare.com;
+              frame-src https://challenges.cloudflare.com;
+              font-src https://challenges.cloudflare.com data:;
+              style-src 'self' 'unsafe-inline';
+              img-src 'self' data:;
+              connect-src 'self';
+              frame-ancestors 'self';
             `
               .replace(/\s+/g, " ")
               .trim(),

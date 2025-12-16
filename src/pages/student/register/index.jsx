@@ -12,8 +12,6 @@ import { Turnstile } from '@marsidev/react-turnstile'
 export default function Index() {
   const router = useRouter();
   const [loading, setLoading] = useState(false);
-  const [mounted, setMounted] = useState(false);
-  const [cfToken, setCfToken] = useState(null);
   const [passwordFocused, setPasswordFocused] = useState(false);
   const [showPassword, setShowPassword] = useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
@@ -103,10 +101,6 @@ export default function Index() {
       toast.error("Password and Confirm Password do not match");
       return;
     }
-    if (!cfToken) {
-      toast.error("Please verify that you are human");
-      return;
-    }
     setLoading(true);
     try {
       const main = new Listing();
@@ -144,10 +138,6 @@ export default function Index() {
     }
     setLoading(false);
   };
-
-  // useEffect(() => {
-  //   setMounted(true);
-  // }, []);
 
   return (
     <div className="min-h-screen flex items-center justify-center bg-gray-100 p-4">

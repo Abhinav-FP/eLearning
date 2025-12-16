@@ -8,6 +8,7 @@ import { IoEye, IoEyeOff } from "react-icons/io5";
 import toast from "react-hot-toast";
 import { useRouter } from "next/router";
 import { FaCheckCircle, FaTimesCircle } from "react-icons/fa";
+import { Turnstile } from '@marsidev/react-turnstile'
 
 export default function Index() {
   const router = useRouter();
@@ -351,8 +352,12 @@ export default function Index() {
                                 ))}
                             </select> */}
 
-            {/* Register Button */}
+            <div className="w-full md:w-12/12 px-2.5 mb-5 flex justify-center">
+              {/* {mounted && <Turnstile onVerify={setCfToken} />} */}
+              <Turnstile siteKey='0x4AAAAAACGwGP65iX0v0KQt' />
+            </div>
 
+            {/* Register Button */}
             <div className="w-full md:w-12/12 px-2.5 mb-5 flex flex-wrap justify-center">
               <div className="w-full md:w-6/12">
                 <button

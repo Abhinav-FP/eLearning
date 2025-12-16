@@ -15,6 +15,7 @@ export default function Index() {
   const [data, setData] = useState([]);
   const [loading, setLoading] = useState(false);
   const [searchText, setSearchText] = useState("");
+  const [wishlistLoading, setWishlistLoading] = useState(false);
   const router = useRouter();
 
   const timerRef = useRef(null);
@@ -40,21 +41,33 @@ export default function Index() {
 
   const handleAddSubmit = async (Id) => {
     try {
+      if(wishlistLoading){
+        return;
+      }
+      setWishlistLoading(true);
       const main = new Listing();
       const response = await main.AddWishlist({ teacherId: Id });
       fetchStudentTeachers(false);
+      setWishlistLoading(false);
     } catch (error) {
       console.log("error", error);
+      setWishlistLoading(false);
     }
   };
 
   const handleRemoveSubmit = async (Id) => {
     try {
+      if(wishlistLoading){
+        return;
+      }
+      setWishlistLoading(true);
       const main = new Listing();
       const response = await main.RemoveWishlist({ teacherId: Id });
       fetchStudentTeachers(false);
+      setWishlistLoading(false);
     } catch (error) {
       console.log("error", error);
+      setWishlistLoading(false);
     }
   };
 

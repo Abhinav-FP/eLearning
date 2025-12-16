@@ -35,31 +35,31 @@ export default function Index() {
     gender: "",
   });
 
-  function Turnstile({ onVerify }) {
-    const ref = useRef(null);
-    const widgetId = useRef(null);
+  // function Turnstile({ onVerify }) {
+  //   const ref = useRef(null);
+  //   const widgetId = useRef(null);
 
-    useEffect(() => {
-      if (!window.turnstile || widgetId.current) return;
+  //   useEffect(() => {
+  //     if (!window.turnstile || widgetId.current) return;
 
-      widgetId.current = window.turnstile.render(ref.current, {
-        sitekey: "0x4AAAAAACGwGP65iX0v0KQt",
-        callback: (token) => {
-          onVerify(token);
-        },
-        appearance: "always", // 👈 Add this line here
-      });
+  //     widgetId.current = window.turnstile.render(ref.current, {
+  //       sitekey: "0x4AAAAAACGwGP65iX0v0KQt",
+  //       callback: (token) => {
+  //         onVerify(token);
+  //       },
+  //       appearance: "always", // 👈 Add this line here
+  //     });
 
-      return () => {
-        if (window.turnstile && widgetId.current) {
-          window.turnstile.remove(widgetId.current);
-          widgetId.current = null;
-        }
-      };
-    }, [onVerify]);
+  //     return () => {
+  //       if (window.turnstile && widgetId.current) {
+  //         window.turnstile.remove(widgetId.current);
+  //         widgetId.current = null;
+  //       }
+  //     };
+  //   }, [onVerify]);
 
-    return <div ref={ref} />;
-  }
+  //   return <div ref={ref} />;
+  // }
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -144,9 +144,9 @@ export default function Index() {
     setLoading(false);
   };
 
-  useEffect(() => {
-    setMounted(true);
-  }, []);
+  // useEffect(() => {
+  //   setMounted(true);
+  // }, []);
 
   return (
     <div className="min-h-screen flex items-center justify-center bg-gray-100 p-4">
@@ -384,7 +384,8 @@ export default function Index() {
                             </select> */}
 
             <div className="w-full md:w-12/12 px-2.5 mb-5 flex justify-center">
-              {mounted && <Turnstile onVerify={setCfToken} />}
+              {/* {mounted && <Turnstile onVerify={setCfToken} />} */}
+              <Turnstile siteKey='0x4AAAAAACGwGP65iX0v0KQt' />
             </div>
 
             <div className="w-full md:w-12/12 px-2.5 mb-5 flex flex-wrap justify-center">

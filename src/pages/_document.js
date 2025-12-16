@@ -6,6 +6,20 @@ export default function Document() {
       <Head>
         {/* Standard favicon */}
         <link rel="icon" href="/favicon.png" />
+        
+        <style id="antiClickjack">{`body { display: none !important; }`}</style>
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `
+      if (self === top) {
+        var antiClickjack = document.getElementById("antiClickjack");
+        if (antiClickjack) antiClickjack.parentNode.removeChild(antiClickjack);
+      } else {
+        top.location = self.location;
+      }
+    `,
+          }}
+        />
       </Head>
       <body className="antialiased">
         <Main />

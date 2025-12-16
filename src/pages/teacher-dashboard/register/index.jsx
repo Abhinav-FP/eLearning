@@ -17,6 +17,7 @@ export default function Index() {
   const [isPasswordValid, setIsPasswordValid] = useState(true);
   const [showPassword, setShowPassword] = useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
+  const [cfToken, setCfToken] = useState(null);
   const [passwordCriteria, setPasswordCriteria] = useState({
     hasUpper: false,
     hasLower: false,
@@ -57,6 +58,10 @@ export default function Index() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     if (loading) return;
+    if (!cfToken) {
+      toast.error("Please complete the captcha verification");
+      return;
+    }
     if (
       !passwordCriteria?.hasUpper ||
       !passwordCriteria?.hasLower ||
@@ -354,7 +359,12 @@ export default function Index() {
 
             <div className="w-full md:w-12/12 px-2.5 mb-5 flex justify-center">
               {/* {mounted && <Turnstile onVerify={setCfToken} />} */}
-              <Turnstile siteKey='0x4AAAAAACGwGP65iX0v0KQt' />
+              <Turnstile
+                siteKey="0x4AAAAAACGwGP65iX0v0KQt"
+                onVerify={(token) => setCfToken(token)}
+                onExpire={() => setCfToken(null)}
+                onError={() => setCfToken(null)}
+              />
             </div>
 
             {/* Register Button */}

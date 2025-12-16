@@ -11,6 +11,7 @@ import { FaCheckCircle, FaTimesCircle } from "react-icons/fa";
 export default function Index() {
   const router = useRouter();
   const [loading, setLoading] = useState(false);
+  const [mounted, setMounted] = useState(false);
   const [cfToken, setCfToken] = useState(null);
   const [passwordFocused, setPasswordFocused] = useState(false);
   const [showPassword, setShowPassword] = useState(false);
@@ -118,12 +119,10 @@ export default function Index() {
   };
 
   useEffect(() => {
+    setMounted(true);
+
     window.onTurnstileSuccess = (token) => {
       setCfToken(token);
-    };
-
-    return () => {
-      delete window.onTurnstileSuccess;
     };
   }, []);
 
@@ -368,11 +367,14 @@ export default function Index() {
 
           {/* Cloudflare Turnstile */}
           <div className="w-full md:w-12/12 px-2.5 mb-5 flex justify-center">
-            <div
-              className="cf-turnstile"
-              data-sitekey="0x4AAAAAACGwGP65iX0v0KQt"
-              data-callback="onTurnstileSuccess"
-            />
+            {mounted && (
+              <div
+                key="turnstile"
+                className="cf-turnstile"
+                data-sitekey="0x4AAAAAACGwGP65iX0v0KQt"
+                data-callback="onTurnstileSuccess"
+              />
+            )}
           </div>
 
             <div className="w-full md:w-12/12 px-2.5 mb-5 flex flex-wrap justify-center">

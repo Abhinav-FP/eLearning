@@ -7,7 +7,7 @@ import { useRole } from "@/context/RoleContext";
 import { useRouter } from "next/router";
 import toast from "react-hot-toast";
 
-export default function Header() {
+export default function Header({isEmulating=false}) {
 
     const [menuOpen, setMenuOpen] = useState();
     const { user, setUser, language, setLanguage } = useRole();
@@ -44,6 +44,19 @@ export default function Header() {
         router.push("/login");
         toast.success("Logout Successfully");
         setUser(null);
+    };
+
+    const handleReturnToAdmin = () => {
+        const adminToken = localStorage && localStorage.getItem("admintoken");
+        if (!adminToken) {
+        toast.error("Admin session not found");
+        return;
+        }
+        localStorage && localStorage.setItem("token", adminToken);
+        localStorage && localStorage.removeItem("admintoken");
+        toast.success("Returned to admin account");
+        setUser(null);
+        router.push("/admin");
     };
 
     return (
@@ -95,12 +108,21 @@ export default function Header() {
                                         className="text-[#CC2828] hover:text-[#ad0e0e] border-t border-b border-[#ddd] text-base py-3 px-4 font-medium cursor-pointer" >
                                         View dashboard
                                     </Link>
+                                    {isEmulating ? 
+                                    <button
+                                        onClick={handleReturnToAdmin}
+                                        className="text-[#CC2828] hover:text-[#ad0e0e] border-t border-[#ddd] text-base py-3 px-4 font-medium cursor-pointer text-left appearance-none bg-transparent border-none"
+                                    >
+                                        Return to Admin
+                                    </button>
+                                    :
                                     <button
                                         onClick={handleLogout}
                                         className="text-[#CC2828] hover:text-[#ad0e0e] border-t border-[#ddd] text-base py-3 px-4 font-medium cursor-pointer text-left appearance-none bg-transparent border-none"
                                     >
                                         Logout
                                     </button>
+                                    }
                                 </div>
                                 :
                                 <div className="flex flex-col lg:hidden">
@@ -131,12 +153,21 @@ export default function Header() {
                                         className="hidden lg:block bg-[#CC2828] hover:bg-[#ad0e0e] text-white text-base py-3.5 px-8 xl:px-10 font-medium cursor-pointer rounded-full" >
                                         View Dashboard
                                     </Link>
+                                    {isEmulating ? 
+                                    <button
+                                        onClick={handleReturnToAdmin}
+                                        className="hidden lg:block bg-[#CC2828] hover:bg-[#ad0e0e] text-white text-base py-3.5 px-8 xl:px-10 font-medium cursor-pointer rounded-full"
+                                    >
+                                        Return to Admin
+                                    </button>
+                                    :
                                     <button
                                         onClick={handleLogout}
                                         href={`${user?.role === "student" ? "/student" : "/teacher-dashboard"}`}
                                         className="hidden lg:block bg-[#CC2828] hover:bg-[#ad0e0e] text-white text-base py-3.5 px-8 xl:px-10 font-medium cursor-pointer rounded-full" >
                                         Logout
                                     </button>
+                                    }
                                 </>
                                 :
                                 <>

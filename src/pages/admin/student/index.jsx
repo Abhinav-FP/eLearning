@@ -4,10 +4,17 @@ import Listing from "@/pages/api/Listing";
 import toast from "react-hot-toast";
 import ViewPopup from "./ViewPopup";
 import { FiSearch } from "react-icons/fi";
+import { FiUserCheck } from "react-icons/fi";
+import { FiSlash } from "react-icons/fi";
+import { FiEye } from "react-icons/fi";
 import NoData from "@/pages/common/NoData";
 import { TableLoader } from "@/components/Loader";
+import { useRouter } from "next/router";
+import { useRole } from "@/context/RoleContext";
 
 function Index() {
+  const router = useRouter();
+  const { user, setUser } = useRole();
   const [data, setData] = useState([]);
   const [loading, setLoading] = useState(false);
   const [blockloading, setBlockloading] = useState(false);
@@ -60,6 +67,29 @@ function Index() {
     } catch (error) {
       console.log("error", error);
       setBlockloading(false);
+    }
+  };
+
+  const handleEmulate = async (id) => {
+    try {
+      const main = new Listing();
+      const response = await main.userEmulate(id);
+      if (!response?.data?.status) {
+        toast.error(response?.data?.message);
+        return;
+      }
+      const { token, message } = response.data;
+      const adminToken = localStorage.getItem("token");
+      if (adminToken) {
+        localStorage && localStorage.setItem("admintoken", adminToken);
+      }
+      localStorage && localStorage.setItem("token", token);
+      toast.success(message || "Emulation successful");
+      setUser(null);
+      router.push("/student");
+    } catch (error) {
+      console.error("Emulation error:", error);
+      toast.error(error?.response?.data?.message || "An unknown error occurred");
     }
   };
 
@@ -177,21 +207,28 @@ function Index() {
                               setItem(item);
                               setIsPopupOpen(true);
                             }}
-                            className="border border-[#CC2828] text-[#CC2828] hover:bg-[#CC2828] hover:text-white px-3 py-1 text-xs rounded cursor-pointer"
+                            title="View details"
+                            className="p-2 rounded hover:bg-gray-100 text-gray-600 hover:text-black transition cursor-pointer"
                           >
-                            View
+                            <FiEye size={16} />
+                          </button>
+                          <button
+                            onClick={() => handleEmulate(item?._id)}
+                            title="Emulate user"
+                            className="p-2 rounded hover:bg-gray-100 text-gray-600 hover:text-black transition cursor-pointer"
+                          >
+                            <FiUserCheck size={16} />
                           </button>
                           <button
                             onClick={() => handleBlock(item?._id)}
-                            className="border border-[#CC2828] text-[#CC2828] hover:bg-[#CC2828] hover:text-white px-3 py-1 text-xs rounded cursor-pointer"
-                          >
-                            {blockloading
-                              ? item?.block
-                                ? "Unblocking"
-                                : "Blocking"
-                              : item?.block
-                                ? "Unblock"
-                                : "Block"}
+                            title={item?.block ? "Unblock user" : "Block user"}
+                              className={`p-2 rounded transition cursor-pointer
+                                ${item?.block
+                                  ? "text-green-600 hover:bg-green-100"
+                                  : "text-red-600 hover:bg-red-100"
+                                }`}
+                            >
+                              <FiSlash size={16} />
                           </button>
                         </div>
                       </td>

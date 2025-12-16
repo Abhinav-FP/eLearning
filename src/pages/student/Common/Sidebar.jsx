@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { MdSpaceDashboard } from "react-icons/md";
 import { usePathname } from "next/navigation";
 import Link from "next/link";
@@ -19,6 +19,14 @@ function SideBar() {
   const pathname = usePathname();
   const [isOpen, setIsOpen] = useState(false);
   const { user } = useRole();
+  const [isEmulating, setIsEmulating] = useState(false);
+  
+  useEffect(() => {
+    if (typeof window !== "undefined") {
+      const adminToken = localStorage.getItem("admintoken");
+      setIsEmulating(!!adminToken);
+    }
+  }, []);
 
   return (
     <>
@@ -70,13 +78,20 @@ function SideBar() {
                 className="w-11 h-11 rounded-full object-cover"
               />
             </div>
-            <div>
-              <p className="font-medium text-sm capitalize  text-black -tracking-[0.04em]">
-                {user?.name}
-              </p>
-              <p className="text-xs capitalize #7A7A7A text-[#7A7A7A]">
-                {user?.role}
-              </p>
+            <div className="flex flex-col">
+                <div className="flex items-center gap-2">
+                <p className="font-medium text-sm capitalize text-black -tracking-[0.04em]">
+                    {user?.name}
+                </p>
+
+                {isEmulating && (
+                    <span className="flex items-center gap-1 px-2 py-[2px] text-[10px] font-semibold rounded-full 
+                    bg-[rgba(204,40,40,0.1)] text-[#CC2828]">
+                    Emulation Mode
+                    </span>
+                )}
+            </div>
+                <p className="text-xs capitalize #7A7A7A text-[#7A7A7A]">{user?.role}</p>
             </div>
           </Link>
         </div>

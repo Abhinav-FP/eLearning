@@ -12,6 +12,7 @@ import moment from "moment-timezone";
 
 export default function AuthLayout({ children, page, sidebar }) {
   const [dropdownOpen, setDropdownOpen] = useState(false);
+  const [isEmulating, setIsEmulating] = useState(false);
   const { user, setUser } = useRole();
   const router = useRouter();
   // console.log("user", user);
@@ -66,6 +67,19 @@ export default function AuthLayout({ children, page, sidebar }) {
     }
   };
 
+  const handleReturnToAdmin = () => {
+    const adminToken = localStorage && localStorage.getItem("admintoken");
+    if (!adminToken) {
+      toast.error("Admin session not found");
+      return;
+    }
+    localStorage && localStorage.setItem("token", adminToken);
+    localStorage && localStorage.removeItem("admintoken");
+    toast.success("Returned to admin account");
+    setUser(null);
+    router.push("/admin");
+  };
+
   useEffect(() => {
     const controller = new AbortController();
     const { signal } = controller;
@@ -86,6 +100,13 @@ export default function AuthLayout({ children, page, sidebar }) {
       // console.log("Timezone updated to:", user.time_zone);
     }
   }, [user?.time_zone]);
+
+  useEffect(() => {
+    if (typeof window !== "undefined") {
+      const adminToken = localStorage.getItem("admintoken");
+      setIsEmulating(!!adminToken);
+    }
+  }, []);
 
   return (
     <div className="md:flex flex-wrap bg-black items-start">
@@ -109,9 +130,21 @@ export default function AuthLayout({ children, page, sidebar }) {
                         className="flex gap-2 px-4 py-2 hover:bg-gray-100 cursor-pointer">
                         <IoSettingsOutline size={20} /> Settings
                       </Link>
-                      <li className="flex gap-2 px-4 py-2 hover:bg-gray-100 cursor-pointer" onClick={handleLogout}>
-                        <MdLogout size={20} /> Logout
-                      </li>
+                      {isEmulating ? (
+                        <li
+                          className="flex gap-2 px-4 py-2 hover:bg-gray-100 cursor-pointer text-[#CC2828]"
+                          onClick={handleReturnToAdmin}
+                        >
+                          <MdLogout size={20} /> Return to Admin
+                        </li>
+                      ) : (
+                        <li
+                          className="flex gap-2 px-4 py-2 hover:bg-gray-100 cursor-pointer"
+                          onClick={handleLogout}
+                        >
+                          <MdLogout size={20} /> Logout
+                        </li>
+                      )}
                     </ul>
                   </div>
                 )}

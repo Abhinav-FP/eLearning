@@ -11,7 +11,7 @@ import { FaCheckCircle, FaTimesCircle } from "react-icons/fa";
 export default function Index() {
   const router = useRouter();
   const [loading, setLoading] = useState(false);
-  const [cfToken, setCfToken] = useState(null);
+  // const [cfToken, setCfToken] = useState(null);
   const [passwordFocused, setPasswordFocused] = useState(false);
   const [showPassword, setShowPassword] = useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);

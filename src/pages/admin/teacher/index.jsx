@@ -4,19 +4,26 @@ import Listing from "../../api/Listing";
 import Link from "next/link";
 import toast from "react-hot-toast";
 import { FiSearch } from "react-icons/fi";
+import { FiUserCheck } from "react-icons/fi";
+import { FiSlash } from "react-icons/fi";
 import { TableLoader } from "@/components/Loader";
 import NoData from "@/pages/common/NoData";
 import Switch from "@/components/Switch";
+import { useRouter } from "next/router";
+import { useRole } from "@/context/RoleContext";
 
 function TeacherListing() {
+  const router = useRouter();
+  const { user, setUser } = useRole();
   const [tabActive, setTabActive] = useState("existing");
   const [teacherData, setTeacherData] = useState([]);
   const [loading, setLoading] = useState(false);
   const [blockloading, setBlockloading] = useState(false);
   const [searchQuery, setSearchQuery] = useState("");
   const [selectedOption, setSelectedOption] = useState("");
-  const timerRef = useRef(null);
-
+  const timerRef = useRef(null);  
+  const [processing, setprocessing] = useState(false);
+  
   const handleBlock = async (id) => {
     try {
       setBlockloading(true);
@@ -37,7 +44,28 @@ function TeacherListing() {
     }
   };
 
-  const [processing, setprocessing] = useState(false);
+  const handleEmulate = async (id) => {
+    try {
+      const main = new Listing();
+      const response = await main.userEmulate(id);
+      if (!response?.data?.status) {
+        toast.error(response?.data?.message);
+        return;
+      }
+      const { token, message } = response.data;
+      const adminToken = localStorage.getItem("token");
+      if (adminToken) {
+        localStorage && localStorage.setItem("admintoken", adminToken);
+      }
+      localStorage && localStorage.setItem("token", token);
+      toast.success(message || "Emulation successful");
+      setUser(null);
+      router.push("/teacher-dashboard");
+    } catch (error) {
+      console.error("Emulation error:", error);
+      toast.error(error?.response?.data?.message || "An unknown error occurred");
+    }
+  };
 
   const handleaistrained = async (id) => {
     try {
@@ -123,7 +151,15 @@ function TeacherListing() {
       <td className="capitalize px-3 lg:px-4 py-2 lg:py-3 text-black text-sm lg:text-base font-medium font-inter">
         <div className="flex gap-2 justify-center items-center">
           {category === "existing" ? (
+            <>
             <button
+              onClick={() => handleEmulate(item?.userId?._id)}
+              title="Emulate user"
+              className="p-2 rounded hover:bg-gray-100 text-gray-600 hover:text-black transition cursor-pointer"
+            >
+              <FiUserCheck size={16} />
+            </button>
+            {/* <button
               onClick={() => handleBlock(item?.userId?._id)}
               className="border border-[#CC2828] text-[#CC2828] hover:bg-[#CC2828] hover:text-white px-3 py-1 text-xs rounded cursor-pointer"
             >
@@ -134,7 +170,19 @@ function TeacherListing() {
                 : item?.userId?.block
                   ? "Unblock"
                   : "Block"}
+            </button> */}
+            <button
+              onClick={() => handleBlock(item?.userId?._id)}
+              title={item?.userId?.block ? "Unblock user" : "Block user"}
+              className={`p-2 rounded transition cursor-pointer
+                ${item?.userId?.block
+                  ? "text-green-600 hover:bg-green-100"
+                  : "text-red-600 hover:bg-red-100"
+                }`}
+            >
+              <FiSlash size={16} />
             </button>
+            </>
           ) : category === "reject" ? (
             <button
               onClick={() => handleApproveReject(item?._id, true)}

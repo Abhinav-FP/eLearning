@@ -47,6 +47,7 @@ export default function Index() {
         callback: (token) => {
           onVerify(token);
         },
+        appearance: "always", // 👈 Add this line here
       });
 
       return () => {

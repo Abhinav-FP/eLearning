@@ -7,6 +7,7 @@ import { IoEye, IoEyeOff } from "react-icons/io5";
 import toast from "react-hot-toast";
 import { useRouter } from "next/router";
 import { FaCheckCircle, FaTimesCircle } from "react-icons/fa";
+import { Turnstile } from '@marsidev/react-turnstile'
 
 export default function Index() {
   const router = useRouter();

@@ -118,10 +118,15 @@ export default function Index() {
   };
 
   useEffect(() => {
-  window.onTurnstileSuccess = function (token) {
-    setCfToken(token);
-  };
- }, []);
+    window.onTurnstileSuccess = (token) => {
+      setCfToken(token);
+    };
+
+    return () => {
+      delete window.onTurnstileSuccess;
+    };
+  }, []);
+
 
 
   return (
@@ -364,10 +369,10 @@ export default function Index() {
           {/* Cloudflare Turnstile */}
           <div className="w-full md:w-12/12 px-2.5 mb-5 flex justify-center">
             <div
-            className="cf-turnstile"
-            data-sitekey="0x4AAAAAACGwGP65iX0v0KQt"
-            data-callback="onTurnstileSuccess"
-          />
+              className="cf-turnstile"
+              data-sitekey="0x4AAAAAACGwGP65iX0v0KQt"
+              data-callback="onTurnstileSuccess"
+            />
           </div>
 
             <div className="w-full md:w-12/12 px-2.5 mb-5 flex flex-wrap justify-center">

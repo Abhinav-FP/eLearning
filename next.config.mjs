@@ -30,11 +30,13 @@ const nextConfig = {
         headers: [
           {
             key: "Content-Security-Policy",
-            value: "frame-ancestors 'none';",
-          },
-          {
-            key: "X-Frame-Options",
-            value: "DENY",
+            value: `
+              frame-ancestors 'self';
+              frame-src https://challenges.cloudflare.com;
+              script-src 'self' https://challenges.cloudflare.com;
+            `
+              .replace(/\s+/g, " ")
+              .trim(),
           },
           { key: "Strict-Transport-Security", value: "max-age=31536000; includeSubDomains" },
         { key: "X-Content-Type-Options", value: "nosniff" },

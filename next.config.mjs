@@ -28,19 +28,13 @@ const nextConfig = {
       {
         source: "/(.*)", // apply to all routes
         headers: [
-          { key: "Content-Security-Policy",
-            value: `
-              default-src 'self';
-              script-src 'self' https://challenges.cloudflare.com;
-              frame-src https://challenges.cloudflare.com;
-              font-src https://challenges.cloudflare.com data:;
-              style-src 'self' 'unsafe-inline';
-              img-src 'self' data:;
-              connect-src 'self';
-              frame-ancestors 'self';
-            `
-              .replace(/\s+/g, " ")
-              .trim(),
+          {
+            key: "Content-Security-Policy",
+            value: "frame-ancestors 'self' https://challenges.cloudflare.com;",
+          },
+          {
+            key: "X-Frame-Options",
+            value: "DENY",
           },
           { key: "Strict-Transport-Security", value: "max-age=31536000; includeSubDomains" },
         { key: "X-Content-Type-Options", value: "nosniff" },

@@ -146,7 +146,7 @@ const Index = ({ Availability, setIsPopupOpen, usedInPopup, setSelectedSlot, sel
               </div>
             </div>
             {!usedInPopup &&
-              <h3 className="flex gap-2 text-base lg:text-lg font-semibold text-[#1E1E1E] m-0 tracking-[-0.03em]">
+              <div className="flex  gap-2 text-base lg:text-lg font-semibold text-[#1E1E1E] m-0 tracking-[-0.03em] w-full md:w-auto">
                 <button
                   onClick={() => {
                     if (!user) {
@@ -161,7 +161,7 @@ const Index = ({ Availability, setIsPopupOpen, usedInPopup, setSelectedSlot, sel
                     router.push(`/student/message?query=${teacherData?.userId?._id}`);
                   }}
                   className={
-                    "font-medium cursor-pointer rounded-full py-3.5 px-2 sm:px-5 text-[#ffffff] bg-[#CC2828] hover:bg-[#ad0e0e] text-sm sm:text-base w-full"
+                    "font-medium cursor-pointer rounded-full py-1.5 lg:py-3.5 px-3 sm:px-5 text-[#ffffff] bg-[#CC2828] hover:bg-[#ad0e0e] text-sm sm:text-base md:w-full"
                   }
                 >
                   Message
@@ -171,12 +171,12 @@ const Index = ({ Availability, setIsPopupOpen, usedInPopup, setSelectedSlot, sel
                     handleClick();
                   }}
                   className={
-                    "font-medium cursor-pointer rounded-full py-3.5 px-2 sm:px-5 text-[#ffffff] bg-[#CC2828] hover:bg-[#ad0e0e] text-sm sm:text-base w-full"
+                    "font-medium cursor-pointer rounded-full py-1.5 lg:py-3.5 px-3 sm:px-5 text-[#ffffff] bg-[#CC2828] hover:bg-[#ad0e0e] text-sm sm:text-base md:w-full"
                   }
                 >
                   Book Slot
                 </button>
-              </h3>}
+              </div>}
           </div>
           <div className="p-4 relative">
             <div className="w-full overflow-x-auto  px-2 pb-4 ">
@@ -193,7 +193,7 @@ const Index = ({ Availability, setIsPopupOpen, usedInPopup, setSelectedSlot, sel
                   step={30}
                   timeslots={1}
                   style={{
-                    height: "1000px",
+                     height: "75vh",
                     width: "100%",
                     fontSize: "14px",
                   }}

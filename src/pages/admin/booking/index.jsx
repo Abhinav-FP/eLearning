@@ -8,6 +8,7 @@ import { FiSearch } from "react-icons/fi";
 import Link from 'next/link';
 import ZoomPopup from './ZoomPopup';
 import BookingView from '../common/BookingView';
+import { formatMultiPrice } from '@/components/ValueDataHook';
 
 export default function Index() {
   const [TabOpen, setTabOpen] = useState('upcoming');
@@ -171,7 +172,7 @@ export default function Index() {
                         {item?.LessonId?.duration} minutes
                       </td>
                       <td className="px-3 lg:px-4 py-2 lg:py-3 capitalize text-black text-sm lg:text-base font-medium font-inter ">
-                        ${item?.totalAmount}
+                        {formatMultiPrice(item?.totalAmount, "USD")}
                       </td>
                       {TabOpen === "past" && (
                         <td >

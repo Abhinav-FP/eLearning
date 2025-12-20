@@ -31,13 +31,13 @@ export default function ZoomPopup({ zoom, onClose }) {
 
           {/* Meeting Info */}
           <div>
-            <span className="font-semibold text-gray-700">Meeting ID:</span> {zoom.meetingId}
+            <span className="font-semibold text-gray-700">Meeting ID:</span> {zoom?.meetingId}
           </div>
-          {zoom.download?.length > 0 && (
+          {zoom?.download?.length > 0 && (
             <div>
               <span className="font-semibold text-gray-700">Recordings:</span>
               <ul className="list-disc list-inside space-y-1 mt-1">
-                {zoom.download.map((link, index) => (
+                {zoom?.download.map((link, index) => (
                   <li key={index}>
                     <a
                       href={link}

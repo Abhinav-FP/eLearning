@@ -59,7 +59,7 @@ export default function AddSlot({ isOpen, onClose, SpecialSlotData }) {
     const { name, value } = e.target;
 
     const now = moment();
-    const thirtyMinutesFromNow = moment().add(30, "minutes");
+    const thirtyMinutesFromNow = moment().add(10, "minutes");
 
     if (name === "startDateTime") {
       const start = moment(value);
@@ -71,7 +71,7 @@ export default function AddSlot({ isOpen, onClose, SpecialSlotData }) {
 
       if (start.isBefore(thirtyMinutesFromNow)) {
         toast.error(
-          `Start time must be at least 30 minutes from now (${thirtyMinutesFromNow.format(
+          `Start time must be at least 10 minutes from now (${thirtyMinutesFromNow.format(
             "DD/MM/YYYY hh:mm A"
           )}).`
         );
@@ -95,7 +95,7 @@ export default function AddSlot({ isOpen, onClose, SpecialSlotData }) {
 
       if (end.isBefore(thirtyMinutesFromNow)) {
         toast.error(
-          `End time must be at least 30 minutes from now (${thirtyMinutesFromNow.format(
+          `End time must be at least 10 minutes from now (${thirtyMinutesFromNow.format(
             "DD/MM/YYYY hh:mm A"
           )}).`
         );

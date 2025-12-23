@@ -82,7 +82,7 @@ export default function Index() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     if (loading) return;
-    console.log("turnstile token", turnRef.current);
+    // console.log("turnstile token", turnRef.current);
     if (!turnRef.current) {
       toast.error("Please complete the captcha verification");
       return;
@@ -146,7 +146,7 @@ export default function Index() {
   };
 
   const handleTurnStile = async (t) => {
-    console.log("Turnstile token:", t);
+    // console.log("Turnstile token:", t);
     turnRef.current = t;
   };
 

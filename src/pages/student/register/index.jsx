@@ -7,7 +7,7 @@ import { IoEye, IoEyeOff } from "react-icons/io5";
 import toast from "react-hot-toast";
 import { useRouter } from "next/router";
 import { FaCheckCircle, FaTimesCircle } from "react-icons/fa";
-import { Turnstile } from '@marsidev/react-turnstile'
+import { Turnstile } from '@marsidev/react-turnstile';
 
 export default function Index() {
   const router = useRouter();
@@ -15,7 +15,7 @@ export default function Index() {
   const [passwordFocused, setPasswordFocused] = useState(false);
   const [showPassword, setShowPassword] = useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
-  const [cfToken, setCfToken] = useState(null);
+  const cfTokenRef = useRef(null);
   const [passwordCriteria, setPasswordCriteria] = useState({
     hasUpper: false,
     hasLower: false,
@@ -82,7 +82,8 @@ export default function Index() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     if (loading) return;
-    if (!cfToken) {
+    console.log("CF TOKEN:", cfTokenRef.current);
+    if (!cfTokenRef.current) {
       toast.error("Please complete the captcha verification");
       return;
     }
@@ -382,10 +383,17 @@ export default function Index() {
             <div className="w-full md:w-12/12 px-2.5 mb-5 flex justify-center">
               {/* {mounted && <Turnstile onVerify={setCfToken} />} */}
               <Turnstile
+                key="cf-turnstile"
                 siteKey="0x4AAAAAACGwGP65iX0v0KQt"
-                onVerify={(token) => setCfToken(token)}
-                onExpire={() => setCfToken(null)}
-                onError={() => setCfToken(null)}
+                onVerify={(token) => {
+                  cfTokenRef.current = token;
+                }}
+                onExpire={() => {
+                  cfTokenRef.current = null;
+                }}
+                onError={() => {
+                  cfTokenRef.current = null;
+                }}
               />
             </div>
 

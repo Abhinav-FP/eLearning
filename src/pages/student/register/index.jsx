@@ -15,7 +15,7 @@ export default function Index() {
   const [passwordFocused, setPasswordFocused] = useState(false);
   const [showPassword, setShowPassword] = useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
-  const cfTokenRef = useRef(null);
+  const turnRef = useRef(null);
   const [passwordCriteria, setPasswordCriteria] = useState({
     hasUpper: false,
     hasLower: false,
@@ -82,8 +82,8 @@ export default function Index() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     if (loading) return;
-    console.log("CF TOKEN:", cfTokenRef.current);
-    if (!cfTokenRef.current) {
+    console.log("turnstile token", turnRef.current);
+    if (!turnRef.current) {
       toast.error("Please complete the captcha verification");
       return;
     }
@@ -143,6 +143,11 @@ export default function Index() {
       setLoading(false);
     }
     setLoading(false);
+  };
+
+  const handleTurnStile = async (t) => {
+    console.log("Turnstile token:", t);
+    turnRef.current = t;
   };
 
   return (
@@ -383,17 +388,12 @@ export default function Index() {
             <div className="w-full md:w-12/12 px-2.5 mb-5 flex justify-center">
               {/* {mounted && <Turnstile onVerify={setCfToken} />} */}
               <Turnstile
-                key="cf-turnstile"
-                siteKey="0x4AAAAAACGwGP65iX0v0KQt"
-                onVerify={(token) => {
-                  cfTokenRef.current = token;
-                }}
-                onExpire={() => {
-                  cfTokenRef.current = null;
-                }}
-                onError={() => {
-                  cfTokenRef.current = null;
-                }}
+                  siteKey={"0x4AAAAAACGwGP65iX0v0KQt"}
+                  ref={turnRef}
+                  onSuccess={handleTurnStile}
+                  onError={(_err) => {
+                      console.log("Turnstile error", _err);
+                  }}
               />
             </div>
 

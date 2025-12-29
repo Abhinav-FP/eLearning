@@ -118,7 +118,7 @@ export default function Index() {
         nationality: data?.nationalities,
         time_zone: data?.timezone,
         gender: data?.gender,
-        // cf_turnstile_token: cfToken,
+        cf_turnstile_token: turnRef.current,
       });
       if (response?.data?.status) {
         router.push("/login");

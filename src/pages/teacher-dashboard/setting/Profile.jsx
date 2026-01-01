@@ -27,10 +27,13 @@ export default function Profile() {
     specialities: [],
   });
   const [file, setFile] = useState(null);
-  const [isZoomConnected, setIsZoomConnected] = useState(false);
   const [newSpeciality, setNewSpeciality] = useState("");
   const [loading, setLoading] = useState(false);
   const [zoomLoading, setZoomLoading] = useState(false);
+  const [isZoomConnected, setIsZoomConnected] = useState(false);
+  const [googleLoading, setGoogleLoading] = useState(false);
+  const [isGoogleCalendarConnected, setIsGoogleCalendarConnected] = useState(false);
+
 
   useEffect(() => {
     setLoading(true);
@@ -243,6 +246,28 @@ export default function Profile() {
     }
   };
 
+  const connectGoogleCalendar = async () => {
+    if (googleLoading) {
+      return;
+    }
+    try {
+      setGoogleLoading(true);
+      const main = new Listing();
+      const response = await main.TeacherGoogleCalendarConnect();
+      if (response?.data && response?.data?.url) {
+        // 🔴 IMPORTANT: redirect browser to Google OAuth
+        window.location.href = response.data.url;
+      } else {
+        toast.error("Unable to connect Google Calendar");
+      }
+      setGoogleLoading(false);
+    } catch (error) {
+      console.log("Google connect error", error);
+      toast.error(error?.response?.data?.message || "Google connection failed");
+      setGoogleLoading(false);
+    }
+  };
+
   return (
     <>
       {loading ? (
@@ -307,6 +332,16 @@ export default function Profile() {
                 Connect Zoom Account
               </button>
             )}
+           <button
+              type="button"
+              disabled={googleLoading}
+              onClick={connectGoogleCalendar}
+              className={`px-4 py-2 rounded cursor-pointer ${
+                googleLoading ? "bg-gray-400" : "bg-green-600 text-white"
+              }`}
+            >
+              {googleLoading ? "Connecting..." : "Connect Google Calendar"}
+            </button>
 
             {/* Guidance paragraph */}
             <div className="mt-4 w-full text-sm xl:text-base text-[#535353] leading-relaxed">

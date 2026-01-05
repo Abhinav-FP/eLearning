@@ -332,7 +332,7 @@ export default function Profile() {
                 Connect Zoom Account
               </button>
             )}
-           <button
+           {/* <button
               type="button"
               disabled={googleLoading}
               onClick={connectGoogleCalendar}
@@ -341,7 +341,7 @@ export default function Profile() {
               }`}
             >
               {googleLoading ? "Connecting..." : "Connect Google Calendar"}
-            </button>
+            </button> */}
 
             {/* Guidance paragraph */}
             <div className="mt-4 w-full text-sm xl:text-base text-[#535353] leading-relaxed">

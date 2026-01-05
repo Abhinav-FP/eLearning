@@ -39,7 +39,9 @@ export default function Addavailablility({ isOpen, onClose, TeacherAvailabilitys
   useEffect(() => {
     if (selectedSlot?.start && selectedSlot?.end) {
       let endTime = toDatetimeLocal(selectedSlot.end);
-      endTime = adjustDateTime(endTime);
+      // Old logic of adding +1 to date, used when system timezones were being enforced
+      // endTime = adjustDateTime(endTime);
+      endTime = toDatetimeLocal(endTime);
 
       setFormData((prev) => ({
         ...prev,

@@ -38,6 +38,10 @@ class Listing extends Component {
     return Api.get("/auth/google");
   }
 
+  async TeacherGoogleCalendarDisconnect() {
+    return Api.post("/auth/google/disconnect");
+  }
+
   async ForgetPasswordLink(data) {
     return Api.post("/user/forget-link", data)
   }

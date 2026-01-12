@@ -31,6 +31,7 @@ export default function Profile() {
   const [loading, setLoading] = useState(false);
   const [zoomLoading, setZoomLoading] = useState(false);
   const [isZoomConnected, setIsZoomConnected] = useState(false);
+  const [isCalendarConnected, setIsCalendarConnected] = useState(false);
   const [googleLoading, setGoogleLoading] = useState(false);
   const [isGoogleCalendarConnected, setIsGoogleCalendarConnected] = useState(false);
 
@@ -63,6 +64,9 @@ export default function Profile() {
         setFile(profiledata?.userId?.profile_photo);
         if (profiledata?.access_token && profiledata?.refresh_token) {
           setIsZoomConnected(true);
+        }
+        if (profiledata?.googleCalendar && profiledata?.googleCalendar?.connected) {
+          setIsCalendarConnected(true);
         }
         setLoading(false);
       })
@@ -268,12 +272,35 @@ export default function Profile() {
     }
   };
 
+  const disconnectGoogleCalendar = async () => {
+    if (googleLoading) {
+      return;
+    }
+    try {
+      setGoogleLoading(true);
+      const main = new Listing();
+      const response = await main.TeacherGoogleCalendarDisconnect();
+      if (response?.data?.status) {
+        toast.success(response?.data?.message);
+        setIsCalendarConnected(false);
+      } else {
+        toast.error("Unable to disconnect Google Calendar");
+      }
+      setGoogleLoading(false);
+    } catch (error) {
+      console.log("Google disconnect error", error);
+      toast.error(error?.response?.data?.message || "Google disconnection failed");
+      setGoogleLoading(false);
+    }
+  };
+
   return (
     <>
       {loading ? (
         <TeacherProfileFormLoader />
       ) : (
         <form onSubmit={handleSubmit}>
+          {/* Profile Section */}
           <div className="border-b  border-[rgba(0,0,0,.1)] flex flex-wrap py-6 lg:py-8">
             <div className="w-full lg:w-5/12  lg:pr-3 mb-2 sm:mb-0">
               <label className="block text-[#CC2828] tracking-[-0.04em] font-medium text-base xl:text-xl mb-1">
@@ -315,7 +342,7 @@ export default function Profile() {
             </div>
 
             {/* Zoom connection buttons */}
-            {isZoomConnected ? (
+            {/* {isZoomConnected ? (
               <button
                 type="button"
                 onClick={disconnectZoom}
@@ -332,18 +359,30 @@ export default function Profile() {
                 Connect Zoom Account
               </button>
             )}
-           <button
-              type="button"
-              disabled={googleLoading}
-              onClick={connectGoogleCalendar}
-              className={`px-4 py-2 rounded cursor-pointer ${
-                googleLoading ? "bg-gray-400" : "bg-green-600 text-white"
-              }`}
-            >
-              {googleLoading ? "Connecting..." : "Connect Google Calendar"}
-            </button>
+            {isCalendarConnected ? 
+              <button
+                type="button"
+                disabled={googleLoading}
+                // onClick={connectGoogleCalendar}
+                className={`px-4 py-2 rounded cursor-pointer ${
+                  googleLoading ? "bg-gray-400" : "bg-green-600 text-white"
+                }`}
+              >
+                {googleLoading ? "Disconnecting..." : "Disconnect Google Calendar"}
+              </button>
+            :
+              <button
+                type="button"
+                disabled={googleLoading}
+                onClick={connectGoogleCalendar}
+                className={`px-4 py-2 rounded cursor-pointer ${
+                  googleLoading ? "bg-gray-400" : "bg-green-600 text-white"
+                }`}
+              >
+                {googleLoading ? "Connecting..." : "Connect Google Calendar"}
+              </button>
+            }
 
-            {/* Guidance paragraph */}
             <div className="mt-4 w-full text-sm xl:text-base text-[#535353] leading-relaxed">
               <p className="font-medium mb-1">
                 Before connecting your Zoom account:
@@ -359,8 +398,94 @@ export default function Profile() {
                   and their recordings can also be stored.
                 </li>
               </ul>
+            </div> */}
+          </div>
+
+          {/* Integrations Section */}
+          <div className="border-b border-[rgba(0,0,0,.1)] py-6 lg:py-8">
+            <h3 className="text-[#CC2828] font-medium text-lg xl:text-xl mb-2">
+              Integrations
+            </h3>
+            <p className="text-[#535353] text-sm xl:text-base mb-3">
+              Connect your accounts to enable automatic meeting creation, calendar sync,
+              and session recordings.
+            </p>
+
+            {/* Zoom */}
+            <div className="flex items-center justify-between py-4 border-b border-[rgba(0,0,0,.08)]">
+              <div>
+                <p className="font-medium text-base">Zoom</p>
+                <p className="text-sm text-[#535353]">
+                  Required for live classes creation & recordings
+                </p>
+              </div>
+
+              {isZoomConnected ? (
+                <button
+                  type="button"
+                  onClick={disconnectZoom}
+                  className="border border-red-500 text-red-500 px-4 py-2 rounded-lg text-sm hover:bg-red-50 cursor-pointer"
+                >
+                  {zoomLoading ? "Disconnecting..." : "Disconnect"}
+                </button>
+              ) : (
+                <button
+                  type="button"
+                  onClick={connectZoom}
+                  className="bg-[#CC2828] text-white px-4 py-2 rounded-lg text-sm hover:bg-red-700 cursor-pointer"
+                >
+                  Connect Zoom
+                </button>
+              )}
+            </div>
+
+            {/* Google Calendar */}
+            <div className="flex items-center justify-between py-4">
+              <div>
+                <p className="font-medium text-base">Google Calendar</p>
+                <p className="text-sm text-[#535353]">
+                  Sync bookings with your gmail account
+                </p>
+              </div>
+
+              {isCalendarConnected ? (
+                <button
+                  type="button"
+                  disabled={googleLoading}
+                  onClick={disconnectGoogleCalendar}
+                  className="border border-red-500 text-red-500 px-4 py-2 rounded-lg text-sm hover:bg-red-50 cursor-pointer"
+                >
+                  {googleLoading ? "Disconnecting..." : "Disconnect"}
+                </button>
+              ) : (
+                <button
+                  type="button"
+                  disabled={googleLoading}
+                  onClick={connectGoogleCalendar}
+                  className="bg-green-600 text-white px-4 py-2 rounded-lg text-sm hover:bg-green-700 cursor-pointer"
+                >
+                  {googleLoading ? "Connecting..." : "Connect"}
+                </button>
+              )}
+            </div>
+
+            {/* Guidance */}
+            <div className="mt-3 bg-[#F9FAFB] rounded-lg p-4 text-sm text-[#535353]">
+              <p className="font-medium mb-1">Before connecting Zoom:</p>
+              <ul className="list-disc list-inside space-y-1">
+                <li> Ensure the email address of your Zoom account matches the
+                  email used for your website account.
+                </li>
+                <li>
+                 Use a <strong>Zoom Pro (or higher)</strong> plan so meetings
+                  longer than 60 minutes can be scheduled without limitations
+                  and their recordings can also be stored.
+                </li>
+              </ul>
             </div>
           </div>
+
+          {/* Form Section */}
           <div className="border-b border-[rgba(0,0,0,.1)] py-6 lg:py-8 space-y-4 lg:space-y-6">
             <div className="flex flex-wrap -mx-2 space-y-4">
               <div className="w-full lg:w-6/12 px-2 ">
@@ -706,6 +831,7 @@ export default function Profile() {
               </div>
             </div>
           </div>
+          {/* Submit Button */}
           <div className="flex w-full lg:w-12/12 xl:w-11/12 flex-wrap justify-center items-center pt-6 lg:pt-10 space-x-4 lg:space-x-6">
             <button
               className="w-full max-w-[143px] md:max-w-[183px] cursor-pointer border border-[#CC2828] bg-[#CC2828] hover:bg-red-700  text-white py-2.5 lg:py-3.5 cursor-pointer rounded-[10px] font-normal text-base xl:text-xl transition  tracking-[-0.04em]"

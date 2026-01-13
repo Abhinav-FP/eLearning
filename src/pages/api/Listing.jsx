@@ -156,6 +156,10 @@ class Listing extends Component {
     return Api.post(`/booking/update/${id}`, data);
   }
 
+  async SyncGoogleCalendar() {
+    return Api.get(`/teacher/google-calendar/sync`);
+  }
+
   async PaypalCreate(data) {
     return Api.post(`/payment/create-order`, data);
   }

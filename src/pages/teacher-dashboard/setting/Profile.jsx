@@ -412,7 +412,7 @@ export default function Profile() {
             </p>
 
             {/* Zoom */}
-            <div className="flex items-center justify-between py-4 border-b border-[rgba(0,0,0,.08)]">
+            <div className="flex items-center justify-between py-4">
               <div>
                 <p className="font-medium text-base">Zoom</p>
                 <p className="text-sm text-[#535353]">
@@ -439,12 +439,31 @@ export default function Profile() {
               )}
             </div>
 
+            {/* Zoom Guidelines */}
+            <div className="mt-3 bg-[#F9FAFB] rounded-lg p-4 text-sm text-[#535353]">
+              <p className="font-medium mb-1">Before connecting Zoom:</p>
+              <ul className="list-disc list-inside space-y-1">
+                <li>
+                  Ensure the email address of your Zoom account matches the email used for
+                  your website account.
+                </li>
+                <li>
+                  Use a <strong>Zoom Pro (or higher)</strong> plan so meetings longer than
+                  60 minutes can be scheduled without limitations and recordings can be
+                  stored.
+                </li>
+              </ul>
+            </div>
+
+            {/* Divider after Zoom section */}
+            <div className="border-b border-[rgba(0,0,0,.08)] my-4" />
+
             {/* Google Calendar */}
             <div className="flex items-center justify-between py-4">
               <div>
                 <p className="font-medium text-base">Google Calendar</p>
                 <p className="text-sm text-[#535353]">
-                  Sync bookings with your gmail account
+                  Sync bookings with your Gmail account
                 </p>
               </div>
 
@@ -469,17 +488,17 @@ export default function Profile() {
               )}
             </div>
 
-            {/* Guidance */}
+            {/* Google Calendar Guidelines */}
             <div className="mt-3 bg-[#F9FAFB] rounded-lg p-4 text-sm text-[#535353]">
-              <p className="font-medium mb-1">Before connecting Zoom:</p>
+              <p className="font-medium mb-1">Before connecting Google Calendar:</p>
               <ul className="list-disc list-inside space-y-1">
-                <li> Ensure the email address of your Zoom account matches the
-                  email used for your website account.
+                <li>
+                  Make sure you are logged into the correct Google account where you want
+                  your classes to be synced.
                 </li>
                 <li>
-                 Use a <strong>Zoom Pro (or higher)</strong> plan so meetings
-                  longer than 60 minutes can be scheduled without limitations
-                  and their recordings can also be stored.
+                  Grant calendar access permissions to allow automatic event creation and
+                  updates.
                 </li>
               </ul>
             </div>

@@ -19,6 +19,7 @@ export default function Index() {
   const [doneLoading, setDoneLoading] = useState(false);
   const [doneId, setDoneId] = useState(null);
   const [searchText, setSearchText] = useState("");
+  const [syncing, setSyncing] = useState(false);
   const timerRef = useRef(null);
 
   const fetchEarnings = async (search = "") => {
@@ -32,6 +33,24 @@ export default function Index() {
       setData([]);
     }
     setLoading(false);
+  };
+
+  const handleCalendarSync = async () => {
+    try {
+      setSyncing(true);
+      const main = new Listing();
+      const response = await main.SyncGoogleCalendar();
+      if(response?.data?.status){
+        toast.success(response?.data?.message || "Calendar updated successfully");
+      }
+      else{
+        toast.error(response?.data?.message);
+      }
+    } catch (err) {
+      toast.error(err?.response?.data?.message || "Calendar sync failed");
+    } finally {
+      setSyncing(false);
+    }
   };
 
   useEffect(() => {
@@ -104,47 +123,69 @@ export default function Index() {
     <TeacherLayout page={"Booking"}>
       <div className="min-h-screen p-5 lg:p-[30px]">
         <div className="">
-          <div className="flex flex-col md:flex-row justify-between md:items-center mb-4 lg:mb-5">
-            <div className="flex flex-wrap gap-5 mb-4 md:mb-0">
-              <button
-                onClick={() => setTabOpen('upcoming')}
-                className={`px-2 px-4 xl:px-8 py-2 h-[44px] rounded-md tracking-[-0.06em] text-base font-medium  cursor-pointer ${TabOpen === 'upcoming'
-                  ? 'bg-[#CC2828] text-[#fff]'
-                  : 'bg-[#E0E0E0] text-[#727272]'
-                  }`}
-              >
-                Upcoming & Ongoing
-              </button>
-              <button
-                onClick={() => setTabOpen('past')}
-                className={`px-2 px-8 xl:px-12 py-2 h-[44px] rounded-md tracking-[-0.06em] text-base font-medium  cursor-pointer ${TabOpen === 'past'
-                  ? 'bg-[#CC2828] text-[#fff]'
-                  : 'bg-[#E0E0E0] text-[#727272]'
-                  }`}
-              >
-                Past
-              </button>
-              <button
-                onClick={() => setTabOpen('cancelled')}
-                className={`px-2 px-8 xl:px-12 py-2 h-[44px] rounded-md tracking-[-0.06em] text-base font-medium  cursor-pointer ${TabOpen === 'cancelled'
-                  ? 'bg-[#CC2828] text-[#fff]'
-                  : 'bg-[#E0E0E0] text-[#727272]'
-                  }`}
-              >
-                Cancelled
-              </button>
-            </div>
-            <div className="w-full md:w-1/3 md:max-w-sm relative">
-              <span className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-                <FiSearch className="text-[#888]" />
-              </span>
-              <input
-                type="text"
-                value={searchText}
-                onChange={handleSearchChange}
-                placeholder="Search using lesson or student name"
-                className="w-full pl-10 pr-4 py-2 border border-[#ddd] text-[#000] rounded-md focus:outline-none focus:ring-1 focus:ring-[#CC2828] placeholder-gray-400"
-              />
+          <div className="flex flex-col gap-4 mb-4 lg:mb-5">
+            <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-3">
+              
+              {/* Tabs */}
+              <div className="flex gap-2 flex-wrap md:flex-nowrap">
+                <button
+                  onClick={() => setTabOpen("upcoming")}
+                  className={`px-3 lg:px-5 py-2 h-[40px] rounded-md tracking-[-0.04em] text-sm font-medium transition cursor-pointer
+                    ${TabOpen === "upcoming"
+                      ? "bg-[#CC2828] text-white"
+                      : "bg-[#E0E0E0] text-[#727272]"
+                    }`}
+                >
+                  Upcoming
+                </button>
+
+                <button
+                  onClick={() => setTabOpen("past")}
+                  className={`px-3 lg:px-5 py-2 h-[40px] rounded-md tracking-[-0.04em] text-sm font-medium transition cursor-pointer
+                    ${TabOpen === "past"
+                      ? "bg-[#CC2828] text-white"
+                      : "bg-[#E0E0E0] text-[#727272]"
+                    }`}
+                >
+                  Past
+                </button>
+
+                <button
+                  onClick={() => setTabOpen("cancelled")}
+                  className={`px-3 lg:px-5 py-2 h-[40px] rounded-md tracking-[-0.04em] text-sm font-medium transition cursor-pointer
+                    ${TabOpen === "cancelled"
+                      ? "bg-[#CC2828] text-white"
+                      : "bg-[#E0E0E0] text-[#727272]"
+                    }`}
+                >
+                  Cancelled
+                </button>
+              </div>
+
+              {/* Search + Sync */}
+              <div className="flex flex-row gap-2 items-stretch md:items-center w-full md:w-auto">
+                <div className="relative w-1/2 sm:w-[220px] lg:w-[260px]">
+                  <span className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                    <FiSearch className="text-[#888]" />
+                  </span>
+                  <input
+                    type="text"
+                    value={searchText}
+                    onChange={handleSearchChange}
+                    placeholder="Search lesson or student"
+                    className="w-full h-[40px] pl-9 pr-3 border border-[#ddd] text-sm text-black rounded-md
+                              focus:outline-none focus:ring-1 focus:ring-[#CC2828] placeholder-gray-400"
+                  />
+                </div>
+                <button
+                  onClick={handleCalendarSync}
+                  disabled={syncing}
+                  className="h-[40px] px-4 rounded-md border border-[#CC2828] cursor-pointer text-[#CC2828] bg-white text-sm font-medium whitespace-nowrap
+                            hover:bg-[#CC2828] hover:text-white transition disabled:opacity-60 disabled:cursor-not-allowed"
+                >
+                  {syncing ? "Syncing..." : "Update Calendar"}
+                </button>
+              </div>
             </div>
           </div>
 

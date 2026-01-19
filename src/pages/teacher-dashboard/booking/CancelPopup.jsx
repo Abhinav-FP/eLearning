@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import Popup from "@/pages/common/Popup";
 import { IoMdEye } from "react-icons/io";
+import { GiCancel } from "react-icons/gi";
 import toast from "react-hot-toast";
 import Listing from "@/pages/api/Listing";
 
@@ -37,9 +38,10 @@ export default function CancelPopup({ data, fetchEarnings }) {
     <>
       <button
         onClick={() => setShowPopup(true)}
-        className="px-2 py-1 rounded-md bg-red-600 hover:bg-red-700 text-white text-sm lg:text-base font-medium font-inter transition duration-200 cursor-pointer"
+        className="text-red-600 font-medium font-inter transition duration-200 cursor-pointer"
+        title="Cancel lesson"
       >
-        Cancel it
+        <GiCancel size={20}/>
       </button>
 
       {showPopup && (

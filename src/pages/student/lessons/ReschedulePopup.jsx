@@ -147,7 +147,7 @@ export default function ReschedulePopup({ isOpen, onClose, lesson, studentTimeZo
                       ${!selectedSlot ? "cursor-not-allowed" : "cursor-pointer"
                 }`}
             >
-              Save
+              {loading ? "Saving..." : "Save"}
             </button>
           </div>
         </div>

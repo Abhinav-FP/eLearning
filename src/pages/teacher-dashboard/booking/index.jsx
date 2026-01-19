@@ -6,11 +6,13 @@ import { TableLoader } from '@/components/Loader';
 import NoData from '@/pages/common/NoData';
 import { formatMultiPrice } from '@/components/ValueDataHook';
 import { FiSearch } from 'react-icons/fi';
+import { RiCalendarScheduleLine } from "react-icons/ri";
 import ZoomPopup from '@/pages/admin/booking/ZoomPopup';
 import BookingView from '@/pages/admin/common/BookingView';
 import CancelPopup from './CancelPopup';
 import Link from 'next/link';
 import toast from 'react-hot-toast';
+import ReschedulePopup from '@/pages/student/lessons/ReschedulePopup';
 
 export default function Index() {
   const [TabOpen, setTabOpen] = useState('upcoming');
@@ -21,6 +23,12 @@ export default function Index() {
   const [searchText, setSearchText] = useState("");
   const [syncing, setSyncing] = useState(false);
   const timerRef = useRef(null);
+
+  // Both are required
+  const [selectedLesson, setSelectedLesson] = useState(null);
+  const [isPopupOpen, setIsPopupOpen] = useState(false);
+  const closePopup = () => setIsPopupOpen(false);
+  const [studentTimeZone, setStudentTimeZone] = useState(null);
 
   const fetchEarnings = async (search = "") => {
     try {
@@ -56,6 +64,11 @@ export default function Index() {
   useEffect(() => {
     fetchEarnings();
   }, [TabOpen]);
+
+  useEffect(() => {
+    const detectedZone = moment.tz.guess();  // ✅ moment-based detection
+    setStudentTimeZone(detectedZone || "");
+  }, []);
 
 
   const handleSearchChange = (e) => {
@@ -117,6 +130,15 @@ export default function Index() {
     }
     setDoneLoading(false);
   }
+
+  const isMoreThanOneHourFromNow = (startDateTime) => {
+    const now = new Date();
+    const start = new Date(startDateTime);
+    const diffInMs = start - now;
+    const oneHourInMs = 60 * 60 * 1000;
+
+    return diffInMs > oneHourInMs;
+  };
 
 
   return (
@@ -293,14 +315,27 @@ export default function Index() {
                           //   <span>N/A</span>
                           // )} */}
                         </td>}
-                        {TabOpen === "upcoming" &&
-                        <td>
-                          {isMoreThanTwoHourFromNow(item?.startDateTime) ?
-                          <CancelPopup data={item} fetchEarnings={fetchEarnings}/>
-                          :
-                          "N/A"
-                          }
-                        </td>}
+                        {TabOpen === "upcoming" && (
+                          <td className="align-middle">
+                            <div className="flex items-center justify-center gap-3">
+                              {isMoreThanTwoHourFromNow(item?.startDateTime) && (
+                                <CancelPopup data={item} fetchEarnings={fetchEarnings} />
+                              )}
+                              {isMoreThanOneHourFromNow(item?.startDateTime) && (
+                                <button
+                                  onClick={() => {
+                                    setSelectedLesson(item);
+                                    setIsPopupOpen(true);
+                                  }}
+                                  className="text-green-600 font-medium font-inter transition duration-200 cursor-pointer"
+                                  title="Reschedule lesson"
+                                >
+                                  <RiCalendarScheduleLine size={20} />
+                                </button>
+                              )}
+                            </div>
+                          </td>
+                        )}
                       </tr>
                     ))
                   ) : (
@@ -322,6 +357,13 @@ export default function Index() {
           </div>
         </div>
       </div>
+      <ReschedulePopup
+        isOpen={isPopupOpen}
+        onClose={closePopup}
+        lesson={selectedLesson}
+        studentTimeZone={studentTimeZone}
+        fetchLessons={fetchEarnings}
+      />
     </TeacherLayout>
   );
 }

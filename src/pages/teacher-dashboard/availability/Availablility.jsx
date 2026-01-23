@@ -138,7 +138,11 @@ const Availablility = ({ Availability, TeacherAvailabilitys }) => {
               onNavigate={date => setCurrentDate(date)}
               step={30}
               timeslots={1}
-              style={{ height: '1000px', width: '100%' }}
+              style={{
+                height: "75vh",
+                width: "100%",
+                fontSize: "14px",
+              }}
               selectable
               eventPropGetter={eventStyleGetter}
               components={{ event: Event }}

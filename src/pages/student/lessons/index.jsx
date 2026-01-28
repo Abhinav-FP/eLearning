@@ -22,11 +22,13 @@ export default function Index() {
     cancelled: [],
   });
   const [isPopupOpen, setIsPopupOpen] = useState(false);
+  const [studentTimeZone, setStudentTimeZone] = useState("");
+  
   const closePopup = () => {
     moment.tz.setDefault();
     setIsPopupOpen(false);
+    setStudentTimeZone("");
   }
-  const [studentTimeZone, setStudentTimeZone] = useState("");
 
   useEffect(() => {
     const detectedZone = moment.tz.guess();

@@ -6,7 +6,7 @@ import RescheduleCalendar from "../lessons/RescheduleCalendar";
 import toast from "react-hot-toast";
 import moment from "moment";
 
-export default function BookLesson({ isOpen, onClose, selectedItem, studentTimeZone, fetchdata }) {
+export default function BookLesson({ isOpen, onClose, selectedItem, studentTimeZone, setStudentTimeZone, fetchdata }) {
   // console.log("selectedItem", selectedItem);
 
   const [selectedSlot, setSelectedSlot] = useState(null);
@@ -129,6 +129,8 @@ export default function BookLesson({ isOpen, onClose, selectedItem, studentTimeZ
             setSelectedSlot={setSelectedSlot}
             selectedLesson={selectedItem?.LessonId}
             mergedAvailability={mergedAvailability}
+            studentTimeZone={studentTimeZone}
+            setStudentTimeZone={setStudentTimeZone}
           />
           <div className="flex justify-between items-center mt-5">
             <div></div>

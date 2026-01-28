@@ -29,13 +29,15 @@ export default function Index() {
   // Both are required
   const [selectedLesson, setSelectedLesson] = useState(null);
   const [isPopupOpen, setIsPopupOpen] = useState(false);
+  const [studentTimeZone, setStudentTimeZone] = useState(null);
+
   const closePopup = () => {
     if (user && user?.role != "student" && user?.time_zone) {
       moment.tz.setDefault(user.time_zone);
     }
     setIsPopupOpen(false);
+    setStudentTimeZone("");
   }
-  const [studentTimeZone, setStudentTimeZone] = useState(null);
 
   const fetchEarnings = async (search = "") => {
     try {

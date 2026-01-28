@@ -11,7 +11,13 @@ export default function LessonCredits() {
   const [openIndex, setOpenIndex] = useState(null);
   const [isPopupOpen, setIsPopupOpen] = useState(false);
   const [selectedItem, setSelectedItem] = useState(null);
-  const closePopup = () => setIsPopupOpen(false);
+  const [studentTimeZone, setStudentTimeZone] = useState("");
+
+  const closePopup = () => {
+    moment.tz.setDefault();
+    setIsPopupOpen(false);
+    setStudentTimeZone("");
+  }
 
   const fetchdata = async () => {
     try {
@@ -35,13 +41,20 @@ export default function LessonCredits() {
     setOpenIndex(openIndex === i ? null : i);
   };
 
-  const [studentTimeZone, setStudentTimeZone] = useState(null);
-
-  // Get timezone
   useEffect(() => {
-    const detectedZone = moment.tz.guess();  // ✅ moment-based detection
+    const detectedZone = moment.tz.guess();
     setStudentTimeZone(detectedZone || "");
   }, []);
+
+  useEffect(() => {
+    if (!studentTimeZone) return;
+
+    moment.tz.setDefault(studentTimeZone);
+
+    return () => {
+      moment.tz.setDefault();
+    };
+  }, [studentTimeZone]);
 
   return (
     <StudentLayout page={"Lesson Credits"}>
@@ -240,6 +253,7 @@ export default function LessonCredits() {
         onClose={closePopup}
         selectedItem={selectedItem}
         studentTimeZone={studentTimeZone}
+        setStudentTimeZone={setStudentTimeZone}
         fetchdata={fetchdata}
       />
     </StudentLayout>

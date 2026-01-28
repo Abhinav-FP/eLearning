@@ -21,6 +21,7 @@ export default function BookingPopup({
   lessons,
   Availability,
   studentTimeZone,
+  setStudentTimeZone,
   loading,
   mergedAvailability,
   slug,
@@ -168,6 +169,8 @@ export default function BookingPopup({
                     setSelectedSlot={setSelectedSlot}
                     selectedLesson={selectedLesson}
                     mergedAvailability={mergedAvailability}
+                    studentTimeZone={studentTimeZone}
+                    setStudentTimeZone={setStudentTimeZone}
                   />
                 </div>
               </div>

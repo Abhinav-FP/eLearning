@@ -95,7 +95,7 @@ export default function AuthLayout({ children, page, sidebar }) {
   }, [user]);
 
   useEffect(() => {
-    if (user?.time_zone) {
+    if (user && user?.role != "student" && user?.time_zone) {
       moment.tz.setDefault(user.time_zone);
       // console.log("Timezone updated to:", user.time_zone);
     }

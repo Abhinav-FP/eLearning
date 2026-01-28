@@ -22,14 +22,26 @@ export default function Index() {
     cancelled: [],
   });
   const [isPopupOpen, setIsPopupOpen] = useState(false);
-  const closePopup = () => setIsPopupOpen(false);
-  const [studentTimeZone, setStudentTimeZone] = useState(null);
+  const closePopup = () => {
+    moment.tz.setDefault();
+    setIsPopupOpen(false);
+  }
+  const [studentTimeZone, setStudentTimeZone] = useState("");
 
-  // Get timezone
   useEffect(() => {
-    const detectedZone = moment.tz.guess();  // ✅ moment-based detection
+    const detectedZone = moment.tz.guess();
     setStudentTimeZone(detectedZone || "");
   }, []);
+
+  useEffect(() => {
+    if (!studentTimeZone) return;
+
+    moment.tz.setDefault(studentTimeZone);
+
+    return () => {
+      moment.tz.setDefault();
+    };
+  }, [studentTimeZone]);
 
   const fetchLessons = async () => {
     try {
@@ -214,6 +226,7 @@ export default function Index() {
         onClose={closePopup}
         lesson={selectedLesson}
         studentTimeZone={studentTimeZone}
+        setStudentTimeZone={setStudentTimeZone}
         fetchLessons={fetchLessons}
       />
     </StudentLayout>

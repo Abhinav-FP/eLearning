@@ -13,6 +13,7 @@ import CancelPopup from './CancelPopup';
 import Link from 'next/link';
 import toast from 'react-hot-toast';
 import ReschedulePopup from '@/pages/student/lessons/ReschedulePopup';
+import { useRole } from '@/context/RoleContext';
 
 export default function Index() {
   const [TabOpen, setTabOpen] = useState('upcoming');
@@ -23,11 +24,17 @@ export default function Index() {
   const [searchText, setSearchText] = useState("");
   const [syncing, setSyncing] = useState(false);
   const timerRef = useRef(null);
+  const { user } = useRole();
 
   // Both are required
   const [selectedLesson, setSelectedLesson] = useState(null);
   const [isPopupOpen, setIsPopupOpen] = useState(false);
-  const closePopup = () => setIsPopupOpen(false);
+  const closePopup = () => {
+    if (user && user?.role != "student" && user?.time_zone) {
+      moment.tz.setDefault(user.time_zone);
+    }
+    setIsPopupOpen(false);
+  }
   const [studentTimeZone, setStudentTimeZone] = useState(null);
 
   const fetchEarnings = async (search = "") => {
@@ -65,11 +72,24 @@ export default function Index() {
     fetchEarnings();
   }, [TabOpen]);
 
+  
   useEffect(() => {
-    const detectedZone = moment.tz.guess();  // ✅ moment-based detection
-    setStudentTimeZone(detectedZone || "");
+   if (user && user?.role != "student" && user?.time_zone) {
+      moment.tz.setDefault(user?.time_zone);
+    }
   }, []);
 
+  useEffect(() => {
+    if (!studentTimeZone) return;
+
+    moment.tz.setDefault(studentTimeZone);
+
+    return () => {
+      if (user && user?.role != "student" && user?.time_zone) {
+       moment.tz.setDefault(user?.time_zone);
+      }
+    };
+  }, [studentTimeZone]);
 
   const handleSearchChange = (e) => {
     const sval = e.target.value;
@@ -362,6 +382,7 @@ export default function Index() {
         onClose={closePopup}
         lesson={selectedLesson}
         studentTimeZone={studentTimeZone}
+        setStudentTimeZone={setStudentTimeZone}
         fetchLessons={fetchEarnings}
       />
     </TeacherLayout>

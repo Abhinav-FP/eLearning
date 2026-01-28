@@ -6,7 +6,7 @@ import RescheduleCalendar from "./RescheduleCalendar";
 import toast from "react-hot-toast";
 import moment from "moment";
 
-export default function ReschedulePopup({ isOpen, onClose, lesson, studentTimeZone, fetchLessons }) {
+export default function ReschedulePopup({ isOpen, onClose, lesson, studentTimeZone, setStudentTimeZone, fetchLessons }) {
   const [selectedSlot, setSelectedSlot] = useState(null);
   const [availability, setAvailability] = useState(null);
   const [mergedAvailability, setMergedAvailability] = useState("");
@@ -123,6 +123,8 @@ export default function ReschedulePopup({ isOpen, onClose, lesson, studentTimeZo
             setSelectedSlot={setSelectedSlot}
             selectedLesson={lesson?.LessonId}
             mergedAvailability={mergedAvailability}
+            studentTimeZone={studentTimeZone}
+            setStudentTimeZone={setStudentTimeZone}
           />
           <div className="flex justify-between items-center mt-5">
             <div></div>

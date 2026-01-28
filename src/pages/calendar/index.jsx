@@ -6,7 +6,9 @@ import "react-big-calendar/lib/css/react-big-calendar.css";
 const localizer = momentLocalizer(moment);
 import { useRole } from "@/context/RoleContext";
 import { useRouter } from "next/router";
+import timeZones from "../../Json/Timezone.json";
 import toast from "react-hot-toast";
+import momentTimeZone from "moment-timezone";
 
 const Event = ({ event }) => {
   const formattedStartTime = moment(event.start).format("hh:mm A");
@@ -23,7 +25,8 @@ const Event = ({ event }) => {
 
   return <div style={eventStyle}></div>;
 };
-const Index = ({ Availability, setIsPopupOpen, usedInPopup, setSelectedSlot, selectedLesson, mergedAvailability, teacherData }) => {
+
+const Index = ({ Availability, setIsPopupOpen, usedInPopup, setSelectedSlot, selectedLesson, mergedAvailability, teacherData, studentTimeZone, setStudentTimeZone }) => {
   const [events, setEvents] = useState([]);
   const { user } = useRole();
   const router = useRouter();
@@ -63,7 +66,7 @@ const Index = ({ Availability, setIsPopupOpen, usedInPopup, setSelectedSlot, sel
       : [];
 
     setEvents([...availabilityEvents, ...bookedEvents]);
-  }, [Availability]);
+  }, [Availability, studentTimeZone]);
 
   const eventStyleGetter = (event) => {
     return {
@@ -94,7 +97,6 @@ const Index = ({ Availability, setIsPopupOpen, usedInPopup, setSelectedSlot, sel
   };
 
   // console.log("availabilityBlocks",Availability);
-
 
   const handleClick = (event) => {
     if (!usedInPopup) {
@@ -129,102 +131,121 @@ const Index = ({ Availability, setIsPopupOpen, usedInPopup, setSelectedSlot, sel
     }
   };
 
+  const handleChange = (e) =>{
+    setSelectedSlot(null);
+    setStudentTimeZone(e.target.value);
+  }
+
+  // console.log("studentTimeZone", studentTimeZone);
+
 
   return (
-    <>
-      <div className="w-full ">
-        <div className="bg-white rounded-[20px]  border-[#CC282880] border-1">
-          <div className="py-1 py-2 lg:py-[15px] px-2 md:px-3 lg:px-6 flex flex-wrap justify-between items-center border-b border-black border-opacity-10">
-            <div className="flex flex-wrap items-center gap-4 mb-4">
-              <div className="flex items-center gap-2">
-                <span className="w-3 h-3 rounded-full bg-[#6ABB52] inline-block"></span>
-                <span className="text-sm text-gray-700">Available</span>
-              </div>
-              <div className="flex items-center gap-2">
-                <span className="w-3 h-3 rounded-full bg-[#8f97a3] inline-block"></span>
-                <span className="text-sm text-gray-700">Booked</span>
-              </div>
+    <div className="w-full ">
+      <div className="bg-white rounded-[20px]  border-[#CC282880] border-1">
+        <div className="py-1 py-2 lg:py-[15px] px-2 md:px-3 lg:px-6 flex flex-wrap justify-between items-center border-b border-black border-opacity-10">
+          <div className="flex flex-wrap items-center gap-4 mb-4">
+            <div className="flex items-center gap-2">
+              <span className="w-3 h-3 rounded-full bg-[#6ABB52] inline-block"></span>
+              <span className="text-sm text-gray-700">Available</span>
             </div>
-            {!usedInPopup &&
-              <div className="flex  gap-2 text-base lg:text-lg font-semibold text-[#1E1E1E] m-0 tracking-[-0.03em] w-full md:w-auto">
-                <button
-                  onClick={() => {
-                    if (!user) {
-                      toast.error("Please login first");
-                      router.push(`/login?redirect=${router.asPath}`);
-                      return;
-                    }
-                    if (user?.role != "student") {
-                      toast.error("Only students can message teachers");
-                      return;
-                    }
-                    router.push(`/student/message?query=${teacherData?.userId?._id}`);
-                  }}
-                  className={
-                    "font-medium cursor-pointer rounded-full py-1.5 lg:py-3.5 px-3 sm:px-5 text-[#ffffff] bg-[#CC2828] hover:bg-[#ad0e0e] text-sm sm:text-base md:w-full"
-                  }
-                >
-                  Message
-                </button>
-                <button
-                  onClick={() => {
-                    handleClick();
-                  }}
-                  className={
-                    "font-medium cursor-pointer rounded-full py-1.5 lg:py-3.5 px-3 sm:px-5 text-[#ffffff] bg-[#CC2828] hover:bg-[#ad0e0e] text-sm sm:text-base md:w-full"
-                  }
-                >
-                  Book Slot
-                </button>
-              </div>}
+            <div className="flex items-center gap-2">
+              <span className="w-3 h-3 rounded-full bg-[#8f97a3] inline-block"></span>
+              <span className="text-sm text-gray-700">Booked</span>
+            </div>
           </div>
-          <div className="p-4 relative">
-            <div className="w-full overflow-x-auto  px-2 pb-4 ">
-              <div className="min-w-[768px] md:min-w-full ">
-                <Calendar
-                  localizer={localizer}
-                  events={events}
-                  startAccessor="start"
-                  endAccessor="end"
-                  defaultView={Views.WEEK}
-                  views={[Views.WEEK]}
-                  date={currentDate}
-                  onNavigate={(date) => setCurrentDate(date)}
-                  step={30}
-                  timeslots={1}
-                  style={{
-                     height: "75vh",
-                    width: "100%",
-                    fontSize: "14px",
-                  }}
-                  selectable
-                  eventPropGetter={eventStyleGetter}
-                  onSelectEvent={(event) => {
-                    if (event?.title !== "Blocked") {
-                      handleClick(event);
-                    }
-                  }}
-                  components={{ event: Event }}
-                  tooltipAccessor={null}
-                  onSelectSlot={(slotInfo) => {
-                    const overlap = events.some(
-                      (event) =>
-                        moment(slotInfo?.start).isBefore(event?.end) &&
-                        moment(slotInfo?.end).isAfter(event?.start)
-                    );
-                    if (!overlap && !usedInPopup) {
-                      handleClick(slotInfo);
-                    }
-                  }}
-                />
-              </div>
+          {!usedInPopup &&
+            <div className="flex  gap-2 text-base lg:text-lg font-semibold text-[#1E1E1E] m-0 tracking-[-0.03em] w-full md:w-auto">
+              <button
+                onClick={() => {
+                  if (!user) {
+                    toast.error("Please login first");
+                    router.push(`/login?redirect=${router.asPath}`);
+                    return;
+                  }
+                  if (user?.role != "student") {
+                    toast.error("Only students can message teachers");
+                    return;
+                  }
+                  router.push(`/student/message?query=${teacherData?.userId?._id}`);
+                }}
+                className={
+                  "font-medium cursor-pointer rounded-full py-1.5 lg:py-3.5 px-3 sm:px-5 text-[#ffffff] bg-[#CC2828] hover:bg-[#ad0e0e] text-sm sm:text-base md:w-full"
+                }
+              >
+                Message
+              </button>
+              <button
+                onClick={() => {
+                  handleClick();
+                }}
+                className={
+                  "font-medium cursor-pointer rounded-full py-1.5 lg:py-3.5 px-3 sm:px-5 text-[#ffffff] bg-[#CC2828] hover:bg-[#ad0e0e] text-sm sm:text-base md:w-full"
+                }
+              >
+                Book Slot
+              </button>
+            </div>}
+        </div>
+        <div className="p-4 relative">
+          <div className="w-full overflow-x-auto px-2">
+            <div className="min-w-[768px] md:min-w-full ">
+              <Calendar
+                localizer={localizer}
+                events={events}
+                startAccessor="start"
+                endAccessor="end"
+                defaultView={Views.WEEK}
+                views={[Views.WEEK]}
+                date={currentDate}
+                onNavigate={(date) => setCurrentDate(date)}
+                step={30}
+                timeslots={1}
+                style={{
+                  height: "75vh",
+                  width: "100%",
+                  fontSize: "14px",
+                }}
+                selectable
+                eventPropGetter={eventStyleGetter}
+                onSelectEvent={(event) => {
+                  if (event?.title !== "Blocked") {
+                    handleClick(event);
+                  }
+                }}
+                components={{ event: Event }}
+                tooltipAccessor={null}
+                onSelectSlot={(slotInfo) => {
+                  const overlap = events.some(
+                    (event) =>
+                      moment(slotInfo?.start).isBefore(event?.end) &&
+                      moment(slotInfo?.end).isAfter(event?.start)
+                  );
+                  if (!overlap && !usedInPopup) {
+                    handleClick(slotInfo);
+                  }
+                }}
+              />
             </div>
-
+          </div>
+          <div className="mt-4 relative flex justify-center sm:justify-end">
+            <select
+              className="w-fit lg:px-2 py-2 text-xs sm:text-sm border border-red-500 rounded-[6px] lg:rounded-[10px] bg-white text-red-600 focus:outline-none focus:ring-1 focus:ring-red-400"
+              onChange={handleChange}
+              value={studentTimeZone}
+              name="timezone"
+              required
+            >
+              <option value="">Change Time-Zone</option>
+              {timeZones && timeZones?.map((zone) => (
+                <option key={zone?.value} value={zone?.value}>
+                  {zone?.label}
+                </option>
+              ))}
+            </select>
           </div>
         </div>
       </div>
-
-    </>
+    </div>
   );
 };
 

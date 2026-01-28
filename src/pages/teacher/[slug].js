@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useLayoutEffect, useState } from "react";
 import Layout from "../common/Layout";
 import Image from "next/image";
 import teacherImg from "../Assets/Images/teacherimg.jpg";
@@ -29,18 +29,28 @@ export default function Index() {
   const [mergedAvailability, setMergedAvailability] = useState("");
   const [lessons, setLessons] = useState([]);
   const [isPopupOpen, setIsPopupOpen] = useState(book ? true : false);
-  const [studentTimeZone, setStudentTimeZone] = useState(null);
+  const [studentTimeZone, setStudentTimeZone] = useState("");
   const closePopup = () => {
     setIsPopupOpen(false);
-    
   };
   const Id = data?.userId?._id;
 
-
   useEffect(() => {
-    const detectedZone = moment.tz.guess();  // ✅ moment-based detection
+    const detectedZone = moment.tz.guess();
     setStudentTimeZone(detectedZone || "");
   }, []);
+
+  useEffect(() => {
+    // console.log("studentTimeZone", studentTimeZone);
+    if (!studentTimeZone) return;
+
+    moment.tz.setDefault(studentTimeZone);
+
+    return () => {
+      moment.tz.setDefault(); // reset on unmount
+    };
+  }, [studentTimeZone]);
+
 
   const fetchLessons = async (Id) => {
     try {
@@ -372,7 +382,7 @@ export default function Index() {
                 <p className="text-sm text-gray-600 mb-6 lg:mb-8">
                   {`All calendar times are displayed based on your device's current time zone: ${studentTimeZone || "NA"}. Please ensure your system time is accurate to avoid any scheduling discrepancies.`}
                 </p>
-                <Calendar Availability={content} setIsPopupOpen={setIsPopupOpen} usedInPopup={false} mergedAvailability={mergedAvailability} teacherData={data}/>
+                <Calendar Availability={content} setIsPopupOpen={setIsPopupOpen} usedInPopup={false} mergedAvailability={mergedAvailability} teacherData={data} studentTimeZone={studentTimeZone} setStudentTimeZone={setStudentTimeZone} />
               </div>
             </div>
             <Testimonial reviews={lessons?.reviews} />
@@ -383,6 +393,7 @@ export default function Index() {
           lessons={lessons}
           Availability={content}
           studentTimeZone={studentTimeZone}
+          setStudentTimeZone={setStudentTimeZone}
           loading={loading}
           mergedAvailability={mergedAvailability}
           slug={slug}

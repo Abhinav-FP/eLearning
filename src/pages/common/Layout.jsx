@@ -31,7 +31,8 @@ export default function Layout({ children }) {
     }, []);
 
     useEffect(() => {
-      if (user?.time_zone) {
+      // console.log("user", user);
+      if (user && user?.role != "student" && user?.time_zone) {
         moment.tz.setDefault(user.time_zone);
         // console.log("Timezone updated to:", user.time_zone);
       }

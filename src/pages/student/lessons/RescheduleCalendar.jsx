@@ -7,7 +7,7 @@ const localizer = momentLocalizer(moment);
 import { useRole } from "@/context/RoleContext";
 import { useRouter } from "next/router";
 import toast from "react-hot-toast";
-import timeZones from "../../../Json/Timezone.json";
+import timeZones from "../../../Json/TimeZone.json";
 
 const Event = ({ event }) => {
   const formattedStartTime = moment(event.start).format("hh:mm A");

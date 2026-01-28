@@ -6,7 +6,7 @@ import "react-big-calendar/lib/css/react-big-calendar.css";
 const localizer = momentLocalizer(moment);
 import { useRole } from "@/context/RoleContext";
 import { useRouter } from "next/router";
-import timeZones from "../../Json/Timezone.json";
+import timeZones from "../../Json/TimeZone.json";
 import toast from "react-hot-toast";
 import momentTimeZone from "moment-timezone";
 

@@ -132,7 +132,9 @@ const Index = ({ Availability, setIsPopupOpen, usedInPopup, setSelectedSlot, sel
   };
 
   const handleChange = (e) =>{
-    setSelectedSlot(null);
+    if(usedInPopup){
+      setSelectedSlot(null);
+    }
     setStudentTimeZone(e.target.value);
   }
 

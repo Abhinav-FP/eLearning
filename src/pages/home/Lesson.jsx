@@ -156,7 +156,7 @@ export default function Lesson({ title }) {
                                                         name={items?.userId?.name}
                                                         divClass="relative md:!h-[205px]"
                                                         imgClass="w-full !h-[205px] md:!h-[205px] rounded-[4px] md:rounded-[6px] object-cover"
-                                                        btnClass="absolute top-1/2 left-0 right-0 mx-auto -translate-y-1/2 text-white hover:text-[#CC2828] w-[85px] text-center cursor-pointer"
+                                                        btnClass="absolute top-1/2 left-0 right-0 mx-auto -translate-y-1/2 text-white hover:text-[#55844D] w-[85px] text-center cursor-pointer"
                                                     />
                                                 </div>
                                             }
@@ -182,7 +182,7 @@ export default function Lesson({ title }) {
                                                     </div>
                                                     <div className="w-6/12 lg:w-6/12 text-right">
                                                         <button
-                                                            className="font-medium cursor-pointer rounded-full py-2 bg-[#CC2828] hover:bg-[#ad0e0e] text-white text-sm lg:text-base py-2.5 px-2 lg:px-4 xl:px-6"
+                                                            className="font-medium cursor-pointer rounded-full py-2 bg-[#55844D] hover:bg-[#3d5e37] text-white text-sm lg:text-base py-2.5 px-2 lg:px-4 xl:px-6"
                                                             onClick={(e) => {
                                                                 e.stopPropagation();
                                                                 e.preventDefault();

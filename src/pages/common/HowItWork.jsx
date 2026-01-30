@@ -5,35 +5,58 @@ import chooseIcon from "../Assets/Images/choose_icon.png";
 import ScheduleIcon from "../Assets/Images/schedule.png";
 import PaymentIcon from "../Assets/Images/payment.png";
 import LearningIcon from "../Assets/Images/learning.png";
+import Icon1 from "../Assets/Images/NewIcon1.png";
+import Icon2 from "../Assets/Images/NewIcon2.png";
+import Icon3 from "../Assets/Images/NewIcon3.png";
+import Icon4 from "../Assets/Images/NewIcon4.png";
 
 export default function HowItWork({ classess, title }) {
-    const Data = [
+    const data = [
         {
-            Icons: chooseIcon,
-            Title: "Choose the teacher",
+            icon: Icon1,
+            text: "Choose the teacher",
         },
         {
-            Icons: ScheduleIcon,
-            Title: "Schedule the lesson",
+            icon: Icon2,
+            text: "Schedule the lesson",
         },
         {
-            Icons: PaymentIcon,
-            Title: "Make the payment/book",
+            icon: Icon3,
+            text: "Make the payment/book",
         },
         {
-            Icons: LearningIcon,
-            Title: "Start learning",
+            icon: Icon4,
+            text: "Start learning",
         },
 
-    ]
+    ];
+
+    // const data = [
+    //     {
+    //         icon: chooseIcon,
+    //         text: "Choose the teacher",
+    //     },
+    //     {
+    //         icon: ScheduleIcon,
+    //         text: "Schedule the lesson",
+    //     },
+    //     {
+    //         icon: PaymentIcon,
+    //         text: "Make the payment/book",
+    //     },
+    //     {
+    //         icon: LearningIcon,
+    //         text: "Start learning",
+    //     },
+
+    // ];
     return (
         <>
-            <div className={`bg-[rgba(204,40,40,0.6)] py-[40px] md:py-[60px] lg:py-[80px] ${classess}`}>
+            <div className={`bg-[rgba(85,132,77,0.6)] py-[40px] md:py-[60px] lg:py-[80px] ${classess}`}>
                 <div className="mx-auto container sm:container md:container lg:container xl:max-w-[1230px] px-4">
                     <Heading classess={'text-center mb-[20px] md:mb-[30px] lg:mb-[40px] text-white'} title={title || "How It Works"} />
                     <div className="flex flex-wrap -mx-4 md:-mx-[20px] lg:-mx-[28px] xl:-mx-[34px]">
-                        {
-                            Data.map((item, i) => (
+                        {data && data?.map((item, i) => (
                                 <div key={i} className=" w-full md:w-3/12 px-4 md:px-[20px] lg:px-[26px] xl:px-[34px] relative 
                                 arrowimg
                                 [&:not(:last-child)]:after:absolute 
@@ -52,9 +75,9 @@ export default function HowItWork({ classess, title }) {
                                 ">
                                     <div className="bg-white rounded-[20px] lg:rounded-[30px] py-4 px-3 lg:px-6 text-center min-h-full">
                                         <div className="relative lg:min-h-[124px] mb-[18px] px-4 ">
-                                            <Image className="block mx-auto  max-w-[80px] md:max-w-none max-h-[80px] md:max-h-none" src={item.Icons} alt={item.Title} />
+                                            <Image className="block mx-auto  max-w-[80px] md:max-w-none max-h-[80px] md:max-h-none" src={item?.icon} alt={item?.text} />
                                         </div>
-                                        <h3 className="max-w-[118px] mx-auto leading-[22px] lg:leading-[24px] font-inter text-[#CC2828] -tracking-[0.04em] font-bold text-base lg:text-xl">{item.Title}</h3>
+                                        <h3 className="max-w-[118px] mx-auto leading-[22px] lg:leading-[24px] font-inter text-[#55844D] -tracking-[0.04em] font-bold text-base lg:text-xl">{item?.text}</h3>
                                     </div>
                                 </div>
                             ))

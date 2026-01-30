@@ -9,7 +9,7 @@ export default function FindCourse({pargraph ,title , courseimg, loading}) {
         <>
             <div className="pt-[40px] md:pt-[60px] lg:pt-[100px] pb-[40px] md:pb-[40px] lg:pb-[60px]">
                 <div className="mx-auto container sm:container md:container lg:container xl:max-w-[1230px]  px-4">
-                    <div className="bg-[#CC2828] rounded-[10px] lg:rounded-[20px] px-6 lg:px-10 py-8 lg:py-12">
+                    <div className="bg-[#55844D] rounded-[10px] lg:rounded-[20px] px-6 lg:px-10 py-8 lg:py-12">
                         <div className="flex flex-wrap -mx-4 items-center space-y-5">
                             <div className="w-full md:w-5/12 px-4 ">
                                 <div className='max-w-[372px]'>
@@ -19,7 +19,7 @@ export default function FindCourse({pargraph ,title , courseimg, loading}) {
                                     </p>
                                     <Link
                                     href="/course"
-                                    className="block w-full text-center font-medium cursor-pointer rounded-full py-3 md:py-3.5 px-5 text-[#CC2828] text-base bg-white"
+                                    className="block w-full text-center font-medium cursor-pointer rounded-full py-3 md:py-3.5 px-5 text-[#55844D] text-base bg-white"
                                     >
                                     Search Courses
                                     </Link>

@@ -1,17 +1,18 @@
 import React, { useEffect, useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
-
 import { IoIosArrowDown } from "react-icons/io";
 import { useRole } from "@/context/RoleContext";
 import { useRouter } from "next/router";
 import toast from "react-hot-toast";
+import { usePathname } from "next/navigation";
 
 export default function Header({isEmulating=false}) {
 
     const [menuOpen, setMenuOpen] = useState();
     const { user, setUser, language, setLanguage } = useRole();
     const router = useRouter();
+    const pathname = usePathname();
     // console.log("router",router);
 
     const toggleMenu = () => {
@@ -67,7 +68,7 @@ export default function Header({isEmulating=false}) {
                         <div className="flex-shrink-0">
                             <Link href="/">
                                    <Image
-                                    className="w-auto h-[85px]"
+                                    className="w-auto h-[75px] sm:h-[85px]"
                                     height={1040}
                                     width={1344}
                                     layout="fixed"
@@ -82,21 +83,36 @@ export default function Header({isEmulating=false}) {
                                 <li className="w-full lg:w-auto relative cursor-pointer [&:not(:last-child)]:border-b lg:border-none border-[#ddd] ">
                                     <Link
                                         href="/"
-                                        className="py-3 lg:py-0 inline-block px-4 lg:px-0 capitalize text-base xl:text-lg tracking-[-0.04em] font-medium text-[#55844D] hover:text-[#3d5e37]">
+                                        className={`py-3 lg:py-0 inline-block px-4 lg:px-0 capitalize text-base xl:text-lg tracking-[-0.04em]
+                                            ${pathname === "/"
+                                                ? "font-bold text-[#55844D]"
+                                                : "font-normal text-black"}
+                                                   hover:text-[#3d5e37]`}
+                                        >   
                                         Home
                                     </Link>
                                 </li>
                                 <li className="w-full lg:w-auto relative cursor-pointer [&:not(:last-child)]:border-b lg:border-none border-[#ddd] ">
                                     <Link
                                         href="/find-teacher"
-                                        className="py-3 lg:py-0 inline-block px-4 lg:px-0 capitalize text-base xl:text-lg tracking-[-0.04em] font-medium text-[#55844D] hover:text-[#3d5e37]">
+                                        className={`py-3 lg:py-0 inline-block px-4 lg:px-0 capitalize text-base xl:text-lg tracking-[-0.04em]
+                                            ${pathname === "/find-teacher"
+                                                ? "font-bold text-[#55844D]"
+                                                : "font-normal text-black"}
+                                                   hover:text-[#3d5e37]`}
+                                        >
                                         Find a Teacher
                                     </Link>
                                 </li>
                                 <li className="w-full lg:w-auto relative cursor-pointer [&:not(:last-child)]:border-b lg:border-none border-[#ddd] ">
                                     <Link
                                         href="/become-teacher"
-                                        className="py-3 lg:py-0 inline-block px-4 lg:px-0 capitalize text-base xl:text-lg tracking-[-0.04em] font-medium text-[#55844D] hover:text-[#3d5e37]">
+                                        className={`py-3 lg:py-0 inline-block px-4 lg:px-0 capitalize text-base xl:text-lg tracking-[-0.04em]
+                                            ${pathname === "/become-teacher"
+                                                ? "font-bold text-[#55844D]"
+                                                : "font-normal text-black"}
+                                                   hover:text-[#3d5e37]`}
+                                        >
                                         Become a Teacher
                                     </Link>
                                 </li>
@@ -105,20 +121,20 @@ export default function Header({isEmulating=false}) {
                                 <div className="flex flex-col lg:hidden">
                                     <Link
                                         href={`${user && user?.role === "student" ? "/student" : user?.role === "teacher" ? "/teacher-dashboard" : "/admin"}`}
-                                        className="text-[#55844D] hover:text-[#3d5e37] border-t border-b border-[#ddd] text-base py-3 px-4 font-medium cursor-pointer" >
+                                        className="font-normal text-black hover:text-[#3d5e37] border-t border-b border-[#ddd] text-base py-3 px-4 cursor-pointer" >
                                         View dashboard
                                     </Link>
                                     {isEmulating ? 
                                     <button
                                         onClick={handleReturnToAdmin}
-                                        className="text-[#55844D] hover:text-[#3d5e37] border-t border-[#ddd] text-base py-3 px-4 font-medium cursor-pointer text-left appearance-none bg-transparent border-none"
+                                        className="font-normal text-black hover:text-[#3d5e37] border-t border-[#ddd] text-base py-3 px-4 cursor-pointer text-left appearance-none bg-transparent border-none"
                                     >
                                         Return to Admin
                                     </button>
                                     :
                                     <button
                                         onClick={handleLogout}
-                                        className="text-[#55844D] hover:text-[#3d5e37] border-t border-[#ddd] text-base py-3 px-4 font-medium cursor-pointer text-left appearance-none bg-transparent border-none"
+                                        className="font-normal text-black hover:text-[#3d5e37] border-t border-[#ddd] text-base py-3 px-4 cursor-pointer text-left appearance-none bg-transparent border-none"
                                     >
                                         Logout
                                     </button>
@@ -126,10 +142,10 @@ export default function Header({isEmulating=false}) {
                                 </div>
                                 :
                                 <div className="flex flex-col lg:hidden">
-                                    <Link href="/login" className="text-[#55844D] hover:text-[#3d5e37] border-t border-[#ddd] text-base py-3 px-4 font-medium cursor-pointer" >
+                                    <Link href="/login" className="font-normal text-black hover:text-[#3d5e37] border-t border-[#ddd] text-base py-3 px-4 cursor-pointer" >
                                         Log In
                                     </Link>
-                                    <Link href="/student/register" className="text-[#55844D] hover:text-[#3d5e37] border-t border-[#ddd] text-base py-3 px-4 font-medium cursor-pointer" >
+                                    <Link href="/student/register" className="font-normal text-black hover:text-[#3d5e37] border-t border-[#ddd] text-base py-3 px-4 cursor-pointer" >
                                         Sign Up
                                     </Link>
                                 </div>
@@ -171,8 +187,9 @@ export default function Header({isEmulating=false}) {
                                 </>
                                 :
                                 <>
-                                    <Link href="/student/register" className="hidden lg:block bg-[#55844D] hover:bg-[#3d5e37] text-white text-base py-3.5 px-8 xl:px-10 font-medium cursor-pointer rounded-full" >
-                                        Sign Up                            </Link>
+                                    <Link href="/student/register" className="hidden lg:block bg-white hover:bg-[#55844D] text-black hover:text-white border-2 border-[#00000033] hover:border-transparent text-base py-3.5 px-8 xl:px-10 font-medium cursor-pointer rounded-full" >
+                                        Sign Up    
+                                    </Link>
                                     <Link href="/login" className="hidden lg:block bg-[#55844D] hover:bg-[#3d5e37] text-white text-base py-3.5 px-8 xl:px-10 font-medium cursor-pointer rounded-full" >
                                         Log In
                                     </Link>

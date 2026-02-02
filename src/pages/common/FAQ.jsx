@@ -25,11 +25,11 @@ export default function FAQ({ classess, Faq, heading }) {
               >
                 {items.question}
                 {openIndex === index ? (
-                  <span className="text-[#008F70] bg-[#C6E4DE] h-[32px] w-[32px] md:h-[38px] md:w-[38px] lg:h-[44px] lg:w-[44px] flex items-center justify-center block rounded-full absolute right-0 top-1/2 -translate-y-1/2">
+                  <span className="text-white bg-[#55844D] h-[32px] w-[32px] md:h-[38px] md:w-[38px] lg:h-[44px] lg:w-[44px] flex items-center justify-center block rounded-full absolute right-0 top-1/2 -translate-y-1/2">
                     -
                   </span>
                 ) : (
-                  <span className="text-[#008F70] bg-[#C6E4DE] h-[32px] w-[32px] md:h-[38px] md:w-[38px] lg:h-[44px] lg:w-[44px] flex items-center justify-center block rounded-full absolute right-0 top-1/2 -translate-y-1/2">
+                  <span className="text-white bg-[#55844D] h-[32px] w-[32px] md:h-[38px] md:w-[38px] lg:h-[44px] lg:w-[44px] flex items-center justify-center block rounded-full absolute right-0 top-1/2 -translate-y-1/2">
                     +
                   </span>
                 )}

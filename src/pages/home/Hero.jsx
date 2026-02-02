@@ -33,7 +33,7 @@ export default function Hero({ title, heroimg, heroimg2, loading }) {
                             </div>
                         </div>
                         <div className="w-full lg:w-5/12 px-4 mt-8 lg:mt-0 text-center lg:text-left">
-                            <h1 className="text-[#55844D] font-inter text-[24px] sm:text-[32px] lg:text-[36px] xl:text-[55px] font-extrabold leading-[30px] sm:leading-[42px] md:leading-[44px] lg:leading-[44px] xl:leading-[60px] mb-4 lg:mb-6 xl:mb-8 -tracking-[0.04em] max-w-[500px] mx-auto">
+                            <h1 className="text-black font-inter text-[24px] sm:text-[32px] lg:text-[36px] xl:text-[55px] font-extrabold leading-[30px] sm:leading-[42px] md:leading-[44px] lg:leading-[44px] xl:leading-[60px] mb-4 lg:mb-6 xl:mb-8 -tracking-[0.04em] max-w-[500px] mx-auto">
                                 {title}
                             </h1>
                             {/* <Button classes={'bg-[#55844D] hover:bg-[#3d5e37] text-base lg:text-lg xl:text-xl py-2.5 lg:py-3 xl:py-3.5 px-4 text-white w-full max-w-[438px]'} title={'Book a lesson'} /> */}

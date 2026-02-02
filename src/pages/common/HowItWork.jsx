@@ -52,9 +52,9 @@ export default function HowItWork({ classess, title }) {
     // ];
     return (
         <>
-            <div className={`bg-[rgba(85,132,77,0.6)] py-[40px] md:py-[60px] lg:py-[80px] ${classess}`}>
+            <div className={`bg-white py-[40px] md:py-[60px] lg:py-[80px] ${classess}`}>
                 <div className="mx-auto container sm:container md:container lg:container xl:max-w-[1230px] px-4">
-                    <Heading classess={'text-center mb-[20px] md:mb-[30px] lg:mb-[40px] text-white'} title={title || "How It Works"} />
+                    <Heading classess={'text-center mb-[20px] md:mb-[30px] lg:mb-[40px] text-black'} title={title || "How It Works"} />
                     <div className="flex flex-wrap -mx-4 md:-mx-[20px] lg:-mx-[28px] xl:-mx-[34px]">
                         {data && data?.map((item, i) => (
                                 <div key={i} className=" w-full md:w-3/12 px-4 md:px-[20px] lg:px-[26px] xl:px-[34px] relative 
@@ -73,7 +73,7 @@ export default function HowItWork({ classess, title }) {
                                 [&:not(:last-child)]:mb-16 [&:not(:last-child)]:md:mb-0
                                 
                                 ">
-                                    <div className="bg-white rounded-[20px] lg:rounded-[30px] py-4 px-3 lg:px-6 text-center min-h-full">
+                                    <div className="bg-white border border-[rgba(85,132,77,0.3)] rounded-[20px] lg:rounded-[30px] py-4 px-3 lg:px-6 text-center min-h-full">
                                         <div className="relative lg:min-h-[124px] mb-[18px] px-4 ">
                                             <Image className="block mx-auto  max-w-[80px] md:max-w-none max-h-[80px] md:max-h-none" src={item?.icon} alt={item?.text} />
                                         </div>

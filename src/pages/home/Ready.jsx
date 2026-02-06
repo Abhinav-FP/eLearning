@@ -8,9 +8,9 @@ export default function Ready({ title }) {
     <>
       <div className="pt-12 md:pt-20">
         <div className="mx-auto max-w-[1230px] px-4">
-          <div className="ready-bg rounded-2xl py-16 md:py-20 lg:py-24 text-center">
+          <div className="bg-[#ECF1E6] rounded-2xl py-16 md:py-20 lg:py-24 text-center">
             <Heading
-              classess={"text-white mb-[30px] lg:mb-[40px] xl:mb-[45px]"}
+              classess={"text-[#33403D] mb-[30px] lg:mb-[40px] xl:mb-[45px]"}
               title={title}
             />
             <Link

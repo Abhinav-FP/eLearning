@@ -13,8 +13,8 @@ export default function FindCourse({pargraph ,title , courseimg, loading}) {
                         <div className="flex flex-wrap -mx-4 items-center space-y-5">
                             <div className="w-full md:w-5/12 px-4 ">
                                 <div className='max-w-[372px]'>
-                                    <Heading classess={'text-center sm:text-left text-black mb-2'} title={title} />
-                                    <p className='text-center sm:text-left text-base font-normal text-black -tracking-[0.03em] mb-6 md:mb-8 lg:mb-10'>
+                                    <Heading classess={'text-center sm:text-left text-[#33403D] mb-2'} title={title} />
+                                    <p className='text-center sm:text-left text-base font-normal text-[#6B7280] -tracking-[0.03em] mb-6 md:mb-8 lg:mb-10'>
                                       {pargraph}
                                     </p>
                                     <Link
@@ -23,7 +23,6 @@ export default function FindCourse({pargraph ,title , courseimg, loading}) {
                                     >
                                     Search Courses
                                     </Link>
-
                                 </div>
                             </div>
                             <div className="w-full md:w-7/12 px-4 lg:text-right">

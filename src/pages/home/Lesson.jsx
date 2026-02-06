@@ -102,7 +102,7 @@ export default function Lesson({ title }) {
 
     return (
         <>
-            <div className="bg-[rgba(85,132,77,0.05)] py-[40px] md:py-[60px] lg:py-[80px] xl:py-[100px]">
+            <div className="bg-[#FAF9F6] py-[40px] md:py-[60px] lg:py-[80px] xl:py-[100px]">
                 <div className="mx-auto container sm:container md:container lg:container xl:max-w-[1230px] px-4">
                     <Heading classess={'text-[#1E1E1E] mb-[30px] lg:mb-[40px] max-w-[834px] mx-auto text-center '} title={title} />
                     <div className="space-y-3">
@@ -172,7 +172,7 @@ export default function Lesson({ title }) {
                                                 </div>
                                                 <div className="flex justify-between items-center pt-4 lg:pt-5">
                                                     <div className="w-6/12 text-black lg:w-6/12">
-                                                        <span className="text-black text-xs xl:text-sm -tracking-[0.03em] text-sm">
+                                                        <span className="text-[#6B7280] text-xs xl:text-sm -tracking-[0.03em] text-sm">
                                                             Lesson from
                                                         </span>
                                                         <div className="text-black font-bold text-base -tracking-[0.03em]">

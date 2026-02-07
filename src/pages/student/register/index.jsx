@@ -388,12 +388,12 @@ export default function Index() {
             <div className="w-full md:w-12/12 px-2.5 mb-5 flex justify-center">
               {/* {mounted && <Turnstile onVerify={setCfToken} />} */}
               <Turnstile
-                  siteKey={"0x4AAAAAACGwGP65iX0v0KQt"}
-                  ref={turnRef}
-                  onSuccess={handleTurnStile}
-                  onError={(_err) => {
-                      console.log("Turnstile error", _err);
-                  }}
+                siteKey={"0x4AAAAAACGwGP65iX0v0KQt"}
+                ref={turnRef}
+                onSuccess={handleTurnStile}
+                onError={(_err) => {
+                  console.log("Turnstile error", _err);
+                }}
               />
             </div>
 

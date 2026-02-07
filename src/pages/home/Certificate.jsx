@@ -11,11 +11,11 @@ export default function Certificate() {
           <GrCertificate className="text-[#33403D] text-[50px] md:text-[70px]" />
         </div>
 
-        <h2 className="text-2xl md:text-3xl lg:text-4xl font-bold tracking-[-0.03em] mb-4 lg:mb-6">
+        <h2 className="heading mb-4 lg:mb-6">
           Official Certification
         </h2>
 
-        <p className="text-base md:text-lg text-[#6B7280] font-medium tracking-[-0.02em] opacity-90 max-w-[700px] mx-auto">
+        <p className="paragraph">
           <span className="font-bold text-[#6B7280]">
             Students who complete 150 hours of study on our platform will receive
             an official certificate issued by Akita Inaka School.

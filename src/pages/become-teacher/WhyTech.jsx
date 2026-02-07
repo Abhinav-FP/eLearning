@@ -1,16 +1,16 @@
 import React, { useState } from "react";
 import Heading from "../common/Heading";
 import Image from "next/image";
-import LineImg from "../Assets/Images/linebar-red.png";
+import LineImg from "../Assets/Images/linebar-green.png";
 import whytechBanner from "../Assets/Images/whytech-banner.png";
 import { PiGlobe } from "react-icons/pi";
 
 export default function WhyTech({title, pargraph, points, language}) {
     return (
-        <div className=" whytech_bg pt-[115px] md:pt-[120px] lg:pt-[150px] pb-[40px] md:pb-[50px] lg:pb-[70px]">
+        <div className=" pt-[115px] md:pt-[120px] lg:pt-[150px] pb-[40px] md:pb-[50px] lg:pb-[70px]">
             <div className="mx-auto container sm:container md:container lg:container xl:max-w-[1230px]  px-4">
                 <Heading classess={'text-center mb-3'} title={title} />
-                <p className="text-center text-[#535353] font-medium text-base -tracking-[0.03em] mb-3 lg:mb-5">{pargraph}</p>
+                <p className="paragraph mb-3 lg:mb-5">{pargraph}</p>
                 <div className="text-center mb-3 md:mb-6 lg:mb-10">
                     <Image className="inline-block" src={LineImg} alt="icon" />
                 </div>
@@ -49,13 +49,13 @@ export default function WhyTech({title, pargraph, points, language}) {
                     <div className="w-full px-2.5">
                         <div className="grid grid-cols-1 md:grid-cols-2 gap-3 lg:gap-5">
                         {points && points?.map((item, index) => (
-                            <div className="rounded border-[#CC2828] pl-1 md:pl-2 border-l-3 md:border-l-5 w-full">
+                            <div className="rounded border-[#55844D] pl-1 md:pl-2 border-l-3 md:border-l-5 w-full">
                                 <li
                                 key={index}
-                                className="bg-[rgba(204,40,40,0.2)] list_shadow rounded-[10px] py-2 sm:py-3 px-3 sm:px-5 h-full flex items-center gap-3 text-sm md:text-base lg:text-lg font-medium leading-snug"
+                                className=" list_shadow rounded-[10px] py-2 sm:py-3 px-3 sm:px-5 h-full flex items-center gap-3 text-sm md:text-base lg:text-lg font-medium leading-snug"
                                 >
-                                <PiGlobe className="text-[#CC2828] min-w-[32px] min-h-[32px] mt-1" size={32} />
-                                <span>{item?.[language]}</span>
+                                <PiGlobe className="text-[#55844D] min-w-[32px] min-h-[32px] mt-1" size={32} />
+                                <span className="text-[#55844D]">{item?.[language]}</span>
                                 </li>
                             </div>
                         ))}

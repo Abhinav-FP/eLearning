@@ -93,7 +93,7 @@ export default function Login() {
         </div>
 
         {/* Heading */}
-        <h2 className="text-center text-[#CC2828] text-2xl lg:text-4xl font-bold mb-6 tracking-[-0.04em] mb-6 lg:mb-8">
+        <h2 className="text-center text-[#55844D] text-2xl lg:text-4xl font-bold mb-6 tracking-[-0.04em] mb-6 lg:mb-8">
           LOG IN
         </h2>
 
@@ -151,7 +151,7 @@ export default function Login() {
 
             {/* Login Button */}
             <button
-              className="w-full cursor-pointer border border-[rgba(0,0,0,0.1)] bg-[#CC2828] hover:bg-red-700 uppercase text-white py-3.5 cursor-pointer rounded-[10px] font-bold text-base transition"
+              className="btn lg w-full"
               type="submit"
               disabled={loading}
             >
@@ -163,7 +163,7 @@ export default function Login() {
             Not registered?{" "}
             <Link
               href="/student/register"
-              className="text-[#CC2828] hover:underline"
+              className="text-[#55844D] hover:underline"
             >
               Register.
             </Link>

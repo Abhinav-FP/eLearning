@@ -22,12 +22,12 @@ export default function Teacher({ teacherData, loading }) {
                 {/* <p className="text-center text-[#535353] font-medium text-base -tracking-[0.03em] mb-4 lg:mb-5">
                     If you are not sure what teacher to choose, where to start, what to focus on - contact us.
                 </p> */}
-                <h2 className="text-center text-xl md:text-2xl lg:text-4xl font-bold -tracking-[0.03em] mb-4 lg:mb-5">
+                <h2 className="text-center text-xl md:text-2xl lg:text-4xl text-[#33403D] font-bold -tracking-[0.03em] mb-4 lg:mb-5">
                     If you are not sure what teacher to choose, where to start, what to focus on - contact us
                     </h2>
                     <div className="flex justify-center mb-8 lg:mb-10">
                         <a
-                            className="font-semibold bg-[#CC2828] hover:bg-[#ad0e0e] text-white transition-all duration-300 rounded-full py-2.5 px-6 md:py-3 md:px-8 text-sm md:text-base"
+                            className="btn lg"
                             target="_blank"
                             href="https://www.takemetojapan.com/contact"
                         >
@@ -46,7 +46,7 @@ export default function Teacher({ teacherData, loading }) {
                     ) :
                     <div className="flex flex-wrap justify-center ">
                         {teacherData && teacherData?.map((item, i) => (
-                            <Link href={`/teacher/${item?._id}`} key={i} className="w-full mb-6 lg:mb-8 bg-[#FFE8E8] rounded-[10px] p-5 md:p-8 lg:p-10">
+                            <Link href={`/teacher/${item?._id}`} key={i} className="w-full mb-6 lg:mb-8 bg-[#ECF1E6] rounded-[10px] p-5 md:p-8 lg:p-10">
                                 <div className="flex flex-wrap">
                                     <div className="w-full md:w-[80px] lg:w-[276px]">
                                         {/* <div className="h-[80px] w-[80px] lg:h-[112px] lg:w-[112px] rounded-full overflow-hidden   mx-0 mb-3 lg:mb-6 "> */}
@@ -85,7 +85,7 @@ export default function Teacher({ teacherData, loading }) {
                                                     Specialities :
                                                 </span> 
                                                     {item.tags.map((tag, idx) => (
-                                                        <span key={idx} className="flex gap-1 flex-wrap items-center text-black text-base -tracking-[0.03em] capitalize">
+                                                        <span key={idx} className="flex gap-1 flex-wrap items-center text-[#33403D] text-base -tracking-[0.03em] capitalize">
                                                             <svg
                                                                 xmlns="http://www.w3.org/2000/svg"
                                                                 className="w-4 h-4 mr-1"
@@ -111,16 +111,16 @@ export default function Teacher({ teacherData, loading }) {
                                         <div className="flex flex-wrap  gap-x-2 md:gap-x-6 lg:gap-x-8 mb-3 lg:mb-5">
                                             <div>
                                                 <span className="text-[#8D929A] text-base -tracking-[0.03em] pr-2">Language :</span>
-                                                <span className="capitalize text-black text-base -tracking-[0.03em] ">{item?.languages_spoken.join(' , ') || "N/A"}</span>
+                                                <span className="capitalize text-[#33403D] text-base -tracking-[0.03em] ">{item?.languages_spoken.join(' , ') || "N/A"}</span>
                                             </div>
                                             <div>
                                                 <span className="text-[#8D929A] text-base -tracking-[0.03em] pr-2">Nationality :</span>
-                                                <span className="capitalize text-black text-base -tracking-[0.03em] ">{item?.userId?.nationality || "N/A"}</span>
+                                                <span className="capitalize text-[#33403D] text-base -tracking-[0.03em] ">{item?.userId?.nationality || "N/A"}</span>
                                             </div>
                                             {/* {item?.userId?.nationality} */}
                                             <div>
                                                 <span className="text-[#8D929A] text-base -tracking-[0.03em] pr-2">Gender :</span>
-                                                <span className="capitalize text-black text-base -tracking-[0.03em] ">{item?.gender === 'M' ? 'Male' : item?.gender === 'F' ? 'Female' : "N/A"}</span>
+                                                <span className="capitalize text-[#33403D] text-base -tracking-[0.03em] ">{item?.gender === 'M' ? 'Male' : item?.gender === 'F' ? 'Female' : "N/A"}</span>
                                             </div>
                                             {/* <div>
                                                 <span className="text-[#8D929A] text-base -tracking-[0.03em] pr-2">Experience :</span>
@@ -135,7 +135,7 @@ export default function Teacher({ teacherData, loading }) {
                                                 <span className="text-black text-sm -tracking-[0.03em] text-sm">
                                                     Lesson from
                                                 </span>
-                                                <div className="text-black font-bold text-base -tracking-[0.03em]">
+                                                <div className="text-[#55844D] font-bold text-base -tracking-[0.03em]">
                                                         {formatMultiPrice(item?.lowestLesson?.price, "USD")}
                                                 </div>
                                                 </>
@@ -143,7 +143,7 @@ export default function Teacher({ teacherData, loading }) {
                                             </div>
                                             <div className="w-full md:w-6/12 flex justify-between md:justify-end gap-3 md:gap-4 lg:gap-5 order-2 md:order-none">
                                                 <button
-                                                    className="font-medium cursor-pointer rounded-full py-2 px-5 bg-[#CC2828] hover:bg-[#ad0e0e] text-white text-sm lg:text-base transition-all"
+                                                    className="transparent-btn md"
                                                     onClick={(e) => {
                                                     e.stopPropagation();
                                                     e.preventDefault();
@@ -161,7 +161,7 @@ export default function Teacher({ teacherData, loading }) {
                                                 </button>
 
                                                 <button
-                                                    className="font-medium cursor-pointer rounded-full py-2 px-5 bg-[#CC2828] hover:bg-[#ad0e0e] text-white text-sm lg:text-base transition-all"
+                                                    className="btn md"
                                                     onClick={(e) => {
                                                     e.stopPropagation();
                                                     e.preventDefault();

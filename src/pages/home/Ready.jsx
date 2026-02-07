@@ -10,12 +10,12 @@ export default function Ready({ title }) {
         <div className="mx-auto max-w-[1230px] px-4">
           <div className="bg-[#ECF1E6] rounded-2xl py-16 md:py-20 lg:py-24 text-center">
             <Heading
-              classess={"text-[#33403D] mb-[30px] lg:mb-[40px] xl:mb-[45px]"}
+              classess={" mb-[30px] lg:mb-[40px] xl:mb-[45px]"}
               title={title}
             />
             <Link
               href="/find-teacher"
-              className="font-medium cursor-pointer rounded-full py-2 px-5 hover:bg-white text-white hover:text-[#55844D] border border-white text-base xl:text-xl py-2.5 lg:py-3.5 px-6 lg:px-10"
+              className="btn lg"
             >
               Book a lesson
             </Link>

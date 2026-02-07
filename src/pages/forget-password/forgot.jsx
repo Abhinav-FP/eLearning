@@ -46,7 +46,7 @@ export default function Forgot() {
         <div className="flex flex-col">
             <div
                 onClick={toggleModal}
-                className="text-base font-medium text-[#CC2828] hover:underline tracking-[-0.06em] "
+                className="text-base font-medium text-[#55844D] hover:underline tracking-[-0.06em] "
             >
                 Forgot Password ?
             </div>

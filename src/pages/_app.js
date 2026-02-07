@@ -8,7 +8,7 @@ import NextNProgress from 'nextjs-progressbar';
 
 export default function App({ Component, pageProps }) {
   return <>
-   <NextNProgress color="#CC2828" />
+   <NextNProgress color="#55844D" />
     <Toaster
       toastOptions={{
         position: "top-right",

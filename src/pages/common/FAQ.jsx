@@ -13,7 +13,7 @@ export default function FAQ({ classess, Faq, heading }) {
       {Faq && Faq?.length > 0 && (
         <div className="mx-auto container sm:container md:container lg:container xl:max-w-[1230px] px-4">
           <Heading
-            classess="text-[#33403D] mb-3"
+            classess="mb-3"
             title= {heading || "Frequently Asked Questions"}
           />
 
@@ -35,7 +35,7 @@ export default function FAQ({ classess, Faq, heading }) {
                 )}
               </button>
               <div
-                className={`pb-5 transition-all duration-500 overflow-hidden ${
+                className={`pb-5 text-[#6B7280] transition-all duration-500 overflow-hidden ${
                   openIndex === index ? "block" : "hidden"
                 }`}
               >

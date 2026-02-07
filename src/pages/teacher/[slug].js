@@ -39,7 +39,7 @@ export default function Index() {
     const detectedZone = moment.tz.guess();
     setStudentTimeZone(detectedZone || "");
   }, []);
-
+  
   useEffect(() => {
     // console.log("studentTimeZone", studentTimeZone);
     if (!studentTimeZone) return;
@@ -138,7 +138,7 @@ export default function Index() {
     const remainingText = words.slice(100).join(" ");
 
     return (
-      <div className="text-white tracking-[-0.03em] text-base font-medium">
+      <div className="text-[#6B7280] tracking-[-0.03em] text-base font-medium">
         <p>
           {expanded || !isLong ? description : shortText + "..."}
           {isLong && !expanded && (
@@ -171,7 +171,7 @@ export default function Index() {
           : <>
             <div className="pt-[114px] md:pt-[124px] lg:pt-[154px]  pb-[40px]  md:pb-[60px] lg:pb-[80px] xl:pb-[100px] ">
               <div className="container sm:container md:container lg:container xl:max-w-[1230px]  px-4 mx-auto">
-                <div className="bg-[rgba(204,40,40,0.8)] rounded-[20px] py-6 lg:py-[30px] px-6 md:px-[30px] lg:px-[30px] xl:px-[45px]">
+                <div className="bg-white rounded-[20px] shadow-2xl border border-gray-50 py-6 lg:py-[30px] px-6 md:px-[30px] lg:px-[30px] xl:px-[45px]">
                   <div className="flex flex-wrap -mx-4 space-y-4">
                     {data?.intro_video &&
                       <div className="mx-auto md:mx-0 w-[280px] md:w-[280px] lg:w-[308px] px-4">
@@ -197,16 +197,16 @@ export default function Index() {
                               className="h-[32px] w-[32px] lg:h-[45px] lg:w-[45px] rounded-full object-cover"
                             />
                           </div>
-                          <h3 className="text-white text-[24px] md:text-[30px] lg:text-[36px] xl:text-[45px] font-inter font-extrabold tracking-[-0.04em] capitalize">
+                          <h3 className="text-black text-[24px] md:text-[30px] lg:text-[36px] xl:text-[45px] font-inter font-extrabold tracking-[-0.04em] capitalize">
                             {data?.userId?.name || ""}{" "}
                             {data?.admin_approved === true ? (<BiSolidBadgeCheck className="inline text-[#6ABB52] w-[32px] h-[32x]" size={32} />) : ""}
                           </h3>
                            {data?.ais_trained && (
-                            <span className="bg-white text-red-500 text-xs font-semibold px-2 py-0.5 rounded-full ml-2">
+                            <span className="bg-white border border-[#55844D] text-[#55844D] text-xs font-semibold px-2 py-0.5 rounded-full ml-2">
                               AIS Trained
                             </span>)}
                         </div>
-                            <button className="font-medium cursor-pointer rounded-full py-2 px-5 bg-white hover:bg-gray-100 text-[#CC2828] text-sm lg:text-base transition-all"
+                            <button className="btn lg"
                             onClick={()=>{
                               if (!user) {
                                   toast.error("Please login first");
@@ -224,33 +224,33 @@ export default function Index() {
                             </button>
                           </div>
                         {/* Fields other than description */}
-                        <div className="flex flex-wrap  gap-x-2 md:gap-x-6 lg:gap-x-8 mb-2 lg:mb-4 text-white text-base font-medium">
+                        <div className="flex flex-wrap  gap-x-2 md:gap-x-6 lg:gap-x-8 mb-2 lg:mb-4 text-base font-medium">
                           {data?.tags && data?.tags?.length > 0 &&
                             <div>
-                              <span className="-tracking-[0.03em] pr-2">Specialities :</span>
+                              <span className="text-[#8D929A] -tracking-[0.03em] pr-2">Specialities :</span>
                               <span className="capitalize -tracking-[0.03em] ">{data?.tags?.join(", ") || ""}</span>
                             </div>}
                           {data?.languages_spoken &&
                             <div>
-                              <span className="-tracking-[0.03em] pr-2">Language :</span>
+                              <span className="text-[#8D929A] -tracking-[0.03em] pr-2">Language :</span>
                               <span className="capitalize -tracking-[0.03em] ">{data?.languages_spoken?.join(", ") || ""}</span>
                             </div>}
                           {data?.userId?.nationality &&
                             <div>
-                              <span className="-tracking-[0.03em] pr-2">Nationality :</span>
+                              <span className="text-[#8D929A] -tracking-[0.03em] pr-2">Nationality :</span>
                               <span className="capitalize -tracking-[0.03em] ">{data?.userId?.nationality}</span>
                             </div>
                           }
 
                           <div>
-                            <span className="-tracking-[0.03em] pr-2">Gender :</span>
+                            <span className="text-[#8D929A] -tracking-[0.03em] pr-2">Gender :</span>
                             <span className="capitalize -tracking-[0.03em] ">
                               {data?.gender === 'M' ? 'Male' : data?.gender === 'F' ? 'Female' : 'Other'}</span>
                           </div>
 
                           {data?.userId?.time_zone &&
                             <div>
-                              <span className="-tracking-[0.03em] pr-2">Time zone :</span>
+                              <span className="text-[#8D929A] -tracking-[0.03em] pr-2">Time zone :</span>
                               <span className="-tracking-[0.03em] ">{data?.userId?.time_zone} </span>
                             </div>
                           }
@@ -363,11 +363,11 @@ export default function Index() {
             {/* Extra fields div */}
             <div
               style={{ backgroundImage: "url('/leasson-bg.png')" }}
-              className="bg-[rgba(249,190,191,.5)] bg-cover bg-center rounded-[20px] py-[40px] lg:py-[60px]"
+              className="bg-[#ECF1E6] bg-cover bg-center rounded-[20px] py-[40px] lg:py-[60px]"
             >
               <div className="container sm:container md:container lg:container xl:max-w-[1230px]  bg-[rgba(249,190,191, .1)] px-4 mx-auto">
                 <Heading
-                  classess={"text-[#CC2828] mb-6 lg:mb-8"}
+                  classess={"text-[#33403D] mb-6 lg:mb-8"}
                   title={"Lessons"}
                 />
                 <LessonList lessons={lessons?.lessons} showSelected={false} slug={slug} />

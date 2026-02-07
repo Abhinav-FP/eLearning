@@ -104,7 +104,7 @@ export default function Lesson({ title }) {
         <>
             <div className="bg-[#FAF9F6] py-[40px] md:py-[60px] lg:py-[80px] xl:py-[100px]">
                 <div className="mx-auto container sm:container md:container lg:container xl:max-w-[1230px] px-4">
-                    <Heading classess={'text-[#1E1E1E] mb-[30px] lg:mb-[40px] max-w-[834px] mx-auto text-center '} title={title} />
+                    <Heading classess={' mb-[30px] lg:mb-[40px] max-w-[834px] mx-auto text-center '} title={title} />
                     <div className="space-y-3">
                         {loading ? (
                             <div className="flex">
@@ -182,7 +182,7 @@ export default function Lesson({ title }) {
                                                     </div>
                                                     <div className="w-6/12 lg:w-6/12 text-right">
                                                         <button
-                                                            className="font-medium cursor-pointer rounded-full py-2 bg-[#55844D] hover:bg-[#3d5e37] text-white text-sm lg:text-base py-2.5 px-2 lg:px-4 xl:px-6"
+                                                            className="btn md"
                                                             onClick={(e) => {
                                                                 e.stopPropagation();
                                                                 e.preventDefault();

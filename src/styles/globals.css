@@ -5,8 +5,10 @@
 
 
 :root {
-  --background: #ffffff; /* Light background */
-  --foreground: #171717; /* Dark text */
+  --background: #ffffff;
+  /* Light background */
+  --foreground: #171717;
+  /* Dark text */
 }
 
 @theme inline {
@@ -21,6 +23,37 @@ body {
   background: var(--background);
   color: var(--foreground);
 }
-.teacher_box{box-shadow: 0px 2.65px 15.89px 0px rgba(0, 0, 0, 0.14);}
 
-.review .swiper-slide{height: auto;}
+@layer components {
+  .btn {
+    @apply bg-[#55844D] hover:bg-[#3d5e37] text-white text-base font-medium cursor-pointer rounded-full
+  }
+
+  .transparent-btn{
+    @apply border border-[#55844D] hover:bg-[#3d5e37] bg-white text-[#55844D] hover:text-white text-base font-medium cursor-pointer rounded-full
+  }
+
+  .md {
+    @apply py-2.5 px-2 lg:px-4 xl:px-6
+  }
+
+  .lg {
+    @apply py-3.5 px-8 xl:px-10
+  }
+
+  .heading {
+    @apply text-center text-[24px] md:text-[30px] lg:text-[36px] xl:text-[45px] text-[#33403D] leading-[28px] md:leading-[40px] lg:leading-[54px] font-extrabold -tracking-[0.04em]
+  }
+
+  .paragraph {
+    @apply text-base md:text-lg text-[#6B7280] text-center font-medium tracking-[-0.02em] opacity-90 mb-8 max-w-[800px] mx-auto
+  }
+}
+
+.teacher_box {
+  box-shadow: 0px 2.65px 15.89px 0px rgba(0, 0, 0, 0.14);
+}
+
+.review .swiper-slide {
+  height: auto;
+}

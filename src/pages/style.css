@@ -3,16 +3,8 @@
 body {
   font-family: "Poppins", sans-serif;
 }
-/* body{background-color:#ffffff; color:#000000}
 
-@layer components{
-.btn{
-  
-}
 
-.heading{@apply text-[45px] text-[#33403D] font-extrabold}
-
-} */
 
 
 .font-inter {

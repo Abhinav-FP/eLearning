@@ -142,7 +142,7 @@ export default function Header({isEmulating=false}) {
                                 </div>
                                 :
                                 <div className="flex flex-col lg:hidden">
-                                    <Link href="/login" className="font-normal text-black hover:text-[#3d5e37] border-t border-[#ddd] text-base py-3 px-4 cursor-pointer" >
+                                    <Link href="/login" className="btn" >
                                         Log In
                                     </Link>
                                     <Link href="/student/register" className="font-normal text-black hover:text-[#3d5e37] border-t border-[#ddd] text-base py-3 px-4 cursor-pointer" >
@@ -187,10 +187,10 @@ export default function Header({isEmulating=false}) {
                                 </>
                                 :
                                 <>
-                                    <Link href="/student/register" className="hidden lg:block bg-white hover:bg-[#55844D] text-black hover:text-white border-2 border-[#00000033] hover:border-transparent text-base py-3.5 px-8 xl:px-10 font-medium cursor-pointer rounded-full" >
+                                    <Link href="/student/register" className="transparent-btn lg" >
                                         Sign Up    
                                     </Link>
-                                    <Link href="/login" className="hidden lg:block bg-[#55844D] hover:bg-[#3d5e37] text-white text-base py-3.5 px-8 xl:px-10 font-medium cursor-pointer rounded-full" >
+                                    <Link href="/login" className="btn lg" >
                                         Log In
                                     </Link>
                                 </>

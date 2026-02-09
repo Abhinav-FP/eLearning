@@ -32,13 +32,13 @@ export default function LessonList({ lessons, showSelected, selectedLesson, SetS
                     }
                   }}
                 >
-                  <h3 className="text-[#CC2828] tracking-[-0.04em] text-xl lg:text-2xl xl:text-[30px] font-inter font-extrabold mb-3 md:mb-3 lg:mb-3 capitalize">
+                  <h3 className="text-[#33403D] tracking-[-0.04em] text-xl lg:text-2xl xl:text-[30px] font-inter font-extrabold mb-3 md:mb-3 lg:mb-3 capitalize">
                     {item?.title} - {item?.duration} minutes
                   </h3>
                   <div className="flex flex-wrap ">
                     <div className="mb-3 md:mb-0 w-full md:w-[calc(100%-170px)] md:pr-5">
-                      <span className="text-base text-[#CC2828]
-                     bg-[rgba(204,40,40,0.1)] font-medium tracking-[-0.04em] 
+                      <span className="text-base text-[#6B7280]
+                     bg-[#55844D1A] font-medium tracking-[-0.04em] 
                      px-5 leading-[40px] py-1 rounded-full line-clamp-1 overflow-hidden"
                         onClick={() => {
                           if (showSelected) {
@@ -60,7 +60,7 @@ export default function LessonList({ lessons, showSelected, selectedLesson, SetS
                             router.push(`/teacher/${slug}#calendar`);
                           }
                         }}
-                        className="z-[100] cursor-pointer text-center inline-block bg-[rgba(204,40,40,0.1)] tracking-[-0.04em] text-[#CC2828] text-base xl:text-lg font-semibold font-inter block px-4 lg:px-5 lg:px-6 py-2.5 rounded-full"
+                        className="z-[100] cursor-pointer text-center inline-block bg-[#55844D] tracking-[-0.04em] text-white text-base xl:text-lg font-semibold font-inter block px-4 lg:px-5 lg:px-6 py-2.5 rounded-full"
                       >
                         {formatMultiPrice(item?.price, "USD")}
                       </button>

@@ -1,34 +1,75 @@
 @import url('https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
-body { 
-    font-family: "Poppins", sans-serif;   
-  }
-  .font-inter {
-    font-family: "Inter", sans-serif;
-  }
-  .hero_bg{background: rgba(85, 132, 77, 0.1);}
-  .whytech_bg{background: linear-gradient(270deg, rgba(204, 40, 40, 0.2) 19.4%, rgba(255, 255, 255, 0) 112.89%);}
 
-  .list_shadow{box-shadow: 0px 4px 54px 0px rgba(0, 0, 0, 0.18);}
-
-  .login_custom{ box-shadow: 0px 4px 34px 0px rgba(0, 0, 0, 0.15);}
-  .sidebar{  box-shadow: 0px 4px 74px 0px #0000000D;}
-  .user_row{box-shadow: 3px 3px 14px 4px #00000012; }
-  .dashboard-box{box-shadow: 0px 4px 24px 0px rgba(0, 0, 0, 0.1);}
-  .lesson_list_shadow{box-shadow: 0px 4px 34px 0px rgba(0, 0, 0, 0.08);}
-  .teacherBox{box-shadow: 0px 4px 14px 0px #0000001A;}
- 
-.rbc-time-slot span.rbc-label {
-    font-size: 11px;
+body {
+  font-family: "Poppins", sans-serif;
 }
-.rbc-toolbar{gap:8px;}
-.rbc-header .rbc-button-link span{font-size: 11px;;}
-   /* animations.css */
+
+
+
+
+.font-inter {
+  font-family: "Inter", sans-serif;
+}
+
+.hero_bg {
+  background: rgba(85, 132, 77, 0.1);
+}
+
+.whytech_bg {
+  background: linear-gradient(270deg, rgba(204, 40, 40, 0.2) 19.4%, rgba(255, 255, 255, 0) 112.89%);
+}
+
+.list_shadow {
+  box-shadow: 0px 4px 54px 0px rgba(0, 0, 0, 0.18);
+}
+
+.login_custom {
+  box-shadow: 0px 4px 34px 0px rgba(0, 0, 0, 0.15);
+}
+
+.sidebar {
+  box-shadow: 0px 4px 74px 0px #0000000D;
+}
+
+.user_row {
+  box-shadow: 3px 3px 14px 4px #00000012;
+}
+
+.dashboard-box {
+  box-shadow: 0px 4px 24px 0px rgba(0, 0, 0, 0.1);
+}
+
+.lesson_list_shadow {
+  box-shadow: 0px 4px 34px 0px rgba(0, 0, 0, 0.08);
+}
+
+.teacherBox {
+  box-shadow: 0px 4px 14px 0px #0000001A;
+}
+
+.rbc-time-slot span.rbc-label {
+  font-size: 11px;
+}
+
+.rbc-toolbar {
+  gap: 8px;
+}
+
+.rbc-header .rbc-button-link span {
+  font-size: 11px;
+  ;
+}
+
+/* animations.css */
 
 @keyframes pulseCircle {
-  0%, 100% {
+
+  0%,
+  100% {
     transform: scale(1);
     opacity: 0.8;
   }
+
   50% {
     transform: scale(1.15);
     opacity: 1;
@@ -36,19 +77,25 @@ body {
 }
 
 @keyframes floatCircle {
-  0%, 100% {
+
+  0%,
+  100% {
     transform: translateY(0);
   }
+
   50% {
     transform: translateY(-10px);
   }
 }
 
-@keyframes pulseCircle  {
-  0%, 100% {
+@keyframes pulseCircle {
+
+  0%,
+  100% {
     transform: scale(1);
     opacity: 0.8;
   }
+
   50% {
     transform: scale(1.15);
     opacity: 1;
@@ -64,44 +111,83 @@ body {
 }
 
 .animate-pulse-circle {
-  animation: pulseCircle 4s ease-in-out infinite;;
+  animation: pulseCircle 4s ease-in-out infinite;
+  ;
 }
 
-.arrowimg:not(:last-child)::after{
-   background-image: url('/arrowNew.png');
+.arrowimg:not(:last-child)::after {
+  background-image: url('/arrowNew.png');
 }
 
-.ready-bg{background: #55844D;}
+.ready-bg {
+  background: #55844D;
+}
 
-.swiper{padding-bottom: 50px !important;} 
-.swiper-button-prev:after, .swiper-button-next:after{ font-size: 28px !important;color: #cc2828;}
-.swiper  .swiper-button-prev{left:-4px}
-.swiper .swiper-button-next{right:-4px}
-.swiper-pagination-fraction, .swiper-pagination-custom, .swiper-horizontal > .swiper-pagination-bullets, .swiper-pagination-bullets.swiper-pagination-horizontal {bottom: 0;}
-  .swiper-horizontal > .swiper-pagination-bullets .swiper-pagination-bullet, .swiper-pagination-horizontal.swiper-pagination-bullets .swiper-pagination-bullet{background: #999999; height: 9px;width: 9px;border: 2px solid #fff; opacity: 1;margin: 0 2px !important;}
+.swiper {
+  padding-bottom: 50px !important;
+}
 
-  .swiper-pagination-horizontal.swiper-pagination-bullets .swiper-pagination-bullet.swiper-pagination-bullet-active{background: #fff; border: 2px solid #CC2828; opacity: 1;}
+.swiper-button-prev:after,
+.swiper-button-next:after {
+  font-size: 28px !important;
+  color: #cc2828;
+}
+
+.swiper .swiper-button-prev {
+  left: -4px
+}
+
+.swiper .swiper-button-next {
+  right: -4px
+}
+
+.swiper-pagination-fraction,
+.swiper-pagination-custom,
+.swiper-horizontal>.swiper-pagination-bullets,
+.swiper-pagination-bullets.swiper-pagination-horizontal {
+  bottom: 0;
+}
+
+.swiper-horizontal>.swiper-pagination-bullets .swiper-pagination-bullet,
+.swiper-pagination-horizontal.swiper-pagination-bullets .swiper-pagination-bullet {
+  background: #999999;
+  height: 9px;
+  width: 9px;
+  border: 2px solid #fff;
+  opacity: 1;
+  margin: 0 2px !important;
+}
+
+.swiper-pagination-horizontal.swiper-pagination-bullets .swiper-pagination-bullet.swiper-pagination-bullet-active {
+  background: #fff;
+  border: 2px solid #CC2828;
+  opacity: 1;
+}
+
 /* Calendr css */
 
 @media (max-width: 1023px) {
-  .arrowimg:not(:last-child):after{background-size: 20px;}
+  .arrowimg:not(:last-child):after {
+    background-size: 20px;
+  }
 }
 
 @media (max-width: 767px) {
-  .arrowimg:not(:last-child)::after{
+  .arrowimg:not(:last-child)::after {
     background-image: url('/arrow-down.png');
   }
-  
+
 }
 
-html{
+html {
   scroll-behavior: smooth;
 }
 
 
- /* width */
- .customscroll::-webkit-scrollbar {
-  width: 4px; border-radius: 10px;
+/* width */
+.customscroll::-webkit-scrollbar {
+  width: 4px;
+  border-radius: 10px;
 }
 
 /* Track */
@@ -127,7 +213,8 @@ html{
   background: #ef2c0c !important;
 }
 
-.paypal-button.paypal-button-color-gold, .paypal-button-row.paypal-button-color-gold .menu-button {
+.paypal-button.paypal-button-color-gold,
+.paypal-button-row.paypal-button-color-gold .menu-button {
   background: #ef2c0c !important;
 }
 
@@ -136,7 +223,8 @@ html{
 
 .policy-page h1 {
   color: #000;
-  font-family: "Inter", sans-serif;;
+  font-family: "Inter", sans-serif;
+  ;
   font-size: 38px;
   font-style: normal;
   font-weight: 600;
@@ -147,7 +235,8 @@ html{
 
 .policy-page h2 {
   color: #000;
-  font-family: "Inter", sans-serif;;
+  font-family: "Inter", sans-serif;
+  ;
   font-size: 32px;
   font-style: normal;
   font-weight: 600;
@@ -157,7 +246,8 @@ html{
 
 .policy-page h3 {
   color: #000;
-  font-family: "Inter", sans-serif;;
+  font-family: "Inter", sans-serif;
+  ;
   font-size: 22px;
   font-style: normal;
   font-weight: 600;
@@ -211,6 +301,7 @@ html{
     line-height: 38px;
     /* margin: 0 0 10px; */
   }
+
   .policy-page h2 {
     font-size: 32px;
     line-height: 38px;
@@ -224,10 +315,12 @@ html{
   .policy-page h1 {
     font-size: 24px;
   }
+
   .policy-page h2 {
     font-size: 22px;
     /* margin: 20px 0 5px; */
   }
+
   .policy-page p {
     font-size: 14px;
   }

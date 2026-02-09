@@ -9,12 +9,12 @@ export default function FindCourse({pargraph ,title , courseimg, loading}) {
         <>
             <div className="pt-[40px] md:pt-[60px] lg:pt-[100px] pb-[40px] md:pb-[40px] lg:pb-[60px]">
                 <div className="mx-auto container sm:container md:container lg:container xl:max-w-[1230px]  px-4">
-                    <div className="bg-[rgba(85,132,77,0.05)] rounded-[10px] lg:rounded-[20px] px-6 lg:px-10 py-8 lg:py-12">
+                    <div className="border border-[#55844D] rounded-[10px] lg:rounded-[20px] px-6 lg:px-10 py-8 lg:py-12">
                         <div className="flex flex-wrap -mx-4 items-center space-y-5">
                             <div className="w-full md:w-5/12 px-4 ">
                                 <div className='max-w-[372px]'>
-                                    <Heading classess={'text-center sm:text-left text-black mb-2'} title={title} />
-                                    <p className='text-center sm:text-left text-base font-normal text-black -tracking-[0.03em] mb-6 md:mb-8 lg:mb-10'>
+                                    <Heading classess={'text-center sm:text-left mb-2'} title={title} />
+                                    <p className='text-center sm:text-left text-base font-normal text-[#6B7280] -tracking-[0.03em] mb-6 md:mb-8 lg:mb-10'>
                                       {pargraph}
                                     </p>
                                     <Link
@@ -23,7 +23,6 @@ export default function FindCourse({pargraph ,title , courseimg, loading}) {
                                     >
                                     Search Courses
                                     </Link>
-
                                 </div>
                             </div>
                             <div className="w-full md:w-7/12 px-4 lg:text-right">

@@ -52,9 +52,9 @@ export default function HowItWork({ classess, title }) {
     // ];
     return (
         <>
-            <div className={`bg-white py-[40px] md:py-[60px] lg:py-[80px] ${classess}`}>
+            <div className={`bg-[#FCF8F5] py-[40px] md:py-[60px] lg:py-[80px] ${classess}`}>
                 <div className="mx-auto container sm:container md:container lg:container xl:max-w-[1230px] px-4">
-                    <Heading classess={'text-center mb-[20px] md:mb-[30px] lg:mb-[40px] text-black'} title={title || "How It Works"} />
+                    <Heading classess={'text-center mb-[20px] md:mb-[30px] lg:mb-[45px] text-[#33403D]'} title={title || "How It Works"} />
                     <div className="flex flex-wrap -mx-4 md:-mx-[20px] lg:-mx-[28px] xl:-mx-[34px]">
                         {data && data?.map((item, i) => (
                                 <div key={i} className=" w-full md:w-3/12 px-4 md:px-[20px] lg:px-[26px] xl:px-[34px] relative 
@@ -73,11 +73,11 @@ export default function HowItWork({ classess, title }) {
                                 [&:not(:last-child)]:mb-16 [&:not(:last-child)]:md:mb-0
                                 
                                 ">
-                                    <div className="bg-white border border-[rgba(85,132,77,0.3)] rounded-[20px] lg:rounded-[30px] py-4 px-3 lg:px-6 text-center min-h-full">
-                                        <div className="relative lg:min-h-[124px] mb-[18px] px-4 ">
-                                            <Image className="block mx-auto  max-w-[80px] md:max-w-none max-h-[80px] md:max-h-none" src={item?.icon} alt={item?.text} />
+                                    <div className="bg-white border border-[rgba(85,132,77,0.3)] rounded-[20px] lg:rounded-[30px] py-10 px-3 lg:px-6 flex flex-col justify-center items-center text-center min-h-full">
+                                        <div className="relative lg:min-h-[27px] mb-[18px] px-4 ">
+                                            <Image className="block mx-auto  max-w-[80px] md:max-w-[57px] max-h-[80px] md:max-h-[49px]" src={item?.icon} alt={item?.text} />
                                         </div>
-                                        <h3 className="max-w-[118px] mx-auto leading-[22px] lg:leading-[24px] font-inter text-[#55844D] -tracking-[0.04em] font-bold text-base lg:text-xl">{item?.text}</h3>
+                                        <h3 className="max-w-[118px] mx-auto leading-[22px] lg:leading-[24px] font-inter text-[#6B7280] -tracking-[0.04em] font-bold text-base lg:text-xl">{item?.text}</h3>
                                     </div>
                                 </div>
                             ))

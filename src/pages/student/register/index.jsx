@@ -168,7 +168,7 @@ export default function Index() {
         </div>
 
         {/* Heading */}
-        <h2 className="text-center text-red-600 text-xl lg:text-2xl font-semibold mb-2 uppercase">
+        <h2 className="text-center text-[#55844D] text-xl lg:text-2xl font-semibold mb-2 uppercase">
           REGISTER as a student
         </h2>
         <p className="text-center text-sm text-black mb-8">
@@ -388,12 +388,12 @@ export default function Index() {
             <div className="w-full md:w-12/12 px-2.5 mb-5 flex justify-center">
               {/* {mounted && <Turnstile onVerify={setCfToken} />} */}
               <Turnstile
-                  siteKey={"0x4AAAAAACGwGP65iX0v0KQt"}
-                  ref={turnRef}
-                  onSuccess={handleTurnStile}
-                  onError={(_err) => {
-                      console.log("Turnstile error", _err);
-                  }}
+                siteKey={"0x4AAAAAACGwGP65iX0v0KQt"}
+                ref={turnRef}
+                onSuccess={handleTurnStile}
+                onError={(_err) => {
+                  console.log("Turnstile error", _err);
+                }}
               />
             </div>
 
@@ -402,7 +402,7 @@ export default function Index() {
                 <button
                   type="submit"
                   disabled={loading} //
-                  className="w-full py-[15px] bg-[#CC2828] hover:bg-[#a11f1f] cursor-pointer text-white py-2 rounded-md font-semibold transition"
+                  className="btn lg w-full"
                 >
                   {loading ? "Loading.." : "Sign Up"} {/* Fixed typo */}
                 </button>
@@ -414,7 +414,7 @@ export default function Index() {
         {/* Login Redirect */}
         <p className="text-center text-base text-[#727272] mt-6 lg:mt-12 tracking-[-0.03em] font-medium">
           Already have an account?{" "}
-          <Link href="/login" className="text-[#CC2828] hover:underline">
+          <Link href="/login" className="text-[#55844D] hover:underline">
             Log in.
           </Link>
         </p>

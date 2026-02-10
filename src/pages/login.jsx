@@ -86,7 +86,7 @@ export default function Login() {
               height={1000}
               width={1000}
               layout="fixed"
-              src={"/Logo.png"}
+              src={"/NewLogo.png"}
               alt="Japanese For Me"
             />
           </Link>

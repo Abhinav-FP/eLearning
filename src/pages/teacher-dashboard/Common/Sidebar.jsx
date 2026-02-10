@@ -52,7 +52,7 @@ function SideBar() {
 
                 <div className="px-3 md:px-4 lg:px-6 text-center py-6 lg:py-8">
                     <Link href="/">
-                    <Image src={"/Logo.png"}    height={1000}   width={1000} alt="avatar" className="h-[85px] w-[100px] mx-2 inline-block" />
+                    <Image src={"/NewLogo.png"}    height={1000}   width={1000} alt="avatar" className="h-[85px] w-[100px] mx-2 inline-block" />
                     </Link>
                 </div>
 

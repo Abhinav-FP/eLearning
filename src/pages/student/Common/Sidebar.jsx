@@ -56,7 +56,7 @@ function SideBar() {
         <div className="px-3 md:px-4 lg:px-6 text-center py-6 lg:py-8">
           <Link href="/">
             <Image
-              src={"/Logo.png"}
+              src={"/NewLogo.png"}
               alt="Japanese For Me"
               height={1000}
               width={1000}

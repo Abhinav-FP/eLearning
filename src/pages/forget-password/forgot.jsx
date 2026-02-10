@@ -90,7 +90,7 @@ export default function Forgot() {
                             <div className="flex justify-end">
                                 <button
                                     onClick={handleForms}
-                                    className="w-full cursor-pointer border border-[rgba(0,0,0,0.1)] bg-[#CC2828] hover:bg-red-700 uppercase text-white py-3.5 cursor-pointer rounded-[10px] font-bold text-base transition"
+                                    className="w-full cursor-pointer border border-[rgba(0,0,0,0.1)] bg-[#55844D] hover:bg-green-700 uppercase text-white py-3.5 cursor-pointer rounded-[10px] font-bold text-base transition"
 
                                 >
                                     {loading ? "Loading..." : "Send Link"}

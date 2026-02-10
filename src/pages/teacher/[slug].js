@@ -181,7 +181,7 @@ export default function Index() {
                           name={data?.userId?.name}
                           divClass="relative"
                           imgClass="rounded-[10px] h-[240px] w-[276px] object-cover"
-                          btnClass="absolute top-1/2  cursor-pointer left-0 w-[81px] text-center text-white hover:text-[#CC2828] right-0 mx-auto -translate-y-1/2"
+                          btnClass="absolute top-1/2  cursor-pointer left-0 w-[81px] text-center text-white hover:text-[#55844D] right-0 mx-auto -translate-y-1/2"
                         />
                       </div>}
                     <div className="w-full md:w-[calc(100%-280px)] lg:w-[calc(100%-308px)] px-4">
@@ -332,7 +332,7 @@ export default function Index() {
                           iconClass="w-16 h-16 mx-auto block"
                           divClass="relative"
                           imgClass="rounded-[10px] h-[187px] w-full object-cover"
-                          btnClass="absolute top-1/2  cursor-pointer left-0 w-[81px] text-center text-white hover:text-[#CC2828] right-0 mx-auto -translate-y-1/2"
+                          btnClass="absolute top-1/2  cursor-pointer left-0 w-[81px] text-center text-white hover:text-[#55844D] right-0 mx-auto -translate-y-1/2"
                         />
                       }
                       <div className="flex flex-wrap mt-4 lg:mt-6">
@@ -345,7 +345,7 @@ export default function Index() {
                           </div>
                         </div>
                         <div className="w-6/12 text-right">
-                          <button className='inline-block font-medium cursor-pointer rounded-full py-2 px-5 bg-[#CC2828] hover:bg-[#ad0e0e] text-white text-sm lg:text-base py-2.5 px-3 lg:px-4 lg:px-6'
+                          <button className='inline-block font-medium cursor-pointer rounded-full py-2 px-5 bg-[#55844D] hover:bg-[#ad0e0e] text-white text-sm lg:text-base py-2.5 px-3 lg:px-4 lg:px-6'
                             onClick={()=>{
                               setIsPopupOpen(true);
                             }}

@@ -132,7 +132,7 @@ export default function AuthLayout({ children, page, sidebar }) {
                       </Link>
                       {isEmulating ? (
                         <li
-                          className="flex gap-2 px-4 py-2 hover:bg-gray-100 cursor-pointer text-[#CC2828]"
+                          className="flex gap-2 px-4 py-2 hover:bg-gray-100 cursor-pointer text-[#55844D]"
                           onClick={handleReturnToAdmin}
                         >
                           <MdLogout size={20} /> Return to Admin

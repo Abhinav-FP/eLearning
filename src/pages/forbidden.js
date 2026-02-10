@@ -22,7 +22,7 @@ export default function Forbidden() {
       
       <Link
             href="/"
-            className="font-medium cursor-pointer rounded-full px-3 md:px-5 text-[#ffffff] bg-[#CC2828] hover:bg-[#ad0e0e] text-sm sm:text-base w-fit py-2.5 lg:py-3.5"
+            className="font-medium cursor-pointer rounded-full px-3 md:px-5 text-[#ffffff] bg-[#55844D] hover:bg-[#3d5e37] text-sm sm:text-base w-fit py-2.5 lg:py-3.5"
           >
             Go to Home
           </Link>

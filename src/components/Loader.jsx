@@ -366,7 +366,7 @@ const EditProfileLoader = () => {
       <div className="h-6 lg:h-8 bg-gray-200 rounded w-40 mb-6"></div>
 
       {/* Profile Card */}
-      <div className="bg-red-100 p-4 md:p-6 lg:p-8 rounded-2xl">
+      <div className="bg-green-100 p-4 md:p-6 lg:p-8 rounded-2xl">
         {/* Profile Section */}
         <div className="flex items-center flex-col gap-3 md:flex-row justify-between">
           <div className="flex items-center gap-3 lg:gap-4">
@@ -620,14 +620,14 @@ const SpecialSlotLoader = () => {
 
       <div className="flex flex-col md:flex-row gap-6 p-6">
         {/* Left: Payment Method */}
-        <div className="border border-[#CC2828] h-fit rounded-xl p-4 w-full md:w-1/2 space-y-4">
+        <div className="border border-[#55844D] h-fit rounded-xl p-4 w-full md:w-1/2 space-y-4">
           <div className="h-6 w-1/3 bg-gray-300 rounded" />
 
           {/* Payment Options */}
           {[1, 2].map((_, i) => (
             <div
               key={i}
-              className="flex items-center justify-between border border-red-300 rounded-lg p-3"
+              className="flex items-center justify-between border border-green-300 rounded-lg p-3"
             >
               <div className="flex items-center gap-3">
                 <div className="h-6 w-6 bg-gray-300 rounded" />
@@ -639,7 +639,7 @@ const SpecialSlotLoader = () => {
         </div>
 
         {/* Right: Summary */}
-        <div className="border border-[#CC2828] rounded-xl p-4 w-full md:w-1/2 space-y-4">
+        <div className="border border-[#55844D] rounded-xl p-4 w-full md:w-1/2 space-y-4">
           {/* Profile section */}
           <div className="flex items-center gap-4">
             <div className="w-12 h-12 rounded-full bg-gray-300" />
@@ -657,7 +657,7 @@ const SpecialSlotLoader = () => {
           </div>
 
           {/* Total Summary */}
-          <div className="border-t border-[#CC2828] pt-4 space-y-2">
+          <div className="border-t border-[#55844D] pt-4 space-y-2">
             <div className="flex justify-between">
               <div className="h-4 w-20 bg-gray-300 rounded" />
               <div className="h-4 w-24 bg-gray-300 rounded" />

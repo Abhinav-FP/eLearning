@@ -37,7 +37,7 @@ export default function Index() {
     return (
         <div className="min-h-screen flex flex-col items-center justify-center bg-gray-50 px-4">
             <FaCheckCircle className="w-20 h-20 text-green-600 mb-6" />
-            <h2 className="text-3xl font-bold text-red-600 mb-2">
+            <h2 className="text-3xl font-bold text-green-600 mb-2">
                 Thank you for Booking!
             </h2>
             <p className="text-gray-600 text-center max-w-sm mb-1">
@@ -46,7 +46,7 @@ export default function Index() {
             <p className="text-gray-600 text-center max-w-sm mb-6">
                 A confirmation email has been sent to <span className="font-medium">{email || ""}</span>
             </p>
-            <Link href="/" className="bg-red-600 text-white px-6 py-2 rounded-full hover:bg-red-700 ">
+            <Link href="/" className="bg-green-600 text-white px-6 py-2 rounded-full hover:bg-green-700 ">
                 Go to Homepage
             </Link>
         </div>

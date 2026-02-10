@@ -30,12 +30,12 @@ const MultipleLessonPayment = ({ selectedLesson, selectedSlot, studentTimeZone, 
   return (
     <div className="flex flex-col md:flex-row gap-6 p-6">
       {/* Left: Payment Method */}
-      <div className="border border-[#CC2828] h-fit rounded-xl p-4 w-full md:w-1/2">
-        <h2 className="text-[#CC2828] font-semibold mb-4">Payment Method</h2>
+      <div className="border border-[#55844D] h-fit rounded-xl p-4 w-full md:w-1/2">
+        <h2 className="text-[#55844D] font-semibold mb-4">Payment Method</h2>
         <div className="space-y-4">
           <div
             onClick={() => setPaymentStatus(false)}
-            className={`flex items-center justify-between border rounded-lg p-3 cursor-pointer ${PaymentStatus === true ? 'border-red-300' : 'border-red-400'
+            className={`flex items-center justify-between border rounded-lg p-3 cursor-pointer ${PaymentStatus === true ? 'border-green-300' : 'border-green-400'
               }`}
           >
             <div className="flex items-center gap-3">
@@ -51,7 +51,7 @@ const MultipleLessonPayment = ({ selectedLesson, selectedSlot, studentTimeZone, 
 
           <div
             onClick={() => setPaymentStatus(true)}
-            className={`flex items-center justify-between border rounded-lg p-3 cursor-pointer ${PaymentStatus === true ? 'border-red-400' : 'border-red-300'
+            className={`flex items-center justify-between border rounded-lg p-3 cursor-pointer ${PaymentStatus === true ? 'border-green-400' : 'border-green-300'
               }`}
           >
             <div className="flex items-center gap-3">
@@ -70,7 +70,7 @@ const MultipleLessonPayment = ({ selectedLesson, selectedSlot, studentTimeZone, 
       </div>
 
       {/* Right: Summary */}
-      <div className="border border-[#CC2828] rounded-xl p-4 w-full md:w-1/2 space-y-4">
+      <div className="border border-[#55844D] rounded-xl p-4 w-full md:w-1/2 space-y-4">
         <div className="flex items-center gap-4">
           {/* <img
             src="https://via.placeholder.com/48"
@@ -121,12 +121,12 @@ const MultipleLessonPayment = ({ selectedLesson, selectedSlot, studentTimeZone, 
             id="email"
             value={email}
             onChange={handleEmailChange}
-            className="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-[#CC2828] focus:border-[#CC2828]"
+            className="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-[#55844D] focus:border-[#55844D]"
             placeholder="Enter your email"
           />
         </div>
 
-        <div className="border-t border-[#CC2828] pt-4">
+        <div className="border-t border-[#55844D] pt-4">
           <div className="flex justify-between">
             <p className="font-medium">Total</p>
             {/* <p className="font-medium">${selectedLesson?.price} USD</p> */}

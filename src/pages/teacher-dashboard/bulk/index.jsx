@@ -34,7 +34,7 @@ export default function Index() {
     <TeacherLayout page={"Bulk Lessons"}>
       <div className="min-h-screen p-5 lg:p-[30px]">
         <div className="pb-4">
-          <h2 className="text-base md:text-xl lg:text-2xl font-bold text-[#CC2828] tracking-[-0.04em] font-inter">
+          <h2 className="text-base md:text-xl lg:text-2xl font-bold text-[#55844D] tracking-[-0.04em] font-inter">
             Bulk Lessons
           </h2>
 
@@ -45,9 +45,9 @@ export default function Index() {
             redeem it.
           </p>
         </div>
-        <div className="rounded-[5px] border border-[rgba(204,40,40,0.3)] overflow-x-auto">
+        <div className="rounded-[5px] border border-[rgba(19,101,16,0.3)] overflow-x-auto">
           <table className="min-w-full text-sm text-center font-inter">
-            <thead className="bg-[rgba(204,40,40,0.1)] text-[#535353] tracking-[-0.04em]">
+            <thead className="bg-[rgba(38,185,27,0.1)] text-[#535353] tracking-[-0.04em]">
               <tr>
                 <th className="px-4 py-3 border-t border-[rgba(204,40,40,0.2)]">
                   Teacher
@@ -105,7 +105,7 @@ export default function Index() {
                   return (
                     <React.Fragment key={item._id}>
                       <tr
-                        className="border-t hover:bg-[rgba(204,40,40,0.05)] cursor-pointer border-[rgba(204,40,40,0.2)]"
+                        className="border-t hover:bg-[rgba(78,204,40,0.1)] cursor-pointer border-[rgba(40,204,77,0.2)]"
                         onClick={() => toggleRow(index)}
                       >
                         <td className="px-4 py-3 font-medium">
@@ -166,13 +166,13 @@ export default function Index() {
                       </tr>
 
                       {isOpen && (
-                        <tr className="border-t border-[rgba(204,40,40,0.2)]">
+                        <tr className="border-t border-[rgba(40,204,43,0.3)]">
                           <td
                             colSpan={10}
-                            className="bg-[rgba(204,40,40,0.03)] px-6 py-5"
+                            className="bg-[rgba(40,204,50,0.03)] px-6 py-5"
                           >
                             <div>
-                              <h3 className="font-semibold text-[#CC2828] mb-3 text-lg">
+                              <h3 className="font-semibold text-[#55844D] mb-3 text-lg">
                                 Bookings Overview
                               </h3>
 

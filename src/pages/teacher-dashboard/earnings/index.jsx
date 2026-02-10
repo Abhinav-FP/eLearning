@@ -79,22 +79,22 @@ export default function index() {
       {
         label: "Total Earnings",
         value: data?.earningsSummary?.totalEarnings.toFixed(2) ?? "N/A",
-        icon: <FaMoneyBillWave className="w-6 h-6 text-[#CC2828]" />,
+        icon: <FaMoneyBillWave className="w-6 h-6 text-[#55844D]" />,
       },
       {
         label: "Available Earnings (Completed Lessons)",
         value: data?.earningsSummary?.pendingEarnings.toFixed(2) ?? "N/A",
-        icon: <FaWallet className="w-6 h-6 text-[#CC2828]" />,
+        icon: <FaWallet className="w-6 h-6 text-[#55844D]" />,
       },
       {
         label: "Requested Earnings",
         value: data?.earningsSummary?.requestedEarnings.toFixed(2) ?? "N/A",
-        icon: <MdRequestQuote className="w-6 h-6 text-[#CC2828]" />,
+        icon: <MdRequestQuote className="w-6 h-6 text-[#55844D]" />,
       },
       {
         label: "Last Paid Earnings",
         value: data?.earningsSummary?.approvedEarnings.toFixed(2) ?? "N/A",
-        icon: <MdPaid className="w-6 h-6 text-[#CC2828]" />,
+        icon: <MdPaid className="w-6 h-6 text-[#55844D]" />,
       },
     ],
     [data]
@@ -109,7 +109,7 @@ export default function index() {
     <TeacherLayout page={"Earnings"}>
       <div className="min-h-screen p-5 lg:p-[30px]">
         <div className="flex flex-wrap justify-between items-center mb-4 lg:mb-5">
-          {/* <h2 className="text-lg md:text-xl lg:text-2xl font-bold text-[#CC2828] tracking-[-0.04em] font-inter">
+          {/* <h2 className="text-lg md:text-xl lg:text-2xl font-bold text-[#55844D] tracking-[-0.04em] font-inter">
               Earnings
             </h2> */}
           <div className="w-full mb-4 md:mb-0 md:w-1/3 md:max-w-sm relative">
@@ -121,7 +121,7 @@ export default function index() {
               value={searchText}
               onChange={handleSearchChange}
               placeholder="Search using name or payment id"
-              className="w-full pl-10 pr-4 py-2 h-[44px] border border-[#ddd] text-[#000] rounded-md focus:outline-none focus:ring-2 focus:ring-[#CC2828] placeholder-gray-400"
+              className="w-full pl-10 pr-4 py-2 h-[44px] border border-[#ddd] text-[#000] rounded-md focus:outline-none focus:ring-2 focus:ring-[#55844D] placeholder-gray-400"
             />
           </div>
           <div className="w-full md:w-auto flex flex-col md:flex-row items-center md:space-x-3 justify-between">
@@ -147,7 +147,7 @@ export default function index() {
                   //   }
                   setIsEarning(true);
                 }}
-                className="w-fit px-2 px-4 xl:px-8 py-2 h-[44px] hover:bg-white hover:text-[#CC2828] border border-[#CC2828] rounded-md tracking-[-0.06em] text-sm font-medium bg-[#CC2828] text-white cursor-pointer"
+                className="w-fit px-2 px-4 xl:px-8 py-2 h-[44px] hover:bg-white hover:text-[#55844D] border border-[#55844D] rounded-md tracking-[-0.06em] text-sm font-medium bg-[#55844D] text-white cursor-pointer"
               >
                 Request Payout
               </button>
@@ -155,7 +155,7 @@ export default function index() {
                 onClick={() => {
                   downloadExcel();
                 }}
-                className="w-fit px-2 px-4 xl:px-8 py-2  h-[44px] hover:bg-white hover:text-[#CC2828] border border-[#CC2828] rounded-md tracking-[-0.06em] text-sm font-medium bg-[#CC2828] text-white cursor-pointer"
+                className="w-fit px-2 px-4 xl:px-8 py-2  h-[44px] hover:bg-white hover:text-[#55844D] border border-[#55844D] rounded-md tracking-[-0.06em] text-sm font-medium bg-[#55844D] text-white cursor-pointer"
               >
                 Export as Excel
               </button>
@@ -181,7 +181,7 @@ export default function index() {
               <button
                 onClick={() => setTabOpen('bookings')}
                 className={`px-2 px-4 xl:px-8 py-2 h-[44px] rounded-md tracking-[-0.06em] text-base font-medium  cursor-pointer ${tabOpen === 'bookings'
-                  ? 'bg-[#CC2828] text-[#fff]'
+                  ? 'bg-[#55844D] text-[#fff]'
                   : 'bg-[#E0E0E0] text-[#727272]'
                   }`}
               >
@@ -190,17 +190,17 @@ export default function index() {
               {/* <button
                 onClick={() => setTabOpen('bonus')}
                 className={`px-2 px-8 xl:px-12 py-2 h-[44px] rounded-md tracking-[-0.06em] text-base font-medium  cursor-pointer ${tabOpen === 'bonus'
-                  ? 'bg-[#CC2828] text-[#fff]'
+                  ? 'bg-[#55844D] text-[#fff]'
                   : 'bg-[#E0E0E0] text-[#727272]'
                   }`}
               >
                 Bonus
               </button> */}
             </div>
-            <div className="rounded-[5px] border border-[rgba(204,40,40,0.3)] overflow-x-auto">
+            <div className="rounded-[5px] border border-[rgba(19,101,16,0.3)] overflow-x-auto">
               {tabOpen === 'bookings' &&
               <table className="min-w-full text-sm text-center rounded-[20px]">
-                <thead className="bg-[rgba(204,40,40,0.1)] text-[#535353] tracking-[-0.04em] font-inter rounded-[20px] whitespace-nowrap">
+                <thead className="bg-[rgba(38,185,27,0.1)] text-[#535353] tracking-[-0.04em] font-inter rounded-[20px] whitespace-nowrap">
                   <tr>
                     <th className="font-normal text-sm lg:text-base px-3 lg:px-4 py-2 lg:py-3 border-t border-[rgba(204,40,40,0.2)] capitalize">
                       Lesson Name
@@ -231,7 +231,7 @@ export default function index() {
                     data?.bookings?.map((item, index) => (
                       <tr
                         key={index}
-                        className="hover:bg-[rgba(204,40,40,0.1)] border-t border-[rgba(204,40,40,0.2)]"
+                        className="hover:bg-[rgba(38,185,27,0.1)] border-t border-[rgba(204,40,40,0.2)]"
                       >
                         <td className="px-3 lg:px-4 py-2 lg:py-3 text-black text-sm lg:text-base font-medium font-inter capitalize">
                           {item?.LessonId?.title || ""}
@@ -283,7 +283,7 @@ export default function index() {
               </table>}
               {tabOpen === 'bonus' &&
               <table className="min-w-full text-sm text-center rounded-[20px]">
-                <thead className="bg-[rgba(204,40,40,0.1)] text-[#535353] tracking-[-0.04em] font-inter rounded-[20px] whitespace-nowrap">
+                <thead className="bg-[rgba(38,185,27,0.1)] text-[#535353] tracking-[-0.04em] font-inter rounded-[20px] whitespace-nowrap">
                   <tr>
                     <th className="font-normal text-sm lg:text-base px-3 lg:px-4 py-2 lg:py-3 border-t border-[rgba(204,40,40,0.2)] capitalize">
                       Lesson Name
@@ -311,7 +311,7 @@ export default function index() {
                     data?.bonusData?.map((item, index) => (
                       <tr
                         key={index}
-                        className="hover:bg-[rgba(204,40,40,0.1)] border-t border-[rgba(204,40,40,0.2)]"
+                        className="hover:bg-[rgba(38,185,27,0.1)] border-t border-[rgba(204,40,40,0.2)]"
                       >
                         <td className="px-3 lg:px-4 py-2 lg:py-3 text-black text-sm lg:text-base font-medium font-inter capitalize">
                           {item?.LessonId?.title || ""}

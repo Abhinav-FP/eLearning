@@ -47,12 +47,12 @@ export default function Index() {
         :
         <div className="min-h-screen p-5 lg:p-[30px]">
           <div className="flex justify-between items-center">
-            <h1 className="font-inter text-lg lg:text-2xl font-bold text-[#CC2828] tracking-[-0.04em] mb-2">
+            <h1 className="font-inter text-lg lg:text-2xl font-bold text-[#55844D] tracking-[-0.04em] mb-2">
               Welcome Back!
             </h1>
             <Link
               href="/teacher-dashboard/setting"
-              className="flex w-fit ml-auto mb-4 lg:mb-5 px-2 sm:px-8 py-2.5 text-[#CC2828] border border-[#CC2828] rounded-md tracking-[-0.06em] text-sm font-medium hover:bg-[#CC2828] hover:text-white cursor-pointer"
+              className="flex w-fit ml-auto mb-4 lg:mb-5 px-2 sm:px-8 py-2.5 text-[#55844D] border border-[#55844D] rounded-md tracking-[-0.06em] text-sm font-medium hover:bg-[#55844D] hover:text-white cursor-pointer"
             >
               Edit Profile
             </Link>
@@ -61,12 +61,12 @@ export default function Index() {
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
             {/* Lesson Prices */}
             <div className="relative bg-white rounded-xl dashboard-box p-3.5 lg:p-4 xl:p-5 border border-[rgba(204,40,40,0.2)] flex flex-col min-h-[120px] md:min-h-[136px]">
-              <h2 className="font-inter text-[#CC2828] font-bold text-base sm:text-lg lg:text-xl xl:text-2xl capitalize tracking-[-0.04em] pr-16">
+              <h2 className="font-inter text-[#55844D] font-bold text-base sm:text-lg lg:text-xl xl:text-2xl capitalize tracking-[-0.04em] pr-16">
                 Lesson Price
               </h2>
-              <div className="absolute right-4 lg:right-5 xl:right-6 bg-[#CC28281A] border-[0.67px] border-[#CC282880] p-3 rounded">
+              <div className="absolute right-4 lg:right-5 xl:right-6 bg-[#55844D1A] border-[0.67px] border-[#55844D80] p-3 rounded">
                 <Link href="/teacher-dashboard/profile" >
-                  <MdAttachMoney className="text-[#CC2828]" size={24} />
+                  <MdAttachMoney className="text-[#55844D]" size={24} />
                 </Link>
               </div>
               <div className="flex flex-col gap-1 mt-6 xl:mt-4">
@@ -93,12 +93,12 @@ export default function Index() {
 
             {/* Total Reviews */}
             <div className="relative bg-white rounded-xl dashboard-box p-3.5 lg:p-4 xl:p-5 border border-[rgba(204,40,40,0.2)] flex flex-col min-h-[120px] md:min-h-[136px]">
-              <h2 className="font-inter text-[#CC2828] font-bold text-base sm:text-lg lg:text-xl xl:text-2xl capitalize tracking-[-0.04em] pr-16">
+              <h2 className="font-inter text-[#55844D] font-bold text-base sm:text-lg lg:text-xl xl:text-2xl capitalize tracking-[-0.04em] pr-16">
                 Total Reviews
               </h2>
-              <div className="absolute right-4 lg:right-5 xl:right-6 bg-[#CC28281A] border-[0.67px] border-[#CC282880] p-3 rounded">
+              <div className="absolute right-4 lg:right-5 xl:right-6 bg-[#55844D1A] border-[0.67px] border-[#55844D80] p-3 rounded">
                 <Link href="/teacher-dashboard/review">
-                <MdReviews className="text-[#CC2828]" size={24} />
+                <MdReviews className="text-[#55844D]" size={24} />
                 </Link>
               </div>
               <div className="text-sm text-[#535353] space-y-1 mt-4">
@@ -108,12 +108,12 @@ export default function Index() {
 
             {/* Payment Earnings */}    
             {/* <div className="relative bg-white rounded-xl dashboard-box p-3.5 lg:p-4 xl:p-5 border border-[rgba(204,40,40,0.2)] flex flex-col min-h-[120px] md:min-h-[136px]">
-              <h2 className="font-inter text-[#CC2828] font-bold text-base sm:text-lg lg:text-xl xl:text-2xl capitalize tracking-[-0.04em] pr-16">
+              <h2 className="font-inter text-[#55844D] font-bold text-base sm:text-lg lg:text-xl xl:text-2xl capitalize tracking-[-0.04em] pr-16">
                 Payment Earnings (Last 30 Days)
               </h2>
-              <div className="absolute right-4 lg:right-5 xl:right-6 bg-[#CC28281A] border-[0.67px] border-[#CC282880] p-3 rounded">
+              <div className="absolute right-4 lg:right-5 xl:right-6 bg-[#55844D1A] border-[0.67px] border-[#55844D80] p-3 rounded">
                 <Link href="/teacher-dashboard/earnings">
-                  <FaWallet className="w-6 h-6 text-[#CC2828]" />
+                  <FaWallet className="w-6 h-6 text-[#55844D]" />
                 </Link>
               </div>
               <div className="text-lg space-y-1.5 mt-8 xl:mt-8">
@@ -128,12 +128,12 @@ export default function Index() {
 
             {/* Upcoming Lessons */}
             <div className="relative bg-white rounded-xl dashboard-box p-3.5 lg:p-4 xl:p-5 border border-[rgba(204,40,40,0.2)] flex flex-col min-h-[120px] md:min-h-[136px]">
-              <h2 className="font-inter text-[#CC2828] font-bold text-base sm:text-lg lg:text-xl xl:text-2xl capitalize tracking-[-0.04em] pr-16">
+              <h2 className="font-inter text-[#55844D] font-bold text-base sm:text-lg lg:text-xl xl:text-2xl capitalize tracking-[-0.04em] pr-16">
                 Upcoming Lessons
               </h2>
-              <div className="absolute right-4 lg:right-5 xl:right-6 bg-[#CC28281A] border-[0.67px] border-[#CC282880] p-3 rounded">
+              <div className="absolute right-4 lg:right-5 xl:right-6 bg-[#55844D1A] border-[0.67px] border-[#55844D80] p-3 rounded">
                 < Link href="/teacher-dashboard/booking">
-                  <MdUpcoming className="text-[#CC2828]" size={24} />
+                  <MdUpcoming className="text-[#55844D]" size={24} />
                 </Link>
               </div>
               {Dashboard?.upcomingLesson && Dashboard?.upcomingLesson?.length > 0 ?
@@ -160,12 +160,12 @@ export default function Index() {
 
             {/* Total Lessons Completed */}
             <div className="relative bg-white rounded-xl dashboard-box p-3.5 lg:p-4 xl:p-5 border border-[rgba(204,40,40,0.2)] flex flex-col min-h-[120px] md:min-h-[136px]">
-              <h2 className="font-inter text-[#CC2828] font-bold text-base sm:text-lg lg:text-xl xl:text-2xl capitalize tracking-[-0.04em] pr-16">
+              <h2 className="font-inter text-[#55844D] font-bold text-base sm:text-lg lg:text-xl xl:text-2xl capitalize tracking-[-0.04em] pr-16">
                 Total lessons completed
               </h2>
-              <div className="absolute right-4 lg:right-5 xl:right-6 bg-[#CC28281A] border-[0.67px] border-[#CC282880] p-3 rounded">
+              <div className="absolute right-4 lg:right-5 xl:right-6 bg-[#55844D1A] border-[0.67px] border-[#55844D80] p-3 rounded">
                 < Link href="/teacher-dashboard/booking">
-                  <FaFileAlt className="text-[#CC2828]" size={24} />
+                  <FaFileAlt className="text-[#55844D]" size={24} />
                 </Link>
               </div>
               <div className="text-lg space-y-1.5 mt-8 xl:mt-8">
@@ -184,12 +184,12 @@ export default function Index() {
 
             {/* Earnings */}    
             {/* <div className="relative bg-white rounded-xl dashboard-box p-3.5 lg:p-4 xl:p-5 border border-[rgba(204,40,40,0.2)] flex flex-col min-h-[120px] md:min-h-[136px]">
-              <h2 className="font-inter text-[#CC2828] font-bold text-base sm:text-lg lg:text-xl xl:text-2xl capitalize tracking-[-0.04em] pr-16">
+              <h2 className="font-inter text-[#55844D] font-bold text-base sm:text-lg lg:text-xl xl:text-2xl capitalize tracking-[-0.04em] pr-16">
                 Earnings (Last 30 Days)
               </h2>
-              <div className="absolute right-4 lg:right-5 xl:right-6 bg-[#CC28281A] border-[0.67px] border-[#CC282880] p-3 rounded">
+              <div className="absolute right-4 lg:right-5 xl:right-6 bg-[#55844D1A] border-[0.67px] border-[#55844D80] p-3 rounded">
                 <Link href="/teacher-dashboard/earnings">
-                  <FaWallet className="w-6 h-6 text-[#CC2828]" />
+                  <FaWallet className="w-6 h-6 text-[#55844D]" />
                 </Link>
               </div>
               <div className="text-lg space-y-1.5 mt-8 xl:mt-8">

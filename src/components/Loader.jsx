@@ -339,7 +339,7 @@ const TeacherDashboardLoader = () => {
         {Array(6).fill(0).map((_, idx) => (
           <div
             key={idx}
-            className="relative bg-white rounded-xl border border-[rgba(204,40,40,0.2)] p-4 min-h-[136px] flex flex-col justify-between"
+            className="relative bg-white rounded-xl border border-[rgba(40,204,40,0.2)] p-4 min-h-[136px] flex flex-col justify-between"
           >
             <div className="h-6 bg-gray-200 rounded w-1/2 mb-4"></div>
 
@@ -415,9 +415,9 @@ const TeacherEarningsLoader = () => {
       </div>
 
       {/* Table Skeleton */}
-      <div className="rounded-[5px] border border-[rgba(204,40,40,0.3)] overflow-x-auto">
+      <div className="rounded-[5px] border border-[rgba(59,204,40,0.3)] overflow-x-auto">
         <table className="min-w-full text-sm text-center rounded-[20px]">
-          <thead className="bg-[rgba(204,40,40,0.1)] text-[#535353] tracking-[-0.04em] font-inter rounded-[20px] whitespace-nowrap">
+          <thead className="bg-[rgba(54,204,40,0.1)] text-[#535353] tracking-[-0.04em] font-inter rounded-[20px] whitespace-nowrap">
             <tr>
               {["Lesson Name", "Lesson Date", "Payment Id", "Payment Date", "Amount"].map((header, idx) => (
                 <th
@@ -433,7 +433,7 @@ const TeacherEarningsLoader = () => {
             {Array(5).fill(0).map((_, i) => (
               <tr
                 key={i}
-                className="hover:bg-[rgba(204,40,40,0.05)] border-t border-[rgba(204,40,40,0.2)]"
+                className="hover:bg-[rgba(86,204,40,0.05)] border-t border-[rgba(45,204,40,0.2)]"
               >
                 {Array(5).fill(0).map((_, j) => (
                   <td

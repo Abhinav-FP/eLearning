@@ -259,9 +259,9 @@ export default function Index() {
                   <div
                     key={index}
                     onClick={() => handleUserSelect(chat)}
-                    className={`flex items-center text-[#ffffff] min-h-[56px] pr-[66px] pl-[89px] py-[8px] hover:bg-[#CC28281A] relative cursor-pointer min-h-[72px] ${
+                    className={`flex items-center text-[#ffffff] min-h-[56px] pr-[66px] pl-[89px] py-[8px] hover:bg-[#55844D1A] relative cursor-pointer min-h-[72px] ${
                       teacherId === chat?.teacher?._id
-                        ? "bg-[#CC28281A]"
+                        ? "bg-[#55844D1A]"
                         : "bg-[#fff]"
                     }`}
                   >
@@ -277,7 +277,7 @@ export default function Index() {
                         {chat?.student?.name}
                       </h3>
                       {chat?.count ? (
-                        <p className="text-sm text-[#CC2828] font-inter tracking-[-0.04em] ">
+                        <p className="text-sm text-[#55844D] font-inter tracking-[-0.04em] ">
                           {chat?.count > 5 ? "5+" : chat?.count} unread messages
                         </p>
                       ) : (
@@ -291,7 +291,7 @@ export default function Index() {
                         className={`h-[28px] w-[28px] text-[#535353] text-xs font-bold flex items-center justify-center absolute right-[22px] rounded-full top-1/2 -translate-y-1/2 ${
                           teacherId === chat?.teacher?._id
                             ? "bg-white"
-                            : "bg-[rgba(204,40,40,0.1)]"
+                            : "bg-[rgba(38,185,27,0.1)]"
                         }`}
                       >
                         {chat?.count > 5 ? "5+" : chat?.count}
@@ -333,7 +333,7 @@ export default function Index() {
                   {MobileOpen && (
                     <button
                       onClick={() => setMobileOpen(false)}
-                      className="block md:hidden ml-auto px-6 py-2 text-[#CC2828] border border-[#CC2828] rounded-md text-xs hover:bg-[#CC2828] hover:text-white"
+                      className="block md:hidden ml-auto px-6 py-2 text-[#55844D] border border-[#55844D] rounded-md text-xs hover:bg-[#55844D] hover:text-white"
                     >
                       Back
                     </button>
@@ -376,7 +376,7 @@ export default function Index() {
                               isIncoming ? "justify-end" : "justify-start"
                             }`}
                           >
-                            <div className="bg-[rgba(204,40,40,0.1)] px-4 py-[12px] rounded-bl-[10px] rounded-t-[10px] max-w-[60%] space-y-2">
+                            <div className="bg-[rgba(38,185,27,0.1)] px-4 py-[12px] rounded-bl-[10px] rounded-t-[10px] max-w-[60%] space-y-2">
                               {/* File preview if present */}
                               {item?.file_url && (
                                 <>
@@ -398,7 +398,7 @@ export default function Index() {
                                       onClick={() =>
                                         window.open(item.file_url, "_blank")
                                       }
-                                      className="cursor-pointer bg-white text-[#CC2828] text-sm font-medium border border-[#CC2828] px-3 py-2 rounded-lg hover:bg-[#f8d7da] transition duration-200"
+                                      className="cursor-pointer bg-white text-[#55844D] text-sm font-medium border border-[#55844D] px-3 py-2 rounded-lg hover:bg-[#f8d7da] transition duration-200"
                                     >
                                       📄 {item.file_name || "Download file"}
                                     </div>
@@ -459,7 +459,7 @@ export default function Index() {
                     />
                     <button
                       onClick={handleFileClick}
-                      className="bg-white h-[30px] sm:h-[50px] w-[30px] sm:w-[50px] text-[16px] sm:text-[22px] cursor-pointer text-[#CC2828] pl-[7px] sm:pl-[14px] pr-[16px] sm:py-2 rounded-full transition duration-200 border border-[#CC2828]"
+                      className="bg-white h-[30px] sm:h-[50px] w-[30px] sm:w-[50px] text-[16px] sm:text-[22px] cursor-pointer text-[#55844D] pl-[7px] sm:pl-[14px] pr-[16px] sm:py-2 rounded-full transition duration-200 border border-[#55844D]"
                       title="Attach a file"
                     >
                       <LuPlus className="w-auto h-auto" />
@@ -467,7 +467,7 @@ export default function Index() {
                     {/* Send Icon Button */}
                     <button
                       type="submit"
-                      className="bg-[#CC2828] h-[30px] sm:h-[50px] w-[30px] sm:w-[50px] text-[16px] sm:text-[22px] cursor-pointer text-white pl-[7px] sm:pl-[14px] pr-[16px] sm:py-2 rounded-full transition duration-200"
+                      className="bg-[#55844D] h-[30px] sm:h-[50px] w-[30px] sm:w-[50px] text-[16px] sm:text-[22px] cursor-pointer text-white pl-[7px] sm:pl-[14px] pr-[16px] sm:py-2 rounded-full transition duration-200"
                       title="Send Message"
                     >
                       <IoSend className="w-auto h-auto" />

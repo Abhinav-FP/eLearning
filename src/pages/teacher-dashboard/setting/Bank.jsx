@@ -81,7 +81,7 @@ export default function Bank({processing, setProcessing}) {
                 {/* Bank Name */}
                 <div className="flex flex-wrap items-start">
                     <div className="w-full lg:w-5/12 xl:w-4/12 lg:pr-3 mb-2 lg:mb-0">
-                        <label className="block text-[#CC2828] font-medium text-base lg:text-xl mb-1">Bank Name</label>
+                        <label className="block text-[#55844D] font-medium text-base lg:text-xl mb-1">Bank Name</label>
                         <p className="text-[#535353] text-base">Enter your Bank Name here</p>
                     </div>
                     <div className="w-full lg:w-6/12 xl:w-5/12 lg:pl-3 relative">
@@ -101,7 +101,7 @@ export default function Bank({processing, setProcessing}) {
                 {/* Branch Code */}
                 <div className="flex flex-wrap items-start">
                     <div className="w-full lg:w-5/12 xl:w-4/12 lg:pr-3 mb-2 lg:mb-0">
-                        <label className="block text-[#CC2828] font-medium text-base lg:text-xl mb-1">Branch Code</label>
+                        <label className="block text-[#55844D] font-medium text-base lg:text-xl mb-1">Branch Code</label>
                         <p className="text-[#535353] text-base">Enter your Branch Code here</p>
                     </div>
                     <div className="w-full lg:w-6/12 xl:w-5/12 lg:pl-3 relative">
@@ -121,7 +121,7 @@ export default function Bank({processing, setProcessing}) {
                 {/* Bank Number */}
                 <div className="flex flex-wrap items-start">
                     <div className="w-full lg:w-5/12 xl:w-4/12 lg:pr-3 mb-2 lg:mb-0">
-                        <label className="block text-[#CC2828] font-medium text-base lg:text-xl mb-1">Bank Account Number</label>
+                        <label className="block text-[#55844D] font-medium text-base lg:text-xl mb-1">Bank Account Number</label>
                         <p className="text-[#535353] text-base">Enter your Bank Account Number here</p>
                     </div>
                     <div className="w-full lg:w-6/12 xl:w-5/12 lg:pl-3 relative">
@@ -141,7 +141,7 @@ export default function Bank({processing, setProcessing}) {
                 {/* User Name */}
                 <div className="flex flex-wrap items-start">
                     <div className="w-full lg:w-5/12 xl:w-4/12 lg:pr-3 mb-2 lg:mb-0">
-                        <label className="block text-[#CC2828] font-medium text-base lg:text-xl mb-1">Account Holder Name</label>
+                        <label className="block text-[#55844D] font-medium text-base lg:text-xl mb-1">Account Holder Name</label>
                         <p className="text-[#535353] text-base">Enter your Account Holder Name here</p>
                     </div>
                     <div className="w-full lg:w-6/12 xl:w-5/12 lg:pl-3 relative">
@@ -160,7 +160,7 @@ export default function Bank({processing, setProcessing}) {
                 {/* Account Type */}
                 <div className="flex flex-wrap items-start">
                     <div className="w-full lg:w-5/12 xl:w-4/12 lg:pr-3 mb-2 lg:mb-0">
-                        <label className="block text-[#CC2828] font-medium text-base lg:text-xl mb-1">
+                        <label className="block text-[#55844D] font-medium text-base lg:text-xl mb-1">
                         Account Type (Optional)
                         </label>
                         <p className="text-[#535353] text-base">Enter the type of your bank account</p>
@@ -183,7 +183,7 @@ export default function Bank({processing, setProcessing}) {
                 {/* Branch Name */}
                 {/* <div className="flex flex-wrap items-start">
                     <div className="w-full lg:w-5/12 xl:w-4/12 lg:pr-3 mb-2 lg:mb-0">
-                        <label className="block text-[#CC2828] font-medium text-base lg:text-xl mb-1">Branch Name</label>
+                        <label className="block text-[#55844D] font-medium text-base lg:text-xl mb-1">Branch Name</label>
                         <p className="text-[#535353] text-base">Enter your Branch Name here</p>
                     </div>
                     <div className="w-full lg:w-6/12 xl:w-5/12 lg:pl-3 relative">
@@ -202,7 +202,7 @@ export default function Bank({processing, setProcessing}) {
                 {/* IFSC Code */}
                 {/* <div className="flex flex-wrap items-start">
                     <div className="w-full lg:w-5/12 xl:w-4/12 lg:pr-3 mb-2 lg:mb-0">
-                        <label className="block text-[#CC2828] font-medium text-base lg:text-xl mb-1">IFSC Code</label>
+                        <label className="block text-[#55844D] font-medium text-base lg:text-xl mb-1">IFSC Code</label>
                         <p className="text-[#535353] text-base">Enter your Bank IFSC Code here</p>
                     </div>
                     <div className="w-full lg:w-6/12 xl:w-5/12 lg:pl-3 relative">
@@ -220,7 +220,7 @@ export default function Bank({processing, setProcessing}) {
 
                 <div className="flex flex-wrap items-start">
                     <div className="w-full lg:w-5/12 xl:w-4/12 lg:pr-3 mb-2 lg:mb-0">
-                        <label className="block text-[#CC2828] font-medium text-base lg:text-xl mb-1">
+                        <label className="block text-[#55844D] font-medium text-base lg:text-xl mb-1">
                             Overseas Bank Account Details (Optional)</label>
                         <p className="text-[#535353] text-base">Enter overseas bank details if applicable</p>
                     </div>
@@ -243,7 +243,7 @@ export default function Bank({processing, setProcessing}) {
             <div className="flex justify-center gap-4 pt-6">
                 <button
                     type="button"
-                    className="w-full max-w-[183px] bg-[#CC2828] hover:bg-red-700 text-white py-2.5 lg:py-3.5
+                    className="w-full max-w-[183px] bg-[#55844D] hover:bg-[#3d5e37] text-white py-2.5 lg:py-3.5
                     rounded-[10px] text-base xl:text-xl cursor-pointer"
                     onClick={() => setShowDetails(!showDetails)}
                 >
@@ -252,7 +252,7 @@ export default function Bank({processing, setProcessing}) {
                 <button
                     type="submit"
                     className={`w-full max-w-[183px] ${!showDetails ? "cursor-not-allowed" : "cursor-pointer"} 
-                        bg-[#CC2828] hover:bg-red-700 text-white py-2.5 lg:py-3.5 rounded-[10px] text-base xl:text-xl`}
+                        bg-[#55844D] hover:bg-[#3d5e37] text-white py-2.5 lg:py-3.5 rounded-[10px] text-base xl:text-xl`}
                     disabled={processing || !showDetails}
                 >
                     {processing ? "Submitting..." : "Submit"}

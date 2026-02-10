@@ -110,13 +110,13 @@ export default function AddLesson({ isOpen, onClose, data, getLessons }) {
         onSubmit={data ? handleUpdate : handleAdd}
         className="max-w-md mx-auto mt-10 px-3 sm:px-6 pb-3 sm:pb-6 bg-white space-y-2 sm:space-y-4"
       >
-        <h2 className="text-2xl font-bold text-center text-[#CC2828]">
+        <h2 className="text-2xl font-bold text-center text-[#55844D]">
           {data ? "Edit Lesson" : "Add lesson"}
         </h2>
         {/* Title Field */}
         {/* Title Field with 50 character limit */}
         <div>
-          <label className="flex justify-between text-[#CC2828] font-medium mb-1">
+          <label className="flex justify-between text-[#55844D] font-medium mb-1">
             Title <span className="text-sm text-gray-500">({formData.title.length}/50)</span>
           </label>
           <input
@@ -127,14 +127,14 @@ export default function AddLesson({ isOpen, onClose, data, getLessons }) {
               if (e.target.value.length <= 50) handleChange(e);
             }}
             placeholder="Enter title"
-            className="w-full p-3 rounded-md bg-gray-100 text-gray-700 focus:outline-none focus:ring-2 focus:ring-[#CC2828]"
+            className="w-full p-3 rounded-md bg-gray-100 text-gray-700 focus:outline-none focus:ring-2 focus:ring-[#55844D]"
             required
           />
         </div>
 
         {/* Description Field changed to textarea with 300 character limit */}
         <div>
-          <label className="flex justify-between text-[#CC2828] font-medium mb-1">
+          <label className="flex justify-between text-[#55844D] font-medium mb-1">
             <span>Description</span>
             <span className="text-sm text-gray-500">({formData.description.length}/300)</span>
           </label>
@@ -146,14 +146,14 @@ export default function AddLesson({ isOpen, onClose, data, getLessons }) {
             }}
             placeholder="Enter description"
             rows={10}
-            className="w-full p-3 rounded-md bg-gray-100 text-gray-700 focus:outline-none focus:ring-2 focus:ring-[#CC2828]"
+            className="w-full p-3 rounded-md bg-gray-100 text-gray-700 focus:outline-none focus:ring-2 focus:ring-[#55844D]"
             required
           />
         </div>
 
         {/* Price Field */}
         <div>
-          <label className="block text-[#CC2828] font-medium mb-1">
+          <label className="block text-[#55844D] font-medium mb-1">
             Price (In USD)
           </label>
           <div className="relative">
@@ -173,13 +173,13 @@ export default function AddLesson({ isOpen, onClose, data, getLessons }) {
               maxLength="7"
               placeholder="Enter price"
               required
-              className="w-full pl-14 p-3 rounded-md bg-gray-100 text-gray-700 focus:outline-none focus:ring-2 focus:ring-[#CC2828]"
+              className="w-full pl-14 p-3 rounded-md bg-gray-100 text-gray-700 focus:outline-none focus:ring-2 focus:ring-[#55844D]"
             />
           </div>
         </div>
         {/* Duration Field */}
         <div>
-          <label className="block text-[#CC2828] font-medium mb-1">
+          <label className="block text-[#55844D] font-medium mb-1">
             Duration
           </label>
 
@@ -234,7 +234,7 @@ export default function AddLesson({ isOpen, onClose, data, getLessons }) {
                 }
                 onChange={handleChange}
                 placeholder="Enter duration"
-                className="ml-2 p-2 rounded-md bg-gray-100 text-gray-700 focus:outline-none focus:ring-2 focus:ring-[#CC2828]"
+                className="ml-2 p-2 rounded-md bg-gray-100 text-gray-700 focus:outline-none focus:ring-2 focus:ring-[#55844D]"
               />
             </label> */}
           </div>
@@ -244,14 +244,14 @@ export default function AddLesson({ isOpen, onClose, data, getLessons }) {
           {data ? (
             <button
               type="submit"
-              className="cursor-pointer flex-1 bg-red-600 text-white py-2 rounded-md hover:bg-red-700"
+              className="cursor-pointer flex-1 bg-[#55844D] text-white py-2 rounded-md hover:bg-[#3d5e37]"
             >
               {loading ? "Updating..." : "Update"}
             </button>
           ) : (
             <button
               type="submit"
-              className="cursor-pointer flex-1 bg-red-600 text-white py-2 rounded-md hover:bg-red-700"
+              className="cursor-pointer flex-1 bg-[#55844D] text-white py-2 rounded-md hover:bg-[#3d5e37]"
             >
               {loading ? "Adding..." : "Add"}
             </button>

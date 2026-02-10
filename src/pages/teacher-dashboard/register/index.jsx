@@ -145,7 +145,7 @@ export default function Index() {
         </div>
 
         {/* Heading */}
-        <h2 className="text-center text-red-600 text-xl lg:text-2xl font-semibold mb-2 uppercase">
+        <h2 className="text-center text-[#55844D] text-xl lg:text-2xl font-semibold mb-2 uppercase">
           REGISTER as a Teacher
         </h2>
         <p className="text-center text-sm text-black mb-8">

@@ -50,6 +50,11 @@ export default function Main() {
         name="description"
         content="Japanese for Me offers a conversation-centered online Japanese learning experience with absolutely no textbook required. Improve your speaking through real dialogues, everyday expressions, and personalized lessons designed by experienced Japanese teachers. Whether you’re a beginner wanting survival Japanese, an intermediate learner aiming for fluency, or life in Japan, we help you speak confidently and naturally. Learn anytime, anywhere."
       />
+      <meta property="og:title" content="Japanese for Me" />
+      <meta property="og:description" content="Learn Japanese through real conversation. No textbooks." />
+      <meta property="og:image" content="https://japaneseforme.com/NewLogo.png" />
+      <meta property="og:url" content="https://japaneseforme.com" />
+      <meta property="og:type" content="website" />
     </Head>
     <Layout>
       <Hero

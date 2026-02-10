@@ -300,13 +300,13 @@ const StudentDashboardLoader = () => {
       {/* Recent Reviews */}
       <div className="flex flex-wrap -mx-4">
         <div className="w-full px-4">
-          <div className="bg-white p-4 lg:p-5 border border-[rgba(204,40,40,0.2)] rounded-[20px]">
+          <div className="bg-white p-4 lg:p-5 border border-[rgba(40,204,108,0.2)] rounded-[20px]">
             <div className="h-6 w-40 bg-gray-200 rounded mb-4"></div>
             <div className="space-y-3">
               {[1, 2].map((_, i) => (
                 <div
                   key={i}
-                  className="bg-[rgba(204,40,40,0.1)] p-2.5 rounded-xl"
+                  className="bg-[rgba(100,204,40,0.1)] p-2.5 rounded-xl"
                 >
                   <div className="h-4 w-full bg-gray-200 rounded mb-2"></div>
                   <div className="flex gap-1 text-yellow-300 mb-2">

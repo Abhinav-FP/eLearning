@@ -39,7 +39,7 @@ export default function Index() {
         <StudentDashboardLoader />
         :
         <div className="min-h-screen p-5 lg:p-[30px]">
-          <h1 className="font-inter text-lg lg:text-2xl font-bold text-[#CC2828] tracking-[-0.04em] mb-2">Welcome Back !</h1>
+          <h1 className="font-inter text-lg lg:text-2xl font-bold text-[#55844D] tracking-[-0.04em] mb-2">Welcome Back !</h1>
           <p className="text-sm lg:text-base text-[#565F66] mb-6">
             {dashboard && dashboard?.booking
               ? `Next Lesson: ${moment(dashboard.booking.startDateTime).format("DD MMMM hh:mm A")} with ${dashboard.booking.teacherId?.name}`
@@ -49,10 +49,10 @@ export default function Index() {
           {/* Row 1: Upcoming Lessons & Favorite Teachers */}
           <div className="flex flex-wrap -mx-4 mb-5 space-y-5 lg:space-y-0">
             <div className='w-full lg:w-1/2 px-4'>
-              <div className="bg-white h-full p-4 lg:p-5 border border-[rgba(204,40,40,0.2)] dashboard-box rounded-[20px]">
+              <div className="bg-white h-full p-4 lg:p-5 border border-[rgba(19,101,16,0.2)] dashboard-box rounded-[20px]">
                 {dashboard && dashboard?.booking ?
                   <>
-                    <h2 className="font-inter text-lg lg:text-xl tracking-[-0.04em] font-bold text-[#CC2828] mb-4">Upcoming Lessons</h2>
+                    <h2 className="font-inter text-lg lg:text-xl tracking-[-0.04em] font-bold text-[#55844D] mb-4">Upcoming Lessons</h2>
                     <div className="space-y-3">
                       <p className='text-[#565F66] text-base lg:text-lg font-normal flex flex-wrap'>
                         <span className='font-medium min-w-[100px]  lg:min-w-[128px]'>
@@ -77,8 +77,8 @@ export default function Index() {
                       </p>
                     </div>
                     <Link href="/student/lessons"
-                      className="inline-block mt-4 md:mt-8 bg-[rgba(204,40,40,0.1)] text-[#CC2828] px-8 py-2.5
-                     rounded-full text-lg hover:bg-red-200 transition cursor-pointer">
+                      className="inline-block mt-4 md:mt-8 bg-[rgba(38,185,27,0.1)] text-[#55844D] px-8 py-2.5
+                     rounded-full text-lg hover:bg-green-200 transition cursor-pointer">
                       Reschedule
                      </Link>
                   </>
@@ -87,17 +87,17 @@ export default function Index() {
               </div>
             </div>
             <div className='w-full lg:w-1/2 px-4'>
-              <div className="bg-white h-full p-4 lg:p-5 border border-[rgba(204,40,40,0.2)] dashboard-box rounded-[20px]">
+              <div className="bg-white h-full p-4 lg:p-5 border border-[rgba(19,101,16,0.2)] dashboard-box rounded-[20px]">
                 {dashboard && dashboard?.wishlistResult && dashboard?.wishlistResult?.length > 0 ?
                   <>
-                    <h2 className="font-inter text-lg lg:text-xl tracking-[-0.04em] font-bold text-[#CC2828] mb-4">Favorite Teachers</h2>
+                    <h2 className="font-inter text-lg lg:text-xl tracking-[-0.04em] font-bold text-[#55844D] mb-4">Favorite Teachers</h2>
                     <div className="space-y-4">
                       {dashboard?.wishlistResult?.map((wish, idx) => (
                         <Link
                           href={`/teacher/${wish?.extra?._id}`}
                           key={idx}
                           className="flex items-center justify-between
-                           border border-[rgba(204,40,40,0.3)]
+                           border border-[rgba(19,101,16,0.3)]
                             rounded-xl p-2.5"
                         >
                           <div className="flex items-center space-x-3">
@@ -117,7 +117,7 @@ export default function Index() {
                                font-inter capitalize">{wish?.teacher?.role}</p>
                             </div>
                           </div>
-                          <Link href={`/student/message?query=${wish?.teacher?._id}`} className="text-[#CC2828] 
+                          <Link href={`/student/message?query=${wish?.teacher?._id}`} className="text-[#55844D] 
                           font-inter text-sm font-medium tracking-[-0.06em] 
                            hover:underline cursor-pointer">
                             Message
@@ -137,8 +137,8 @@ export default function Index() {
 
           <div className="flex flex-wrap -mx-4">
             <div className='w-full px-4'>
-              <div className="bg-white p-4 lg:p-5 border border-[rgba(204,40,40,0.2)]  rounded-[20px]">
-                <h2 className="font-inter text-lg lg:text-xl tracking-[-0.04em] font-bold text-[#CC2828] mb-4">Recent Reviews</h2>
+              <div className="bg-white p-4 lg:p-5 border border-[rgba(19,101,16,0.2)]  rounded-[20px]">
+                <h2 className="font-inter text-lg lg:text-xl tracking-[-0.04em] font-bold text-[#55844D] mb-4">Recent Reviews</h2>
                 {dashboard && dashboard?.reviews && dashboard?.reviews?.length > 0 ?
                   <div className="space-y-2">
                     {dashboard?.reviews?.map((item, idx) => (
@@ -147,7 +147,7 @@ export default function Index() {
                         className="relative bg-[#F6F7F7] rounded-[10px] p-4 lg:p-5"
                       >
                         <div className="flex justify-between items-start">
-                          <h3 className="text-base font-semibold text-[#CC2828] -tracking-[0.04em] font-inter">
+                          <h3 className="text-base font-semibold text-[#55844D] -tracking-[0.04em] font-inter">
                             Review on Lesson – {item?.lessonId?.title}
                           </h3>
                         </div>
@@ -160,7 +160,7 @@ export default function Index() {
                               <FaStar key={i} size={16} fill="currentColor" />
                             ))}
                           </div>
-                          <span className="text-sm text-[#CC2828] font-inter font-medium -tracking-[0.04em]">
+                          <span className="text-sm text-[#55844D] font-inter font-medium -tracking-[0.04em]">
                             {moment(item?.updatedAt || item?.createdAt).format(
                               "MMMM DD, YYYY"
                             )}

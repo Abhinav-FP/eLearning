@@ -108,7 +108,7 @@ export default function BookingPopup({
     <div className="fixed inset-0 top-0 bottom-0 flex  justify-center bg-[rgba(0,0,0,.3)] z-50">
       <div className='bg-white mt-28 rounded-lg w-full shadow-lg w-ful '>
         <div className="px-4 pt-4  h-full text-gray-800 relative ">
-          <div style={{ backgroundImage: "url('/leasson-bg.png')" }} className="text-gray-800 pb-40 lg:pb-10 overflow-y-auto max-h-[80vh] h-full ">
+          <div style={{ backgroundImage: "url('/leasson-bg.png')"}} className="text-gray-800 pb-40 lg:pb-10 overflow-y-auto max-h-[80vh] h-full bg-[#ECF1E6]">
             <button
               onClick={onClose}
               className="cursor-pointer text-gray-600 hover:text-gray-800 focus:outline-none absolute right-6 lg:right-12 top-6 lg:top-8 z-[2]"
@@ -119,11 +119,11 @@ export default function BookingPopup({
             {step === 1 && (
               <div
 
-                className="h-full bg-[rgba(249,190,191,.5)] bg-cover bg-center rounded-[20px] py-[40px] lg:py-[60px] pt-10 min-h-full"
+                className="h-full bg-[rgba(249,190,191,0.1)] bg-cover bg-center rounded-[20px] py-[40px] lg:py-[60px] pt-10 min-h-full"
               >
                 <div className="container sm:container md:container lg:container xl:max-w-[1230px]  bg-[rgba(249,190,191, .1)] px-4 mx-auto">
                   <Heading
-                    classess="text-[#CC2828] mb-6 lg:mb-8 text-center !text-3xl !mb-3 "
+                    classess="text-[#55844D] mb-6 lg:mb-8 text-center !text-3xl !mb-3 "
                     title="Select your Lesson"
                   />
                   <LessonList
@@ -137,10 +137,10 @@ export default function BookingPopup({
               </div>
             )}
             {step === 2 && (
-              <div className="h-full bg-[rgba(249,190,191,.5)] bg-cover bg-center rounded-[20px] py-[40px] lg:py-[60px] pt-10 min-h-full">
+              <div className="h-full bg-[rgba(249,190,191,0.1)] bg-cover bg-center rounded-[20px] py-[40px] lg:py-[60px] pt-10 min-h-full">
                 <div className="container sm:container md:container lg:container xl:max-w-[1230px]  bg-[rgba(249,190,191, .1)] px-4 mx-auto">
                   <Heading
-                    classess="text-[#CC2828] !text-3xl !mb-3 text-center"
+                    classess="text-[#55844D] !text-3xl !mb-3 text-center"
                     title="Choose Your Lesson Option"
                   />
                   <LessonType 
@@ -156,11 +156,11 @@ export default function BookingPopup({
             {step === 3 && (
               <div
 
-                className="bg-[rgba(249,190,191,.5)] bg-cover bg-center rounded-[20px] py-[40px] lg:py-[60px]"
+                className="bg-[rgba(249,190,191,0.1)] bg-cover bg-center rounded-[20px] py-[40px] lg:py-[60px]"
               >
                 <div className="container sm:container md:container lg:container xl:max-w-[1230px]  bg-[rgba(249,190,191, .1)] px-4 mx-auto">
                   <Heading
-                    classess="text-[#CC2828] !text-3xl !mb-3 text-center"
+                    classess="text-[#55844D] !text-3xl !mb-3 text-center"
                     title="Select your Lesson Start Time"
                   />
                   <Calendar
@@ -179,7 +179,7 @@ export default function BookingPopup({
               <>
                 {selectedLesson && (
                   <Heading
-                    classess="text-[#CC2828] !text-3xl !mb-0 text-center"
+                    classess="text-[#55844D] !text-3xl !mb-0 text-center"
                     title={selectedLesson?.title}
                   />
                 )}
@@ -221,7 +221,7 @@ export default function BookingPopup({
             <div className="w-full lg:w-auto flex flex-col lg:flex-row gap-2 lg:gap-4 items-center">
               {selectedLesson && (
                 <div className="w-full lg:w-auto border border-gray-300 rounded-full px-4 py-2 ">
-                  <p className="flex gap-2 items-center justify-center text-[#CC2828] capitalize text-sm lg:text-base font-semibold font-inter tracking-[-0.04em]">
+                  <p className="flex gap-2 items-center justify-center text-[#55844D] capitalize text-sm lg:text-base font-semibold font-inter tracking-[-0.04em]">
                     <FaBookReader size={20} />
                     {selectedLesson?.title} -{" "}
                     {formatMultiPrice(selectedLesson?.price, "USD")}{" "}
@@ -230,7 +230,7 @@ export default function BookingPopup({
               )}
               {selectedSlot && (
                 <div className=" w-full lg:w-auto border border-gray-300 rounded-full px-4 py-2">
-                  <p className="flex gap-2 items-center justify-center text-[#CC2828] capitalize text-sm lg:text-base font-semibold font-inter tracking-[-0.04em]">
+                  <p className="flex gap-2 items-center justify-center text-[#55844D] capitalize text-sm lg:text-base font-semibold font-inter tracking-[-0.04em]">
                     <IoMdTime size={20} />
                     {moment(selectedSlot.start).format("MMM D, h:mm A")}{" - "}
                     {getFormattedEndTime(selectedSlot?.start, selectedLesson?.duration)}
@@ -252,7 +252,7 @@ export default function BookingPopup({
                     setStep(step - 1);
                   }}
 
-                  className="font-medium cursor-pointer rounded-full py-2 px-5 text-[#ffffff] bg-[#CC2828] hover:bg-[#ad0e0e] text-base  "
+                  className="font-medium cursor-pointer rounded-full py-2 px-5 text-[#ffffff] bg-[#55844D] hover:bg-[#3d5e37] text-base  "
                 >
                   Previous
                 </button>
@@ -272,7 +272,7 @@ export default function BookingPopup({
                       setStep(step + 1);
                     }}
                     disabled={(step == 1 && !selectedLesson) || (step == 2 && lessonType === "multiple" && multipleLessons < 2) || (step == 3 && !selectedSlot)}
-                    className={`ml-auto font-medium rounded-full py-2 px-5 text-white text-base w-fit bg-[#CC2828] hover:bg-[#ad0e0e] 
+                    className={`ml-auto font-medium rounded-full py-2 px-5 text-white text-base w-fit bg-[#55844D] hover:bg-[#3d5e37] 
                   ${(step == 1 && !selectedLesson) || (step == 2 && lessonType === "multiple" && multipleLessons < 2) || (step == 3 && !selectedSlot) 
                     ? "cursor-not-allowed" 
                     : "cursor-pointer"}`}

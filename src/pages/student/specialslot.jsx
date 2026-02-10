@@ -80,14 +80,14 @@ export default function Index() {
     <StudentLayout page={"Special Slots"}>
       <div className="min-h-screen p-5 lg:p-[30px]">
         <div className="flex flex-col md:flex-row justify-between md:items-center mb-4 lg:mb-5">
-          <h2 className="capitalize text-lg md:text-xl lg:text-2xl font-bold text-[#CC2828] tracking-[-0.04em] font-inter mb-3 md:mb-0">
+          <h2 className="capitalize text-lg md:text-xl lg:text-2xl font-bold text-[#55844D] tracking-[-0.04em] font-inter mb-3 md:mb-0">
             Special Slots
           </h2>
           <div className="flex items-center justify-between space-x-3">
             <select
               value={selectedOption}
               onChange={handleDropdownChange}
-              className="border border-[#CC2828] text-[#CC2828] px-1 sm:px-4 py-1.5 rounded-md h-[42px] focus:outline-none"
+              className="border border-[#55844D] text-[#55844D] px-1 sm:px-4 py-1.5 rounded-md h-[42px] focus:outline-none"
             >
               <option value="">All</option>
               <option value="pending">Pending</option>
@@ -95,20 +95,20 @@ export default function Index() {
             </select>
           </div>
         </div>
-        <div className="rounded-[5px] border border-[rgba(204,40,40,0.3)] overflow-x-auto">
+        <div className="rounded-[5px] border border-[rgba(19,101,16,0.3)] overflow-x-auto">
           <table className="min-w-full text-sm text-center rounded-[20px]">
-            <thead className="bg-[rgba(204,40,40,0.1)] text-[#535353] tracking-[-0.04em] font-inter rounded-[20px] whitespace-nowrap">
+            <thead className="bg-[rgba(38,185,27,0.1)] text-[#535353] tracking-[-0.04em] font-inter rounded-[20px] whitespace-nowrap">
               <tr>
-                <th className="font-normal text-sm lg:text-base px-3 lg:px-4 py-2 lg:py-3 border-t border-[rgba(204,40,40,0.2)] capitalize">
+                <th className="font-normal text-sm lg:text-base px-3 lg:px-4 py-2 lg:py-3 border-t border-[rgba(19,101,16,0.2)] capitalize">
                   Index
                 </th>
-                <th className="font-normal text-sm lg:text-base px-3 lg:px-4 py-2 lg:py-3 border-t border-[rgba(204,40,40,0.2)] capitalize">
+                <th className="font-normal text-sm lg:text-base px-3 lg:px-4 py-2 lg:py-3 border-t border-[rgba(19,101,16,0.2)] capitalize">
                   Lesson Name
                 </th>
-                <th className="font-normal text-sm lg:text-base px-3 lg:px-4 py-2 lg:py-3 border-t border-[rgba(204,40,40,0.2)] capitalize">
+                <th className="font-normal text-sm lg:text-base px-3 lg:px-4 py-2 lg:py-3 border-t border-[rgba(19,101,16,0.2)] capitalize">
                   Teacher Name
                 </th>
-                <th className="font-normal text-sm lg:text-base px-3 lg:px-4 py-2 lg:py-3 border-t border-[rgba(204,40,40,0.2)] capitalize">
+                <th className="font-normal text-sm lg:text-base px-3 lg:px-4 py-2 lg:py-3 border-t border-[rgba(19,101,16,0.2)] capitalize">
                   <button className="w-full flex items-center justify-center gap-2 cursor-pointer"
                     type="button"
                     onClick={() => {
@@ -123,13 +123,13 @@ export default function Index() {
                     )}
                   </button>
                 </th>
-                <th className="font-normal text-sm lg:text-base px-3 lg:px-4 py-2 lg:py-3 border-t border-[rgba(204,40,40,0.2)] capitalize">
+                <th className="font-normal text-sm lg:text-base px-3 lg:px-4 py-2 lg:py-3 border-t border-[rgba(19,101,16,0.2)] capitalize">
                   Amount
                 </th>
-                <th className="font-normal text-sm lg:text-base px-3 lg:px-4 py-2 lg:py-3 border-t border-[rgba(204,40,40,0.2)] capitalize">
+                <th className="font-normal text-sm lg:text-base px-3 lg:px-4 py-2 lg:py-3 border-t border-[rgba(19,101,16,0.2)] capitalize">
                   Payment status
                 </th>
-                <th className="font-normal text-sm lg:text-base px-3 lg:px-4 py-2 lg:py-3 border-t border-[rgba(204,40,40,0.2)] capitalize">
+                <th className="font-normal text-sm lg:text-base px-3 lg:px-4 py-2 lg:py-3 border-t border-[rgba(19,101,16,0.2)] capitalize">
                   Created At
                 </th>
               </tr>
@@ -142,7 +142,7 @@ export default function Index() {
                   payout?.map((item, index) => (
                     <tr
                       key={index}
-                      className="hover:bg-[rgba(204,40,40,0.1)] border-t border-[rgba(204,40,40,0.2)]"
+                      className="hover:bg-[rgba(38,185,27,0.1)] border-t border-[rgba(19,101,16,0.2)]"
                     >
                       <td className="px-3 lg:px-4 py-2 lg:py-3 text-black text-sm lg:text-base font-medium font-inter ">
                         {index + 1}
@@ -172,7 +172,7 @@ export default function Index() {
                               !item?.cancelled && (
                                 <button
                                   onClick={() => handlePaymentLink(item?._id)}
-                                  className="text-xs bg-[#CC2828] text-white px-2 py-[2px] rounded-md hover:bg-[#b22424] transition cursor-pointer"
+                                  className="text-xs bg-[#55844D] text-white px-2 py-[2px] rounded-md hover:bg-[#3d5e37] transition cursor-pointer"
                                 >
                                   {paymentLoading ? "Processing..." : "Pay"}
                                 </button>

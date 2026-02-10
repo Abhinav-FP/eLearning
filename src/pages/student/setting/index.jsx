@@ -15,13 +15,13 @@ export default function Index() {
                 <div className="border-b border-[rgba(0,0,0,.1)] px-3 md:px-8 lg:px-12 pt-2">
                     <button
                         onClick={() => handleTabClick('Profile')}
-                        className={` cursor-pointer tracking-[-0.04em] font-medium  px-2 md:px-4 lg:px-8 pt-3 lg:pt-4 pb-3 lg:pb-4 text-sm sm:text-base lg:text-xl outline-none focus:outline-none ease-linear transition-all border-b duration-150 ${activeTab === 'Profile' ? 'text-[#CC2828] border-[#CC2828]' : 'text-[#535353]  border-[rgba(0,0,0,.0)] '}`}
+                        className={` cursor-pointer tracking-[-0.04em] font-medium  px-2 md:px-4 lg:px-8 pt-3 lg:pt-4 pb-3 lg:pb-4 text-sm sm:text-base lg:text-xl outline-none focus:outline-none ease-linear transition-all border-b duration-150 ${activeTab === 'Profile' ? 'text-[#55844D] border-[#55844D]' : 'text-[#535353]  border-[rgba(0,0,0,.0)] '}`}
                     >
                         Profile
                     </button>
                     <button
                         onClick={() => handleTabClick('password')}
-                        className={` cursor-pointer tracking-[-0.04em] font-medium  px-2 md:px-4 lg:px-8 pt-3 lg:pt-4 pb-3 lg:pb-4 text-sm sm:text-base lg:text-xl outline-none focus:outline-none ease-linear transition-all border-b duration-150  ${activeTab === 'password' ? 'text-[#CC2828] border-[#CC2828]' : 'text-[#535353]  border-[rgba(0,0,0,.0)] '}`}
+                        className={` cursor-pointer tracking-[-0.04em] font-medium  px-2 md:px-4 lg:px-8 pt-3 lg:pt-4 pb-3 lg:pb-4 text-sm sm:text-base lg:text-xl outline-none focus:outline-none ease-linear transition-all border-b duration-150  ${activeTab === 'password' ? 'text-[#55844D] border-[#55844D]' : 'text-[#535353]  border-[rgba(0,0,0,.0)] '}`}
                     >
                         Password
                     </button>

@@ -365,7 +365,7 @@ export default function Index() {
               style={{ backgroundImage: "url('/leasson-bg.png')" }}
               className="bg-[#ECF1E6] bg-cover bg-center rounded-[20px] py-[40px] lg:py-[60px]"
             >
-              <div className="container sm:container md:container lg:container xl:max-w-[1230px]  bg-[rgba(249,190,191, .1)] px-4 mx-auto">
+              <div className="container sm:container md:container lg:container xl:max-w-[1230px]  bg-[rgba(249,190,191,.1)] px-4 mx-auto">
                 <Heading
                   classess={"text-[#33403D] mb-6 lg:mb-8"}
                   title={"Lessons"}

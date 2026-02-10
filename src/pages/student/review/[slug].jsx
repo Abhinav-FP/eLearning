@@ -93,10 +93,10 @@ export default function Index() {
               {/* ✅ REVIEW SECTION */}
               {!BookinData?.ReviewId ? (
                 <div className="mb-10">
-                  <h2 className="text-center text-2xl font-bold text-[#CC2828] mb-6">Write a Review</h2>
+                  <h2 className="text-center text-2xl font-bold text-[#55844D] mb-6">Write a Review</h2>
                   <form onSubmit={handleSubmit} className="space-y-6 bg-white p-6 rounded-xl border border-gray-200">
                     <div>
-                      <label className="block text-[#CC2828] font-semibold mb-2">Rate Your Experience</label>
+                      <label className="block text-[#55844D] font-semibold mb-2">Rate Your Experience</label>
                       <div className="flex justify-center gap-3">
                         {[1, 2, 3].map((star) => (
                           <button
@@ -112,7 +112,7 @@ export default function Index() {
                       </div>
                     </div>
                     <div>
-                      <label className="block text-[#CC2828] font-semibold mb-2">
+                      <label className="block text-[#55844D] font-semibold mb-2">
                         Your Review <span>({description.length}/300)</span>
                       </label>
                       <textarea
@@ -124,13 +124,13 @@ export default function Index() {
                         }}
                         required
                         placeholder="Please enter your review"
-                        className="w-full border border-gray-300 rounded-lg p-4 focus:ring-2 focus:ring-[#CC2828] resize-none"
+                        className="w-full border border-gray-300 rounded-lg p-4 focus:ring-2 focus:ring-[#55844D] resize-none"
                       />
                     </div>
                     <button
                       type="submit"
                       disabled={processing}
-                      className="w-full bg-[#CC2828] hover:bg-red-700 text-white py-3 rounded-lg text-lg font-medium transition disabled:opacity-50 cursor-pointer"
+                      className="w-full bg-[#55844D] hover:bg-[#3d5e37] text-white py-3 rounded-lg text-lg font-medium transition disabled:opacity-50 cursor-pointer"
                     >
                       {processing ? "Submitting..." : "Submit Review"}
                     </button>
@@ -145,7 +145,7 @@ export default function Index() {
               {/* ✅ TIP SECTION */}
               {/* {!BookinData?.BonusId && !Tips && (
                 <p
-                  className="text-center text-[#CC2828] font-semibold cursor-pointer hover:text-black"
+                  className="text-center text-[#55844D] font-semibold cursor-pointer hover:text-black"
                   onClick={() => setTips(true)}
                 >
                   Would you like to send a tip to the teacher?
@@ -161,7 +161,7 @@ export default function Index() {
               {/* {Tips && !BookinData?.BonusId && (
                 <div className="pt-[89px] md:pt-[95px] lg:pt-[110px] pb-[20px] md:pb-[40px] lg:pb-[60px]">
                   <div className="flex flex-col items-center justify-center w-full max-w-2xl text-center mx-auto">
-                    <h1 className="font-inter text-2xl lg:text-3xl font-bold text-[#CC2828] tracking-[-0.04em] mb-3">
+                    <h1 className="font-inter text-2xl lg:text-3xl font-bold text-[#55844D] tracking-[-0.04em] mb-3">
                       Paying Tips for Teachers
                     </h1>
                     <p className="text-lg font-semibold text-[#000000]">
@@ -171,12 +171,12 @@ export default function Index() {
                   </div>
 
                   <div className="flex flex-col md:flex-row gap-6 p-6">
-                    <div className="border border-[#CC2828] h-fit rounded-xl p-4 w-full md:w-1/2">
-                      <h2 className="text-[#CC2828] font-semibold mb-4">Payment Method</h2>
+                    <div className="border border-[#55844D] h-fit rounded-xl p-4 w-full md:w-1/2">
+                      <h2 className="text-[#55844D] font-semibold mb-4">Payment Method</h2>
                       <div className="space-y-4">
                         <div
                           onClick={() => setPaymentStatus(false)}
-                          className={`flex items-center justify-between border rounded-lg p-3 cursor-pointer ${PaymentStatus === true ? 'border-red-300' : 'border-red-400'
+                          className={`flex items-center justify-between border rounded-lg p-3 cursor-pointer ${PaymentStatus === true ? 'border-green-300' : 'border-green-400'
                             }`}
                         >
                           <div className="flex items-center gap-3">
@@ -192,7 +192,7 @@ export default function Index() {
 
                         <div
                           onClick={() => setPaymentStatus(true)}
-                          className={`flex items-center justify-between border rounded-lg p-3 cursor-pointer ${PaymentStatus === true ? 'border-red-400' : 'border-red-300'
+                          className={`flex items-center justify-between border rounded-lg p-3 cursor-pointer ${PaymentStatus === true ? 'border-green-400' : 'border-green-300'
                             }`}
                         >
                           <div className="flex items-center gap-3">
@@ -208,7 +208,7 @@ export default function Index() {
                       </div>
                     </div>
 
-                    <div className="border border-[#CC2828] rounded-xl p-4 w-full md:w-1/2 space-y-4">
+                    <div className="border border-[#55844D] rounded-xl p-4 w-full md:w-1/2 space-y-4">
                       <div className="space-y-2">
                         <label htmlFor="amount" className="text-sm font-medium text-gray-700">
                           Amount
@@ -218,7 +218,7 @@ export default function Index() {
                           id="amount"
                           value={amount}
                           onChange={handleamountChange}
-                          className="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-[#CC2828] focus:border-[#CC2828]"
+                          className="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-[#55844D] focus:border-[#55844D]"
                           placeholder="Enter your amount"
                         />
                       </div>

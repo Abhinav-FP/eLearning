@@ -115,7 +115,7 @@ export default function ReschedulePopup({ isOpen, onClose, lesson, studentTimeZo
       >
         <div className="container sm:container md:container lg:container xl:max-w-[1230px]  bg-[rgba(249,190,191, .1)] px-4 mx-auto">
           <Heading
-            classess="text-[#CC2828] mb-6 lg:mb-8 text-center"
+            classess="text-[#55844D] mb-6 lg:mb-8 text-center"
             title="Select your Lesson Start Time"
           />
           <RescheduleCalendar
@@ -130,7 +130,7 @@ export default function ReschedulePopup({ isOpen, onClose, lesson, studentTimeZo
             <div></div>
             <div>
               {selectedSlot && (
-                <p className="text-[#CC2828] capitalize text-base xl:text-lg font-semibold font-inter inline-block tracking-[-0.04em]">
+                <p className="text-[#55844D] capitalize text-base xl:text-lg font-semibold font-inter inline-block tracking-[-0.04em]">
                   Selected Time Slot –{" "}
                   {moment(selectedSlot.start).format("MMM D, h:mm A")} –{" "}
                   {getFormattedEndTime(
@@ -145,7 +145,7 @@ export default function ReschedulePopup({ isOpen, onClose, lesson, studentTimeZo
                 handleSubmit();
               }}
               disabled={!selectedSlot}
-              className={`font-medium rounded-full py-2 px-5 text-white text-base w-fit bg-[#CC2828] hover:bg-[#ad0e0e] 
+              className={`font-medium rounded-full py-2 px-5 text-white text-base w-fit bg-[#55844D] hover:bg-[#3d5e37] 
                       ${!selectedSlot ? "cursor-not-allowed" : "cursor-pointer"
                 }`}
             >

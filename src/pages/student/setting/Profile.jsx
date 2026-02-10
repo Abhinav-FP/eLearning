@@ -123,7 +123,7 @@ export default function Profile() {
         <>
           <div className="border-b  border-[rgba(0,0,0,.1)] flex flex-wrap py-6 lg:py-8">
             <div className="w-full w-full lg:w-5/12 xl:w-4/12 lg:pr-3 mb-2 sm:mb-0">
-              <label className="block text-[#CC2828] tracking-[-0.04em] font-medium text-base xl:text-xl mb-1">
+              <label className="block text-[#55844D] tracking-[-0.04em] font-medium text-base xl:text-xl mb-1">
                 Your Photo
               </label>
               <p className="block text-[#535353] text-sm xl:text-base tracking-[-0.04em] font-medium">
@@ -153,7 +153,7 @@ export default function Profile() {
                 />
                 <label
                   htmlFor="profileImageInput"
-                  className="text-[#CC2828] font-medium text-base xl:text-xl border-none tracking-[-0.04em] cursor-pointer"
+                  className="text-[#55844D] font-medium text-base xl:text-xl border-none tracking-[-0.04em] cursor-pointer"
                 >
                   Update Avatar
                 </label>
@@ -163,7 +163,7 @@ export default function Profile() {
           <div className="border-b border-[rgba(0,0,0,.1)]  py-6 lg:py-8 space-y-4 lg:space-y-6">
             <div className="flex flex-wrap">
               <div className="w-full w-full lg:w-5/12 xl:w-4/12 lg:pr-3 mb-2 lg:mb-0">
-                <label className="block text-[#CC2828] font-medium text-base xl:text-xl mb-1 tracking-[-0.04em]">
+                <label className="block text-[#55844D] font-medium text-base xl:text-xl mb-1 tracking-[-0.04em]">
                   Name
                 </label>
                 <p className="block text-[#535353] font-medium text-sm xl:text-base  tracking-[-0.04em] mb-0">
@@ -183,7 +183,7 @@ export default function Profile() {
             </div>
             <div className="flex flex-wrap">
               <div className="w-full lg:w-5/12 xl:w-4/12 lg:pr-3 mb-2 lg:mb-0">
-                <label className="block text-[#CC2828] font-medium text-base xl:text-xl mb-1 tracking-[-0.04em]">
+                <label className="block text-[#55844D] font-medium text-base xl:text-xl mb-1 tracking-[-0.04em]">
                   Email
                 </label>
                 <p className="block text-[#535353] font-medium text-sm xl:text-base tracking-[-0.04em] mb-0">
@@ -203,7 +203,7 @@ export default function Profile() {
             </div>
             <div className="flex flex-wrap">
               <div className="w-full lg:w-5/12 xl:w-4/12 lg:pr-3 mb-2 lg:mb-0">
-                <label className="block text-[#CC2828] font-medium text-base xl:text-xl mb-1 tracking-[-0.04em]">
+                <label className="block text-[#55844D] font-medium text-base xl:text-xl mb-1 tracking-[-0.04em]">
                   Time Zone
                 </label>
                 <p className="block text-[#535353] font-medium text-sm xl:text-base tracking-[-0.04em] mb-0">
@@ -231,7 +231,7 @@ export default function Profile() {
           </div>
           <div className="flex w-full lg:w-12/12 xl:w-11/12 flex-wrap justify-center items-center pt-6 lg:pt-10 space-x-4 lg:space-x-6">
             <button
-              className="w-full max-w-[183px] cursor-pointer border border-[#CC2828] bg-[#CC2828] hover:bg-red-700  text-white py-3.5 cursor-pointer rounded-[10px] font-normal text-base xl:text-xl transition  tracking-[-0.04em]"
+              className="w-full max-w-[183px] cursor-pointer border border-[#55844D] bg-[#55844D] hover:bg-green-700  text-white py-3.5 cursor-pointer rounded-[10px] font-normal text-base xl:text-xl transition  tracking-[-0.04em]"
               type="submit"
               onClick={handleSubmit}
               disabled={processing}

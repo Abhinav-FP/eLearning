@@ -46,7 +46,7 @@ function SideBar() {
       >
         {isOpen && (
           <button
-            className="lg:hidden p-1.5 absolute left-[213px] top-3 text-red-700 border border-red-700 z-[99] rounded"
+            className="lg:hidden p-1.5 absolute left-[213px] top-3 text-green-700 border border-green-700 z-[99] rounded"
             onClick={() => setIsOpen(false)}
           >
             <IoMdArrowRoundBack size={18} />
@@ -86,7 +86,7 @@ function SideBar() {
 
                 {isEmulating && (
                     <span className="flex items-center gap-1 px-2 py-[2px] text-[10px] font-semibold rounded-full 
-                    bg-[rgba(204,40,40,0.1)] text-[#CC2828]">
+                    bg-[rgba(38,185,27,0.1)] text-[#55844D]">
                     Emulation Mode
                     </span>
                 )}
@@ -105,7 +105,7 @@ function SideBar() {
                 href="/student"
                 className={`flex items-center py-2.5 px-3 md:px-4 lg:px-6 gap-2 text-[#565F66] text-base font-medium tracking-[-0.06em] ${
                   pathname === "/student"
-                    ? "text-white bg-[#D6202C]"
+                    ? "text-white bg-[#55844D]"
                     : "hover:bg-gray-100"
                 } `}
               >
@@ -116,7 +116,7 @@ function SideBar() {
                 href="/student/lessons"
                 className={`flex items-center py-2.5 px-3 md:px-4 lg:px-6  gap-2 text-[#565F66] text-base font-medium tracking-[-0.06em] ${
                   pathname === "/student/lessons"
-                    ? "text-white bg-[#D6202C]"
+                    ? "text-white bg-[#55844D]"
                     : "hover:bg-gray-100"
                 } `}
               >
@@ -127,7 +127,7 @@ function SideBar() {
                 href="/student/teachers"
                 className={`flex items-center py-2.5 px-3 md:px-4 lg:px-6 gap-2 text-[#565F66] text-base font-medium tracking-[-0.06em] ${
                   pathname === "/student/teachers"
-                    ? "text-white bg-[#D6202C]"
+                    ? "text-white bg-[#55844D]"
                     : "hover:bg-gray-100"
                 } `}
               >
@@ -138,7 +138,7 @@ function SideBar() {
                 href="/student/message"
                 className={`relative flex items-center py-2.5 px-3 md:px-4 lg:px-6 gap-2 text-[#565F66] text-base font-medium tracking-[-0.06em] ${
                   pathname === "/student/message"
-                    ? "text-white bg-[#D6202C]"
+                    ? "text-white bg-[#55844D]"
                     : "hover:bg-gray-100"
                 }`}
               >
@@ -146,7 +146,7 @@ function SideBar() {
                 Messages
                 {user?.unreadCount > 0 && (
                   <div
-                    className={`h-[28px] w-[28px] text-white bg-[#D6202C] text-xs font-bold flex items-center justify-center absolute right-[22px] rounded-full top-1/2 -translate-y-1/2 ${
+                    className={`h-[28px] w-[28px] text-white bg-[#55844D] text-xs font-bold flex items-center justify-center absolute right-[22px] rounded-full top-1/2 -translate-y-1/2 ${
                       pathname === "/student/message" ? "hidden" : "block"
                     }`}
                   >
@@ -158,7 +158,7 @@ function SideBar() {
                 href="/student/payment-history"
                 className={`flex items-center py-2.5 px-3 md:px-4 lg:px-6 gap-2 text-[#565F66] text-base font-medium tracking-[-0.06em] ${
                   pathname === "/student/payment-history"
-                    ? "text-white bg-[#D6202C]"
+                    ? "text-white bg-[#55844D]"
                     : "hover:bg-gray-100"
                 }`}
               >
@@ -169,7 +169,7 @@ function SideBar() {
                 href="/student/credits"
                 className={`flex items-center py-2.5 px-3 md:px-4 lg:px-6 gap-2 text-[#565F66] text-base font-medium tracking-[-0.06em] ${
                   pathname === "/student/credits"
-                    ? "text-white bg-[#D6202C]"
+                    ? "text-white bg-[#55844D]"
                     : "hover:bg-gray-100"
                 }`}
               >
@@ -180,7 +180,7 @@ function SideBar() {
                 href="/student/review"
                 className={`flex items-center py-2.5 px-3 md:px-4 lg:px-6 gap-2 text-[#565F66] text-base font-medium tracking-[-0.06em] ${
                   pathname === "/student/review"
-                    ? "text-white bg-[#D6202C]"
+                    ? "text-white bg-[#55844D]"
                     : "hover:bg-gray-100"
                 }`}
               >
@@ -191,7 +191,7 @@ function SideBar() {
                 href="/student/specialslot"
                 className={`flex items-center py-2.5 px-3 md:px-4 lg:px-6 gap-2 text-[#565F66] text-base font-medium tracking-[-0.06em] ${
                   pathname === "/student/specialslot"
-                    ? "text-white bg-[#D6202C]"
+                    ? "text-white bg-[#55844D]"
                     : "hover:bg-gray-100"
                 }`}
               >
@@ -202,7 +202,7 @@ function SideBar() {
                 href="/student/setting"
                 className={`flex items-center py-2.5 px-3 md:px-4 lg:px-6 gap-2 text-[#565F66] text-base font-medium tracking-[-0.06em] ${
                   pathname === "/student/setting"
-                    ? "text-white bg-[#D6202C]"
+                    ? "text-white bg-[#55844D]"
                     : "hover:bg-gray-100"
                 }`}
               >

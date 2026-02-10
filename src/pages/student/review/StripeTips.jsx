@@ -70,7 +70,7 @@ function StripeForm({
         <div className="p-4 space-y-4 border rounded-lg">
             <CardElement className="p-2 border rounded-md" />
             <button
-                className="w-full bg-red-600 hover:bg-red-700 text-white font-medium py-2 rounded-full cursor-pointer"
+                className="w-full bg-green-600 hover:bg-green-700 text-white font-medium py-2 rounded-full cursor-pointer"
                 onClick={handlePayment}
                 disabled={processing || !stripe || !elements}
             >

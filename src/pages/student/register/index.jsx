@@ -186,7 +186,7 @@ export default function Index() {
           <div className="flex flex-wrap -mx-2.5 justify-center">
             <div className="w-full md:w-6/12 px-2.5 mb-5">
               <label className="block text-base font-medium text-[#727272] tracking-[-0.06em] mb-1">
-                Name <span className="text-red-500">*</span>
+                Name <span className="text-green-500">*</span>
               </label>
               <input
                 value={data?.name}
@@ -201,7 +201,7 @@ export default function Index() {
             <div className="w-full md:w-6/12 px-2.5 mb-5">
               <label className="block text-base font-medium text-[#727272] tracking-[-0.06em] mb-1">
 
-                Time-Zone <span className="text-red-500">*</span>
+                Time-Zone <span className="text-green-500">*</span>
               </label>
               {/* Time-Zone */}
               <select
@@ -222,7 +222,7 @@ export default function Index() {
             </div>
             <div className="w-full md:w-6/12 px-2.5 mb-5">
               <label className="block text-base font-medium text-[#727272] tracking-[-0.06em] mb-1">
-                Email <span className="text-red-500">*</span>
+                Email <span className="text-green-500">*</span>
 
               </label>
               <input
@@ -237,7 +237,7 @@ export default function Index() {
             </div>
             <div className="w-full md:w-6/12 px-2.5 mb-5">
               <label className="block text-base font-medium text-[#727272] tracking-[-0.06em] mb-1">
-                Confirm Email <span className="text-red-500">*</span>
+                Confirm Email <span className="text-green-500">*</span>
 
               </label>
               <input
@@ -252,7 +252,7 @@ export default function Index() {
             </div>
             <div className="w-full md:w-6/12 px-2.5 mb-5 relative">
               <label className="block text-base font-semibold text-[#727272] tracking-[-0.06em] mb-1">
-                Password  <span className="text-red-500">*</span>
+                Password  <span className="text-green-500">*</span>
 
               </label>
               <div className="relative">
@@ -287,7 +287,7 @@ export default function Index() {
                     {passwordCriteria.hasLower ? (
                       <FaCheckCircle className="text-green-600" />
                     ) : (
-                      <FaTimesCircle className="text-red-600" />
+                      <FaTimesCircle className="text-green-600" />
                     )}
                     Contains lowercase letter
                   </p>
@@ -295,7 +295,7 @@ export default function Index() {
                     {passwordCriteria.hasUpper ? (
                       <FaCheckCircle className="text-green-600" />
                     ) : (
-                      <FaTimesCircle className="text-red-600" />
+                      <FaTimesCircle className="text-green-600" />
                     )}
                     Contains uppercase letter
                   </p>
@@ -303,7 +303,7 @@ export default function Index() {
                     {passwordCriteria.hasNumber ? (
                       <FaCheckCircle className="text-green-600" />
                     ) : (
-                      <FaTimesCircle className="text-red-600" />
+                      <FaTimesCircle className="text-green-600" />
                     )}
                     Contains number
                   </p>
@@ -311,7 +311,7 @@ export default function Index() {
                     {passwordCriteria.hasSymbol ? (
                       <FaCheckCircle className="text-green-600" />
                     ) : (
-                      <FaTimesCircle className="text-red-600" />
+                      <FaTimesCircle className="text-green-600" />
                     )}
                     Contains special character
                   </p>
@@ -319,7 +319,7 @@ export default function Index() {
                     {passwordCriteria.hasMinLength ? (
                       <FaCheckCircle className="text-green-600" />
                     ) : (
-                      <FaTimesCircle className="text-red-600" />
+                      <FaTimesCircle className="text-green-600" />
                     )}
                     At least 8 characters long
                   </p>
@@ -328,7 +328,7 @@ export default function Index() {
             </div>
             <div className="w-full md:w-6/12 px-2.5 mb-5 relative">
               <label className="block text-base font-semibold text-[#727272] tracking-[-0.06em] mb-1">
-                Confirm Password <span className="text-red-500">*</span>
+                Confirm Password <span className="text-green-500">*</span>
 
               </label>
               <div className="relative">

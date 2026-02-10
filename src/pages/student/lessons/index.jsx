@@ -125,7 +125,7 @@ export default function Index() {
     <StudentLayout page={"My Lessons"}>
       <div className="min-h-screen  py-5 lg:py-[30px]">
         <div className="px-5 lg:px-[30px]">
-          <h1 className="font-inter text-lg lg:text-xl xl:text-3xl font-bold text-[#CC2828] tracking-[-0.04em] mb-1 lg:mb-3 xl:mb-5">
+          <h1 className="font-inter text-lg lg:text-xl xl:text-3xl font-bold text-[#55844D] tracking-[-0.04em] mb-1 lg:mb-3 xl:mb-5">
             Stay on Track with Your Lessons
           </h1>
         </div>
@@ -137,8 +137,8 @@ export default function Index() {
               key={item}
               onClick={() => setTab(item.toLowerCase())}
               className={`py-3 font-inter px-2 rounded-b rounded-b-sm text-sm lg:text-base font-medium tracking-[-0.04em] cursor-pointer relative after:absolute after:left-0 after:right-0 after:h-[5px] after:bottom-0 after:rounded-md ${tab === item.toLowerCase()
-                ? "text-[#CC2828] after:bg-[#CC2828]"
-                : "text-[#535353]  hover:text-[#CC2828] hover:after:bg-[#CC2828]"
+                ? "text-[#55844D] after:bg-[#55844D]"
+                : "text-[#535353]  hover:text-[#55844D] hover:after:bg-[#55844D]"
                 }`}
             >
               {item === "Upcoming" ? "Upcoming & Ongoing" : item}
@@ -159,7 +159,7 @@ export default function Index() {
               categorizedLessons[tab].map((lesson, idx) => (
                 <div key={idx}>
                   <div className="flex items-center gap-3 xl:gap-4 flex-wrap mb-3 lg:mb-4 xl:mb-5">
-                    <p className="text-[#CC2828] font-bold text-lg xl:text-xl font-inter">
+                    <p className="text-[#55844D] font-bold text-lg xl:text-xl font-inter">
                       {lesson?.startDateTime ? moment(lesson.startDateTime).format("DD MMMM, YYYY") : ""}
                     </p>
                     <p className="text-sm lg:text-base font-medium text-[#535353] font-inter">
@@ -168,7 +168,7 @@ export default function Index() {
                     <p className="text-sm lg:text-base font-medium text-[#535353] font-inter ">{`${calculateDurationMinutes(lesson?.startDateTime, lesson?.endDateTime)} mins`}</p>
                   </div>
                   <div
-                    className="bg-white rounded-[10px] lesson_list_shadow p-3 md:p-4 lg:p-5 flex items-center justify-between transition border-[rgba(204,40,40,0.2)] border-1"
+                    className="bg-white rounded-[10px] lesson_list_shadow p-3 md:p-4 lg:p-5 flex items-center justify-between transition border-[rgba(19,101,16,0.2)] border-1"
                   >
                     <div className="flex items-center space-x-2.5 lg:space-x-3">
                       <Image
@@ -187,7 +187,7 @@ export default function Index() {
                     </div>
                     <div className="flex flex-col sm:flex-row gap-2 md:gap-3 xl:gap-5">
                       {tab === "upcoming" && isMoreThanOneHourFromNow(lesson?.startDateTime) &&
-                        <button className="tracking-[-0.06em] font-inter px-6 md:px-10 lg:px-12 xl:px-16 py-2 lg:py-2.5 text-[#CC2828] border border-[#CC2828] rounded-[10px]  text-sm hover:bg-[#CC2828] hover:text-white cursor-pointer"
+                        <button className="tracking-[-0.06em] font-inter px-6 md:px-10 lg:px-12 xl:px-16 py-2 lg:py-2.5 text-[#55844D] border border-[#55844D] rounded-[10px]  text-sm hover:bg-[#55844D] hover:text-white cursor-pointer"
                           onClick={() => {
                             setSelectedLesson(lesson);
                             setIsPopupOpen(true);
@@ -196,7 +196,7 @@ export default function Index() {
                         </button>}
                       {tab === "past" && lesson?.ReviewId === null && (
                         <button
-                          className="tracking-[-0.06em] font-inter px-6 md:px-10 lg:px-12 xl:px-16 py-2 lg:py-2.5 text-[#CC2828] border border-[#CC2828] rounded-[10px] text-sm hover:bg-[#CC2828] hover:text-white cursor-pointer"
+                          className="tracking-[-0.06em] font-inter px-6 md:px-10 lg:px-12 xl:px-16 py-2 lg:py-2.5 text-[#55844D] border border-[#55844D] rounded-[10px] text-sm hover:bg-[#55844D] hover:text-white cursor-pointer"
                           onClick={() => router.push(`/student/review/${lesson?._id}`)}
                         >
                           Add Review
@@ -206,12 +206,12 @@ export default function Index() {
                        {/* {isBeforeEndTime("2025-07-04T11:00:00.000Z") && */}
                       {lesson?.zoom && lesson?.zoom?.meetingLink && isBeforeEndTime(lesson?.endDateTime) &&
                         <a href={lesson?.zoom?.meetingLink || ""} target="blank"
-                          className="animate-pulse tracking-[-0.06em] font-inter px-6 md:px-10 lg:px-12 xl:px-16 py-2 lg:py-2.5 text-white border border-[#CC2828] rounded-[10px]  text-sm bg-[#CC2828] hover:bg-white hover:text-[#CC2828] cursor-pointer"
+                          className="animate-pulse tracking-[-0.06em] font-inter px-6 md:px-10 lg:px-12 xl:px-16 py-2 lg:py-2.5 text-white border border-[#55844D] rounded-[10px]  text-sm bg-[#55844D] hover:bg-white hover:text-[#55844D] cursor-pointer"
                         >
                           Join Lesson
                         </a>
                        }
-                      <Link href={`/student/message?query=${lesson?.teacherId?._id}`} className="tracking-[-0.06em] font-inter px-6 md:px-10 lg:px-12 xl:px-16 py-2 lg:py-2.5 text-white border border-[#CC2828] rounded-[10px]  text-sm bg-[#CC2828] hover:bg-white hover:text-[#CC2828] cursor-pointer">
+                      <Link href={`/student/message?query=${lesson?.teacherId?._id}`} className="tracking-[-0.06em] font-inter px-6 md:px-10 lg:px-12 xl:px-16 py-2 lg:py-2.5 text-white border border-[#55844D] rounded-[10px]  text-sm bg-[#55844D] hover:bg-white hover:text-[#55844D] cursor-pointer">
                         Message
                       </Link>
                     </div>

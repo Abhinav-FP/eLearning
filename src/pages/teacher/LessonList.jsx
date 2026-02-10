@@ -21,7 +21,7 @@ export default function LessonList({ lessons, showSelected, selectedLesson, SetS
               {lessons?.map((item, index) => (
                 <li
                   key={index}
-                  className={`bg-white rounded-[10px] ${showSelected && selectedLesson?._id == item?._id ? "border border-[#CC2828]" : "border border-white"} lg:rounded-[20px] p-5 lg:p-6 xl:p-10 cursor-pointer`}
+                  className={`bg-white rounded-[10px] ${showSelected && selectedLesson?._id == item?._id ? "border border-[#55844D]" : "border border-transparent"} lg:rounded-[20px] p-5 lg:p-6 xl:p-10 cursor-pointer`}
                   onClick={() => {
                     if (!showSelected) {
                       setLesson(item);

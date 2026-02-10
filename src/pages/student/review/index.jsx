@@ -29,7 +29,7 @@ export default function ReviewsList() {
   return (
     <StudentLayout page={"Settings"}>
       <div className="p-5 lg:p-[30px] ">
-        <h2 className="text-base md:text-xl lg:text-2xl font-bold text-[#CC2828] tracking-[-0.04em] font-inter">
+        <h2 className="text-base md:text-xl lg:text-2xl font-bold text-[#55844D] tracking-[-0.04em] font-inter">
           Recent Reviews
         </h2>
         <div className="mt-3 md:mt-4 lg:mt-6 space-y-4 lg:space-5">
@@ -42,7 +42,7 @@ export default function ReviewsList() {
                 className="relative bg-[#F6F7F7] rounded-[10px] p-4 lg:p-5"
               >
                 <div className="flex justify-between items-start">
-                  <h3 className="text-base font-semibold text-[#CC2828] -tracking-[0.04em] font-inter">
+                  <h3 className="text-base font-semibold text-[#55844D] -tracking-[0.04em] font-inter">
                     Review on Lesson – {review?.lessonId?.title}
                   </h3>
                 </div>
@@ -55,7 +55,7 @@ export default function ReviewsList() {
                       <FaStar key={i} size={16} fill="currentColor" />
                     ))}
                   </div>
-                  <span className="text-sm text-[#CC2828] font-inter font-medium -tracking-[0.04em]">
+                  <span className="text-sm text-[#55844D] font-inter font-medium -tracking-[0.04em]">
                     {moment(review?.updatedAt || review?.createdAt).format(
                       "MMMM DD, YYYY"
                     )}

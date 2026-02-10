@@ -51,7 +51,7 @@ export default function Index() {
       <div className="min-h-screen bg-gray-50 p-4 sm:p-6">
         <Link
           href="/student/teachers"
-          className="flex w-fit ml-auto mb-4 sm:mb-6 px-6 md:px-8 lg:px-10 py-2 text-[#CC2828] border border-[#CC2828] rounded-md text-xs sm:text-sm hover:bg-[#CC2828] hover:text-white cursor-pointer"
+          className="flex w-fit ml-auto mb-4 sm:mb-6 px-6 md:px-8 lg:px-10 py-2 text-[#55844D] border border-[#55844D] rounded-md text-xs sm:text-sm hover:bg-[#55844D] hover:text-white cursor-pointer"
         >
           Back
         </Link>
@@ -73,7 +73,7 @@ export default function Index() {
                 <Link href={!isBlocked ? `/teacher/${teacher?.teacher?._id}` :""} className="block group">
                 <div
                   key={idx}
-                  className="bg-white rounded-[10px] lesson_list_shadow p-4 lg:p-6 flex flex-col lg:flex-row gap-6 lg:gap-10 border border-[#CC2828]/20"
+                  className="bg-white rounded-[10px] lesson_list_shadow p-4 lg:p-6 flex flex-col lg:flex-row gap-6 lg:gap-10 border border-[#55844D]/20"
                 >
                   {/* {teacher?.intro_video && ( */}
                     <div className="w-full sm:max-w-[300px] shrink-0" 
@@ -89,7 +89,7 @@ export default function Index() {
                         name={teacher?.teacher?.name}
                         divClass="relative"
                         imgClass="rounded-[10px] h-[160px] sm:h-[200px] w-full object-cover"
-                        btnClass="absolute inset-0 flex justify-center items-center text-white hover:text-[#CC2828]"
+                        btnClass="absolute inset-0 flex justify-center items-center text-white hover:text-[#55844D]"
                       />
                     </div>
                   {/* )} */}
@@ -97,7 +97,7 @@ export default function Index() {
                     <div>
                       <h3
                         className="flex gap-2 items-center font-inter text-lg lg:text-2xl
-                       text-[#CC2828] font-semibold capitalize mb-2"
+                       text-[#55844D] font-semibold capitalize mb-2"
                       >
                         {teacher?.teacher?.name || ""}
                       <span
@@ -108,7 +108,7 @@ export default function Index() {
                                 handleRemoveSubmit(teacher?.teacher?.userId);
                               }}
                             >
-                              <FaHeart color={"#CC2828"} size={18} />
+                              <FaHeart color={"#55844D"} size={18} />
                             </span>
                       </h3>
 
@@ -173,7 +173,7 @@ export default function Index() {
                           e.stopPropagation();
                           router.push(`/teacher/${teacher?.teacher?._id}?book=true`);
                         }}
-                        className="font-medium cursor-pointer rounded-full py-2 px-5 bg-[#CC2828] hover:bg-[#ad0e0e] text-white text-sm lg:text-base transition-all"
+                        className="font-medium cursor-pointer rounded-full py-2 px-5 bg-[#55844D] hover:bg-[#3d5e37] text-white text-sm lg:text-base transition-all"
                       >
                         Book
                       </button>
@@ -181,7 +181,7 @@ export default function Index() {
                       <Link
                         href={`/student/message?query=${teacher?.teacher?.userId}`}
                         onClick={(e) => e.stopPropagation()}
-                        className="font-medium cursor-pointer rounded-full py-2 px-5 bg-[#CC2828] hover:bg-[#ad0e0e] text-white text-sm lg:text-base transition-all"
+                        className="font-medium cursor-pointer rounded-full py-2 px-5 bg-[#55844D] hover:bg-[#3d5e37] text-white text-sm lg:text-base transition-all"
                       >
                         Message
                       </Link>

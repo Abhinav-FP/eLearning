@@ -127,9 +127,8 @@ export default function Index() {
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gray-100 p-4">
-      <div className="bg-white px-4 md:px-6 lg:px-16 pt-5 pb-10 lg:pb-20  rounded-[20px] md:rounded-[20px] 
-      lg:rounded-[40px] shadow lg:shadow-lg w-full max-w-[976px] login_custom">
+    <div className="min-h-screen flex items-center justify-center bg-white sm:bg-gray-100 p-4">
+      <div className="sm:bg-white px-4 md:px-6 lg:px-16 pt-5 pb-10 lg:pb-20  sm:rounded-[20px] md:rounded-[20px] lg:rounded-[40px] sm:shadow lg:shadow-lg w-full max-w-[976px] sm:login_custom">
         {/* Logo */}
         <div className="flex justify-center mb-6">
           <Link href="/">

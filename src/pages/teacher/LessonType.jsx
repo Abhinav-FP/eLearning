@@ -11,37 +11,37 @@ export default function LessonType({selectedLesson, multipleLessons, setMultiple
     <div className="w-full max-w-3xl mx-auto mt-10">
       <div className="grid md:grid-cols-2 gap-6">
         <div className={`bg-white border rounded-[20px] p-6 
-          ${lessonType === "single" ? "border-[#CC2828]" : "border-[#CC2828]/20"} 
-          hover:border-[#CC2828] transition cursor-pointer`}
+          ${lessonType === "single" ? "border-[#55844D]" : "border-[#55844D]/20"} 
+          hover:border-[#55844D] transition cursor-pointer`}
           onClick={()=>{
             setLessonType("single");
           }}>
-          <h3 className="text-[#CC2828] font-extrabold text-xl mb-3 tracking-[-0.04em]">
+          <h3 className="text-[#55844D] font-extrabold text-xl mb-3 tracking-[-0.04em]">
             Single Lesson
           </h3>
           <p className="text-gray-700 mb-5 text-base">
             Pay per lesson — perfect if you want to try one session.
           </p>
           <div className="">
-            <span className="text-[#CC2828] text-2xl font-bold">
+            <span className="text-[#55844D] text-2xl font-bold">
               {formatMultiPrice(selectedLesson?.price, "USD")}
             </span>
           </div>
         </div>
         <div className={`bg-white border rounded-[20px] p-6
-          ${lessonType === "multiple" ? "border-[#CC2828]" : "border-[#CC2828]/20"} 
-           hover:border-[#CC2828] transition cursor-pointer`}
+          ${lessonType === "multiple" ? "border-[#55844D]" : "border-[#55844D]/20"} 
+           hover:border-[#55844D] transition cursor-pointer`}
            onClick={()=>{
             setLessonType("multiple");
            }}>
-          <h3 className="text-[#CC2828] font-extrabold text-xl mb-3 tracking-[-0.04em]">
+          <h3 className="text-[#55844D] font-extrabold text-xl mb-3 tracking-[-0.04em]">
             Multiple Lessons
           </h3>
           <p className="text-gray-700 text-base mb-5">
             Choose the number of lessons you want to buy in advance.
           </p>
           <div className="mb-5">
-            <label className="block text-sm font-medium text-[#CC2828] mb-2">
+            <label className="block text-sm font-medium text-[#55844D] mb-2">
               Number of Lessons (minimum 2)
             </label>
             <input
@@ -57,12 +57,12 @@ export default function LessonType({selectedLesson, multipleLessons, setMultiple
                 setMultipleLessons(Number(e.target.value))
               }
             }}
-              className="w-full border border-[#CC2828]/40 rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-[#CC2828]"
+              className="w-full border border-[#55844D]/40 rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-[#55844D]"
               placeholder="Enter number of lessons"
             />
           </div>
           <div className="text-right">
-            <span className="text-[#CC2828] text-lg font-semibold">
+            <span className="text-[#55844D] text-lg font-semibold">
               {formatMultiPrice((selectedLesson?.price*multipleLessons) || 0, "USD")}
             </span>
           </div>

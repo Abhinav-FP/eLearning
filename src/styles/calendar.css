@@ -14,10 +14,10 @@ margin-left: 0;
   display: none;
 }
 .rbc-toolbar .rbc-toolbar-label{font-family: Poppins; font-size: 18px; font-weight: 600;   color: #1E1E1E;}
-.rbc-calendar .rbc-toolbar button:hover, .rbc-calendar .rbc-toolbar button:active, .rbc-calendar .rbc-toolbar button.rbc-active{background-color: #cc2828;color: #fff;border-color: #cc2828;}
+.rbc-calendar .rbc-toolbar button:hover, .rbc-calendar .rbc-toolbar button:active, .rbc-calendar .rbc-toolbar button.rbc-active{background-color: #55844D;color: #fff;border-color: #55844D;}
 
-.rbc-calendar .rbc-toolbar button:active:hover, .rbc-calendar .rbc-toolbar button:active:focus, .rbc-calendar .rbc-toolbar button.rbc-active:hover, .rbc-calendar .rbc-toolbar button.rbc-active:focus{background-color: #ad0e0e;color: #fff;
-  border-color: #ad0e0e;}
+.rbc-calendar .rbc-toolbar button:active:hover, .rbc-calendar .rbc-toolbar button:active:focus, .rbc-calendar .rbc-toolbar button.rbc-active:hover, .rbc-calendar .rbc-toolbar button.rbc-active:focus{background-color: #3d5e37;color: #fff;
+  border-color: #3d5e37;}
 
  .rbc-row-segment .rbc-event, .rbc-row-segment .rbc-day-slot .rbc-background-event{    background-color: #68C32F !important;}
 .rbc-event .font-bold{font-weight: 400;;}

@@ -300,13 +300,13 @@ const StudentDashboardLoader = () => {
       {/* Recent Reviews */}
       <div className="flex flex-wrap -mx-4">
         <div className="w-full px-4">
-          <div className="bg-white p-4 lg:p-5 border border-[rgba(204,40,40,0.2)] rounded-[20px]">
+          <div className="bg-white p-4 lg:p-5 border border-[rgba(40,204,108,0.2)] rounded-[20px]">
             <div className="h-6 w-40 bg-gray-200 rounded mb-4"></div>
             <div className="space-y-3">
               {[1, 2].map((_, i) => (
                 <div
                   key={i}
-                  className="bg-[rgba(204,40,40,0.1)] p-2.5 rounded-xl"
+                  className="bg-[rgba(100,204,40,0.1)] p-2.5 rounded-xl"
                 >
                   <div className="h-4 w-full bg-gray-200 rounded mb-2"></div>
                   <div className="flex gap-1 text-yellow-300 mb-2">
@@ -339,7 +339,7 @@ const TeacherDashboardLoader = () => {
         {Array(6).fill(0).map((_, idx) => (
           <div
             key={idx}
-            className="relative bg-white rounded-xl border border-[rgba(204,40,40,0.2)] p-4 min-h-[136px] flex flex-col justify-between"
+            className="relative bg-white rounded-xl border border-[rgba(40,204,40,0.2)] p-4 min-h-[136px] flex flex-col justify-between"
           >
             <div className="h-6 bg-gray-200 rounded w-1/2 mb-4"></div>
 
@@ -366,7 +366,7 @@ const EditProfileLoader = () => {
       <div className="h-6 lg:h-8 bg-gray-200 rounded w-40 mb-6"></div>
 
       {/* Profile Card */}
-      <div className="bg-red-100 p-4 md:p-6 lg:p-8 rounded-2xl">
+      <div className="bg-green-100 p-4 md:p-6 lg:p-8 rounded-2xl">
         {/* Profile Section */}
         <div className="flex items-center flex-col gap-3 md:flex-row justify-between">
           <div className="flex items-center gap-3 lg:gap-4">
@@ -415,9 +415,9 @@ const TeacherEarningsLoader = () => {
       </div>
 
       {/* Table Skeleton */}
-      <div className="rounded-[5px] border border-[rgba(204,40,40,0.3)] overflow-x-auto">
+      <div className="rounded-[5px] border border-[rgba(59,204,40,0.3)] overflow-x-auto">
         <table className="min-w-full text-sm text-center rounded-[20px]">
-          <thead className="bg-[rgba(204,40,40,0.1)] text-[#535353] tracking-[-0.04em] font-inter rounded-[20px] whitespace-nowrap">
+          <thead className="bg-[rgba(54,204,40,0.1)] text-[#535353] tracking-[-0.04em] font-inter rounded-[20px] whitespace-nowrap">
             <tr>
               {["Lesson Name", "Lesson Date", "Payment Id", "Payment Date", "Amount"].map((header, idx) => (
                 <th
@@ -433,7 +433,7 @@ const TeacherEarningsLoader = () => {
             {Array(5).fill(0).map((_, i) => (
               <tr
                 key={i}
-                className="hover:bg-[rgba(204,40,40,0.05)] border-t border-[rgba(204,40,40,0.2)]"
+                className="hover:bg-[rgba(86,204,40,0.05)] border-t border-[rgba(45,204,40,0.2)]"
               >
                 {Array(5).fill(0).map((_, j) => (
                   <td
@@ -620,14 +620,14 @@ const SpecialSlotLoader = () => {
 
       <div className="flex flex-col md:flex-row gap-6 p-6">
         {/* Left: Payment Method */}
-        <div className="border border-[#CC2828] h-fit rounded-xl p-4 w-full md:w-1/2 space-y-4">
+        <div className="border border-[#55844D] h-fit rounded-xl p-4 w-full md:w-1/2 space-y-4">
           <div className="h-6 w-1/3 bg-gray-300 rounded" />
 
           {/* Payment Options */}
           {[1, 2].map((_, i) => (
             <div
               key={i}
-              className="flex items-center justify-between border border-red-300 rounded-lg p-3"
+              className="flex items-center justify-between border border-green-300 rounded-lg p-3"
             >
               <div className="flex items-center gap-3">
                 <div className="h-6 w-6 bg-gray-300 rounded" />
@@ -639,7 +639,7 @@ const SpecialSlotLoader = () => {
         </div>
 
         {/* Right: Summary */}
-        <div className="border border-[#CC2828] rounded-xl p-4 w-full md:w-1/2 space-y-4">
+        <div className="border border-[#55844D] rounded-xl p-4 w-full md:w-1/2 space-y-4">
           {/* Profile section */}
           <div className="flex items-center gap-4">
             <div className="w-12 h-12 rounded-full bg-gray-300" />
@@ -657,7 +657,7 @@ const SpecialSlotLoader = () => {
           </div>
 
           {/* Total Summary */}
-          <div className="border-t border-[#CC2828] pt-4 space-y-2">
+          <div className="border-t border-[#55844D] pt-4 space-y-2">
             <div className="flex justify-between">
               <div className="h-4 w-20 bg-gray-300 rounded" />
               <div className="h-4 w-24 bg-gray-300 rounded" />

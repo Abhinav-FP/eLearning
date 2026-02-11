@@ -130,7 +130,7 @@ body {
 .swiper-button-prev:after,
 .swiper-button-next:after {
   font-size: 28px !important;
-  color: #cc2828;
+  color: #55844D;
 }
 
 .swiper .swiper-button-prev {
@@ -160,7 +160,7 @@ body {
 
 .swiper-pagination-horizontal.swiper-pagination-bullets .swiper-pagination-bullet.swiper-pagination-bullet-active {
   background: #fff;
-  border: 2px solid #CC2828;
+  border: 2px solid #55844D;
   opacity: 1;
 }
 

@@ -176,7 +176,7 @@ export default function Index() {
                   onClick={() => setTabOpen("upcoming")}
                   className={`px-3 lg:px-5 py-2 h-[40px] rounded-md tracking-[-0.04em] text-sm font-medium transition cursor-pointer
                     ${TabOpen === "upcoming"
-                      ? "bg-[#CC2828] text-white"
+                      ? "bg-[#55844D] text-white"
                       : "bg-[#E0E0E0] text-[#727272]"
                     }`}
                 >
@@ -187,7 +187,7 @@ export default function Index() {
                   onClick={() => setTabOpen("past")}
                   className={`px-3 lg:px-5 py-2 h-[40px] rounded-md tracking-[-0.04em] text-sm font-medium transition cursor-pointer
                     ${TabOpen === "past"
-                      ? "bg-[#CC2828] text-white"
+                      ? "bg-[#55844D] text-white"
                       : "bg-[#E0E0E0] text-[#727272]"
                     }`}
                 >
@@ -198,7 +198,7 @@ export default function Index() {
                   onClick={() => setTabOpen("cancelled")}
                   className={`px-3 lg:px-5 py-2 h-[40px] rounded-md tracking-[-0.04em] text-sm font-medium transition cursor-pointer
                     ${TabOpen === "cancelled"
-                      ? "bg-[#CC2828] text-white"
+                      ? "bg-[#55844D] text-white"
                       : "bg-[#E0E0E0] text-[#727272]"
                     }`}
                 >
@@ -218,14 +218,14 @@ export default function Index() {
                     onChange={handleSearchChange}
                     placeholder="Search lesson or student"
                     className="w-full h-[40px] pl-9 pr-3 border border-[#ddd] text-sm text-black rounded-md
-                              focus:outline-none focus:ring-1 focus:ring-[#CC2828] placeholder-gray-400"
+                              focus:outline-none focus:ring-1 focus:ring-[#55844D] placeholder-gray-400"
                   />
                 </div>
                 <button
                   onClick={handleCalendarSync}
                   disabled={syncing}
-                  className="h-[40px] px-4 rounded-md border border-[#CC2828] cursor-pointer text-[#CC2828] bg-white text-sm font-medium whitespace-nowrap
-                            hover:bg-[#CC2828] hover:text-white transition disabled:opacity-60 disabled:cursor-not-allowed"
+                  className="h-[40px] px-4 rounded-md border border-[#55844D] cursor-pointer text-[#55844D] bg-white text-sm font-medium whitespace-nowrap
+                            hover:bg-[#55844D] hover:text-white transition disabled:opacity-60 disabled:cursor-not-allowed"
                 >
                   {syncing ? "Syncing..." : "Update Calendar"}
                 </button>
@@ -233,9 +233,9 @@ export default function Index() {
             </div>
           </div>
 
-          <div className="rounded-[5px] border border-[rgba(204,40,40,0.3)] overflow-x-auto">
+          <div className="rounded-[5px] border border-[rgba(19,101,16,0.3)] overflow-x-auto">
             <table className="min-w-full text-sm text-center rounded-[20px]">
-              <thead className="bg-[rgba(204,40,40,0.1)] text-[#535353] tracking-[-0.04em] font-inter rounded-[20px] whitespace-nowrap">
+              <thead className="bg-[rgba(38,185,27,0.1)] text-[#535353] tracking-[-0.04em] font-inter rounded-[20px] whitespace-nowrap">
                 <tr>
                   <th className="font-normal text-sm lg:text-base px-3 lg:px-4 py-2 lg:py-3 border-t border-[rgba(204,40,40,0.2)] capitalize">
                     Lesson name
@@ -277,7 +277,7 @@ export default function Index() {
                     data?.map((item, index) => (
                       <tr
                         key={index}
-                        className="hover:bg-[rgba(204,40,40,0.1)] border-t border-[rgba(204,40,40,0.2)]"
+                        className="hover:bg-[rgba(38,185,27,0.1)] border-t border-[rgba(204,40,40,0.2)]"
                       >
                         <td className="px-3 lg:px-4 py-2 lg:py-3 text-black text-sm lg:text-base font-medium font-inter">
                           <div className="flex justify-center items-center gap-2 whitespace-nowrap">
@@ -287,7 +287,7 @@ export default function Index() {
                                 href={item?.zoom?.meetingLink || ""}
                                 target="blank"
                                 rel="noopener noreferrer"
-                                className="text-xs bg-[#CC2828] text-white px-2 py-[2px] rounded-md hover:bg-[#b22424] transition cursor-pointer"
+                                className="text-xs bg-[#55844D] text-white px-2 py-[2px] rounded-md hover:bg-[#3d5e37] transition cursor-pointer"
                               >
                                 Join Now
                               </a>}
@@ -301,7 +301,7 @@ export default function Index() {
                             <span className="capitalize">{item?.UserId?.name}</span>
                               <Link
                                 href={`/teacher-dashboard/message?query=${item?.UserId?._id}`}
-                                className="text-xs bg-[#CC2828] text-white px-2 py-[2px] rounded-md hover:bg-[#b22424] transition cursor-pointer"
+                                className="text-xs bg-[#55844D] text-white px-2 py-[2px] rounded-md hover:bg-[#3d5e37] transition cursor-pointer"
                               >
                                 Message
                               </Link>
@@ -322,7 +322,7 @@ export default function Index() {
                             ) : (
                               <button
                                 onClick={() => handleMarkAsDone(item._id)}
-                                className="text-xs bg-white border-1 border-[#CC2828] text-[#CC2828] px-3 py-1 rounded-md hover:bg-[#CC2828] hover:text-white transition cursor-pointer"
+                                className="text-xs bg-white border-1 border-[#55844D] text-[#55844D] px-3 py-1 rounded-md hover:bg-[#55844D] hover:text-white transition cursor-pointer"
                               >
                                 {doneId === item?._id ? "Processing..." : "Mark as Done"}
                               </button>

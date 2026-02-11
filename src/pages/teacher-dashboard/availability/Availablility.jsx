@@ -96,7 +96,7 @@ const Availablility = ({ Availability, TeacherAvailabilitys }) => {
   return (
     <>
       <div className="w-full">
-        <div className="bg-white rounded-[20px] border-[#CC282880] border-1">
+        <div className="bg-white rounded-[20px] border-[#55844D80] border-1">
           <div className="py-4 lg:py-3 lg:py-[15px] px-2 md:px-4 lg:px-6 flex flex-wrap  flex-row justify-between items-center border-b border-[rgba(0,0,0,.1)]">
             <div className="flex flex-wrap items-center gap-2 md:gap-4  md:mb-0 ">
               <div className="flex items-center gap-1 md:gap-2">
@@ -112,14 +112,14 @@ const Availablility = ({ Availability, TeacherAvailabilitys }) => {
                 <span className="text-sm text-gray-700">Booked</span>
               </div>
               {/* <div className="flex items-center gap-2">
-                                <span className="w-3 h-3 rounded-full bg-[#CC2828] inline-block"></span>
+                                <span className="w-3 h-3 rounded-full bg-[#55844D] inline-block"></span>
                                 <span className="text-sm text-gray-700">Booked by You</span>
                             </div> */}
             </div>
             <h3 className="text-base lg:text-lg font-semibold text-[#1E1E1E] m-0 tracking-[-0.03em]">
               <button
                 onClick={() => { setIsPopupOpen(true); }}
-                className="font-medium cursor-pointer rounded-full px-3 md:px-5 text-[#ffffff] bg-[#CC2828] hover:bg-[#ad0e0e] text-sm sm:text-base w-full py-2.5 lg:py-3.5"
+                className="font-medium cursor-pointer rounded-full px-3 md:px-5 text-[#ffffff] bg-[#55844D] hover:bg-[#3d5e37] text-sm sm:text-base w-full py-2.5 lg:py-3.5"
               >
                 Add Availablility
               </button>

@@ -303,7 +303,7 @@ export default function Profile() {
           {/* Profile Section */}
           <div className="border-b  border-[rgba(0,0,0,.1)] flex flex-wrap py-6 lg:py-8">
             <div className="w-full lg:w-5/12  lg:pr-3 mb-2 sm:mb-0">
-              <label className="block text-[#CC2828] tracking-[-0.04em] font-medium text-base xl:text-xl mb-1">
+              <label className="block text-[#55844D] tracking-[-0.04em] font-medium text-base xl:text-xl mb-1">
                 Your Photo
               </label>
               <p className="block text-[#535353] text-sm xl:text-base tracking-[-0.04em] font-medium">
@@ -334,7 +334,7 @@ export default function Profile() {
                 />
                 <label
                   htmlFor="profileImageInput"
-                  className="text-[#CC2828] font-medium text-base xl:text-xl border-none tracking-[-0.04em] cursor-pointer"
+                  className="text-[#55844D] font-medium text-base xl:text-xl border-none tracking-[-0.04em] cursor-pointer"
                 >
                   Update Avatar
                 </label>
@@ -403,7 +403,7 @@ export default function Profile() {
 
           {/* Integrations Section */}
           <div className="border-b border-[rgba(0,0,0,.1)] py-6 lg:py-8">
-            <h3 className="text-[#CC2828] font-medium text-lg xl:text-xl mb-2">
+            <h3 className="text-[#55844D] font-medium text-lg xl:text-xl mb-2">
               Integrations
             </h3>
             <p className="text-[#535353] text-sm xl:text-base mb-3">
@@ -432,7 +432,7 @@ export default function Profile() {
                 <button
                   type="button"
                   onClick={connectZoom}
-                  className="bg-[#CC2828] text-white px-4 py-2 rounded-lg text-sm hover:bg-red-700 cursor-pointer"
+                  className="bg-[#55844D] text-white px-4 py-2 rounded-lg text-sm hover:bg-[#3d5e37] cursor-pointer"
                 >
                   Connect Zoom
                 </button>
@@ -508,7 +508,7 @@ export default function Profile() {
           <div className="border-b border-[rgba(0,0,0,.1)] py-6 lg:py-8 space-y-4 lg:space-y-6">
             <div className="flex flex-wrap -mx-2 space-y-4">
               <div className="w-full lg:w-6/12 px-2 ">
-                <label className="block text-[#CC2828] font-medium text-base xl:text-xl mb-1 tracking-[-0.04em]">
+                <label className="block text-[#55844D] font-medium text-base xl:text-xl mb-1 tracking-[-0.04em]">
                   Name <span className="text-red-500">*</span>
                 </label>
                 <input
@@ -521,7 +521,7 @@ export default function Profile() {
                 />
               </div>
               <div className="w-full lg:w-6/12  px-2">
-                <label className="block text-[#CC2828] font-medium text-base xl:text-xl mb-1 tracking-[-0.04em]">
+                <label className="block text-[#55844D] font-medium text-base xl:text-xl mb-1 tracking-[-0.04em]">
                   Email <span className="text-red-500">*</span>
                 </label>
                 <input
@@ -536,7 +536,7 @@ export default function Profile() {
                 />
               </div>
               <div className="w-full lg:w-6/12  px-2">
-                <label className="block text-[#CC2828] font-medium text-base xl:text-xl mb-1 tracking-[-0.04em]">
+                <label className="block text-[#55844D] font-medium text-base xl:text-xl mb-1 tracking-[-0.04em]">
                   Time Zone<span className="text-red-500">*</span>
                 </label>
                 <select
@@ -559,7 +559,7 @@ export default function Profile() {
               </div>
               <div className="w-full lg:w-6/12  px-2">
                 <label
-                  className="block text-[#CC2828] font-medium text-base xl:text-xl mb-1 tracking-[-0.04em]"
+                  className="block text-[#55844D] font-medium text-base xl:text-xl mb-1 tracking-[-0.04em]"
                   onChange={handleChange}
                   value={data?.nationality}
                   name="nationality"
@@ -585,7 +585,7 @@ export default function Profile() {
               </div>
 
               <div className="w-full lg:w-6/12 px-2">
-                <label className="block text-[#CC2828] font-medium text-base xl:text-xl mb-1 tracking-[-0.04em]">
+                <label className="block text-[#55844D] font-medium text-base xl:text-xl mb-1 tracking-[-0.04em]">
                   Languages spoken
                 </label>
 
@@ -610,13 +610,13 @@ export default function Profile() {
                     data?.languages_spoken?.map((lang, idx) => (
                       <div
                         key={idx}
-                        className="bg-red-100 text-red-700 px-3 py-1 rounded-full text-sm flex items-center gap-2"
+                        className="bg-green-100 text-[#2b3e27] px-3 py-1 rounded-full text-sm flex items-center gap-2"
                       >
                         {lang}
                         <button
                           type="button"
                           onClick={() => handleRemoveLanguage(lang)}
-                          className="text-red-500 hover:text-red-800 text-xs cursor-pointer"
+                          className="text-[#2b3e27] text-xs cursor-pointer"
                         >
                           ✕
                         </button>
@@ -626,7 +626,7 @@ export default function Profile() {
               </div>
 
               <div className="w-full lg:w-6/12  px-2">
-                <label className="block text-[#CC2828] font-medium text-base xl:text-xl mb-1 tracking-[-0.04em] capitalize">
+                <label className="block text-[#55844D] font-medium text-base xl:text-xl mb-1 tracking-[-0.04em] capitalize">
                   Intro video link (Only Youtube and vimeo allowed)
                 </label>
                 <input
@@ -638,7 +638,7 @@ export default function Profile() {
                 />
               </div>
               {/* <div className="w-full lg:w-6/12 px-2">
-                <label className="block text-[#CC2828] font-medium text-base xl:text-xl mb-1 tracking-[-0.04em]">
+                <label className="block text-[#55844D] font-medium text-base xl:text-xl mb-1 tracking-[-0.04em]">
                   Upload any relevant certificate
                 </label>
 
@@ -664,7 +664,7 @@ export default function Profile() {
               </div> */}
 
               {/* <div className="w-full lg:w-6/12  px-2">
-                <label className="block text-[#CC2828] font-medium text-base xl:text-xl mb-1 tracking-[-0.04em]">
+                <label className="block text-[#55844D] font-medium text-base xl:text-xl mb-1 tracking-[-0.04em]">
                   Experience (In Years)
                 </label>
                 <input
@@ -678,7 +678,7 @@ export default function Profile() {
               </div> */}
 
               {/* <div className="w-full lg:w-6/12  px-2">
-                <label className="block text-[#CC2828] font-medium text-base xl:text-xl mb-1 tracking-[-0.04em]">
+                <label className="block text-[#55844D] font-medium text-base xl:text-xl mb-1 tracking-[-0.04em]">
                   Average Price (In USD)
                 </label>
                 <input
@@ -692,7 +692,7 @@ export default function Profile() {
               </div>
 
               <div className="w-full lg:w-6/12  px-2">
-                <label className="block text-[#CC2828] font-medium text-base xl:text-xl mb-1 tracking-[-0.04em]">
+                <label className="block text-[#55844D] font-medium text-base xl:text-xl mb-1 tracking-[-0.04em]">
                   Average Time (In Minutes)
                 </label>
                 <input
@@ -706,7 +706,7 @@ export default function Profile() {
               </div> */}
 
               {/* <div className="w-full px-2">
-                <label className="block text-[#CC2828] font-medium text-base xl:text-xl mb-1 tracking-[-0.04em]">
+                <label className="block text-[#55844D] font-medium text-base xl:text-xl mb-1 tracking-[-0.04em]">
                   Qualification
                 </label>
                 <select
@@ -727,7 +727,7 @@ export default function Profile() {
               </div> */}
 
               <div className="w-full lg:w-6/12 px-2 mb-4">
-                <label className="text-[#CC2828] font-medium text-base xl:text-xl mb-2 block">
+                <label className="text-[#55844D] font-medium text-base xl:text-xl mb-2 block">
                   Gender
                 </label>
                 <div className="flex items-center space-x-4">
@@ -738,7 +738,7 @@ export default function Profile() {
                       value="M"
                       checked={data.gender === "M"}
                       onChange={handleChange}
-                      className=" w-4 h-4 accent-[#CC2828]"
+                      className=" w-4 h-4 accent-[#55844D]"
                     />
                     <span>Male</span>
                   </label>
@@ -749,7 +749,7 @@ export default function Profile() {
                       value="F"
                       checked={data.gender === "F"}
                       onChange={handleChange}
-                      className=" w-4 h-4 accent-[#CC2828]"
+                      className=" w-4 h-4 accent-[#55844D]"
                     />
                     <span>Female</span>
                   </label>
@@ -760,7 +760,7 @@ export default function Profile() {
                       value="O"
                       checked={data.gender === "O"}
                       onChange={handleChange}
-                       className=" w-4 h-4 accent-[#CC2828]"
+                       className=" w-4 h-4 accent-[#55844D]"
                     />
                     <span>Other</span>
                   </label> */}
@@ -769,7 +769,7 @@ export default function Profile() {
 
               {/* AIS Trained */}
               <div className="w-full lg:w-6/12 px-2 mb-4">
-                <label className="text-[#CC2828] font-medium text-base xl:text-xl mb-2 block">
+                <label className="text-[#55844D] font-medium text-base xl:text-xl mb-2 block">
                   Akita Inaka School Trained(AIS)
                 </label>
                 <div className="flex items-center space-x-4">
@@ -781,11 +781,11 @@ export default function Profile() {
               {/* Speciality Tags */}
               <div className="w-full px-2 mb-4">
                 <div className="flex justify-between items-center mb-2 ">
-                  <label className="text-[#CC2828] font-medium text-base xl:text-xl block">
+                  <label className="text-[#55844D] font-medium text-base xl:text-xl block">
                     Specialities (Upto 5 allowed)
                   </label>
                   {/* Character Counter */}
-                  <p className="text-[#CC2828] text-sm">
+                  <p className="text-[#55844D] text-sm">
                     {newSpeciality.length}/20 characters
                   </p>
                 </div>
@@ -807,7 +807,7 @@ export default function Profile() {
                   <button
                     type="button"
                     onClick={handleAddSpeciality}
-                    className="bg-[#CC2828] text-white px-6 h-11 lg:h-[54px] rounded-lg hover:bg-[#a81e1e] text-sm cursor-pointer"
+                    className="bg-[#55844D] text-white px-6 h-11 lg:h-[54px] rounded-lg hover:bg-[#3d5e37] text-sm cursor-pointer"
                   >
                     Add
                   </button>
@@ -819,13 +819,13 @@ export default function Profile() {
                     {data.specialities.map((spec, idx) => (
                       <div
                         key={idx}
-                        className="bg-red-100 text-red-700 px-3 py-1 rounded-full text-sm flex items-center gap-2"
+                        className="bg-green-100 text-[#2b3e27] px-3 py-1 rounded-full text-sm flex items-center gap-2"
                       >
                         {spec}
                         <button
                           type="button"
                           onClick={() => handleRemoveSpeciality(spec)}
-                          className="text-red-500 hover:text-red-800 text-xs cursor-pointer"
+                          className="text-[#3d5e37] text-xs cursor-pointer"
                         >
                           ✕
                         </button>
@@ -837,7 +837,7 @@ export default function Profile() {
 
               {/* Description */}
               <div className="w-full px-2">
-                <label className="block text-[#CC2828] font-medium text-base xl:text-xl mb-1 tracking-[-0.04em]">
+                <label className="block text-[#55844D] font-medium text-base xl:text-xl mb-1 tracking-[-0.04em]">
                   Description
                 </label>
                 <textarea
@@ -853,7 +853,7 @@ export default function Profile() {
           {/* Submit Button */}
           <div className="flex w-full lg:w-12/12 xl:w-11/12 flex-wrap justify-center items-center pt-6 lg:pt-10 space-x-4 lg:space-x-6">
             <button
-              className="w-full max-w-[143px] md:max-w-[183px] cursor-pointer border border-[#CC2828] bg-[#CC2828] hover:bg-red-700  text-white py-2.5 lg:py-3.5 cursor-pointer rounded-[10px] font-normal text-base xl:text-xl transition  tracking-[-0.04em]"
+              className="w-full max-w-[143px] md:max-w-[183px] cursor-pointer border border-[#55844D] bg-[#55844D] hover:bg-[#3d5e37]  text-white py-2.5 lg:py-3.5 cursor-pointer rounded-[10px] font-normal text-base xl:text-xl transition  tracking-[-0.04em]"
               type="submit"
               // onClick={handleSubmit}
               disabled={processing}

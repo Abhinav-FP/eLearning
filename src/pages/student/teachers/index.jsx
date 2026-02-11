@@ -101,12 +101,12 @@ export default function Index() {
               value={searchText}
               onChange={handleSearchChange}
               placeholder="Search using teacher name"
-              className="w-full pl-10 pr-4 py-2 border border-[#ddd] text-[#000] rounded-md focus:outline-none focus:ring-1 focus:ring-[#CC2828] placeholder-gray-400"
+              className="w-full pl-10 pr-4 py-2 border border-[#ddd] text-[#000] rounded-md focus:outline-none focus:ring-1 focus:ring-[#55844D] placeholder-gray-400"
             />
           </div>
           <Link
             href="/student/favourite-teacher"
-            className="w-fit md:ml-auto px-4 lg:px-6 py-2.5 text-[#CC2828] border border-[#CC2828] rounded-md tracking-[-0.06em] text-sm font-medium hover:bg-[#CC2828] hover:text-white cursor-pointer"
+            className="w-fit md:ml-auto px-4 lg:px-6 py-2.5 text-[#55844D] border border-[#55844D] rounded-md tracking-[-0.06em] text-sm font-medium hover:bg-[#55844D] hover:text-white cursor-pointer"
           >
             {`View Favourite Teachers (${data?.favouriteSize || "0"})`}
           </Link>
@@ -136,7 +136,7 @@ export default function Index() {
               <Link href={`/teacher/${teacher?._id}`} className="block group">
                 <div
                   key={idx}
-                  className="bg-white rounded-[10px] lesson_list_shadow p-4 lg:p-6 flex flex-col lg:flex-row gap-6 lg:gap-10 border border-[#CC2828]/20"
+                  className="bg-white rounded-[10px] lesson_list_shadow p-4 lg:p-6 flex flex-col lg:flex-row gap-6 lg:gap-10 border border-[#55844D]/20"
                 >
                   {/* {teacher?.intro_video && ( */}
                     <div className="w-full sm:max-w-[300px] shrink-0" 
@@ -154,7 +154,7 @@ export default function Index() {
                         name={teacher?.userId?.name}
                         divClass="relative"
                         imgClass="rounded-[10px] h-[160px] sm:h-[200px] w-full object-cover"
-                        btnClass="absolute inset-0 flex justify-center items-center text-white hover:text-[#CC2828]"
+                        btnClass="absolute inset-0 flex justify-center items-center text-white hover:text-[#55844D]"
                       />
                     </div>
                   {/* )} */}
@@ -162,7 +162,7 @@ export default function Index() {
                     <div>
                       <h3
                         className="flex gap-2 items-center font-inter text-lg lg:text-2xl
-                       text-[#CC2828] font-semibold capitalize mb-2"
+                       text-[#55844D] font-semibold capitalize mb-2"
                       >
                         {teacher?.userId?.name}
                       {teacher?.isLiked ? (
@@ -174,7 +174,7 @@ export default function Index() {
                               handleRemoveSubmit(teacher?.userId?._id);
                             }}
                           >
-                            <FaHeart color="#CC2828" className="w-[24px] h-[24px] lg:w-[18px] lg:h-[18px]" size={18} />
+                            <FaHeart color="#55844D" className="w-[24px] h-[24px] lg:w-[18px] lg:h-[18px]" size={18} />
                           </span>
                         ) : (
                           <span
@@ -250,7 +250,7 @@ export default function Index() {
                           e.stopPropagation();
                           router.push(`/teacher/${teacher?._id}?book=true`);
                         }}
-                        className="font-medium cursor-pointer rounded-full py-2 px-5 bg-[#CC2828] hover:bg-[#ad0e0e] text-white text-sm lg:text-base transition-all"
+                        className="font-medium cursor-pointer rounded-full py-2 px-5 bg-[#55844D] hover:bg-[#3d5e37] text-white text-sm lg:text-base transition-all"
                       >
                         Book
                       </button>
@@ -258,7 +258,7 @@ export default function Index() {
                       <Link
                         href={`/student/message?query=${teacher?.userId?._id}`}
                         onClick={(e) => e.stopPropagation()}
-                        className="font-medium cursor-pointer rounded-full py-2 px-5 bg-[#CC2828] hover:bg-[#ad0e0e] text-white text-sm lg:text-base transition-all"
+                        className="font-medium cursor-pointer rounded-full py-2 px-5 bg-[#55844D] hover:bg-[#3d5e37] text-white text-sm lg:text-base transition-all"
                       >
                         Message
                       </Link>

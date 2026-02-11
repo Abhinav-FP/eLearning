@@ -58,14 +58,14 @@ function Index() {
       <TeacherLayout page={"Payout"}>
         <div className="min-h-screen p-5 lg:p-[30px]">
           <div className="flex flex-col md:flex-row justify-between md:items-center mb-4 lg:mb-5">
-            <h2 className="capitalize text-lg md:text-xl lg:text-2xl font-bold text-[#CC2828] tracking-[-0.04em] font-inter">
+            <h2 className="capitalize text-lg md:text-xl lg:text-2xl font-bold text-[#55844D] tracking-[-0.04em] font-inter">
               payout Entries
             </h2>
             <div className="flex items-center space-x-3 justify-between mt-3 md:mt-0">
               <select
                 value={selectedOption}
                 onChange={handleDropdownChange}
-                className="border border-[#CC2828] text-[#CC2828] h-[44px] px-1 sm:px-4 py-1.5 rounded-md focus:outline-none"
+                className="border border-[#55844D] text-[#55844D] h-[44px] px-1 sm:px-4 py-1.5 rounded-md focus:outline-none"
               >
                 <option value="">All</option>
                 <option value="approved">Approved</option>
@@ -76,15 +76,15 @@ function Index() {
                 onClick={() => {
                   downloadExcel();
                 }}
-                className="w-fit px-2 sm:px-8 h-[44px] py-2 hover:bg-white hover:text-[#CC2828] border border-[#CC2828] rounded-md tracking-[-0.06em] text-sm font-medium bg-[#CC2828] text-white cursor-pointer"
+                className="w-fit px-2 sm:px-8 h-[44px] py-2 hover:bg-white hover:text-[#55844D] border border-[#55844D] rounded-md tracking-[-0.06em] text-sm font-medium bg-[#55844D] text-white cursor-pointer"
               >
                 Export as Excel
               </button>
             </div>
           </div>
-          <div className="rounded-[5px] border border-[rgba(204,40,40,0.3)] overflow-x-auto">
+          <div className="rounded-[5px] border border-[rgba(19,101,16,0.3)] overflow-x-auto">
             <table className="min-w-full text-sm text-center rounded-[20px]">
-              <thead className="bg-[rgba(204,40,40,0.1)] text-[#535353] tracking-[-0.04em] font-inter rounded-[20px] whitespace-nowrap">
+              <thead className="bg-[rgba(38,185,27,0.1)] text-[#535353] tracking-[-0.04em] font-inter rounded-[20px] whitespace-nowrap">
                 <tr>
                   <th className="font-normal text-sm lg:text-base px-3 lg:px-4 py-2 lg:py-3 border-t border-[rgba(204,40,40,0.2)] capitalize">
                     Index
@@ -114,7 +114,7 @@ function Index() {
                     payout?.map((item, index) => (
                       <tr
                         key={index}
-                        className="hover:bg-[rgba(204,40,40,0.1)] border-t border-[rgba(204,40,40,0.2)]"
+                        className="hover:bg-[rgba(38,185,27,0.1)] border-t border-[rgba(204,40,40,0.2)]"
                       >
                         <td className="px-3 lg:px-4 py-2 lg:py-3 text-black text-sm lg:text-base font-medium font-inter ">
                           {index + 1}

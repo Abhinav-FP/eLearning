@@ -45,12 +45,12 @@ export default function Earning({ isOpen, onClose, data, fetchEarnings }) {
                 onSubmit={handleAdd}
                 className="max-w-md mx-auto mt-10 px-3 lg:px-6 pb-3 sm:pb-6 bg-white space-y-2 sm:space-y-4"
             >
-                <h2 className="text-2xl font-bold text-center text-[#CC2828]">
+                <h2 className="text-2xl font-bold text-center text-[#55844D]">
                     Request Payout
                 </h2>
                 {/* Title Field */}
                 <div>
-                    <label className="block text-[#CC2828] font-medium mb-1">Amount</label>
+                    <label className="block text-[#55844D] font-medium mb-1">Amount</label>
                     {/* <input
                         type="number"
                         name="amount"
@@ -59,11 +59,11 @@ export default function Earning({ isOpen, onClose, data, fetchEarnings }) {
                         placeholder="Enter amount"
                         min="0"
                         step="0.01"
-                        className="w-full p-3 rounded-md bg-gray-100 text-gray-700 focus:outline-none focus:ring-2 focus:ring-[#CC2828]"
+                        className="w-full p-3 rounded-md bg-gray-100 text-gray-700 focus:outline-none focus:ring-2 focus:ring-[#55844D]"
                         required
                     /> */}
                     <div
-                        className="w-full p-3 rounded-md bg-gray-100 text-gray-700 focus:outline-none focus:ring-2 focus:ring-[#CC2828] text-base"
+                        className="w-full p-3 rounded-md bg-gray-100 text-gray-700 focus:outline-none focus:ring-2 focus:ring-[#55844D] text-base"
                     >
                         {amount?.toFixed(2) ?? "—"}
                     </div>
@@ -72,7 +72,7 @@ export default function Earning({ isOpen, onClose, data, fetchEarnings }) {
                 <div className="flex justify-between gap-4 mt-6">
                     <button
                         type="submit"
-                        className="cursor-pointer flex-1 bg-red-600 text-white py-3 rounded-md hover:bg-red-700 disabled:opacity-50"
+                        className="cursor-pointer flex-1 bg-[#55844D] text-white py-3 rounded-md hover:bg-[#3d5e37] disabled:opacity-50"
                         disabled={loading}
                     >
                         {loading ? "Processing..." : "Request Payout"}

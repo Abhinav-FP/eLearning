@@ -1,7 +1,7 @@
 import React from "react";
 import Link from "next/link";
 import FooterLogo from "../Assets/Images/footerLogoNew.png";
-// import FooterLogo from "../../../public/Logo.png";
+// import FooterLogo from "../../../public/NewLogo.png";
 import Image from "next/image";
 export default function Footer() {
      return (

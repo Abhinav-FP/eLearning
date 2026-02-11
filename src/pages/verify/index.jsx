@@ -44,7 +44,7 @@ export default function Index() {
   return (
     <Layout>
       <div className="mt-20 lg:mt-40 min-h-[60vh] flex flex-col justify-center items-center px-4 text-center">
-        <h1 className="text-2xl md:text-3xl font-semibold text-[#CC2828] mb-4">
+        <h1 className="text-2xl md:text-3xl font-semibold text-[#55844D] mb-4">
           You have not verified your email yet.
         </h1>
         <p className="text-base md:text-lg text-gray-700 max-w-xl mb-6">
@@ -53,12 +53,12 @@ export default function Index() {
           click the button below to generate a new email.
         </p>
         {emailSent ? (
-          <p className="text-[#CC2828] font-semibold">
+          <p className="text-[#55844D] font-semibold">
             Verification Email Sent. Please check your inbox
           </p>
         ) : (
           <button
-            className="bg-[#CC2828] hover:bg-[#ad0e0e] text-white font-medium py-2 px-6 rounded-full transition-all duration-200 cursor-pointer"
+            className="bg-[#55844D] hover:bg-[#3d5e37] text-white font-medium py-2 px-6 rounded-full transition-all duration-200 cursor-pointer"
             onClick={() => {
               SendEmail();
             }}

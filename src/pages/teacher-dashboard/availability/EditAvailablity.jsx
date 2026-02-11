@@ -95,7 +95,7 @@ export default function EditAvailablity({
   return (
     <Popup isOpen={isOpen} onClose={onClose} size={"max-w-[510px]"}>
       <div className="mx-auto bg-white rounded-xl">
-        <h2 className="text-xl sm:text-2xl font-semibold text-center text-[#CC2828] py-4 border-b border-gray-200">
+        <h2 className="text-xl sm:text-2xl font-semibold text-center text-[#55844D] py-4 border-b border-gray-200">
           Availability Details
         </h2>
 
@@ -126,7 +126,7 @@ export default function EditAvailablity({
               type="submit"
               onClick={handleUpdate}
               disabled={loading}
-              className="w-full bg-red-600 text-white py-2 rounded-md hover:bg-red-700 text-sm font-medium"
+              className="w-full bg-[#55844D] text-white py-2 rounded-md hover:bg-[#3d5e37] text-sm font-medium"
             >
               {loading ? "Updating..." : "Update"}
             </button> */}
@@ -134,7 +134,7 @@ export default function EditAvailablity({
               type="button"
               onClick={handleDelete}
               disabled={processing}
-              className="cursor-pointer flex-1 bg-red-600 text-white py-2 rounded-md hover:bg-red-700"
+              className="cursor-pointer flex-1 bg-[#55844D] text-white py-2 rounded-md hover:bg-[#3d5e37]"
             >
               {processing ? "Deleting..." : "Delete"}
             </button>

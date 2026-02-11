@@ -223,13 +223,13 @@ export default function AddSlot({ isOpen, onClose, SpecialSlotData }) {
         onSubmit={formData?.amount && Number(formData?.amount) <= 0 ? handleZeroAmountSlot : handleAdd}
         className="max-w-md mx-auto mt-10 px-3 sm:px-6 pb-3 sm:pb-6 bg-white space-y-4"
       >
-        <h2 className="text-2xl font-bold text-center text-[#CC2828]">
+        <h2 className="text-2xl font-bold text-center text-[#55844D]">
           Create Special Slot
         </h2>
 
         {/* Student Field */}
         <div className="mb-6 relative z-10">
-          <label className="block text-[#CC2828] font-medium mb-2">
+          <label className="block text-[#55844D] font-medium mb-2">
             Select Student
           </label>
           <input
@@ -240,7 +240,7 @@ export default function AddSlot({ isOpen, onClose, SpecialSlotData }) {
             onFocus={() => setIsFocused(true)}
             // onBlur={()=>{setIsFocused(false)}}
             onBlur={() => setTimeout(() => setIsFocused(false), 200)}
-            className="w-full p-3 rounded-md bg-gray-100 text-gray-700 focus:outline-none focus:ring-2 focus:ring-[#CC2828]"
+            className="w-full p-3 rounded-md bg-gray-100 text-gray-700 focus:outline-none focus:ring-2 focus:ring-[#55844D]"
           />
 
           {isFocused && (
@@ -277,14 +277,14 @@ export default function AddSlot({ isOpen, onClose, SpecialSlotData }) {
 
         {/* Lesson Field */}
         <div>
-          <label className="block text-[#CC2828] font-medium mb-1">
+          <label className="block text-[#55844D] font-medium mb-1">
             Select Lesson
           </label>
           <select
             name="lesson"
             value={formData.lesson}
             onChange={handleChange}
-            className="capitalize w-full p-3 rounded-md bg-gray-100 text-gray-700 focus:outline-none focus:ring-2 focus:ring-[#CC2828]"
+            className="capitalize w-full p-3 rounded-md bg-gray-100 text-gray-700 focus:outline-none focus:ring-2 focus:ring-[#55844D]"
             required
           >
             <option value=""> Select a Lesson </option>
@@ -300,7 +300,7 @@ export default function AddSlot({ isOpen, onClose, SpecialSlotData }) {
 
         {/* Amount Field */}
         <div>
-          <label className="block text-[#CC2828] font-medium mb-1">
+          <label className="block text-[#55844D] font-medium mb-1">
             Amount (USD)
           </label>
           <input
@@ -312,14 +312,14 @@ export default function AddSlot({ isOpen, onClose, SpecialSlotData }) {
             }}
             maxLength="7"
             placeholder="Enter amount"
-            className="w-full p-3 rounded-md bg-gray-100 text-gray-700 focus:outline-none focus:ring-2 focus:ring-[#CC2828]"
+            className="w-full p-3 rounded-md bg-gray-100 text-gray-700 focus:outline-none focus:ring-2 focus:ring-[#55844D]"
             required
           />
         </div>
 
         {/* Start Time Field */}
         <div>
-          <label className="block text-[#CC2828] font-medium mb-1">
+          <label className="block text-[#55844D] font-medium mb-1">
             Start Date & Time
           </label>
           <input
@@ -327,14 +327,14 @@ export default function AddSlot({ isOpen, onClose, SpecialSlotData }) {
             name="startDateTime"
             value={formData.startDateTime}
             onChange={handleChange}
-            className="w-full p-3 rounded-md bg-gray-100 text-gray-700 focus:outline-none focus:ring-2 focus:ring-[#CC2828]"
+            className="w-full p-3 rounded-md bg-gray-100 text-gray-700 focus:outline-none focus:ring-2 focus:ring-[#55844D]"
             required
           />
         </div>
 
         {/* End Time Field */}
         <div>
-          <label className="block text-[#CC2828] font-medium mb-1">
+          <label className="block text-[#55844D] font-medium mb-1">
             End Date & Time
           </label>
           <input
@@ -342,7 +342,7 @@ export default function AddSlot({ isOpen, onClose, SpecialSlotData }) {
             name="endDateTime"
             value={formData.endDateTime}
             onChange={handleChange}
-            className="w-full p-3 rounded-md bg-gray-100 text-gray-700 focus:outline-none focus:ring-2 focus:ring-[#CC2828]"
+            className="w-full p-3 rounded-md bg-gray-100 text-gray-700 focus:outline-none focus:ring-2 focus:ring-[#55844D]"
             required
           />
         </div>
@@ -372,7 +372,7 @@ export default function AddSlot({ isOpen, onClose, SpecialSlotData }) {
           ) : (
             <button
               type="submit"
-              className="bg-red-600 text-white py-2 px-6 rounded-md hover:bg-red-700 transition duration-200 cursor-pointer"
+              className="bg-[#55844D] text-white py-2 px-6 rounded-md hover:bg-[#3d5e37] transition duration-200 cursor-pointer"
             >
               {loading ? "Creating..." : "Create Slot"}
             </button>

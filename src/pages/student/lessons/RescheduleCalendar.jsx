@@ -120,7 +120,7 @@ const RescheduleCalendar = ({ Availability, setSelectedSlot, selectedLesson, mer
 
   return (
     <div className="w-full ">
-      <div className="bg-white rounded-[20px]  border-[#CC282880] border-1">
+      <div className="bg-white rounded-[20px]  border-[#55844D80] border-1">
         <div className="py-1 py-2 lg:py-[15px] px-2 md:px-3 lg:px-6 flex flex-wrap justify-between items-center border-b border-black border-opacity-10">
           <div className="flex flex-wrap items-center gap-4 mb-4">
             <div className="flex items-center gap-2">
@@ -167,7 +167,7 @@ const RescheduleCalendar = ({ Availability, setSelectedSlot, selectedLesson, mer
           </div>
           <div className="mt-4 relative flex justify-center sm:justify-end">
             <select
-              className="w-fit lg:px-2 py-2 text-xs sm:text-sm border border-red-500 rounded-[6px] lg:rounded-[10px] bg-white text-red-600 focus:outline-none focus:ring-1 focus:ring-red-400"
+              className="w-fit lg:px-2 py-2 text-xs sm:text-sm border border-green-500 rounded-[6px] lg:rounded-[10px] bg-white text-green-600 focus:outline-none focus:ring-1 focus:ring-green-400"
               onChange={handleChange}
               value={studentTimeZone}
               name="timezone"

@@ -64,7 +64,7 @@ export default function Teacher({ teacherData, loading }) {
                                                 name={item?.userId?.name}
                                                 divClass="relative"
                                                 imgClass="rounded-[10px] h-[240px] w-[276px] object-cover"
-                                                btnClass="absolute top-1/2  cursor-pointer left-0 w-[81px] text-center text-white hover:text-[#CC2828] right-0 mx-auto -translate-y-1/2"
+                                                btnClass="absolute top-1/2  cursor-pointer left-0 w-[81px] text-center text-white hover:text-[#55844D] right-0 mx-auto -translate-y-1/2"
                                             />
                                             </div>
                                         {/* </div> */}

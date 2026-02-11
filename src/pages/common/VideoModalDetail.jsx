@@ -149,7 +149,7 @@ export default function VideoModalDetail({ video, image, name, divClass, imgClas
               setIsEditing(true);
               setIsOpen(true);
             }}
-            className="absolute top-2 right-2 p-1 text-white bg-[#CC2828] rounded-full cursor-pointer"
+            className="absolute top-2 right-2 p-1 text-white bg-[#55844D] rounded-full cursor-pointer"
           >
             <MdEdit size={24} />
           </button>
@@ -195,7 +195,7 @@ export default function VideoModalDetail({ video, image, name, divClass, imgClas
                 <div className="flex flex-col space-y-1">
                   <label
                     htmlFor="videoUrl"
-                    className="text-sm font-semibold text-red-700"
+                    className="text-sm font-semibold text-green-700"
                   >
                     Video URL
                   </label>
@@ -207,16 +207,16 @@ export default function VideoModalDetail({ video, image, name, divClass, imgClas
                       setEditValue(e.target.value);
                     }}
                     placeholder="Enter new video URL"
-                    className="w-full rounded-lg border border-red-300 bg-white p-2
+                    className="w-full rounded-lg border border-green-300 bg-white p-2
                                         text-gray-900 focus:outline-none focus:ring-2
-                                        focus:ring-red-500 focus:border-red-500"
+                                        focus:ring-green-500 focus:border-green-500"
                   />
                 </div>
                 {/* Submit button */}
                 <button
                   onClick={handleSubmit}
-                  className="w-full px-4 py-2 bg-red-600 text-white font-medium
-                                       rounded-lg hover:bg-red-700 transition-colors cursor-pointer"
+                  className="w-full px-4 py-2 bg-green-600 text-white font-medium
+                                       rounded-lg hover:bg-green-700 transition-colors cursor-pointer"
                 >
                   {loading ? "Saving..." : "Save Changes"}
                 </button>

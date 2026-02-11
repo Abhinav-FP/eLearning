@@ -47,7 +47,7 @@ export default function Index() {
                     </h2>
                     <div className="flex justify-center mb-8 lg:mb-10">
                         <a
-                            className="font-semibold bg-[#CC2828] hover:bg-[#ad0e0e] text-white transition-all duration-300 rounded-full py-2.5 px-6 md:py-3 md:px-8 text-sm md:text-base"
+                            className="font-semibold bg-[#55844D] hover:bg-[#3d5e37] text-white transition-all duration-300 rounded-full py-2.5 px-6 md:py-3 md:px-8 text-sm md:text-base"
                             target="_blank"
                             href="https://www.takemetojapan.com/contact"
                         >
@@ -93,7 +93,7 @@ export default function Index() {
                         <div className="flex flex-wrap md:items-center md:justify-between">
                           <div className="w-full md:w-6/12 flex justify-start gap-3 md:gap-4 lg:gap-5 order-2 md:order-none">
                             <a href={item?.link} 
-                            className="font-medium cursor-pointer rounded-full py-2 px-5 bg-[#CC2828] hover:bg-[#ad0e0e] text-white text-sm lg:text-base transition-all"
+                            className="font-medium cursor-pointer rounded-full py-2 px-5 bg-[#55844D] hover:bg-[#3d5e37] text-white text-sm lg:text-base transition-all"
                             target="blank"
                             >
                               View

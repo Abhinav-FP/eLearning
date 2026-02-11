@@ -132,10 +132,10 @@ export default function Index() {
           <SpecialSlotLoader />
         ) : unauthorized ? (
           <div className="min-h-[60vh] flex flex-col items-center justify-center text-center px-4">
-            <div className="w-20 h-20 bg-red-100 text-red-500 flex items-center justify-center rounded-full mb-6">
+            <div className="w-20 h-20 bg-green-100 text-green-500 flex items-center justify-center rounded-full mb-6">
               <MdErrorOutline className="w-10 h-10" />
             </div>
-            <h2 className="text-2xl font-semibold text-[#CC2828] mb-2">
+            <h2 className="text-2xl font-semibold text-[#55844D] mb-2">
               Access not allowed
             </h2>
             <p className="text-gray-600 mb-2 max-w-md">
@@ -150,14 +150,14 @@ export default function Index() {
             </p>
             <button
               onClick={() => router.push("/")}
-              className="cursor-pointer mt-2 px-6 py-2 bg-[#CC2828] text-white rounded-md hover:bg-[#b82323] transition"
+              className="cursor-pointer mt-2 px-6 py-2 bg-[#55844D] text-white rounded-md hover:bg-[#3d5e37] transition"
             >
               Go to Homepage
             </button>
           </div>
         ) : error ? (
           <div className="min-h-[60vh] flex flex-col items-center justify-center text-center px-4">
-            <div className="w-20 h-20 bg-red-100 text-red-500 flex items-center justify-center rounded-full mb-6">
+            <div className="w-20 h-20 bg-green-100 text-green-500 flex items-center justify-center rounded-full mb-6">
               <svg
                 className="w-10 h-10"
                 fill="none"
@@ -172,7 +172,7 @@ export default function Index() {
                 />
               </svg>
             </div>
-            <h2 className="text-2xl font-semibold text-[#CC2828] mb-2">
+            <h2 className="text-2xl font-semibold text-[#55844D] mb-2">
               Token Expired or Invalid Link
             </h2>
             <p className="text-gray-600 mb-4 max-w-md">
@@ -182,7 +182,7 @@ export default function Index() {
             </p>
             <button
               onClick={() => router.push("/")}
-              className="cursor-pointer mt-2 px-6 py-2 bg-[#CC2828] text-white rounded-md hover:bg-[#b82323] transition"
+              className="cursor-pointer mt-2 px-6 py-2 bg-[#55844D] text-white rounded-md hover:bg-[#3d5e37] transition"
             >
               Go to Homepage
             </button>
@@ -221,10 +221,10 @@ export default function Index() {
           </div>
         ) : data?.cancelled  ?(
           <div className="min-h-[60vh] flex flex-col items-center justify-center text-center px-4">
-            <div className="w-20 h-20 bg-red-100 text-red-500 flex items-center justify-center rounded-full mb-6">
+            <div className="w-20 h-20 bg-green-100 text-green-500 flex items-center justify-center rounded-full mb-6">
               <MdErrorOutline className="w-10 h-10" />
             </div>
-            <h2 className="text-2xl font-semibold text-[#CC2828] mb-2">
+            <h2 className="text-2xl font-semibold text-[#55844D] mb-2">
               This Slot Has Been Cancelled
             </h2>
             <p className="text-gray-600 mb-4 max-w-md">
@@ -233,7 +233,7 @@ export default function Index() {
             </p>
             <button
               onClick={() => router.push("/")}
-              className="cursor-pointer mt-2 px-6 py-2 bg-[#CC2828] text-white rounded-md hover:bg-[#b82323] transition"
+              className="cursor-pointer mt-2 px-6 py-2 bg-[#55844D] text-white rounded-md hover:bg-[#3d5e37] transition"
             >
               Go to Homepage
             </button>
@@ -242,13 +242,13 @@ export default function Index() {
          : (
           <>
             <Heading
-              classess="text-[#CC2828] !text-3xl !mb-0 text-center"
+              classess="text-[#55844D] !text-3xl !mb-0 text-center"
               title={data?.lesson?.title}
             />
             <div className="flex flex-col md:flex-row gap-6 p-6">
               {/* Left: Payment Method */}
-              <div className="border border-[#CC2828] h-fit rounded-xl p-4 w-full md:w-1/2">
-                <h2 className="text-[#CC2828] font-semibold mb-4">
+              <div className="border border-[#55844D] h-fit rounded-xl p-4 w-full md:w-1/2">
+                <h2 className="text-[#55844D] font-semibold mb-4">
                   Payment Method
                 </h2>
                 <div className="space-y-4">
@@ -256,8 +256,8 @@ export default function Index() {
                     onClick={() => setPaymentStatus(false)}
                     className={`flex items-center justify-between border rounded-lg p-3 cursor-pointer ${
                       PaymentStatus === true
-                        ? "border-red-300"
-                        : "border-red-400"
+                        ? "border-green-300"
+                        : "border-green-400"
                     }`}
                   >
                     <div className="flex items-center gap-3">
@@ -275,8 +275,8 @@ export default function Index() {
                     onClick={() => setPaymentStatus(true)}
                     className={`flex items-center justify-between border rounded-lg p-3 cursor-pointer ${
                       PaymentStatus === true
-                        ? "border-red-400"
-                        : "border-red-300"
+                        ? "border-green-400"
+                        : "border-green-300"
                     }`}
                   >
                     <div className="flex items-center gap-3">
@@ -293,7 +293,7 @@ export default function Index() {
               </div>
 
               {/* Right: Summary */}
-              <div className="border border-[#CC2828] rounded-xl p-4 w-full md:w-1/2 space-y-4">
+              <div className="border border-[#55844D] rounded-xl p-4 w-full md:w-1/2 space-y-4">
                 <div className="flex items-center gap-4">
                   <Image
                     src={data?.teacher?.profile_photo || "/Placeholder.png"}
@@ -349,12 +349,12 @@ export default function Index() {
                     id="email"
                     value={email}
                     onChange={handleEmailChange}
-                    className="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-[#CC2828] focus:border-[#CC2828]"
+                    className="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-[#55844D] focus:border-[#55844D]"
                     placeholder="Enter your email"
                   />
                 </div>
 
-                <div className="border-t border-[#CC2828] pt-4">
+                <div className="border-t border-[#55844D] pt-4">
                   <div className="flex justify-between">
                     <p className="font-medium">Total</p>
                     {/* <p className="font-medium">${selectedLesson?.price} USD</p> */}

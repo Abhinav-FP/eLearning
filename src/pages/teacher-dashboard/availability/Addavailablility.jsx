@@ -125,12 +125,12 @@ export default function Addavailablility({ isOpen, onClose, TeacherAvailabilitys
         onSubmit={handleAdd}
         className="max-w-md mx-auto lg:px-6 lg:py-4 bg-white space-y-2 sm:space-y-4"
       >
-        <h2 className="text-xl md:text-2xl font-bold lg:text-[28px] tracking-[-0.04em] text-center text-[#CC2828] mb-3 lg:mb-4">
+        <h2 className="text-xl md:text-2xl font-bold lg:text-[28px] tracking-[-0.04em] text-center text-[#55844D] mb-3 lg:mb-4">
           Add Availability
         </h2>
 
         <div>
-          <label className="block text-[#CC2828] text-base lg:text-xl font-medium mb-1 tracking-[-0.04em]">
+          <label className="block text-[#55844D] text-base lg:text-xl font-medium mb-1 tracking-[-0.04em]">
             Start Date and Time
           </label>
           <input
@@ -139,13 +139,13 @@ export default function Addavailablility({ isOpen, onClose, TeacherAvailabilitys
             value={formData.startDateTime}
             onChange={handleChange}
             min={minDateTime}
-            className="w-full p-3 rounded-md lg:rounded-lg text-base bg-[#F4F6F8] text-gray-700 focus:outline-none focus:ring-2 focus:ring-[#CC2828]"
+            className="w-full p-3 rounded-md lg:rounded-lg text-base bg-[#F4F6F8] text-gray-700 focus:outline-none focus:ring-2 focus:ring-[#55844D]"
             required
           />
         </div>
 
         <div>
-          <label className="block text-[#CC2828] text-base lg:text-xl font-medium mb-1 tracking-[-0.04em]">
+          <label className="block text-[#55844D] text-base lg:text-xl font-medium mb-1 tracking-[-0.04em]">
             End Date and Time
           </label>
           <input
@@ -154,7 +154,7 @@ export default function Addavailablility({ isOpen, onClose, TeacherAvailabilitys
             value={formData.endDateTime}
             min={minDateTime}
             onChange={handleChange}
-            className="w-full p-3 rounded-md lg:rounded-lg text-base bg-[#F4F6F8] text-gray-700 focus:outline-none focus:ring-2 focus:ring-[#CC2828]"
+            className="w-full p-3 rounded-md lg:rounded-lg text-base bg-[#F4F6F8] text-gray-700 focus:outline-none focus:ring-2 focus:ring-[#55844D]"
             required
           />
         </div>
@@ -166,7 +166,7 @@ export default function Addavailablility({ isOpen, onClose, TeacherAvailabilitys
         <div className="flex justify-between gap-4 mt-6">
           <button
             type="submit"
-            className="cursor-pointer font-medium text-base lg:text-xl tracking-[-0.04em] flex-1 bg-[#CC2828] text-white py-2 lg:py-2.5 rounded-md lg:rounded-xl hover:bg-[#ad0e0e]"
+            className="cursor-pointer font-medium text-base lg:text-xl tracking-[-0.04em] flex-1 bg-[#55844D] text-white py-2 lg:py-2.5 rounded-md lg:rounded-xl hover:bg-[#3d5e37]"
           >
             {loading ? "Adding..." : "Add"}
           </button>

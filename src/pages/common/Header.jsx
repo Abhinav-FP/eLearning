@@ -72,7 +72,7 @@ export default function Header({isEmulating=false}) {
                                     height={1040}
                                     width={1344}
                                     layout="fixed"
-                                    src={"/Logo.png"}
+                                    src={"/NewLogo.png"}
                                     alt="Japanese For Me"
                                 />
                             </Link>

@@ -32,7 +32,7 @@ export default function LessonList({ lessons }) {
                 {/* Title */}
                 <div className="flex items-center justify-between mb-4">
                   <h3 className={`text-lg md:text-xl xl:text-2xl font-bold font-inter tracking-tight capitalize 
-                    ${isDeleted ? "text-gray-500 " : "text-[#CC2828]"}`}>
+                    ${isDeleted ? "text-gray-500 " : "text-[#55844D]"}`}>
                     {item?.title} - {item?.duration} minutes
                   </h3>
                   {isDeleted && <FaArchive size={18} className="text-gray-500" />}
@@ -43,7 +43,7 @@ export default function LessonList({ lessons }) {
                   <span className={`text-base font-medium tracking-[-0.04em] px-5 py-1 leading-[40px] rounded-full line-clamp-1 overflow-hidden 
                     ${isDeleted
                       ? "bg-gray-200 text-gray-500"
-                      : "bg-[rgba(204,40,40,0.1)] text-[#CC2828]"}`}>
+                      : "bg-[rgba(38,185,27,0.1)] text-[#55844D]"}`}>
                     {item?.description}
                   </span>
 
@@ -51,7 +51,7 @@ export default function LessonList({ lessons }) {
                     className={`text-sm md:text-base lg:text-lg font-semibold px-6 py-2.5 rounded-full w-full md:w-auto text-center transition-all duration-200 
                       ${isDeleted
                         ? "bg-gray-200 text-gray-500 cursor-not-allowed"
-                        : "text-[#CC2828] bg-[#CC28281A] hover:bg-[#CC282820]"}`}
+                        : "text-[#55844D] bg-[#55844D1A] hover:bg-[#55844D20]"}`}
                     disabled
                   >
                     {formatMultiPrice(item?.price, "USD")}

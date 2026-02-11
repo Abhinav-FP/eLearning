@@ -138,7 +138,7 @@ export default function Password() {
                 </div>
                 <div className="flex w-full lg:w-12/12 xl:w-11/12 flex-wrap justify-center items-center pt-6 lg:pt-10 space-x-4 lg:space-x-6">
                     <button
-                        className="w-full max-w-[183px] cursor-pointer border border-[#55844D] bg-[#55844D] hover:bg-green-700  text-white py-2.5 lg:py-3.5 cursor-pointer rounded-[10px] font-normal text-base xl:text-xl transition  tracking-[-0.04em]"
+                        className="w-full max-w-[183px] cursor-pointer border border-[#55844D] bg-[#55844D] hover:bg-[#3d5e37]  text-white py-2.5 lg:py-3.5 cursor-pointer rounded-[10px] font-normal text-base xl:text-xl transition  tracking-[-0.04em]"
                         type='submit'
                         disabled={processing}
                     >

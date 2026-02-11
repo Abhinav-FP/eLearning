@@ -101,7 +101,7 @@ export default function ApproveRejectPopup({ isOpen, onClose, actionKey, id, fet
         <div className="flex justify-center pt-2">
           <button
             type="submit"
-            className="border-[#CC2828] bg-[#CC2828] hover:bg-red-700  text-white px-4 py-2 rounded cursor-pointer"
+            className="border-[#55844D] bg-[#55844D] hover:bg-[#3d5e37]  text-white px-4 py-2 rounded cursor-pointer"
           >
             {loading ? "Submitting..." : "Submit"}
           </button>

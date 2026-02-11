@@ -145,10 +145,10 @@ export default function Home() {
 
         return (
             <div className="mb-4 w-full lg:w-6/12 xl:w-6/12 lg:pr-3">
-                <label className="text-[#CC2828] font-medium text-base xl:text-lg mb-1 flex items-center">
+                <label className="text-[#55844D] font-medium text-base xl:text-lg mb-1 flex items-center">
                     {label}
                     {view && typeof fileValue === 'string' && (
-                        <Link href={view} target="_blank" rel="noopener noreferrer" className="ml-2 text-blue-600 underline p-1 bg-[#CC28281A] rounded">
+                        <Link href={view} target="_blank" rel="noopener noreferrer" className="ml-2 text-blue-600 underline p-1 bg-[#55844D1A] rounded">
                             <IoMdEye className='text-[#46494D]' />
                         </Link>
                     )}
@@ -190,7 +190,7 @@ export default function Home() {
 
     const SectionHeading = ({ title }) => (
         <div className="w-full lg:w-6/12  lg:pl-0 mb-4">
-            <h2 className="text-[#CC2828] text-xl lg:text-2xl font-semibold tracking-[-0.04em]">{title}</h2>
+            <h2 className="text-[#55844D] text-xl lg:text-2xl font-semibold tracking-[-0.04em]">{title}</h2>
         </div>
     );
 
@@ -202,7 +202,7 @@ export default function Home() {
                     <SectionHeading title="Hero Section" />
                     <div className="flex flex-wrap">
                         <div className="mb-4 w-full lg:w-6/12 xl:w-6/12 lg:pr-3">
-                            <label className="block text-[#CC2828] font-medium text-base xl:text-lg mb-1">Hero Heading</label>
+                            <label className="block text-[#55844D] font-medium text-base xl:text-lg mb-1">Hero Heading</label>
                             <input
                                 type={"text"}
                                 name={"hero_heading"}
@@ -222,7 +222,7 @@ export default function Home() {
                     <SectionHeading title="Find Your Course" />
                     <div className="flex flex-wrap">
                         <div className="mb-4 w-full lg:w-6/12 xl:w-6/12 lg:pr-3">
-                            <label className="block text-[#CC2828] font-medium text-base xl:text-lg mb-1">Course Heading</label>
+                            <label className="block text-[#55844D] font-medium text-base xl:text-lg mb-1">Course Heading</label>
                             <input
                                 type={"text"}
                                 name={"course_heading"}
@@ -233,7 +233,7 @@ export default function Home() {
                         </div>
                         <FileUpload label="Upload Image 2" name="course_img" view={images?.course_img} />
                         <div className="w-full mb-4">
-                            <label className="block text-[#CC2828] font-medium text-base xl:text-xl mb-1">Description</label>
+                            <label className="block text-[#55844D] font-medium text-base xl:text-xl mb-1">Description</label>
                             <textarea
                                 rows={5}
                                 name="course_paragraph"
@@ -249,7 +249,7 @@ export default function Home() {
                 <div className='flex flex-wrap'>
                     <div className="mb-4 w-full lg:w-6/12 xl:w-6/12 lg:pr-3">
                         <SectionHeading title="Ready" />
-                        <label className="block text-[#CC2828] font-medium text-base xl:text-lg mb-1">learn Heading</label>
+                        <label className="block text-[#55844D] font-medium text-base xl:text-lg mb-1">learn Heading</label>
                         <input
                             type={"text"}
                             name={"learn"}
@@ -262,7 +262,7 @@ export default function Home() {
                     <div className="mb-4 w-full lg:w-6/12 xl:w-6/12 lg:pr-3">
                         <SectionHeading title="Teacher" />
 
-                        <label className="block text-[#CC2828] font-medium text-base xl:text-lg mb-1">best teacher Heading</label>
+                        <label className="block text-[#55844D] font-medium text-base xl:text-lg mb-1">best teacher Heading</label>
                         <input
                             type={"text"}
                             name={"best_teacher"}
@@ -278,7 +278,7 @@ export default function Home() {
                         <button
                             type="submit"
                             disabled={processing}
-                            className="w-full max-w-[170px] border border-[#CC2828] bg-[#CC2828] hover:bg-red-700 text-white py-3  rounded-[10px] font-normal text-base xl:text-lg transition tracking-[-0.04em]"
+                            className="w-full max-w-[170px] border border-[#55844D] bg-[#55844D] hover:bg-[#3d5e37] text-white py-3  rounded-[10px] font-normal text-base xl:text-lg transition tracking-[-0.04em]"
                         >
                             {processing ? "Loading..." : "Submit"}
                         </button>

@@ -37,7 +37,7 @@ export default function Index() {
     <AdminLayout page={"Reviews"}>
       <div className="min-h-screen p-5 lg:p-[30px]">
         <div className="flex justify-between items-center mb-4 lg:mb-5">
-          <h2 className="text-lg md:text-xl lg:text-2xl font-bold text-[#CC2828] tracking-[-0.04em] font-inter">
+          <h2 className="text-lg md:text-xl lg:text-2xl font-bold text-[#55844D] tracking-[-0.04em] font-inter">
             Reviews
           </h2>
         </div>
@@ -46,7 +46,7 @@ export default function Index() {
             <button
               key={key}
               onClick={() => setTabActive(key)}
-              className={`text-sm lg:text-lg font-medium tracking-[-0.04em] px-2 py-3 lg:py-1.5 cursor-pointer border border-[#CC2828] rounded-[10px] ${minWidth} ${tabActive === key ? "bg-[#CC2828] text-white" : "bg-white text-[#CC2828]"
+              className={`text-sm lg:text-lg font-medium tracking-[-0.04em] px-2 py-3 lg:py-1.5 cursor-pointer border border-[#55844D] rounded-[10px] ${minWidth} ${tabActive === key ? "bg-[#55844D] text-white" : "bg-white text-[#55844D]"
                 }`}
             >
               {label}

@@ -53,7 +53,7 @@ export default function Index() {
     <AdminLayout page={"Courses"}>
       <div className="min-h-screen p-5 lg:p-[30px]">
         <div className="flex flex-col md:flex-row justify-between md:items-center mb-4 lg:mb-5">
-          <h1 className="font-inter text-lg lg:text-2xl font-bold text-[#CC2828] tracking-[-0.04em] mb-6">
+          <h1 className="font-inter text-lg lg:text-2xl font-bold text-[#55844D] tracking-[-0.04em] mb-6">
             Manage Courses
           </h1>
           <button
@@ -61,7 +61,7 @@ export default function Index() {
               setSelectedCourse(null);
               setIsOpen(true);
             }}
-            className="w-fit px-2 sm:px-8 h-[44px] py-2 hover:bg-white hover:text-[#CC2828] border border-[#CC2828] rounded-md tracking-[-0.06em] text-sm font-medium bg-[#CC2828] text-white cursor-pointer"
+            className="w-fit px-2 sm:px-8 h-[44px] py-2 hover:bg-white hover:text-[#55844D] border border-[#55844D] rounded-md tracking-[-0.06em] text-sm font-medium bg-[#55844D] text-white cursor-pointer"
           >
             Add Course
           </button>
@@ -88,14 +88,14 @@ export default function Index() {
                       setIsOpen(true);
                       setSelectedCourse(item);
                     }}
-                    className="absolute top-2 left-2 bg-white bg-opacity-80 hover:bg-[#CC2828] hover:text-white text-[#CC2828] p-2 rounded-full shadow-sm transition-all cursor-pointer"
+                    className="absolute top-2 left-2 bg-white bg-opacity-80 hover:bg-[#55844D] hover:text-white text-[#55844D] p-2 rounded-full shadow-sm transition-all cursor-pointer"
                   >
                     <FaEdit className="w-4 h-4" />
                   </button>
                   {item?.is_deleted ? (
                     <button
                       onClick={() => enableCourse(item?._id)}
-                      className="absolute top-2 right-2 bg-white bg-opacity-80 hover:bg-[#CC2828] hover:text-white text-[#CC2828] p-2 rounded-full shadow-sm transition-all cursor-pointer"
+                      className="absolute top-2 right-2 bg-white bg-opacity-80 hover:bg-[#55844D] hover:text-white text-[#55844D] p-2 rounded-full shadow-sm transition-all cursor-pointer"
                     >
                       <FaUndo className="w-4 h-4" />
                     </button>
@@ -105,7 +105,7 @@ export default function Index() {
                         setIsDeleteOpen(true);
                         setSelectedCourse(item);
                       }}
-                      className="absolute top-2 right-2 bg-white bg-opacity-80 hover:bg-[#CC2828] hover:text-white text-[#CC2828] p-2 rounded-full shadow-sm transition-all cursor-pointer"
+                      className="absolute top-2 right-2 bg-white bg-opacity-80 hover:bg-[#55844D] hover:text-white text-[#55844D] p-2 rounded-full shadow-sm transition-all cursor-pointer"
                     >
                       <RiDeleteBin6Line className="w-4 h-4" />
                     </button>
@@ -125,7 +125,7 @@ export default function Index() {
                   <a
                     href={item?.link}
                     target="_blank"
-                    className="mt-auto block text-center w-full py-2.5 rounded-full bg-[#CC2828] hover:bg-[#ad0e0e] text-white font-semibold transition-all"
+                    className="mt-auto block text-center w-full py-2.5 rounded-full bg-[#55844D] hover:bg-[#3d5e37] text-white font-semibold transition-all"
                   >
                     View
                   </a>

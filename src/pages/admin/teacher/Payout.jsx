@@ -6,20 +6,20 @@ import { IoInformationCircleOutline } from 'react-icons/io5';
 export default function Payout({ payout, }) {
     return (
 
-        <div className="rounded-[5px] border border-[rgba(204,40,40,0.3)] overflow-x-auto">
+        <div className="rounded-[5px] border border-[rgba(19,101,16,0.3)] overflow-x-auto">
             <table className="min-w-full text-sm text-center rounded-[20px]">
-                <thead className="bg-[rgba(204,40,40,0.1)] text-[#535353] tracking-[-0.04em] font-inter rounded-[20px] whitespace-nowrap">
+                <thead className="bg-[rgba(38,185,27,0.1)] text-[#535353] tracking-[-0.04em] font-inter rounded-[20px] whitespace-nowrap">
                     <tr>
-                        <th className="font-normal text-sm lg:text-base px-3 lg:px-4 py-2 lg:py-3 border-t border-[rgba(204,40,40,0.2)] capitalize">
+                        <th className="font-normal text-sm lg:text-base px-3 lg:px-4 py-2 lg:py-3 border-t border-[rgba(19,101,16,0.2)] capitalize">
                             Index
                         </th>
-                        <th className="font-normal text-sm lg:text-base px-3 lg:px-4 py-2 lg:py-3 border-t border-[rgba(204,40,40,0.2)] capitalize">
+                        <th className="font-normal text-sm lg:text-base px-3 lg:px-4 py-2 lg:py-3 border-t border-[rgba(19,101,16,0.2)] capitalize">
                             Amount
                         </th>
-                        <th className="font-normal text-sm lg:text-base px-3 lg:px-4 py-2 lg:py-3 border-t border-[rgba(204,40,40,0.2)] capitalize">
+                        <th className="font-normal text-sm lg:text-base px-3 lg:px-4 py-2 lg:py-3 border-t border-[rgba(19,101,16,0.2)] capitalize">
                             Request Time
                         </th>
-                        <th className="font-normal text-sm lg:text-base px-3 lg:px-4 py-2 lg:py-3 border-t border-[rgba(204,40,40,0.2)] capitalize">
+                        <th className="font-normal text-sm lg:text-base px-3 lg:px-4 py-2 lg:py-3 border-t border-[rgba(19,101,16,0.2)] capitalize">
                             Status
                         </th>
                     </tr>
@@ -30,7 +30,7 @@ export default function Payout({ payout, }) {
                         payout?.map((item, index) => (
                             <tr
                                 key={index}
-                                className="hover:bg-[rgba(204,40,40,0.1)] border-t border-[rgba(204,40,40,0.2)]"
+                                className="hover:bg-[rgba(38,185,27,0.1)] border-t border-[rgba(19,101,16,0.2)]"
                             >
                                 <td className="px-3 lg:px-4 py-2 lg:py-3 text-black text-sm lg:text-base font-medium font-inter ">
                                     {index + 1}

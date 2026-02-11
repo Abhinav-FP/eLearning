@@ -109,7 +109,7 @@ function TeacherListing() {
 
   const TeacherRow = ({ item, category }) => (
     <tr
-      className={`border-t hover:bg-[rgba(204,40,40,0.1)] border-[rgba(204,40,40,0.2)] ${item?.userId?.block ? "opacity-50" : ""
+      className={`border-t hover:bg-[rgba(38,185,27,0.1)] border-[rgba(19,101,16,0.2)] ${item?.userId?.block ? "opacity-50" : ""
         }`}
     >
       <td className="capitalize px-3 lg:px-4 py-2 lg:py-3 text-black text-sm lg:text-base font-medium font-inter ">
@@ -131,7 +131,7 @@ function TeacherListing() {
           <td className="capitalize px-3 lg:px-4 py-2 lg:py-3 text-black text-sm lg:text-base font-medium font-inter">
               {/* <button
                 onClick={() => handleaistrained(item?._id)}
-                className="cursor-pointer border border-[#CC2828] text-[#CC2828] hover:bg-[#CC2828] hover:text-white px-3 py-1 text-xs rounded cursor-pointer"
+                className="cursor-pointer border border-[#55844D] text-[#55844D] hover:bg-[#55844D] hover:text-white px-3 py-1 text-xs rounded cursor-pointer"
               >
                 {processing
                   ? item?.ais_trained
@@ -161,7 +161,7 @@ function TeacherListing() {
             </button>
             {/* <button
               onClick={() => handleBlock(item?.userId?._id)}
-              className="border border-[#CC2828] text-[#CC2828] hover:bg-[#CC2828] hover:text-white px-3 py-1 text-xs rounded cursor-pointer"
+              className="border border-[#55844D] text-[#55844D] hover:bg-[#55844D] hover:text-white px-3 py-1 text-xs rounded cursor-pointer"
             >
               {blockloading
                 ? item?.userId?.block
@@ -186,7 +186,7 @@ function TeacherListing() {
           ) : category === "reject" ? (
             <button
               onClick={() => handleApproveReject(item?._id, true)}
-              className="border border-[#CC2828] text-[#CC2828] hover:bg-[#CC2828] hover:text-white px-3 py-1 text-xs rounded cursor-pointer"
+              className="border border-[#55844D] text-[#55844D] hover:bg-[#55844D] hover:text-white px-3 py-1 text-xs rounded cursor-pointer"
             >
               {blockloading ? "Approving..." : "Approve"}
             </button>
@@ -194,13 +194,13 @@ function TeacherListing() {
             <>
               <button
                 onClick={() => handleApproveReject(item?._id, true)}
-                className="border border-[#CC2828] text-[#CC2828] hover:bg-[#CC2828] hover:text-white px-3 py-1 text-xs rounded cursor-pointer"
+                className="border border-[#55844D] text-[#55844D] hover:bg-[#55844D] hover:text-white px-3 py-1 text-xs rounded cursor-pointer"
               >
                 {blockloading ? "Approving..." : "Approve"}
               </button>
               <button
                 onClick={() => handleApproveReject(item?._id, false)}
-                className="border border-[#CC2828] text-[#CC2828] hover:bg-[#CC2828] hover:text-white px-3 py-1 text-xs rounded cursor-pointer"
+                className="border border-[#55844D] text-[#55844D] hover:bg-[#55844D] hover:text-white px-3 py-1 text-xs rounded cursor-pointer"
               >
                 {blockloading ? "Rejecting..." : "Reject"}
               </button>
@@ -283,7 +283,7 @@ function TeacherListing() {
                   fetchData(searchQuery, "");
                 }}
                 className={`text-sm lg:text-lg capitalize font-medium tracking-[-0.04em] md:px-2 py-3 lg:py-2  cursor-pointer border-b-2 ${tabActive === item?.value
-                  ? "text-[#CC2828] border-[#CC2828]"
+                  ? "text-[#55844D] border-[#55844D]"
                   : "text-[#727272] border-transparent"
                   }`}
               >
@@ -301,7 +301,7 @@ function TeacherListing() {
               value={searchQuery}
               onChange={handleChange}
               placeholder="Search by name or email"
-              className="w-full pl-10 pr-4 py-2 border border-[#ddd] text-[#000] rounded-md focus:outline-none focus:ring-1 focus:ring-[#CC2828] placeholder-gray-400"
+              className="w-full pl-10 pr-4 py-2 border border-[#ddd] text-[#000] rounded-md focus:outline-none focus:ring-1 focus:ring-[#55844D] placeholder-gray-400"
             />
           </div>
 
@@ -321,27 +321,27 @@ function TeacherListing() {
           </div>}
         </div>
         <div>
-          <div className="rounded-[5px] border border-[rgba(204,40,40,0.3)] overflow-x-auto">
+          <div className="rounded-[5px] border border-[rgba(19,101,16,0.3)] overflow-x-auto">
             <table className="min-w-full text-sm text-center rounded-[20px]">
-              <thead className="bg-[rgba(204,40,40,0.1)] text-[#535353] tracking-[-0.04em] font-inter rounded-[20px] whitespace-nowrap">
+              <thead className="bg-[rgba(38,185,27,0.1)] text-[#535353] tracking-[-0.04em] font-inter rounded-[20px] whitespace-nowrap">
                 <tr>
-                  <th className="font-normal text-sm lg:text-base px-3 lg:px-4 py-2 lg:py-3 border-t border-[rgba(204,40,40,0.2)] capitalize ">
+                  <th className="font-normal text-sm lg:text-base px-3 lg:px-4 py-2 lg:py-3 border-t border-[rgba(19,101,16,0.2)] capitalize ">
                     name
                   </th>
-                  <th className="font-normal text-sm lg:text-base px-3 lg:px-4 py-2 lg:py-3 border-t border-[rgba(204,40,40,0.2)] capitalize">
+                  <th className="font-normal text-sm lg:text-base px-3 lg:px-4 py-2 lg:py-3 border-t border-[rgba(19,101,16,0.2)] capitalize">
                     Email
                   </th>
-                  <th className="font-normal text-sm lg:text-base px-3 lg:px-4 py-2 lg:py-3 border-t border-[rgba(204,40,40,0.2)] capitalize">
+                  <th className="font-normal text-sm lg:text-base px-3 lg:px-4 py-2 lg:py-3 border-t border-[rgba(19,101,16,0.2)] capitalize">
                     Nationality
                   </th>
-                  {/* <th className="font-normal text-sm lg:text-base px-3 lg:px-4 py-2 lg:py-3 border-t border-[rgba(204,40,40,0.2)] capitalize">
+                  {/* <th className="font-normal text-sm lg:text-base px-3 lg:px-4 py-2 lg:py-3 border-t border-[rgba(19,101,16,0.2)] capitalize">
                     Experience
                   </th> */}
                   {tabActive === "existing" &&
-                  <th className="font-normal text-sm lg:text-base px-3 lg:px-4 py-2 lg:py-3 border-t border-[rgba(204,40,40,0.2)] capitalize">
+                  <th className="font-normal text-sm lg:text-base px-3 lg:px-4 py-2 lg:py-3 border-t border-[rgba(19,101,16,0.2)] capitalize">
                     AIS Trained
                   </th>}
-                  <th className="font-normal text-sm lg:text-base px-3 lg:px-4 py-2 lg:py-3 border-t border-[rgba(204,40,40,0.2)] capitalize">
+                  <th className="font-normal text-sm lg:text-base px-3 lg:px-4 py-2 lg:py-3 border-t border-[rgba(19,101,16,0.2)] capitalize">
                     Action
                   </th>
                 </tr>

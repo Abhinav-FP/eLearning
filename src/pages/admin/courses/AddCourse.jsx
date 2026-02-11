@@ -130,11 +130,11 @@ export default function AddCourse({ isOpen, onClose, data = null, fetchData }) {
         onSubmit={data ? handleUpdate : handleAdd}
         className="max-w-md mx-auto mt-10 px-3 sm:px-6 pb-3 sm:pb-6 bg-white space-y-2 sm:space-y-4"
       >
-        <h2 className="text-2xl font-bold text-center text-[#CC2828]">
+        <h2 className="text-2xl font-bold text-center text-[#55844D]">
           {data ? "Edit Course" : "Add Course"}
         </h2>
         <div>
-          <label className="flex justify-between text-[#CC2828] font-medium mb-1">
+          <label className="flex justify-between text-[#55844D] font-medium mb-1">
             Title{" "}
             <span className="text-sm text-gray-500">
               ({formData.title.length}/50)
@@ -148,14 +148,14 @@ export default function AddCourse({ isOpen, onClose, data = null, fetchData }) {
               if (e.target.value.length <= 50) handleChange(e);
             }}
             placeholder="Enter title"
-            className="w-full p-3 rounded-md bg-gray-100 text-gray-700 focus:outline-none focus:ring-2 focus:ring-[#CC2828]"
+            className="w-full p-3 rounded-md bg-gray-100 text-gray-700 focus:outline-none focus:ring-2 focus:ring-[#55844D]"
             required
           />
         </div>
 
         {/* Description Field changed to textarea with 300 character limit */}
         <div>
-          <label className="flex justify-between text-[#CC2828] font-medium mb-1">
+          <label className="flex justify-between text-[#55844D] font-medium mb-1">
             <span>Description</span>
             <span className="text-sm text-gray-500">
               ({formData.description.length}/500)
@@ -170,13 +170,13 @@ export default function AddCourse({ isOpen, onClose, data = null, fetchData }) {
             }}
             placeholder="Enter description"
             rows={10}
-            className="w-full p-3 rounded-md bg-gray-100 text-gray-700 focus:outline-none focus:ring-2 focus:ring-[#CC2828]"
+            className="w-full p-3 rounded-md bg-gray-100 text-gray-700 focus:outline-none focus:ring-2 focus:ring-[#55844D]"
             required
           />
         </div>
 
         <div>
-          <label className="block text-[#CC2828] font-medium mb-1">
+          <label className="block text-[#55844D] font-medium mb-1">
             Course Link
           </label>
           <input
@@ -185,21 +185,21 @@ export default function AddCourse({ isOpen, onClose, data = null, fetchData }) {
             value={formData.link}
             onChange={handleChange}
             placeholder="Enter course link (e.g. https://example.com)"
-            className="w-full p-3 rounded-md bg-gray-100 text-gray-700 focus:outline-none focus:ring-2 focus:ring-[#CC2828]"
+            className="w-full p-3 rounded-md bg-gray-100 text-gray-700 focus:outline-none focus:ring-2 focus:ring-[#55844D]"
             required
           />
         </div>
 
         {/* thumbnail Upload Field */}
         <div>
-          <label className="block text-[#CC2828] font-medium mb-1">
+          <label className="block text-[#55844D] font-medium mb-1">
             Upload Course Image
           </label>
           <input
             type="file"
             accept="image/*"
             onChange={handleImageChange}
-            className="w-full p-2 bg-gray-100 rounded-md cursor-pointer text-gray-700 focus:outline-none focus:ring-2 focus:ring-[#CC2828]"
+            className="w-full p-2 bg-gray-100 rounded-md cursor-pointer text-gray-700 focus:outline-none focus:ring-2 focus:ring-[#55844D]"
           />
 
           {/* Image Preview */}
@@ -218,14 +218,14 @@ export default function AddCourse({ isOpen, onClose, data = null, fetchData }) {
           {data ? (
             <button
               type="submit"
-              className="cursor-pointer flex-1 bg-red-600 text-white py-2 rounded-md hover:bg-red-700"
+              className="cursor-pointer flex-1 bg-[#55844D] text-white py-2 rounded-md hover:bg-[#3d5e37]"
             >
               {loading ? "Updating..." : "Update"}
             </button>
           ) : (
             <button
               type="submit"
-              className="cursor-pointer flex-1 bg-red-600 text-white py-2 rounded-md hover:bg-red-700"
+              className="cursor-pointer flex-1 bg-[#55844D] text-white py-2 rounded-md hover:bg-[#3d5e37]"
             >
               {loading ? "Adding..." : "Add"}
             </button>

@@ -8,7 +8,7 @@ export default function ViewPopup({ isOpen, onClose, data, timezoneMappings }) {
   return (
     <Popup isOpen={isOpen} onClose={onClose} size="max-w-[510px]">
       <div className="space-y-4">
-        <h3 className="text-2xl font-semibold text-[#CC2828] mb-4">User Details</h3>
+        <h3 className="text-2xl font-semibold text-[#55844D] mb-4">User Details</h3>
 
         <div className="flex items-center gap-4">
           <img

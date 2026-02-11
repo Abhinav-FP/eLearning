@@ -62,7 +62,7 @@ export default function ZoomPopup({ zoom, onClose }) {
                   const isTeacher = chat.name?.toLowerCase().includes("teacher");
                   return (
                     <div className={`flex flex-col ${isTeacher ? "items-start" : "items-end"} mb-4`}>
-                      <div className={`px-4 py-2 rounded-lg ${isTeacher ? "bg-[#CC2828] text-white " : "bg-[#CC2828] text-white"}`}>
+                      <div className={`px-4 py-2 rounded-lg ${isTeacher ? "bg-[#55844D] text-white " : "bg-[#55844D] text-white"}`}>
                         <p className="text-sm whitespace-pre-line">{chat.message.replaceAll("\\r", "")}</p>
                       </div>
                       <div className="flex items-center gap-2 mt-1 text-xs text-black ">

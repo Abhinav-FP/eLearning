@@ -11,38 +11,38 @@ export default function Bulk({loading, data}) {
     setOpenIndex(openIndex === i ? null : i);
   };
   return (
-    <div className="rounded-[5px] border border-[rgba(204,40,40,0.3)] overflow-x-auto">
+    <div className="rounded-[5px] border border-[rgba(19,101,16,0.3)] overflow-x-auto">
       <table className="min-w-full text-sm text-center font-inter">
-        <thead className="bg-[rgba(204,40,40,0.1)] text-[#535353] tracking-[-0.04em]">
+        <thead className="bg-[rgba(38,185,27,0.1)] text-[#535353] tracking-[-0.04em]">
           <tr>
-            <th className="px-4 py-3 border-t border-[rgba(204,40,40,0.2)]">
+            <th className="px-4 py-3 border-t border-[rgba(19,101,16,0.2)]">
               Teacher
             </th>
-            <th className="px-4 py-3 border-t border-[rgba(204,40,40,0.2)]">
+            <th className="px-4 py-3 border-t border-[rgba(19,101,16,0.2)]">
               Lesson Name
             </th>
-            <th className="px-4 py-3 border-t border-[rgba(204,40,40,0.2)]">
+            <th className="px-4 py-3 border-t border-[rgba(19,101,16,0.2)]">
               Student
             </th>
-            <th className="px-4 py-3 border-t border-[rgba(204,40,40,0.2)]">
+            <th className="px-4 py-3 border-t border-[rgba(19,101,16,0.2)]">
               Total Lessons
             </th>
-            <th className="px-4 py-3 border-t border-[rgba(204,40,40,0.2)]">
+            <th className="px-4 py-3 border-t border-[rgba(19,101,16,0.2)]">
               Remaining
             </th>
-            <th className="px-4 py-3 border-t border-[rgba(204,40,40,0.2)]">
+            <th className="px-4 py-3 border-t border-[rgba(19,101,16,0.2)]">
               Total Payment<br/>(excl. processing fee)
             </th>
-            <th className="px-4 py-3 border-t border-[rgba(204,40,40,0.2)]">
+            <th className="px-4 py-3 border-t border-[rgba(19,101,16,0.2)]">
               My Earning
             </th>
-            <th className="px-4 py-3 border-t border-[rgba(204,40,40,0.2)]">
+            <th className="px-4 py-3 border-t border-[rgba(19,101,16,0.2)]">
               Payment ID
             </th>
-            <th className="px-4 py-3 border-t border-[rgba(204,40,40,0.2)]">
+            <th className="px-4 py-3 border-t border-[rgba(19,101,16,0.2)]">
               Payment Date
             </th>
-            <th className="px-4 py-3 border-t border-[rgba(204,40,40,0.2)]">
+            <th className="px-4 py-3 border-t border-[rgba(19,101,16,0.2)]">
               Details
             </th>
           </tr>
@@ -69,7 +69,7 @@ export default function Bulk({loading, data}) {
               return (
                 <React.Fragment key={item._id}>
                   <tr
-                    className="border-t hover:bg-[rgba(204,40,40,0.05)] cursor-pointer border-[rgba(204,40,40,0.2)]"
+                    className="border-t hover:bg-[rgba(38,185,27,0.1)] cursor-pointer border-[rgba(19,101,16,0.2)]"
                     onClick={() => toggleRow(index)}
                   >
                     <td className="px-4 py-3 font-medium">
@@ -126,13 +126,13 @@ export default function Bulk({loading, data}) {
                   </tr>
 
                   {isOpen && (
-                    <tr className="border-t border-[rgba(204,40,40,0.2)]">
+                    <tr className="border-t border-[rgba(19,101,16,0.2)]">
                       <td
                         colSpan={10}
-                        className="bg-[rgba(204,40,40,0.03)] px-6 py-5"
+                        className="bg-[rgba(99,204,40,0.03)] px-6 py-5"
                       >
                         <div>
-                          <h3 className="font-semibold text-[#CC2828] mb-3 text-lg">
+                          <h3 className="font-semibold text-[#55844D] mb-3 text-lg">
                             Bookings Overview
                           </h3>
 

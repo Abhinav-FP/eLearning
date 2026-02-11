@@ -73,12 +73,12 @@ export default function EditReview({ isOpen, onClose, data, getLessons }) {
                 onSubmit={handleUpdate}
                 className="max-w-md mx-auto mt-10 px-3 sm:px-6 pb-3 sm:pb-6 bg-white space-y-2 sm:space-y-4"
             >
-                <h2 className="text-2xl font-bold text-center text-[#CC2828]">
+                <h2 className="text-2xl font-bold text-center text-[#55844D]">
                     Edit Review
                 </h2>
                 {/* Description Field */}
                 <div>
-                    <label className="block text-[#CC2828] font-medium mb-1">
+                    <label className="block text-[#55844D] font-medium mb-1">
                         Rating
                     </label>
                     <input
@@ -89,14 +89,14 @@ export default function EditReview({ isOpen, onClose, data, getLessons }) {
                         min={1}                     // 👈 Set minimum value
                         max={3}                     // 👈 Set maximum value
                         placeholder="Enter rating (1–3)"
-                        className="w-full p-3 rounded-md bg-gray-100 text-gray-700 focus:outline-none focus:ring-2 focus:ring-[#CC2828]"
+                        className="w-full p-3 rounded-md bg-gray-100 text-gray-700 focus:outline-none focus:ring-2 focus:ring-[#55844D]"
                         required
                     />
 
                 </div>
 
                 <div>
-                    <label className="block text-[#CC2828] font-medium mb-1">
+                    <label className="block text-[#55844D] font-medium mb-1">
                         Description
                         <span className="text-sm text-gray-500">({formData.description.length}/300)</span>
                     </label>
@@ -109,7 +109,7 @@ export default function EditReview({ isOpen, onClose, data, getLessons }) {
                             if (e.target.value.length <= 300) handleChange(e);
                         }}
                         placeholder="Enter description"
-                        className="w-full p-3 rounded-md bg-gray-100 text-gray-700 focus:outline-none focus:ring-2 focus:ring-[#CC2828]"
+                        className="w-full p-3 rounded-md bg-gray-100 text-gray-700 focus:outline-none focus:ring-2 focus:ring-[#55844D]"
                         required
                     />
                 </div>
@@ -117,14 +117,14 @@ export default function EditReview({ isOpen, onClose, data, getLessons }) {
                 <div className="flex justify-between gap-4 mt-6">
                     <button
                         type="submit"
-                        className="cursor-pointer flex-1 bg-red-600 text-white py-2 rounded-md hover:bg-red-700"
+                        className="cursor-pointer flex-1 bg-[#55844D] text-white py-2 rounded-md hover:bg-[#3d5e37]"
                     >
                         {loading ? "Updating..." : "Update"}
                     </button>
                     <button
                         type="button"
                         onClick={onClose}
-                        className="cursor-pointer flex-1 border border-red-600 text-red-600 py-2 rounded-md hover:bg-red-50"
+                        className="cursor-pointer flex-1 border border-[#55844D] text-[#55844D] py-2 rounded-md hover:bg-red-50"
                     >
                         Cancel
                     </button>

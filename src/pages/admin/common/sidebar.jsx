@@ -34,7 +34,7 @@ function SideBar() {
             >
                 {isOpen &&
                     <button
-                        className="lg:hidden p-2 absolute left-[213px] top-6 text-red-700 border border-red-700 z-[99] rounded"
+                        className="lg:hidden p-2 absolute left-[213px] top-6 text-green-700 border border-green-700 z-[99] rounded"
                         onClick={() => setIsOpen(false)}
                     >
                         <IoMdArrowRoundBack size={18} />
@@ -42,7 +42,7 @@ function SideBar() {
 
                 <div className="px-3 md:px-4 lg:px-6 text-center py-6 lg:py-8">
                     <Link href="/">
-                        <Image src={"/Logo.png"}    height={1000} width={1000} alt="avatar" className="h-[85px] w-[100px] mx-2 inline-block" />
+                        <Image src={"/NewLogo.png"}    height={1000} width={1000} alt="avatar" className="h-[85px] w-[100px] mx-2 inline-block" />
                     </Link>
                 </div>
 
@@ -68,77 +68,77 @@ function SideBar() {
                         <ul className="mt-2 space-y-1 mb-10">
                             <Link
                                 href="/admin"
-                                className={`flex items-center py-2.5 px-3 md:px-4 lg:px-6 gap-2 text-[#565F66] text-base font-medium tracking-[-0.06em] ${pathname === "/admin" ? "text-white bg-[#D6202C]" : "hover:bg-gray-100"} `}
+                                className={`flex items-center py-2.5 px-3 md:px-4 lg:px-6 gap-2 text-[#565F66] text-base font-medium tracking-[-0.06em] ${pathname === "/admin" ? "text-white bg-[#55844D]" : "hover:bg-gray-100"} `}
                             >
                                 <MdSpaceDashboard size={20} />
                                 Dashboard
                             </Link>
                             <Link
                                 href="/admin/teacher"
-                                className={`flex items-center py-2.5 px-3 md:px-4 lg:px-6  gap-2 text-[#565F66] text-base font-medium tracking-[-0.06em] ${pathname === "/admin/teacher" ? "text-white bg-[#D6202C]" : "hover:bg-gray-100"} `}
+                                className={`flex items-center py-2.5 px-3 md:px-4 lg:px-6  gap-2 text-[#565F66] text-base font-medium tracking-[-0.06em] ${pathname === "/admin/teacher" ? "text-white bg-[#55844D]" : "hover:bg-gray-100"} `}
                             >
                                 <PiChalkboardTeacherFill size={20} />
                                 Teachers
                             </Link>
                             <Link
                                 href="/admin/student"
-                                className={`flex items-center py-2.5 px-3 md:px-4 lg:px-6  gap-2 text-[#565F66] text-base font-medium tracking-[-0.06em] ${pathname === "/admin/student" ? "text-white bg-[#D6202C]" : "hover:bg-gray-100"} `}
+                                className={`flex items-center py-2.5 px-3 md:px-4 lg:px-6  gap-2 text-[#565F66] text-base font-medium tracking-[-0.06em] ${pathname === "/admin/student" ? "text-white bg-[#55844D]" : "hover:bg-gray-100"} `}
                             >
                                 <PiStudentFill size={20} />
                                 Students
                             </Link>
                             <Link
                                 href="/admin/booking"
-                                className={`flex items-center py-2.5 px-3 md:px-4 lg:px-6 gap-2 text-[#565F66] text-base font-medium tracking-[-0.06em] ${pathname === "/admin/booking" ? "text-white bg-[#D6202C]" : "hover:bg-gray-100"} `}
+                                className={`flex items-center py-2.5 px-3 md:px-4 lg:px-6 gap-2 text-[#565F66] text-base font-medium tracking-[-0.06em] ${pathname === "/admin/booking" ? "text-white bg-[#55844D]" : "hover:bg-gray-100"} `}
                             >
                                 <MdReviews size={20} />
                                 Bookings
                             </Link>
                             <Link
                                 href="/admin/reviews"
-                                className={`flex items-center py-2.5 px-3 md:px-4 lg:px-6 gap-2 text-[#565F66] text-base font-medium tracking-[-0.06em] ${pathname === "/admin/reviews" ? "text-white bg-[#D6202C]" : "hover:bg-gray-100"} `}
+                                className={`flex items-center py-2.5 px-3 md:px-4 lg:px-6 gap-2 text-[#565F66] text-base font-medium tracking-[-0.06em] ${pathname === "/admin/reviews" ? "text-white bg-[#55844D]" : "hover:bg-gray-100"} `}
                             >
                                 <MdOutlineReviews size={20} />
                                 Reviews
                             </Link>
                             <Link
                                 href="/admin/home"
-                                className={`flex items-center py-2.5 px-3 md:px-4 lg:px-6 gap-2 text-[#565F66] text-base font-medium tracking-[-0.06em] ${pathname === "/admin/home" ? "text-white bg-[#D6202C]" : "hover:bg-gray-100"} `}
+                                className={`flex items-center py-2.5 px-3 md:px-4 lg:px-6 gap-2 text-[#565F66] text-base font-medium tracking-[-0.06em] ${pathname === "/admin/home" ? "text-white bg-[#55844D]" : "hover:bg-gray-100"} `}
                             >
                                 <FaEdit size={20} />
                                 Edit Home
                             </Link>
                             <Link
                                 href="/admin/courses"
-                                className={`flex items-center py-2.5 px-3 md:px-4 lg:px-6 gap-2 text-[#565F66] text-base font-medium tracking-[-0.06em] ${pathname === "/admin/courses" ? "text-white bg-[#D6202C]" : "hover:bg-gray-100"} `}
+                                className={`flex items-center py-2.5 px-3 md:px-4 lg:px-6 gap-2 text-[#565F66] text-base font-medium tracking-[-0.06em] ${pathname === "/admin/courses" ? "text-white bg-[#55844D]" : "hover:bg-gray-100"} `}
                             >
                                 <MdPlayLesson size={20}/>
                                 Manage Courses
                             </Link>
                             <Link
                                 href="/admin/payment"
-                                className={`flex items-center py-2.5 px-3 md:px-4 lg:px-6 gap-2 text-[#565F66] text-base font-medium tracking-[-0.06em] ${pathname === "/admin/payment" ? "text-white bg-[#D6202C]" : "hover:bg-gray-100"}`}
+                                className={`flex items-center py-2.5 px-3 md:px-4 lg:px-6 gap-2 text-[#565F66] text-base font-medium tracking-[-0.06em] ${pathname === "/admin/payment" ? "text-white bg-[#55844D]" : "hover:bg-gray-100"}`}
                             >
                                 <MdPayments size={20} />
                                 Earnings and Payments
                             </Link>
                             <Link
                                 href="/admin/payout"
-                                className={`flex items-center py-2.5 px-3 md:px-4 lg:px-6 gap-2 text-[#565F66] text-base font-medium tracking-[-0.06em] ${pathname === "/admin/payout" ? "text-white bg-[#D6202C]" : "hover:bg-gray-100"}`}
+                                className={`flex items-center py-2.5 px-3 md:px-4 lg:px-6 gap-2 text-[#565F66] text-base font-medium tracking-[-0.06em] ${pathname === "/admin/payout" ? "text-white bg-[#55844D]" : "hover:bg-gray-100"}`}
                             >
                                 <MdOutlineRateReview size={20} />
                                 Payouts
                             </Link>
                             {/* <Link
                                 href="/teacher-dashboard/earnings"
-                                className={`flex items-center py-2.5 px-3 md:px-4 lg:px-6 gap-2 text-[#565F66] text-base font-medium tracking-[-0.06em] ${pathname === "/teacher-dashboard/earnings" ? "text-white bg-[#D6202C]" : "hover:bg-gray-100"}`}
+                                className={`flex items-center py-2.5 px-3 md:px-4 lg:px-6 gap-2 text-[#565F66] text-base font-medium tracking-[-0.06em] ${pathname === "/teacher-dashboard/earnings" ? "text-white bg-[#55844D]" : "hover:bg-gray-100"}`}
                             >
                                 <FaCalendar size={20} />
                                 Calendar management
                             </Link>  */}
                             <Link
                                 href="/admin/setting"
-                                className={`flex items-center py-2.5 px-3 md:px-4 lg:px-6 gap-2 text-[#565F66] text-base font-medium tracking-[-0.06em] ${pathname === "/admin/setting" ? "text-white bg-[#D6202C]" : "hover:bg-gray-100"}`}
+                                className={`flex items-center py-2.5 px-3 md:px-4 lg:px-6 gap-2 text-[#565F66] text-base font-medium tracking-[-0.06em] ${pathname === "/admin/setting" ? "text-white bg-[#55844D]" : "hover:bg-gray-100"}`}
                             >
                                 <IoSettingsOutline size={20} />
                                 Settings

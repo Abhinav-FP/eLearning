@@ -94,7 +94,7 @@ const Index = ({ }) => {
 
                                         </div>
                                         <div className="flex items-center mb-2 gap-1">
-                                            <a className="text-base text-gray-400 hover:text-[#CC2828]" href={`mailto:${record?.record?.userId?.email}`}>{record?.record?.userId?.email}</a>
+                                            <a className="text-base text-gray-400 hover:text-[#55844D]" href={`mailto:${record?.record?.userId?.email}`}>{record?.record?.userId?.email}</a>
                                         </div>
 
                                         <div className="flex flex-wrap items-center gap-4 text-sm text-gray-400">
@@ -119,7 +119,7 @@ const Index = ({ }) => {
                                                 name={record?.record?.userId?.name}
                                                 divClass="relative lg:h-[200px]"
                                                 imgClass="w-full h-[150px] sm:h-[150px]  md:h-[170px] lg:h-[200px] rounded-[6px] md:rounded-[10px]"
-                                                btnClass="absolute top-1/2 left-0 right-0 mx-auto -translate-y-1/2 text-white hover:text-[#CC2828] w-[65px] text-center cursor-pointer"
+                                                btnClass="absolute top-1/2 left-0 right-0 mx-auto -translate-y-1/2 text-white hover:text-[#55844D] w-[65px] text-center cursor-pointer"
                                                 iconClass="h-16 w-16"
                                                 isAdmin={true}
                                                 teacherId={record?.record?._id}
@@ -139,8 +139,8 @@ const Index = ({ }) => {
                                 onClick={() => handleTabClick('about')}
                                 className={`tracking-[-0.03em] font-medium cursor-pointer text-xs sm:text-sm md:text-base uppercase outline-none focus:outline-none ease-linear transition-all border duration-150 rounded-xl py-2 px-4 md:px-8 lg:px-12
                                     ${activeTab === 'about'
-                                        ? 'text-[#CC2828] bg-[#F2F2F2] bg-opacity-10 border-[#CC2828] border-opacity-40'
-                                        : 'border-black border-opacity-10 text-[#CC2828]'}`}
+                                        ? 'text-[#55844D] bg-[#F2F2F2] bg-opacity-10 border-[#55844D] border-opacity-40'
+                                        : 'border-black border-opacity-10 text-[#55844D]'}`}
                             >
                                 About Us
                             </button>
@@ -148,8 +148,8 @@ const Index = ({ }) => {
                                 onClick={() => handleTabClick('booking')}
                                 className={`tracking-[-0.03em] font-medium cursor-pointer text-xs sm:text-sm md:text-base uppercase outline-none focus:outline-none ease-linear transition-all border duration-150 rounded-xl py-2 px-4 md:px-8 lg:px-12
                                     ${activeTab === 'booking'
-                                        ? 'text-[#CC2828] bg-[#F2F2F2] bg-opacity-10 border-[#CC2828] border-opacity-40'
-                                        : 'border-black border-opacity-10 text-[#CC2828]'}`}
+                                        ? 'text-[#55844D] bg-[#F2F2F2] bg-opacity-10 border-[#55844D] border-opacity-40'
+                                        : 'border-black border-opacity-10 text-[#55844D]'}`}
                             >
                                 Booking
                             </button>
@@ -157,8 +157,8 @@ const Index = ({ }) => {
                                 onClick={() => handleTabClick('lesson')}
                                 className={`tracking-[-0.03em] font-medium cursor-pointer text-xs sm:text-sm md:text-base uppercase outline-none focus:outline-none ease-linear transition-all border duration-150 rounded-xl py-2 px-4 md:px-8 lg:px-12
                                     ${activeTab === 'lesson'
-                                        ? 'text-[#CC2828] bg-[#F2F2F2] bg-opacity-10 border-[#CC2828] border-opacity-40'
-                                        : 'border-black border-opacity-10 text-[#CC2828]'}`}
+                                        ? 'text-[#55844D] bg-[#F2F2F2] bg-opacity-10 border-[#55844D] border-opacity-40'
+                                        : 'border-black border-opacity-10 text-[#55844D]'}`}
                             >
                                 Lesson
                             </button>
@@ -166,8 +166,8 @@ const Index = ({ }) => {
                                 onClick={() => handleTabClick('payout')}
                                 className={`tracking-[-0.03em] font-medium cursor-pointer text-xs sm:text-sm md:text-base uppercase outline-none focus:outline-none ease-linear transition-all border duration-150 rounded-xl py-2 px-4 md:px-8 lg:px-12
                                     ${activeTab === 'payout'
-                                        ? 'text-[#CC2828] bg-[#F2F2F2] bg-opacity-10 border-[#CC2828] border-opacity-40'
-                                        : 'border-black border-opacity-10 text-[#CC2828]'}`}
+                                        ? 'text-[#55844D] bg-[#F2F2F2] bg-opacity-10 border-[#55844D] border-opacity-40'
+                                        : 'border-black border-opacity-10 text-[#55844D]'}`}
                             >
                                 Payout
                             </button>
@@ -175,8 +175,8 @@ const Index = ({ }) => {
                                 onClick={() => handleTabClick('review')}
                                 className={`tracking-[-0.03em] font-medium cursor-pointer text-xs sm:text-sm md:text-base uppercase outline-none focus:outline-none ease-linear transition-all border duration-150 rounded-xl py-2 px-4 md:px-8 lg:px-12
                                     ${activeTab === 'review'
-                                        ? 'text-[#CC2828] bg-[#F2F2F2] bg-opacity-10 border-[#CC2828] border-opacity-40'
-                                        : 'border-black border-opacity-10 text-[#CC2828]'}`}
+                                        ? 'text-[#55844D] bg-[#F2F2F2] bg-opacity-10 border-[#55844D] border-opacity-40'
+                                        : 'border-black border-opacity-10 text-[#55844D]'}`}
                             >
                                 Review
                             </button>
@@ -184,8 +184,8 @@ const Index = ({ }) => {
                                 onClick={() => handleTabClick('bank')}
                                 className={`tracking-[-0.03em] font-medium cursor-pointer text-xs sm:text-sm md:text-base uppercase outline-none focus:outline-none ease-linear transition-all border duration-150 rounded-xl py-2 px-4 md:px-8 lg:px-12
                                     ${activeTab === 'bank'
-                                        ? 'text-[#CC2828] bg-[#F2F2F2] bg-opacity-10 border-[#CC2828] border-opacity-40'
-                                        : 'border-black border-opacity-10 text-[#CC2828]'}`}
+                                        ? 'text-[#55844D] bg-[#F2F2F2] bg-opacity-10 border-[#55844D] border-opacity-40'
+                                        : 'border-black border-opacity-10 text-[#55844D]'}`}
                             >
                                 Bank Details
                             </button>

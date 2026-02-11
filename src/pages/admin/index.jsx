@@ -37,13 +37,13 @@ export default function Index() {
     <AdminLayout page={"Dashboard"}>
       <div className="min-h-screen p-5 lg:p-[30px]">
         <div className="grid grid-cols-1 sm:grid-cols-2 2xl:grid-cols-4 gap-4 ">
-          <div className="relative bg-white rounded-xl dashboard-box p-3.5 lg:p-4 xl:p-5 border border-[rgba(204,40,40,0.2)] flex flex-col sm:min-h-[136px]">
-            <h2 className="font-inter text-[#CC2828] font-bold text-lg lg:text-xl xl:text-xl capitalize tracking-[-0.04em]">
+          <div className="relative bg-white rounded-xl dashboard-box p-3.5 lg:p-4 xl:p-5 border border-[rgba(19,101,16,0.2)] flex flex-col sm:min-h-[136px]">
+            <h2 className="font-inter text-[#55844D] font-bold text-lg lg:text-xl xl:text-xl capitalize tracking-[-0.04em]">
               active teachers
             </h2>
-            <div className="absolute right-4 lg:right-5 xl:right-6 bg-[#CC28281A] border-[0.67px] border-[#CC282880] p-3 rounded">
+            <div className="absolute right-4 lg:right-5 xl:right-6 bg-[#55844D1A] border-[0.67px] border-[#55844D80] p-3 rounded">
               <Link href="/admin/teacher">
-                <GiTeacher className="text-[#CC2828]" size={24} />
+                <GiTeacher className="text-[#55844D]" size={24} />
               </Link>
             </div>
 
@@ -53,13 +53,13 @@ export default function Index() {
               </p>
             </div>
           </div>
-          <div className="relative bg-white rounded-xl dashboard-box p-3.5 lg:p-4 xl:p-5 border border-[rgba(204,40,40,0.2)] flex flex-col sm:min-h-[136px]">
-            <h2 className="font-inter text-[#CC2828] font-bold text-lg lg:text-xl xl:text-xl capitalize tracking-[-0.04em]">
+          <div className="relative bg-white rounded-xl dashboard-box p-3.5 lg:p-4 xl:p-5 border border-[rgba(19,101,16,0.2)] flex flex-col sm:min-h-[136px]">
+            <h2 className="font-inter text-[#55844D] font-bold text-lg lg:text-xl xl:text-xl capitalize tracking-[-0.04em]">
               Active Students
             </h2>
-            <div className="absolute right-4 lg:right-5 xl:right-6 bg-[#CC28281A] border-[0.67px] border-[#CC282880] p-3 rounded">
+            <div className="absolute right-4 lg:right-5 xl:right-6 bg-[#55844D1A] border-[0.67px] border-[#55844D80] p-3 rounded">
               <Link href="/admin/student">
-                <PiStudentBold className="text-[#CC2828]" size={24} />
+                <PiStudentBold className="text-[#55844D]" size={24} />
               </Link>
             </div>
             <div className="text-sm text-[#535353] space-y-1 mt-4">
@@ -68,13 +68,13 @@ export default function Index() {
               </p>
             </div>
           </div>
-          <div className="relative bg-white rounded-xl dashboard-box p-3.5 lg:p-4 xl:p-5 border border-[rgba(204,40,40,0.2)] flex flex-col sm:min-h-[136px]">
-            <h2 className="font-inter text-[#CC2828] font-bold text-lg lg:text-xl xl:text-xl capitalize tracking-[-0.04em]">
+          <div className="relative bg-white rounded-xl dashboard-box p-3.5 lg:p-4 xl:p-5 border border-[rgba(19,101,16,0.2)] flex flex-col sm:min-h-[136px]">
+            <h2 className="font-inter text-[#55844D] font-bold text-lg lg:text-xl xl:text-xl capitalize tracking-[-0.04em]">
               Pending Reviews
             </h2>
-            <div className="absolute right-4 lg:right-5 xl:right-6 bg-[#CC28281A] border-[0.67px] border-[#CC282880] p-3 rounded">
+            <div className="absolute right-4 lg:right-5 xl:right-6 bg-[#55844D1A] border-[0.67px] border-[#55844D80] p-3 rounded">
               <Link href="/admin/reviews">
-                <MdReviews className="text-[#CC2828]" size={24} />
+                <MdReviews className="text-[#55844D]" size={24} />
               </Link>
             </div>
 
@@ -84,13 +84,13 @@ export default function Index() {
               </p>
             </div>
           </div>
-          <div className="relative bg-white rounded-xl dashboard-box p-3.5 lg:p-4 xl:p-5 border border-[rgba(204,40,40,0.2)] flex flex-col min-h-[136px]">
-            <h2 className="font-inter text-[#CC2828] font-bold text-lg lg:text-xl xl:text-xl capitalize tracking-[-0.04em]">
+          <div className="relative bg-white rounded-xl dashboard-box p-3.5 lg:p-4 xl:p-5 border border-[rgba(19,101,16,0.2)] flex flex-col min-h-[136px]">
+            <h2 className="font-inter text-[#55844D] font-bold text-lg lg:text-xl xl:text-xl capitalize tracking-[-0.04em]">
               Total Completed <br></br> Booking
             </h2>
-            <div className="absolute right-4 lg:right-5 xl:right-6 bg-[#CC28281A] border-[0.67px] border-[#CC282880] p-3 rounded">
+            <div className="absolute right-4 lg:right-5 xl:right-6 bg-[#55844D1A] border-[0.67px] border-[#55844D80] p-3 rounded">
               <Link href="/admin/booking">
-                <TbBrandBooking className="text-[#CC2828]" size={24} />
+                <TbBrandBooking className="text-[#55844D]" size={24} />
               </Link>
             </div>
             <div className="text-sm text-[#535353] space-y-1 mt-4">
@@ -101,26 +101,26 @@ export default function Index() {
           </div>
         </div>
 
-        <div className="bg-white rounded-2xl shadow border border-[rgba(204,40,40,0.2)] overflow-auto mt-4 ">
+        <div className="bg-white rounded-2xl shadow border border-[rgba(19,101,16,0.2)] overflow-auto mt-4 ">
           <div className='px-5 pt-5'>
-            <h2 className="text-[#CC2828] text-xl lg:text-2xl font-semibold mb-4">Teacher Management</h2>
+            <h2 className="text-[#55844D] text-xl lg:text-2xl font-semibold mb-4">Teacher Management</h2>
           </div>
           <table className="min-w-full text-sm text-center rounded-[20px]">
-            <thead className="bg-[rgba(204,40,40,0.1)] text-[#535353] tracking-[-0.04em] font-inter rounded-[20px] whitespace-nowrap">
+            <thead className="bg-[rgba(38,185,27,0.1)] text-[#535353] tracking-[-0.04em] font-inter rounded-[20px] whitespace-nowrap">
               <tr>
-                <th className="font-normal text-sm lg:text-base px-3 lg:px-4 py-2 lg:py-3 border-t border-[rgba(204,40,40,0.2)] capitalize ">
+                <th className="font-normal text-sm lg:text-base px-3 lg:px-4 py-2 lg:py-3 border-t border-[rgba(19,101,16,0.2)] capitalize ">
                   Teacher name
                 </th>
-                <th className="font-normal text-sm lg:text-base px-3 lg:px-4 py-2 lg:py-3 border-t border-[rgba(204,40,40,0.2)] capitalize ">
+                <th className="font-normal text-sm lg:text-base px-3 lg:px-4 py-2 lg:py-3 border-t border-[rgba(19,101,16,0.2)] capitalize ">
                   Email
                 </th>
-                <th className="font-normal text-sm lg:text-base px-3 lg:px-4 py-2 lg:py-3 border-t border-[rgba(204,40,40,0.2)] capitalize">
+                <th className="font-normal text-sm lg:text-base px-3 lg:px-4 py-2 lg:py-3 border-t border-[rgba(19,101,16,0.2)] capitalize">
                   Nationality
                 </th>
-                <th className="font-normal text-sm lg:text-base px-3 lg:px-4 py-2 lg:py-3 border-t border-[rgba(204,40,40,0.2)] capitalize">
+                <th className="font-normal text-sm lg:text-base px-3 lg:px-4 py-2 lg:py-3 border-t border-[rgba(19,101,16,0.2)] capitalize">
                   Gender
                 </th>
-                {/* <th className="font-normal text-sm lg:text-base px-3 lg:px-4 py-2 lg:py-3 border-t border-[rgba(204,40,40,0.2)] capitalize">
+                {/* <th className="font-normal text-sm lg:text-base px-3 lg:px-4 py-2 lg:py-3 border-t border-[rgba(19,101,16,0.2)] capitalize">
                   View
                 </th> */}
               </tr>
@@ -134,7 +134,7 @@ export default function Index() {
                   return (
                     <tr
                       key={index}
-                      className={`border-t hover:bg-[rgba(204,40,40,0.1)] border-[rgba(204,40,40,0.2)] ${user?.block ? "opacity-50" : ""}`}
+                      className={`border-t hover:bg-[rgba(38,185,27,0.1)] border-[rgba(19,101,16,0.2)] ${user?.block ? "opacity-50" : ""}`}
                     >
                       <td className="capitalize whitespace-nowrap px-3 lg:px-4 py-2 lg:py-3 text-black text-sm lg:text-base font-medium font-inter">
                         <Link href={`/admin/teacher/${user?._id}`} >
@@ -162,8 +162,8 @@ export default function Index() {
               </tbody>)}
           </table>
         </div>
-        <div className="bg-white p-5 rounded-2xl shadow border border-[rgba(204,40,40,0.2)]  mt-3 ">
-          <h2 className="text-[#CC2828] text-xl lg:text-2xl font-semibold mb-4">Reviews</h2>
+        <div className="bg-white p-5 rounded-2xl shadow border border-[rgba(19,101,16,0.2)]  mt-3 ">
+          <h2 className="text-[#55844D] text-xl lg:text-2xl font-semibold mb-4">Reviews</h2>
           {
             loading ? (
               <ReviewLoader />

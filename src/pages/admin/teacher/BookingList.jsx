@@ -21,7 +21,7 @@ export default function BookingList({ book }) {
         >
           {/* Header */}
           <div className="flex flex-col md:flex-row md:items-center md:justify-between mb-4 gap-2">
-            <h2 className="text-xl font-semibold text-[#CC2828]">
+            <h2 className="text-xl font-semibold text-[#55844D]">
               Lesson: {book?.LessonId?.title}
             </h2>
             <span className="text-sm text-gray-500">

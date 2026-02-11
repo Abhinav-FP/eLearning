@@ -69,7 +69,7 @@ export default function AdminManage() {
         <div className="mx-auto py-6 bg-white">
             <form onSubmit={handleSubmit} className="space-y-6">
                 <div>
-                    <label className="block text-[#CC2828] font-medium text-base xl:text-xl mb-1 tracking-[-0.04em]">
+                    <label className="block text-[#55844D] font-medium text-base xl:text-xl mb-1 tracking-[-0.04em]">
                        Processing fee (%)
                     </label>
                     <input
@@ -85,7 +85,7 @@ export default function AdminManage() {
                     <button
                         type="submit"
                         disabled={processing}
-                        className="w-full max-w-[183px] bg-[#CC2828] cursor-pointer hover:bg-red-700 text-white py-2.5 lg:py-3.5 rounded-[10px] text-base xl:text-xl"
+                        className="w-full max-w-[183px] bg-[#55844D] cursor-pointer hover:bg-[#3d5e37] text-white py-2.5 lg:py-3.5 rounded-[10px] text-base xl:text-xl"
                     >
                         {processing ? 'Saving...' : 'Save Settings'}
                     </button>

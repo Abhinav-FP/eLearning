@@ -383,8 +383,8 @@ const BookingView = ({ data, status }) => {
                             <div
                               className={`px-4 py-2 rounded-lg ${
                                 isTeacher
-                                  ? "bg-[#CC2828] text-white "
-                                  : "bg-[#CC2828] text-white"
+                                  ? "bg-[#55844D] text-white "
+                                  : "bg-[#55844D] text-white"
                               }`}
                             >
                               <p className="text-sm whitespace-pre-line">

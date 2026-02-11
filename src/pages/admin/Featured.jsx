@@ -90,7 +90,7 @@ export default function Featured({ teacherData }) {
 
   return (
     <div className={`py-5 px-5 md:px-10`} >
-      <h1 className="text-2xl md:text-3xl font-semibold text-[#D6202C] mb-8">
+      <h1 className="text-2xl md:text-3xl font-semibold text-[#55844D] mb-8">
         Choose Featured Teachers
       </h1>
 
@@ -102,10 +102,10 @@ export default function Featured({ teacherData }) {
           return (
             <div
               key={num}
-              className="flex-1 min-w-[300px] max-w-[400px] bg-white p-3 sm:p-6 rounded-xl border border-red-100 relative"
+              className="flex-1 min-w-[300px] max-w-[400px] bg-white p-3 sm:p-6 rounded-xl border border-green-100 relative"
               ref={(el) => (dropdownRefs.current[num] = el)} // attach ref
             >
-              <label className="block text-[#D6202C] text-sm font-semibold mb-2">
+              <label className="block text-[#55844D] text-sm font-semibold mb-2">
                 Featured Teacher #{num}
               </label>
 
@@ -116,7 +116,7 @@ export default function Featured({ teacherData }) {
                   onClick={() =>
                     setOpenDropdown((prev) => (prev === num ? null : num))
                   }
-                  className="w-full border border-[#D6202C] rounded-lg px-3 py-2 flex justify-between items-center text-left focus:outline-none focus:ring-2 focus:ring-[#D6202C]"
+                  className="w-full border border-[#55844D] rounded-lg px-3 py-2 flex justify-between items-center text-left focus:outline-none focus:ring-2 focus:ring-[#55844D]"
                 >
                   {selectedTeacher ? (
                     <div className="flex items-center gap-3">
@@ -143,7 +143,7 @@ export default function Featured({ teacherData }) {
                 </button>
                 {/* Dropdown Options */}
                 {openDropdown === num && (
-                  <div className="absolute left-0 right-0 mt-1 bg-white border border-[#D6202C] rounded-lg shadow-lg max-h-60 overflow-y-auto z-2">
+                  <div className="absolute left-0 right-0 mt-1 bg-white border border-[#55844D] rounded-lg shadow-lg max-h-60 overflow-y-auto z-2">
                     {teacherData && teacherData?.map((teacher) => {
                       const isSelected = featured.some(
                         (f) => f._id === teacher._id && f.number !== num
@@ -195,7 +195,7 @@ export default function Featured({ teacherData }) {
           className={`px-8 py-3 rounded-lg text-white font-semibold ${
             loading
               ? "bg-gray-400 cursor-not-allowed"
-              : "bg-[#D6202C] hover:bg-[#b11b25]"
+              : "bg-[#55844D] hover:bg-[#3d5e37]"
           } transition duration-200 cursor-pointer`}
         >
           {loading ? "Submitting..." : "Submit"}

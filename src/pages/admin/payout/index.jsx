@@ -72,7 +72,7 @@ export default function Index() {
       <div className="min-h-screen p-5 lg:p-[30px]">
         <div className="md:flex flex-wrap justify-between items-center mb-4 lg:mb-5">
           {/* Heading aligned left */}
-          <h2 className="capitalize text-lg md:text-xl lg:text-2xl font-bold text-[#CC2828] tracking-[-0.04em] font-inter mb-3 md:mb-0">
+          <h2 className="capitalize text-lg md:text-xl lg:text-2xl font-bold text-[#55844D] tracking-[-0.04em] font-inter mb-3 md:mb-0">
             Payout Requests
           </h2>
 
@@ -88,7 +88,7 @@ export default function Index() {
                 value={searchText}
                 onChange={handleSearchChange}
                 placeholder="Search using teacher name"
-                className="w-full pl-10 pr-4 py-2 h-[44px] border border-[#ddd] text-[#000] rounded-md focus:outline-none focus:ring-2 focus:ring-[#CC2828] placeholder-gray-400"
+                className="w-full pl-10 pr-4 py-2 h-[44px] border border-[#ddd] text-[#000] rounded-md focus:outline-none focus:ring-2 focus:ring-[#55844D] placeholder-gray-400"
               />
             </div>
 
@@ -106,26 +106,26 @@ export default function Index() {
           </div>
         </div>
 
-        <div className="rounded-[5px] border border-[rgba(204,40,40,0.3)] overflow-x-auto">
+        <div className="rounded-[5px] border border-[rgba(19,101,16,0.3)] overflow-x-auto">
           <table className="min-w-full text-sm text-center rounded-[20px]">
-            <thead className="bg-[rgba(204,40,40,0.1)] text-[#535353] tracking-[-0.04em] font-inter rounded-[20px] whitespace-nowrap">
+            <thead className="bg-[rgba(38,185,27,0.1)] text-[#535353] tracking-[-0.04em] font-inter rounded-[20px] whitespace-nowrap">
               <tr>
-                <th className="font-normal text-sm lg:text-base px-3 lg:px-4 py-2 lg:py-3 border-t border-[rgba(204,40,40,0.2)] capitalize">
+                <th className="font-normal text-sm lg:text-base px-3 lg:px-4 py-2 lg:py-3 border-t border-[rgba(19,101,16,0.2)] capitalize">
                   Index
                 </th>
-                <th className="font-normal text-sm lg:text-base px-3 lg:px-4 py-2 lg:py-3 border-t border-[rgba(204,40,40,0.2)] capitalize">
+                <th className="font-normal text-sm lg:text-base px-3 lg:px-4 py-2 lg:py-3 border-t border-[rgba(19,101,16,0.2)] capitalize">
                   Teacher Name
                 </th>
-                <th className="font-normal text-sm lg:text-base px-3 lg:px-4 py-2 lg:py-3 border-t border-[rgba(204,40,40,0.2)] capitalize">
+                <th className="font-normal text-sm lg:text-base px-3 lg:px-4 py-2 lg:py-3 border-t border-[rgba(19,101,16,0.2)] capitalize">
                   Amount
                 </th>
-                <th className="font-normal text-sm lg:text-base px-3 lg:px-4 py-2 lg:py-3 border-t border-[rgba(204,40,40,0.2)] capitalize">
+                <th className="font-normal text-sm lg:text-base px-3 lg:px-4 py-2 lg:py-3 border-t border-[rgba(19,101,16,0.2)] capitalize">
                   Bank Details
                 </th>
-                <th className="font-normal text-sm lg:text-base px-3 lg:px-4 py-2 lg:py-3 border-t border-[rgba(204,40,40,0.2)] capitalize">
+                <th className="font-normal text-sm lg:text-base px-3 lg:px-4 py-2 lg:py-3 border-t border-[rgba(19,101,16,0.2)] capitalize">
                   Request Time
                 </th>
-                <th className="font-normal text-sm lg:text-base px-3 lg:px-4 py-2 lg:py-3 border-t border-[rgba(204,40,40,0.2)] capitalize">
+                <th className="font-normal text-sm lg:text-base px-3 lg:px-4 py-2 lg:py-3 border-t border-[rgba(19,101,16,0.2)] capitalize">
                   Action
                 </th>
               </tr>
@@ -136,7 +136,7 @@ export default function Index() {
               <tbody>
                 {payout && payout?.length > 0 ? (
                   payout?.map((item, index) => (
-                    <tr key={index} className="hover:bg-[rgba(204,40,40,0.1)] border-t border-[rgba(204,40,40,0.2)]" >
+                    <tr key={index} className="hover:bg-[rgba(38,185,27,0.1)] border-t border-[rgba(19,101,16,0.2)]" >
                       <td className="px-3 lg:px-4 py-2 lg:py-3 text-black text-sm lg:text-base font-medium font-inter ">
                         {index + 1}
                       </td>
@@ -167,7 +167,7 @@ export default function Index() {
                                 setSelectedId(item?._id);
                                 setIsApprovePopupOpen(true);
                               })}
-                              className="border border-[#CC2828] text-[#CC2828] hover:bg-[#CC2828] hover:text-white px-3 py-1 text-xs rounded cursor-pointer"
+                              className="border border-[#55844D] text-[#55844D] hover:bg-[#55844D] hover:text-white px-3 py-1 text-xs rounded cursor-pointer"
                             >
                               Approve
                             </button>
@@ -177,7 +177,7 @@ export default function Index() {
                                 setSelectedId(item?._id);
                                 setIsApprovePopupOpen(true);
                               })}
-                              className="border border-[#CC2828] text-[#CC2828] hover:bg-[#CC2828] hover:text-white px-3 py-1 text-xs rounded cursor-pointer"
+                              className="border border-[#55844D] text-[#55844D] hover:bg-[#55844D] hover:text-white px-3 py-1 text-xs rounded cursor-pointer"
                             >
                               Reject
                             </button>

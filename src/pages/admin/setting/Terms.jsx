@@ -82,7 +82,7 @@ export default function Terms() {
                     <button
                         disabled={processing}
                         type="submit"
-                        className="w-full max-w-[183px] cursor-pointer border border-[#CC2828] bg-[#CC2828] hover:bg-red-700  text-white py-2.5 lg:py-3.5 cursor-pointer rounded-[10px] font-normal text-base xl:text-xl transition  tracking-[-0.04em]"
+                        className="w-full max-w-[183px] cursor-pointer border border-[#55844D] bg-[#55844D] hover:bg-[#3d5e37]  text-white py-2.5 lg:py-3.5 cursor-pointer rounded-[10px] font-normal text-base xl:text-xl transition  tracking-[-0.04em]"
 
                     >
                         Save Settings

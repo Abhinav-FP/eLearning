@@ -130,12 +130,12 @@ const FaqManager = () => {
     return (
         <div className="px-5 lg:px-[30px] pb-5 lg:pb-[30px] space-y-6">
             <div className="w-full lg:w-6/12  lg:pl-0 mb-4">
-                <h2 className="text-[#CC2828] text-xl lg:text-2xl font-semibold tracking-[-0.04em]">Home Page FAQ</h2>
+                <h2 className="text-[#55844D] text-xl lg:text-2xl font-semibold tracking-[-0.04em]">Home Page FAQ</h2>
             </div>
             {faqs.map((faq, index) => (
                 <div key={index} className="grid grid-cols-1 md:grid-cols-2 gap-4 items-center">
                     <div>
-                        <label className="block text-[#CC2828] font-medium mb-2">Question</label>
+                        <label className="block text-[#55844D] font-medium mb-2">Question</label>
                         <input
                             type="text"
                             disabled={faq?._id}
@@ -148,12 +148,12 @@ const FaqManager = () => {
 
                     <div>
                         <div className="flex justify-between items-center mb-2">
-                            <label className="block text-[#CC2828] font-medium">Answer</label>
+                            <label className="block text-[#55844D] font-medium">Answer</label>
                             <div className="flex items-center gap-2">
                                 {faq._id ? (
                                     <button
                                         onClick={() => openEditModal(faq)}
-                                        className="bg-red-500 text-white rounded-full p-1 hover:bg-red-700"
+                                        className="bg-[#55844D] text-white rounded-full p-1 hover:bg-[#3d5e37] cursor-pointer"
                                         title="Edit FAQ"
                                     >
                                         <MdEdit />
@@ -162,7 +162,7 @@ const FaqManager = () => {
                                     <button
                                         onClick={() => handleFaqSubmit(index)}
 
-                                        className="bg-red-500 text-white rounded-full p-1 hover:bg-red-700"
+                                        className="bg-[#55844D] text-white rounded-full p-1 hover:bg-[#3d5e37] cursor-pointer"
                                         title="Save FAQ"
                                     >
                                         <MdAdd />
@@ -171,7 +171,7 @@ const FaqManager = () => {
                                 <span className="text-[#b1a9a9]">|</span>
                                 <button
                                     onClick={() => deleteFaq(index)}
-                                    className="bg-red-500 text-white rounded-full p-1 hover:bg-red-700"
+                                    className="bg-[#55844D] text-white rounded-full p-1 hover:bg-[#3d5e37] cursor-pointer"
                                     title="Delete FAQ"
                                 >
                                     <MdDelete />
@@ -193,7 +193,7 @@ const FaqManager = () => {
             <div className="flex justify-center ">
                 <button
                     onClick={addFaq}
-                    className="w-full max-w-[170px] border border-[#CC2828] bg-[#CC2828] hover:bg-red-700 text-white py-3 rounded-[10px] text-base xl:text-lg transition"
+                    className="w-full max-w-[170px] border border-[#55844D] bg-[#55844D] hover:bg-[#3d5e37] text-white py-3 rounded-[10px] text-base xl:text-lg transition cursor-pointer"
                 >
                     + Add More
                 </button>
@@ -201,7 +201,7 @@ const FaqManager = () => {
 
             {modalOpen && (
                 <Popup isOpen={modalOpen} onClose={closePopup} size={"max-w-[510px]"}>
-                    <h3 className="text-xl font-semibold mb-4 text-[#CC2828]">Edit FAQ</h3>
+                    <h3 className="text-xl font-semibold mb-4 text-[#55844D]">Edit FAQ</h3>
                     <div className="mb-4">
                         <label className="block font-medium mb-1">Question</label>
                         <textarea
@@ -229,7 +229,7 @@ const FaqManager = () => {
                     <div className="flex justify-end gap-2">
                         <button
                             onClick={saveFaqFromModal}
-                            className="px-4 py-2 bg-[#CC2828] text-white rounded hover:bg-red-700 cursor-pointer"
+                            className="px-4 py-2 bg-[#55844D] text-white rounded hover:bg-[#3d5e37] cursor-pointer"
                         >
                             Save
                         </button>

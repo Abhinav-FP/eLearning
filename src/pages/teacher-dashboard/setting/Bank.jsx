@@ -21,7 +21,7 @@ export default function Bank({processing, setProcessing}) {
                     AccountHolderName: profiledata?.AccountHolderName || "",
                     AccountType: profiledata?.AccountType || "",
                     OverseasDetails: profiledata?.OverseasDetails || "",
-                    _id: profiledata?._id || ""
+                    // _id: profiledata?._id || ""
                 });
             })
             .catch((err) => {
@@ -38,7 +38,7 @@ export default function Bank({processing, setProcessing}) {
         AccountHolderName: "",
         AccountType: "",
         OverseasDetails: "",
-        _id: ""
+        // _id: ""
     });
 
     const handleChange = (e) => {

@@ -51,7 +51,7 @@ export default function Footer() {
                      </div>
                   </div>
               </div>
-              <div className="border-t border-[rgba(56,121,117,0.2)] pt-3.5 mt-10 md:mt-16 lg:mt-28 text-center">
+              <div className="border-t border-[rgba(56,121,117,0.2)] pt-3.5 mt-10 text-center">
                  <div className="mx-auto container sm:container md:container lg:container xl:max-w-[1230px]  px-4">
                     <p className="text-white -tracking-[0.03em] text-sm lg:text-base m-0">© 2025 Japanese for Me. All Rights Reserved.</p>
                  </div>

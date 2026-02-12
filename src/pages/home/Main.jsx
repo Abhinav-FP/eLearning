@@ -52,8 +52,8 @@ export default function Main() {
       />
       <meta property="og:title" content="Japanese for Me" />
       <meta property="og:description" content="Learn Japanese through real conversation. No textbooks." />
-      <meta property="og:image" content="https://japaneseforme.com/NewLogo.png" />
-      <meta property="og:url" content="https://japaneseforme.com" />
+      <meta property="og:image" content="https://akitainakaschoolonline.com/NewLogo.png" />
+      <meta property="og:url" content="https://akitainakaschoolonline.com" />
       <meta property="og:type" content="website" />
     </Head>
     <Layout>

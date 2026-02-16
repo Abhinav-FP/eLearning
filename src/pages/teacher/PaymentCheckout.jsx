@@ -3,6 +3,7 @@ import Stripe from "../stripe/Stripe";
 import Payment from "../payment/index"
 import Image from "next/image";
 import { formatMultiPrice } from "@/components/ValueDataHook";
+import ApplePayForm from "../stripe/ApplePayForm";
 
 const PaymentCheckout = ({ selectedLesson, selectedSlot, studentTimeZone, user, commission }) => {
   const [email, setEmail] = useState(user?.email || "");
@@ -158,6 +159,15 @@ const PaymentCheckout = ({ selectedLesson, selectedSlot, studentTimeZone, user, 
             studentTimeZone={studentTimeZone} 
             email={email} 
           />
+          // <ApplePayForm
+          //   PricePayment={selectedLesson?.price + commission * selectedLesson?.price} 
+          //   processingFee={commission * selectedLesson?.price} 
+          //   adminCommission={0.10 * selectedLesson?.price} 
+          //   selectedLesson={selectedLesson} 
+          //   selectedSlot={selectedSlot} 
+          //   studentTimeZone={studentTimeZone} 
+          //   email={email} 
+          // />
         )}
       </div>
     </div>

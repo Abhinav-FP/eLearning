@@ -14,7 +14,7 @@ export default function Footer() {
                            <Image className="block mx-auto md:mx-0 h-[147px] w-auto" src={FooterLogo} alt="img" />
                         </Link>
                      </div>
-                     <div className="w-full md:w-[324px] px-4 text-center md:text-left">
+                     <div className="w-full md:w-[325px] px-4 text-center md:text-left">
                         <h3 className="text-white text-lg lg:text-xl -tracking-[0.04em] font-bold mb-3 md:mb-4">
                            Quick Links
                         </h3>
@@ -33,7 +33,7 @@ export default function Footer() {
                            </li>
                            <li>
                               <p className="-tracking-[0.03em] text-base text-white hover:underline">
-                              Contact: office@japaneseforme.com
+                              Contact: office@akitainakaschool.com
                               </p>
                            </li>
                         </ul>
@@ -53,7 +53,7 @@ export default function Footer() {
               </div>
               <div className="border-t border-[rgba(56,121,117,0.2)] pt-3.5 mt-10 text-center">
                  <div className="mx-auto container sm:container md:container lg:container xl:max-w-[1230px]  px-4">
-                    <p className="text-white -tracking-[0.03em] text-sm lg:text-base m-0">© 2025 Japanese for Me. All Rights Reserved.</p>
+                    <p className="text-white -tracking-[0.03em] text-sm lg:text-base m-0">© 2025 Akita Inaka School Online. All Rights Reserved.</p>
                  </div>
               </div>
           </footer>

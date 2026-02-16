@@ -156,6 +156,10 @@ class Listing extends Component {
     return Api.post(`/booking/update/${id}`, data);
   }
 
+  async RescheduleBookingToFuture(id, data) {
+    return Api.post(`/teacher/booking/reschedule-from-past/${id}`, data);
+  }
+
   async SyncGoogleCalendar() {
     return Api.get(`/teacher/google-calendar/sync`);
   }

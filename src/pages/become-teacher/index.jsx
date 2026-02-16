@@ -34,12 +34,12 @@ export default function Index() {
   const data = {
     "benefits": {
       "title": {
-        "en": "Why Teach with Japanese for Me?",
-        "ja": "Japanese for Meで教える魅力とは"
+        "en": "Why Teach with Akita Inaka School Online?",
+        "ja": "Akita Inaka School Onlineで教える魅力とは"
       },
       "description": {
-        "en": "At Japanese for Me, we empower educators to share their passion, connect with eager learners worldwide, and thrive in a flexible, supportive environment.",
-        "ja": "オンライン日本語教師としての魅力的なキャリアを築きたい方へ。Japanese for Me は、あなたのスキルを最大に活かし、安心して続ける環境を提供します。"
+        "en": "At Akita Inaka School Online, we empower educators to share their passion, connect with eager learners worldwide, and thrive in a flexible, supportive environment.",
+        "ja": "オンライン日本語教師としての魅力的なキャリアを築きたい方へ。Akita Inaka School Online は、あなたのスキルを最大に活かし、安心して続ける環境を提供します。"
       },
       "points": [
         {
@@ -115,7 +115,7 @@ export default function Index() {
     </Head>
     <Layout>
       <WhyTech
-        //  title={'Why Teach with Japanese for Me?'} 
+        //  title={'Why Teach with Akita Inaka School Online?'} 
         title={data?.benefits?.title[language] || ""}
         pargraph={data?.benefits?.description[language] || ""}
         points={data?.benefits?.points || []}

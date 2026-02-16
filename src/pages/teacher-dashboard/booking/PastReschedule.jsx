@@ -2,11 +2,11 @@ import React, { useEffect, useState } from "react";
 import Popup from "@/pages/common/Popup";
 import Heading from "@/pages/common/Heading";
 import Listing from "@/pages/api/Listing";
-import RescheduleCalendar from "./RescheduleCalendar";
+import RescheduleCalendar from "../../student/lessons/RescheduleCalendar";
 import toast from "react-hot-toast";
 import moment from "moment";
 
-export default function ReschedulePopup({ isOpen, onClose, lesson, studentTimeZone, setStudentTimeZone, fetchLessons }) {
+export default function PastReschedule({ isOpen, onClose, lesson, studentTimeZone, setStudentTimeZone, fetchLessons }) {
   const [selectedSlot, setSelectedSlot] = useState(null);
   const [availability, setAvailability] = useState(null);
   const [mergedAvailability, setMergedAvailability] = useState("");
@@ -87,7 +87,7 @@ export default function ReschedulePopup({ isOpen, onClose, lesson, studentTimeZo
     setLoading(true);
     try {
       const main = new Listing();
-      const response = await main.BookingUpdate(lesson?._id, {
+      const response = await main.RescheduleBookingToFuture(lesson?._id, {
         startDateTime: selectedSlot?.start,
         endDateTime: endTime,
         timezone: studentTimeZone || "UTC",

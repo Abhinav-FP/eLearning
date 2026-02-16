@@ -11,7 +11,7 @@ import { FiSearch } from "react-icons/fi";
 import CancelPopup from '../booking/CancelPopup';
 import SpecialSlotCancel from './SpecialSlotCancel';
 
-export default function Iindex() {
+export default function Index() {
   const [payout, setPayout] = useState([]);
   const [loading, setLoading] = useState(false);
   const [selectedOption, setSelectedOption] = useState("");
@@ -186,7 +186,7 @@ export default function Iindex() {
                         {formatMultiPrice(item?.amount, "USD")}
                       </td>
                       <td className="capitalize px-3 lg:px-4 py-2 lg:py-3 text-black text-sm lg:text-base font-medium font-inter ">
-                        {item?.paymentStatus}
+                        {item?.amount === 0 ? "Free" : item?.paymentStatus}
                       </td>
                       <td className="capitalize px-3 lg:px-4 py-2 lg:py-3 text-black text-sm lg:text-base font-medium font-inter ">
                         {moment(item?.createdAt).format('DD MMM YYYY, hh:mm A') || ''}

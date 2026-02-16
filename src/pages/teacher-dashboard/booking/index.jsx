@@ -7,12 +7,15 @@ import NoData from '@/pages/common/NoData';
 import { formatMultiPrice } from '@/components/ValueDataHook';
 import { FiSearch } from 'react-icons/fi';
 import { RiCalendarScheduleLine } from "react-icons/ri";
+import { MdReplay } from "react-icons/md";
 import ZoomPopup from '@/pages/admin/booking/ZoomPopup';
 import BookingView from '@/pages/admin/common/BookingView';
 import CancelPopup from './CancelPopup';
+import { MdCheck } from "react-icons/md";
 import Link from 'next/link';
 import toast from 'react-hot-toast';
 import ReschedulePopup from '@/pages/student/lessons/ReschedulePopup';
+import PastReschedule from './PastReschedule';
 import { useRole } from '@/context/RoleContext';
 
 export default function Index() {
@@ -29,6 +32,7 @@ export default function Index() {
   // Both are required
   const [selectedLesson, setSelectedLesson] = useState(null);
   const [isPopupOpen, setIsPopupOpen] = useState(false);
+  const [isPastRescheduleOpen, setIsPastRescheduleOpen] = useState(false);
   const [studentTimeZone, setStudentTimeZone] = useState(null);
 
   const closePopup = () => {
@@ -37,6 +41,13 @@ export default function Index() {
     }
     setIsPopupOpen(false);
     setStudentTimeZone("");
+  }
+
+  const closePastReschedulePopup = () => {
+    if (user && user?.role != "student" && user?.time_zone) {
+      moment.tz.setDefault(user.time_zone);
+    }
+    setIsPastRescheduleOpen(false);
   }
 
   const fetchEarnings = async (search = "") => {
@@ -316,33 +327,82 @@ export default function Index() {
                           {formatMultiPrice(item?.teacherEarning, "USD")}
                         </td>
                         {TabOpen === "past" && (
-                          <td>
+                          <td className='py-1 md:py-0'>
                             {item?.lessonCompletedTeacher ? (
-                              <span className="text-green-600 text-sm font-medium">Done</span>
+                              <div className='flex justify-center'>
+                               <p className="text-[#55844D] py-2 text-sm font-medium text-center">Done</p>
+                              </div>
                             ) : (
-                              <button
-                                onClick={() => handleMarkAsDone(item._id)}
-                                className="text-xs bg-white border-1 border-[#55844D] text-[#55844D] px-3 py-1 rounded-md hover:bg-[#55844D] hover:text-white transition cursor-pointer"
-                              >
-                                {doneId === item?._id ? "Processing..." : "Mark as Done"}
-                              </button>
+                              <div className="flex gap-2 justify-center">
+                                {doneId === item?._id ? 
+                                 <svg
+                                    className="animate-spin h-4 w-4"
+                                    viewBox="0 0 24 24"
+                                    fill="none"
+                                  >
+                                    <circle
+                                      className="opacity-25"
+                                      cx="12"
+                                      cy="12"
+                                      r="10"
+                                      stroke="currentColor"
+                                      strokeWidth="4"
+                                    />
+                                    <path
+                                      className="opacity-75"
+                                      fill="currentColor"
+                                      d="M4 12a8 8 0 018-8v4l3-3-3-3v4a8 8 0 00-8 8z"
+                                    />
+                                  </svg>
+                                :
+                                <>
+                                {/* Mark as Done */}
+                                <button
+                                  onClick={() => handleMarkAsDone(item._id)}
+                                  className="
+                                    flex items-center justify-center
+                                    w-9 h-9
+                                    rounded-full
+                                    border border-[#55844D]
+                                    text-[#55844D]
+                                    bg-white
+                                    hover:bg-[#55844D] hover:text-white
+                                    transition
+                                    disabled:opacity-60
+                                    cursor-pointer
+                                  "
+                                  title="Mark as Done"
+                                  disabled={doneId === item?._id}
+                                >
+                                  <MdCheck size={16} />
+                                </button>
+                                {/* Reschedule */}
+                                <button
+                                  onClick={() => {
+                                    setSelectedLesson(item);
+                                    setIsPastRescheduleOpen(true);
+                                  }}
+                                  className="flex items-center justify-center w-9 h-9 rounded-full border border-[#CC2828] text-[#CC2828] bg-white hover:bg-[#CC2828] hover:text-white transition cursor-pointer"
+                                  title="Reschedule to future"
+                                >
+                                  <MdReplay size={16} />
+                                </button>
+                                </>
+                                }
+                              </div>
                             )}
                           </td>
                         )}
                         {TabOpen === "past" &&
                         <td>
-                          {/* {item?.zoom ? ( */}
                             <BookingView data={item} status= {"teacher"} />
-                          {/* // ) : (
-                          //   <span>N/A</span>
-                          // )} */}
                         </td>}
                         {TabOpen === "upcoming" && (
                           <td className="align-middle">
                             <div className="flex items-center justify-center gap-3">
-                              {isMoreThanTwoHourFromNow(item?.startDateTime) && (
+                              {/* {isMoreThanTwoHourFromNow(item?.startDateTime) && (
                                 <CancelPopup data={item} fetchEarnings={fetchEarnings} />
-                              )}
+                              )} */}
                               {isMoreThanOneHourFromNow(item?.startDateTime) && (
                                 <button
                                   onClick={() => {
@@ -382,6 +442,14 @@ export default function Index() {
       <ReschedulePopup
         isOpen={isPopupOpen}
         onClose={closePopup}
+        lesson={selectedLesson}
+        studentTimeZone={studentTimeZone}
+        setStudentTimeZone={setStudentTimeZone}
+        fetchLessons={fetchEarnings}
+      />
+      <PastReschedule
+        isOpen={isPastRescheduleOpen}
+        onClose={closePastReschedulePopup}
         lesson={selectedLesson}
         studentTimeZone={studentTimeZone}
         setStudentTimeZone={setStudentTimeZone}

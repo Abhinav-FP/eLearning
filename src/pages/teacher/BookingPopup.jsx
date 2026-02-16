@@ -121,7 +121,7 @@ export default function BookingPopup({
 
                 className="h-full bg-[rgba(249,190,191,0.1)] bg-cover bg-center rounded-[20px] py-[40px] lg:py-[60px] pt-10 min-h-full"
               >
-                <div className="container sm:container md:container lg:container xl:max-w-[1230px]  bg-[rgba(249,190,191, .1)] px-4 mx-auto">
+                <div className="container sm:container md:container lg:container xl:max-w-[1230px]  bg-[rgba(249,190,191,.1)] px-4 mx-auto">
                   <Heading
                     classess="text-[#55844D] mb-6 lg:mb-8 text-center !text-3xl !mb-3 "
                     title="Select your Lesson"

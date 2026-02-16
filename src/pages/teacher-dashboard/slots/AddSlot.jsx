@@ -353,18 +353,18 @@ export default function AddSlot({ isOpen, onClose, SpecialSlotData }) {
             <>
               <button
                 type="submit"
-                className="flex items-center justify-center gap-2 bg-[#FFE8E8] text-[#C62828] font-medium py-2 px-6 rounded-md border border-[#F5B7B1] hover:bg-[#FFDADA] transition duration-200 cursor-pointer shadow-sm"
+                className="flex items-center justify-center gap-2 bg-[#55844D] text-white font-medium py-2 px-6 rounded-md hover:bg-[#3d5e37] transition duration-200 cursor-pointer shadow-sm"
               >
                 {loading ? (
                   "Creating..."
                 ) : (
                   <>
-                    <MdInfoOutline className="text-[#C62828] text-lg" />
+                    <MdInfoOutline className="text-white text-lg" />
                     Create Slot with 0 Amount
                   </>
                 )}
               </button>
-              <p className="text-sm text-[#B71C1C] text-center max-w-md leading-relaxed">
+              <p className="text-sm text-[#CC2828] text-center max-w-md leading-relaxed">
                 You're about to create a <strong>free slot</strong> for which the student
                 will not be required to pay. No payment history will be generated for this slot.
               </p>

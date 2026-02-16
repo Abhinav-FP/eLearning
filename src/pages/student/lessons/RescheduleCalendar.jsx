@@ -167,7 +167,7 @@ const RescheduleCalendar = ({ Availability, setSelectedSlot, selectedLesson, mer
           </div>
           <div className="mt-4 relative flex justify-center sm:justify-end">
             <select
-              className="w-fit lg:px-2 py-2 text-xs sm:text-sm border border-green-500 rounded-[6px] lg:rounded-[10px] bg-white text-green-600 focus:outline-none focus:ring-1 focus:ring-green-400"
+              className="w-fit lg:px-2 py-2 text-xs sm:text-sm border border-[#55844D] rounded-[6px] lg:rounded-[10px] bg-white text-[#55844D] focus:outline-none focus:ring-1 focus:ring-green-400"
               onChange={handleChange}
               value={studentTimeZone}
               name="timezone"

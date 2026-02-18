@@ -30,6 +30,14 @@ export default function Index() {
     fetchdata();
   }, []);
 
+  const isPastBooking = (endDateTime) => {
+    if (!endDateTime) return false;
+
+    return moment().isAfter(
+      moment(endDateTime).add(10, "minutes")
+    );
+  };
+
   return (
     <TeacherLayout page={"Bulk Lessons"}>
       <div className="min-h-screen p-5 lg:p-[30px]">
@@ -212,8 +220,10 @@ export default function Index() {
                                             className={`px-2 py-1 rounded-md text-xs font-semibold ${
                                               b.cancelled
                                                 ? "bg-red-100 text-red-600"
-                                                : booking?.lessonCompletedStudent
+                                                : booking?.lessonCompletedTeacher
                                                 ? "bg-green-100 text-green-700"
+                                                : isPastBooking(booking?.endDateTime)
+                                                ? "bg-gray-100 text-gray-600"
                                                 : "bg-orange-100 text-orange-600"
                                             }`}
                                           >
@@ -221,6 +231,8 @@ export default function Index() {
                                               ? "Cancelled"
                                               : booking?.lessonCompletedTeacher
                                               ? "Completed"
+                                              : isPastBooking(booking?.endDateTime)
+                                              ? "Done"
                                               : "Upcoming"}
                                           </span>
                                         </div>

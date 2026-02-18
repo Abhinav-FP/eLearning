@@ -133,7 +133,7 @@ export default function Index() {
         <div className="flex justify-center mb-6">
           <Link href="/">
             <Image
-              className="max-w-fit h-[100px]"
+              className="h-[100px] w-[117px]"
               height={1000}
               width={1000}
               layout="fixed"

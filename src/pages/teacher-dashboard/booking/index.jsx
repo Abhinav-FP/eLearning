@@ -275,7 +275,7 @@ export default function Index() {
                    )}
                   {TabOpen === "upcoming" && (
                     <th className="font-normal text-xs sm:text-sm lg:text-base px-3 lg:px-4 py-2 lg:py-3 border-t border-[rgba(204,40,40,0.2)] capitalize text-gray-700">
-                      Action
+                      Reschedule
                     </th>
                   )}
                 </tr>

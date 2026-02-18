@@ -45,12 +45,12 @@ export default function Main() {
   return (
     <>
     <Head>
-      <title>Japanese for Me | Online Japanese learning platform focused on conversation, no textbook.</title>
+      <title>Akita Inaka School Online | Online Japanese learning platform focused on conversation, no textbook.</title>
       <meta
         name="description"
-        content="Japanese for Me offers a conversation-centered online Japanese learning experience with absolutely no textbook required. Improve your speaking through real dialogues, everyday expressions, and personalized lessons designed by experienced Japanese teachers. Whether you’re a beginner wanting survival Japanese, an intermediate learner aiming for fluency, or life in Japan, we help you speak confidently and naturally. Learn anytime, anywhere."
+        content="Akita Inaka School Online offers a conversation-centered online Japanese learning experience with absolutely no textbook required. Improve your speaking through real dialogues, everyday expressions, and personalized lessons designed by experienced Japanese teachers. Whether you’re a beginner wanting survival Japanese, an intermediate learner aiming for fluency, or life in Japan, we help you speak confidently and naturally. Learn anytime, anywhere."
       />
-      <meta property="og:title" content="Japanese for Me" />
+      <meta property="og:title" content="Akita Inaka School Online" />
       <meta property="og:description" content="Learn Japanese through real conversation. No textbooks." />
       <meta property="og:image" content="https://akitainakaschoolonline.com/NewLogo.png" />
       <meta property="og:url" content="https://akitainakaschoolonline.com" />

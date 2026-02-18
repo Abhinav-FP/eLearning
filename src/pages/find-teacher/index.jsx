@@ -30,7 +30,7 @@ export default function Index() {
   return (
     <>
     <Head>
-      <title>Find a Japanese Teacher | Japanese For Me</title>
+      <title>Find a Japanese Teacher | Akita Inaka School Online</title>
       <meta
         name="description"
         content="Search and book certified Japanese teachers for live Zoom lessons. Compare profiles, availability, experience, and pricing."

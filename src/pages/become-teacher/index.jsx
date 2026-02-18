@@ -107,10 +107,10 @@ export default function Index() {
   return (
     <>
     <Head>
-      <title>Become a Japanese Tutor | Teach Online & Earn with JapaneseForMe</title>
+      <title>Become a Japanese Tutor | Teach Online & Earn with Akita Inaka School Online</title>
       <meta
         name="description"
-        content="Teach Japanese online with JapaneseForMe. Enjoy flexible hours, reliable earnings, dedicated support, and access to thousands of students. See benefits, FAQs, and register today."
+        content="Teach Japanese online with Akita Inaka School Online. Enjoy flexible hours, reliable earnings, dedicated support, and access to thousands of students. See benefits, FAQs, and register today."
       />
     </Head>
     <Layout>

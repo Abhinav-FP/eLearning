@@ -29,10 +29,10 @@ export default function PrivacyPage() {
     return (
         <>
         <Head>
-          <title>Privacy Policy | JapaneseFor.Me – How We Collect & Protect Your Data</title>
+          <title>Privacy Policy | Akita Inaka School Online – How We Collect & Protect Your Data</title>
           <meta
             name="description"
-            content="Read the Privacy Policy of JapaneseForMe to understand how we collect, store, and protect your personal information. Learn about data usage, cookies, user rights, and platform security practices."
+            content="Read the Privacy Policy of Akita Inaka School Online to understand how we collect, store, and protect your personal information. Learn about data usage, cookies, user rights, and platform security practices."
           />
         </Head>
         <Layout>

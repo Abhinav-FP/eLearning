@@ -29,10 +29,10 @@ export default function PrivacyPage() {
     return (
         <>
         <Head>
-          <title>Terms & Conditions | Japanese For Me</title>
+          <title>Terms & Conditions | Akita Inaka School Online</title>
           <meta
             name="description"
-            content="Read the official Terms & Conditions for Japanese For Me. Understand our policies on usage, privacy, teacher–student interactions, payments, and platform responsibilities."
+            content="Read the official Terms & Conditions for Akita Inaka School Online. Understand our policies on usage, privacy, teacher–student interactions, payments, and platform responsibilities."
           />
         </Head>
         <Layout>

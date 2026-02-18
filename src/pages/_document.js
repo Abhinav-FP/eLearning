@@ -5,7 +5,7 @@ export default function Document() {
     <Html lang="en">
       <Head>
         {/* Standard favicon */}
-        <link rel="icon" href="/favicon.png" />
+        <link rel="icon" href="/NewLogo.png" />
         
         <style id="antiClickjack">{`body { display: none !important; }`}</style>
         <script

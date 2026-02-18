@@ -56,6 +56,14 @@ export default function LessonCredits() {
     };
   }, [studentTimeZone]);
 
+  const isPastBooking = (endDateTime) => {
+    if (!endDateTime) return false;
+
+    return moment().isAfter(
+      moment(endDateTime).add(10, "minutes")
+    );
+  };
+
   return (
     <StudentLayout page={"Lesson Credits"}>
       <div className="min-h-screen p-5 lg:p-[30px]">
@@ -180,62 +188,66 @@ export default function LessonCredits() {
                             className="bg-[rgba(44,204,40,0.05)] px-6 py-5"
                           >
                             <div>
-  <h3 className="font-semibold text-[#55844D] mb-3 text-lg">
-    Bookings Overview
-  </h3>
+                              <h3 className="font-semibold text-[#55844D] mb-3 text-lg">
+                                Bookings Overview
+                              </h3>
 
-  {item?.bookings?.length > 0 ? (
-    <div className="grid gap-4 md:grid-cols-2">
-      {item.bookings.map((b) => {
-        const booking = b?.id;
+                              {item?.bookings?.length > 0 ? (
+                                <div className="grid gap-4 md:grid-cols-2">
+                                  {item.bookings.map((b) => {
+                                    const booking = b?.id;
 
-        return (
-          <div
-            key={b?._id}
-            className="bg-white shadow-sm border border-gray-200 rounded-xl p-4 hover:shadow-md transition"
-          >
-            <div className="flex justify-between items-start">
-              {/* Left Info */}
-              <div className="space-y-1">
-                <p className="font-semibold text-sm text-gray-800">
-                  {item?.LessonId?.title}
-                </p>
+                                    return (
+                                      <div
+                                        key={b?._id}
+                                        className="bg-white shadow-sm border border-gray-200 rounded-xl p-4 hover:shadow-md transition"
+                                      >
+                                        <div className="flex justify-between items-start">
+                                          {/* Left Info */}
+                                          <div className="space-y-1">
+                                            <p className="font-semibold text-sm text-gray-800">
+                                              {item?.LessonId?.title}
+                                            </p>
 
-                <p className="text-xs text-gray-500">
-                  {moment(booking?.startDateTime).format("DD MMM YYYY, hh:mm A")}
-                  <span className="text-gray-400"> → </span>
-                  {moment(booking?.endDateTime).format("DD MMM YYYY, hh:mm A")}
-                </p>
-              </div>
+                                            <p className="text-xs text-gray-500">
+                                              {moment(booking?.startDateTime).format("DD MMM YYYY, hh:mm A")}
+                                              <span className="text-gray-400"> → </span>
+                                              {moment(booking?.endDateTime).format("DD MMM YYYY, hh:mm A")}
+                                            </p>
+                                          </div>
 
-              {/* Status */}
-              <span
-                className={`px-2 py-1 rounded-md text-xs font-semibold ${
-                  b.cancelled
-                    ? "bg-green-100 text-green-600"
-                    : booking?.lessonCompletedStudent
-                    ? "bg-green-100 text-green-700"
-                    : "bg-orange-100 text-orange-600"
-                }`}
-              >
-                {b.cancelled
-                  ? "Cancelled"
-                  : booking?.lessonCompletedTeacher
-                  ? "Completed"
-                  : "Upcoming"}
-              </span>
-            </div>
-            <div className="mt-3 border-t pt-2 text-[11px] text-gray-500 flex justify-between">
-              <span>Booking ID: {booking?._id}</span>
-            </div>
-          </div>
-        );
-      })}
-    </div>
-  ) : (
-    <p className="text-gray-500 italic">No bookings used yet.</p>
-  )}
-</div>
+                                          {/* Status */}
+                                           <span
+                                            className={`px-2 py-1 rounded-md text-xs font-semibold ${
+                                              b.cancelled
+                                                ? "bg-red-100 text-red-600"
+                                                : booking?.lessonCompletedTeacher
+                                                ? "bg-green-100 text-green-700"
+                                                : isPastBooking(booking?.endDateTime)
+                                                ? "bg-gray-100 text-gray-600"
+                                                : "bg-orange-100 text-orange-600"
+                                            }`}
+                                          >
+                                            {b.cancelled
+                                              ? "Cancelled"
+                                              : booking?.lessonCompletedTeacher
+                                              ? "Completed"
+                                              : isPastBooking(booking?.endDateTime)
+                                              ? "Done"
+                                              : "Upcoming"}
+                                          </span>
+                                        </div>
+                                        <div className="mt-3 border-t pt-2 text-[11px] text-gray-500 flex justify-between">
+                                          <span>Booking ID: {booking?._id}</span>
+                                        </div>
+                                      </div>
+                                    );
+                                  })}
+                                </div>
+                              ) : (
+                                <p className="text-gray-500 italic">No bookings used yet.</p>
+                              )}
+                            </div>
 
                           </td>
                         </tr>

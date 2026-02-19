@@ -284,6 +284,10 @@ class Listing extends Component {
     return Api.post(`/teacher/free-specialSlot`, data);
   }
 
+  async SpecialSlotUsingBulk(data) {
+    return Api.post(`/teacher/specialSlot-using-bulk`, data);
+  }
+
   async SpecialSlotGet(data, search) {
     return Api.get(`/teacher/specialSlot?status=${data}&search=${search}`);
   }

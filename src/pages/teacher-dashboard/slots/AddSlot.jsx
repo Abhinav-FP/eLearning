@@ -14,46 +14,12 @@ export default function AddSlot({ isOpen, onClose, SpecialSlotData }) {
     startDateTime: "",
     endDateTime: "",
   });
+  const [useBulkCredit, setUseBulkCredit] = useState(false);
   const [filteredStudents, setfilteredStudents] = useState(null);
   const [data, setData] = useState({});
   const [search, setSearch] = useState("");
   const [isFocused, setIsFocused] = useState(false);
   const wrapperRef = useRef(null);
-
-  // const handleChange = (e) => {
-  //   const { name, value } = e.target;
-
-  //   const now = new Date();
-  //   const threeHoursFromNow = new Date(now.getTime() + 3 * 60 * 60 * 1000);
-
-  //   if (name === "startDateTime") {
-  //     const start = new Date(value);
-  //     if (start < threeHoursFromNow) {
-  //       toast.error("Start time must be at least 3 hours from now.");
-  //       return;
-  //     }
-  //   }
-
-  //   if (name === "endDateTime") {
-  //     const start = new Date(formData.startDateTime);
-  //     const end = new Date(value);
-
-  //     if (end <= start) {
-  //       toast.error("End time must be after start time.");
-  //       return;
-  //     }
-
-  //     if (end < threeHoursFromNow) {
-  //       toast.error("End time must be at least 3 hours from now.");
-  //       return;
-  //     }
-  //   }
-
-  //   setFormData((prev) => ({
-  //     ...prev,
-  //     [name]: value,
-  //   }));
-  // };
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -108,7 +74,6 @@ export default function AddSlot({ isOpen, onClose, SpecialSlotData }) {
       [name]: value,
     }));
   };
-
 
   const handleAdd = async (e) => {
     e.preventDefault();
@@ -187,6 +152,42 @@ export default function AddSlot({ isOpen, onClose, SpecialSlotData }) {
     setLoading(false);
   };
 
+  const handleSlotFromBulkCredit = async(e) => {
+    e.preventDefault();
+    if (loading) return;
+    setLoading(true);
+    console.log("Creating slot with bulk credit...");
+    try {
+      const main = new Listing();
+      const response = await main.SpecialSlotUsingBulk({
+        student: formData.student,
+        lesson: formData.lesson,
+        startDateTime: formData.startDateTime,
+        endDateTime: formData.endDateTime,
+      });
+
+      if (response?.data?.status) {
+        toast.success(response.data.message);
+        setFormData({
+          student: "",
+          lesson: "",
+          amount: "",
+          startDateTime: "",
+          endDateTime: "",
+        });
+        SpecialSlotData();
+        onClose();
+      } else {
+        toast.error(response.data.message);
+      }
+    } catch (error) {
+      console.error("API error:", error);
+      toast.error(error?.response?.data?.message || "Something went wrong!");
+      setLoading(false);
+    }
+    setLoading(false);
+  };
+
   useEffect(() => {
     const main = new Listing();
     main
@@ -220,7 +221,7 @@ export default function AddSlot({ isOpen, onClose, SpecialSlotData }) {
   return (
     <Popup isOpen={isOpen} onClose={onClose} size={"max-w-[540px]"}>
       <form
-        onSubmit={formData?.amount && Number(formData?.amount) <= 0 ? handleZeroAmountSlot : handleAdd}
+        onSubmit={useBulkCredit ? handleSlotFromBulkCredit : formData?.amount && Number(formData?.amount) <= 0 ? handleZeroAmountSlot : handleAdd}
         className="max-w-md mx-auto mt-10 px-3 sm:px-6 pb-3 sm:pb-6 bg-white space-y-4"
       >
         <h2 className="text-2xl font-bold text-center text-[#55844D]">
@@ -241,6 +242,7 @@ export default function AddSlot({ isOpen, onClose, SpecialSlotData }) {
             // onBlur={()=>{setIsFocused(false)}}
             onBlur={() => setTimeout(() => setIsFocused(false), 200)}
             className="w-full p-3 rounded-md bg-gray-100 text-gray-700 focus:outline-none focus:ring-2 focus:ring-[#55844D]"
+            required
           />
 
           {isFocused && (
@@ -303,18 +305,63 @@ export default function AddSlot({ isOpen, onClose, SpecialSlotData }) {
           <label className="block text-[#55844D] font-medium mb-1">
             Amount (USD)
           </label>
-          <input
-            type="text"
-            name="amount"
-            value={formData.amount}
-            onChange={(e) => {
-              if (/^[0-9]*$/.test(e.target.value)) handleChange(e);
-            }}
-            maxLength="7"
-            placeholder="Enter amount"
-            className="w-full p-3 rounded-md bg-gray-100 text-gray-700 focus:outline-none focus:ring-2 focus:ring-[#55844D]"
-            required
-          />
+
+          <div className="relative">
+            <input
+              type="text"
+              name="amount"
+              value={formData.amount}
+              disabled={useBulkCredit}
+              onChange={(e) => {
+                if (/^[0-9]*$/.test(e.target.value)) handleChange(e);
+              }}
+              maxLength="7"
+              placeholder="Enter amount"
+              className={`w-full p-3 rounded-md text-gray-700 transition
+                ${
+                  useBulkCredit
+                    ? "bg-gray-200 border-2 border-gray-400 cursor-not-allowed text-gray-500 focus:ring-0"
+                    : "bg-gray-100 focus:outline-none focus:ring-2 focus:ring-[#55844D]"
+                }
+              `}
+              required={!useBulkCredit}
+            />
+
+            {useBulkCredit && (
+              <span className="absolute right-3 top-1/2 -translate-y-1/2 text-xs text-gray-500">
+                Disabled
+              </span>
+            )}
+          </div>
+
+          {/* Checkbox */}
+          <div className="flex items-center gap-2 mt-2">
+            <input
+              type="checkbox"
+              id="useBulkCredit"
+              checked={useBulkCredit}
+              onChange={(e) => {
+                setFormData((prev) => ({
+                  ...prev,
+                  amount: "",
+                }));
+                setUseBulkCredit(e.target.checked);
+              }}
+              className="w-4 h-4 accent-[#55844D]"
+            />
+            <label
+              htmlFor="useBulkCredit"
+              className="text-sm text-gray-700 cursor-pointer"
+            >
+              Use bulk lesson credit for payment instead
+            </label>
+          </div>
+
+          {useBulkCredit && (
+            <p className="text-xs text-gray-500 mt-1">
+              Payment will be adjusted using the student’s bulk lesson credits.
+            </p>
+          )}
         </div>
 
         {/* Start Time Field */}

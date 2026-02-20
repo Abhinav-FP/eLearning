@@ -9,6 +9,7 @@ import Listing from "@/pages/api/Listing";
 import toast from "react-hot-toast";
 import { TeacherProfileFormLoader } from "@/components/Loader";
 import { useRole } from "@/context/RoleContext";
+import ToggleSwitch from "@/pages/common/ToggleSwitch";
 
 export default function Profile() {
   const [processing, setProcessing] = useState(false);
@@ -25,6 +26,7 @@ export default function Profile() {
     interest: "",
     description: "",
     specialities: [],
+    bulk_bookings_allowed: false,
   });
   const [file, setFile] = useState(null);
   const [newSpeciality, setNewSpeciality] = useState("");
@@ -50,6 +52,7 @@ export default function Profile() {
           timezone: profiledata?.userId?.time_zone,
           nationality: profiledata?.userId?.nationality,
           ais_trained: profiledata?.ais_trained,
+          bulk_bookings_allowed: profiledata?.bulk_bookings_allowed,
           // average_time: profiledata?.average_time,
           // average_price: profiledata?.average_price,
           languages_spoken: profiledata?.languages_spoken,
@@ -124,12 +127,10 @@ export default function Profile() {
       formData.append("email", data?.email);
       formData.append("timezone", data?.timezone);
       formData.append("nationality", data?.nationality);
-      formData.append(
-        "languages_spoken",
-        JSON.stringify(data.languages_spoken)
-      );
+      formData.append("languages_spoken", JSON.stringify(data.languages_spoken));
       formData.append("gender", data?.gender);
       formData.append("ais_trained", data?.ais_trained);
+      formData.append("bulk_bookings_allowed", data?.bulk_bookings_allowed);
       formData.append("intro_video", data?.intro_video);
       formData.append("interest", data?.interest);
       // formData.append("experience", data?.experience)
@@ -292,6 +293,13 @@ export default function Profile() {
       toast.error(error?.response?.data?.message || "Google disconnection failed");
       setGoogleLoading(false);
     }
+  };
+
+  const handleBulkBookingToggle = (value) => {
+    setData((prev) => ({
+      ...prev,
+      bulk_bookings_allowed: value,
+    }));
   };
 
   return (
@@ -726,7 +734,8 @@ export default function Profile() {
                 </select>
               </div> */}
 
-              <div className="w-full lg:w-6/12 px-2 mb-4">
+              {/* Gender */}
+              <div className="w-full lg:w-4/12 px-2 mb-4">
                 <label className="text-[#55844D] font-medium text-base xl:text-xl mb-2 block">
                   Gender
                 </label>
@@ -767,8 +776,21 @@ export default function Profile() {
                 </div>
               </div>
 
+              {/* Bulk Bookings */}
+              <div className="w-full lg:w-4/12 px-2 mb-4">
+                <label className="text-[#55844D] font-medium text-base xl:text-xl mb-2 block">
+                  Bulk Bookings
+                </label>
+                <div className="flex items-center space-x-4">
+                  <ToggleSwitch
+                    checked={data.bulk_bookings_allowed}
+                    onChange={handleBulkBookingToggle}
+                  />
+                </div>
+              </div>
+
               {/* AIS Trained */}
-              <div className="w-full lg:w-6/12 px-2 mb-4">
+              <div className="w-full lg:w-4/12 px-2 mb-4">
                 <label className="text-[#55844D] font-medium text-base xl:text-xl mb-2 block">
                   Akita Inaka School Trained(AIS)
                 </label>

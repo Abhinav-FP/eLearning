@@ -25,6 +25,7 @@ export default function BookingPopup({
   loading,
   mergedAvailability,
   slug,
+  bulkBookingAllowed,
 }) {
   const { user } = useRole();
 
@@ -149,6 +150,7 @@ export default function BookingPopup({
                    setMultipleLessons={setMultipleLessons}
                    lessonType={lessonType}
                    setLessonType={setLessonType}
+                   bulkBookingAllowed={bulkBookingAllowed}
                   />
                 </div>
               </div>

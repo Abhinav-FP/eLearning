@@ -397,6 +397,7 @@ export default function Index() {
           loading={loading}
           mergedAvailability={mergedAvailability}
           slug={slug}
+          bulkBookingAllowed={data?.bulk_bookings_allowed || false}
         />
       </Layout>
     </>

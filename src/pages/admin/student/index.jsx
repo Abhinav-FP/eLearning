@@ -11,6 +11,7 @@ import NoData from "@/pages/common/NoData";
 import { TableLoader } from "@/components/Loader";
 import { useRouter } from "next/router";
 import { useRole } from "@/context/RoleContext";
+import * as XLSX from 'xlsx';
 
 function Index() {
   const router = useRouter();
@@ -125,6 +126,23 @@ function Index() {
     }
   };
 
+  const downloadExcel = () => {
+    if (!data || data.length === 0) {
+      toast.error("No data to export");
+      return;
+    }
+    const result = data && data?.map(item => ({
+      "Email": item?.email || "",
+      "Name": item?.name || "",
+    }));
+
+    const worksheet = XLSX.utils.json_to_sheet(result);
+    const workbook = XLSX.utils.book_new();
+    XLSX.utils.book_append_sheet(workbook, worksheet, "Sheet1");
+
+    XLSX.writeFile(workbook, "Students.xlsx");
+  };
+
   useEffect(() => {
     fetchData("");
   }, []);
@@ -137,9 +155,10 @@ function Index() {
   return (
     <AdminLayout page={"Students Listing"}>
       <div className="min-h-screen p-5 lg:p-[30px]">
-        <div className=" ">
-          <div className="flex flex-col md:flex-row justify-between mb-4 lg:mb-5">
-            <div className="relative w-full mb-4 md:mb-0 md:w-80">
+       <div className="mb-4 lg:mb-5">
+          <div className="flex flex-col gap-3 md:flex-row md:items-center md:justify-between">
+            {/* LEFT: Search */}
+            <div className="relative w-full md:w-80">
               <span className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
                 <FiSearch className="text-[#888]" />
               </span>
@@ -148,21 +167,29 @@ function Index() {
                 value={searchQuery}
                 onChange={handleChange}
                 placeholder="Search by name or email"
-                className="w-full pl-10 pr-4 py-2 border border-[#ddd] text-[#000] rounded-md focus:outline-none focus:ring-1 focus:ring-[#55844D] placeholder-gray-400"
+                className="w-full pl-10 pr-4 py-2 h-[44px] border border-[#ddd] text-[#000] rounded-md focus:outline-none focus:ring-1 focus:ring-[#55844D] placeholder-gray-400"
               />
             </div>
 
-            <div className="w-full md:w-fit md:ml-auto">
+            {/* RIGHT: Filter + Export */}
+            <div className="flex w-full gap-3 md:w-auto md:justify-end">
               <select
                 name="filter"
                 value={selectedOption}
                 onChange={handleSelectChange}
-                className="w-full md:w-auto border border-[#ddd] h-[44px] text-[#000] px-2 sm:px-3 xl:px-4 py-2 mb-4 md:mb-0  rounded-md focus:outline-none"
+                className="w-full md:w-auto h-[44px] border border-[#ddd] text-[#000] px-3 rounded-md focus:outline-none"
               >
                 <option value="">All</option>
                 <option value="true">Blocked</option>
                 <option value="false">Unblocked</option>
               </select>
+
+              <button
+                onClick={downloadExcel}
+                className="w-full md:w-auto h-[44px] px-4 xl:px-8 bg-[#55844D] text-white border border-[#55844D] rounded-md text-sm font-medium tracking-[-0.06em] hover:bg-white hover:text-[#55844D] transition cursor-pointer"
+              >
+                Export as Excel
+              </button>
             </div>
           </div>
         </div>

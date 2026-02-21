@@ -89,19 +89,18 @@ export default function index() {
     const result = data.bookings.map(item => ({
       "Lesson Name": item?.LessonId?.title || "",
       "Payment ID": item?.StripepaymentId?.payment_id || item?.paypalpaymentId?.orderID || "",
-      "Start Time": moment(item?.startDateTime).format("DD MMM YYYY, hh:mm A") || "",
+      "Booking Creation Time": item?.createdAt ? moment(item.createdAt).format("DD MMM YYYY, hh:mm A") : "",
       "Teacher Name": item?.teacherId?.name || "",
-      "Total Payment": formatMultiPrice(item?.totalAmount, "USD") || "",
-      "Admin Commission": formatMultiPrice(item?.adminCommission, "USD") || "",
+      "Total Payment (excl. processing fee)": formatMultiPrice((item?.totalAmount || 0) - (item?.processingFee || 0), "USD"),
+      "My Earning": formatMultiPrice(item?.adminCommission, "USD"),
       "Student Name": item?.UserId?.name || "",
-      "Duration (mins)": item?.LessonId?.duration || ""
+      "Duration (mins)": item?.LessonId?.duration ? `${item.LessonId.duration} mins` : "",
     }));
 
     const worksheet = XLSX.utils.json_to_sheet(result);
     const workbook = XLSX.utils.book_new();
-    XLSX.utils.book_append_sheet(workbook, worksheet, "Sheet1");
-
-    XLSX.writeFile(workbook, "Earnings.xlsx");
+    XLSX.utils.book_append_sheet(workbook, worksheet, "Payments");
+    XLSX.writeFile(workbook, "Payments.xlsx");
   };
 
   const stats = useMemo(
@@ -133,9 +132,10 @@ export default function index() {
   return (
     <AdminLayout page={"Earnings"}>
       <div className="min-h-screen p-5 lg:p-[30px]">
-        <div className="flex flex-wrap justify-between items-center mb-4 lg:mb-5">
-          {/* Search Input */}
-          <div className="w-full mb-4 md:mb-0 md:w-1/3 md:max-w-sm relative">
+       <div className="mb-4 lg:mb-5">
+        <div className="flex flex-col gap-3 md:flex-row md:items-center md:justify-between">
+          {/* LEFT: Search */}
+          <div className="relative w-full md:w-80">
             <span className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
               <FiSearch className="text-[#888]" />
             </span>
@@ -148,31 +148,32 @@ export default function index() {
             />
           </div>
 
-          <div className="w-full md:w-auto flex flex-col md:flex-row items-center md:space-x-3 justify-between ">
-            {/* Dropdown Filter */}
+          {/* RIGHT: Filter + Export */}
+          <div className="flex w-full gap-3 md:w-auto md:justify-end">
             <select
               value={selectedOption}
               onChange={handleDropdownChange}
-              className="w-full md:w-auto border border-[#ddd] h-[44px] text-[#000] px-2 sm:px-3 xl:px-4 py-2 mb-4 md:mb-0  rounded-md focus:outline-none"
+              className="w-full md:w-auto h-[44px] border border-[#ddd] text-[#000] px-3 rounded-md focus:outline-none"
             >
               <option value="">All</option>
               <option value="last7">Last 7 Days</option>
               <option value="last30">Last 30 Days</option>
               {yearOptions.map((year) => (
-                <option key={year} value={year}>{year}</option>
+                <option key={year} value={year}>
+                  {year}
+                </option>
               ))}
             </select>
-            {/* Export Button */}
-            <div className="space-x-3 w-full md:w-auto flex md:block justify-between">
-              <button
-                onClick={downloadExcel}
-                className="w-fit px-2 px-4 xl:px-8 py-2  h-[44px] hover:bg-white hover:text-[#55844D] border border-[#55844D] rounded-md tracking-[-0.06em] text-sm font-medium bg-[#55844D] text-white cursor-pointer"
-              >
-                Export as Excel
-              </button>
-            </div>
+
+            <button
+              onClick={downloadExcel}
+              className="w-full md:w-auto h-[44px] px-4 xl:px-8 bg-[#55844D] text-white border border-[#55844D] rounded-md text-sm font-medium tracking-[-0.06em] hover:bg-white hover:text-[#55844D] transition cursor-pointer"
+            >
+              Export as Excel
+            </button>
           </div>
         </div>
+       </div>
         {loading ? (
           <TeacherEarningsLoader />
         ) : (
@@ -251,10 +252,17 @@ export default function index() {
                         <td className="px-3 lg:px-4 py-2 lg:py-3 text-black text-sm lg:text-base font-medium font-inter capitalize whitespace-nowrap">
                           {item?.LessonId?.title || ""}
                         </td>
+                        {/* 
+                        There are 4 types of booking payments currently -
+                        1) Reguular booking with payment id for either stripe or paypal
+                        2) Special Slot with payment, it will also have either stripe or paypal payment id
+                        3) Special Slot with no payment(free slot), payment not required as amount is 0
+                        4) Bulk booking, payment was already done in the past     
+                        */}
                         <td className="px-3 lg:px-4 py-2 lg:py-3 text-black text-sm lg:text-base font-medium font-inter whitespace-nowrap">
                           {item?.StripepaymentId?.payment_id ||
                             item?.paypalpaymentId?.orderID ||
-                            ""}
+                            (item?.isFromBulk ? "Bulk Purchase" : item?.totalAmount === 0 ? "Free Booking" : "")}
                         </td>
                         <td className="px-3 lg:px-4 py-2 lg:py-3 text-black text-sm lg:text-base font-medium font-inter whitespace-nowrap">
                           {moment(item?.createdAt).format(

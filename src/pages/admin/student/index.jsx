@@ -188,7 +188,7 @@ function Index() {
                 onClick={downloadExcel}
                 className="w-full md:w-auto h-[44px] px-4 xl:px-8 bg-[#55844D] text-white border border-[#55844D] rounded-md text-sm font-medium tracking-[-0.06em] hover:bg-white hover:text-[#55844D] transition cursor-pointer"
               >
-                Export as Excel
+                Export Emails
               </button>
             </div>
           </div>

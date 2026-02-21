@@ -88,7 +88,7 @@ export default function index() {
     }
     const result = data.bookings.map(item => ({
       "Lesson Name": item?.LessonId?.title || "",
-      "Payment ID": item?.StripepaymentId?.payment_id || item?.paypalpaymentId?.orderID || "",
+      "Payment ID": item?.StripepaymentId?.payment_id || item?.paypalpaymentId?.orderID || (item?.isFromBulk ? "Bulk Purchase" : item?.totalAmount === 0 ? "Free Booking" : ""),
       "Booking Creation Time": item?.createdAt ? moment(item.createdAt).format("DD MMM YYYY, hh:mm A") : "",
       "Teacher Name": item?.teacherId?.name || "",
       "Total Payment (excl. processing fee)": formatMultiPrice((item?.totalAmount || 0) - (item?.processingFee || 0), "USD"),

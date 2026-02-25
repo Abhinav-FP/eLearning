@@ -189,6 +189,10 @@ class Listing extends Component {
     return Api.post("/payment/create-payment-intent", data);
   }
 
+  async walletStripeRecharge(data) {
+    return Api.post("/payment/create-wallet-payment-intent", data);
+  }
+
   async stripe_webhook(data) {
     return Api.post("/webhook", data);
   }

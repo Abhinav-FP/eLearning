@@ -1,6 +1,8 @@
 import { useState } from "react";
 import moment from "moment";
 import StudentLayout from "../Common/StudentLayout";
+import { formatMultiPrice } from "@/components/ValueDataHook";
+import Link from "next/link";
 
 export default function Index() {
   const [loading, setLoading] = useState(false);
@@ -47,15 +49,16 @@ export default function Index() {
               Balance
             </h2>
             <p className="text-2xl lg:text-3xl font-extrabold text-[#55844D] mt-2 font-inter">
-              ${walletBalance.toFixed(2)}
+              {formatMultiPrice(walletBalance, "USD") || ""}
             </p>
           </div>
 
-          <button
-            className="mt-4 md:mt-0 h-[46px] px-6 rounded-[12px] bg-[#55844D] text-white font-semibold text-base tracking-[-0.04em] hover:opacity-90 transition font-inter"
+          <Link
+            href="/student/wallet/recharge"
+            className="mt-4 md:mt-0 h-[46px] px-6 rounded-[12px] bg-[#55844D] text-white font-semibold text-base tracking-[-0.04em] hover:opacity-90 transition font-inter flex items-center justify-center focus-visible:ring-2 focus-visible:ring-[#55844D] focus:outline-none"
           >
-            Recharge Wallet
-          </button>
+            <span>Recharge Wallet</span>
+          </Link>
         </div>
 
         {/* 🔹 Transactions Table */}

@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import Layout from "../common/Layout";
 import Image from "next/image";
 import Heading from "../common/Heading";
-import LineImg from "../Assets/Images/linebar-red.png";
+import LineImg from "../Assets/Images/linebar-green.png";
 import Listing from "../api/Listing";
 import { BookLoader } from "@/components/Loader";
 import Link from "next/link";
@@ -69,7 +69,7 @@ export default function Index() {
                 data?.map((item, index) => (
                   <div
                     key={index}
-                    className="w-full mb-6 lg:mb-8 bg-[#FFE8E8] rounded-[10px] p-5 md:p-8 lg:p-10"
+                    className="w-full mb-6 lg:mb-8 bg-[#eaffe8] rounded-[10px] p-5 md:p-8 lg:p-10"
                   >
                     <div className="flex flex-wrap">
                       <div className="w-full md:w-[80px] lg:w-[276px]">

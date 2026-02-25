@@ -9,6 +9,7 @@ import { MdClass } from "react-icons/md";
 import { FaChalkboardTeacher } from "react-icons/fa";
 import { LuMessagesSquare } from "react-icons/lu";
 import { MdPayment } from "react-icons/md";
+import { IoWallet } from "react-icons/io5";
 import { IoSettingsOutline } from "react-icons/io5";
 import { MdOutlineRateReview } from "react-icons/md";
 import { MdOutlineCreditScore } from "react-icons/md";
@@ -164,6 +165,17 @@ function SideBar() {
               >
                 <MdPayments size={20} />
                 Payments
+              </Link>
+              <Link
+                href="/student/wallet"
+                className={`flex items-center py-2.5 px-3 md:px-4 lg:px-6 gap-2 text-[#565F66] text-base font-medium tracking-[-0.06em] ${
+                  pathname === "/student/wallet"
+                    ? "text-white bg-[#55844D]"
+                    : "hover:bg-gray-100"
+                }`}
+              >
+                <IoWallet size={20} />
+                Wallet
               </Link>
               <Link
                 href="/student/credits"

@@ -1,14 +1,13 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import moment from "moment";
 import StudentLayout from "../Common/StudentLayout";
 import { formatMultiPrice } from "@/components/ValueDataHook";
 import Link from "next/link";
+import Listing from "@/pages/api/Listing";
 
 export default function Index() {
   const [loading, setLoading] = useState(false);
-
-  // 🔹 Static wallet data (replace later with API)
-  const walletBalance = 420.5;
+  const [data, setData] = useState(null);
 
   const transactions = [
     {
@@ -37,6 +36,27 @@ export default function Index() {
     },
   ];
 
+  const fetchData = async () => {
+    try {
+      setLoading(true);
+      const main = new Listing();
+      const response = await main.StudentWallet();
+      if (response?.data?.status) {
+        setData(response.data.data);
+      }
+    } catch (error) {
+      console.log("error", error);
+    }finally{
+      setLoading(false);
+    }
+  };
+
+  useEffect(() => {
+    fetchData();
+  }, []);
+
+  console.log("data", data);
+
   return (
     <StudentLayout page={"Wallet History"}>
       <div className="min-h-screen p-5 lg:p-[30px] space-y-6">
@@ -49,7 +69,7 @@ export default function Index() {
               Balance
             </h2>
             <p className="text-2xl lg:text-3xl font-extrabold text-[#55844D] mt-2 font-inter">
-              {formatMultiPrice(walletBalance, "USD") || ""}
+              {formatMultiPrice(data?.balance || 0, "USD") || ""}
             </p>
           </div>
 
@@ -88,7 +108,7 @@ export default function Index() {
                     Amount
                   </th>
                   <th className="px-4 py-3 border-t border-[rgba(19,101,16,0.2)]">
-                    Status
+                    Closing Balance
                   </th>
                 </tr>
               </thead>
@@ -103,32 +123,32 @@ export default function Index() {
                 </tbody>
               ) : (
                 <tbody>
-                  {transactions.length > 0 ? (
-                    transactions.map((item, index) => (
+                  {data?.transactions && data?.transactions.length > 0 ? (
+                    data?.transactions.map((item, index) => (
                       <tr
                         key={index}
                         className="border-t hover:bg-[rgba(38,185,27,0.1)] border-[rgba(19,101,16,0.2)]"
                       >
                         <td className="px-4 py-3 text-black font-medium font-inter">
-                          {item.id}
+                          {item?._id}
                         </td>
 
                         <td
-                          className={`px-4 py-3 font-semibold font-inter ${
-                            item.type === "credit"
+                          className={`px-4 py-3 font-semibold font-inter capitalize ${
+                            item?.type === "credit"
                               ? "text-[#55844D]"
                               : "text-red-500"
                           }`}
                         >
-                          {item.type === "credit" ? "Credit" : "Debit"}
+                          {item?.type}
                         </td>
 
                         <td className="px-4 py-3 text-black font-medium font-inter">
-                          {item.reason}
+                          {item?.reason}
                         </td>
 
                         <td className="px-4 py-3 text-black font-medium font-inter">
-                          {moment(item.createdAt).format(
+                          {moment(item?.createdAt).format(
                             "DD MMM YYYY hh:mm A"
                           )}
                         </td>
@@ -140,12 +160,12 @@ export default function Index() {
                               : "text-red-500"
                           }`}
                         >
-                          {item.type === "credit" ? "+" : "-"}$
-                          {item.amount.toFixed(2)}
+                          {item?.type === "credit" ? "+" : "-"}$
+                          {formatMultiPrice(item?.amount, "USD") || ""}
                         </td>
 
                         <td className="px-4 py-3 text-black font-medium font-inter capitalize">
-                          {item.status}
+                          {formatMultiPrice(item?.balance, "USD") || ""}
                         </td>
                       </tr>
                     ))

@@ -138,6 +138,10 @@ class Listing extends Component {
     return Api.get(`/student/specialSlot/payment/${data}`);
   }
 
+  async StudentWallet() {
+    return Api.get(`/student/wallet`);
+  }
+
   async RemoveWishlist(data) {
     return Api.post("/favourite/delete", data);
   }

@@ -9,33 +9,6 @@ export default function Index() {
   const [loading, setLoading] = useState(false);
   const [data, setData] = useState(null);
 
-  const transactions = [
-    {
-      id: "TXN-1001",
-      type: "credit",
-      reason: "Wallet Recharge",
-      amount: 300,
-      status: "completed",
-      createdAt: "2026-02-20T10:30:00Z",
-    },
-    {
-      id: "TXN-1002",
-      type: "debit",
-      reason: "Lesson Payment",
-      amount: 40,
-      status: "completed",
-      createdAt: "2026-02-21T12:00:00Z",
-    },
-    {
-      id: "TXN-1003",
-      type: "credit",
-      reason: "Lesson Refund",
-      amount: 40,
-      status: "completed",
-      createdAt: "2026-02-22T08:00:00Z",
-    },
-  ];
-
   const fetchData = async () => {
     try {
       setLoading(true);
@@ -55,7 +28,7 @@ export default function Index() {
     fetchData();
   }, []);
 
-  console.log("data", data);
+  // console.log("data", data);
 
   return (
     <StudentLayout page={"Wallet History"}>

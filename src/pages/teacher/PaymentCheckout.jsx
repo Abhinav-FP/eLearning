@@ -3,7 +3,7 @@ import Stripe from "../stripe/Stripe";
 import Payment from "../payment/index"
 import Image from "next/image";
 import { formatMultiPrice } from "@/components/ValueDataHook";
-import ApplePayForm from "../stripe/ApplePayForm";
+import WalletCheckout from "./WalletCheckout";
 
 const PaymentCheckout = ({ selectedLesson, selectedSlot, studentTimeZone, user, commission }) => {
   const [email, setEmail] = useState(user?.email || "");
@@ -12,7 +12,7 @@ const PaymentCheckout = ({ selectedLesson, selectedSlot, studentTimeZone, user, 
     setEmail(e.target.value);
   };
 
-  const [PaymentStatus, setPaymentStatus] = useState(false)
+  const [PaymentStatus, setPaymentStatus] = useState("stripe")
   function getFormattedEndTime(time, durationInMinutes) {
     const start = new Date(time);
     const end = new Date(start.getTime() + durationInMinutes * 60000);
@@ -35,15 +35,15 @@ const PaymentCheckout = ({ selectedLesson, selectedSlot, studentTimeZone, user, 
         <h2 className="text-[#55844D] font-semibold mb-4">Payment Method</h2>
         <div className="space-y-4">
           <div
-            onClick={() => setPaymentStatus(false)}
-            className={`flex items-center justify-between border rounded-lg p-3 cursor-pointer ${PaymentStatus === true ? 'border-[#55844D]' : 'border-[#3d5e37]'
+            onClick={() => setPaymentStatus("paypal")}
+            className={`flex items-center justify-between border rounded-lg p-3 cursor-pointer ${PaymentStatus === "paypal" ? 'border-[#55844D]' : 'border-[#3d5e37]'
               }`}
           >
             <div className="flex items-center gap-3">
               <span className="text-xl">🅿️</span>
               <p>PayPal</p>
             </div>
-            {PaymentStatus === false ? (
+            {PaymentStatus === "paypal" ? (
               <span className="w-4 h-4 border-2 border-green-500 bg-green-500 rounded-full" />
             ) : (
               <span className="w-4 h-4 border-2 border-gray-400 rounded-full" />
@@ -51,21 +51,39 @@ const PaymentCheckout = ({ selectedLesson, selectedSlot, studentTimeZone, user, 
           </div>
 
           <div
-            onClick={() => setPaymentStatus(true)}
-            className={`flex items-center justify-between border rounded-lg p-3 cursor-pointer ${PaymentStatus === true ? 'border-[#55844D]' : 'border-[#3d5e37]'
+            onClick={() => setPaymentStatus("stripe")}
+            className={`flex items-center justify-between border rounded-lg p-3 cursor-pointer ${PaymentStatus === "stripe" ? 'border-[#55844D]' : 'border-[#3d5e37]'
               }`}
           >
             <div className="flex items-center gap-3">
               <span className="text-xl">💳</span>
               <p>Credit Card - Stripe</p>
             </div>
-            {PaymentStatus === true ? (
+            {PaymentStatus === "stripe" ? (
               <span className="w-4 h-4 border-2 border-green-500 bg-green-500 rounded-full" />
             ) : (
               <span className="w-4 h-4 border-2 border-gray-400 rounded-full" />
             )}
 
 
+          </div>
+
+          {/* Wallet */}
+          <div
+            onClick={() => setPaymentStatus("wallet")}
+            className={`flex items-center justify-between border rounded-lg p-3 cursor-pointer ${
+              PaymentStatus === "wallet" ? "border-[#55844D]" : "border-[#3d5e37]"
+            }`}
+          >
+            <div className="flex items-center gap-3">
+              <span className="text-xl">💼</span>
+              <p>Wallet Balance</p>
+            </div>
+            {PaymentStatus === "wallet" ? (
+              <span className="w-4 h-4 border-2 border-green-500 bg-green-500 rounded-full" />
+            ) : (
+              <span className="w-4 h-4 border-2 border-gray-400 rounded-full" />
+            )}
           </div>
         </div>
       </div>
@@ -139,7 +157,7 @@ const PaymentCheckout = ({ selectedLesson, selectedSlot, studentTimeZone, user, 
           {/* <p className="text-sm text-gray-500">Estimated ${(selectedLesson?.price + commission*selectedLesson?.price).toFixed(2)} USD</p> */}
         </div>
 
-        {PaymentStatus === false ? (
+        {PaymentStatus === "paypal" ? (
           <Payment 
             PricePayment={selectedLesson?.price + commission * selectedLesson?.price} 
             processingFee={commission * selectedLesson?.price} 
@@ -149,7 +167,7 @@ const PaymentCheckout = ({ selectedLesson, selectedSlot, studentTimeZone, user, 
             studentTimeZone={studentTimeZone} 
             email={email} 
           />
-        ) : (
+        ) : PaymentStatus === "stripe" ? (
           <Stripe 
             PricePayment={selectedLesson?.price + commission * selectedLesson?.price} 
             processingFee={commission * selectedLesson?.price} 
@@ -159,16 +177,18 @@ const PaymentCheckout = ({ selectedLesson, selectedSlot, studentTimeZone, user, 
             studentTimeZone={studentTimeZone} 
             email={email} 
           />
-          // <ApplePayForm
-          //   PricePayment={selectedLesson?.price + commission * selectedLesson?.price} 
-          //   processingFee={commission * selectedLesson?.price} 
-          //   adminCommission={0.10 * selectedLesson?.price} 
-          //   selectedLesson={selectedLesson} 
-          //   selectedSlot={selectedSlot} 
-          //   studentTimeZone={studentTimeZone} 
-          //   email={email} 
-          // />
-        )}
+        )
+        :
+        <WalletCheckout
+          PricePayment={selectedLesson?.price + commission * selectedLesson?.price} 
+          processingFee={commission * selectedLesson?.price} 
+          adminCommission={0.10 * selectedLesson?.price} 
+          selectedLesson={selectedLesson} 
+          selectedSlot={selectedSlot} 
+          studentTimeZone={studentTimeZone} 
+          email={email} 
+        />
+      }
       </div>
     </div>
   );

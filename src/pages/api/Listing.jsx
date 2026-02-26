@@ -142,6 +142,10 @@ class Listing extends Component {
     return Api.get(`/student/wallet`);
   }
 
+  async Wallet_payment(data) {
+    return Api.post(`/payment/wallet-booking`, data);
+  }
+
   async RemoveWishlist(data) {
     return Api.post("/favourite/delete", data);
   }

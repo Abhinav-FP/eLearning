@@ -44,7 +44,7 @@ function StripeCheckoutRedirect({ PricePayment, email }) {
   };
 
   return (
-    <div className="p-4 border rounded-lg">
+    <div className="">
       <button
         className="w-full bg-[#55844D] hover:bg-[#3d5e37] text-white font-medium py-2 rounded-full"
         onClick={handlePayment}

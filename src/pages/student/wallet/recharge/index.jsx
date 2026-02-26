@@ -1,8 +1,9 @@
 import { useState } from "react";
 import Heading from "../../../common/Heading";
-import Payment from "../../../payment/index";
+import Payment from "./walletPaypal";
 import Stripe from "./walletStripe";
 import { formatMultiPrice } from "@/components/ValueDataHook";
+import StudentLayout from "../../Common/StudentLayout";
 
 export default function Index() {
   const [paymentMethod, setPaymentMethod] = useState("stripe");
@@ -14,11 +15,11 @@ export default function Index() {
   };
 
   return (
-    <>
-      <Heading
+   <StudentLayout page={"Recharge Wallet"}>
+      {/* <Heading
         classess="text-[#55844D] !text-3xl !mb-0 text-center"
         title={"Recharge Wallet"}
-      />
+      /> */}
 
       <div className="flex flex-col md:flex-row gap-6 p-6">
 
@@ -113,7 +114,7 @@ export default function Index() {
           <div className="border-t border-[#55844D] pt-4 space-y-2">
             <div className="flex justify-between">
               <p className="font-medium">Recharge Amount</p>
-              <p className="font-medium">{formatMultiPrice(amount, "USD")} USD</p>
+              <p className="font-medium">{formatMultiPrice(amount, "USD")}</p>
             </div>
 
             <div className="flex justify-between text-lg font-semibold text-[#55844D] pt-2">
@@ -126,11 +127,7 @@ export default function Index() {
           {paymentMethod === "paypal" ? (
             <Payment
               PricePayment={amount}
-              adminCommission={0}
-              processingFee={amount}
               email={email}
-              isWalletRecharge={true}
-              rechargeAmount={amount}
             />
           ) : (
             <Stripe
@@ -140,6 +137,6 @@ export default function Index() {
           )}
         </div>
       </div>
-    </>
+    </StudentLayout>
   );
 }

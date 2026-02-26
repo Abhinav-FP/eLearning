@@ -176,6 +176,10 @@ class Listing extends Component {
     return Api.post(`/payment/capture-order`, data);
   }
 
+  async walletPaypalRecharge(data) {
+    return Api.post(`/payment/capture-wallet-order`, data);
+  }
+
   async PaypalTipApprove(data) {
     return Api.post(`/payment/tip-capture-order`, data);
   }

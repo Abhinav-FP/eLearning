@@ -11,6 +11,7 @@ import Heading from "../common/Heading";
 import { SpecialSlotLoader } from "@/components/Loader";
 import { useRole } from "@/context/RoleContext";
 import toast from "react-hot-toast";
+import WalletCheckout from "../teacher/WalletCheckout";
 
 export default function Index() {
   const router = useRouter();
@@ -19,7 +20,7 @@ export default function Index() {
   const [data, setData] = useState(null);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(false);
-  const [PaymentStatus, setPaymentStatus] = useState(false);
+  const [PaymentStatus, setPaymentStatus] = useState("paypal");
   const [studentTimeZone, setStudentTimeZone] = useState(null);
   const [commission, setCommission] = useState(null);
   const [unauthorized, setUnauthorized] = useState(false);
@@ -253,9 +254,9 @@ export default function Index() {
                 </h2>
                 <div className="space-y-4">
                   <div
-                    onClick={() => setPaymentStatus(false)}
+                    onClick={() => setPaymentStatus("paypal")}
                     className={`flex items-center justify-between border rounded-lg p-3 cursor-pointer ${
-                      PaymentStatus === true
+                      PaymentStatus === "paypal"
                         ? "border-green-300"
                         : "border-green-400"
                     }`}
@@ -264,7 +265,7 @@ export default function Index() {
                       <span className="text-xl">🅿️</span>
                       <p>PayPal</p>
                     </div>
-                    {PaymentStatus === false ? (
+                    {PaymentStatus === "paypal" ? (
                       <span className="w-4 h-4 border-2 border-green-500 bg-green-500 rounded-full" />
                     ) : (
                       <span className="w-4 h-4 border-2 border-gray-400 rounded-full" />
@@ -272,9 +273,9 @@ export default function Index() {
                   </div>
 
                   <div
-                    onClick={() => setPaymentStatus(true)}
+                    onClick={() => setPaymentStatus("stripe")}
                     className={`flex items-center justify-between border rounded-lg p-3 cursor-pointer ${
-                      PaymentStatus === true
+                      PaymentStatus === "stripe"
                         ? "border-green-400"
                         : "border-green-300"
                     }`}
@@ -283,7 +284,24 @@ export default function Index() {
                       <span className="text-xl">💳</span>
                       <p>Credit Card - Stripe</p>
                     </div>
-                    {PaymentStatus === true ? (
+                    {PaymentStatus === "stripe" ? (
+                      <span className="w-4 h-4 border-2 border-green-500 bg-green-500 rounded-full" />
+                    ) : (
+                      <span className="w-4 h-4 border-2 border-gray-400 rounded-full" />
+                    )}
+                  </div>
+                  {/* Wallet */}
+                  <div
+                    onClick={() => setPaymentStatus("wallet")}
+                    className={`flex items-center justify-between border rounded-lg p-3 cursor-pointer ${
+                      PaymentStatus === "wallet" ? "border-[#55844D]" : "border-[#3d5e37]"
+                    }`}
+                  >
+                    <div className="flex items-center gap-3">
+                      <span className="text-xl">💼</span>
+                      <p>Wallet Balance</p>
+                    </div>
+                    {PaymentStatus === "wallet" ? (
                       <span className="w-4 h-4 border-2 border-green-500 bg-green-500 rounded-full" />
                     ) : (
                       <span className="w-4 h-4 border-2 border-gray-400 rounded-full" />
@@ -371,7 +389,7 @@ export default function Index() {
                   )}`}</p>
                 </div>
 
-                {PaymentStatus === false ? (
+                {PaymentStatus === "paypal" ? (
                   <Payment
                     PricePayment={data?.amount + commission * data?.amount}
                     processingFee={data?.amount * commission}
@@ -383,7 +401,7 @@ export default function Index() {
                     isSpecialSlot={true}
                     specialSlotData={data}
                   />
-                ) : (
+                ) : PaymentStatus === "stripe" ? (
                   <Stripe
                     PricePayment={data?.amount + commission * data?.amount}
                     processingFee={data?.amount * commission}
@@ -395,7 +413,19 @@ export default function Index() {
                     isSpecialSlot={true}
                     specialSlotData={data}
                   />
-                )}
+                ) :
+                <WalletCheckout
+                  PricePayment={data?.amount + commission * data?.amount}
+                  processingFee={data?.amount * commission}
+                  adminCommission={0.1 * data?.amount}
+                  selectedLesson={data?.lesson}
+                  selectedSlot={data?.startDateTime}
+                  studentTimeZone={studentTimeZone}
+                  email={email}
+                  isSpecialSlot={true}
+                  specialSlotData={data}
+                />
+                }
               </div>
             </div>
           </>

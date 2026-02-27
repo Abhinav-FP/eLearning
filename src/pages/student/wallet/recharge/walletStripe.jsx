@@ -52,7 +52,7 @@ function StripeCheckoutRedirect({ PricePayment, email }) {
       >
         {processing
           ? "Redirecting to Stripe..."
-          : `Pay $${PricePayment.toFixed(2)} USD`}
+          : `Pay ${formatMultiPrice(PricePayment || 0, "USD") || ""}`}
       </button>
     </div>
   );

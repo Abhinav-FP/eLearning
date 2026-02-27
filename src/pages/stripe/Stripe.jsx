@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import toast from 'react-hot-toast';
 import Listing from '../api/Listing';
 import { useRouter } from 'next/router';
+import { formatMultiPrice } from '@/components/ValueDataHook';
 
 function StripeForm({ 
   PricePayment, selectedLesson, adminCommission, selectedSlot, studentTimeZone, email,
@@ -95,7 +96,7 @@ function StripeForm({
         onClick={handlePayment}
         disabled={processing}
       >
-        {processing ? "Redirecting..." : `Pay $${PricePayment && PricePayment.toFixed(2)} USD`}
+        {processing ? "Redirecting..." : `Pay $${formatMultiPrice(PricePayment || 0, "USD") || ""} USD`}
       </button>
     </div>
   );

@@ -57,7 +57,7 @@ const PaymentCheckout = ({ selectedLesson, selectedSlot, studentTimeZone, user, 
           >
             <div className="flex items-center gap-3">
               <span className="text-xl">💳</span>
-              <p>Credit Card - Stripe</p>
+              <p>Credit Card or Apple Pay - Stripe</p>
             </div>
             {PaymentStatus === "stripe" ? (
               <span className="w-4 h-4 border-2 border-green-500 bg-green-500 rounded-full" />

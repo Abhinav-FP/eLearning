@@ -2,25 +2,16 @@ import React, { useEffect, useState } from 'react';
 import toast from 'react-hot-toast';
 import Listing from '../api/Listing';
 import { useRouter } from 'next/router';
-import { loadStripe } from '@stripe/stripe-js';
-import {
-  Elements,
-  CardElement,
-  useStripe,
-  useElements
-} from '@stripe/react-stripe-js';
 
-const stripePromise = loadStripe(process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY);
+function StripeForm({ 
+  PricePayment, selectedLesson, adminCommission, selectedSlot, studentTimeZone, email,
+  isSpecialSlot=false, specialSlotData, processingFee, isBulk = false, multipleLessons = 1 
+}) {
 
-function StripeForm({ PricePayment, selectedLesson, adminCommission, selectedSlot, studentTimeZone, email, 
-                      isSpecialSlot=false, specialSlotData, processingFee, isBulk = false, multipleLessons = 1 }) {
-  // console.log("processingFee",processingFee);
-  const stripe = useStripe();
-  const elements = useElements();
   const [processing, setProcessing] = useState(false);
   const [endTime, setEndTime] = useState(isSpecialSlot ? specialSlotData?.endDateTime : null);
-  const [message, setMessage] = useState(null);
   const router = useRouter()
+
   const addDurationToDate = (start, durationInMinutes) => {
     const originalDate = new Date(start);
     const finalDate = new Date(originalDate.getTime() + durationInMinutes * 60000);
@@ -50,38 +41,16 @@ function StripeForm({ PricePayment, selectedLesson, adminCommission, selectedSlo
     }
   }, [selectedSlot, selectedLesson]);
 
-  const [cardComplete, setCardComplete] = useState(false);
-
-  useEffect(() => {
-  if (!elements) return; // <--- bail out if elements is not ready yet
-
-  const cardElement = elements.getElement(CardElement);
-  if (!cardElement) return;
-
-  const handleChange = (event) => {
-    setCardComplete(event.complete); // true when card details are valid
-  };
-
-  cardElement.on('change', handleChange);
-
-  // cleanup listener on unmount
-  return () => {
-    cardElement.off('change', handleChange);
-  };
-}, [elements]); 
-
   const handlePayment = async () => {
     const trimmedEmail = email?.trim();
     const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
     if(!trimmedEmail || !emailPattern.test(trimmedEmail)){
       toast.error("Please enter a valid email address");
       return;
     }
-    if (!cardComplete) {
-      toast.error("Please enter valid card details");
-      return; 
-    }
-    if (processing || !stripe || !elements) return;
+
+    if (processing) return;
 
     try {
       localStorage.setItem("email", email);
@@ -103,23 +72,11 @@ function StripeForm({ PricePayment, selectedLesson, adminCommission, selectedSlo
         isBulk: isBulk,
         multipleLessons: multipleLessons
       });
-      const clientSecret = res?.data?.clientSecret;
-      const cardElement = elements.getElement(CardElement);
-      const paymentResult = await stripe.confirmCardPayment(clientSecret, {
-        payment_method: {
-          card: cardElement,
-        },
-      });
 
-      if (paymentResult.error) {
-        setMessage(paymentResult.error.message);
-        router.push("/cancel")
-
-        toast.error(paymentResult.error.message);
-      } else if (paymentResult.paymentIntent.status === 'succeeded') {
-        router.push("/success")
-        setMessage('✅ Payment successful! Thank you.');
-        toast.success("Payment successful!");
+      if (res?.data?.url) {
+        window.location.href = res.data.url; // 🔥 Redirect to Stripe Checkout
+      } else {
+        toast.error("Unable to initiate payment session");
       }
 
     } catch (err) {
@@ -133,23 +90,15 @@ function StripeForm({ PricePayment, selectedLesson, adminCommission, selectedSlo
 
   return (
     <div className="p-4 space-y-4 border rounded-lg">
-      <CardElement className="p-2 border rounded-md" />
       <button
         className="w-full bg-[#55844D] hover:bg-[#3d5e37] text-white font-medium py-2 rounded-full cursor-pointer"
         onClick={handlePayment}
-        disabled={processing || !stripe || !elements}
+        disabled={processing}
       >
-        {processing ? "Processing..." : `Pay $${PricePayment && PricePayment.toFixed(2)} USD`}
+        {processing ? "Redirecting..." : `Pay $${PricePayment && PricePayment.toFixed(2)} USD`}
       </button>
-      {message && <p className="text-sm text-gray-700">{message}</p>}
     </div>
   );
 }
 
-export default function StripeWrapper(props) {
-  return (
-    <Elements stripe={stripePromise}>
-      <StripeForm {...props} />
-    </Elements>
-  );
-}
+export default StripeForm;

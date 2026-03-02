@@ -252,8 +252,11 @@ export default function index() {
                             item?.paypalpaymentId?.created_at
                           ).format("DD MMM YYYY, hh:mm A") || ""}
                         </td>
-                        <td className="px-3 lg:px-4 py-2 lg:py-3 text-black text-sm lg:text-base font-medium font-inter">
-                          {formatMultiPrice(item?.teacherEarning, "USD") || ""}
+                       <td className="px-3 lg:px-4 py-2 lg:py-3 text-black text-sm lg:text-base font-medium font-inter">
+                          <div className="flex flex-col leading-tight">
+                            <span className="text-black font-semibold">{formatMultiPrice(item?.teacherEarning * item?.usdToJpyRate, "JPY")}</span>
+                            <span className="text-gray-500 text-xs">({formatMultiPrice(item?.teacherEarning, "USD")})</span>
+                          </div>
                         </td>
                         <td className="px-3 lg:px-4 py-2 lg:py-3 text-black text-sm lg:text-base font-medium font-inter">
                           {item?.lessonCompletedStudent && item?.lessonCompletedTeacher

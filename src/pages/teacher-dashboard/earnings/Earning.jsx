@@ -2,10 +2,11 @@ import React, { useEffect, useState } from "react";
 import Popup from "@/pages/common/Popup";
 import Listing from "@/pages/api/Listing";
 import toast from "react-hot-toast";
+import { formatMultiPrice } from "@/components/ValueDataHook";
 
-export default function Earning({ isOpen, onClose, data, fetchEarnings }) {
+export default function Earning({ isOpen, onClose, data, dataUsd, fetchEarnings }) {
     const [loading, setLoading] = useState(false);
-    const [amount, setAmount] = useState(data);
+    const [amount, setAmount] = useState(dataUsd);
 
     // const handleChange = (e) => {
     //     setAmount(e.target.value);
@@ -13,7 +14,7 @@ export default function Earning({ isOpen, onClose, data, fetchEarnings }) {
     const handleAdd = async (e) => {
         e.preventDefault();
         if (loading) return;
-        if(amount === 0){
+        if(data === 0){
             toast.error("Cannot create request for 0 amount!");
             return;
         }
@@ -21,7 +22,7 @@ export default function Earning({ isOpen, onClose, data, fetchEarnings }) {
         try {
             const main = new Listing();
             const response = await main.payoutAdd({
-                amount: parseFloat(amount),
+                amount: parseFloat(data),
             });
             if (response?.data?.status) {
                 toast.success(response.data.message);
@@ -65,7 +66,7 @@ export default function Earning({ isOpen, onClose, data, fetchEarnings }) {
                     <div
                         className="w-full p-3 rounded-md bg-gray-100 text-gray-700 focus:outline-none focus:ring-2 focus:ring-[#55844D] text-base"
                     >
-                        {amount?.toFixed(2) ?? "—"}
+                        {formatMultiPrice(amount, "JPY") ?? "—"}
                     </div>
                 </div>
                 {/* Action Buttons */}

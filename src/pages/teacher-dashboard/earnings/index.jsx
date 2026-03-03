@@ -368,7 +368,8 @@ export default function index() {
         <Earning
           isOpen={IsEarning}
           onClose={close}
-          data={data?.totalPendingEarning}
+          data={data?.totalPendingEarningJpy}
+          dataUsd={data?.totalPendingEarning}
           fetchEarnings={fetchEarnings}
         />
       )}

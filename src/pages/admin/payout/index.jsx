@@ -144,7 +144,10 @@ export default function Index() {
                         <Link href={`/admin/teacher/${item?.userId?._id}`}>{item?.userId?.name}</Link>
                       </td>
                       <td className="capitalize px-3 lg:px-4 py-2 lg:py-3 text-black text-sm lg:text-base font-medium font-inter ">
-                        {formatMultiPrice(item?.amount, "USD") || ""}
+                        <div className="flex flex-col leading-tight">
+                          <span className="text-black font-semibold">{formatMultiPrice(item?.amountInJpy, "JPY")}</span>
+                          <span className="text-gray-500 text-xs">({formatMultiPrice(item?.amount, "USD")})</span>
+                        </div>
                       </td>
                       <td className="px-3 lg:px-4 py-2 lg:py-3 text-black text-sm lg:text-base font-medium font-inter text-center whitespace-nowrap">
                         <button className="flex items-center justify-center gap-1 mx-auto cursor-pointer"

@@ -6,7 +6,7 @@ import { formatMultiPrice } from "@/components/ValueDataHook";
 
 export default function Earning({ isOpen, onClose, data, dataUsd, fetchEarnings }) {
     const [loading, setLoading] = useState(false);
-    const [amount, setAmount] = useState(dataUsd);
+    const [amount, setAmount] = useState(data);
 
     // const handleChange = (e) => {
     //     setAmount(e.target.value);
@@ -22,7 +22,8 @@ export default function Earning({ isOpen, onClose, data, dataUsd, fetchEarnings 
         try {
             const main = new Listing();
             const response = await main.payoutAdd({
-                amount: parseFloat(data),
+                amount: parseFloat(dataUsd),
+                amountInJpy: parseFloat(data),
             });
             if (response?.data?.status) {
                 toast.success(response.data.message);
@@ -52,22 +53,17 @@ export default function Earning({ isOpen, onClose, data, dataUsd, fetchEarnings 
                 {/* Title Field */}
                 <div>
                     <label className="block text-[#55844D] font-medium mb-1">Amount</label>
-                    {/* <input
-                        type="number"
-                        name="amount"
-                        value={amount}
-                        readOnly
-                        placeholder="Enter amount"
-                        min="0"
-                        step="0.01"
-                        className="w-full p-3 rounded-md bg-gray-100 text-gray-700 focus:outline-none focus:ring-2 focus:ring-[#55844D]"
-                        required
-                    /> */}
-                    <div
-                        className="w-full p-3 rounded-md bg-gray-100 text-gray-700 focus:outline-none focus:ring-2 focus:ring-[#55844D] text-base"
-                    >
+
+                    <div className="w-full p-3 rounded-md bg-gray-100 text-gray-700 focus:outline-none focus:ring-2 focus:ring-[#55844D] text-base">
                         {formatMultiPrice(amount, "JPY") ?? "—"}
                     </div>
+
+                    {/* Informational USD display */}
+                    {dataUsd !== undefined && (
+                        <p className="text-xs text-gray-500 mt-1">
+                            ≈ {formatMultiPrice(dataUsd, "USD")}
+                        </p>
+                    )}
                 </div>
                 {/* Action Buttons */}
                 <div className="flex justify-between gap-4 mt-6">

@@ -287,7 +287,7 @@ export default function Index() {
                     {passwordCriteria.hasLower ? (
                       <FaCheckCircle className="text-green-600" />
                     ) : (
-                      <FaTimesCircle className="text-green-600" />
+                      <FaTimesCircle className="text-red-600" />
                     )}
                     Contains lowercase letter
                   </p>
@@ -295,7 +295,7 @@ export default function Index() {
                     {passwordCriteria.hasUpper ? (
                       <FaCheckCircle className="text-green-600" />
                     ) : (
-                      <FaTimesCircle className="text-green-600" />
+                      <FaTimesCircle className="text-red-600" />
                     )}
                     Contains uppercase letter
                   </p>
@@ -303,7 +303,7 @@ export default function Index() {
                     {passwordCriteria.hasNumber ? (
                       <FaCheckCircle className="text-green-600" />
                     ) : (
-                      <FaTimesCircle className="text-green-600" />
+                      <FaTimesCircle className="text-red-600" />
                     )}
                     Contains number
                   </p>
@@ -311,7 +311,7 @@ export default function Index() {
                     {passwordCriteria.hasSymbol ? (
                       <FaCheckCircle className="text-green-600" />
                     ) : (
-                      <FaTimesCircle className="text-green-600" />
+                      <FaTimesCircle className="text-red-600" />
                     )}
                     Contains special character
                   </p>
@@ -319,7 +319,7 @@ export default function Index() {
                     {passwordCriteria.hasMinLength ? (
                       <FaCheckCircle className="text-green-600" />
                     ) : (
-                      <FaTimesCircle className="text-green-600" />
+                      <FaTimesCircle className="text-red-600" />
                     )}
                     At least 8 characters long
                   </p>

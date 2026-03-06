@@ -2,15 +2,20 @@ import { formatMultiPrice } from "@/components/ValueDataHook";
 import moment from "moment";
 import React, { useState } from "react";
 import { FaChevronDown } from "react-icons/fa";
+import BulkEdit from "./BulkEdit";
+import { CiEdit } from "react-icons/ci";
 
-
-export default function Bulk({loading, data}) {
-    const [openIndex, setOpenIndex] = useState(null);
-    
-    const toggleRow = (i) => {
+export default function Bulk({loading, data, fetchEarnings}) {
+  const [isOpen, setIsOpen] = useState(false);
+  const closePopup = () => setIsOpen(false);
+  const [selectedItem, setSelectedItem] = useState(null);
+  const [openIndex, setOpenIndex] = useState(null);
+  const toggleRow = (i) => {
     setOpenIndex(openIndex === i ? null : i);
   };
+
   return (
+    <>
     <div className="rounded-[5px] border border-[rgba(19,101,16,0.3)] overflow-x-auto">
       <table className="min-w-full text-sm text-center font-inter">
         <thead className="bg-[rgba(38,185,27,0.1)] text-[#535353] tracking-[-0.04em]">
@@ -78,6 +83,15 @@ export default function Bulk({loading, data}) {
 
                     <td className="px-4 py-3 font-medium">
                       {item?.LessonId?.title}
+                      <button 
+                        className="cursor-pointer"
+                        onClick={()=>{
+                          setIsOpen(true);
+                          setSelectedItem(item);
+                        }}
+                      >
+                      <CiEdit size={18}/>
+                      </button>
                     </td>
 
                     <td className="px-4 py-3 font-medium">
@@ -207,5 +221,12 @@ export default function Bulk({loading, data}) {
         </tbody>
       </table>
     </div>
+    <BulkEdit
+      isOpen={isOpen}
+      onClose={closePopup}
+      bulk={selectedItem}
+      fetchEarnings={fetchEarnings}
+    />
+    </>
   );
 }

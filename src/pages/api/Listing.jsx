@@ -394,6 +394,11 @@ class Listing extends Component {
   async AdminEarning(date, search, page) {
     return Api.get(`/admin/earning?date=${date}&search=${search}&page=${page}`);
   }
+
+  async AdminBulkEdit(id, data) {
+    return Api.post(`/admin/bulk/${id}`, data);
+  }
+
   async HomeUpdate(data) {
     return ApiallowFile.post(`/home/update`, data);
   }

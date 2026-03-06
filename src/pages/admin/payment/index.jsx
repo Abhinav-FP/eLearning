@@ -321,7 +321,7 @@ export default function index() {
           </>
             }
             {tabOpen==="bulk" &&
-            <Bulk loading={loading} data={data?.bulkPurchases || []} />
+            <Bulk loading={loading} data={data?.bulkPurchases || []} fetchEarnings={fetchEarnings} />
             }
           </>
         )}

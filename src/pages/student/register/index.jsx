@@ -8,6 +8,7 @@ import toast from "react-hot-toast";
 import { useRouter } from "next/router";
 import { FaCheckCircle, FaTimesCircle } from "react-icons/fa";
 import { Turnstile } from '@marsidev/react-turnstile';
+import Head from "next/head";
 
 export default function Index() {
   const router = useRouter();
@@ -34,32 +35,6 @@ export default function Index() {
     confirm_password: "",
     gender: "",
   });
-
-  // function Turnstile({ onVerify }) {
-  //   const ref = useRef(null);
-  //   const widgetId = useRef(null);
-
-  //   useEffect(() => {
-  //     if (!window.turnstile || widgetId.current) return;
-
-  //     widgetId.current = window.turnstile.render(ref.current, {
-  //       sitekey: "0x4AAAAAACGwGP65iX0v0KQt",
-  //       callback: (token) => {
-  //         onVerify(token);
-  //       },
-  //       appearance: "always", // 👈 Add this line here
-  //     });
-
-  //     return () => {
-  //       if (window.turnstile && widgetId.current) {
-  //         window.turnstile.remove(widgetId.current);
-  //         widgetId.current = null;
-  //       }
-  //     };
-  //   }, [onVerify]);
-
-  //   return <div ref={ref} />;
-  // }
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -151,6 +126,24 @@ export default function Index() {
   };
 
   return (
+    <>
+    <Head>
+        <script
+          async
+          src="https://www.googletagmanager.com/gtag/js?id=AW-17996291123"
+        ></script>
+
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `
+              window.dataLayer = window.dataLayer || [];
+              function gtag(){dataLayer.push(arguments);}
+              gtag('js', new Date());
+              gtag('config', 'AW-17996291123');
+            `,
+          }}
+        />
+      </Head>
     <div className="min-h-screen flex items-center justify-center bg-white sm:bg-gray-100 p-4">
       <div className="sm:bg-white px-4 md:px-6 lg:px-16 pt-5 pb-10 lg:pb-20 sm:rounded-[20px] md:rounded-[20px] lg:rounded-[40px] sm:shadow lg:shadow-lg w-full max-w-[976px] sm:login_custom">
         {/* Logo */}
@@ -420,5 +413,6 @@ export default function Index() {
         </p>
       </div>
     </div>
+    </>
   );
 }

@@ -168,9 +168,9 @@ export default function Index() {
                 <span className="font-normal text-[#55844D]">Nationality:</span>{" "}
                 {data?.profile?.userId?.nationality || "N/A"}
               </p>
-              <p>
+              {/* <p>
                 <span className="font-normal text-[#55844D]">Gender:</span> {keyMappings[data?.profile?.gender] || "N/A"}
-              </p>
+              </p> */}
               <p className="text-sm lg:text-base text-black tracking-[-0.04em]">
                 <span className="font-normal text-[#55844D]">
                   Language spoken:

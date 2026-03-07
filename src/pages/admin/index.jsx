@@ -17,6 +17,7 @@ import { IoMdEye } from 'react-icons/io';
 export default function Index() {
   const [listing, setListing] = useState(null); // Fix typo in setListing
   const [loading, setLoading] = useState(false);
+  const formatBoolean = (val) => (val === true ? 'Yes' : val === false ? 'No' : 'N/A');
 
   useEffect(() => {
     setLoading(true);
@@ -118,7 +119,7 @@ export default function Index() {
                   Nationality
                 </th>
                 <th className="font-normal text-sm lg:text-base px-3 lg:px-4 py-2 lg:py-3 border-t border-[rgba(19,101,16,0.2)] capitalize">
-                  Gender
+                  AIS Trained
                 </th>
                 {/* <th className="font-normal text-sm lg:text-base px-3 lg:px-4 py-2 lg:py-3 border-t border-[rgba(19,101,16,0.2)] capitalize">
                   View
@@ -149,7 +150,7 @@ export default function Index() {
                         {user?.nationality || "N/A"}
                       </td>
                       <td className="capitalize whitespace-nowrap px-3 lg:px-4 py-2 lg:py-3 text-black text-sm lg:text-base font-medium font-inter">
-                        {item?.gender || "N/A"}
+                        {formatBoolean(record?.ais_trained) || "N/A"}
                       </td>
                       {/* <td className="capitalize whitespace-nowrap px-3 lg:px-4 py-2 lg:py-3 text-black text-sm lg:text-base font-medium font-inter">
                         <Link href={`/admin/teacher/${user?._id}`} className='text-center'>

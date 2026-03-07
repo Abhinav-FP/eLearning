@@ -36,10 +36,10 @@ export default function AboutUs({ record, loading }) {
               <p className="font-medium text-sm md:text-base text-gray-600">{record?.userId?.nationality || "N/A"}</p>
             </div>
 
-            <div className='mb-2'>
+            {/* <div className='mb-2'>
               <label className="block text-base font-semibold text-gray-800 mb-1">Gender</label>
               <p className="font-medium text-sm md:text-base text-gray-600">{formatGender(record?.gender) || "N/A"}</p>
-            </div>
+            </div> */}
 
             {/* <div className='mb-2'>
               <label className="block text-base font-semibold text-gray-800 mb-1">Japanese for Me Approved</label>

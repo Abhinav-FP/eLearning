@@ -164,7 +164,7 @@ export default function Index() {
 
                           {/* Payment Status */}
                           <div className="flex justify-center items-center gap-2">
-                            <span className="capitalize">{item?.paymentStatus}</span>
+                            <span className="capitalize">{item?.amount === 0 ? "Free" : item?.paymentStatus}</span>
 
                             {/* Show Pay button only if pending, before start time, and not cancelled */}
                             {item?.paymentStatus === "pending" &&

@@ -82,16 +82,23 @@ export default function Bulk({loading, data, fetchEarnings}) {
                     </td>
 
                     <td className="px-4 py-3 font-medium">
-                      {item?.LessonId?.title}
-                      <button 
-                        className="cursor-pointer"
-                        onClick={()=>{
-                          setIsOpen(true);
-                          setSelectedItem(item);
-                        }}
-                      >
-                      <CiEdit size={18}/>
-                      </button>
+                      <div className="flex items-center gap-2">
+                        
+                        <span className="text-[#000]">
+                          {item?.LessonId?.title}
+                        </span>
+
+                        <button
+                          onClick={() => {
+                            setIsOpen(true);
+                            setSelectedItem(item);
+                          }}
+                          className="p-1 rounded hover:bg-[#f3f7f2] hover:text-[#55844D] transition cursor-pointer"
+                        >
+                          <CiEdit size={18} />
+                        </button>
+
+                      </div>
                     </td>
 
                     <td className="px-4 py-3 font-medium">

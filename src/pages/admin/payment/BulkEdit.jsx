@@ -13,7 +13,7 @@ export default function BulkEdit({ isOpen, onClose, bulk, fetchEarnings }) {
   const [sendNotification, setSendNotification] = useState(true);
   const [loading, setLoading] = useState(false);
 
-  console.log("bulk", bulk);
+  // console.log("bulk", bulk);
 
   const handleSubmit = async (e) => {
     e.preventDefault();

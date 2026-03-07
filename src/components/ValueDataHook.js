@@ -5,8 +5,8 @@ export const formatMultiPrice = (amount, currency) => {
     style: "currency",
     currency: currency,
     currencyDisplay: "code", // Show 'USD' instead of '$'
-    minimumFractionDigits: 2,
-    maximumFractionDigits: 2,
+    minimumFractionDigits: currency === "JPY"? 0 : 2,
+    maximumFractionDigits: currency === "JPY"? 0 : 2,
   }).format(amount);
 };
 

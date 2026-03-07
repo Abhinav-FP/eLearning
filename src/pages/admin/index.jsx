@@ -150,7 +150,7 @@ export default function Index() {
                         {user?.nationality || "N/A"}
                       </td>
                       <td className="capitalize whitespace-nowrap px-3 lg:px-4 py-2 lg:py-3 text-black text-sm lg:text-base font-medium font-inter">
-                        {formatBoolean(record?.ais_trained) || "N/A"}
+                        {formatBoolean(item?.ais_trained) || "N/A"}
                       </td>
                       {/* <td className="capitalize whitespace-nowrap px-3 lg:px-4 py-2 lg:py-3 text-black text-sm lg:text-base font-medium font-inter">
                         <Link href={`/admin/teacher/${user?._id}`} className='text-center'>

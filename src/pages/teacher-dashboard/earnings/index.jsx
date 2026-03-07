@@ -74,31 +74,35 @@ export default function index() {
   };
 
 
-  const stats = useMemo(
-    () => [
+  const stats = useMemo(() => {
+    const formatValue = (val) => {
+      const num = Number(val);
+      return !isNaN(num) ? num.toFixed(2) : "N/A";
+    };
+
+    return [
       {
         label: "Total Earnings",
-        value: data?.earningsSummary?.totalEarnings.toFixed(2) ?? "N/A",
+        value: formatValue(data?.earningsSummary?.totalEarnings),
         icon: <FaMoneyBillWave className="w-6 h-6 text-[#55844D]" />,
       },
       {
         label: "Available Earnings (Completed Lessons)",
-        value: data?.earningsSummary?.pendingEarnings.toFixed(2) ?? "N/A",
+        value: formatValue(data?.earningsSummary?.pendingEarnings),
         icon: <FaWallet className="w-6 h-6 text-[#55844D]" />,
       },
       {
         label: "Requested Earnings",
-        value: data?.earningsSummary?.requestedEarnings.toFixed(2) ?? "N/A",
+        value: formatValue(data?.earningsSummary?.requestedEarnings),
         icon: <MdRequestQuote className="w-6 h-6 text-[#55844D]" />,
       },
       {
         label: "Last Paid Earnings",
-        value: data?.earningsSummary?.approvedEarnings.toFixed(2) ?? "N/A",
+        value: formatValue(data?.earningsSummary?.approvedEarnings),
         icon: <MdPaid className="w-6 h-6 text-[#55844D]" />,
       },
-    ],
-    [data]
-  );
+    ];
+  }, [data]);
 
   const [IsEarning, setIsEarning] = useState(false);
   const close = () => setIsEarning(false);

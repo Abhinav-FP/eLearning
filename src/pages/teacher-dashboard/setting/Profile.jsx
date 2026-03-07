@@ -128,7 +128,7 @@ export default function Profile() {
       formData.append("timezone", data?.timezone);
       formData.append("nationality", data?.nationality);
       formData.append("languages_spoken", JSON.stringify(data.languages_spoken));
-      formData.append("gender", data?.gender);
+      // formData.append("gender", data?.gender);
       formData.append("ais_trained", data?.ais_trained);
       formData.append("bulk_bookings_allowed", data?.bulk_bookings_allowed);
       formData.append("intro_video", data?.intro_video);
@@ -735,7 +735,7 @@ export default function Profile() {
               </div> */}
 
               {/* Gender */}
-              <div className="w-full lg:w-4/12 px-2 mb-4">
+              {/* <div className="w-full lg:w-4/12 px-2 mb-4">
                 <label className="text-[#55844D] font-medium text-base xl:text-xl mb-2 block">
                   Gender
                 </label>
@@ -762,22 +762,11 @@ export default function Profile() {
                     />
                     <span>Female</span>
                   </label>
-                  {/* <label className="flex items-center space-x-1 text-base">
-                    <input
-                      type="radio"
-                      name="gender"
-                      value="O"
-                      checked={data.gender === "O"}
-                      onChange={handleChange}
-                       className=" w-4 h-4 accent-[#55844D]"
-                    />
-                    <span>Other</span>
-                  </label> */}
                 </div>
-              </div>
+              </div> */}
 
               {/* Bulk Bookings */}
-              <div className="w-full lg:w-4/12 px-2 mb-4">
+              <div className="w-full lg:w-6/12 px-2 mb-4">
                 <label className="text-[#55844D] font-medium text-base xl:text-xl mb-2 block">
                   Bulk Bookings
                 </label>
@@ -790,7 +779,7 @@ export default function Profile() {
               </div>
 
               {/* AIS Trained */}
-              <div className="w-full lg:w-4/12 px-2 mb-4">
+              <div className="w-full lg:w-6/12 px-2 mb-4">
                 <label className="text-[#55844D] font-medium text-base xl:text-xl mb-2 block">
                   Akita Inaka School Trained(AIS)
                 </label>

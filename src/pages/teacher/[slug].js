@@ -242,11 +242,11 @@ export default function Index() {
                             </div>
                           }
 
-                          <div>
+                          {/* <div>
                             <span className="text-[#8D929A] -tracking-[0.03em] pr-2">Gender :</span>
                             <span className="capitalize -tracking-[0.03em] ">
                               {data?.gender === 'M' ? 'Male' : data?.gender === 'F' ? 'Female' : 'Other'}</span>
-                          </div>
+                          </div> */}
 
                           {data?.userId?.time_zone &&
                             <div>

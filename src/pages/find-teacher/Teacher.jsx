@@ -118,10 +118,10 @@ export default function Teacher({ teacherData, loading }) {
                                                 <span className="capitalize text-[#33403D] text-base -tracking-[0.03em] ">{item?.userId?.nationality || "N/A"}</span>
                                             </div>
                                             {/* {item?.userId?.nationality} */}
-                                            <div>
+                                            {/* <div>
                                                 <span className="text-[#8D929A] text-base -tracking-[0.03em] pr-2">Gender :</span>
                                                 <span className="capitalize text-[#33403D] text-base -tracking-[0.03em] ">{item?.gender === 'M' ? 'Male' : item?.gender === 'F' ? 'Female' : "N/A"}</span>
-                                            </div>
+                                            </div> */}
                                             {/* <div>
                                                 <span className="text-[#8D929A] text-base -tracking-[0.03em] pr-2">Experience :</span>
                                                 <span className="text-black text-base -tracking-[0.03em] ">{item?.experience || 'N/a'} Years</span>

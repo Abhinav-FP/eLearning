@@ -88,6 +88,7 @@ const Availablility = ({ Availability, TeacherAvailabilitys }) => {
 
   //Edit Avaiblitiy
   const [selectedEvent, setSelectedEvent] = useState(null);
+  const [selectedEvents, setSelectedEvents] = useState([]);
 
   const closeModal = () => {
     setSelectedEvent(false);
@@ -95,6 +96,14 @@ const Availablility = ({ Availability, TeacherAvailabilitys }) => {
 
   return (
     <>
+    <style>{`
+      .rbc-day-slot .rbc-events-container {
+        pointer-events: none;
+      }
+      .rbc-event {
+        pointer-events: auto;
+      }
+    `}</style>
       <div className="w-full">
         <div className="bg-white rounded-[20px] border-[#55844D80] border-1">
           <div className="py-4 lg:py-3 lg:py-[15px] px-2 md:px-4 lg:px-6 flex flex-wrap  flex-row justify-between items-center border-b border-[rgba(0,0,0,.1)]">
@@ -148,18 +157,35 @@ const Availablility = ({ Availability, TeacherAvailabilitys }) => {
               components={{ event: Event }}
               tooltipAccessor={null}
               onSelectEvent={(event) => {
+                // console.log("Selected event:", event);
                 if (!event?.id || event?.id === "undefined") {
                   toast.error("Slots having a booking are not editable");
                   return;
                 }
+                setSelectedEvents([event]);
                 setSelectedEvent(event);
               }}
+              // onSelectSlot={(slotInfo) => {
+              //   const overlap = events.some(event =>
+              //     moment(slotInfo.start).isBefore(event.end) &&
+              //     moment(slotInfo.end).isAfter(event.start)
+              //   );
+              //   if (!overlap) {
+              //     handleSelectSlot(slotInfo);
+              //   }
+              // }}
               onSelectSlot={(slotInfo) => {
-                const overlap = events.some(event =>
+                // Find all green events that fall within the dragged slot range
+                const overlappingEvents = events.filter(event =>
+                  event.color === "#6ABB52" && // only Available (green) events
                   moment(slotInfo.start).isBefore(event.end) &&
                   moment(slotInfo.end).isAfter(event.start)
                 );
-                if (!overlap) {
+
+                if (overlappingEvents.length > 0) {
+                  setSelectedEvents(overlappingEvents);   // always array
+                  setSelectedEvent(overlappingEvents[0]); // just to trigger modal open
+                } else {
                   handleSelectSlot(slotInfo);
                 }
               }}
@@ -179,7 +205,7 @@ const Availablility = ({ Availability, TeacherAvailabilitys }) => {
 
       {selectedEvent && (
         <EditAvailablity
-          selectedEvent={selectedEvent}
+          selectedEvents={selectedEvents}
           isOpen={selectedEvent}
           TeacherAvailabilitys={TeacherAvailabilitys}
           onClose={closeModal}

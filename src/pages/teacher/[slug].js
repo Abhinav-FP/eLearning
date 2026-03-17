@@ -1,4 +1,4 @@
-import React, { useEffect, useLayoutEffect, useState } from "react";
+import React, { useEffect, useLayoutEffect, useMemo, useState } from "react";
 import Layout from "../common/Layout";
 import Image from "next/image";
 import teacherImg from "../Assets/Images/teacherimg.jpg";
@@ -129,37 +129,37 @@ export default function Index() {
     }
   }, [slug, Id]);
 
-  const DescriptionWithViewMore = ({ description }) => {
+  const DescriptionWithViewMore = ({ description = "", wordLimit = 100 }) => {
     const [expanded, setExpanded] = useState(false);
 
-    const words = description?.split(" ") || [];
-    const isLong = words.length > 100;
-    const shortText = words.slice(0, 100).join(" ");
-    const remainingText = words.slice(100).join(" ");
+    const { isLong, shortText } = useMemo(() => {
+      if (!description) return { isLong: false, shortText: "" };
+
+      const words = description.trim().split(/\s+/);
+      const isLong = words.length > wordLimit;
+
+      return {
+        isLong,
+        shortText: words.slice(0, wordLimit).join(" "),
+      };
+    }, [description, wordLimit]);
 
     return (
-      <div className="text-[#6B7280] tracking-[-0.03em] text-base font-medium">
-        <p>
-          {expanded || !isLong ? description : shortText + "..."}
-          {isLong && !expanded && (
-            <button
-              className="ml-2 text-white hover:text-blue-400 underline cursor-pointer"
-              onClick={() => setExpanded(true)}
-            >
-              Read More
-            </button>
-          )}
-        </p>
-        {expanded && isLong && (
-          <p className="mt-2">
-            {remainingText}
-          </p>
+      <div className="text-[#6B7280] tracking-[-0.03em] text-base font-medium leading-relaxed">
+        <p className="whitespace-pre-line">
+          {expanded || !isLong ? description : `${shortText}...`}
+        {isLong && (
+          <button
+            onClick={() => setExpanded((prev) => !prev)}
+            className="ml-2 text-black hover:text-blue-500 underline cursor-pointer transition-colors"
+          >
+            {expanded ? "Show Less" : "Read More"}
+          </button>
         )}
+        </p>
       </div>
     );
   };
-
-  // console.log("data", data);
 
   return (
     <>

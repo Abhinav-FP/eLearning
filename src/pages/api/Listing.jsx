@@ -261,8 +261,8 @@ class Listing extends Component {
     return Api.post(`/teacher/availability/add`, data);
   }
 
-  async deleteAvailability(id) {
-    return Api.delete(`/teacher/availability/delete/${id}`);
+  async deleteAvailability(data) {
+    return Api.post("/teacher/availability/delete", data);
   }
 
   async EditAvailability(id, data) {

@@ -20,7 +20,7 @@ margin-left: 0;
   border-color: #3d5e37;}
 
  .rbc-row-segment .rbc-event, .rbc-row-segment .rbc-day-slot .rbc-background-event{    background-color: #68C32F !important;}
-.rbc-event .font-bold{font-weight: 400;;}
+.rbc-event .font-bold{font-weight: 400;}
 
 .rbc-time-view .rbc-allday-cell{
   display: none;

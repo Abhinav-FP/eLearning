@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import Heading from "../common/Heading";
 import Image from "next/image";
 import LineImg from "../Assets/Images/linebar-red.png";
@@ -11,29 +11,134 @@ import { useRouter } from "next/router";
 import toast from "react-hot-toast";
 import VideoModalDetail from "../common/VideoModalDetail";
 
-export default function Teacher({ teacherData, loading }) {
+export default function Teacher({ teacherData, loading, onSearch }) {
     const { user } = useRole();
     const router = useRouter();
-    // console.log("TeacherData", teacherData);
+
+    const [selectedDays, setSelectedDays] = useState([]);
+    const [selectedSlots, setSelectedSlots] = useState([]);
+    const [englishOnly, setEnglishOnly] = useState(false);
+
+    const days = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"];
+
+    const slots = [
+        "6-9",
+        "9-12",
+        "12-3",
+        "3-6",
+        "6-9 PM",
+        "9-12 AM",
+        "12-3 AM",
+        "3-6 AM"
+    ];
+
+    const toggleDay = (day) => {
+        setSelectedDays((prev) =>
+            prev.includes(day)
+                ? prev.filter((d) => d !== day)
+                : [...prev, day]
+        );
+    };
+
+    const toggleSlot = (slot) => {
+        setSelectedSlots((prev) =>
+            prev.includes(slot)
+                ? prev.filter((s) => s !== slot)
+                : [...prev, slot]
+        );
+    };
+
+    const handleSearch = () => {
+        if (selectedDays.length === 0 || selectedSlots.length === 0) {
+            toast.error("Please select at least one day and one time slot");
+            return;
+        }
+
+        onSearch?.({
+            days: selectedDays,
+            slots: selectedSlots,
+            english: englishOnly
+        });
+    };
+    
     return (
         <div className="pt-[115px] md:pt-[120px] lg:pt-[150px] pb-[20px] md:pb-[40px] lg:pb-[60px]">
-            <div className="mx-auto container sm:container md:container lg:container xl:max-w-[1230px]  px-4">
+            <div className="mx-auto container sm:container md:container lg:container xl:max-w-[1230px] px-4">
+                 <div className="bg-[#ECF1E6] rounded-[10px] p-5 md:p-6 lg:p-8 mb-8">
+                    <h3 className="text-xl font-bold mb-4 text-[#33403D]">
+                        Find your lesson
+                    </h3>
+
+                    <div className="flex flex-wrap gap-4 items-center">
+
+                        <div className="flex flex-wrap gap-2">
+                            {days && days?.map((day) => (
+                                <button
+                                    key={day}
+                                    onClick={() => toggleDay(day)}
+                                    className={`px-3 py-2 rounded border ${
+                                        selectedDays.includes(day)
+                                            ? "bg-[#55844D] text-white"
+                                            : "bg-white"
+                                    }`}
+                                >
+                                    {day}
+                                </button>
+                            ))}
+                        </div>
+
+                        {/* Slots */}
+                        <div className="flex flex-wrap gap-2">
+                            {slots && slots?.map((slot) => (
+                                <button
+                                    key={slot}
+                                    onClick={() => toggleSlot(slot)}
+                                    className={`px-3 py-2 rounded border ${
+                                        selectedSlots.includes(slot)
+                                            ? "bg-[#55844D] text-white"
+                                            : "bg-white"
+                                    }`}
+                                >
+                                    {slot}
+                                </button>
+                            ))}
+                        </div>
+
+                        {/* English Toggle */}
+                        <label className="flex items-center gap-2 cursor-pointer">
+                            <input
+                                type="checkbox"
+                                checked={englishOnly}
+                                onChange={() => setEnglishOnly(!englishOnly)}
+                            />
+                            English Supported
+                        </label>
+
+                        {/* Search Button */}
+                        <button
+                            onClick={handleSearch}
+                            className="btn md"
+                        >
+                            Search
+                        </button>
+                    </div>
+                </div>
                 {/* <Heading classess={'text-center mb-2 lg:mb-3'} title={'Not sure which teacher to choose or where to start?'} /> */}
                 {/* <p className="text-center text-[#535353] font-medium text-base -tracking-[0.03em] mb-4 lg:mb-5">
                     If you are not sure what teacher to choose, where to start, what to focus on - contact us.
                 </p> */}
                 <h2 className="text-center text-xl md:text-2xl lg:text-4xl text-[#33403D] font-bold -tracking-[0.03em] mb-4 lg:mb-5">
                     If you are not sure what teacher to choose, where to start, what to focus on - contact us
-                    </h2>
-                    <div className="flex justify-center mb-8 lg:mb-10">
-                        <a
-                            className="btn lg"
-                            target="_blank"
-                            href="https://www.takemetojapan.com/contact"
-                        >
-                            Let’s Work Together
-                        </a>
-                    </div>
+                </h2>
+                <div className="flex justify-center mb-8 lg:mb-10">
+                    <a
+                        className="btn lg"
+                        target="_blank"
+                        href="https://www.takemetojapan.com/contact"
+                    >
+                        Let’s Work Together
+                    </a>
+                </div>
                 {/* <div className="text-center mb-8 lg:mb-10">
                     <Image className="inline-block" src={LineImg} alt="icon" />
                 </div> */}

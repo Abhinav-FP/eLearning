@@ -84,8 +84,14 @@ class Listing extends Component {
     return Api.post("/student/bulkLessons/check", data);
   }
 
-  async homeTeacher() {
-    return Api.get("/home/teacher",);
+  async homeTeacher(filters = {}) {
+    return Api.get("/home/teacher", {
+      params: {
+        days: filters.days?.join(","),   // array → string
+        slots: filters.slots?.join(","),
+        english: filters.english
+      }
+    });
   }
 
   async homeCourse() {

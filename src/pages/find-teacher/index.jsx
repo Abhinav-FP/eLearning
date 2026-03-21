@@ -8,11 +8,11 @@ import Head from "next/head";
 export default function Index() {
   const [teacherData, setTeacherData] = useState([]);
   const [loading, setLoading] = useState(false);
-  const fetchData = async () => {
+  const fetchData = async (filters = {}) => {
     try {
       setLoading(true);
       const main = new Listing();
-      const response = await main.homeTeacher();
+      const response = await main.homeTeacher(filters);
       if (response.data) {
         setTeacherData(response.data.data);
       }
@@ -37,7 +37,7 @@ export default function Index() {
       />
     </Head>
     <Layout>
-      <Teacher teacherData={teacherData} loading={loading} />
+      <Teacher teacherData={teacherData} loading={loading} onSearch={fetchData}/>
       <HowItWork classess={"mb-[40px] md:mb-[60px] lg:mb-[100px] !mt-0"} />
     </Layout>
     </>

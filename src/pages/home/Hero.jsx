@@ -39,10 +39,10 @@ export default function Hero({ title, heroimg, heroimg2, loading }) {
                             {/* <Button classes={'bg-[#55844D] hover:bg-[#3d5e37] text-base lg:text-lg xl:text-xl py-2.5 lg:py-3 xl:py-3.5 px-4 text-white w-full max-w-[438px]'} title={'Book a lesson'} /> */}
                             <div className="w-full flex justify-center lg:justify-start">
                                 <Link
-                                    href="/#lesson"
+                                    href="/find-teacher?filter=true"
                                     className="btn lg"
                                 >
-                                    Book a lesson
+                                    Find your lesson!
                                 </Link>
                             </div>
                         </div>

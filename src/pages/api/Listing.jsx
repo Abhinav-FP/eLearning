@@ -87,9 +87,10 @@ class Listing extends Component {
   async homeTeacher(filters = {}) {
     return Api.get("/home/teacher", {
       params: {
-        days: filters.days?.join(","),   // array → string
-        slots: filters.slots?.join(","),
-        english: filters.english
+        days: filters?.days?.join(","),   // array → string
+        slots: filters?.slots?.join(","),
+        english: filters?.english,
+        studentTimeZone: filters?.studentTimeZone
       }
     });
   }

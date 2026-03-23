@@ -13,12 +13,16 @@ export default function Index() {
       setLoading(true);
       const main = new Listing();
       const response = await main.homeTeacher(filters);
-      if (response.data) {
+      if (response?.data?.status) {
         setTeacherData(response.data.data);
+      }
+      else{
+        setTeacherData([]);
       }
       setLoading(false);
     } catch (error) {
       console.log("error", error);
+      setTeacherData([]);
       setLoading(false);
     }
   };

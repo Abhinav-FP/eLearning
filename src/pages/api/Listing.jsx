@@ -38,6 +38,10 @@ class Listing extends Component {
     return Api.get("/auth/google");
   }
 
+  async TeacherRequestEnglishSupport() {
+    return Api.get("/teacher/requestEnglishSupport");
+  }
+
   async TeacherGoogleCalendarDisconnect() {
     return Api.post("/auth/google/disconnect");
   }
@@ -353,6 +357,10 @@ class Listing extends Component {
 
    async AisTrained(data) {
     return Api.post(`/admin/ais-trained`, data);
+  }
+
+  async ApproveEnglishSupport(data) {
+    return Api.post(`/admin/english-support`, data);
   }
 
   async approveRejectTeacher(data) {

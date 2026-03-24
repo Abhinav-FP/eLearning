@@ -107,6 +107,28 @@ function TeacherListing() {
     }
   };
 
+  const handleEnglishApprove = async (id, approve) => {
+    try {
+      setprocessing(true);
+      const main = new Listing();
+      const response = await main.ApproveEnglishSupport({
+        id,
+        status: approve ? "approved" : "rejected",
+      });
+      if (response?.data?.status) {
+        toast.success(response.data.message);
+        fetchData("");
+      } else {
+        toast.error(response.data.message);
+      }
+
+      setprocessing(false);
+    } catch (err) {
+      toast.error("Something went wrong");
+      setprocessing(false);
+    }
+  };
+
   const TeacherRow = ({ item, category }) => (
     <tr
       className={`border-t hover:bg-[rgba(38,185,27,0.1)] border-[rgba(19,101,16,0.2)] ${item?.userId?.block ? "opacity-50" : ""
@@ -128,6 +150,7 @@ function TeacherListing() {
       </td> */}
 
         {category === "existing" &&
+        <>
           <td className="capitalize px-3 lg:px-4 py-2 lg:py-3 text-black text-sm lg:text-base font-medium font-inter">
               {/* <button
                 onClick={() => handleaistrained(item?._id)}
@@ -146,6 +169,41 @@ function TeacherListing() {
               handleChange={() => handleaistrained(item?._id)}
               />
           </td>
+          <td className="px-3 lg:px-4 py-2 text-sm">
+            {item?.englishSupportStatus === "none" && (
+              <span className="text-gray-400">—</span>
+            )}
+
+            {item?.englishSupportStatus === "pending" && (
+              <div className="flex justify-center items-center gap-2">
+                <button
+                  onClick={() => handleEnglishApprove(item?._id, true)}
+                  className="text-green-600 text-xs border px-2 py-1 rounded cursor-pointer"
+                >
+                  Approve
+                </button>
+                <button
+                  onClick={() => handleEnglishApprove(item?._id, false)}
+                  className="text-red-600 text-xs border px-2 py-1 rounded cursor-pointer"
+                >
+                  Reject
+                </button>
+              </div>
+            )}
+
+            {item?.englishSupportStatus === "approved" && (
+              <span className="text-green-600 text-xs font-medium">
+                ✅ Approved
+              </span>
+            )}
+
+            {item?.englishSupportStatus === "rejected" && (
+              <span className="text-red-500 text-xs font-medium">
+                ❌ Rejected
+              </span>
+            )}
+         </td>
+        </>
         }
 
       <td className="capitalize px-3 lg:px-4 py-2 lg:py-3 text-black text-sm lg:text-base font-medium font-inter">
@@ -317,6 +375,9 @@ function TeacherListing() {
               <option value="">All</option>
               <option value="true">Blocked</option>
               <option value="false">Unblocked</option>
+              <option value="english_pending">English Pending</option>
+              <option value="english_approved">English Approved</option>
+              <option value="english_rejected">English Rejected</option>
             </select>
           </div>}
         </div>
@@ -340,6 +401,10 @@ function TeacherListing() {
                   {tabActive === "existing" &&
                   <th className="font-normal text-sm lg:text-base px-3 lg:px-4 py-2 lg:py-3 border-t border-[rgba(19,101,16,0.2)] capitalize">
                     AIS Trained
+                  </th>}
+                  {tabActive === "existing" &&
+                  <th className="font-normal text-sm lg:text-base px-3 lg:px-4 py-2 lg:py-3 border-t border-[rgba(19,101,16,0.2)] capitalize">
+                    English Supported Lessons
                   </th>}
                   <th className="font-normal text-sm lg:text-base px-3 lg:px-4 py-2 lg:py-3 border-t border-[rgba(19,101,16,0.2)] capitalize">
                     Action

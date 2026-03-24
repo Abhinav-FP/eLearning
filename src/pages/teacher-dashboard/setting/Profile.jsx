@@ -27,6 +27,7 @@ export default function Profile() {
     description: "",
     specialities: [],
     bulk_bookings_allowed: false,
+    englishSupportStatus: "none",
   });
   const [file, setFile] = useState(null);
   const [newSpeciality, setNewSpeciality] = useState("");
@@ -63,6 +64,7 @@ export default function Profile() {
           // documentlink: profiledata?.documentlink,
           // qualifications: profiledata?.qualifications,
           specialities: profiledata?.tags || [],
+          englishSupportStatus: profiledata?.englishSupportStatus || "none",
         });
         setFile(profiledata?.userId?.profile_photo);
         if (profiledata?.access_token && profiledata?.refresh_token) {
@@ -301,6 +303,24 @@ export default function Profile() {
       bulk_bookings_allowed: value,
     }));
   };
+
+  const handleRequestEnglish = async () => {
+    try {
+      const main = new Listing();
+      const res = await main.TeacherRequestEnglishSupport();
+      if (res?.data?.status) {
+        toast.success("Request sent to admin");
+        setData(prev => ({
+          ...prev,
+          englishSupportStatus: "pending",
+        }));
+      }
+    } catch (err) {
+      toast.error("Something went wrong");
+    }
+  };
+
+  // console.log("englishSupportStatus",data?.englishSupportStatus);
 
   return (
     <>
@@ -786,6 +806,63 @@ export default function Profile() {
                 <div className="flex items-center space-x-4">
                   {data?.ais_trained ? "True" : "False"} (Can be changed by the
                   Admin only)
+                </div>
+              </div>
+
+              {/* English Support Request */}
+              <div className="w-full lg:w-6/12 px-2 mb-4">
+                <label className="text-[#55844D] font-medium text-base xl:text-xl mb-2 block">
+                  English Supported Lessons
+                </label>
+
+                <div className="flex items-center justify-between">
+                  {/* LEFT TEXT */}
+                  <span className="text-[#535353] text-sm">
+                    {data?.englishSupportStatus === "none" &&
+                      "Get verified to teach in English"}
+
+                    {data?.englishSupportStatus === "pending" &&
+                      "Your request is under review by admin"}
+
+                    {data?.englishSupportStatus === "approved" &&
+                      "You are verified to teach in English"}
+
+                    {data?.englishSupportStatus === "rejected" &&
+                      "Your request was not approved. You can apply again"}
+                  </span>
+
+                  {/* RIGHT BUTTON / STATUS */}
+                  {data?.englishSupportStatus === "none" && (
+                    <button
+                      type="button"
+                      onClick={handleRequestEnglish}
+                      className="bg-[#55844D] text-white px-4 py-2 rounded-lg text-sm hover:bg-[#3d5e37] cursor-pointer"
+                    >
+                      Request
+                    </button>
+                  )}
+
+                  {data?.englishSupportStatus === "pending" && (
+                    <span className="text-yellow-600 text-sm font-medium">
+                      ⏳ Pending
+                    </span>
+                  )}
+
+                  {data?.englishSupportStatus === "approved" && (
+                    <span className="text-green-600 text-sm font-medium">
+                      ✅ Approved
+                    </span>
+                  )}
+
+                  {data?.englishSupportStatus === "rejected" && (
+                    <button
+                      type="button"
+                      onClick={handleRequestEnglish}
+                      className="bg-red-500 text-white px-4 py-2 rounded-lg text-sm hover:bg-red-600 cursor-pointer"
+                    >
+                      Apply Again
+                    </button>
+                  )}
                 </div>
               </div>
 

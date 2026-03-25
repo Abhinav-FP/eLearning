@@ -108,14 +108,14 @@ export default function Filters({ isOpen, onClose, onSearch }) {
         </div>
 
         {/* English Toggle */}
-        {/* <label className="flex items-center gap-2 cursor-pointer">
+        <label className="flex items-center gap-2 cursor-pointer">
           <input
             type="checkbox"
             checked={englishOnly}
             onChange={() => setEnglishOnly(!englishOnly)}
           />
           <span className="text-sm text-[#33403D]">English Supported</span>
-        </label> */}
+        </label>
 
         {/* Action Buttons */}
         <div className="flex gap-3 pt-2">

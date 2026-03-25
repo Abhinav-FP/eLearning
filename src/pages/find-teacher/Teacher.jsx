@@ -12,12 +12,15 @@ import toast from "react-hot-toast";
 import VideoModalDetail from "../common/VideoModalDetail";
 import Filters from "./Filters";
 import { FiFilter } from "react-icons/fi";
+import { FaCheckCircle } from "react-icons/fa";
 
 export default function Teacher({ teacherData, loading, onSearch }) {
    const { user } = useRole();
    const router = useRouter();
    const { filter } = router.query;
   const [isPopupOpen, setIsPopupOpen] = useState(filter ? true : false);
+
+//   console.log("teacherData", teacherData);
     
     return (
         <div className="pt-[115px] md:pt-[120px] lg:pt-[150px] pb-[20px] md:pb-[40px] lg:pb-[60px]">
@@ -87,7 +90,27 @@ export default function Teacher({ teacherData, loading, onSearch }) {
                                         </div> */}
                                     </div>
                                     <div className="w-full md:w-[calc(100%-80px)] lg:w-[calc(100%-276px)] mt-2 md:mt-0 md:pl-6 lg:pl-8">
-                                        <h3 className="text-black text-xl lg:text-2xl font-bold -tracking-[0.03em] text-left mb-2.5 lg:mb-4 capitalize">{item?.userId?.name}</h3>
+                                        {/* <h3 className="text-black text-xl lg:text-2xl font-bold -tracking-[0.03em] text-left mb-2.5 lg:mb-4 capitalize">{item?.userId?.name}</h3> */}
+                                        <div className="flex items-center gap-2 mb-2.5 lg:mb-4">
+                                           <h3 className="text-black text-xl lg:text-2xl font-bold -tracking-[0.03em] capitalize">
+                                               {item?.userId?.name}
+                                           </h3>
+
+                                           {item?.englishSupportStatus === "approved" && (
+                                               <span className="flex items-center gap-1 bg-[#E6F4EA] text-[#2E7D32] text-xs font-medium px-2 py-1 rounded-full">
+                                                   {/* <svg
+                                                   xmlns="http://www.w3.org/2000/svg"
+                                                   className="w-3 h-3"
+                                                   viewBox="0 0 24 24"
+                                                   fill="currentColor"
+                                                   >
+                                                   <path d="M12 2a10 10 0 100 20 10 10 0 000-20zm4.3 7.3l-4.8 4.8a1 1 0 01-1.4 0l-2.4-2.4 1.4-1.4 1.7 1.7 4.1-4.1 1.4 1.4z" />
+                                                   </svg> */}
+                                                   <FaCheckCircle size={14}/>
+                                                   English Supported Lessons
+                                               </span>
+                                           )}
+                                        </div>
                                         {item?.tags?.length > 0 &&
                                             <div className="flex gap-x-3 items-center flex-wrap">
                                                 <span className="text-[#8D929A] text-base -tracking-[0.03em] ">

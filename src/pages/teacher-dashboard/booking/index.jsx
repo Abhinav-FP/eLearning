@@ -164,13 +164,13 @@ export default function Index() {
     setDoneLoading(false);
   }
 
-  const isMoreThanOneHourFromNow = (startDateTime) => {
+  const isMoreThanTenMinsFromNow = (startDateTime) => {
     const now = new Date();
     const start = new Date(startDateTime);
     const diffInMs = start - now;
-    const oneHourInMs = 60 * 60 * 1000;
+    const TenMs = 10 * 60 * 1000;
 
-    return diffInMs > oneHourInMs;
+    return diffInMs > TenMs;
   };
 
 
@@ -403,7 +403,7 @@ export default function Index() {
                               {/* {isMoreThanTwoHourFromNow(item?.startDateTime) && (
                                 <CancelPopup data={item} fetchEarnings={fetchEarnings} />
                               )} */}
-                              {isMoreThanOneHourFromNow(item?.startDateTime) && (
+                              {isMoreThanTenMinsFromNow(item?.startDateTime) && (
                                 <button
                                   onClick={() => {
                                     setSelectedLesson(item);

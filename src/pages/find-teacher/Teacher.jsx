@@ -96,7 +96,7 @@ export default function Teacher({ teacherData, loading, onSearch }) {
                                                {item?.userId?.name}
                                            </h3>
 
-                                           {item?.englishSupportStatus === "approved" && (
+                                           {item?.englishSupportStatus && item?.englishSupportStatus === "approved" && (
                                                <span className="flex items-center gap-1 bg-[#E6F4EA] text-[#2E7D32] text-xs font-medium px-2 py-1 rounded-full">
                                                    {/* <svg
                                                    xmlns="http://www.w3.org/2000/svg"

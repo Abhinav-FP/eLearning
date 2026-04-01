@@ -39,7 +39,7 @@ body {
     @apply border border-[#55844D] bg-white text-[#55844D] hover:text-white text-base font-medium cursor-pointer rounded-full
   }
 
-  .transparent-btn:hover{
+  .transparent-btn:hover {
     @apply bg-[var(--main)]
   }
 
@@ -49,6 +49,10 @@ body {
 
   .lg {
     @apply py-3.5 px-8 xl:px-10
+  }
+
+  .xl {
+    @apply py-4 px-8 xl:px-10  
   }
 
   .heading {

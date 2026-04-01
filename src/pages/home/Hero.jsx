@@ -26,7 +26,7 @@ export default function Hero({ title, heroimg, heroimg2, loading }) {
                                 </div>
                                 <div className="relative -mt-12 md:mt-0 md:absolute md:bottom-0 md:left-[120px] w-[95%] md:w-[90%] border-t-8 border-l-8 md:border-t-12 md:border-l-12 shadow-lg border-[#eef2ed] z-20">
                                     {loading ? (
-                                        <div className="w-full h-[200px] md:h-[564px] bg-gray-200 animate-pulse rounded-lg" />
+                                        <div className="w-full h-[200px] md:h-[270px] bg-gray-200 animate-pulse rounded-lg" />
                                     ) : (
                                         <Image src={heroimg2 ? heroimg2 : HeroImg2} width={480} height={270} alt="hero banner" className="w-full h-auto md:h-[280px] object-cover" />
                                     )}

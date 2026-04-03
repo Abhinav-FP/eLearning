@@ -84,6 +84,14 @@ export default function Profile() {
   const handleChange = (e) => {
     const { name, value } = e.target;
     if (name === "languages_spoken") {
+      if (value === "") return;
+      if (
+        value.toLowerCase() === "english" &&
+        data?.englishSupportStatus !== "approved"
+      ) {
+        toast.error("You need approval to select English as a language.");
+        return;
+      }
       if (!data?.languages_spoken?.includes(value) && value !== "")
         setData((prev) => ({
           ...prev,
@@ -103,11 +111,19 @@ export default function Profile() {
   };
 
   const handleRemoveLanguage = (lang) => {
+     if (
+    lang === "English" &&
+    data?.englishSupportStatus === "approved"
+  ) {
+    toast.error("English cannot be removed after approval");
+    return;
+  }
     setData((prev) => ({
       ...prev,
       languages_spoken: prev.languages_spoken.filter((l) => l !== lang),
     }));
   };
+  
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -319,6 +335,7 @@ export default function Profile() {
       toast.error("Something went wrong");
     }
   };
+
 
   // console.log("englishSupportStatus",data?.englishSupportStatus);
 

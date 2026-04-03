@@ -114,7 +114,7 @@ export default function Filters({ isOpen, onClose, onSearch }) {
             checked={englishOnly}
             onChange={() => setEnglishOnly(!englishOnly)}
           />
-          <span className="text-sm text-[#33403D]">English Supported</span>
+          <span className="text-sm text-[#33403D]">I want English speaking teacher</span>
         </label>
 
         {/* Action Buttons */}

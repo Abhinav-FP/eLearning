@@ -18,11 +18,11 @@ import Bulk from "./Bulk";
 export default function index() {
   const [data, setData] = useState({});
   const [bookings, setBookings] = useState([]);
-  const [page, setPage] =useState(1);
+  const [page, setPage] = useState(1);
   const [loading, setLoading] = useState(false);
   const [buttonLoading, setButtonLoading] = useState(false);
   const [selectedOption, setSelectedOption] = useState("");
-  const[tabOpen, setTabOpen] = useState("bookings");
+  const [tabOpen, setTabOpen] = useState("bookings");
   const [searchText, setSearchText] = useState("");
   const timerRef = useRef(null);
 
@@ -55,10 +55,10 @@ export default function index() {
     yearOptions.push(year);
   }
 
-  const fetchEarnings = async (search, page=1) => {
+  const fetchEarnings = async (search, page = 1) => {
     try {
-      if(page===1){setLoading(true);}
-      else{setButtonLoading(true);}
+      if (page === 1) { setLoading(true); }
+      else { setButtonLoading(true); }
       const main = new Listing();
       const response = await main.AdminEarning(selectedOption, search || searchText, page);
       setData(response?.data?.data || []);
@@ -75,34 +75,88 @@ export default function index() {
     fetchEarnings();
   }, [selectedOption]);
 
-  const LoadMore=()=>{
-    const nextPage= page+1;
+  const LoadMore = () => {
+    const nextPage = page + 1;
     setPage(nextPage);
-    fetchEarnings(searchText,nextPage);    
+    fetchEarnings(searchText, nextPage);
   }
 
-  const downloadExcel = () => {
-    if (!data?.bookings || data.bookings.length === 0) {
-      toast.error("No data to export");
-      return;
+  // const downloadExcel = () => {
+  //   if (!data?.bookings || data.bookings.length === 0) {
+  //     toast.error("No data to export");
+  //     return;
+  //   }
+  //   const result = data.bookings.map(item => ({
+  //     "Lesson Name": item?.LessonId?.title || "",
+  //     "Payment ID": item?.StripepaymentId?.payment_id || item?.paypalpaymentId?.orderID || (item?.isFromBulk ? "Bulk Purchase" : item?.totalAmount === 0 ? "Free Booking" : ""),
+  //     "Booking Creation Time": item?.createdAt ? moment(item.createdAt).format("DD MMM YYYY, hh:mm A") : "",
+  //     "Teacher Name": item?.teacherId?.name || "",
+  //     "Total Payment (excl. processing fee)": formatMultiPrice((item?.totalAmount || 0) - (item?.processingFee || 0), "USD"),
+  //     "My Earning": formatMultiPrice(item?.adminCommission, "USD"),
+  //     "Student Name": item?.UserId?.name || "",
+  //     "Duration (mins)": item?.LessonId?.duration ? `${item.LessonId.duration} mins` : "",
+  //   }));
+
+  //   const worksheet = XLSX.utils.json_to_sheet(result);
+  //   const workbook = XLSX.utils.book_new();
+  //   XLSX.utils.book_append_sheet(workbook, worksheet, "Payments");
+  //   XLSX.writeFile(workbook, "Payments.xlsx");
+  // };
+
+  const downloadExcel = async () => {
+    try {
+      const main = new Listing();
+
+      // ✅ Call API with exportAll=true
+      const response = await main.AdminEarning(
+        selectedOption,
+        searchText,
+        1,
+        true // 👈 IMPORTANT
+      );
+
+      const allBookings = response?.data?.data?.bookings || [];
+
+      if (allBookings.length === 0) {
+        toast.error("No data to export");
+        return;
+      }
+
+      const result = allBookings.map(item => ({
+        "Lesson Name": item?.LessonId?.title || "",
+        "Payment ID":
+          item?.StripepaymentId?.payment_id ||
+          item?.paypalpaymentId?.orderID ||
+          (item?.isFromBulk
+            ? "Bulk Purchase"
+            : item?.totalAmount === 0
+              ? "Free Booking"
+              : ""),
+        "Booking Creation Time": item?.createdAt
+          ? moment(item.createdAt).format("DD MMM YYYY, hh:mm A")
+          : "",
+        "Teacher Name": item?.teacherId?.name || "",
+        "Total Payment (excl. processing fee)": formatMultiPrice(
+          (item?.totalAmount || 0) - (item?.processingFee || 0),
+          "USD"
+        ),
+        "My Earning": formatMultiPrice(item?.adminCommission, "USD"),
+        "Student Name": item?.UserId?.name || "",
+        "Duration (mins)": item?.LessonId?.duration
+          ? `${item.LessonId.duration} mins`
+          : "",
+      }));
+
+      const worksheet = XLSX.utils.json_to_sheet(result);
+      const workbook = XLSX.utils.book_new();
+      XLSX.utils.book_append_sheet(workbook, worksheet, "Payments");
+      XLSX.writeFile(workbook, "Payments.xlsx");
+
+    } catch (error) {
+      console.log(error);
+      toast.error("Failed to export data");
     }
-    const result = data.bookings.map(item => ({
-      "Lesson Name": item?.LessonId?.title || "",
-      "Payment ID": item?.StripepaymentId?.payment_id || item?.paypalpaymentId?.orderID || (item?.isFromBulk ? "Bulk Purchase" : item?.totalAmount === 0 ? "Free Booking" : ""),
-      "Booking Creation Time": item?.createdAt ? moment(item.createdAt).format("DD MMM YYYY, hh:mm A") : "",
-      "Teacher Name": item?.teacherId?.name || "",
-      "Total Payment (excl. processing fee)": formatMultiPrice((item?.totalAmount || 0) - (item?.processingFee || 0), "USD"),
-      "My Earning": formatMultiPrice(item?.adminCommission, "USD"),
-      "Student Name": item?.UserId?.name || "",
-      "Duration (mins)": item?.LessonId?.duration ? `${item.LessonId.duration} mins` : "",
-    }));
-
-    const worksheet = XLSX.utils.json_to_sheet(result);
-    const workbook = XLSX.utils.book_new();
-    XLSX.utils.book_append_sheet(workbook, worksheet, "Payments");
-    XLSX.writeFile(workbook, "Payments.xlsx");
   };
-
   const stats = useMemo(
     () => [
       {
@@ -132,48 +186,48 @@ export default function index() {
   return (
     <AdminLayout page={"Earnings"}>
       <div className="min-h-screen p-5 lg:p-[30px]">
-       <div className="mb-4 lg:mb-5">
-        <div className="flex flex-col gap-3 md:flex-row md:items-center md:justify-between">
-          {/* LEFT: Search */}
-          <div className="relative w-full md:w-80">
-            <span className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-              <FiSearch className="text-[#888]" />
-            </span>
-            <input
-              type="text"
-              value={searchText}
-              onChange={handleSearchChange}
-              placeholder="Search using payment ID, lesson, teacher, or student name"
-              className="w-full pl-10 pr-4 py-2 h-[44px] border border-[#ddd] text-[#000] rounded-md focus:outline-none focus:ring-1 focus:ring-[#55844D] placeholder-gray-400"
-            />
-          </div>
+        <div className="mb-4 lg:mb-5">
+          <div className="flex flex-col gap-3 md:flex-row md:items-center md:justify-between">
+            {/* LEFT: Search */}
+            <div className="relative w-full md:w-80">
+              <span className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                <FiSearch className="text-[#888]" />
+              </span>
+              <input
+                type="text"
+                value={searchText}
+                onChange={handleSearchChange}
+                placeholder="Search using payment ID, lesson, teacher, or student name"
+                className="w-full pl-10 pr-4 py-2 h-[44px] border border-[#ddd] text-[#000] rounded-md focus:outline-none focus:ring-1 focus:ring-[#55844D] placeholder-gray-400"
+              />
+            </div>
 
-          {/* RIGHT: Filter + Export */}
-          <div className="flex w-full gap-3 md:w-auto md:justify-end">
-            <select
-              value={selectedOption}
-              onChange={handleDropdownChange}
-              className="w-full md:w-auto h-[44px] border border-[#ddd] text-[#000] px-3 rounded-md focus:outline-none"
-            >
-              <option value="">All</option>
-              <option value="last7">Last 7 Days</option>
-              <option value="last30">Last 30 Days</option>
-              {yearOptions.map((year) => (
-                <option key={year} value={year}>
-                  {year}
-                </option>
-              ))}
-            </select>
+            {/* RIGHT: Filter + Export */}
+            <div className="flex w-full gap-3 md:w-auto md:justify-end">
+              <select
+                value={selectedOption}
+                onChange={handleDropdownChange}
+                className="w-full md:w-auto h-[44px] border border-[#ddd] text-[#000] px-3 rounded-md focus:outline-none"
+              >
+                <option value="">All</option>
+                <option value="last7">Last 7 Days</option>
+                <option value="last30">Last 30 Days</option>
+                {yearOptions.map((year) => (
+                  <option key={year} value={year}>
+                    {year}
+                  </option>
+                ))}
+              </select>
 
-            <button
-              onClick={downloadExcel}
-              className="w-full md:w-auto h-[44px] px-4 xl:px-8 bg-[#55844D] text-white border border-[#55844D] rounded-md text-sm font-medium tracking-[-0.06em] hover:bg-white hover:text-[#55844D] transition cursor-pointer"
-            >
-              Export as Excel
-            </button>
+              <button
+                onClick={downloadExcel}
+                className="w-full md:w-auto h-[44px] px-4 xl:px-8 bg-[#55844D] text-white border border-[#55844D] rounded-md text-sm font-medium tracking-[-0.06em] hover:bg-white hover:text-[#55844D] transition cursor-pointer"
+              >
+                Export as Excel
+              </button>
+            </div>
           </div>
         </div>
-       </div>
         {loading ? (
           <TeacherEarningsLoader />
         ) : (
@@ -209,119 +263,119 @@ export default function index() {
                 Bulk Purchases
               </button>
             </div>
-            {tabOpen==="bookings" &&
-            <>
-            <div className="rounded-[5px] border border-[rgba(19,101,16,0.3)] overflow-x-auto ">
-              <table className="min-w-full text-sm text-center rounded-[20px]">
-                <thead className="bg-[rgba(38,185,27,0.1)] text-[#535353] tracking-[-0.04em] font-inter rounded-[20px] whitespace-nowrap">
-                  <tr>
-                    <th className="font-normal text-sm lg:text-base px-3 lg:px-4 py-2 lg:py-3 border-t border-[rgba(19,101,16,0.2)] capitalize">
-                      Lesson Name
-                    </th>
-                    <th className="font-normal text-sm lg:text-base px-3 lg:px-4 py-2 lg:py-3 border-t border-[rgba(19,101,16,0.2)] capitalize">
-                      Payment ID
-                    </th>
-                    <th className="font-normal text-sm lg:text-base px-3 lg:px-4 py-2 lg:py-3 border-t border-[rgba(19,101,16,0.2)] capitalize">
-                      Booking Creation Time
-                    </th>
-                    <th className="font-normal text-sm lg:text-base px-3 lg:px-4 py-2 lg:py-3 border-t border-[rgba(19,101,16,0.2)] capitalize">
-                      Teacher Name
-                    </th>
-                    <th className="font-normal text-sm lg:text-base px-3 lg:px-4 py-2 lg:py-3 border-t border-[rgba(19,101,16,0.2)] capitalize">
-                      Total Payment<br/>(excl. processing fee)
-                    </th>
-                    <th className="font-normal text-sm lg:text-base px-3 lg:px-4 py-2 lg:py-3 border-t border-[rgba(19,101,16,0.2)] capitalize">
-                      My Earning
-                    </th>
-                    <th className="font-normal text-sm lg:text-base px-3 lg:px-4 py-2 lg:py-3 border-t border-[rgba(19,101,16,0.2)] capitalize">
-                      Student Name
-                    </th>
-                    <th className="font-normal text-sm lg:text-base px-3 lg:px-4 py-2 lg:py-3 border-t border-[rgba(19,101,16,0.2)] capitalize">
-                      Duration
-                    </th>
-                  </tr>
-                </thead>
+            {tabOpen === "bookings" &&
+              <>
+                <div className="rounded-[5px] border border-[rgba(19,101,16,0.3)] overflow-x-auto ">
+                  <table className="min-w-full text-sm text-center rounded-[20px]">
+                    <thead className="bg-[rgba(38,185,27,0.1)] text-[#535353] tracking-[-0.04em] font-inter rounded-[20px] whitespace-nowrap">
+                      <tr>
+                        <th className="font-normal text-sm lg:text-base px-3 lg:px-4 py-2 lg:py-3 border-t border-[rgba(19,101,16,0.2)] capitalize">
+                          Lesson Name
+                        </th>
+                        <th className="font-normal text-sm lg:text-base px-3 lg:px-4 py-2 lg:py-3 border-t border-[rgba(19,101,16,0.2)] capitalize">
+                          Payment ID
+                        </th>
+                        <th className="font-normal text-sm lg:text-base px-3 lg:px-4 py-2 lg:py-3 border-t border-[rgba(19,101,16,0.2)] capitalize">
+                          Booking Creation Time
+                        </th>
+                        <th className="font-normal text-sm lg:text-base px-3 lg:px-4 py-2 lg:py-3 border-t border-[rgba(19,101,16,0.2)] capitalize">
+                          Teacher Name
+                        </th>
+                        <th className="font-normal text-sm lg:text-base px-3 lg:px-4 py-2 lg:py-3 border-t border-[rgba(19,101,16,0.2)] capitalize">
+                          Total Payment<br />(excl. processing fee)
+                        </th>
+                        <th className="font-normal text-sm lg:text-base px-3 lg:px-4 py-2 lg:py-3 border-t border-[rgba(19,101,16,0.2)] capitalize">
+                          My Earning
+                        </th>
+                        <th className="font-normal text-sm lg:text-base px-3 lg:px-4 py-2 lg:py-3 border-t border-[rgba(19,101,16,0.2)] capitalize">
+                          Student Name
+                        </th>
+                        <th className="font-normal text-sm lg:text-base px-3 lg:px-4 py-2 lg:py-3 border-t border-[rgba(19,101,16,0.2)] capitalize">
+                          Duration
+                        </th>
+                      </tr>
+                    </thead>
 
-                <tbody>
-                  {bookings && bookings?.length > 0 ? (
-                    bookings?.map((item, index) => (
-                      <tr
-                        key={index}
-                        className="hover:bg-[rgba(38,185,27,0.1)] border-t border-[rgba(19,101,16,0.2)]"
-                      >
-                        <td className="px-3 lg:px-4 py-2 lg:py-3 text-black text-sm lg:text-base font-medium font-inter capitalize whitespace-nowrap">
-                          {item?.LessonId?.title || ""}
-                        </td>
-                        {/* 
+                    <tbody>
+                      {bookings && bookings?.length > 0 ? (
+                        bookings?.map((item, index) => (
+                          <tr
+                            key={index}
+                            className="hover:bg-[rgba(38,185,27,0.1)] border-t border-[rgba(19,101,16,0.2)]"
+                          >
+                            <td className="px-3 lg:px-4 py-2 lg:py-3 text-black text-sm lg:text-base font-medium font-inter capitalize whitespace-nowrap">
+                              {item?.LessonId?.title || ""}
+                            </td>
+                            {/* 
                         There are 4 types of booking payments currently -
                         1) Reguular booking with payment id for either stripe or paypal
                         2) Special Slot with payment, it will also have either stripe or paypal payment id
                         3) Special Slot with no payment(free slot), payment not required as amount is 0
                         4) Bulk booking, payment was already done in the past     
                         */}
-                        <td className="px-3 lg:px-4 py-2 lg:py-3 text-black text-sm lg:text-base font-medium font-inter whitespace-nowrap">
-                          {item?.StripepaymentId?.payment_id ||
-                            item?.paypalpaymentId?.orderID ||
-                            (item?.isFromBulk ? "Bulk Purchase" : item?.totalAmount === 0 ? "Free Booking" : "")}
-                        </td>
-                        <td className="px-3 lg:px-4 py-2 lg:py-3 text-black text-sm lg:text-base font-medium font-inter whitespace-nowrap">
-                          {moment(item?.createdAt).format(
-                            "DD MMM YYYY, hh:mm A"
-                          ) || ""}
-                        </td>
-                        <td className="px-3 lg:px-4 py-2 lg:py-3 text-black text-sm lg:text-base font-medium font-inter capitalize whitespace-nowrap">
-                          <Link href={`/admin/teacher/${item?.teacherId?._id
-                            }`}>
-                            {item?.teacherId?.name || ""}
-                          </Link>
-                        </td>
-                        <td className="px-3 lg:px-4 py-2 lg:py-3 text-black text-sm lg:text-base font-medium font-inter whitespace-nowrap">
-                          {formatMultiPrice(item?.totalAmount-item?.processingFee, "USD") || ""}
-                        </td>
-                        <td className="px-3 lg:px-4 py-2 lg:py-3 text-black text-sm lg:text-base font-medium font-inter whitespace-nowrap">
-                          {formatMultiPrice(item?.adminCommission, "USD") || ""}
-                        </td>
-                        <td className="px-3 lg:px-4 py-2 lg:py-3 text-black text-sm lg:text-base font-medium font-inter capitalize whitespace-nowrap">
-                          {item?.UserId?.name || ""}
-                        </td>
-                        <td className="px-3 lg:px-4 py-2 lg:py-3 text-black text-sm lg:text-base font-medium font-inter capitalize whitespace-nowrap">
-                          {item?.LessonId?.duration || ""}{" "}mins
-                        </td>
-                      </tr>
-                    ))
-                  ) : (
-                    <tr>
-                      <td colSpan={8}>
-                        <div className="mt-2">
-                          <NoData
-                            Heading={"No Earnings found."}
-                            content={
-                              "Your earnings will appear here once a booking is created."
-                            }
-                          />
-                        </div>
-                      </td>
-                    </tr>
-                  )}
-                </tbody>
-              </table>
-            </div>
-            {searchText==="" && data?.pagination?.currentPage < data?.pagination?.totalPages ? 
-            <div className="flex justify-center mt-4">
-              <button
-                onClick={LoadMore}
-                className="w-fit px-2 px-4 xl:px-8 py-2  h-[44px] hover:bg-white hover:text-[#55844D] border border-[#55844D] rounded-full tracking-[-0.06em] text-sm font-medium bg-[#55844D] text-white cursor-pointer"
-              >
-                {buttonLoading ? "Loading" : "See More"}
-              </button>
-            </div>
-            :
-            <></>
-          }
-          </>
+                            <td className="px-3 lg:px-4 py-2 lg:py-3 text-black text-sm lg:text-base font-medium font-inter whitespace-nowrap">
+                              {item?.StripepaymentId?.payment_id ||
+                                item?.paypalpaymentId?.orderID ||
+                                (item?.isFromBulk ? "Bulk Purchase" : item?.totalAmount === 0 ? "Free Booking" : "")}
+                            </td>
+                            <td className="px-3 lg:px-4 py-2 lg:py-3 text-black text-sm lg:text-base font-medium font-inter whitespace-nowrap">
+                              {moment(item?.createdAt).format(
+                                "DD MMM YYYY, hh:mm A"
+                              ) || ""}
+                            </td>
+                            <td className="px-3 lg:px-4 py-2 lg:py-3 text-black text-sm lg:text-base font-medium font-inter capitalize whitespace-nowrap">
+                              <Link href={`/admin/teacher/${item?.teacherId?._id
+                                }`}>
+                                {item?.teacherId?.name || ""}
+                              </Link>
+                            </td>
+                            <td className="px-3 lg:px-4 py-2 lg:py-3 text-black text-sm lg:text-base font-medium font-inter whitespace-nowrap">
+                              {formatMultiPrice(item?.totalAmount - item?.processingFee, "USD") || ""}
+                            </td>
+                            <td className="px-3 lg:px-4 py-2 lg:py-3 text-black text-sm lg:text-base font-medium font-inter whitespace-nowrap">
+                              {formatMultiPrice(item?.adminCommission, "USD") || ""}
+                            </td>
+                            <td className="px-3 lg:px-4 py-2 lg:py-3 text-black text-sm lg:text-base font-medium font-inter capitalize whitespace-nowrap">
+                              {item?.UserId?.name || ""}
+                            </td>
+                            <td className="px-3 lg:px-4 py-2 lg:py-3 text-black text-sm lg:text-base font-medium font-inter capitalize whitespace-nowrap">
+                              {item?.LessonId?.duration || ""}{" "}mins
+                            </td>
+                          </tr>
+                        ))
+                      ) : (
+                        <tr>
+                          <td colSpan={8}>
+                            <div className="mt-2">
+                              <NoData
+                                Heading={"No Earnings found."}
+                                content={
+                                  "Your earnings will appear here once a booking is created."
+                                }
+                              />
+                            </div>
+                          </td>
+                        </tr>
+                      )}
+                    </tbody>
+                  </table>
+                </div>
+                {searchText === "" && data?.pagination?.currentPage < data?.pagination?.totalPages ?
+                  <div className="flex justify-center mt-4">
+                    <button
+                      onClick={LoadMore}
+                      className="w-fit px-2 px-4 xl:px-8 py-2  h-[44px] hover:bg-white hover:text-[#55844D] border border-[#55844D] rounded-full tracking-[-0.06em] text-sm font-medium bg-[#55844D] text-white cursor-pointer"
+                    >
+                      {buttonLoading ? "Loading" : "See More"}
+                    </button>
+                  </div>
+                  :
+                  <></>
+                }
+              </>
             }
-            {tabOpen==="bulk" &&
-            <Bulk loading={loading} data={data?.bulkPurchases || []} fetchEarnings={fetchEarnings} />
+            {tabOpen === "bulk" &&
+              <Bulk loading={loading} data={data?.bulkPurchases || []} fetchEarnings={fetchEarnings} />
             }
           </>
         )}

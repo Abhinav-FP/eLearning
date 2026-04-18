@@ -240,6 +240,7 @@ export default function index() {
                     label={item.label}
                     value={item.value}
                     icon={item.icon}
+                    currency={"USD"}
                   />
                 ))}
             </div>

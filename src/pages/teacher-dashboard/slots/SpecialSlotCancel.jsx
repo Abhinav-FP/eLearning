@@ -8,8 +8,6 @@ export default function SpecialSlotCancel({ data, fetchEarnings }) {
   const [loading, setLoading] = useState(false);
   const [showPopup, setShowPopup] = useState(false);
 
-  console.log("data", data);
-
   const handleCancel = async (id) => {
     if (loading) return;
     setLoading(true);

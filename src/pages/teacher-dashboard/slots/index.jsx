@@ -194,9 +194,11 @@ export default function Index() {
                       <td className="capitalize px-3 lg:px-4 py-2 lg:py-3 text-black text-sm lg:text-base font-medium font-inter ">
                         {item?.cancelled
                           ? "Cancelled"
-                          : item?.paymentStatus === "paid" || item?.amount == 0 || !isBeforeStartTime(item?.startDateTime)
+                          : !isBeforeStartTime(item?.startDateTime)
                           ? "N/A"
-                          : <SpecialSlotCancel data={item} fetchEarnings={SpecialSlotData} />}
+                          : item?.amount == 0 || item?.paymentStatus === "pending"
+                          ? <SpecialSlotCancel data={item} fetchEarnings={SpecialSlotData} />
+                          : "N/A"}
                       </td>
                     </tr>
                   ))

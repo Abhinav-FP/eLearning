@@ -16,7 +16,8 @@ let Api = axios.create({
     'Accept': 'application/json',
     'Access-Control-Allow-Origin': '*',
     // "Content-Type": "multipart/form-data",
-  }
+  },
+  validateStatus: (status) => status >= 200 && status < 500
 });
 
 Api.interceptors.request.use(
@@ -38,7 +39,8 @@ let ApiallowFile = axios.create({
     'Accept': 'application/json',
     'Access-Control-Allow-Origin': '*',
     "Content-Type": "multipart/form-data",
-  }
+  },
+  validateStatus: (status) => status >= 200 && status < 500
 });
 
 ApiallowFile.interceptors.request.use(

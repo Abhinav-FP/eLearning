@@ -50,17 +50,18 @@ export default function Index() {
     setIsPastRescheduleOpen(false);
   }
 
-  const fetchEarnings = async (search = "") => {
+  const fetchEarnings = async (search = "", options = {}) => {
+    const silent = Boolean(options?.silent);
     try {
-      setLoading(true);
+      if (!silent) setLoading(true);
       const main = new Listing();
       const response = await main.TeacherBooking(TabOpen, search);
       setData(response?.data?.data || []);
     } catch (error) {
       console.log('error', error);
-      setData([]);
+      if (!silent) setData([]);
     }
-    setLoading(false);
+    if (!silent) setLoading(false);
   };
 
   const handleCalendarSync = async () => {
@@ -85,6 +86,14 @@ export default function Index() {
     fetchEarnings();
   }, [TabOpen]);
 
+  useEffect(() => {
+    if (TabOpen !== "upcoming") return;
+    const intervalId = setInterval(() => {
+      fetchEarnings(searchText || "", { silent: true });
+    }, 60 * 1000);
+    return () => clearInterval(intervalId);
+  }, [TabOpen, searchText]);
+  
   
   useEffect(() => {
    if (user && user?.role != "student" && user?.time_zone) {
@@ -293,9 +302,9 @@ export default function Index() {
                         <td className="px-3 lg:px-4 py-2 lg:py-3 text-black text-sm lg:text-base font-medium font-inter">
                           <div className="flex justify-center items-center gap-2 whitespace-nowrap">
                             <span className="capitalize">{item?.LessonId?.title}</span>
-                            {item?.zoom && item?.zoom?.meetingLink && isBeforeEndTime(item?.endDateTime) &&
+                            {item?.zoom && (item?.zoom?.start_url || item?.zoom?.meetingLink) && isBeforeEndTime(item?.endDateTime) &&
                               <a
-                                href={item?.zoom?.meetingLink || ""}
+                                href={item?.zoom?.start_url || item?.zoom?.meetingLink || ""}
                                 target="blank"
                                 rel="noopener noreferrer"
                                 className="text-xs bg-[#55844D] text-white px-2 py-[2px] rounded-md hover:bg-[#3d5e37] transition cursor-pointer"

@@ -110,7 +110,7 @@ export default function Index() {
               type="text"
               value={searchText}
               onChange={handleSearchChange}
-              placeholder="Search using lesson or teacher name"
+              placeholder="Search using lesson, teacher or student name"
               className="w-full pl-10 pr-4 py-2 h-[44px] border border-[#ddd] text-[#000] rounded-md focus:outline-none focus:ring-1 focus:ring-[#55844D] placeholder-gray-400"
             />
           </div>

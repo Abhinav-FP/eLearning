@@ -58,33 +58,29 @@ export default function Index() {
             <thead className="bg-[rgba(38,185,27,0.1)] text-[#535353] tracking-[-0.04em]">
               <tr>
                 <th className="px-4 py-3 border-t border-[rgba(204,40,40,0.2)]">
-                  Teacher
-                </th>
-                <th className="px-4 py-3 border-t border-[rgba(204,40,40,0.2)]">
                   Lesson Name
                 </th>
                 <th className="px-4 py-3 border-t border-[rgba(204,40,40,0.2)]">
                   Student
                 </th>
                 <th className="px-4 py-3 border-t border-[rgba(204,40,40,0.2)]">
-                  Total Lessons
+                  <p>Lessons</p>
+                  <p className="text-gray-400 whitespace-nowrap text-[10px]">Total / Completed / Remaining</p>
                 </th>
                 <th className="px-4 py-3 border-t border-[rgba(204,40,40,0.2)]">
-                  Remaining
+                  <p className="whitespace-nowrap mb-0">Total Teacher Earning</p>
+                  (USD / JPY)
                 </th>
                 <th className="px-4 py-3 border-t border-[rgba(204,40,40,0.2)]">
-                  Total Payment
-                  <br />
-                  (excl. processing fee)
+                  <p className="whitespace-nowrap mb-0">Per Lesson Earning</p>
+                  (USD / JPY)
                 </th>
                 <th className="px-4 py-3 border-t border-[rgba(204,40,40,0.2)]">
-                  My Earning
+                  <p className="whitespace-nowrap mb-0">Earned So Far</p>
+                  (USD / JPY)
                 </th>
                 <th className="px-4 py-3 border-t border-[rgba(204,40,40,0.2)]">
-                  Payment ID
-                </th>
-                <th className="px-4 py-3 border-t border-[rgba(204,40,40,0.2)]">
-                  Payment Date
+                  <p className="whitespace-nowrap mb-0">Payment ID</p>
                 </th>
                 <th className="px-4 py-3 border-t border-[rgba(204,40,40,0.2)]">
                   Details
@@ -95,13 +91,13 @@ export default function Index() {
             <tbody>
               {loading ? (
                 <tr>
-                  <td colSpan={10} className="py-6 text-gray-500">
+                  <td colSpan={8} className="py-6 text-gray-500">
                     Loading...
                   </td>
                 </tr>
               ) : data.length === 0 ? (
                 <tr>
-                  <td colSpan={10} className="py-6 text-gray-500">
+                  <td colSpan={8} className="py-6 text-gray-500">
                     No lesson credits available.
                   </td>
                 </tr>
@@ -109,6 +105,18 @@ export default function Index() {
                 data &&
                 data?.map((item, index) => {
                   const isOpen = openIndex === index;
+                  const rate = Number(item?.usdToJpyRate || 0) || 0;
+                  const totalTeacherUsd = Number(item?.teacherEarning || 0) || 0;
+                  const perLessonUsd =
+                    item?.totalLessons > 0 ? totalTeacherUsd / item.totalLessons : 0;
+                  const totalTeacherJpy = totalTeacherUsd * rate;
+                  const perLessonJpy = perLessonUsd * rate;
+                  const completedCount =
+                    item?.bookings?.filter(
+                      (b) => !b?.cancelled && b?.id?.lessonCompletedTeacher
+                    )?.length || 0;
+                  const earnedSoFarUsd = perLessonUsd * completedCount;
+                  const earnedSoFarJpy = perLessonJpy * completedCount;
 
                   return (
                     <React.Fragment key={item._id}>
@@ -116,10 +124,6 @@ export default function Index() {
                         className="border-t hover:bg-[rgba(78,204,40,0.1)] cursor-pointer border-[rgba(40,204,77,0.2)]"
                         onClick={() => toggleRow(index)}
                       >
-                        <td className="px-4 py-3 font-medium">
-                          {item?.teacherId?.name}
-                        </td>
-
                         <td className="px-4 py-3 font-medium">
                           {item?.LessonId?.title}
                         </td>
@@ -129,40 +133,50 @@ export default function Index() {
                         </td>
 
                         <td className="px-4 py-3 font-medium">
-                          {item?.totalLessons}
-                        </td>
-
-                        <td
-                          className={`px-4 py-3 font-medium ${
-                            item?.lessonsRemaining === 0
-                              ? "text-red-500"
-                              : "text-green-600"
-                          }`}
-                        >
-                          {item?.lessonsRemaining}
-                        </td>
-
-                        <td className="px-4 py-3 font-medium">
-                          {formatMultiPrice(
-                            item?.totalAmount - item?.processingFee,
-                            "USD"
-                          ) || ""}
+                          <span>{item?.totalLessons}</span>
+                          <span className="text-gray-400"> / </span>
+                          <span>{completedCount}</span>
+                          <span className="text-gray-400"> / </span>
+                          <span
+                            className={
+                              item?.lessonsRemaining === 0
+                                ? "text-red-500"
+                                : "text-green-600"
+                            }
+                          >
+                            {item?.lessonsRemaining}
+                          </span>
                         </td>
 
                         <td className="px-4 py-3 font-medium">
-                          {formatMultiPrice(item?.adminCommission, "USD") || ""}
+                          <div>{formatMultiPrice(totalTeacherUsd, "USD") || ""}</div>
+                          <div className="text-xs text-gray-500">
+                            {formatMultiPrice(totalTeacherJpy, "JPY") || ""}
+                          </div>
                         </td>
 
                         <td className="px-4 py-3 font-medium">
-                          {item?.StripepaymentId?.payment_id ||
-                            item?.paypalpaymentId?.orderID}
+                          <div>{formatMultiPrice(perLessonUsd, "USD") || ""}</div>
+                          <div className="text-xs text-gray-500">
+                            {formatMultiPrice(perLessonJpy, "JPY") || ""}
+                          </div>
                         </td>
 
                         <td className="px-4 py-3 font-medium">
-                          {moment(item?.createdAt).format(
+                          <div>{formatMultiPrice(earnedSoFarUsd, "USD") || ""}</div>
+                          <div className="text-xs text-gray-500">
+                            {formatMultiPrice(earnedSoFarJpy, "JPY") || ""}
+                          </div>
+                        </td>
+
+                        <td className="px-4 py-3 font-medium">
+                          <p>{item?.StripepaymentId?.payment_id ||
+                            item?.paypalpaymentId?.orderID}</p>
+                            <p className="text-gray-400">{moment(item?.createdAt).format(
                             "DD MMM YYYY, hh:mm A"
-                          ) || ""}
+                          ) || ""}</p>
                         </td>
+
 
                         <td className="px-4 py-3">
                           <FaChevronDown
@@ -176,7 +190,7 @@ export default function Index() {
                       {isOpen && (
                         <tr className="border-t border-[rgba(40,204,43,0.3)]">
                           <td
-                            colSpan={10}
+                            colSpan={8}
                             className="bg-[rgba(40,204,50,0.03)] px-6 py-5"
                           >
                             <div>
@@ -239,6 +253,9 @@ export default function Index() {
                                         <div className="mt-3 border-t pt-2 text-[11px] text-gray-500 flex justify-between">
                                           <span>
                                             Booking ID: {booking?._id}
+                                          </span>
+                                          <span>
+                                            Earning: {formatMultiPrice(perLessonUsd, "USD")} / {formatMultiPrice(perLessonJpy, "JPY")}
                                           </span>
                                         </div>
                                       </div>
